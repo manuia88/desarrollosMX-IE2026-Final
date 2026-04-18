@@ -780,6 +780,54 @@ export type Database = {
           },
         ]
       }
+      auth_sessions_log: {
+        Row: {
+          aal: string | null
+          action: string
+          created_at: string
+          id: string
+          ip: unknown
+          meta: Json
+          profile_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          aal?: string | null
+          action: string
+          created_at?: string
+          id?: string
+          ip?: unknown
+          meta?: Json
+          profile_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          aal?: string | null
+          action?: string
+          created_at?: string
+          id?: string
+          ip?: unknown
+          meta?: Json
+          profile_id?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "auth_sessions_log_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "auth_sessions_log_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       broker_companies: {
         Row: {
           contact_email: string | null
