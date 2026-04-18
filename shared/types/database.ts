@@ -998,6 +998,13 @@ export type Database = {
             referencedRelation: "desarrolladoras"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "desarrolladoras_holding_parent_id_fkey"
+            columns: ["holding_parent_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
         ]
       }
       feature_registry: {
@@ -1508,6 +1515,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "fk_profiles_agency"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "public_agencies"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "fk_profiles_broker"
             columns: ["broker_company_id"]
             isOneToOne: false
@@ -1515,10 +1529,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "fk_profiles_broker"
+            columns: ["broker_company_id"]
+            isOneToOne: false
+            referencedRelation: "public_broker_companies"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "fk_profiles_desarrolladora"
             columns: ["desarrolladora_id"]
             isOneToOne: false
             referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_profiles_desarrolladora"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
             referencedColumns: ["id"]
           },
           {
@@ -1838,6 +1866,123 @@ export type Database = {
           type?: string | null
         }
         Relationships: []
+      }
+      public_agencies: {
+        Row: {
+          country_code: string | null
+          created_at: string | null
+          id: string | null
+          is_verified: boolean | null
+          logo_url: string | null
+          name: string | null
+          slug: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agencies_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      public_broker_companies: {
+        Row: {
+          country_code: string | null
+          created_at: string | null
+          id: string | null
+          is_authorized_broker: boolean | null
+          logo_url: string | null
+          name: string | null
+          slug: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_authorized_broker?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_authorized_broker?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "broker_companies_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      public_desarrolladoras: {
+        Row: {
+          country_code: string | null
+          created_at: string | null
+          id: string | null
+          is_verified: boolean | null
+          logo_url: string | null
+          name: string | null
+          slug: string | null
+          website: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+          website?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "desarrolladoras_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
       }
       public_profiles: {
         Row: {
