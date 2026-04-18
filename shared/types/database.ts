@@ -147,6 +147,60 @@ export type Database = {
           },
         ]
       }
+      ai_memory_store: {
+        Row: {
+          created_at: string
+          embedding: string | null
+          expires_at: string | null
+          id: string
+          importance_score: number
+          key: string
+          namespace: string
+          updated_at: string
+          user_id: string
+          value: Json
+        }
+        Insert: {
+          created_at?: string
+          embedding?: string | null
+          expires_at?: string | null
+          id?: string
+          importance_score?: number
+          key: string
+          namespace: string
+          updated_at?: string
+          user_id: string
+          value: Json
+        }
+        Update: {
+          created_at?: string
+          embedding?: string | null
+          expires_at?: string | null
+          id?: string
+          importance_score?: number
+          key?: string
+          namespace?: string
+          updated_at?: string
+          user_id?: string
+          value?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_memory_store_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_memory_store_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_log: {
         Row: {
           action: string
@@ -1052,6 +1106,50 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "public_desarrolladoras"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      embeddings: {
+        Row: {
+          chunk_index: number
+          content: string
+          country_code: string | null
+          created_at: string
+          embedding: string
+          id: string
+          meta: Json
+          source_id: string
+          source_type: string
+        }
+        Insert: {
+          chunk_index?: number
+          content: string
+          country_code?: string | null
+          created_at?: string
+          embedding: string
+          id?: string
+          meta?: Json
+          source_id: string
+          source_type: string
+        }
+        Update: {
+          chunk_index?: number
+          content?: string
+          country_code?: string | null
+          created_at?: string
+          embedding?: string
+          id?: string
+          meta?: Json
+          source_id?: string
+          source_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "embeddings_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
           },
         ]
       }
@@ -2852,7 +2950,41 @@ export type Database = {
         Returns: boolean
       }
       is_superadmin: { Args: never; Returns: boolean }
+      jsonb_diff: { Args: { a: Json; b: Json }; Returns: Json }
       longtransactionsenabled: { Args: never; Returns: boolean }
+      match_ai_memory: {
+        Args: {
+          p_embedding: string
+          p_match_count?: number
+          p_min_similarity?: number
+          p_namespace: string
+        }
+        Returns: {
+          id: string
+          importance_score: number
+          key: string
+          similarity: number
+          updated_at: string
+          value: Json
+        }[]
+      }
+      match_embeddings: {
+        Args: {
+          p_country_code?: string
+          p_embedding: string
+          p_match_count?: number
+          p_min_similarity?: number
+          p_source_types?: string[]
+        }
+        Returns: {
+          content: string
+          id: string
+          meta: Json
+          similarity: number
+          source_id: string
+          source_type: string
+        }[]
+      }
       mfa_consume_backup_code: { Args: { p_code: string }; Returns: boolean }
       mfa_mark_enabled: { Args: never; Returns: undefined }
       mfa_regenerate_backup_codes: { Args: never; Returns: string[] }

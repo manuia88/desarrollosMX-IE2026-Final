@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { TrpcProvider } from '@/shared/lib/trpc/provider';
+import { AppShell } from '@/shared/ui/layout/shell-client';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -26,7 +27,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         ))}
       </head>
       <body>
-        <TrpcProvider>{children}</TrpcProvider>
+        <TrpcProvider>
+          {children}
+          <AppShell />
+        </TrpcProvider>
       </body>
     </html>
   );
