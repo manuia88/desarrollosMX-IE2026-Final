@@ -31,7 +31,7 @@
   --tracking-wide: 0.04em;
 
   /* ============================================================
-   * Colors — semantic (light mode base)
+   * Colors — brand + status (light mode base)
    * ============================================================ */
   --color-brand-primary: oklch(0.67 0.19 285);
   --color-brand-secondary: oklch(0.78 0.12 180);
@@ -42,14 +42,38 @@
   --color-danger: oklch(0.64 0.23 25);
   --color-info: oklch(0.72 0.15 240);
 
+  /* ============================================================
+   * Colors — semantic surfaces
+   * ============================================================ */
   --color-bg-base: oklch(0.99 0 0);
   --color-bg-surface: oklch(0.97 0.005 280);
   --color-bg-muted: oklch(0.94 0.01 280);
+
+  --color-surface-base: oklch(0.99 0 0);
+  --color-surface-raised: oklch(1 0 0);
+  --color-surface-sunken: oklch(0.96 0.005 280);
+
+  /* ============================================================
+   * Colors — semantic text
+   * ============================================================ */
   --color-text-primary: oklch(0.18 0.02 280);
   --color-text-secondary: oklch(0.42 0.02 280);
   --color-text-muted: oklch(0.58 0.02 280);
+  --color-text-inverse: oklch(0.99 0 0);
+
+  /* ============================================================
+   * Colors — semantic borders
+   * ============================================================ */
   --color-border-subtle: oklch(0.9 0.01 280);
   --color-border-strong: oklch(0.75 0.02 280);
+  --color-border-focus: oklch(0.67 0.19 285);
+
+  /* ============================================================
+   * Colors — interactive state overlays
+   * ============================================================ */
+  --color-state-hover-overlay: oklch(0.18 0.02 280 / 0.05);
+  --color-state-active-overlay: oklch(0.18 0.02 280 / 0.1);
+  --color-state-selected-bg: oklch(0.67 0.19 285 / 0.12);
 
   /* ============================================================
    * Tints — backgrounds suaves
@@ -68,6 +92,18 @@
   --gradient-cool: linear-gradient(135deg, oklch(0.78 0.12 180), oklch(0.72 0.15 240));
   --gradient-fresh: linear-gradient(135deg, oklch(0.85 0.12 145), oklch(0.78 0.12 180));
   --gradient-sunset: linear-gradient(135deg, oklch(0.78 0.17 50), oklch(0.64 0.23 25));
+  --gradient-iridescent: linear-gradient(
+    135deg,
+    oklch(0.67 0.19 285),
+    oklch(0.78 0.12 180),
+    oklch(0.8 0.15 65)
+  );
+  --gradient-shimmer: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(1 0 0 / 0.4) 50%,
+    transparent 100%
+  );
 
   /* ============================================================
    * Radii
@@ -101,25 +137,30 @@
   --content-max: 1100px;
 
   /* ============================================================
-   * Motion
+   * Motion — durations + easings
    * ============================================================ */
   --duration-fast: 150ms;
   --duration-base: 250ms;
   --duration-slow: 400ms;
   --duration-slower: 700ms;
+
   --ease-dopamine: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --motion-enter: 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-exit: 200ms cubic-bezier(0.4, 0, 1, 1);
+  --motion-bounce: 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* ============================================================
- * Keyframes
+ * Keyframes — base delight layer (Dopamine v5.1 parity)
  * ============================================================ */
 @keyframes shimmer {
-  from {
-    background-position: -200% 0;
+  0% {
+    left: -100%;
   }
-  to {
-    background-position: 200% 0;
+  100% {
+    left: 200%;
   }
 }
 
@@ -133,6 +174,142 @@
   }
 }
 
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+@keyframes float-med {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(-1.5deg);
+  }
+}
+
+@keyframes float-fast {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes score-bar {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes grad-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.7) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes card-float {
+  0%,
+  100% {
+    transform: translateY(0) rotateX(0) rotateY(0);
+  }
+  25% {
+    transform: translateY(-6px) rotateX(1deg) rotateY(-1deg);
+  }
+  75% {
+    transform: translateY(-3px) rotateX(-0.5deg) rotateY(0.5deg);
+  }
+}
+
 @keyframes pulse-glow {
   0%,
   100% {
@@ -143,6 +320,84 @@
   }
 }
 
+@keyframes glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 20px oklch(0.67 0.19 285 / 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 40px oklch(0.67 0.19 285 / 0.2),
+      0 0 80px oklch(0.78 0.12 180 / 0.08);
+  }
+}
+
+@keyframes morph-blob {
+  0% {
+    border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+  }
+  33% {
+    border-radius: 50% 40% 55% 45% / 45% 55% 35% 65%;
+  }
+  66% {
+    border-radius: 35% 65% 45% 55% / 55% 40% 60% 40%;
+  }
+  100% {
+    border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes stagger-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes grid-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(130px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(130px) rotate(-360deg);
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(420px) rotate(1080deg) scale(0.3);
+  }
+}
+
 /* ============================================================
  * Dark mode overrides
  * ============================================================ */
@@ -150,17 +405,32 @@
   --color-bg-base: oklch(0.15 0.02 280);
   --color-bg-surface: oklch(0.2 0.02 280);
   --color-bg-muted: oklch(0.25 0.02 280);
+
+  --color-surface-base: oklch(0.15 0.02 280);
+  --color-surface-raised: oklch(0.21 0.02 280);
+  --color-surface-sunken: oklch(0.11 0.02 280);
+
   --color-text-primary: oklch(0.96 0 0);
   --color-text-secondary: oklch(0.78 0.01 280);
   --color-text-muted: oklch(0.62 0.01 280);
+  --color-text-inverse: oklch(0.15 0.02 280);
+
   --color-border-subtle: oklch(0.3 0.02 280);
   --color-border-strong: oklch(0.4 0.02 280);
+  --color-border-focus: oklch(0.78 0.18 285);
+
+  --color-state-hover-overlay: oklch(0.99 0 0 / 0.06);
+  --color-state-active-overlay: oklch(0.99 0 0 / 0.12);
+  --color-state-selected-bg: oklch(0.67 0.19 285 / 0.22);
 
   --color-bg-lavender: oklch(0.22 0.05 300);
   --color-bg-mint: oklch(0.22 0.05 170);
   --color-bg-peach: oklch(0.22 0.05 60);
   --color-bg-slate: oklch(0.22 0.02 240);
   --color-bg-rose: oklch(0.22 0.05 10);
+
+  --color-brand-primary: oklch(0.74 0.19 285);
+  --color-brand-secondary: oklch(0.82 0.12 180);
 
   --shadow-xs: 0 1px 2px oklch(0 0 0 / 0.4);
   --shadow-sm: 0 2px 6px oklch(0 0 0 / 0.45);
