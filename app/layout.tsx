@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { TrpcProvider } from '@/shared/lib/trpc/provider';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -24,7 +25,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <link key={href} rel="stylesheet" href={href} />
         ))}
       </head>
-      <body>{children}</body>
+      <body>
+        <TrpcProvider>{children}</TrpcProvider>
+      </body>
     </html>
   );
 }
