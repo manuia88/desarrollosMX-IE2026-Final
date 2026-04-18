@@ -1245,6 +1245,60 @@ export type Database = {
           },
         ]
       }
+      legal_documents_template: {
+        Row: {
+          body_md: string
+          code: string
+          country_code: string
+          created_at: string
+          id: string
+          is_active: boolean
+          locale: string
+          name: string
+          required_fields: Json
+          version: string
+        }
+        Insert: {
+          body_md: string
+          code: string
+          country_code: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          locale: string
+          name: string
+          required_fields?: Json
+          version: string
+        }
+        Update: {
+          body_md?: string
+          code?: string
+          country_code?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          locale?: string
+          name?: string
+          required_fields?: Json
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legal_documents_template_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "legal_documents_template_locale_fkey"
+            columns: ["locale"]
+            isOneToOne: false
+            referencedRelation: "locales"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       locales: {
         Row: {
           code: string
