@@ -12,7 +12,8 @@
       "!docs",
       "!.claude",
       "!shared/types/database.ts",
-      "!package-lock.json"
+      "!package-lock.json",
+      "!next-env.d.ts"
     ]
   },
   "formatter": {
@@ -55,6 +56,11 @@
   "json": {
     "formatter": {
       "indentWidth": 2
+    }
+  },
+  "css": {
+    "formatter": {
+      "quoteStyle": "single"
     }
   }
 }
