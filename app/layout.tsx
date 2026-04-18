@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { AxeBoot } from '@/shared/lib/a11y/axe-boot';
 import { TrpcProvider } from '@/shared/lib/trpc/provider';
 import { GlobalOverlays } from '@/shared/ui/layout/shell-client';
 import { ThemeProvider } from '@/shared/ui/layout/theme-provider';
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
             <GlobalOverlays />
             <Toaster />
+            <AxeBoot />
           </TrpcProvider>
         </ThemeProvider>
       </body>
