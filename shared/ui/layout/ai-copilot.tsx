@@ -14,6 +14,7 @@ export function AICopilot() {
   const open = useCopilotStore((s) => s.open);
   const close = useCopilotStore((s) => s.close);
   const context = useCopilotStore((s) => s.context);
+  const setContext = useCopilotStore((s) => s.setContext);
   const initialPrompt = useCopilotStore((s) => s.initialPrompt);
   const clearInitialPrompt = useCopilotStore((s) => s.clearInitialPrompt);
   const suggestions = useCopilotStore((s) => s.suggestions);
@@ -114,6 +115,15 @@ export function AICopilot() {
                   {context.entity.type}: {context.entity.id.slice(0, 8)}
                 </span>
               ) : null}
+              <button
+                type="button"
+                onClick={() => setContext(null)}
+                className="copilot-chip-drop"
+                aria-label="Quitar contexto"
+                title="Quitar contexto"
+              >
+                ×
+              </button>
             </div>
           ) : null}
 
