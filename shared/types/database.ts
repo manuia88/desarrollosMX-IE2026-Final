@@ -2239,6 +2239,53 @@ export type Database = {
           },
         ]
       }
+      tax_rules: {
+        Row: {
+          applies_from: string
+          applies_to: string | null
+          country_code: string
+          created_at: string
+          id: string
+          meta: Json
+          rate: number
+          scope: string
+          scope_id: string | null
+          tax_type: string
+        }
+        Insert: {
+          applies_from?: string
+          applies_to?: string | null
+          country_code: string
+          created_at?: string
+          id?: string
+          meta?: Json
+          rate: number
+          scope: string
+          scope_id?: string | null
+          tax_type: string
+        }
+        Update: {
+          applies_from?: string
+          applies_to?: string | null
+          country_code?: string
+          created_at?: string
+          id?: string
+          meta?: Json
+          rate?: number
+          scope?: string
+          scope_id?: string | null
+          tax_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_rules_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       template_public_audit_log: {
         Row: {
           action: string
