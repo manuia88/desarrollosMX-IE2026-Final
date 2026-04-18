@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { TrpcProvider } from '@/shared/lib/trpc/provider';
-import { CommandPalette } from '@/shared/ui/layout/command-palette';
-import { CommandPaletteBoot } from '@/shared/ui/layout/command-palette-boot';
+import { AppShell } from '@/shared/ui/layout/shell-client';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -30,8 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body>
         <TrpcProvider>
           {children}
-          <CommandPaletteBoot />
-          <CommandPalette />
+          <AppShell />
         </TrpcProvider>
       </body>
     </html>
