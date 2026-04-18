@@ -741,6 +741,93 @@ export type Database = {
         }
         Relationships: []
       }
+      auth_backup_codes: {
+        Row: {
+          code_hash: string
+          created_at: string
+          id: string
+          profile_id: string
+          used_at: string | null
+        }
+        Insert: {
+          code_hash: string
+          created_at?: string
+          id?: string
+          profile_id: string
+          used_at?: string | null
+        }
+        Update: {
+          code_hash?: string
+          created_at?: string
+          id?: string
+          profile_id?: string
+          used_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "auth_backup_codes_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "auth_backup_codes_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      auth_sessions_log: {
+        Row: {
+          aal: string | null
+          action: string
+          created_at: string
+          id: string
+          ip: unknown
+          meta: Json
+          profile_id: string
+          user_agent: string | null
+        }
+        Insert: {
+          aal?: string | null
+          action: string
+          created_at?: string
+          id?: string
+          ip?: unknown
+          meta?: Json
+          profile_id: string
+          user_agent?: string | null
+        }
+        Update: {
+          aal?: string | null
+          action?: string
+          created_at?: string
+          id?: string
+          ip?: unknown
+          meta?: Json
+          profile_id?: string
+          user_agent?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "auth_sessions_log_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "auth_sessions_log_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       broker_companies: {
         Row: {
           contact_email: string | null
@@ -957,6 +1044,13 @@ export type Database = {
             columns: ["holding_parent_id"]
             isOneToOne: false
             referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "desarrolladoras_holding_parent_id_fkey"
+            columns: ["holding_parent_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
             referencedColumns: ["id"]
           },
         ]
@@ -1353,10 +1447,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "profile_feature_overrides_granted_by_fkey"
+            columns: ["granted_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "profile_feature_overrides_profile_id_fkey"
             columns: ["profile_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profile_feature_overrides_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -1455,6 +1563,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "fk_profiles_agency"
+            columns: ["agency_id"]
+            isOneToOne: false
+            referencedRelation: "public_agencies"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "fk_profiles_broker"
             columns: ["broker_company_id"]
             isOneToOne: false
@@ -1462,10 +1577,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "fk_profiles_broker"
+            columns: ["broker_company_id"]
+            isOneToOne: false
+            referencedRelation: "public_broker_companies"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "fk_profiles_desarrolladora"
             columns: ["desarrolladora_id"]
             isOneToOne: false
             referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_profiles_desarrolladora"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
             referencedColumns: ["id"]
           },
           {
@@ -1491,6 +1620,237 @@ export type Database = {
           },
         ]
       }
+      rate_limit_log: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_default: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260414: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260415: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260416: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260417: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260418: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260419: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260420: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260421: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      rate_limit_log_p20260422: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
       role_features: {
         Row: {
           feature_code: string
@@ -1514,6 +1874,81 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "feature_registry"
             referencedColumns: ["code"]
+          },
+        ]
+      }
+      role_requests: {
+        Row: {
+          approver_id: string | null
+          country_code: string
+          created_at: string
+          decided_at: string | null
+          id: string
+          meta: Json
+          profile_id: string
+          reason: string | null
+          requested_role: Database["public"]["Enums"]["user_role"]
+          status: string
+        }
+        Insert: {
+          approver_id?: string | null
+          country_code: string
+          created_at?: string
+          decided_at?: string | null
+          id?: string
+          meta?: Json
+          profile_id: string
+          reason?: string | null
+          requested_role: Database["public"]["Enums"]["user_role"]
+          status?: string
+        }
+        Update: {
+          approver_id?: string | null
+          country_code?: string
+          created_at?: string
+          decided_at?: string | null
+          id?: string
+          meta?: Json
+          profile_id?: string
+          reason?: string | null
+          requested_role?: Database["public"]["Enums"]["user_role"]
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "role_requests_approver_id_fkey"
+            columns: ["approver_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "role_requests_approver_id_fkey"
+            columns: ["approver_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "role_requests_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "role_requests_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "role_requests_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -1667,6 +2102,27 @@ export type Database = {
         }
         Relationships: []
       }
+      template_public_rate_limit_log: {
+        Row: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Insert: {
+          count: number
+          endpoint: string
+          user_id: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          user_id?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       geography_columns: {
@@ -1710,6 +2166,173 @@ export type Database = {
           type?: string | null
         }
         Relationships: []
+      }
+      public_agencies: {
+        Row: {
+          country_code: string | null
+          created_at: string | null
+          id: string | null
+          is_verified: boolean | null
+          logo_url: string | null
+          name: string | null
+          slug: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agencies_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      public_broker_companies: {
+        Row: {
+          country_code: string | null
+          created_at: string | null
+          id: string | null
+          is_authorized_broker: boolean | null
+          logo_url: string | null
+          name: string | null
+          slug: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_authorized_broker?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_authorized_broker?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "broker_companies_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      public_desarrolladoras: {
+        Row: {
+          country_code: string | null
+          created_at: string | null
+          id: string | null
+          is_verified: boolean | null
+          logo_url: string | null
+          name: string | null
+          slug: string | null
+          website: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+          website?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string | null
+          id?: string | null
+          is_verified?: boolean | null
+          logo_url?: string | null
+          name?: string | null
+          slug?: string | null
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "desarrolladoras_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      public_profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          country_code: string | null
+          created_at: string | null
+          first_name: string | null
+          full_name: string | null
+          id: string | null
+          last_name: string | null
+          public_portfolio_url: string | null
+          rol: Database["public"]["Enums"]["user_role"] | null
+          slug: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: never
+          country_code?: string | null
+          created_at?: string | null
+          first_name?: string | null
+          full_name?: string | null
+          id?: string | null
+          last_name?: string | null
+          public_portfolio_url?: never
+          rol?: Database["public"]["Enums"]["user_role"] | null
+          slug?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: never
+          country_code?: string | null
+          created_at?: string | null
+          first_name?: string | null
+          full_name?: string | null
+          id?: string | null
+          last_name?: string | null
+          public_portfolio_url?: never
+          rol?: Database["public"]["Enums"]["user_role"] | null
+          slug?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
       }
       table_privs: {
         Row: {
@@ -1878,6 +2501,10 @@ export type Database = {
         }
         Returns: undefined
       }
+      approve_role_request: {
+        Args: { p_request_id: string }
+        Returns: undefined
+      }
       autovacuum_off: {
         Args: {
           p_parent_schema: string
@@ -1939,6 +2566,15 @@ export type Database = {
         Returns: string
       }
       check_partition_type: { Args: { p_type: string }; Returns: boolean }
+      check_rate_limit_db: {
+        Args: {
+          p_endpoint: string
+          p_max_calls: number
+          p_user_id: string
+          p_window_sec: number
+        }
+        Returns: boolean
+      }
       check_subpart_sameconfig: {
         Args: { p_parent_table: string }
         Returns: {
@@ -2217,6 +2853,9 @@ export type Database = {
       }
       is_superadmin: { Args: never; Returns: boolean }
       longtransactionsenabled: { Args: never; Returns: boolean }
+      mfa_consume_backup_code: { Args: { p_code: string }; Returns: boolean }
+      mfa_mark_enabled: { Args: never; Returns: undefined }
+      mfa_regenerate_backup_codes: { Args: never; Returns: string[] }
       partition_data_id: {
         Args: {
           p_analyze?: boolean
@@ -2288,6 +2927,10 @@ export type Database = {
       postgis_wagyu_version: { Args: never; Returns: string }
       reapply_privileges: {
         Args: { p_parent_table: string }
+        Returns: undefined
+      }
+      reject_role_request: {
+        Args: { p_reason?: string; p_request_id: string }
         Returns: undefined
       }
       resolve_features: { Args: { p_user_id?: string }; Returns: string[] }

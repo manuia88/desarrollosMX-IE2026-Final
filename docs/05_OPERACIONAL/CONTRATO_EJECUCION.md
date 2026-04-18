@@ -216,10 +216,10 @@ Recomendación: [1 línea con razón]
 7. GESTIÓN DE SESIÓN Y CONTEXTO
 ═══════════════════════════════════════════════════════════════
 
-60% → aviso informativo (continúas)
-75% → paras al siguiente módulo completo + §5.D
-85% → paras inmediato + §5.D
-Nunca comprimir manualmente. Nunca continuar tras 85% sin OK.
+70% → aviso informativo (continúas trabajando)
+90% → paras al siguiente MÓDULO completo + §5.D
+95% → paras inmediato + §5.D (hard stop)
+Nunca comprimir manualmente. Nunca continuar tras 95% sin OK.
 
 Al retomar en sesión nueva:
 - Este contrato está en docs/05_OPERACIONAL/CONTRATO_EJECUCION.md
