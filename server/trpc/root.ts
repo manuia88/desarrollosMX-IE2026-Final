@@ -1,3 +1,4 @@
+import { meRouter } from '@/features/auth/routes/me';
 import { mfaRouter } from '@/features/auth/routes/mfa';
 import { roleRequestRouter } from '@/features/auth/routes/role-request';
 import { publicProcedure, router } from './init';
@@ -7,6 +8,7 @@ export const appRouter = router({
     ok: true,
     timestamp: Date.now(),
   })),
+  me: meRouter,
   mfa: mfaRouter,
   roleRequest: roleRequestRouter,
 });
