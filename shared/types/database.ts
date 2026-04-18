@@ -1206,6 +1206,98 @@ export type Database = {
           },
         ]
       }
+      fiscal_docs: {
+        Row: {
+          cancel_reason: string | null
+          canceled_at: string | null
+          country_code: string
+          created_at: string
+          currency: string
+          desarrolladora_id: string | null
+          doc_type: string
+          folio: string | null
+          id: string
+          issued_at: string | null
+          meta: Json
+          operacion_id: string | null
+          pdf_url: string | null
+          series: string | null
+          status: string
+          total_minor: number
+          uuid_extern: string | null
+          xml_url: string | null
+        }
+        Insert: {
+          cancel_reason?: string | null
+          canceled_at?: string | null
+          country_code: string
+          created_at?: string
+          currency: string
+          desarrolladora_id?: string | null
+          doc_type: string
+          folio?: string | null
+          id?: string
+          issued_at?: string | null
+          meta?: Json
+          operacion_id?: string | null
+          pdf_url?: string | null
+          series?: string | null
+          status?: string
+          total_minor: number
+          uuid_extern?: string | null
+          xml_url?: string | null
+        }
+        Update: {
+          cancel_reason?: string | null
+          canceled_at?: string | null
+          country_code?: string
+          created_at?: string
+          currency?: string
+          desarrolladora_id?: string | null
+          doc_type?: string
+          folio?: string | null
+          id?: string
+          issued_at?: string | null
+          meta?: Json
+          operacion_id?: string | null
+          pdf_url?: string | null
+          series?: string | null
+          status?: string
+          total_minor?: number
+          uuid_extern?: string | null
+          xml_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fiscal_docs_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "fiscal_docs_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "fiscal_docs_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fiscal_docs_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       fx_rates: {
         Row: {
           base: string
