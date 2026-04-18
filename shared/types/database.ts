@@ -3672,6 +3672,7 @@ export type Database = {
       mfa_consume_backup_code: { Args: { p_code: string }; Returns: boolean }
       mfa_mark_enabled: { Args: never; Returns: undefined }
       mfa_regenerate_backup_codes: { Args: never; Returns: string[] }
+      mfa_reminders_tick: { Args: never; Returns: number }
       partition_data_id: {
         Args: {
           p_analyze?: boolean
