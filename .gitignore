@@ -1,10 +1,22 @@
-node_modules
-.next
-.env.local
+node_modules/
+.next/
 .env
+.env.local
+.env.*.local
+dist/
+coverage/
+playwright-report/
+.vercel/
 *.log
 .DS_Store
 
 # Docs internos de diseño (referencia, no versionar)
 docs/biblia-v5/
 docs/referencias-ui/
+
+# Claude Code
+.claude/settings.local.json
+
+# Supabase
+supabase/.branches/
+supabase/.temp/

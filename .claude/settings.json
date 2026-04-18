@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(cat:*)",
+      "Bash(echo:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(supabase:*)",
+      "Bash(node:*)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Write(**)",
+      "Edit(**)",
+      "Read(**)",
+      "Glob(**)",
+      "Grep(**)",
+      "WebFetch(**)",
+      "TodoWrite",
+      "Agent(**)",
+      "NotebookEdit(**)"
+    ]
+  }
+}
