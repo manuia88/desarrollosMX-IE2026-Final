@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import type { ReactNode } from 'react';
 import { AxeBoot } from '@/shared/lib/a11y/axe-boot';
+import { defaultLocale, isLocale } from '@/shared/lib/i18n/config';
 import { TrpcProvider } from '@/shared/lib/trpc/provider';
 import { GlobalOverlays } from '@/shared/ui/layout/shell-client';
 import { ThemeProvider } from '@/shared/ui/layout/theme-provider';
@@ -19,9 +21,17 @@ const FONT_LINKS = [
   'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap',
 ];
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+async function detectLang(): Promise<string> {
+  const hdrs = await headers();
+  const pathname = hdrs.get('x-pathname') ?? hdrs.get('x-invoke-path') ?? '';
+  const segment = pathname.split('/').filter(Boolean)[0] ?? '';
+  return isLocale(segment) ? segment : defaultLocale;
+}
+
+export default async function RootLayout({ children }: { children: ReactNode }) {
+  const lang = await detectLang();
   return (
-    <html lang="es-MX" suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
