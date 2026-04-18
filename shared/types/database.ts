@@ -1109,6 +1109,50 @@ export type Database = {
           },
         ]
       }
+      embeddings: {
+        Row: {
+          chunk_index: number
+          content: string
+          country_code: string | null
+          created_at: string
+          embedding: string
+          id: string
+          meta: Json
+          source_id: string
+          source_type: string
+        }
+        Insert: {
+          chunk_index?: number
+          content: string
+          country_code?: string | null
+          created_at?: string
+          embedding: string
+          id?: string
+          meta?: Json
+          source_id: string
+          source_type: string
+        }
+        Update: {
+          chunk_index?: number
+          content?: string
+          country_code?: string | null
+          created_at?: string
+          embedding?: string
+          id?: string
+          meta?: Json
+          source_id?: string
+          source_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "embeddings_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       feature_registry: {
         Row: {
           category: string
@@ -2922,6 +2966,23 @@ export type Database = {
           similarity: number
           updated_at: string
           value: Json
+        }[]
+      }
+      match_embeddings: {
+        Args: {
+          p_country_code?: string
+          p_embedding: string
+          p_match_count?: number
+          p_min_similarity?: number
+          p_source_types?: string[]
+        }
+        Returns: {
+          content: string
+          id: string
+          meta: Json
+          similarity: number
+          source_id: string
+          source_type: string
         }[]
       }
       mfa_consume_backup_code: { Args: { p_code: string }; Returns: boolean }
