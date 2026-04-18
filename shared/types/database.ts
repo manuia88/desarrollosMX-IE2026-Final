@@ -1549,6 +1549,67 @@ export type Database = {
           },
         ]
       }
+      role_requests: {
+        Row: {
+          approver_id: string | null
+          country_code: string
+          created_at: string
+          decided_at: string | null
+          id: string
+          meta: Json
+          profile_id: string
+          reason: string | null
+          requested_role: Database["public"]["Enums"]["user_role"]
+          status: string
+        }
+        Insert: {
+          approver_id?: string | null
+          country_code: string
+          created_at?: string
+          decided_at?: string | null
+          id?: string
+          meta?: Json
+          profile_id: string
+          reason?: string | null
+          requested_role: Database["public"]["Enums"]["user_role"]
+          status?: string
+        }
+        Update: {
+          approver_id?: string | null
+          country_code?: string
+          created_at?: string
+          decided_at?: string | null
+          id?: string
+          meta?: Json
+          profile_id?: string
+          reason?: string | null
+          requested_role?: Database["public"]["Enums"]["user_role"]
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "role_requests_approver_id_fkey"
+            columns: ["approver_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "role_requests_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "role_requests_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       spatial_ref_sys: {
         Row: {
           auth_name: string | null
@@ -1908,6 +1969,10 @@ export type Database = {
           p_parent_schema: string
           p_parent_tablename: string
         }
+        Returns: undefined
+      }
+      approve_role_request: {
+        Args: { p_request_id: string }
         Returns: undefined
       }
       autovacuum_off: {
@@ -2323,6 +2388,10 @@ export type Database = {
       postgis_wagyu_version: { Args: never; Returns: string }
       reapply_privileges: {
         Args: { p_parent_table: string }
+        Returns: undefined
+      }
+      reject_role_request: {
+        Args: { p_reason?: string; p_request_id: string }
         Returns: undefined
       }
       resolve_features: { Args: { p_user_id?: string }; Returns: string[] }
