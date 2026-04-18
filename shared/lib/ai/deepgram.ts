@@ -10,11 +10,7 @@ export type DeepgramClientOpts = {
 };
 
 export class DeepgramClient {
-  constructor(_opts: DeepgramClientOpts) {
-    // H2: persistir opts y abrir WebSocket a wss://api.deepgram.com/v1/listen
-  }
-
-  start(): Promise<void> {
+  start(_opts: DeepgramClientOpts): Promise<void> {
     throw new Error('deepgram_not_implemented_h2');
   }
 
