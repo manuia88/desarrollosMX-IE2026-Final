@@ -15,7 +15,7 @@ const AICopilot = dynamic(() => import('./ai-copilot').then((m) => m.AICopilot),
   ssr: false,
 });
 
-export function AppShell() {
+export function GlobalOverlays() {
   return (
     <>
       <CommandPaletteBoot />
