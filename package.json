@@ -10,7 +10,7 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest",
     "test:e2e": "playwright test",
     "test:a11y": "playwright test tests/e2e/a11y.spec.ts",
     "format": "biome format --write .",
