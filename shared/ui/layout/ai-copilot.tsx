@@ -7,7 +7,12 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useCopilotStore } from '@/shared/hooks/useCopilotStore';
 import { useCopilotSuggestions } from '@/shared/hooks/useCopilotSuggestions';
+import { useVoiceInput } from '@/shared/hooks/useVoiceInput';
 import { AI_ASK_EVENT } from '@/shared/lib/command-palette/seed-commands';
+
+function isSupportedUnknown(v: boolean | null): boolean {
+  return v === null;
+}
 
 export function AICopilot() {
   const isOpen = useCopilotStore((s) => s.isOpen);
@@ -39,6 +44,13 @@ export function AICopilot() {
 
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const voice = useVoiceInput({
+    locale: 'es-MX',
+    onTranscript: (text, isFinal) => {
+      setInput((prev) => (isFinal ? `${prev}${prev ? ' ' : ''}${text}`.trim() : text));
+    },
+  });
 
   useHotkeys('mod+j', () => toggle(), {
     preventDefault: true,
@@ -181,13 +193,30 @@ export function AICopilot() {
               className="copilot-input"
               disabled={isStreaming}
             />
-            <button
-              type="submit"
-              disabled={!input.trim() || isStreaming}
-              className="copilot-submit"
-            >
-              {isStreaming ? '…' : 'Enviar'}
-            </button>
+            <div className="copilot-form-actions">
+              {voice.isSupported ? (
+                <button
+                  type="button"
+                  onClick={() => (voice.isListening ? voice.stop() : voice.start())}
+                  className={voice.isListening ? 'copilot-mic copilot-mic-active' : 'copilot-mic'}
+                  title={voice.isListening ? 'Detener voz' : 'Dictar por voz'}
+                  aria-label={voice.isListening ? 'Detener voz' : 'Dictar por voz'}
+                >
+                  {voice.isListening ? '●' : '🎤'}
+                </button>
+              ) : isSupportedUnknown(voice.isSupported) ? null : (
+                <span className="copilot-mic-off" title="Voz no disponible en este navegador">
+                  —
+                </span>
+              )}
+              <button
+                type="submit"
+                disabled={!input.trim() || isStreaming}
+                className="copilot-submit"
+              >
+                {isStreaming ? '…' : 'Enviar'}
+              </button>
+            </div>
           </form>
         </motion.aside>
       ) : (
