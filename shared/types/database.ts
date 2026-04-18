@@ -201,6 +201,60 @@ export type Database = {
           },
         ]
       }
+      api_keys: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          key_hash: string
+          key_prefix: string
+          last_used_at: string | null
+          name: string
+          profile_id: string
+          revoked_at: string | null
+          scopes: string[]
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          key_hash: string
+          key_prefix: string
+          last_used_at?: string | null
+          name: string
+          profile_id: string
+          revoked_at?: string | null
+          scopes?: string[]
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          key_hash?: string
+          key_prefix?: string
+          last_used_at?: string | null
+          name?: string
+          profile_id?: string
+          revoked_at?: string | null
+          scopes?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "api_keys_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "api_keys_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_log: {
         Row: {
           action: string
@@ -1776,9 +1830,11 @@ export type Database = {
           razon_social: string | null
           regimen_fiscal: string | null
           rfc: string | null
+          rfc_encrypted: string | null
           rol: Database["public"]["Enums"]["user_role"]
           slug: string | null
           tax_id: string | null
+          tax_id_encrypted: string | null
           updated_at: string
         }
         Insert: {
@@ -1804,9 +1860,11 @@ export type Database = {
           razon_social?: string | null
           regimen_fiscal?: string | null
           rfc?: string | null
+          rfc_encrypted?: string | null
           rol?: Database["public"]["Enums"]["user_role"]
           slug?: string | null
           tax_id?: string | null
+          tax_id_encrypted?: string | null
           updated_at?: string
         }
         Update: {
@@ -1832,9 +1890,11 @@ export type Database = {
           razon_social?: string | null
           regimen_fiscal?: string | null
           rfc?: string | null
+          rfc_encrypted?: string | null
           rol?: Database["public"]["Enums"]["user_role"]
           slug?: string | null
           tax_id?: string | null
+          tax_id_encrypted?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -3003,6 +3063,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      decrypt_secret: { Args: { p_ciphertext: string }; Returns: string }
       disablelongtransactions: { Args: never; Returns: string }
       drop_constraints: {
         Args: {
@@ -3068,6 +3129,7 @@ export type Database = {
         Returns: string
       }
       enablelongtransactions: { Args: never; Returns: string }
+      encrypt_secret: { Args: { p_plaintext: string }; Returns: string }
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
       geometry: { Args: { "": string }; Returns: unknown }
       geometry_above: {
@@ -3194,6 +3256,13 @@ export type Database = {
         Returns: boolean
       }
       is_superadmin: { Args: never; Returns: boolean }
+      issue_api_key: {
+        Args: { p_expires_at?: string; p_name: string; p_scopes?: string[] }
+        Returns: {
+          api_key_id: string
+          raw_key: string
+        }[]
+      }
       jsonb_diff: { Args: { a: Json; b: Json }; Returns: Json }
       longtransactionsenabled: { Args: never; Returns: boolean }
       match_ai_memory: {
@@ -3960,6 +4029,7 @@ export type Database = {
         Args: { p_country_code: string; p_postal_code: string }
         Returns: boolean
       }
+      verify_api_key: { Args: { p_raw_key: string }; Returns: string }
     }
     Enums: {
       user_role:
