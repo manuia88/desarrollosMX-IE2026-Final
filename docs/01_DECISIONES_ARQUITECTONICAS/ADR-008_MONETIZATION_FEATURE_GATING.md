@@ -40,7 +40,7 @@ Feature gating H1 existente en registry (fuente CONTEXTO §2):
 - **Objetivo**: validar retención, comisión promedio, absorción, y ajustar pricing Fase 2 con datos.
 
 **Fase 2 — Monetización SaaS (H2, meses 6-18)**
-- Asesores: **4 planes** (Free / Starter / Pro / Enterprise). Starter $499 MXN/mes, Pro $1,499, Enterprise custom.
+- Asesores: **4 planes** (Free / Starter / Pro / Enterprise). Starter $499 MXN/mes, Pro $999, Enterprise $2,499 custom.
 - Desarrolladores: **4 planes** (Free / Starter / Pro / Enterprise) según capacidades contabilidad + IE + AI. Free 1 proyecto; Starter $999 MXN/mes (5 proyectos, 20 AI extractions/mes); Pro $2,999 (ilimitado, 50 extractions); Enterprise custom con API.
 - Fee marketplace 0.5% del valor cierre se mantiene para devs con operaciones vía DMX.
 - API B2B comienza a monetizar con Free tier (100 req/día) + Starter $5K + Pro $25K + Enterprise custom.
