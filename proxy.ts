@@ -3,6 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 import { defaultLocale, isLocale } from '@/shared/lib/i18n/config';
 import { routing } from '@/shared/lib/i18n/routing';
+import { applySecurityHeaders, generateNonce } from '@/shared/lib/security/headers';
 import { requireEnv } from '@/shared/lib/supabase/env';
 import type { Database } from '@/shared/types/database';
 
@@ -52,6 +53,8 @@ function redirectTo(req: NextRequest, locale: string, path: string, from?: strin
 
 export async function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
+  const isDev = process.env.NODE_ENV !== 'production';
+  const nonce = generateNonce();
 
   if (
     pathname.startsWith('/api') ||
@@ -59,7 +62,8 @@ export async function proxy(req: NextRequest) {
     pathname === '/favicon.ico' ||
     pathname.startsWith('/design-system')
   ) {
-    return NextResponse.next({ request: req });
+    const pass = NextResponse.next({ request: req });
+    return applySecurityHeaders(pass, nonce, isDev);
   }
 
   let response = intlMiddleware(req);
@@ -105,7 +109,7 @@ export async function proxy(req: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (isPublicPath(rest)) {
-    return response;
+    return applySecurityHeaders(response, nonce, isDev);
   }
 
   if (!user) {
@@ -137,9 +141,13 @@ export async function proxy(req: NextRequest) {
     }
   }
 
-  return response;
+  return applySecurityHeaders(response, nonce, isDev);
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|design-system|.*\\.).*)'],
+  // Incluye /api para que CSP + HSTS + headers de seguridad apliquen también a endpoints.
+  // Excluye archivos estáticos para no sumar overhead.
+  matcher: [
+    '/((?!_next/static|_next/image|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff|woff2|ttf|otf)$).*)',
+  ],
 };
