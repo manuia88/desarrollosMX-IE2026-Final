@@ -307,6 +307,139 @@
   cursor: not-allowed;
 }
 
+/* ============================================================
+ * GenerativeComponent scaffolds
+ * ============================================================ */
+.gen-stat-card {
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid oklch(0.9 0.02 285);
+  background: white;
+}
+
+.gen-stat-label {
+  font-size: var(--text-xs);
+  color: oklch(0.5 0.02 285);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.gen-stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.15;
+}
+
+.gen-stat-trend {
+  font-size: var(--text-xs);
+  margin-top: 0.2rem;
+}
+
+.gen-comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.gen-comparison-table th,
+.gen-comparison-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid oklch(0.92 0.02 285);
+  text-align: left;
+}
+
+.gen-comparison-table th {
+  background: oklch(0.97 0.01 285);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+}
+
+.gen-mini-map {
+  border: 1px dashed oklch(0.85 0.02 285);
+  border-radius: 12px;
+  padding: 0.75rem;
+  background: oklch(0.98 0.01 285);
+  font-size: var(--text-sm);
+}
+
+.gen-mini-map-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--text-xs);
+  color: oklch(0.45 0.02 285);
+  margin-bottom: 0.5rem;
+}
+
+.gen-mini-map-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.gen-mini-map-pin {
+  margin-right: 0.25rem;
+}
+
+.gen-timeline {
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.gen-timeline li {
+  display: flex;
+  gap: 0.75rem;
+  font-size: var(--text-sm);
+}
+
+.gen-timeline-date {
+  font-family: var(--font-mono);
+  color: oklch(0.45 0.02 285);
+  min-width: 4.5rem;
+}
+
+.gen-cta-card {
+  padding: 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, oklch(0.95 0.05 285), oklch(0.97 0.03 180));
+  border: 1px solid oklch(0.9 0.03 285);
+}
+
+.gen-cta-card h3 {
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+}
+
+.gen-cta-card p {
+  font-size: var(--text-sm);
+  margin: 0.5rem 0 0.75rem;
+}
+
+.gen-cta-action {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  background: oklch(0.55 0.2 285);
+  color: white;
+  text-decoration: none;
+  font-size: var(--text-sm);
+}
+
+.gen-fallback {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid oklch(0.85 0.1 30);
+  background: oklch(0.98 0.03 30);
+  font-size: var(--text-sm);
+}
+
 .cmdk-ask-ai {
   width: 100%;
   text-align: left;
