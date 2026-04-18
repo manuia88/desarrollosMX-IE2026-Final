@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
 import { fetchAndStoreRates } from '@/shared/lib/currency/fx';
 
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
-
 export async function GET(request: Request) {
   const secret = process.env.CRON_SECRET;
   const header = request.headers.get('authorization');

@@ -1,4 +1,5 @@
 import { getTranslations } from 'next-intl/server';
+import { Suspense } from 'react';
 import { AccountForm } from '@/features/settings/components/account-form';
 
 export default async function AccountSettingsPage() {
@@ -9,7 +10,9 @@ export default async function AccountSettingsPage() {
       <header>
         <h1 className="text-2xl font-semibold">{t('title')}</h1>
       </header>
-      <AccountForm />
+      <Suspense fallback={<div className="h-96 rounded-md border" />}>
+        <AccountForm />
+      </Suspense>
     </main>
   );
 }

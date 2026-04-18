@@ -5,12 +5,6 @@ import { httpBatchLink } from '@trpc/client';
 import { type ReactNode, useState } from 'react';
 import { trpc } from './client';
 
-function getBaseUrl() {
-  if (typeof window !== 'undefined') return '';
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return 'http://localhost:3000';
-}
-
 export function TrpcProvider({ children }: { children: ReactNode }) {
   const [queryClient] = useState(
     () =>
@@ -26,7 +20,7 @@ export function TrpcProvider({ children }: { children: ReactNode }) {
 
   const [trpcClient] = useState(() =>
     trpc.createClient({
-      links: [httpBatchLink({ url: `${getBaseUrl()}/api/trpc` })],
+      links: [httpBatchLink({ url: '/api/trpc' })],
     }),
   );
 
