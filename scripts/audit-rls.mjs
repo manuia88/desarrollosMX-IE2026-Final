@@ -5,8 +5,16 @@ const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 if (!url || !serviceRole) {
-  console.error('✗ missing env NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY');
-  process.exit(1);
+  // En CI sin secret (ej: GitHub Secrets sin SUPABASE_SERVICE_ROLE_KEY): skip con warning.
+  // Forzar strict con env AUDIT_RLS_STRICT=1 cuando todo esté configurado.
+  if (process.env.AUDIT_RLS_STRICT === '1') {
+    console.error('✗ missing env NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY');
+    process.exit(1);
+  }
+  console.warn(
+    '⚠ audit-rls SKIPPED: missing env NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY. Añade SUPABASE_SERVICE_ROLE_KEY a GitHub Secrets y setea AUDIT_RLS_STRICT=1 para bloquear.',
+  );
+  process.exit(0);
 }
 
 const supabase = createClient(url, serviceRole, {
