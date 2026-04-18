@@ -18,6 +18,9 @@
     "db:push": "supabase db push",
     "db:reset": "supabase db reset",
     "i18n:validate": "node scripts/validate-i18n.mjs",
+    "audit:rls": "node scripts/audit-rls.mjs",
+    "audit:selects": "node scripts/grep-unsafe-selects.mjs",
+    "test:security": "vitest run tests/security --passWithNoTests",
     "prepare": "husky"
   },
   "lint-staged": {

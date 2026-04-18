@@ -2835,6 +2835,14 @@ export type Database = {
         Args: { p_request_id: string }
         Returns: undefined
       }
+      audit_rls_violations: {
+        Args: never
+        Returns: {
+          category: string
+          detail: string
+          object_name: string
+        }[]
+      }
       autovacuum_off: {
         Args: {
           p_parent_schema: string
