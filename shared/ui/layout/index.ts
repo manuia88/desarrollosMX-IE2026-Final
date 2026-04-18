@@ -7,3 +7,6 @@ export { Header } from './header';
 export { GlobalOverlays } from './shell-client';
 export type { SidebarItem, SidebarProps } from './sidebar';
 export { Sidebar } from './sidebar';
+export { ThemeProvider } from './theme-provider';
+export type { ThemeToggleProps } from './theme-toggle';
+export { ThemeToggle } from './theme-toggle';
