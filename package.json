@@ -1,0 +1,58 @@
+{
+  "name": "desarrollosmx",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "format": "biome format --write .",
+    "db:types": "supabase gen types typescript --project-id qxfuqwlktmhokwwlvggy > shared/types/database.ts",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.103.3",
+    "@tanstack/react-query": "^5.99.0",
+    "@trpc/client": "^11.16.0",
+    "@trpc/react-query": "^11.16.0",
+    "@trpc/server": "^11.16.0",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "next": "^16.2.4",
+    "next-intl": "^4.9.1",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "zod": "^4.3.6",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.12",
+    "@playwright/test": "^1.59.1",
+    "@swc/helpers": "^0.5.21",
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^25.6.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "supabase": "^2.92.1",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.4"
+  }
+}
