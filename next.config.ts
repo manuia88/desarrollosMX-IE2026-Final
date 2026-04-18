@@ -14,19 +14,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'api.mapbox.com' },
     ],
   },
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-          { key: 'Permissions-Policy', value: 'camera=(), microphone=(self), geolocation=(self)' },
-        ],
-      },
-    ];
-  },
+  // Security headers (CSP + HSTS + etc) viven en middleware.ts — ver FASE 06 §6.D.
 };
 
 export default withNextIntl(nextConfig);

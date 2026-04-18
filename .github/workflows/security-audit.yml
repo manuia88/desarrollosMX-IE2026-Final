@@ -1,0 +1,39 @@
+name: Security Audit (RLS / SECURITY DEFINER / VIEWs)
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+concurrency:
+  group: security-audit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit-rls:
+    name: Audit RLS patterns (ADR-009)
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: 0
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://qxfuqwlktmhokwwlvggy.supabase.co' }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - name: Run audit-rls against remote Supabase
+        run: node scripts/audit-rls.mjs
+
+  grep-unsafe-selects:
+    name: Grep unsafe cross-user SELECTs on base tables
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - run: node scripts/grep-unsafe-selects.mjs

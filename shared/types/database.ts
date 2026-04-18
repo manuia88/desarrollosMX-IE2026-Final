@@ -201,6 +201,291 @@ export type Database = {
           },
         ]
       }
+      api_keys: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          key_hash: string
+          key_prefix: string
+          last_used_at: string | null
+          name: string
+          profile_id: string
+          revoked_at: string | null
+          scopes: string[]
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          key_hash: string
+          key_prefix: string
+          last_used_at?: string | null
+          name: string
+          profile_id: string
+          revoked_at?: string | null
+          scopes?: string[]
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          key_hash?: string
+          key_prefix?: string
+          last_used_at?: string | null
+          name?: string
+          profile_id?: string
+          revoked_at?: string | null
+          scopes?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "api_keys_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "api_keys_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      api_rate_limits: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_default: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260414: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260415: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260416: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260417: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260418: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260419: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260420: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260421: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260422: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
       audit_log: {
         Row: {
           action: string
@@ -1686,6 +1971,54 @@ export type Database = {
           },
         ]
       }
+      privacy_exports: {
+        Row: {
+          completed_at: string | null
+          download_count: number
+          expires_at: string | null
+          id: string
+          meta: Json
+          profile_id: string
+          requested_at: string
+          storage_path: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          download_count?: number
+          expires_at?: string | null
+          id?: string
+          meta?: Json
+          profile_id: string
+          requested_at?: string
+          storage_path?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          download_count?: number
+          expires_at?: string | null
+          id?: string
+          meta?: Json
+          profile_id?: string
+          requested_at?: string
+          storage_path?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_exports_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_exports_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile_feature_overrides: {
         Row: {
           expires_at: string | null
@@ -1755,10 +2088,12 @@ export type Database = {
       profiles: {
         Row: {
           agency_id: string | null
+          anonymized_at: string | null
           avatar_url: string | null
           broker_company_id: string | null
           country_code: string
           created_at: string
+          deleted_at: string | null
           desarrolladora_id: string | null
           docs_verificacion_urls: Json | null
           email: string
@@ -1769,6 +2104,7 @@ export type Database = {
           is_approved: boolean
           last_name: string
           meta: Json
+          pending_deletion_at: string | null
           phone: string | null
           preferred_currency: string | null
           preferred_locale: string | null
@@ -1776,17 +2112,21 @@ export type Database = {
           razon_social: string | null
           regimen_fiscal: string | null
           rfc: string | null
+          rfc_encrypted: string | null
           rol: Database["public"]["Enums"]["user_role"]
           slug: string | null
           tax_id: string | null
+          tax_id_encrypted: string | null
           updated_at: string
         }
         Insert: {
           agency_id?: string | null
+          anonymized_at?: string | null
           avatar_url?: string | null
           broker_company_id?: string | null
           country_code: string
           created_at?: string
+          deleted_at?: string | null
           desarrolladora_id?: string | null
           docs_verificacion_urls?: Json | null
           email: string
@@ -1797,6 +2137,7 @@ export type Database = {
           is_approved?: boolean
           last_name: string
           meta?: Json
+          pending_deletion_at?: string | null
           phone?: string | null
           preferred_currency?: string | null
           preferred_locale?: string | null
@@ -1804,17 +2145,21 @@ export type Database = {
           razon_social?: string | null
           regimen_fiscal?: string | null
           rfc?: string | null
+          rfc_encrypted?: string | null
           rol?: Database["public"]["Enums"]["user_role"]
           slug?: string | null
           tax_id?: string | null
+          tax_id_encrypted?: string | null
           updated_at?: string
         }
         Update: {
           agency_id?: string | null
+          anonymized_at?: string | null
           avatar_url?: string | null
           broker_company_id?: string | null
           country_code?: string
           created_at?: string
+          deleted_at?: string | null
           desarrolladora_id?: string | null
           docs_verificacion_urls?: Json | null
           email?: string
@@ -1825,6 +2170,7 @@ export type Database = {
           is_approved?: boolean
           last_name?: string
           meta?: Json
+          pending_deletion_at?: string | null
           phone?: string | null
           preferred_currency?: string | null
           preferred_locale?: string | null
@@ -1832,9 +2178,11 @@ export type Database = {
           razon_social?: string | null
           regimen_fiscal?: string | null
           rfc?: string | null
+          rfc_encrypted?: string | null
           rol?: Database["public"]["Enums"]["user_role"]
           slug?: string | null
           tax_id?: string | null
+          tax_id_encrypted?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -2134,6 +2482,36 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limit_policies: {
+        Row: {
+          created_at: string
+          description: string | null
+          endpoint: string
+          key_type: string
+          max_calls: number
+          updated_at: string
+          window_sec: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          endpoint: string
+          key_type: string
+          max_calls: number
+          updated_at?: string
+          window_sec: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          endpoint?: string
+          key_type?: string
+          max_calls?: number
+          updated_at?: string
+          window_sec?: number
+        }
+        Relationships: []
+      }
       role_features: {
         Row: {
           feature_code: string
@@ -2378,6 +2756,27 @@ export type Database = {
           },
         ]
       }
+      template_public_api_rate_limits: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
       template_public_audit_log: {
         Row: {
           action: string
@@ -2450,6 +2849,27 @@ export type Database = {
           endpoint?: string
           user_id?: string
           window_start?: string
+        }
+        Relationships: []
+      }
+      view_dedup: {
+        Row: {
+          dedup_key: string
+          entity_id: string
+          entity_type: string
+          viewed_at: string
+        }
+        Insert: {
+          dedup_key: string
+          entity_id: string
+          entity_type: string
+          viewed_at?: string
+        }
+        Update: {
+          dedup_key?: string
+          entity_id?: string
+          entity_type?: string
+          viewed_at?: string
         }
         Relationships: []
       }
@@ -2803,6 +3223,7 @@ export type Database = {
             }
             Returns: string
           }
+      anonymize_profile: { Args: { p_profile_id: string }; Returns: undefined }
       apply_cluster: {
         Args: {
           p_child_schema: string
@@ -2835,6 +3256,14 @@ export type Database = {
         Args: { p_request_id: string }
         Returns: undefined
       }
+      audit_rls_violations: {
+        Args: never
+        Returns: {
+          category: string
+          detail: string
+          object_name: string
+        }[]
+      }
       autovacuum_off: {
         Args: {
           p_parent_schema: string
@@ -2861,6 +3290,7 @@ export type Database = {
         }
         Returns: Record<string, unknown>
       }
+      cancel_account_deletion: { Args: never; Returns: undefined }
       check_automatic_maintenance_value: {
         Args: { p_automatic_maintenance: string }
         Returns: boolean
@@ -2896,6 +3326,15 @@ export type Database = {
         Returns: string
       }
       check_partition_type: { Args: { p_type: string }; Returns: boolean }
+      check_rate_limit: {
+        Args: {
+          p_endpoint: string
+          p_key: string
+          p_max_calls: number
+          p_window_sec: number
+        }
+        Returns: boolean
+      }
       check_rate_limit_db: {
         Args: {
           p_endpoint: string
@@ -2995,6 +3434,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      decrypt_secret: { Args: { p_ciphertext: string }; Returns: string }
       disablelongtransactions: { Args: never; Returns: string }
       drop_constraints: {
         Args: {
@@ -3060,6 +3500,7 @@ export type Database = {
         Returns: string
       }
       enablelongtransactions: { Args: never; Returns: string }
+      encrypt_secret: { Args: { p_plaintext: string }; Returns: string }
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
       geometry: { Args: { "": string }; Returns: unknown }
       geometry_above: {
@@ -3181,7 +3622,18 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_operation_participant: {
+        Args: { p_operation_id: string }
+        Returns: boolean
+      }
       is_superadmin: { Args: never; Returns: boolean }
+      issue_api_key: {
+        Args: { p_expires_at?: string; p_name: string; p_scopes?: string[] }
+        Returns: {
+          api_key_id: string
+          raw_key: string
+        }[]
+      }
       jsonb_diff: { Args: { a: Json; b: Json }; Returns: Json }
       longtransactionsenabled: { Args: never; Returns: boolean }
       match_ai_memory: {
@@ -3220,6 +3672,7 @@ export type Database = {
       mfa_consume_backup_code: { Args: { p_code: string }; Returns: boolean }
       mfa_mark_enabled: { Args: never; Returns: undefined }
       mfa_regenerate_backup_codes: { Args: never; Returns: string[] }
+      mfa_reminders_tick: { Args: never; Returns: number }
       partition_data_id: {
         Args: {
           p_analyze?: boolean
@@ -3293,10 +3746,19 @@ export type Database = {
         Args: { p_parent_table: string }
         Returns: undefined
       }
+      register_view: {
+        Args: {
+          p_dedup_key: string
+          p_entity_id: string
+          p_entity_type: string
+        }
+        Returns: boolean
+      }
       reject_role_request: {
         Args: { p_reason?: string; p_request_id: string }
         Returns: undefined
       }
+      request_account_deletion: { Args: never; Returns: string }
       resolve_features: { Args: { p_user_id?: string }; Returns: string[] }
       run_maintenance: {
         Args: {
@@ -3306,6 +3768,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      run_scheduled_deletions: { Args: never; Returns: number }
       show_limit: { Args: never; Returns: number }
       show_partition_info: {
         Args: {
@@ -3948,6 +4411,7 @@ export type Database = {
         Args: { p_country_code: string; p_postal_code: string }
         Returns: boolean
       }
+      verify_api_key: { Args: { p_raw_key: string }; Returns: string }
     }
     Enums: {
       user_role:
