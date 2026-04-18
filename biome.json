@@ -5,6 +5,7 @@
       "**",
       "!node_modules",
       "!.next",
+      "!.next-stale-*",
       "!dist",
       "!coverage",
       "!playwright-report",
@@ -15,7 +16,9 @@
       "!package-lock.json",
       "!next-env.d.ts",
       "!supabase/.temp",
-      "!supabase/.branches"
+      "!supabase/.branches",
+      "!**/* 2.*",
+      "!**/* 2/"
     ]
   },
   "formatter": {

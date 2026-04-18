@@ -13,7 +13,7 @@ const COUNTRIES = [
   { code: 'US', label: 'United States', defaultLocale: 'en-US' },
 ] as const;
 
-export function SignupForm() {
+export function SignupForm({ geoTimezoneHint }: { geoTimezoneHint?: string | null } = {}) {
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -46,6 +46,8 @@ export function SignupForm() {
       }
 
       const supabase = createClient();
+      const browserTimezone =
+        typeof Intl !== 'undefined' ? Intl.DateTimeFormat().resolvedOptions().timeZone : null;
       const { error: signUpError } = await supabase.auth.signUp({
         email: parsed.data.email,
         password: parsed.data.password,
@@ -55,6 +57,7 @@ export function SignupForm() {
             last_name: parsed.data.last_name,
             country_code: parsed.data.country_code,
             preferred_locale: parsed.data.preferred_locale,
+            preferred_timezone: geoTimezoneHint ?? browserTimezone ?? undefined,
           },
         },
       });

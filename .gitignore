@@ -1,5 +1,6 @@
 node_modules/
 .next/
+.next-stale-*/
 .env
 .env.local
 .env.*.local
@@ -10,6 +11,12 @@ playwright-report/
 .vercel/
 *.log
 .DS_Store
+
+# iCloud Drive duplicate artifacts
+* 2
+* 2.*
+*\ 2
+*\ 2.*
 
 # Docs internos de diseño (referencia, no versionar)
 docs/biblia-v5/

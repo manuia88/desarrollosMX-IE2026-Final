@@ -1206,6 +1206,191 @@ export type Database = {
           },
         ]
       }
+      fiscal_docs: {
+        Row: {
+          cancel_reason: string | null
+          canceled_at: string | null
+          country_code: string
+          created_at: string
+          currency: string
+          desarrolladora_id: string | null
+          doc_type: string
+          folio: string | null
+          id: string
+          issued_at: string | null
+          meta: Json
+          operacion_id: string | null
+          pdf_url: string | null
+          series: string | null
+          status: string
+          total_minor: number
+          uuid_extern: string | null
+          xml_url: string | null
+        }
+        Insert: {
+          cancel_reason?: string | null
+          canceled_at?: string | null
+          country_code: string
+          created_at?: string
+          currency: string
+          desarrolladora_id?: string | null
+          doc_type: string
+          folio?: string | null
+          id?: string
+          issued_at?: string | null
+          meta?: Json
+          operacion_id?: string | null
+          pdf_url?: string | null
+          series?: string | null
+          status?: string
+          total_minor: number
+          uuid_extern?: string | null
+          xml_url?: string | null
+        }
+        Update: {
+          cancel_reason?: string | null
+          canceled_at?: string | null
+          country_code?: string
+          created_at?: string
+          currency?: string
+          desarrolladora_id?: string | null
+          doc_type?: string
+          folio?: string | null
+          id?: string
+          issued_at?: string | null
+          meta?: Json
+          operacion_id?: string | null
+          pdf_url?: string | null
+          series?: string | null
+          status?: string
+          total_minor?: number
+          uuid_extern?: string | null
+          xml_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fiscal_docs_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "fiscal_docs_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "fiscal_docs_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fiscal_docs_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      fx_rates: {
+        Row: {
+          base: string
+          fetched_at: string
+          quote: string
+          rate: number
+          source: string
+        }
+        Insert: {
+          base: string
+          fetched_at?: string
+          quote: string
+          rate: number
+          source?: string
+        }
+        Update: {
+          base?: string
+          fetched_at?: string
+          quote?: string
+          rate?: number
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fx_rates_base_fkey"
+            columns: ["base"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "fx_rates_quote_fkey"
+            columns: ["quote"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      legal_documents_template: {
+        Row: {
+          body_md: string
+          code: string
+          country_code: string
+          created_at: string
+          id: string
+          is_active: boolean
+          locale: string
+          name: string
+          required_fields: Json
+          version: string
+        }
+        Insert: {
+          body_md: string
+          code: string
+          country_code: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          locale: string
+          name: string
+          required_fields?: Json
+          version: string
+        }
+        Update: {
+          body_md?: string
+          code?: string
+          country_code?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          locale?: string
+          name?: string
+          required_fields?: Json
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "legal_documents_template_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "legal_documents_template_locale_fkey"
+            columns: ["locale"]
+            isOneToOne: false
+            referencedRelation: "locales"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       locales: {
         Row: {
           code: string
@@ -2143,6 +2328,53 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "plans"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      tax_rules: {
+        Row: {
+          applies_from: string
+          applies_to: string | null
+          country_code: string
+          created_at: string
+          id: string
+          meta: Json
+          rate: number
+          scope: string
+          scope_id: string | null
+          tax_type: string
+        }
+        Insert: {
+          applies_from?: string
+          applies_to?: string | null
+          country_code: string
+          created_at?: string
+          id?: string
+          meta?: Json
+          rate: number
+          scope: string
+          scope_id?: string | null
+          tax_type: string
+        }
+        Update: {
+          applies_from?: string
+          applies_to?: string | null
+          country_code?: string
+          created_at?: string
+          id?: string
+          meta?: Json
+          rate?: number
+          scope?: string
+          scope_id?: string | null
+          tax_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tax_rules_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
           },
         ]
       }

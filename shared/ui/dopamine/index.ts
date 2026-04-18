@@ -4,6 +4,7 @@ export type { Card3DProps } from './card-3d';
 export { Card3D } from './card-3d';
 export type { FloatingShapesProps } from './floating-shapes';
 export { FloatingShapes } from './floating-shapes';
+export { FxPill } from './fx-pill';
 export type { LabelPillProps, LabelPillSize, LabelPillTone } from './label-pill';
 export { LabelPill } from './label-pill';
 export type { ParticleFieldProps } from './particle-field';

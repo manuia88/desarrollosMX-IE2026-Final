@@ -1,0 +1,160 @@
+{
+  "Common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "close": "Cerrar",
+    "open": "Abrir",
+    "confirm": "Confirmar",
+    "back": "Atrás",
+    "continue": "Continuar",
+    "submit": "Enviar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "yes": "Sí",
+    "no": "No",
+    "required": "Obligatorio",
+    "optional": "Opcional"
+  },
+  "Auth": {
+    "signin": "Iniciar sesión",
+    "signup": "Crear cuenta",
+    "logout": "Cerrar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "rememberMe": "Recordarme",
+    "signinWithGoogle": "Continuar con Google",
+    "signinWithApple": "Continuar con Apple",
+    "alreadyHaveAccount": "¿Ya tienes cuenta?",
+    "dontHaveAccount": "¿No tienes cuenta?",
+    "mfa": {
+      "title": "Verificación en dos pasos",
+      "enroll": "Activar autenticador",
+      "verify": "Verificar código",
+      "code": "Código de 6 dígitos",
+      "backupCodes": "Códigos de respaldo",
+      "enterCode": "Ingresa el código de tu app autenticadora"
+    },
+    "pendingApproval": {
+      "title": "Cuenta en revisión",
+      "body": "Tu cuenta está siendo revisada por un administrador."
+    },
+    "inactive": {
+      "title": "Cuenta inactiva",
+      "body": "Tu cuenta fue desactivada. Contacta a soporte."
+    }
+  },
+  "Nav": {
+    "dashboard": "Panel",
+    "marketplace": "Marketplace",
+    "contacts": "Contactos",
+    "searches": "Búsquedas",
+    "captations": "Captaciones",
+    "operations": "Operaciones",
+    "tasks": "Tareas",
+    "developments": "Desarrollos",
+    "marketing": "Marketing",
+    "statistics": "Estadísticas",
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "security": "Seguridad",
+    "account": "Cuenta"
+  },
+  "Search": {
+    "placeholder": "Buscar desarrollos, contactos, operaciones...",
+    "filters": {
+      "price": "Precio",
+      "bedrooms": "Recámaras",
+      "bathrooms": "Baños",
+      "parking": "Cochera",
+      "type": "Tipo de propiedad",
+      "location": "Ubicación",
+      "amenities": "Amenidades"
+    }
+  },
+  "Properties": {
+    "types": {
+      "departamento": "Departamento",
+      "casa": "Casa",
+      "terreno": "Terreno",
+      "oficina": "Oficina",
+      "local": "Local comercial",
+      "bodega": "Bodega"
+    },
+    "amenities": {
+      "alberca": "Alberca",
+      "gimnasio": "Gimnasio",
+      "seguridad": "Seguridad 24/7",
+      "roof": "Roof garden",
+      "elevator": "Elevador",
+      "pet_friendly": "Pet friendly"
+    }
+  },
+  "Errors": {
+    "unauthorized": "Acceso denegado",
+    "notFound": "No encontrado",
+    "forbidden": "No tienes permisos",
+    "serverError": "Error del servidor",
+    "network": "Error de conexión",
+    "tryAgain": "Intenta de nuevo"
+  },
+  "Copilot": {
+    "title": "DMX Copilot",
+    "placeholder": "Escribe o ⇧Enter para salto de línea",
+    "close": "Cerrar copilot",
+    "removeContext": "Quitar contexto",
+    "voiceUnavailable": "Voz no disponible en este navegador",
+    "send": "Enviar",
+    "thinking": "Pensando..."
+  },
+  "Palette": {
+    "label": "Paleta de comandos",
+    "placeholder": "Escribe un comando o busca...",
+    "noResults": "Sin resultados",
+    "categories": {
+      "navigation": "Navegación",
+      "actions": "Acciones",
+      "recent": "Recientes"
+    }
+  },
+  "Profile": {
+    "security": {
+      "title": "Seguridad",
+      "password": "Contraseña",
+      "mfa": "Autenticación de dos factores",
+      "sessions": "Sesiones activas",
+      "backupCodes": "Códigos de respaldo",
+      "signOutAll": "Cerrar todas las sesiones"
+    }
+  },
+  "Settings": {
+    "account": {
+      "title": "Cuenta",
+      "language": "Idioma",
+      "currency": "Moneda preferida",
+      "timezone": "Zona horaria",
+      "timezoneHelp": "Tu zona horaria se usa para mostrar fechas y agendar eventos."
+    }
+  },
+  "Sidebar": {
+    "label": "Navegación principal"
+  },
+  "Theme": {
+    "label": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "Home": {
+    "title": "DesarrollosMX",
+    "tagline": "Inteligencia inmobiliaria AI-native para LATAM"
+  },
+  "Currency": {
+    "convertedFrom": "≈ {amount}"
+  }
+}
