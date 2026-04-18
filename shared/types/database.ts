@@ -771,6 +771,13 @@ export type Database = {
             referencedRelation: "profiles"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "auth_backup_codes_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
         ]
       }
       broker_companies: {
@@ -1385,10 +1392,24 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "profile_feature_overrides_granted_by_fkey"
+            columns: ["granted_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "profile_feature_overrides_profile_id_fkey"
             columns: ["profile_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "profile_feature_overrides_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -1595,6 +1616,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "role_requests_approver_id_fkey"
+            columns: ["approver_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "role_requests_country_code_fkey"
             columns: ["country_code"]
             isOneToOne: false
@@ -1606,6 +1634,13 @@ export type Database = {
             columns: ["profile_id"]
             isOneToOne: false
             referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "role_requests_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -1803,6 +1838,56 @@ export type Database = {
           type?: string | null
         }
         Relationships: []
+      }
+      public_profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          country_code: string | null
+          created_at: string | null
+          first_name: string | null
+          full_name: string | null
+          id: string | null
+          last_name: string | null
+          public_portfolio_url: string | null
+          rol: Database["public"]["Enums"]["user_role"] | null
+          slug: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: never
+          country_code?: string | null
+          created_at?: string | null
+          first_name?: string | null
+          full_name?: string | null
+          id?: string | null
+          last_name?: string | null
+          public_portfolio_url?: never
+          rol?: Database["public"]["Enums"]["user_role"] | null
+          slug?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: never
+          country_code?: string | null
+          created_at?: string | null
+          first_name?: string | null
+          full_name?: string | null
+          id?: string | null
+          last_name?: string | null
+          public_portfolio_url?: never
+          rol?: Database["public"]["Enums"]["user_role"] | null
+          slug?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "profiles_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
       }
       table_privs: {
         Row: {
