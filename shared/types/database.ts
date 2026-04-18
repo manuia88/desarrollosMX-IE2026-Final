@@ -3189,6 +3189,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_operation_participant: {
+        Args: { p_operation_id: string }
+        Returns: boolean
+      }
       is_superadmin: { Args: never; Returns: boolean }
       jsonb_diff: { Args: { a: Json; b: Json }; Returns: Json }
       longtransactionsenabled: { Args: never; Returns: boolean }
