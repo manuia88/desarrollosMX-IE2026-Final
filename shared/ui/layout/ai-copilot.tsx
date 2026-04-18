@@ -10,6 +10,7 @@ import { useCopilotSuggestions } from '@/shared/hooks/useCopilotSuggestions';
 import { useVoiceInput } from '@/shared/hooks/useVoiceInput';
 import { parseCitations } from '@/shared/lib/ai/citations';
 import { AI_ASK_EVENT } from '@/shared/lib/command-palette/seed-commands';
+import { captureUIEvent } from '@/shared/lib/telemetry/events';
 
 function isSupportedUnknown(v: boolean | null): boolean {
   return v === null;
@@ -78,6 +79,10 @@ export function AICopilot() {
     }
   }, [isOpen, initialPrompt, clearInitialPrompt]);
 
+  useEffect(() => {
+    if (isOpen) captureUIEvent(null, 'copilot_opened');
+  }, [isOpen]);
+
   const isStreaming = status === 'streaming' || status === 'submitted';
 
   const handleSubmit = async (e?: React.FormEvent) => {
@@ -85,6 +90,7 @@ export function AICopilot() {
     const text = input.trim();
     if (!text || isStreaming) return;
     setInput('');
+    captureUIEvent(null, 'copilot_message_sent', { length: text.length });
     await sendMessage({ text });
   };
 

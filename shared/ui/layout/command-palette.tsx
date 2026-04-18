@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { AI_ASK_EVENT, dispatchBrowserEvent } from '@/shared/lib/command-palette/seed-commands';
 import { useCommandRegistry } from '@/shared/lib/command-palette/use-command-registry';
+import { captureUIEvent } from '@/shared/lib/telemetry/events';
 
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ export function CommandPalette() {
 
   useEffect(() => {
     if (!open) return;
+    captureUIEvent(null, 'command_palette_opened');
     const onEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false);
     };

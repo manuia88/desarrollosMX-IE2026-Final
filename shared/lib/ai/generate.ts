@@ -1,7 +1,11 @@
 import { generateText, type ModelMessage } from 'ai';
-import { posthog } from '@/shared/lib/telemetry/posthog';
-import { sentry } from '@/shared/lib/telemetry/sentry';
-import { type ModelCategory, resolveModel } from './providers';
+import {
+  captureAIQueryCompleted,
+  captureAIQueryFailed,
+  captureAIQueryStarted,
+  estimateCostUsd,
+} from '@/shared/lib/telemetry/events';
+import { MODEL_REGISTRY, type ModelCategory, resolveModel } from './providers';
 
 type GenerateOpts = {
   category: ModelCategory;
@@ -12,13 +16,18 @@ type GenerateOpts = {
   maxOutputTokens?: number;
 };
 
+function modelIdFor(category: ModelCategory): string {
+  // Cada LanguageModel expone modelId en v6.
+  return (MODEL_REGISTRY[category] as unknown as { modelId: string }).modelId;
+}
+
 export async function generateAI(opts: GenerateOpts) {
   const start = Date.now();
+  const model = modelIdFor(opts.category);
 
-  posthog.capture({
-    distinctId: opts.userId,
-    event: 'ai_query_started',
-    properties: { category: opts.category, session: opts.session },
+  captureAIQueryStarted(opts.userId, {
+    category: opts.category,
+    model,
   });
 
   try {
@@ -28,31 +37,28 @@ export async function generateAI(opts: GenerateOpts) {
       ...(opts.maxOutputTokens ? { maxOutputTokens: opts.maxOutputTokens } : {}),
     });
 
-    posthog.capture({
-      distinctId: opts.userId,
-      event: 'ai_query_completed',
-      properties: {
-        category: opts.category,
-        tokens_in: res.usage?.inputTokens,
-        tokens_out: res.usage?.outputTokens,
-        ms: Date.now() - start,
-      },
+    const tokens_in = res.usage?.inputTokens;
+    const tokens_out = res.usage?.outputTokens;
+
+    captureAIQueryCompleted(opts.userId, {
+      category: opts.category,
+      model,
+      latency_ms: Date.now() - start,
+      ...(tokens_in !== undefined ? { tokens_in } : {}),
+      ...(tokens_out !== undefined ? { tokens_out } : {}),
+      cost_usd: estimateCostUsd({
+        model,
+        ...(tokens_in !== undefined ? { tokensIn: tokens_in } : {}),
+        ...(tokens_out !== undefined ? { tokensOut: tokens_out } : {}),
+      }),
     });
 
     return res;
   } catch (err) {
-    sentry.captureException(err, {
-      tags: { 'ai.category': opts.category, 'ai.user_id': opts.userId },
-    });
-
-    posthog.capture({
-      distinctId: opts.userId,
-      event: 'ai_query_failed',
-      properties: {
-        category: opts.category,
-        ms: Date.now() - start,
-        error: err instanceof Error ? err.message : String(err),
-      },
+    captureAIQueryFailed(opts.userId, err, {
+      category: opts.category,
+      model,
+      latency_ms: Date.now() - start,
     });
 
     if (opts.fallbackCategory) {
