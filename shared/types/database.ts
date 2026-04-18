@@ -255,6 +255,237 @@ export type Database = {
           },
         ]
       }
+      api_rate_limits: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_default: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260414: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260415: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260416: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260417: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260418: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260419: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260420: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260421: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      api_rate_limits_p20260422: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
       audit_log: {
         Row: {
           action: string
@@ -2194,6 +2425,36 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limit_policies: {
+        Row: {
+          created_at: string
+          description: string | null
+          endpoint: string
+          key_type: string
+          max_calls: number
+          updated_at: string
+          window_sec: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          endpoint: string
+          key_type: string
+          max_calls: number
+          updated_at?: string
+          window_sec: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          endpoint?: string
+          key_type?: string
+          max_calls?: number
+          updated_at?: string
+          window_sec?: number
+        }
+        Relationships: []
+      }
       role_features: {
         Row: {
           feature_code: string
@@ -2437,6 +2698,27 @@ export type Database = {
             referencedColumns: ["code"]
           },
         ]
+      }
+      template_public_api_rate_limits: {
+        Row: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Insert: {
+          count: number
+          endpoint: string
+          key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          endpoint?: string
+          key?: string
+          window_start?: string
+        }
+        Relationships: []
       }
       template_public_audit_log: {
         Row: {
@@ -2964,6 +3246,15 @@ export type Database = {
         Returns: string
       }
       check_partition_type: { Args: { p_type: string }; Returns: boolean }
+      check_rate_limit: {
+        Args: {
+          p_endpoint: string
+          p_key: string
+          p_max_calls: number
+          p_window_sec: number
+        }
+        Returns: boolean
+      }
       check_rate_limit_db: {
         Args: {
           p_endpoint: string
