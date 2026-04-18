@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useCopilotStore } from '@/shared/hooks/useCopilotStore';
+import { useCopilotSuggestions } from '@/shared/hooks/useCopilotSuggestions';
 import { AI_ASK_EVENT } from '@/shared/lib/command-palette/seed-commands';
 
 export function AICopilot() {
@@ -18,6 +19,7 @@ export function AICopilot() {
   const initialPrompt = useCopilotStore((s) => s.initialPrompt);
   const clearInitialPrompt = useCopilotStore((s) => s.clearInitialPrompt);
   const suggestions = useCopilotStore((s) => s.suggestions);
+  useCopilotSuggestions();
 
   const transport = useMemo(
     () =>
