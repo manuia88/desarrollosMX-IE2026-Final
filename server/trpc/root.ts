@@ -1,3 +1,4 @@
+import { mfaRouter } from '@/features/auth/routes/mfa';
 import { publicProcedure, router } from './init';
 
 export const appRouter = router({
@@ -5,6 +6,7 @@ export const appRouter = router({
     ok: true,
     timestamp: Date.now(),
   })),
+  mfa: mfaRouter,
 });
 
 export type AppRouter = typeof appRouter;

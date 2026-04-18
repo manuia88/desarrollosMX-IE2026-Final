@@ -741,6 +741,38 @@ export type Database = {
         }
         Relationships: []
       }
+      auth_backup_codes: {
+        Row: {
+          code_hash: string
+          created_at: string
+          id: string
+          profile_id: string
+          used_at: string | null
+        }
+        Insert: {
+          code_hash: string
+          created_at?: string
+          id?: string
+          profile_id: string
+          used_at?: string | null
+        }
+        Update: {
+          code_hash?: string
+          created_at?: string
+          id?: string
+          profile_id?: string
+          used_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "auth_backup_codes_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       broker_companies: {
         Row: {
           contact_email: string | null
@@ -2217,6 +2249,9 @@ export type Database = {
       }
       is_superadmin: { Args: never; Returns: boolean }
       longtransactionsenabled: { Args: never; Returns: boolean }
+      mfa_consume_backup_code: { Args: { p_code: string }; Returns: boolean }
+      mfa_mark_enabled: { Args: never; Returns: undefined }
+      mfa_regenerate_backup_codes: { Args: never; Returns: string[] }
       partition_data_id: {
         Args: {
           p_analyze?: boolean
