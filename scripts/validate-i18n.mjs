@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-import { readFile, readdir } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { readdir, readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const MESSAGES_DIR = resolve(__dirname, '..', 'messages');

@@ -26,6 +26,7 @@ export function LocaleSwitcher() {
   const handleChange = (next: Locale) => {
     if (next === currentLocale) return;
 
+    // biome-ignore lint/suspicious/noDocumentCookie: next-intl reads NEXT_LOCALE via document.cookie on client; Cookie Store API no disponible en todos los browsers soportados.
     document.cookie = `NEXT_LOCALE=${next}; path=/; max-age=${60 * 60 * 24 * 365}; SameSite=Lax`;
 
     const newPathname = pathname.startsWith(`/${currentLocale}`)
