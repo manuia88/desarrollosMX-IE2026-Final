@@ -326,6 +326,19 @@
   color: oklch(0.55 0.02 285);
 }
 
+.copilot-citation {
+  display: inline-block;
+  padding: 0 0.35rem;
+  margin: 0 0.15rem;
+  font-size: 0.7rem;
+  background: oklch(0.93 0.05 285);
+  color: oklch(0.4 0.12 285);
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  vertical-align: baseline;
+}
+
 .copilot-submit {
   padding: 0 1rem;
   border-radius: 8px;

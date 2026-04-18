@@ -8,6 +8,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { useCopilotStore } from '@/shared/hooks/useCopilotStore';
 import { useCopilotSuggestions } from '@/shared/hooks/useCopilotSuggestions';
 import { useVoiceInput } from '@/shared/hooks/useVoiceInput';
+import { parseCitations } from '@/shared/lib/ai/citations';
 import { AI_ASK_EVENT } from '@/shared/lib/command-palette/seed-commands';
 
 function isSupportedUnknown(v: boolean | null): boolean {
@@ -152,7 +153,22 @@ export function AICopilot() {
                   {m.parts
                     .filter((p): p is { type: 'text'; text: string } => p.type === 'text')
                     .map((p) => (
-                      <p key={`${m.id}-${p.text.slice(0, 32)}`}>{p.text}</p>
+                      <p key={`${m.id}-${p.text.slice(0, 32)}`}>
+                        {parseCitations(p.text).map((seg) =>
+                          seg.kind === 'text' ? (
+                            <span key={seg.key}>{seg.text}</span>
+                          ) : (
+                            <button
+                              key={seg.key}
+                              type="button"
+                              className="copilot-citation"
+                              title={`${seg.source_type}:${seg.source_id}`}
+                            >
+                              [{seg.source_type}]
+                            </button>
+                          ),
+                        )}
+                      </p>
                     ))}
                 </div>
               ))
