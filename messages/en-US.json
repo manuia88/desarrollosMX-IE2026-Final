@@ -1,6 +1,160 @@
 {
   "Common": {
     "save": "Save",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "open": "Open",
+    "confirm": "Confirm",
+    "back": "Back",
+    "continue": "Continue",
+    "submit": "Submit",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "yes": "Yes",
+    "no": "No",
+    "required": "Required",
+    "optional": "Optional"
+  },
+  "Auth": {
+    "signin": "Sign in",
+    "signup": "Create account",
+    "logout": "Sign out",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "rememberMe": "Remember me",
+    "signinWithGoogle": "Continue with Google",
+    "signinWithApple": "Continue with Apple",
+    "alreadyHaveAccount": "Already have an account?",
+    "dontHaveAccount": "Don't have an account?",
+    "mfa": {
+      "title": "Two-factor verification",
+      "enroll": "Enable authenticator",
+      "verify": "Verify code",
+      "code": "6-digit code",
+      "backupCodes": "Backup codes",
+      "enterCode": "Enter the code from your authenticator app"
+    },
+    "pendingApproval": {
+      "title": "Account under review",
+      "body": "Your account is being reviewed by an administrator."
+    },
+    "inactive": {
+      "title": "Account inactive",
+      "body": "Your account has been deactivated. Contact support."
+    }
+  },
+  "Nav": {
+    "dashboard": "Dashboard",
+    "marketplace": "Marketplace",
+    "contacts": "Contacts",
+    "searches": "Searches",
+    "captations": "Captations",
+    "operations": "Operations",
+    "tasks": "Tasks",
+    "developments": "Developments",
+    "marketing": "Marketing",
+    "statistics": "Statistics",
+    "profile": "Profile",
+    "settings": "Settings",
+    "security": "Security",
+    "account": "Account"
+  },
+  "Search": {
+    "placeholder": "Search developments, contacts, operations...",
+    "filters": {
+      "price": "Price",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "parking": "Parking",
+      "type": "Property type",
+      "location": "Location",
+      "amenities": "Amenities"
+    }
+  },
+  "Properties": {
+    "types": {
+      "departamento": "Apartment",
+      "casa": "House",
+      "terreno": "Land",
+      "oficina": "Office",
+      "local": "Retail space",
+      "bodega": "Warehouse"
+    },
+    "amenities": {
+      "alberca": "Pool",
+      "gimnasio": "Gym",
+      "seguridad": "24/7 security",
+      "roof": "Roof garden",
+      "elevator": "Elevator",
+      "pet_friendly": "Pet friendly"
+    }
+  },
+  "Errors": {
+    "unauthorized": "Access denied",
+    "notFound": "Not found",
+    "forbidden": "You don't have permission",
+    "serverError": "Server error",
+    "network": "Connection error",
+    "tryAgain": "Try again"
+  },
+  "Copilot": {
+    "title": "DMX Copilot",
+    "placeholder": "Type or ⇧Enter for newline",
+    "close": "Close copilot",
+    "removeContext": "Remove context",
+    "voiceUnavailable": "Voice not available in this browser",
+    "send": "Send",
+    "thinking": "Thinking..."
+  },
+  "Palette": {
+    "label": "Command palette",
+    "placeholder": "Type a command or search...",
+    "noResults": "No results",
+    "categories": {
+      "navigation": "Navigation",
+      "actions": "Actions",
+      "recent": "Recent"
+    }
+  },
+  "Profile": {
+    "security": {
+      "title": "Security",
+      "password": "Password",
+      "mfa": "Two-factor authentication",
+      "sessions": "Active sessions",
+      "backupCodes": "Backup codes",
+      "signOutAll": "Sign out all sessions"
+    }
+  },
+  "Settings": {
+    "account": {
+      "title": "Account",
+      "language": "Language",
+      "currency": "Preferred currency",
+      "timezone": "Time zone",
+      "timezoneHelp": "Your time zone is used to display dates and schedule events."
+    }
+  },
+  "Sidebar": {
+    "label": "Main navigation"
+  },
+  "Theme": {
+    "label": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "Home": {
+    "title": "DesarrollosMX",
+    "tagline": "AI-native real estate intelligence for LATAM"
+  },
+  "Currency": {
+    "convertedFrom": "≈ {amount}"
   }
 }

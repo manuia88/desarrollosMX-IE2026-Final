@@ -17,6 +17,7 @@
     "db:types": "supabase gen types typescript --project-id qxfuqwlktmhokwwlvggy > shared/types/database.ts",
     "db:push": "supabase db push",
     "db:reset": "supabase db reset",
+    "i18n:validate": "node scripts/validate-i18n.mjs",
     "prepare": "husky"
   },
   "lint-staged": {
