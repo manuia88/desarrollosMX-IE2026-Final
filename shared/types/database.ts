@@ -1971,6 +1971,54 @@ export type Database = {
           },
         ]
       }
+      privacy_exports: {
+        Row: {
+          completed_at: string | null
+          download_count: number
+          expires_at: string | null
+          id: string
+          meta: Json
+          profile_id: string
+          requested_at: string
+          storage_path: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          download_count?: number
+          expires_at?: string | null
+          id?: string
+          meta?: Json
+          profile_id: string
+          requested_at?: string
+          storage_path?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          download_count?: number
+          expires_at?: string | null
+          id?: string
+          meta?: Json
+          profile_id?: string
+          requested_at?: string
+          storage_path?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "privacy_exports_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "privacy_exports_profile_id_fkey"
+            columns: ["profile_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profile_feature_overrides: {
         Row: {
           expires_at: string | null
@@ -2040,10 +2088,12 @@ export type Database = {
       profiles: {
         Row: {
           agency_id: string | null
+          anonymized_at: string | null
           avatar_url: string | null
           broker_company_id: string | null
           country_code: string
           created_at: string
+          deleted_at: string | null
           desarrolladora_id: string | null
           docs_verificacion_urls: Json | null
           email: string
@@ -2054,6 +2104,7 @@ export type Database = {
           is_approved: boolean
           last_name: string
           meta: Json
+          pending_deletion_at: string | null
           phone: string | null
           preferred_currency: string | null
           preferred_locale: string | null
@@ -2070,10 +2121,12 @@ export type Database = {
         }
         Insert: {
           agency_id?: string | null
+          anonymized_at?: string | null
           avatar_url?: string | null
           broker_company_id?: string | null
           country_code: string
           created_at?: string
+          deleted_at?: string | null
           desarrolladora_id?: string | null
           docs_verificacion_urls?: Json | null
           email: string
@@ -2084,6 +2137,7 @@ export type Database = {
           is_approved?: boolean
           last_name: string
           meta?: Json
+          pending_deletion_at?: string | null
           phone?: string | null
           preferred_currency?: string | null
           preferred_locale?: string | null
@@ -2100,10 +2154,12 @@ export type Database = {
         }
         Update: {
           agency_id?: string | null
+          anonymized_at?: string | null
           avatar_url?: string | null
           broker_company_id?: string | null
           country_code?: string
           created_at?: string
+          deleted_at?: string | null
           desarrolladora_id?: string | null
           docs_verificacion_urls?: Json | null
           email?: string
@@ -2114,6 +2170,7 @@ export type Database = {
           is_approved?: boolean
           last_name?: string
           meta?: Json
+          pending_deletion_at?: string | null
           phone?: string | null
           preferred_currency?: string | null
           preferred_locale?: string | null
@@ -2795,6 +2852,27 @@ export type Database = {
         }
         Relationships: []
       }
+      view_dedup: {
+        Row: {
+          dedup_key: string
+          entity_id: string
+          entity_type: string
+          viewed_at: string
+        }
+        Insert: {
+          dedup_key: string
+          entity_id: string
+          entity_type: string
+          viewed_at?: string
+        }
+        Update: {
+          dedup_key?: string
+          entity_id?: string
+          entity_type?: string
+          viewed_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       geography_columns: {
@@ -3145,6 +3223,7 @@ export type Database = {
             }
             Returns: string
           }
+      anonymize_profile: { Args: { p_profile_id: string }; Returns: undefined }
       apply_cluster: {
         Args: {
           p_child_schema: string
@@ -3211,6 +3290,7 @@ export type Database = {
         }
         Returns: Record<string, unknown>
       }
+      cancel_account_deletion: { Args: never; Returns: undefined }
       check_automatic_maintenance_value: {
         Args: { p_automatic_maintenance: string }
         Returns: boolean
@@ -3665,10 +3745,19 @@ export type Database = {
         Args: { p_parent_table: string }
         Returns: undefined
       }
+      register_view: {
+        Args: {
+          p_dedup_key: string
+          p_entity_id: string
+          p_entity_type: string
+        }
+        Returns: boolean
+      }
       reject_role_request: {
         Args: { p_reason?: string; p_request_id: string }
         Returns: undefined
       }
+      request_account_deletion: { Args: never; Returns: string }
       resolve_features: { Args: { p_user_id?: string }; Returns: string[] }
       run_maintenance: {
         Args: {
@@ -3678,6 +3767,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      run_scheduled_deletions: { Args: never; Returns: number }
       show_limit: { Args: never; Returns: number }
       show_partition_info: {
         Args: {
