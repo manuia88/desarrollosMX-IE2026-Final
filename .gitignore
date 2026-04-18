@@ -21,3 +21,4 @@ docs/referencias-ui/
 # Supabase
 supabase/.branches/
 supabase/.temp/
+.vercel
