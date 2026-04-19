@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "DMX Market Assistant",
+  "version": "0.1.0",
+  "description": "Captura legal de listings inmobiliarios desde portales públicos (GC-27 — patrón Lusha/Clay).",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "DMX Market Assistant"
+  },
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://www.inmuebles24.com/*",
+    "https://www.vivanuncios.com.mx/*",
+    "https://propiedades.com/*",
+    "https://www.propiedades.com/*",
+    "https://inmuebles.mercadolibre.com.mx/*",
+    "https://www.facebook.com/marketplace/*",
+    "https://desarrollosmx.com/*",
+    "http://localhost:3000/*"
+  ],
+  "content_scripts": []
+}
