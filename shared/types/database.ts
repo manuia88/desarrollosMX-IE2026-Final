@@ -6065,6 +6065,68 @@ export type Database = {
           },
         ]
       }
+      str_hosts: {
+        Row: {
+          avg_occupancy_rate: number | null
+          avg_rating: number | null
+          avg_reviews_count: number | null
+          churn_risk: number | null
+          country_code: string
+          display_name: string | null
+          first_seen_at: string
+          host_id: string
+          last_updated_at: string
+          listings_count: number
+          meta: Json
+          retention_12m_rate: number | null
+          super_host_score: number | null
+          superhost_flag: boolean
+          tier: string | null
+        }
+        Insert: {
+          avg_occupancy_rate?: number | null
+          avg_rating?: number | null
+          avg_reviews_count?: number | null
+          churn_risk?: number | null
+          country_code: string
+          display_name?: string | null
+          first_seen_at?: string
+          host_id: string
+          last_updated_at?: string
+          listings_count?: number
+          meta?: Json
+          retention_12m_rate?: number | null
+          super_host_score?: number | null
+          superhost_flag?: boolean
+          tier?: string | null
+        }
+        Update: {
+          avg_occupancy_rate?: number | null
+          avg_rating?: number | null
+          avg_reviews_count?: number | null
+          churn_risk?: number | null
+          country_code?: string
+          display_name?: string | null
+          first_seen_at?: string
+          host_id?: string
+          last_updated_at?: string
+          listings_count?: number
+          meta?: Json
+          retention_12m_rate?: number | null
+          super_host_score?: number | null
+          superhost_flag?: boolean
+          tier?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_hosts_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       str_listings: {
         Row: {
           bathrooms: number | null
