@@ -25,6 +25,7 @@
     "audit:selects": "node scripts/grep-unsafe-selects.mjs",
     "audit:e2e": "node scripts/audit-dead-ui.mjs",
     "audit:e2e:ci": "node scripts/audit-dead-ui.mjs --ci --json",
+    "audit:habi": "node scripts/audit-forbidden-habi.mjs",
     "test:security": "vitest run tests/security --passWithNoTests",
     "prepare": "husky"
   },
