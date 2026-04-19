@@ -10,10 +10,16 @@ puntos marcados, reportas en formatos estrictos, esperas luz verde.
 
 P1. docs/02_PLAN_MAESTRO/FASE_NN_*.md     → plan operativo (verdad ejecutiva)
 P2. docs/01_DECISIONES_ARQUITECTONICAS/   → ADRs (decisiones cerradas)
+                                            — incluye ADR-018 E2E Connectedness
+                                              (regla inviolable aplica §6.bis)
 P3. docs/00_FOUNDATION/                   → stack, convenciones, glosario
 P4. docs/03_CATALOGOS/                    → referencia técnica (BD, scores, etc)
+                                            — incluye 03.13 E2E Connections Map
+                                              (vivo, se actualiza cada PR)
 P5. docs/04_MODULOS/                      → specs de módulo UI
 P6. docs/05_OPERACIONAL/                  → runbooks
+                                            — incluye E2E_QUALITY_PLAYBOOK.md
+                                              (tooling + anti-patterns)
 P7. docs/CONTEXTO_MAESTRO_DMX_v5.md       → síntesis producto
 P8. docs/BRIEFING_PARA_REWRITE.md         → decisiones founder
 P9. docs/biblia-v5/                       → fuente primaria (consulta bajo demanda)
@@ -81,6 +87,9 @@ PARAS OBLIGATORIO (STOP POINTS):
    - npm run build pasa (si aplica a la fase)
    - Tests pasan (si la fase los incluye)
    - Migrations aplicadas sin error (si aplica)
+   - npm run audit:e2e pasa (0 violations) [ADR-018, aplica FASE 07+]
+   - Playwright smoke de la fase pasa (npm run test:e2e:phase NN) [FASE 07+]
+   - 03.13_E2E_CONNECTIONS_MAP actualizado con rows nuevas [FASE 07+]
 10. Todo pasa → git tag fase-NN-complete && git push --tags
 11. Algo falla → STOP, reporte §5.C, no creas tag
 12. Reporte §5.B y espera "OK FASE (NN+1)"
@@ -211,6 +220,62 @@ Recomendación: [1 línea con razón]
 ❌ READMEs no pedidos
 ❌ Archivos helpers/utils no indicados en plan
 ❌ Sugerencias mid-fase (guarda para §5.B)
+❌ UI con botones sin handler real (ADR-018 Regla 1)
+❌ STUBs sin marcar con las 4 señales (ADR-018)
+❌ Endpoints que devuelven 200 fake (usar 501 Not Implemented)
+❌ Hooks suscritos a mock data en production builds
+❌ Forms sin resolver Zod (ADR-018 Regla 2)
+❌ href="#" o href="" en Links/anchors (ADR-018 Regla 3)
+❌ Audit log ausente en mutations sensibles (ADR-018 Regla 7)
+
+═══════════════════════════════════════════════════════════════
+6.bis — E2E CONNECTEDNESS (REGLA INVIOLABLE)
+═══════════════════════════════════════════════════════════════
+
+Per ADR-018, cada FASE cerrada (de FASE 07 en adelante) debe cumplir el
+E2E Verification Checklist. CERO botones muertos, CERO stubs sin marcar,
+CERO UI placeholders sin backend real.
+
+Aplica desde FASE 07. FASEs 00-06 (foundation) quedan fuera de scope al
+ser meta-work sin UI significativa user-facing.
+
+Las 10 subreglas inviolables:
+  R1. Cada botón UI conecta a handler → tRPC → DB → respuesta → update UI.
+  R2. Cada formulario: Zod validation → mutation → side effects.
+  R3. Cada link Next.js apunta a ruta que responde 200.
+  R4. Cada hook se suscribe a fuente real de datos.
+  R5. Cada notificación llega al destinatario correcto por canal correcto.
+  R6. Cada acción protegida valida auth + rol + feature gating + rate limit.
+  R7. Cada acción significativa genera audit_log entry.
+  R8. Cada cascada de datos ejecuta su trigger y se verifica.
+  R9. Cada error: mensaje user + Sentry capture + retry donde aplique.
+  R10. Cada loading y empty state implementados con intención.
+
+Enforcement (6 mecanismos):
+  M1. audit-dead-ui.mjs — AST parser detecta violations estáticas en PR.
+  M2. E2E Verification Checklist obligatorio al final de cada FASE_NN.md.
+  M3. 03.13_E2E_CONNECTIONS_MAP actualizado en cada PR con cambios UI.
+  M4. CI workflow "E2E Audit" como required status check GitHub.
+  M5. Playwright smoke tests por fase cerrada (golden paths).
+  M6. PR template con manual review checklist firmado por reviewer.
+
+Violaciones bloquean:
+  ▸ PR merge (CI required status check).
+  ▸ Tag fase-NN-complete (falla verificación paso 9 §3).
+  ▸ §5.B reporte de cierre (imposible reportar verificaciones OK).
+
+STUBs permitidos solo con las 4 señales simultáneas:
+  1. Comentario `// STUB — activar FASE XX con [dependencia]` en código.
+  2. UI badge visible al user (`[beta]` / `[próximamente]` / `[alpha]`).
+  3. Documentado en §5.B "Inferencias y stubs permitidos" de la fase.
+  4. Endpoint devuelve TRPCError NOT_IMPLEMENTED o HTTP 501.
+
+Falta cualquiera de las 4 → stub ilegal → audit falla → PR bloqueado.
+
+Tooling y proceso detallado:
+  ▸ docs/05_OPERACIONAL/E2E_QUALITY_PLAYBOOK.md
+  ▸ docs/01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md
+  ▸ docs/03_CATALOGOS/03.13_E2E_CONNECTIONS_MAP.md
 
 ═══════════════════════════════════════════════════════════════
 7. GESTIÓN DE SESIÓN Y CONTEXTO
