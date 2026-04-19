@@ -6096,7 +6096,703 @@ export type Database = {
             referencedRelation: "str_markets"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "str_listings_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "v_str_market_monthly"
+            referencedColumns: ["market_id"]
+          },
         ]
+      }
+      str_market_monthly_aggregates: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_market_monthly_aggregates_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_market_monthly_aggregates_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_market_monthly_aggregates_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "str_markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_market_monthly_aggregates_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "v_str_market_monthly"
+            referencedColumns: ["market_id"]
+          },
+        ]
+      }
+      str_market_monthly_aggregates_default: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20220101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20230101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20240101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20250101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20260101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20270101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20280101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20290101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_market_monthly_aggregates_p20300101: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          market_id: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
       }
       str_markets: {
         Row: {
@@ -6240,6 +6936,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "str_markets"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_monthly_snapshots_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "v_str_market_monthly"
+            referencedColumns: ["market_id"]
           },
         ]
       }
@@ -8027,6 +8730,66 @@ export type Database = {
         }
         Relationships: []
       }
+      template_public_str_market_monthly_aggregates: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate: number | null
+          period: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          market_id: string
+          meta: Json
+          occupancy_rate?: number | null
+          period: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          active_listings?: number | null
+          adjusted_occupancy_rate?: number | null
+          adjusted_revpar_minor?: number | null
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          booking_lead_time_days?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: number
+          market_id?: string
+          meta?: Json
+          occupancy_rate?: number | null
+          period?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
       template_public_str_monthly_snapshots: {
         Row: {
           adr_minor: number | null
@@ -9167,6 +9930,42 @@ export type Database = {
         }
         Relationships: []
       }
+      v_str_market_monthly: {
+        Row: {
+          active_listings: number | null
+          adjusted_occupancy_rate: number | null
+          adjusted_revpar_minor: number | null
+          adr_minor: number | null
+          airroi_district: string | null
+          airroi_locality: string | null
+          avg_length_of_stay: number | null
+          booking_lead_time_days: number | null
+          country_code: string | null
+          currency: string | null
+          market_id: string | null
+          occupancy_rate: number | null
+          period: string | null
+          revenue_minor: number | null
+          revpar_minor: number | null
+          source: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_market_monthly_aggregates_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_markets_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       v_str_zone_monthly: {
         Row: {
           adr_median_minor: number | null
@@ -9202,6 +10001,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "str_markets"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_monthly_snapshots_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "v_str_market_monthly"
+            referencedColumns: ["market_id"]
           },
         ]
       }
