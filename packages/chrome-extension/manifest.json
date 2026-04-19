@@ -27,5 +27,31 @@
     "https://desarrollosmx.com/*",
     "http://localhost:3000/*"
   ],
-  "content_scripts": []
+  "content_scripts": [
+    {
+      "matches": ["https://www.inmuebles24.com/*"],
+      "js": ["content/inmuebles24.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.vivanuncios.com.mx/*"],
+      "js": ["content/vivanuncios.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://propiedades.com/*", "https://www.propiedades.com/*"],
+      "js": ["content/propiedades-com.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://inmuebles.mercadolibre.com.mx/*"],
+      "js": ["content/ml-inmuebles.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.facebook.com/marketplace/*"],
+      "js": ["content/fb-marketplace.js"],
+      "run_at": "document_idle"
+    }
+  ]
 }

@@ -51,7 +51,9 @@ async function buildServiceWorker() {
 async function listContentScripts() {
   try {
     const files = await readdir(CONTENT_DIR);
-    return files.filter((f) => f.endsWith('.ts')).map((f) => join(CONTENT_DIR, f));
+    return files
+      .filter((f) => f.endsWith('.ts') && !f.startsWith('_'))
+      .map((f) => join(CONTENT_DIR, f));
   } catch {
     return [];
   }
