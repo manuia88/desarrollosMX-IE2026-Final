@@ -1,6 +1,6 @@
 # FASE 20 — Portal Comprador (10 Pages + Personalización Netflix + Family Accounts + WhatsApp Primary + UPG 7.11 Buyer Experience)
 
-> **Duración estimada:** 8 sesiones Claude Code (~32 horas con agentes paralelos)
+> **Duración estimada:** 6-8 sesiones Claude Code (~24-32 horas con agentes paralelos) para core + 1-2 sesiones extra para BLOQUE 20.L PPD + Innovations (total 7-10 sesiones)
 > **Dependencias:** FASE 02 (Auth + RLS + role='comprador' + resolve_features), FASE 03 (AI-Native Shell + Copilot + Voice), FASE 04 (Design System), FASE 05 (i18n + multi-currency), FASE 08-12 (IE scores A01-A11 + H14 Buyer Persona + C03 Matching + isócronas F13), FASE 17 (Document Intel pública read-only), FASE 18 (escrow + pre-aprobación widgets), FASE 21 (landing pública — onboarding cross-portal).
 > **Bloqueantes externos:**
 > - **Meta WhatsApp Business API approval** (2-4 semanas para templates aprobados — crítico y no paralelizable).
@@ -50,37 +50,77 @@ Crítico:
 - [ ] Login comprador carga `/comprador/dashboard`.
 - [ ] Sidebar 10 items clickables.
 
-#### MÓDULO 20.A.2 — Onboarding 5-step
+#### MÓDULO 20.A.2 — PPD Capa 1: Micro-onboarding inicial (3-5 preguntas, ~60s)
 
-**Pasos:**
-- `[20.A.2.1]` Si `profiles.onboarding_completed=false` → redirect `/onboarding/step-1`.
-- `[20.A.2.2]` Step 1: Bienvenida + aceptar T&Cs (checkbox obligatorio con link detalle que explícitamente enumera "DMX es infraestructura de marketplace, no es responsable de la construcción, entrega, ni garantías post-venta — esas son del desarrollador").
-- `[20.A.2.3]` Step 2: Perfil — nombre, teléfono (WhatsApp), ciudad, país.
-- `[20.A.2.4]` Step 3: Buyer Persona quiz (calcula H14):
-  - 8 preguntas: intención (vivir/invertir/segunda_casa), tamaño familia, edades hijos, ingresos rango, urgencia, sensitivity precio, sensibilidad riesgo, prioridades (lista draggable — schools/safety/transit/ecosystem/ROI).
-  - Output: buyer_persona (investor/family_growing/first_buyer/empty_nest/executive_downtown/remote_worker) + Lifestyle preference (6 perfiles A10).
-- `[20.A.2.5]` Step 4: Preferencias búsqueda — ciudad(es), zonas favoritas, rango precio, recámaras min, amenities must-have.
-- `[20.A.2.6]` Step 5: Connect family (opcional) — invitar pareja/padres/asesor via WA link "Explora conmigo: {unique_link}".
-- `[20.A.2.7]` Marca `onboarding_completed=true` + score_subscriptions iniciales para zonas favoritas.
+> Implementa Capa 1 de [ADR-021 Progressive Preference Discovery](../01_DECISIONES_ARQUITECTONICAS/ADR-021_PROGRESSIVE_PREFERENCE_DISCOVERY.md). Reemplaza el onboarding 5-step monolítico anterior. **Las propiedades quedan visibles desde minuto 0** — no hay paywall psicográfico.
 
-**Criterio de done del módulo:**
-- [ ] Flow 5 steps completa en <3 min.
-- [ ] buyer_persona persistido en `user_scores`.
+Pasos:
+- [20.A.2.1] Si `profiles.onboarding_completed=false` AND `profiles.onboarding_wave=0` → **soft prompt** (banner dismissable, no modal full-screen) "¿Quieres mejores matches en 60 segundos?". Default skip OK; user puede explorar sin completar.
+- [20.A.2.2] Card full-screen mobile (sheet en desktop) con `<ProgressBarMultiSegment segments={5} current={N}/>` arriba.
+- [20.A.2.3] **Pregunta 1 — Presupuesto + forma pago**: rango precio + radio (contado / crédito / mixto). Skip → default presupuesto inferido por zona seleccionada (Capa 3).
+- [20.A.2.4] **Pregunta 2 — Timeline**: radio "ya busco" / "3-6 meses" / "investigación". Skip → default "investigación".
+- [20.A.2.5] **Pregunta 3 — Buyer persona**: cards con icon (first_time / investor / upgrade_family / couple_first / retiree / relocation_regional / relocation_international). Skip → null (Capa 3 inferirá behavioral).
+- [20.A.2.6] **Pregunta 4 — Zona interés inicial**: ciudad + 1-2 alcaldías (autocomplete con `supported_cities` + `colonias` table). Skip → default ciudad de profile.country_code.
+- [20.A.2.7] **Pregunta 5 — Situación familiar**: solo / pareja / con_hijos / ampliando / empty_nester. Skip → null.
+- [20.A.2.8] Al terminar (o skip): set `profiles.onboarding_wave=1`, `profiles.onboarding_completed=false` (queda abierto a Capa 2). Persist en `profiles.psychographic_profile.layer1` jsonb.
+- [20.A.2.9] Trigger explore con propiedades relevantes filtradas por zona+presupuesto. Mostrar T&Cs disclaimer DMX como infraestructura (link footer + checkbox en step 1, no obligatorio bloqueante).
 
-#### MÓDULO 20.A.3 — Lifestyle DNA quiz (GC-62)
+Criterio de done del módulo:
+- [ ] Flow Capa 1 completable en <60s con todas las respuestas O en <10s skip-all.
+- [ ] Persiste en `profiles.psychographic_profile.layer1`.
+- [ ] Propiedades visibles incluso con skip-all.
 
-**Pasos:**
-- `[20.A.3.1]` Después del Step 5 onboarding (o accesible luego en `/comprador/lifestyle-dna`), quiz opcional pero incentivado (badge + 10% mejor matching):
-  - 10 preguntas dinámicas covering: rutinas diarias (remote/office/hybrid), entretenimiento preferido (cafés/parks/gym/nightlife/museos), tolerancia ruido, cercanía deseada a familia/trabajo/escuelas, transporte primary (car/transit/bike/walk), tipo vivienda conceptual (moderno/clásico/eco), mascota sí/no, visitas frecuentes (quiet vs social), ambiente vecindario (urbano dense / suburbano / mixed).
-- `[20.A.3.2]` Output: `lifestyle_dna` JSON (12 dimensiones 0-1) persisted en `user_scores.lifestyle_dna`.
-- `[20.A.3.3]` Matching engine C03 (FASE 10) lee `lifestyle_dna` como señal adicional (weight 25%) junto a filtros y buyer_persona.
-- `[20.A.3.4]` Personalización: homepage Netflix orden secciones se refina adicionalmente por dimensiones Lifestyle DNA.
-- `[20.A.3.5]` Re-quiz opcional en `/settings/preferences` — avisa al user que cambio recalibra matching.
+#### MÓDULO 20.A.3 — PPD Capa 2: Micro-questions embedded engine
 
-**Criterio de done del módulo:**
-- [ ] Quiz completa en <4 min.
-- [ ] Lifestyle DNA JSON persiste + visible en perfil.
-- [ ] Matching cambia con different DNA (A/B test).
+> Implementa Capa 2 de ADR-021. Trigger engine frontend lanza preguntas dinámicas durante navegación.
+
+Pasos:
+- [20.A.3.1] Tabla `micro_questions_catalog` con vocabulario versionado (~20-30 preguntas distribuidas en categorías Emocional/Técnico/Urbano/Financiero/Espacial/Inversión). Catálogo seed FASE 20 con prioridad + cooldown_days + trigger_conditions jsonb.
+- [20.A.3.2] Engine trigger frontend: hook `usePPDQuestionTrigger()` que evalúa cada N interacciones (3-7 dinámico), respeta cooldown 7d per question, max 1 pregunta per session browser.
+- [20.A.3.3] UI: toast-style bottom sheet (no modal blocking). 3-4 opciones swipe-dismissable. Skip siempre disponible. Tiempo respuesta <10s.
+- [20.A.3.4] Persist en `user_micro_question_answers` (one row per answer + context jsonb snapshot).
+- [20.A.3.5] **NON-ADAPTIVE en catálogo**: el set de preguntas no cambia según respuestas previas. Solo cambia el orden/timing en que aparecen (behavioral-driven). Documentado en código + tests.
+- [20.A.3.6] Cada answer dispara recompute parcial de `match_score` para próximas vistas (event-driven optimistic UI).
+
+Criterio de done del módulo:
+- [ ] Catálogo seed con ≥20 preguntas distribuidas en 6 dimensiones.
+- [ ] Engine respeta cooldown + max-per-session.
+- [ ] Skip funciona y NO bloquea exploración.
+- [ ] Audit log per answer.
+
+#### MÓDULO 20.A.4 — PPD Capa 3: Behavioral inference engine
+
+> Implementa Capa 3 de ADR-021. Server job que destila `inferred_preferences` desde behavioral signals.
+
+Pasos:
+- [20.A.4.1] Tabla `behavioral_signals` particionada mensual via pg_partman. Schema: id, user_id, signal_type (dwell|photo_zoom|map_expand|save|skip|contact|price_skip|story_read), property_id nullable, signal_data jsonb, created_at. BRIN index (user_id, created_at).
+- [20.A.4.2] Frontend hooks: `usePPDSignal(signalType, payload)` invocado desde swipe deck, ficha, mapa, comparador. Throttle a 1 send per signal_type per second.
+- [20.A.4.3] Cron `ppd_inference_recompute` daily (FASE 12) recalcula `profiles.inferred_preferences jsonb` por user con confidence per dimension (0-1).
+- [20.A.4.4] Trigger event-based si user cruza ≥50 interacciones nuevas → recompute incremental.
+- [20.A.4.5] Output integra en `match_score` cuando `user_micro_question_answers` no cubre dimensión (Capa 2 prevalence high; Capa 3 fills gaps).
+- [20.A.4.6] Privacy: `behavioral_signals` queda fuera de exports user-facing y de logs (LFPDPPP).
+
+Criterio de done del módulo:
+- [ ] Tabla particionada con datos de prueba.
+- [ ] Cron run sin error con >100 users seed.
+- [ ] inferred_preferences poblado con confidence per dim.
+
+#### MÓDULO 20.A.5 — PPD Capa 4: Profile transparency UI (/profile/dna)
+
+> Implementa Capa 4 de ADR-021. UI pública per-user de "lo que DMX sabe de ti".
+
+Pasos:
+- [20.A.5.1] Route `app/(comprador)/profile/dna/page.tsx` con `<RadarChart6D values={...} confidenceByDim={...} />` (componente FASE 04 módulo 4.P).
+- [20.A.5.2] Completion meter % calculado desde answers count + signals count + dimensions covered.
+- [20.A.5.3] "Lo que DMX sabe de ti" — lista editable: cada item muestra label + value detected + ConfidenceBadge + botón "Editar" (override manual via answer al micro-question).
+- [20.A.5.4] Share para pareja/familia (co-match): genera URL share-link con read access a profile dna del invitee. Usa `family_accounts` infrastructure (BLOQUE 20.F).
+- [20.A.5.5] CTA optional "Survey rápido 10-15 preguntas" (boost match score más rápido sin esperar Capa 2 organic).
+- [20.A.5.6] Settings toggle `dna_visible` (boolean, default true) para opt-out de transparency UI (privacy-conscious users).
+
+Criterio de done del módulo:
+- [ ] Route renderiza con datos reales.
+- [ ] RadarChart6D muestra 6 ejes + confidence.
+- [ ] Edit cycle: user override → reflected in match_score próxima carga.
 
 ### BLOQUE 20.B — 10 Pages — Dashboard, Lifestyle, Affordability
 
@@ -544,6 +584,118 @@ Mapeo UPG sub-etapa 7.11 contexto §23.1 — 9 herramientas Buyer Experience con
 - [ ] Settings persists cambios.
 - [ ] PWA instalable en iOS + Android.
 
+### BLOQUE 20.L — Innovations Findperty-derived (módulos M-* aprobados housekeeping post-07b)
+
+> Implementa innovations derivadas de competitive intel Findperty (2026-04-19) + 110 game-changers + ADRs 021/022/023. Bloque grande pero modular: cada M-* es independiente, paralelizable cuando no comparte tabla.
+
+#### MÓDULO 20.L.1 — Matching + Discovery (M-MATCH-SCORE-6D, M-VIBE-TAGS-UI, M-VISUAL-PREFERENCE, M-REVERSE-BROWSING, M-SWIPE-MODE, M-PROPERTY-STORY)
+
+Pasos:
+- [20.L.1.1] **M-MATCH-SCORE-6D**: computation 6 dimensiones (Emocional/Técnico/Urbano/Financiero/Espacial/Inversión) con pesos dinámicos por buyer_persona (tabla pesos en ADR-021). Breakdown transparente visible en card + expandable en modal con `<MatchScoreBreakdown />`. Reasons cited (data sources). Persist en `buyer_property_matches`.
+- [20.L.1.2] **M-VIBE-TAGS-UI**: `<VibeTagChip />` en property cards (max 4 visibles + "+N more") + filter UI (AND/OR/NOT) en /explorar + validation UI para owners/asesores con audit trail. Backed por `vibe_tags_catalog` (ADR-022).
+- [20.L.1.3] **M-VISUAL-PREFERENCE**: Pinterest-style moodboards 20-30 pre-swipe (opt-in step opcional Capa 1). User likea vibes (ej: "moderno minimalista", "ladrillo urbano", "luz natural"). Likes alimentan inferred_preferences via signal type `moodboard_like`.
+- [20.L.1.4] **M-REVERSE-BROWSING**: route `/zonas` como primary entry point alternativo (mapa heatmap + scores IE + vibe). Después `/zonas/[slug]/propiedades`. Inversión del flujo tradicional propiedad-first.
+- [20.L.1.5] **M-SWIPE-MODE**: vista alternativa toggle (Mapa/Lista/Grid/Swipe) en `/explorar`. Keyboard shortcuts ← → ↑ ↓. Undo last swipe. Botón "¿Por qué pasé?" → mini-form para training del algoritmo.
+- [20.L.1.6] **M-PROPERTY-STORY**: AI-generated narrative desde property data + scores IE + zona data. `<PropertyStory aiGenerated editable />` (FASE 04 módulo 4.P). Editable owner/asesor con audit trail.
+
+Criterio de done del módulo:
+- [ ] 6 sub-módulos navegables y testeados.
+- [ ] Match score 6D refleja pesos por buyer_persona.
+
+#### MÓDULO 20.L.2 — Collaboration + Social (M-CO-MATCH, M-BUYER-CIRCLES)
+
+Pasos:
+- [20.L.2.1] **M-CO-MATCH**: 2+ users vinculados (pareja/familia via `family_accounts` BLOQUE 20.F + columna `linked_partners` en profiles). Overlay matches mutuos + diferencias por dimensión. Negotiation helper con reasons concretas ("Tú priorizas Inversión 35%, tu pareja Espacial 25% — 3 propiedades cumplen ambos").
+- [20.L.2.2] **M-BUYER-CIRCLES**: anonymous por buyer_persona + presupuesto + zona. User opt-in. Ver viaje agregado de otros del grupo (sin PII): "Otros 14 first_time en Polanco vieron 47 props promedio antes de apartar".
+
+Criterio de done del módulo:
+- [ ] Co-match overlay funciona con 2 users test.
+- [ ] Buyer circles anonimizan correctamente.
+
+#### MÓDULO 20.L.3 — Decisiones asistidas (M-REGRET-MODELING, M-COMMUTE-CONSTELLATION, M-AI-VIRTUAL-TOUR, M-CONTRARIAN-AI, M-NEGOTIATION-ADVISOR, M-FINANCIAL-REALITY-CHECK, M-CREDIT-PREQUALIFIED-LIVE)
+
+Pasos:
+- [20.L.3.1] **M-REGRET-MODELING**: lenguaje informativo nunca culposo. "Info que te faltaría conocer" vs "te arrepentirás". Pre-factual data-backed. Cita data sources (AirROI snapshots, días en mercado, comparables).
+- [20.L.3.2] **M-COMMUTE-CONSTELLATION**: 5 lugares clave del user (`profiles.life_places jsonb`) + isochrones cruzadas desde propiedades candidatas. Mapbox Isochrones API.
+- [20.L.3.3] **M-AI-VIRTUAL-TOUR**: agent AI "visita" via listing data + Google Street View + scores IE + Mapbox. Genera reporte honesto pre-visita física. Markdown + screenshots.
+- [20.L.3.4] **M-CONTRARIAN-AI**: solo tras umbral confidence (≥50 interacciones + ≥10 saves + ≥20 answers). Framed como sugerencia ("Considera explorar Tlalpan — tus signals matchean pero no la tienes en watchlist"). 1 sola oportunidad per dimensión. User dismiss → preference confirmed + no vuelve a desafiar.
+- [20.L.3.5] **M-NEGOTIATION-ADVISOR**: sugiere oferta + probabilidad aceptación usando comparables + días mercado + estacionalidad + motivación vendedor inferida.
+- [20.L.3.6] **M-FINANCIAL-REALITY-CHECK**: banner embedded en ficha propiedad. "Tu capacidad $X/mes · Este $Y/mes · Viable: sí/ajustado/no" live con tasas Banxico.
+- [20.L.3.7] **M-CREDIT-PREQUALIFIED-LIVE**: toggle "solo lo que me aprobarían" en filtros + simulador hipotecario integrado live (consume FASE 18 backend).
+
+Criterio de done del módulo:
+- [ ] 7 sub-módulos con triggers y data sources cited.
+- [ ] Contrarian AI respeta umbral.
+
+#### MÓDULO 20.L.4 — Transparencia + Trust (M-AUDIT-TRAIL, M-NDA-FLOW, M-PROPERTY-LEDGER, M-DYNAMIC-PERSONALITIES, M-RESIDENT-STORIES)
+
+Pasos:
+- [20.L.4.1] **M-AUDIT-TRAIL**: cada score/recommendation/tag con botón "¿Por qué?" → expand data sources + weights + confidence + timestamp. Cumple ADR-018 R7. Cumple Principio P15.
+- [20.L.4.2] **M-NDA-FLOW**: dirección oculta hasta commitment (visita agendada O pago apartado). Coordenadas radio 200m pre-commitment. Columna `properties.show_address_after_match boolean default false` + `privacy_level text`.
+- [20.L.4.3] **M-PROPERTY-LEDGER**: "CV propiedad" público — ventas pasadas, avalúos, cambios uso suelo, gravámenes, propietarios anonymized.
+- [20.L.4.4] **M-DYNAMIC-PERSONALITIES**: UI copy adaptado per buyer_persona detectado. Misma data, tono diferente (investor → ROI-first wording, family → safety/schools-first wording).
+- [20.L.4.5] **M-RESIDENT-STORIES**: testimonios anonimizados consentidos de residentes actuales. No marketing, data real (años viviendo, satisfacción, "lo que cambiaría").
+
+Criterio de done del módulo:
+- [ ] 5 sub-módulos integrados.
+- [ ] NDA flow respeta coordinates radius.
+
+#### MÓDULO 20.L.5 — Tools prácticas (M-VISIT-COMPANION-MOBILE, M-COMPARADOR-MULTIDIM, M-FAMILY-REPORT-PDF, M-SMART-MULTI-VISIT, M-ZONE-NEWSLETTER, M-DECISION-FATIGUE, M-DEMAND-SURGE, M-ZONE-TIME-TRAVEL, M-FUTURE-ZONING)
+
+Pasos:
+- [20.L.5.1] **M-VISIT-COMPANION-MOBILE**: checklist contextual durante visita física (offline-capable PWA). Pre-cargadas preguntas per tipo propiedad. Auto-save post-visita.
+- [20.L.5.2] **M-COMPARADOR-MULTIDIM**: 5 propiedades side-by-side con scores IE + commute real + amenidades verificadas + mantenimiento + resale projection + presupuesto total verdadero (mensualidades + HOA + predial + servicios). Extiende módulo 20.D.1.
+- [20.L.5.3] **M-FAMILY-REPORT-PDF**: generator branded + compartible + imprimible.
+- [20.L.5.4] **M-SMART-MULTI-VISIT**: AI arma ruta óptima + coordina horarios + confirma automáticos.
+- [20.L.5.5] **M-ZONE-NEWSLETTER**: suscripción por zona con new listings + price drops + events + scores IE updates.
+- [20.L.5.6] **M-DECISION-FATIGUE**: detección overwhelm (skips rápidos, backs frecuentes, sesión larga sin save) → sugiere pause + top 3 curados.
+- [20.L.5.7] **M-DEMAND-SURGE**: alerts con data real ("3 nuevos interesados últimas 48h") FOMO legítimo.
+- [20.L.5.8] **M-ZONE-TIME-TRAVEL**: slider temporal con data histórica + proyección (requiere scores IE FASE 08+).
+- [20.L.5.9] **M-FUTURE-ZONING**: permisos SEDUVI aprobados + impacto esperado.
+
+Criterio de done del módulo:
+- [ ] 9 sub-módulos navegables.
+- [ ] PWA offline para visit-companion.
+
+#### MÓDULO 20.L.6 — Marketplace + negociación (M-CONVERSATIONAL-QUERY, M-INVERSE-SELECTION, M-GROUP-BUYING, M-REVERSE-AUCTION, M-INSPECTOR-MARKETPLACE, M-ZONE-STOCK-MARKET)
+
+Pasos:
+- [20.L.6.1] **M-CONVERSATIONAL-QUERY**: user chatea natural language (Copilot extension), AI parsea + resuelve multiple constraints. "Quiero algo en Roma Norte bajo 6M con buena luz mañana y pet-friendly" → filtros aplicados + propiedades.
+- [20.L.6.2] **M-INVERSE-SELECTION** ("La Propiedad me Elige"): propietario invita top matches (tabla `property_invitations` + rate limit + dismissed bloqueado + opt-in `profiles.receive_invitations` + 1-a-1).
+- [20.L.6.3] **M-GROUP-BUYING**: compradores agrupados por edificio/desarrollo (tabla `buyer_groups` + `buyer_group_members`). Negociación grupal = mayor poder.
+- [20.L.6.4] **M-REVERSE-AUCTION**: compradores publican demanda (`reverse_listings`), propietarios compiten.
+- [20.L.6.5] **M-INSPECTOR-MARKETPLACE**: toggle al agendar visita. Inspector profesional DMX verificado con reporte mismo día.
+- [20.L.6.6] **M-ZONE-STOCK-MARKET**: zonas como "stock-like" con cotización + trend + watchlist + alerts (sin tokens, solo visualization).
+
+Criterio de done del módulo:
+- [ ] 6 sub-módulos integrados.
+- [ ] Group buying respeta threshold.
+
+#### MÓDULO 20.L.7 — Monetization + infrastructure (M-ESCROW-DIGITAL, M-CFDI-AUTOMATICO, M-LEGACY-PROJECTION)
+
+Pasos:
+- [20.L.7.1] **M-ESCROW-DIGITAL**: apartado + señal + enganche en cuenta neutral con triggers automáticos. Revenue 0.5-1%. Extiende BLOQUE 20.H.2.
+- [20.L.7.2] **M-CFDI-AUTOMATICO**: generación + timbrado + envío SAT + retención ISR con Facturapi.io/Finkok.
+- [20.L.7.3] **M-LEGACY-PROJECTION**: patrimonio neto 20y + % propiedad + puente próximas compras. Extiende módulo 20.C.3.
+
+Criterio de done del módulo:
+- [ ] 3 sub-módulos en flujo escrow + CFDI + projection.
+
+#### MÓDULO 20.L.8 — Engagement (M-PROPERTY-DATING-PROFILE)
+
+Pasos:
+- [20.L.8.1] **M-PROPERTY-DATING-PROFILE**: cada propiedad con perfil tipo persona — nombre, personalidad, hobbies, qué busca ocupante. Columna `properties.property_dating_profile jsonb`. UI playful pero opcional (toggle en ficha).
+
+Criterio de done del módulo:
+- [ ] Property dating profile renderiza per-property con datos test.
+
+### Deferido a H2/H3 (documentado pero NO implementar en H1)
+
+- **Pre-approval Multi-Banco** (H2, requiere contratos B2B con bancos)
+- **Holographic AR** (H3)
+- **DNA Match historic waves** (H2, requiere 500+ users con data acumulada)
+- **Neighbor Pre-Match** (H2, requiere users activos con vecindarios poblados)
+
 ## Criterio de done de la FASE
 
 - [ ] 10 pages navegables y funcionales.
@@ -561,6 +713,9 @@ Mapeo UPG sub-etapa 7.11 contexto §23.1 — 9 herramientas Buyer Experience con
 - [ ] PWA base instalable.
 - [ ] i18n `t('buyer.*')`.
 - [ ] Tests Vitest ≥70% en `features/buyer/*`, `features/family/*`, `features/personalization/*`. Playwright e2e: onboarding → buyer_persona = investor → homepage shows ROI first → apartar unit → escrow flow.
+- [ ] PPD Capa 1-4 implementada (módulos 20.A.2 a 20.A.5).
+- [ ] BLOQUE 20.L sub-módulos M-* navegables y testeados (prioridad H1: M-MATCH-SCORE-6D, M-VIBE-TAGS-UI, M-PROPERTY-STORY, M-AUDIT-TRAIL, M-NDA-FLOW, M-FINANCIAL-REALITY-CHECK).
+- [ ] Tablas BD nuevas migradas: micro_questions_catalog, user_micro_question_answers, behavioral_signals (particionada), buyer_property_matches, vibe_tags_catalog, property_invitations, buyer_groups + buyer_group_members, reverse_listings.
 - [ ] Tag git `fase-20-complete`.
 - [ ] Features entregados: 40 (target §9 briefing).
 
