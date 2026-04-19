@@ -7,6 +7,7 @@ import type {
 } from './provider';
 import { NotImplementedPaymentError } from './provider';
 
+// STUB — activar en FASE 23 (Monetización) con SDK stripe + claves prod.
 export class StripeProvider implements PaymentProvider {
   readonly name = 'stripe';
 

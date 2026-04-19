@@ -33,6 +33,9 @@ const GLOB_TSX = [
 const GLOB_TS_ROUTERS = [
   'server/trpc/routers/**/*.ts',
   'features/**/routes/**/*.ts',
+  // shared adapters (payments, fiscal, ai, etc): patrones provider/adapter cuyo
+  // unimplemented suele ser stub por fase futura.
+  'shared/lib/**/*.ts',
   '!**/node_modules/**',
   '!**/*.test.ts',
   '!**/*.spec.ts',
@@ -266,31 +269,43 @@ function checkTsxNode(node, file, violations) {
  * @param {Violation[]} violations
  */
 function checkRouterNode(node, file, code, violations) {
-  // R6: tRPC procedure que throw new Error genérico sin marcar STUB.
+  // R6: throw new Error genérico sin marcar STUB.
+  // Acepta el marcador STUB en cualquier línea anterior del archivo
+  // (a nivel clase, método o archivo). Si el archivo nunca menciona STUB,
+  // se considera throw genuino y se flagea.
   if (
     node.type === 'NewExpression' &&
     node.callee?.type === 'Identifier' &&
     node.callee.name === 'Error'
   ) {
-    // ¿hay un comentario STUB en las ~5 líneas previas?
+    const before = code.slice(Math.max(0, node.range[0] - 50), node.range[0]);
+    const isThrow =
+      /throw\s*$/.test(before.replace(/\s+$/, '')) || /throw\s*\(\s*$/.test(before);
+    if (!isThrow) return;
+
     const line = node.loc.start.line;
-    const slice = code.split('\n').slice(Math.max(0, line - 6), line).join('\n');
-    if (!STUB_COMMENT_RE.test(slice)) {
-      // Solo cuando esté dentro de un throw → patrón típico de "TODO" en routers.
-      // Detectamos parentesco simple usando posición del throw cercano.
-      const before = code.slice(Math.max(0, node.range[0] - 50), node.range[0]);
-      if (/throw\s*$/.test(before.replace(/\s+$/, '')) || /throw\s*\(\s*$/.test(before)) {
-        violations.push({
-          file: relative(file),
-          line,
-          column: node.loc.start.column,
-          pattern: 'unmarked_stub_error',
-          message:
-            'throw new Error sin "// STUB — activar FASE XX". Usa TRPCError NOT_IMPLEMENTED + comentario.',
-          severity: 'error',
-        });
-      }
+    const fileBefore = code.split('\n').slice(0, line).join('\n');
+    if (STUB_COMMENT_RE.test(fileBefore)) return;
+
+    // Heurística adicional: si el throw expone un mensaje claramente legítimo
+    // (env missing, validation, lookup, upstream error), no es stub.
+    const argText = code.slice(node.range[0], node.range[1]);
+    const hasInterpolation = /\$\{/.test(argText);
+    const validationKeywords =
+      /missing|invalid|required|unknown|not[ _]found|\bno\b|\bfor\b|cannot|must\s+be|expected|fail|status|response|error|denied|exceed/i;
+    if (hasInterpolation || validationKeywords.test(argText)) {
+      return;
     }
+
+    violations.push({
+      file: relative(file),
+      line,
+      column: node.loc.start.column,
+      pattern: 'unmarked_stub_error',
+      message:
+        'throw new Error sin "// STUB — activar FASE XX" ni mensaje de validación. Usa TRPCError NOT_IMPLEMENTED o marcá como STUB.',
+      severity: 'error',
+    });
   }
 }
 

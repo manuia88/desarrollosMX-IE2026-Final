@@ -1,6 +1,7 @@
 import type { FiscalDocGenerator, FiscalDocStatus, InvoiceInput } from './generator';
 import { NotImplementedFiscalError } from './generator';
 
+// STUB — activar en FASE 16 (Contabilidad + NFS-e municipal) con cliente NFS-e BR.
 export class BRNfsGenerator implements FiscalDocGenerator {
   readonly country = 'BR';
   readonly provider = 'nfs_e_municipal';
