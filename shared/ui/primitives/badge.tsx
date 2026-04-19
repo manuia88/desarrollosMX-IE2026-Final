@@ -2,7 +2,14 @@ import type { HTMLAttributes, ReactNode } from 'react';
 import { forwardRef } from 'react';
 import { cn } from './cn';
 
-export type BadgeVariant = 'success' | 'warning' | 'danger' | 'info' | 'neutral' | 'gradient';
+export type BadgeVariant =
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'info'
+  | 'neutral'
+  | 'gradient'
+  | 'stub';
 export type BadgeSize = 'xs' | 'sm' | 'md';
 
 export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
@@ -17,6 +24,7 @@ const variants: Record<BadgeVariant, string> = {
   info: 'bg-[var(--color-info)]/15 text-[var(--color-info)]',
   neutral: 'bg-[var(--color-bg-muted)] text-[var(--color-text-secondary)]',
   gradient: 'bg-[var(--gradient-p)] text-[var(--color-text-inverse)]',
+  stub: 'bg-[var(--color-bg-muted)] text-[var(--color-text-secondary)] border border-dashed border-[var(--color-border-subtle)] uppercase tracking-wide',
 };
 
 const sizes: Record<BadgeSize, string> = {

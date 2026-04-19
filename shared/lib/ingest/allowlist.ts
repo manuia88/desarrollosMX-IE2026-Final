@@ -42,6 +42,8 @@ export const ALLOWED_SOURCES = [
   'chrome_ext_fb_marketplace',
   'chrome_ext_lamudi',
   'airdna',
+  'airroi',
+  'airroi_mcp',
   'google_trends',
   'cushman',
   'cbre',

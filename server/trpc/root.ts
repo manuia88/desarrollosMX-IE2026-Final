@@ -6,6 +6,21 @@ import { aiRouter } from '@/features/ia-generativa/routes/ai';
 import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { marketRouter } from '@/features/market/routes/market';
 import { scianRouter } from '@/features/scian/routes/scian';
+import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
+import { envRouter } from '@/features/str-intelligence/routes/env';
+import { hostMigrationsRouter } from '@/features/str-intelligence/routes/host-migrations';
+import { strHostsRouter } from '@/features/str-intelligence/routes/hosts';
+import { invisibleHotelsRouter } from '@/features/str-intelligence/routes/invisible-hotels';
+import { ltrStrConnectionRouter } from '@/features/str-intelligence/routes/ltr-connection';
+import { nomadRouter } from '@/features/str-intelligence/routes/nomad';
+import { photoCvRouter } from '@/features/str-intelligence/routes/photo-cv';
+import { strPortfolioRouter } from '@/features/str-intelligence/routes/portfolio';
+import { strPricingRouter } from '@/features/str-intelligence/routes/pricing';
+import { strReportsRouter } from '@/features/str-intelligence/routes/reports';
+import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
+import { strViabilityRouter } from '@/features/str-intelligence/routes/viability';
+import { strWatchdogRouter } from '@/features/str-intelligence/routes/watchdog';
+import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
 import { publicProcedure, router } from './init';
 
 export const appRouter = router({
@@ -21,6 +36,21 @@ export const appRouter = router({
   mfa: mfaRouter,
   roleRequest: roleRequestRouter,
   scian: scianRouter,
+  ltrStrConnection: ltrStrConnectionRouter,
+  strBreakeven: strBreakevenRouter,
+  hostMigrations: hostMigrationsRouter,
+  strHosts: strHostsRouter,
+  env: envRouter,
+  invisibleHotels: invisibleHotelsRouter,
+  nomad: nomadRouter,
+  photoCv: photoCvRouter,
+  strPortfolio: strPortfolioRouter,
+  strPricing: strPricingRouter,
+  strReports: strReportsRouter,
+  strWatchdog: strWatchdogRouter,
+  strScores: strScoresRouter,
+  strViability: strViabilityRouter,
+  zoneInvestment: zoneInvestmentRouter,
 });
 
 export type AppRouter = typeof appRouter;
