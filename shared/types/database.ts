@@ -201,6 +201,42 @@ export type Database = {
           },
         ]
       }
+      api_budgets: {
+        Row: {
+          alert_threshold_pct: number
+          hard_limit_pct: number
+          is_paused: boolean
+          last_reset_at: string
+          meta: Json
+          monthly_budget_usd: number
+          reset_day_of_month: number
+          source: string
+          spent_mtd_usd: number
+        }
+        Insert: {
+          alert_threshold_pct?: number
+          hard_limit_pct?: number
+          is_paused?: boolean
+          last_reset_at?: string
+          meta?: Json
+          monthly_budget_usd: number
+          reset_day_of_month?: number
+          source: string
+          spent_mtd_usd?: number
+        }
+        Update: {
+          alert_threshold_pct?: number
+          hard_limit_pct?: number
+          is_paused?: boolean
+          last_reset_at?: string
+          meta?: Json
+          monthly_budget_usd?: number
+          reset_day_of_month?: number
+          source?: string
+          spent_mtd_usd?: number
+        }
+        Relationships: []
+      }
       api_keys: {
         Row: {
           created_at: string
@@ -1226,6 +1262,33 @@ export type Database = {
           },
         ]
       }
+      confidence_thresholds: {
+        Row: {
+          metric: string
+          min_sample_high: number
+          min_sample_low: number
+          min_sample_medium: number
+          notes: string | null
+          source: string
+        }
+        Insert: {
+          metric: string
+          min_sample_high: number
+          min_sample_low: number
+          min_sample_medium: number
+          notes?: string | null
+          source: string
+        }
+        Update: {
+          metric?: string
+          min_sample_high?: number
+          min_sample_low?: number
+          min_sample_medium?: number
+          notes?: string | null
+          source?: string
+        }
+        Relationships: []
+      }
       countries: {
         Row: {
           address_format: Json
@@ -1308,6 +1371,56 @@ export type Database = {
           symbol?: string
         }
         Relationships: []
+      }
+      data_lineage: {
+        Row: {
+          confidence: number | null
+          destination_pk: string | null
+          destination_table: string
+          id: string
+          recorded_at: string
+          run_id: string
+          source: string
+          source_span: Json | null
+          transformation: string | null
+          upstream_hash: string | null
+          upstream_url: string | null
+        }
+        Insert: {
+          confidence?: number | null
+          destination_pk?: string | null
+          destination_table: string
+          id?: string
+          recorded_at?: string
+          run_id: string
+          source: string
+          source_span?: Json | null
+          transformation?: string | null
+          upstream_hash?: string | null
+          upstream_url?: string | null
+        }
+        Update: {
+          confidence?: number | null
+          destination_pk?: string | null
+          destination_table?: string
+          id?: string
+          recorded_at?: string
+          run_id?: string
+          source?: string
+          source_span?: Json | null
+          transformation?: string | null
+          upstream_hash?: string | null
+          upstream_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_lineage_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "ingest_runs"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       desarrolladoras: {
         Row: {
@@ -1622,6 +1735,742 @@ export type Database = {
           },
         ]
       }
+      geo_data_points: {
+        Row: {
+          country_code: string
+          entity_type: string
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: string
+          meta: Json
+          name: string | null
+          run_id: string | null
+          scian_code: string | null
+          source: string
+          source_id: string | null
+          valid_from: string
+          valid_to: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          entity_type: string
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: string
+          meta?: Json
+          name?: string | null
+          run_id?: string | null
+          scian_code?: string | null
+          source: string
+          source_id?: string | null
+          valid_from: string
+          valid_to?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          entity_type?: string
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: string
+          meta?: Json
+          name?: string | null
+          run_id?: string | null
+          scian_code?: string | null
+          source?: string
+          source_id?: string | null
+          valid_from?: string
+          valid_to?: string | null
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "geo_data_points_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      geo_snapshots: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "geo_snapshots_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      geo_snapshots_default: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20220101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20230101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20240101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20250101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20260101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20270101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20280101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20290101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      geo_snapshots_p20300101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      ingest_allowed_sources: {
+        Row: {
+          added_at: string
+          category: string
+          is_active: boolean
+          legal_basis: string | null
+          meta: Json
+          source: string
+        }
+        Insert: {
+          added_at?: string
+          category: string
+          is_active?: boolean
+          legal_basis?: string | null
+          meta?: Json
+          source: string
+        }
+        Update: {
+          added_at?: string
+          category?: string
+          is_active?: boolean
+          legal_basis?: string | null
+          meta?: Json
+          source?: string
+        }
+        Relationships: []
+      }
+      ingest_dlq: {
+        Row: {
+          failed_at: string
+          id: string
+          payload: Json
+          reason: string
+          resolution_notes: string | null
+          resolved_at: string | null
+          resolved_by_user_id: string | null
+          retry_count: number
+          run_id: string | null
+          source: string
+        }
+        Insert: {
+          failed_at?: string
+          id?: string
+          payload: Json
+          reason: string
+          resolution_notes?: string | null
+          resolved_at?: string | null
+          resolved_by_user_id?: string | null
+          retry_count?: number
+          run_id?: string | null
+          source: string
+        }
+        Update: {
+          failed_at?: string
+          id?: string
+          payload?: Json
+          reason?: string
+          resolution_notes?: string | null
+          resolved_at?: string | null
+          resolved_by_user_id?: string | null
+          retry_count?: number
+          run_id?: string | null
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ingest_dlq_resolved_by_user_id_fkey"
+            columns: ["resolved_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ingest_dlq_resolved_by_user_id_fkey"
+            columns: ["resolved_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ingest_dlq_run_id_fkey"
+            columns: ["run_id"]
+            isOneToOne: false
+            referencedRelation: "ingest_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ingest_runs: {
+        Row: {
+          completed_at: string | null
+          cost_estimated_usd: number | null
+          country_code: string
+          duration_ms: number | null
+          error: string | null
+          id: string
+          meta: Json
+          raw_payload_url: string | null
+          rows_dlq: number
+          rows_inserted: number
+          rows_skipped: number
+          rows_updated: number
+          sample_percentage: number | null
+          source: string
+          started_at: string
+          status: string
+          triggered_by: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          cost_estimated_usd?: number | null
+          country_code: string
+          duration_ms?: number | null
+          error?: string | null
+          id?: string
+          meta?: Json
+          raw_payload_url?: string | null
+          rows_dlq?: number
+          rows_inserted?: number
+          rows_skipped?: number
+          rows_updated?: number
+          sample_percentage?: number | null
+          source: string
+          started_at?: string
+          status: string
+          triggered_by?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          cost_estimated_usd?: number | null
+          country_code?: string
+          duration_ms?: number | null
+          error?: string | null
+          id?: string
+          meta?: Json
+          raw_payload_url?: string | null
+          rows_dlq?: number
+          rows_inserted?: number
+          rows_skipped?: number
+          rows_updated?: number
+          sample_percentage?: number | null
+          source?: string
+          started_at?: string
+          status?: string
+          triggered_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ingest_runs_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      ingest_watermarks: {
+        Row: {
+          alert_after_hours: number | null
+          country_code: string
+          expected_periodicity: string | null
+          last_successful_at: string | null
+          last_successful_period_end: string | null
+          last_successful_run_id: string | null
+          meta: Json
+          source: string
+        }
+        Insert: {
+          alert_after_hours?: number | null
+          country_code: string
+          expected_periodicity?: string | null
+          last_successful_at?: string | null
+          last_successful_period_end?: string | null
+          last_successful_run_id?: string | null
+          meta?: Json
+          source: string
+        }
+        Update: {
+          alert_after_hours?: number | null
+          country_code?: string
+          expected_periodicity?: string | null
+          last_successful_at?: string | null
+          last_successful_period_end?: string | null
+          last_successful_run_id?: string | null
+          meta?: Json
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ingest_watermarks_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "ingest_watermarks_last_successful_run_id_fkey"
+            columns: ["last_successful_run_id"]
+            isOneToOne: false
+            referencedRelation: "ingest_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       legal_documents_template: {
         Row: {
           body_md: string
@@ -1713,6 +2562,2031 @@ export type Database = {
             referencedColumns: ["code"]
           },
         ]
+      }
+      macro_series: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "macro_series_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      macro_series_default: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20220101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20230101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20240101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20250101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20260101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20270101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20280101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20290101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      macro_series_p20300101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      market_prices_secondary: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "market_prices_secondary_captured_by_user_id_fkey"
+            columns: ["captured_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "market_prices_secondary_captured_by_user_id_fkey"
+            columns: ["captured_by_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "market_prices_secondary_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "market_prices_secondary_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      market_prices_secondary_default: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20251201: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20260101: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20260201: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20260301: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20260401: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20260501: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20260601: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20260701: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_prices_secondary_p20260801: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "market_pulse_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      market_pulse_default: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20220101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20230101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20240101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20250101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20260101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20270101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20280101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20290101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      market_pulse_p20300101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
       }
       part_config: {
         Row: {
@@ -2613,6 +5487,443 @@ export type Database = {
           },
         ]
       }
+      search_trends: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "search_trends_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      search_trends_default: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20220101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20230101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20240101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20250101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20260101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20270101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20280101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20290101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      search_trends_p20300101: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at?: string
+          id?: never
+          interest_score: number
+          keyword: string
+          meta?: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: never
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
       spatial_ref_sys: {
         Row: {
           auth_name: string | null
@@ -2831,6 +6142,228 @@ export type Database = {
         }
         Relationships: []
       }
+      template_public_geo_snapshots: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: number
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      template_public_macro_series: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Insert: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric_name: string
+          period_end: string
+          period_start: string
+          periodicity: string
+          run_id?: string | null
+          series_id: string
+          source: string
+          unit: string
+          value: number
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: number
+          meta?: Json
+          metric_name?: string
+          period_end?: string
+          period_start?: string
+          periodicity?: string
+          run_id?: string | null
+          series_id?: string
+          source?: string
+          unit?: string
+          value?: number
+        }
+        Relationships: []
+      }
+      template_public_market_prices_secondary: {
+        Row: {
+          address_raw: string | null
+          amenities: Json | null
+          area_built_m2: number | null
+          area_terrain_m2: number | null
+          bathrooms: number | null
+          bedrooms: number | null
+          captured_by_user_id: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market: number | null
+          fetched_at: string
+          geom: unknown
+          h3_r8: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking: number | null
+          posted_at: string
+          price_minor: number
+          property_type: string | null
+          raw_html_hash: string | null
+          run_id: string | null
+          seller_type: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via: Database["public"]["Enums"]["market_capture_source"]
+          country_code: string
+          currency: string
+          days_on_market?: number | null
+          fetched_at: string
+          geom?: unknown
+          h3_r8?: string | null
+          id: number
+          listing_id: string
+          meta: Json
+          operation: string
+          parking?: number | null
+          posted_at: string
+          price_minor: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source: string
+          zone_id?: string | null
+        }
+        Update: {
+          address_raw?: string | null
+          amenities?: Json | null
+          area_built_m2?: number | null
+          area_terrain_m2?: number | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          captured_by_user_id?: string | null
+          captured_via?: Database["public"]["Enums"]["market_capture_source"]
+          country_code?: string
+          currency?: string
+          days_on_market?: number | null
+          fetched_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          id?: number
+          listing_id?: string
+          meta?: Json
+          operation?: string
+          parking?: number | null
+          posted_at?: string
+          price_minor?: number
+          property_type?: string | null
+          raw_html_hash?: string | null
+          run_id?: string | null
+          seller_type?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      template_public_market_pulse: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id: string | null
+          source: string
+          value: number
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at: string
+          id: number
+          meta: Json
+          metric: string
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          source: string
+          value: number
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: number
+          meta?: Json
+          metric?: string
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          source?: string
+          value?: number
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
       template_public_rate_limit_log: {
         Row: {
           count: number
@@ -2849,6 +6382,102 @@ export type Database = {
           endpoint?: string
           user_id?: string
           window_start?: string
+        }
+        Relationships: []
+      }
+      template_public_search_trends: {
+        Row: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id: string | null
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          fetched_at: string
+          id: number
+          interest_score: number
+          keyword: string
+          meta: Json
+          period_end: string
+          period_start: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          fetched_at?: string
+          id?: number
+          interest_score?: number
+          keyword?: string
+          meta?: Json
+          period_end?: string
+          period_start?: string
+          run_id?: string | null
+          zone_id?: string | null
+        }
+        Relationships: []
+      }
+      template_public_zone_price_index: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: number
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
         }
         Relationships: []
       }
@@ -2872,6 +6501,727 @@ export type Database = {
           viewed_at?: string
         }
         Relationships: []
+      }
+      zona_snapshots: {
+        Row: {
+          computed_at: string
+          country_code: string
+          id: string
+          payload: Json
+          period: string
+          run_id: string | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          country_code: string
+          id?: string
+          payload: Json
+          period: string
+          run_id?: string | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          country_code?: string
+          id?: string
+          payload?: Json
+          period?: string
+          run_id?: string | null
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zona_snapshots_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      zone_price_index: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zone_price_index_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "zone_price_index_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      zone_price_index_default: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20220101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20230101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20240101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20250101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20260101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20270101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20280101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20290101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_price_index_p20300101: {
+        Row: {
+          computed_at: string
+          confidence: string
+          country_code: string
+          currency: string
+          id: number
+          meta: Json
+          mom_pct: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type: string | null
+          run_id: string | null
+          sample_size: number
+          yoy_pct: number | null
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          confidence?: string
+          country_code: string
+          currency: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation: string
+          period_end: string
+          period_start: string
+          price_per_m2_minor: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size: number
+          yoy_pct?: number | null
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          confidence?: string
+          country_code?: string
+          currency?: string
+          id?: never
+          meta?: Json
+          mom_pct?: number | null
+          operation?: string
+          period_end?: string
+          period_start?: string
+          price_per_m2_minor?: number
+          property_type?: string | null
+          run_id?: string | null
+          sample_size?: number
+          yoy_pct?: number | null
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_tiers: {
+        Row: {
+          country_code: string
+          last_recomputed_at: string
+          meta: Json
+          months_tracked: number
+          projects_count: number
+          sales_count: number
+          tier: number
+          zone_id: string
+        }
+        Insert: {
+          country_code: string
+          last_recomputed_at?: string
+          meta?: Json
+          months_tracked?: number
+          projects_count?: number
+          sales_count?: number
+          tier: number
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          last_recomputed_at?: string
+          meta?: Json
+          months_tracked?: number
+          projects_count?: number
+          sales_count?: number
+          tier?: number
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zone_tiers_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
       }
     }
     Views: {
@@ -3746,6 +8096,7 @@ export type Database = {
         Args: { p_parent_table: string }
         Returns: undefined
       }
+      recompute_zone_tiers: { Args: never; Returns: number }
       register_view: {
         Args: {
           p_dedup_key: string
@@ -4414,6 +8765,11 @@ export type Database = {
       verify_api_key: { Args: { p_raw_key: string }; Returns: string }
     }
     Enums: {
+      market_capture_source:
+        | "chrome_extension"
+        | "admin_upload"
+        | "partnership_feed"
+        | "api_official"
       user_role:
         | "superadmin"
         | "admin_desarrolladora"
@@ -4562,6 +8918,12 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      market_capture_source: [
+        "chrome_extension",
+        "admin_upload",
+        "partnership_feed",
+        "api_official",
+      ],
       user_role: [
         "superadmin",
         "admin_desarrolladora",
