@@ -1,9 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [
-    {
-      "path": "/api/cron/fx-snapshot",
-      "schedule": "0 12 * * *"
-    }
+    { "path": "/api/cron/fx-snapshot", "schedule": "0 12 * * *" },
+    { "path": "/api/cron/ingest/banxico", "schedule": "0 14 * * *" },
+    { "path": "/api/cron/ingest/inegi", "schedule": "0 15 15 * *" },
+    { "path": "/api/cron/ingest/denue", "schedule": "0 2 5 * *" }
   ]
 }
