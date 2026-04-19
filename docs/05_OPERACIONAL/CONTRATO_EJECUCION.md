@@ -291,3 +291,37 @@ Al retomar en sesión nueva:
 - Lee git log para estado
 - Lee TodoWrite si persiste
 - Reporta §5.A de la fase en curso
+
+═══════════════════════════════════════════════════════════════
+8. TODOs OPERACIONALES ACTIVOS (post-housekeeping 2026-04-19)
+═══════════════════════════════════════════════════════════════
+
+Pendientes derivados del housekeeping post-FASE 07b. Status updated cada
+cierre de mini-fase o TODO.
+
+TODO #1 — Branch protection main promotion
+  Status: ✅ CERRADO 2026-04-19
+  Refs: PR #13 (chore/protection-infra-fix, commit 2e73e7d) +
+        gh api PUT branches/main/protection (10 contexts validados).
+  Resultado: required_status_checks alineados con jobs reales.
+             Cualquier futuro PR docs-only ya no se bloquea.
+
+TODO #2 — Mini-fase Playwright auto-fetch (5 fuentes financieras MX)
+  Status: 🟡 ACTIVO — agendado post-FASE 18
+  Spec: docs/05_OPERACIONAL/TODO_PLAYWRIGHT_AUTOFETCH.md
+  Estimado: ~0.5-1 sesión Claude Code.
+  Razonamiento timing: FASE 18 es la primera consumidora intensiva
+  de datos financieros (calculadoras hipotecarias, pre-aprobación).
+
+TODO #3 — Vocabulario inicial vibe_tags (50-60 tags ADR-022)
+  Status: 🟡 AGENDADO — mini-fase OBLIGATORIA pre-FASE 20
+  Spec: ADR-022_VIBE_TAGS_HYBRID.md §5 + 03.1 Dominio 14.5
+  Estimado: ~0.5 sesión (curaduría vocabulario + seed migration +
+            validation_rule per tag).
+  Razonamiento timing: FASE 20 BLOQUE 20.L M-VIBE-TAGS-UI depende
+  del catálogo seed; sin tags no hay UI funcional.
+
+TODO #4 — Upgrade Vercel CLI (51.5.0 → 51.7.0)
+  Status: 🟢 OPCIONAL — sin urgencia
+  Comando: pnpm add -g vercel@latest (o npm i -g vercel@latest)
+  No bloquea housekeeping ni próximas fases.
