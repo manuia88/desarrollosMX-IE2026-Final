@@ -2,10 +2,6 @@ name: DB Types Drift Check
 
 on:
   pull_request:
-    paths:
-      - 'supabase/migrations/**'
-      - 'shared/types/database.ts'
-      - '.github/workflows/db-types-check.yml'
   push:
     branches:
       - main
@@ -21,21 +17,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Detect schema-affecting changes
+        id: changes
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            schema:
+              - 'supabase/migrations/**'
+              - 'shared/types/database.ts'
+              - '.github/workflows/db-types-check.yml'
+
+      - name: Skip notice (no schema changes)
+        if: steps.changes.outputs.schema != 'true'
+        run: echo "No schema-affecting changes detected; skipping drift check (always-success required-context shim)."
+
       - uses: actions/setup-node@v4
+        if: steps.changes.outputs.schema == 'true'
         with:
           node-version: '22'
 
       - uses: supabase/setup-cli@v1
+        if: steps.changes.outputs.schema == 'true'
         with:
           version: latest
 
       - name: Regenerate types from remote schema
+        if: steps.changes.outputs.schema == 'true'
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
         run: |
           supabase gen types typescript --project-id qxfuqwlktmhokwwlvggy > shared/types/database.ts
 
       - name: Verify no drift
+        if: steps.changes.outputs.schema == 'true'
         run: |
           if ! git diff --exit-code shared/types/database.ts; then
             echo "::error::shared/types/database.ts is out of sync with the remote schema."
