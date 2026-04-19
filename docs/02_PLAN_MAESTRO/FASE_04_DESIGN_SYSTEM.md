@@ -1,12 +1,13 @@
 # FASE 04 — Design System Dopamine
 
-> **Duración estimada:** 2.5 sesiones Claude Code (~5 horas con agentes paralelos)
+> **Duración estimada:** 3.5 sesiones Claude Code (~7 horas con agentes paralelos) — incluye módulo 4.P refinement post-competitive analysis Findperty (ADR-023)
 > **Dependencias:** [FASE 00 — Bootstrap](./FASE_00_BOOTSTRAP.md), [FASE 03 — AI-Native Shell](./FASE_03_AI_NATIVE_SHELL.md)
 > **Bloqueantes externos:**
 > - Fuentes Outfit + DM Sans + JetBrains Mono descargadas y self-hosted en `public/fonts/` (o cargadas via `next/font/google`)
 > - Mapbox token (`NEXT_PUBLIC_MAPBOX_TOKEN`) — solo para el componente `MiniMap` del DS (uso ligero; heavy maps en Fase 08+)
 > - Revisión visual con Manu del `/design-system` preview page antes de cerrar la fase
 > - Referencias: `docs/biblia-v5/dmx-dopamine-v2.jsx` (landing) y módulos Dopamine M1-M9 (en repo viejo archivado)
+> - Revisión visual del módulo 4.P en `/design-system` con Manu antes de cerrar (pre-implementación FASE 20)
 > **Resultado esperado:** Design System Dopamine completo: tokens CSS-first, primitives (Button/Card/Input/Select/Badge/Dialog/Sheet/Dropdown/Tooltip/Toast), capa Dopamine (Card3D con perspective, AnimNum, FloatingShapes, ParticleField, Btn shimmer, Label pill), layouts (AppShell, Sidebar 60↔240, Header 54, ContentGrid 1100px, AICopilot integrado de Fase 03), dark mode via CSS vars, preview `/design-system` solo dev, a11y baseline con `prefers-reduced-motion` respetado. Tag `fase-04-complete`.
 > **Priority:** [H1]
 
@@ -311,6 +312,81 @@ Ya construido en Fase 03. Aquí se verifica integración con AppShell.
 - [ ] Axe viola = 0 en `/design-system`.
 - [ ] Lighthouse a11y ≥ 95.
 
+### BLOQUE 4.P — Design System Refinement (post-competitive analysis Findperty 2026-04-19)
+
+> Implementa decisiones de [ADR-023 Design System Refinement](../01_DECISIONES_ARQUITECTONICAS/ADR-023_DESIGN_SYSTEM_REFINEMENT.md). Componentes nuevos para soportar Progressive Preference Discovery ([ADR-021](../01_DECISIONES_ARQUITECTONICAS/ADR-021_PROGRESSIVE_PREFERENCE_DISCOVERY.md)) y Vibe Tags Hybrid ([ADR-022](../01_DECISIONES_ARQUITECTONICAS/ADR-022_VIBE_TAGS_HYBRID.md)). Esta extensión es no-breaking sobre tokens y primitives existentes — todo es aditivo.
+
+#### MÓDULO 4.P.1 — Tokens update en `styles/tokens.css`
+
+Pasos:
+- [4.P.1.1] Declarar variant `--radius-full: 9999px` (si no existe ya) y `--radius-pill` alias de `--radius-full` para semántica.
+- [4.P.1.2] Agregar shadow-wow con acento coral warm:
+  ```
+  --shadow-wow-inner: 0 0 14px 0 rgba(217, 119, 87, 0.55) inset, 0 0 24px 0 rgba(217, 119, 87, 0.40) inset;
+  --shadow-wow-outer: 0 40px 80px 0 rgba(217, 119, 87, 0.20), 0 4px 14px 0 rgba(217, 119, 87, 0.20);
+  --shadow-wow: var(--shadow-wow-inner), var(--shadow-wow-outer);
+  ```
+- [4.P.1.3] Toast tier tokens (info/success/celebration colors + confetti trigger flag):
+  ```
+  --toast-info-bg / --toast-info-fg / --toast-info-border
+  --toast-success-bg (lime/emerald) / --toast-success-fg / --toast-success-icon
+  --toast-celebration-bg (gradient) / --toast-celebration-fg / --toast-celebration-emoji-default
+  --toast-celebration-confetti: 1; (flag CSS para hook React)
+  ```
+- [4.P.1.4] Density tokens: `--spacing-density-comfortable` (×1.3 sobre base) y `--spacing-density-compact` (×1.0). Toggle en root con `data-density="comfortable|compact"`.
+
+Criterio de done del módulo:
+- [ ] tokens.css con +10 nuevas vars sin romper existing.
+- [ ] Dark mode invertido respeta nuevos tokens.
+
+#### MÓDULO 4.P.2 — Componentes nuevos `shared/ui/dopamine/`
+
+Pasos:
+- [4.P.2.1] **VibeTagChip** (`shared/ui/dopamine/VibeTagChip.tsx`): icon + label + valor cuantitativo opcional + ConfidenceBadge inline. Props: `code`, `label`, `value?`, `confidence`, `dataSource?`, `onClick?`. Variants: `default | filter-active | edited`.
+- [4.P.2.2] **MatchScoreBreakdown** (`shared/ui/dopamine/MatchScoreBreakdown.tsx`): visualiza 6 dimensiones (Emocional/Técnico/Urbano/Financiero/Espacial/Inversión) con barras coloreadas + reasons expandibles per dim + data sources cited. Props: `dimensions: Record<dim, {score, weight, reasons: Array<{source, value}>, confidence}>`.
+- [4.P.2.3] **ProgressBarMultiSegment** (`shared/ui/dopamine/ProgressBarMultiSegment.tsx`): para Capa 1 onboarding PPD. Props: `segments: number`, `current: number`, `labels?: string[]`. Soporta micro-onboarding 5 pasos.
+- [4.P.2.4] **ToastCelebration** (`shared/ui/dopamine/ToastCelebration.tsx`): variant especial del toast system (`shared/ui/primitives/Toast.tsx`) con confetti opt-in + emoji + auto-dismiss 6s. Respeta `prefers-reduced-motion` (sin confetti).
+- [4.P.2.5] **PropertyStory** (`shared/ui/dopamine/PropertyStory.tsx`): narrative block con AI-generated badge + edit button para owner/asesor. Props: `text`, `aiGenerated`, `editable`, `onEdit?`. Soporta markdown limitado.
+- [4.P.2.6] **RadarChart6D** (`shared/ui/dopamine/RadarChart6D.tsx`): basado en Recharts. 6 ejes fijos (Emocional/Técnico/Urbano/Financiero/Espacial/Inversión). Props: `values: Record<dim, number>`, `confidenceByDim?: Record<dim, ConfidenceLevel>`, `compareTo?: Record<dim, number>` para co-match.
+- [4.P.2.7] **ConfidenceBadge** (`shared/ui/dopamine/ConfidenceBadge.tsx`): visual high/medium/low/insufficient con tooltip explicativo. Reusable en MatchScoreBreakdown, RadarChart6D, VibeTagChip.
+
+Criterio de done del módulo:
+- [ ] 7 componentes exportados desde `shared/ui/dopamine/index.ts`.
+- [ ] Cada componente con story en `/design-system` preview.
+- [ ] Cada componente con `prefers-reduced-motion` respetado donde aplique.
+
+#### MÓDULO 4.P.3 — Refactor primitives existentes
+
+Pasos:
+- [4.P.3.1] **Button**: agregar variant `pill` (rounded-full, padding ajustado para hit-target ≥44px). NO descontinuar variants existentes.
+- [4.P.3.2] **Input**: agregar variant `pill` (rounded-full) específicamente para search bars y filtros.
+- [4.P.3.3] **Card**: agregar prop `lowChrome` (boolean): aplica regla "border subtle OR shadow sutil, nunca ambos". Default `false` (mantiene backward compat).
+- [4.P.3.4] **Text** (si existe primitive): default `SolidText`. `GradientText` queda variant explícita reservada para hero principal y display numbers.
+- [4.P.3.5] **Modal/Sheet**: simplificar shadow stack a max 2 layers.
+
+Criterio de done del módulo:
+- [ ] 5 primitives extendidos sin breaking changes.
+- [ ] Tests visuales side-by-side antes/después en `/design-system`.
+
+#### MÓDULO 4.P.4 — E2E mapping en 03.13
+
+Pasos:
+- [4.P.4.1] Agregar 7 components nuevos a `docs/03_CATALOGOS/03.13_E2E_CONNECTIONS_MAP.md` bajo "FASE 04 — Design System (módulo 4.P)" — cada row con UI Component, Route (típicamente `/design-system` para preview, consumido en FASE 20-21), Handler (props), tRPC Procedure (— para components puros), DB Op (—), Cascades (—), Audit Log (—), Notifs (—), Permissions (public/auth), Tests (path Playwright a11y), Status (active).
+
+Criterio de done del módulo:
+- [ ] 7 rows nuevas en 03.13 con todas las columnas.
+
+#### MÓDULO 4.P.5 — A11y refresh + Lighthouse
+
+Pasos:
+- [4.P.5.1] Re-run Lighthouse a11y en `/design-system` con componentes nuevos visibles. Target ≥95.
+- [4.P.5.2] Re-run `@axe-core/playwright` test — target 0 violations.
+- [4.P.5.3] Verificar contrast ratios: ConfidenceBadge low (color amarillo) ≥3:1 sobre bg cards.
+
+Criterio de done del módulo:
+- [ ] Lighthouse a11y ≥95 mantenido.
+- [ ] Axe violations = 0.
+
 ## Criterio de done de la FASE
 
 - [ ] Tokens Dopamine expandidos (≥ 100 CSS vars) + exportados en TS.
@@ -322,9 +398,10 @@ Ya construido en Fase 03. Aquí se verifica integración con AppShell.
 - [ ] Lighthouse a11y ≥ 95 en `/design-system`.
 - [ ] `prefers-reduced-motion` respetado.
 - [ ] Playwright test a11y verde.
+- [ ] BLOQUE 4.P aplicado: tokens nuevos + 7 componentes Dopamine nuevos + refactor primitives + 7 rows en 03.13 + a11y verde post-refinement.
 - [ ] Tag git: `fase-04-complete`.
 
-## Features implementadas en esta fase (≈ 15)
+## Features implementadas en esta fase (≈ 22)
 
 1. **F-04-01** Tokens Dopamine expandidos (tipografía, colors, gradients, tints, shadows, radii, spacing, durations, easings, keyframes)
 2. **F-04-02** Button primitive (6 variants, 3 sizes, asChild)
@@ -341,6 +418,13 @@ Ya construido en Fase 03. Aquí se verifica integración con AppShell.
 13. **F-04-13** AppShell + Sidebar 60↔240 glass + Header 54 + ContentGrid 1100
 14. **F-04-14** Dark mode via next-themes + tokens override
 15. **F-04-15** Preview `/design-system` dev-only + a11y baseline ≥ 95
+16. **F-04-16** Tokens shadow-wow coral + density toggle + toast tier tokens
+17. **F-04-17** VibeTagChip component (icon + label + value + confidence)
+18. **F-04-18** MatchScoreBreakdown 6D con reasons expandibles + data sources
+19. **F-04-19** ProgressBarMultiSegment (PPD onboarding capa 1)
+20. **F-04-20** ToastCelebration con confetti opt-in (reduced-motion respect)
+21. **F-04-21** PropertyStory + RadarChart6D + ConfidenceBadge
+22. **F-04-22** Refactor Button/Input pill variants + Card lowChrome + Modal less chrome
 
 ## Próxima fase
 
