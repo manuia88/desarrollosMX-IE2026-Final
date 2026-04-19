@@ -201,6 +201,63 @@ export type Database = {
           },
         ]
       }
+      airroi_spend_ledger: {
+        Row: {
+          actual_cost_usd: number | null
+          airroi_request_id: string | null
+          country_code: string | null
+          created_at: string
+          duration_ms: number | null
+          endpoint_key: string
+          endpoint_path: string
+          error: string | null
+          estimated_cost_usd: number
+          http_status: number | null
+          id: number
+          market_ref: string | null
+          meta: Json
+          method: string
+          ok: boolean
+          run_id: string | null
+        }
+        Insert: {
+          actual_cost_usd?: number | null
+          airroi_request_id?: string | null
+          country_code?: string | null
+          created_at?: string
+          duration_ms?: number | null
+          endpoint_key: string
+          endpoint_path: string
+          error?: string | null
+          estimated_cost_usd: number
+          http_status?: number | null
+          id?: never
+          market_ref?: string | null
+          meta?: Json
+          method: string
+          ok?: boolean
+          run_id?: string | null
+        }
+        Update: {
+          actual_cost_usd?: number | null
+          airroi_request_id?: string | null
+          country_code?: string | null
+          created_at?: string
+          duration_ms?: number | null
+          endpoint_key?: string
+          endpoint_path?: string
+          error?: string | null
+          estimated_cost_usd?: number
+          http_status?: number | null
+          id?: never
+          market_ref?: string | null
+          meta?: Json
+          method?: string
+          ok?: boolean
+          run_id?: string | null
+        }
+        Relationships: []
+      }
       api_budgets: {
         Row: {
           alert_threshold_pct: number
@@ -9742,6 +9799,15 @@ export type Database = {
       mfa_mark_enabled: { Args: never; Returns: undefined }
       mfa_regenerate_backup_codes: { Args: never; Returns: string[] }
       mfa_reminders_tick: { Args: never; Returns: number }
+      monthly_airroi_spend_by_endpoint: {
+        Args: { p_month?: string }
+        Returns: {
+          actual_cost_usd: number
+          calls: number
+          endpoint_key: string
+          estimated_cost_usd: number
+        }[]
+      }
       partition_data_id: {
         Args: {
           p_analyze?: boolean
