@@ -28,6 +28,14 @@ Crítico:
 - i18n: landing debe disponer es-MX/es-CO/es-AR/pt-BR/en-US. Routing automático con `next-intl` (FASE 05).
 - Core Web Vitals monitored con Vercel Speed Insights + PostHog.
 
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-9 | Short-form video feed (Real Estate TikTok) | Feed vertical tipo TikTok para exploration emocional de proyectos | Módulo 21.A.11 (nuevo) |
+| GC-4 | Voice search público | Search voice en landing + /explorar (es-MX / pt-BR) | Módulo 21.B.2 (nuevo) |
+| GC-7 | Constitutional AI on copy generation | Reglas para narratives / market copy generados (landing ticker, /indices narrative, /metodologia auto-updates): nunca inventar datos, siempre source span, confidence threshold | Módulo 21.H.4 (nuevo) |
+
 ## Bloques
 
 ### BLOQUE 21.A — Landing SPA (9 secciones pixel-perfect)
@@ -206,6 +214,22 @@ Crítico:
 - [ ] CTAs redirects funcionan.
 - [ ] Newsletter signup confirm.
 
+#### MÓDULO 21.A.11 — Short-form video feed (GC-9 Real Estate TikTok)
+
+**Pasos:**
+- `[21.A.11.1]` Nueva sección landing (entre ZoneExplorer y HowItWorks) + ruta dedicada `/explorar-video`: feed vertical full-screen swipe up/down al estilo TikTok.
+- `[21.A.11.2]` Cada video 15-60s: tour proyecto + overlay IE scores + CTA "Ver ficha" + creator (asesor o dev) + música opcional.
+- `[21.A.11.3]` Source videos: (a) auto-generados desde FASE 22 `ai_marketing_assets.asset_type='video_story'`, (b) subidos manualmente por dev/asesor vía `/marketing/video-feed` (FASE 14/15).
+- `[21.A.11.4]` Algoritmo feed: collaborative filtering + zone_interest + lifestyle_dna si logueado; para anónimos: trending global.
+- `[21.A.11.5]` Engagement actions: like, save to watchlist, share (WA/Twitter/IG), report inapropiado.
+- `[21.A.11.6]` Performance: lazy load + HLS streaming + preload next 2 videos. Max 2MB/video on mobile.
+- `[21.A.11.7]` A11y: captions obligatorios autogenerados (Whisper) + control play/pause teclado + prefers-reduced-motion skip auto-play.
+
+**Criterio de done del módulo:**
+- [ ] Feed carga 20 videos + swipe smooth a 60fps.
+- [ ] Tap video → ficha proyecto.
+- [ ] Captions visibles + toggle.
+
 ### BLOQUE 21.B — /explorar mapa público simplificado
 
 #### MÓDULO 21.B.1 — Map public
@@ -226,6 +250,21 @@ Crítico:
 - [ ] 3 capas renderizan.
 - [ ] Rate limiting valida.
 - [ ] Mobile responsive.
+
+#### MÓDULO 21.B.2 — Voice search público (GC-4)
+
+**Pasos:**
+- `[21.B.2.1]` Floating mic button en landing hero + en `/explorar` topbar. Tap → Web Speech API `lang='es-MX'` (o pt-BR si locale BR) → transcribe query.
+- `[21.B.2.2]` Query pasa por endpoint `/api/public/voice-query-parse` Claude Haiku que extrae `{ zones[], property_type, price_min, price_max, bedrooms, filters_extra }` → aplica filtros en /explorar o redirige a /proyectos?filters=...
+- `[21.B.2.3]` TTS opcional response: "Encontré 24 proyectos en Condesa bajo 4M con 2 recámaras".
+- `[21.B.2.4]` Rate limit 30 queries/min por IP. Session memory last 3 queries (para "muéstrame más baratos").
+- `[21.B.2.5]` Accessibility: mic visible, keyboard shortcut Shift+Slash, ESC cancela, fallback textual.
+- `[21.B.2.6]` PostHog event `voice_search_query` con zones/price/filters extracted (anonymous).
+
+**Criterio de done del módulo:**
+- [ ] Voice query test aplica filtros correctos.
+- [ ] Latencia <2s p95.
+- [ ] Sin auth required.
 
 ### BLOQUE 21.C — /proyectos/[id] ficha completa
 
@@ -455,6 +494,21 @@ Crítico:
 - [ ] Bundle <300KB initial.
 - [ ] Lighthouse Performance ≥90.
 
+#### MÓDULO 21.H.4 — Constitutional AI on copy generation (GC-7)
+
+**Pasos:**
+- `[21.H.4.1]` Cada copy AI-generado user-facing público (ticker dinámico, /indices narrative, /metodologia auto-updates, DMX Wrapped social share text, meta descriptions dinámicas de /proyectos/[id]) pasa por validator `constitutionalPublicCopy(text, sources[])`:
+  - R1 Never hallucinate data: si texto contiene números/stats, el sistema verifica que cada número existe en `sources` (tabla de datos backend ground-truth).
+  - R2 Source citation: cada afirmación factual lleva `data-source-ref` atributo con link a /metodologia#score o fuente pública.
+  - R3 Disclaimer post-venta: cualquier copy que describa "beneficios" debe incluir disclaimer DMX no responsable post-venta.
+  - R4 Low confidence → not publish: si LLM confidence <0.85 → no publica auto, crea tarea admin review.
+- `[21.H.4.2]` Tabla `public_copy_audit_log` guarda cada generación con sources, outcome (published / pending_review / rejected), validation checks.
+- `[21.H.4.3]` Cron `public_copy_health` diario reporta copy publicado con violations detectadas post-hoc.
+
+**Criterio de done del módulo:**
+- [ ] Copy con número inventado → rejected.
+- [ ] Audit log visible para admin.
+
 ### BLOQUE 21.I — Referral system
 
 #### MÓDULO 21.I.1 — Referral tracking
@@ -497,9 +551,34 @@ Crítico:
 
 **Dependencia cruzada:** Este archivo referencia M19 Marketplace Público + M20 Ficha Proyecto Personalizada (docs/04_MODULOS/) — Agente H BATCH 2 escribe.
 
+## Features añadidas por GCs (delta v2)
+
+- **F-21-31** Short-form video feed (GC-9) estilo TikTok con captions + collaborative filtering.
+- **F-21-32** Voice search público (GC-4) es-MX / pt-BR sin auth.
+- **F-21-33** Constitutional AI on public copy generation (GC-7) con audit log.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-21-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 FASE 22 — Marketing + Comms (Notifs multi-canal + WA Business + Webhooks consumers + Auto-gen piezas + Academia)
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

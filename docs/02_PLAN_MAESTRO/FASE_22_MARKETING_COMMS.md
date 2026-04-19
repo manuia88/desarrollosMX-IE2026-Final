@@ -39,6 +39,14 @@ Cross-references:
 - Catálogo 03.12 (notifs + webhooks detalle).
 - M01 Dashboard notifs badge, M20 preferences center.
 
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-33 | WhatsApp template auto-draft | Generación IA templates por zona/segmento con IE scores; alimenta WA send | Módulo 22.N.1 (nuevo) |
+| GC-28 | Sequence Engine integration | Conecta con FASE 14 sequence engine para multi-channel batch sends | Módulo 22.N.2 (nuevo) |
+| GC-50 | Birthday + anniversary cron | Cron diario detecta fechas clave y triggers flows (cumple, 1y compra, 6m sin contacto) | Módulo 22.K.5 (nuevo cron) |
+
 ## Bloques
 
 ### BLOQUE 22.A — Schema BD (notificaciones + config + queue + webhooks)
@@ -561,6 +569,24 @@ Cross-references:
 - [ ] Wrapped genera para 100% usuarios con actividad año.
 - [ ] Share Twitter incluye imagen + hashtag #DMXWrapped.
 
+#### MÓDULO 22.K.5 — Birthday + anniversary cron (GC-50)
+
+**Pasos:**
+- `[22.K.5.1]` Cron `birthday_anniversary_daily` 8am local por timezone (wrapper timezone-aware como briefing). Para cada asesor activo, escanea sus contactos:
+  - `birthday_today`: `contactos.birth_date` mes/día = hoy.
+  - `birthday_upcoming_3d`: mes/día = hoy+3 (ya cubierto FASE 13 GC-50 módulo 13.F.6 — aquí replica en marketing comms para notif a contacto si opt-in).
+  - `anniversary_1y_purchase`: `operaciones.closed_at` date exactly 1y ago.
+  - `anniversary_6m_no_contact`: `contactos.last_interaction_at < now() - 180 days`.
+- `[22.K.5.2]` Para cada match: (a) crea tarea asesor, (b) si contacto consent WA/email → dispatch template personalizado (birthday template "¡Feliz cumpleaños {name}!", anniversary "Hace 1 año cerramos tu hogar en {zona}"), (c) log en `re_engagement_flows` tabla.
+- `[22.K.5.3]` 3 templates WA a aprobar Meta adicionales (adds a 22.C.3 catalog): `birthday_greeting_v1`, `anniversary_1y_v1`, `reengagement_6m_v1`.
+- `[22.K.5.4]` Si el contacto responde → push a FASE 14 Sequence Engine (GC-28) step "post_birthday_followup".
+- `[22.K.5.5]` Feature gated `feature.birthday_reengagement` (default Starter+).
+
+**Criterio de done del módulo:**
+- [ ] Contacto con birth_date hoy recibe WA greeting.
+- [ ] Tarea asesor creada paralela.
+- [ ] Template catálogo actualizado.
+
 ### BLOQUE 22.L — Compliance (unsubscribe + preferences center)
 
 #### MÓDULO 22.L.1 — Unsubscribe links firmados
@@ -595,6 +621,34 @@ Cross-references:
 **Criterio de done del módulo:**
 - [ ] Enviar STOP → WA bloqueado + confirmación recibida.
 
+### BLOQUE 22.N — GC-33 WA Auto-Draft + GC-28 Sequence Engine integration
+
+#### MÓDULO 22.N.1 — WhatsApp template auto-draft (GC-33)
+
+**Pasos:**
+- `[22.N.1.1]` Service `shared/lib/notifs/wa-auto-draft.ts` centraliza `draftWaTemplate({ userId, contactId, intent, locale })` (intent ∈ nurture/property_match/follow_up/birthday/anniversary/price_drop/re_engagement).
+- `[22.N.1.2]` Genera draft usando Claude Haiku + data contacto + IE scores zona top (N8 Livability, N11 Momentum, F01 Safety). Output `{ text, variables_used, citations[] }`.
+- `[22.N.1.3]` Validación Meta policy: asegura que variables están soportadas por template aprobado (mapeo intent→template). Si custom text fuera de ventana 24h → requires template.
+- `[22.N.1.4]` UI integrations: usado por FASE 13 (13.D.4) y Sequence Engine (22.N.2) y Blast (FASE 14 14.C.5).
+- `[22.N.1.5]` Feature gated `feature.wa_auto_draft`.
+
+**Criterio de done del módulo:**
+- [ ] Draft multi-intent genera con ≥2 citations IE.
+- [ ] Variables mapeo correcto.
+
+#### MÓDULO 22.N.2 — Sequence Engine integration (GC-28)
+
+**Pasos:**
+- `[22.N.2.1]` El orchestrator de notifs (22.D.1) expone API `orchestrator.sendFromSequence(step, contact, context)` que FASE 14 Sequence Engine invoca en cada step tipo Message.
+- `[22.N.2.2]` Soporta channels (wa, email, sms, in_app) con fallback cascade.
+- `[22.N.2.3]` Tracking: cada send desde sequence ≠ notif regular — tag `source='sequence_run'`, `sequence_run_id` en `notificaciones.metadata` para analytics.
+- `[22.N.2.4]` Rate limiting per sequence (max 100 sends/hour por user para evitar bursts Meta).
+- `[22.N.2.5]` Stop events: si notif bounces / opt-out / contact_responded → notifica Sequence Engine para evaluar branch/stop.
+
+**Criterio de done del módulo:**
+- [ ] Sequence 3 steps WA+email+SMS ejecuta via orchestrator.
+- [ ] Stop event propaga correctamente.
+
 ### BLOQUE 22.M — Tracking PostHog
 
 #### MÓDULO 22.M.1 — Events
@@ -627,9 +681,34 @@ Cross-references:
 - [ ] Documentación catálogo 03.12 actualizada con mapping final tipos → canales default → templates.
 - [ ] Tag git `fase-22-complete`.
 
+## Features añadidas por GCs (delta v2)
+
+- **F-22-21** Birthday + anniversary cron (GC-50) con 3 templates Meta nuevos.
+- **F-22-22** WhatsApp template auto-draft service (GC-33) centralizado.
+- **F-22-23** Sequence Engine orchestrator integration (GC-28) con stop events.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-22-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 FASE 23 — Monetización (Stripe full + feature gating + 7 productos B2B infraestructura H1 + API externa).
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent F) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

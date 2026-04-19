@@ -15,6 +15,13 @@
 
 El flow maestro DMX inicia con "DEV sube PDF → document_job → AI extrae → Tabla verde/amarillo/rojo → DEV completa → Quality Score → Proyecto publicado" (§20.5 briefing). Sin este pipeline, los proyectos quedan con data incompleta/inconsistente, el matching falla, los compradores no confían, y el IE no puede calcular scores (garbage in, garbage out).
 
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-7 | Constitutional AI (never hallucinate on financials) | Principio rector del pipeline LLM: nunca inventar números, siempre citar span origen, ask when uncertain, low confidence → manual review | Bloque 17.C transversal + Bloque 17.I (nuevo) |
+| GC-26 | Enrichment pipeline integration | Docs procesados pueden alimentar Enrichment Engine M03 (FASE 13) | Módulo 17.F.3 (nuevo) |
+
 El engine combina OCR tradicional + AI structured extraction (Claude Sonnet 4 con function calling) + validaciones de reglas de negocio. La salida no es texto libre sino un JSON schema determinista por tipo de doc (una escritura tiene campos distintos que un permiso SEDUVI). Quality Score verde=aprobado automático, ámbar=revisión humana sugerida, rojo=bloquea publicación.
 
 Crítico:
@@ -349,6 +356,17 @@ Crítico:
 - [ ] Checklist completo unlock siguiente etapa operación.
 - [ ] Notif 7d anticipación dispara.
 
+#### MÓDULO 17.F.3 — Enrichment pipeline integration (GC-26)
+
+**Pasos:**
+- `[17.F.3.1]` Al aprobar documento `acta_constitutiva` / `constancia_situacion_fiscal` / `poder_notarial` → trigger push de datos al Enrichment Engine (FASE 13 GC-26) para auto-enriquecer contactos/contrapartes de la operación.
+- `[17.F.3.2]` Output al enrichment: `{ contact_id, source_doc_job_id, enriched_fields: {rfc, curp, legal_name, ...} }` → se muestra en `contactos.enrichment_log`.
+- `[17.F.3.3]` Permiso explícito: dev/asesor ve checkbox "Usar datos del doc para enriquecer contacto" al aprobar.
+
+**Criterio de done del módulo:**
+- [ ] Doc aprobado + checkbox on → contacto enriquecido con RFC/CURP en <10s.
+- [ ] Audit trail visible.
+
 ### BLOQUE 17.G — Google Drive monitor
 
 #### MÓDULO 17.G.1 — OAuth + setup
@@ -405,6 +423,34 @@ Crítico:
 - [ ] Cost calculated correcto con Sonnet 4 rates.
 - [ ] Alert >$50/día test dispara email.
 
+### BLOQUE 17.I — Constitutional AI guardrails (GC-7)
+
+#### MÓDULO 17.I.1 — Reglas para LLM extraction
+
+**Pasos:**
+- `[17.I.1.1]` Tabla `constitutional_rules` (scope, rule_id, description, action, threshold). Scope: `doc_intel` para esta fase; seed con reglas:
+  - R1 **Never hallucinate numbers**: si output tiene `value numeric`, debe incluir `source_span` (página + texto literal donde aparece). Sin source_span → reject.
+  - R2 **Cite source span**: cada field crítico (financiales, fechas, m2, RFC, folios) requiere `source_page` + `source_text` (≥10 chars literal del doc).
+  - R3 **Ask when uncertain**: si confidence <0.7 O faltan datos → output incluye `_uncertain_fields[]` con questions para review humano.
+  - R4 **Low confidence → manual review**: Quality Score nunca green si ≥1 field crítico <0.85 confidence.
+  - R5 **Financial numbers double-check**: montos > $1M MXN requieren 2 confirmaciones (regex pattern match + digits spell-out coherence).
+- `[17.I.1.2]` Modificar prompts de extraction en MÓDULO 17.C.2 para incluir reglas explícitas en system message:
+  ```
+  Reglas obligatorias:
+  - Para cada field extraído, incluye "source_span": { page: N, text: "literal quote ≥10 chars" }.
+  - NUNCA inventes números. Si no puedes ver el valor claramente, retorna null + añade el field name a "_uncertain_fields".
+  - Para montos financieros > $1M MXN, confirma contra representación textual (ej: "dos millones" == 2000000).
+  - Si tu confidence < 0.7 para cualquier field crítico, marca el doc como requires_manual_review=true.
+  ```
+- `[17.I.1.3]` Validator post-LLM `validateConstitutional(extraction, templateSchema)`: chequea R1-R5 → si falla alguna → downgrade Quality Score a amber/red + anota `constitutional_violations[]` en `document_jobs.validation_errors`.
+- `[17.I.1.4]` UI review (Bloque 17.E) muestra badge "Constitutional AI: 5/5 passed" o warning con violations específicas.
+- `[17.I.1.5]` Analytics: cron `constitutional_metrics_weekly` reporta tasa de violations por template + action plan prompt tuning.
+
+**Criterio de done del módulo:**
+- [ ] 5 reglas seed aplicadas.
+- [ ] Doc con field sin source_span → auto-amber.
+- [ ] Monto fake (no en doc) → rechazado.
+
 ## Criterio de done de la FASE
 
 - [ ] Schema `document_jobs` + `document_extraction_templates` + `document_job_events` + `drive_monitors` creadas.
@@ -425,9 +471,33 @@ Crítico:
 - [ ] Tag git `fase-17-complete`.
 - [ ] Features entregados: 15 (target §9 briefing).
 
+## Features añadidas por GCs (delta v2)
+
+- **F-17-16** Constitutional AI guardrails (GC-7): 5 reglas seed + validator + analytics.
+- **F-17-17** Enrichment pipeline integration (GC-26) de doc aprobado a contacto.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-17-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 FASE 18 — Legal + Pagos + Escrow (Mifiel + Stripe Connect + apartado + pre-aprobación crediticia)
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

@@ -16,6 +16,19 @@
 
 Cierra los 9 módulos del portal asesor (M10 Dashboard Developer queda en FASE 15 Portal Desarrollador). Este bloque entrega el flow comercial completo: tareas operativas, operaciones con compliance fiscal/legal mexicano, marketing auto-generado, estadísticas con pedagogía.
 
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-28 | Sequence Engine (Apollo/Outreach pattern) | Multi-channel automation (WA+email+SMS+call) con branching por response | Módulo 14.A.5 (nuevo) |
+| GC-29 | Intent Signals (6sense/Bombora pattern) | Detecta hot leads por behavior y los sube en priority queue | Módulo 14.B.6 (nuevo) |
+| GC-30 | AI Dialer + AI Scribe | Click-to-call + transcripción + extracción next actions | Módulo 14.B.7 (nuevo) |
+| GC-35 | Multi-channel blast | WA+email+SMS simultáneo con personalización por contacto | Módulo 14.C.5 (nuevo, dentro Marketing) |
+| GC-42 | QR Check-in visita | QR único por visita; asesor+comprador scan para trackear asistencia real | Módulo 14.B.8 (nuevo) |
+| GC-52 | Cross-sell Detector | Surface upsell opportunities (inversor compró → otras props similares) | Módulo 14.B.9 (nuevo) |
+| GC-56 | Commission Forecast | Forecast 3-6 meses basado en pipeline probabilístico | Módulo 14.D.5 (nuevo) |
+| GC-39 | Offline visits + voice notes post-visita | PWA offline capture + voice note transcribed + auto-fill feedback | Módulo 14.B.10 (nuevo) |
+
 Crítico:
 - M07 es el módulo más complejo por las flows financieros MX (comisión+IVA+split invisible-ya-no, CFDI, Mifiel) — es donde DMX supera a Pulppo.
 - STATUS_MAP operaciones (DISC-01 resuelto desde rewrite): offer↔propuesta, offer_blocked↔oferta_aceptada, contract↔escritura, closed↔cerrada, paying↔pagando, cancelled↔cancelada.
@@ -72,6 +85,19 @@ Crítico:
 **Criterio de done del módulo:**
 - [ ] Manager ve tareas de todos sus asesores.
 - [ ] Cron corre y marca vencidas.
+
+#### MÓDULO 14.A.5 — Sequence Engine (GC-28 Apollo/Outreach pattern)
+
+**Pasos:**
+- `[14.A.5.1]` Tabla `sequence_templates` (id, name, owner_id, steps jsonb) y `sequence_runs` (id, contact_id, template_id, status, current_step, started_at, stopped_at, stop_reason).
+- `[14.A.5.2]` UI `/asesor/sequences` canvas visual: nodes `Message (channel: wa/email/sms/task)` + `Wait N hours/days` + `Branch (if response = yes/no/timeout)`.
+- `[14.A.5.3]` Worker `sequence_runner` cada 5min avanza steps; si contacto responde (via WA webhook FASE 22 o email open/click) → marca `responded_at` y dispara branch `yes`.
+- `[14.A.5.4]` Stop conditions automáticas: contact opt-out, operation created, visit scheduled.
+- `[14.A.5.5]` Feature gated `feature.sequence_engine` (starter 3 active seqs, pro 20, enterprise ilimitado).
+
+**Criterio de done del módulo:**
+- [ ] Secuencia 3 pasos ejecuta correctamente con branching.
+- [ ] Stop on response verificado.
 
 ### BLOQUE 14.B — M07 Operaciones (wizard 6 pasos)
 
@@ -142,6 +168,75 @@ Crítico:
 - [ ] Flow completo Mifiel con firmantes.
 - [ ] Badge NOM-151 visible.
 
+#### MÓDULO 14.B.6 — Intent Signals hot leads (GC-29)
+
+**Pasos:**
+- `[14.B.6.1]` Service `features/operaciones/lib/intent-signals.ts` computa `intent_score` 0-100 por contacto usando señales:
+  - Email opens/clicks 7d (+5 per open, +15 per click).
+  - Landing visits 7d (+20 per visit).
+  - Wishlist adds 14d (+10 per add).
+  - Chat replies <1h (+30).
+  - Form submit property detail (+40).
+- `[14.B.6.2]` Tabla `intent_signals_log` audit trail + cron rollup horario a `contactos.intent_score` + `intent_tier` (cold/warm/hot/burning).
+- `[14.B.6.3]` Widget M01 Dashboard "Hot Leads" priority queue (top 10 por intent_score >70).
+- `[14.B.6.4]` Trigger notif tipo `new_hot_lead` cuando contacto cruza threshold 70 → asesor asignado.
+
+**Criterio de done del módulo:**
+- [ ] Contacto simulado 3 opens + 1 click → intent_score ≥20.
+- [ ] Widget top 10 ordenado correctamente.
+
+#### MÓDULO 14.B.7 — AI Dialer + AI Scribe (GC-30)
+
+**Pasos:**
+- `[14.B.7.1]` Integración Twilio Voice (FASE 22 Twilio base) + widget click-to-call en ficha contacto/operación.
+- `[14.B.7.2]` Llamada se graba (con consent disclaimer recorded) → post-call upload a Storage `call-recordings/` (cifrado).
+- `[14.B.7.3]` Worker `call_transcription_worker` usa Whisper (OpenAI) para ES-MX transcript → guarda en `calls` tabla (id, operation_id, contact_id, recording_url, transcript, duration_s, status).
+- `[14.B.7.4]` AI Scribe: Claude Sonnet analiza transcript → extrae `{ next_actions[], key_objections[], sentiment, summary, suggested_tasks[] }` → crea tareas sugeridas (user aprueba).
+- `[14.B.7.5]` Feature gated `feature.ai_dialer` (pro+, cost tracked per minuto grabación).
+
+**Criterio de done del módulo:**
+- [ ] Llamada test graba + transcribe en <2min post-call.
+- [ ] Scribe genera ≥1 next action coherente.
+
+#### MÓDULO 14.B.8 — QR Check-in visita (GC-42)
+
+**Pasos:**
+- `[14.B.8.1]` Al crear `visitas_programadas` → sistema genera `visit_qr_token` único (JWT 24h vida). URL `dmx.to/v/<token>`.
+- `[14.B.8.2]` Scan QR (asesor Y comprador) desde mobile → endpoint `/api/visit/checkin` registra geolocation + timestamp + user_id. Marca `visitas_programadas.arrived_at`.
+- `[14.B.8.3]` Si ambos scans dentro de 15min y geolocations match (±200m del proyecto) → `status='confirmed_arrival'`.
+- `[14.B.8.4]` No-show detection: si visit time +30min sin check-in → trigger notif asesor + contador de no-shows en contacto.
+
+**Criterio de done del módulo:**
+- [ ] QR scan ambos flancos → arrived_at registrado.
+- [ ] No-show dispara notif.
+
+#### MÓDULO 14.B.9 — Cross-sell Detector (GC-52)
+
+**Pasos:**
+- `[14.B.9.1]` Cron `cross_sell_detector_daily` analiza contactos post-compra:
+  - Inversor compró departamento → sugerir 2ª unidad misma zona / proyecto hermano.
+  - Familia compró primera casa → sugerir seguro hogar (partner).
+  - Dev con 3 proyectos exitosos → sugerir feasibility para zona nueva.
+- `[14.B.9.2]` Output: `cross_sell_opportunities` tabla (contact_id, type, rationale, expires_at, acted_on).
+- `[14.B.9.3]` Widget M07 Operaciones "Cross-sell oportunidades" top 5.
+
+**Criterio de done del módulo:**
+- [ ] Op cerrada inversor → oportunidad 2ª unidad creada.
+- [ ] Widget muestra rationale legible.
+
+#### MÓDULO 14.B.10 — Offline visits + voice notes post-visita (GC-39)
+
+**Pasos:**
+- `[14.B.10.1]` PWA (FASE 25 base) soporta flujo offline: asesor en visita sin señal captura fotos + nota de voz en Service Worker IndexedDB.
+- `[14.B.10.2]` Componente mobile `<VoiceNotePostVisit>`: record (max 5 min) → al volver online, sube blob + llama `/api/voice-notes/transcribe` (Whisper).
+- `[14.B.10.3]` Transcript + Claude Haiku analiza → auto-llena `interaction_feedback` (rating 1-5, tags, texto limpio, objeciones, interest_level).
+- `[14.B.10.4]` Timeline contacto incluye nota + audio player + transcript.
+- `[14.B.10.5]` Sync queue visible en UI con status "Pendiente de sync".
+
+**Criterio de done del módulo:**
+- [ ] Voice note offline → sync + transcribe al reconectar.
+- [ ] Feedback form auto-llenado editable.
+
 ### BLOQUE 14.C — M08 Marketing
 
 #### MÓDULO 14.C.1 — Landing pages + QR + templates WhatsApp + folders
@@ -192,6 +287,18 @@ Crítico:
 
 **Criterio de done del módulo:**
 - [ ] Publicar a Inmuebles24 con credencial asesor → success en <2 min.
+
+#### MÓDULO 14.C.5 — Multi-channel blast (GC-35)
+
+**Pasos:**
+- `[14.C.5.1]` UI `/marketing/blast` wizard: Paso 1 segmento (filtros sobre `contactos`), Paso 2 canales (WA + email + SMS checkboxes), Paso 3 mensaje por canal (WA template / email React Email / SMS 160char) con variables `{first_name}`, `{zone}`, `{project}`, `{ie_score}`.
+- `[14.C.5.2]` Preview por canal + estimación alcance + costo (WA $0.005/msg, SMS $0.045/msg, email $0).
+- `[14.C.5.3]` Send respeta opt-out, quiet hours (FASE 22), rate limits Meta/Twilio, y feature cap `feature.blast_max_contacts_month` (starter 100, pro 1000, enterprise ilimitado).
+- `[14.C.5.4]` Tracking: `blast_campaigns` tabla con métricas opens/clicks/replies per channel.
+
+**Criterio de done del módulo:**
+- [ ] Blast a 10 contactos test llega por 3 canales.
+- [ ] Metrics visibles <5min.
 
 ### BLOQUE 14.D — M09 Estadísticas (2 superficies + pedagogía)
 
@@ -244,6 +351,20 @@ Crítico:
 **Criterio de done del módulo:**
 - [ ] Cambiar rango fechas actualiza KPIs sin full page reload.
 - [ ] Comparativa equipo respeta RLS (solo permissions.stats.view_team).
+
+#### MÓDULO 14.D.5 — Commission Forecast 3-6 meses (GC-56)
+
+**Pasos:**
+- `[14.D.5.1]` Service `features/estadisticas/lib/commission-forecast.ts`: por cada `busqueda`/`operacion` abierta calcula `expected_value = valor_estimado × comision_pct × probability(etapa)` donde probability viene de histórico asesor:
+  - propuesta 20%, oferta_aceptada 55%, escritura 85%, pagando 95%.
+- `[14.D.5.2]` Agregación por mes próximos 6 (basado en `fecha_cierre_estimada`).
+- `[14.D.5.3]` UI `/estadisticas?tab=forecast` con chart barras apiladas (confirmed + probable + stretch) + tabla desglosada.
+- `[14.D.5.4]` Escenarios: optimista (prob×1.3), base, pesimista (prob×0.7). Toggle.
+- `[14.D.5.5]` Export PDF para compartir con manager / planeación personal.
+
+**Criterio de done del módulo:**
+- [ ] Forecast 6m renderiza coherente con pipeline real.
+- [ ] Escenarios alternables sin reload.
 
 ### BLOQUE 14.E — Gamification + Discover Weekly + Wrapped (M01+M09)
 
@@ -327,9 +448,39 @@ Crítico:
 - [ ] Tag git: `fase-14-complete`.
 - [ ] Documentación: `docs/04_MODULOS/M06..M09_*.md` reflejan estado "implementado".
 
+## Features añadidas por GCs (delta v2)
+
+- **F-14-14** Sequence Engine multi-channel (GC-28) con canvas visual + branching.
+- **F-14-15** Intent Signals hot leads (GC-29) con score 0-100 + tier.
+- **F-14-16** AI Dialer + AI Scribe (GC-30) con Twilio Voice + Whisper + Claude extract.
+- **F-14-17** QR Check-in visita (GC-42) con geolocation match + no-show.
+- **F-14-18** Cross-sell Detector cron (GC-52) con 3 heurísticas base.
+- **F-14-19** Offline visits + voice notes post-visita (GC-39) PWA + Whisper.
+- **F-14-20** Multi-channel blast (GC-35) con segmentación + opt-out + costo preview.
+- **F-14-21** Commission Forecast 3-6 meses (GC-56) con 3 escenarios + export PDF.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-14-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 [FASE 15 — Portal Desarrollador (M10-M15)](./FASE_15_PORTAL_DESARROLLADOR.md)
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

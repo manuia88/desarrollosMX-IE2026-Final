@@ -36,6 +36,13 @@ Cross-references:
 - Catálogo 03.10 (features registry detalle).
 - Catálogo 03.11 (7 productos B2B detalle).
 
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-1 | DMX API as Product (foundation H1 → FASE 30 H2 bridge) | H1 entrega infraestructura API externa completa + página `/developers` + OpenAPI; FASE 30 H2 formaliza go-to-market | Módulo 23.N.1 (nuevo) |
+| GC-22 | DMX Insights (newsletter + podcast revenue stream) | H2 pin: newsletter signup + content strategy anchored in /indices + metodología | Módulo 23.N.2 (nuevo) |
+
 ## Bloques
 
 ### BLOQUE 23.A — Schema BD (plans + subscriptions + billing + api_keys)
@@ -560,6 +567,39 @@ Cross-references:
 **Criterio de done del módulo:**
 - [ ] User CO checkout MP → subscription creada + billing_history alineada.
 
+### BLOQUE 23.N — Game-changer bridges
+
+#### MÓDULO 23.N.1 — API H1 foundation + FASE 30 H2 bridge (GC-1)
+
+**Pasos:**
+- `[23.N.1.1]` Publicar página pública `/developers` (ya apuntada por navbar landing FASE 21): secciones Quickstart, API Reference (link a `/api/playground`), Pricing (link a /pricing tab API), Use cases (bancos, aseguradoras, retailers), Changelog, Status page link, Contact sales.
+- `[23.N.1.2]` Exponer el `openapi.json` generado en BLOQUE 23.I con versión `v1` y marcar `info.x-product = "DMX API v1"`.
+- `[23.N.1.3]` Developer onboarding wizard: signup → plan selection → first key generated → primer request example → success state (ready para FASE 30 formalizar DX + SDKs).
+- `[23.N.1.4]` "H2 stub" explicit: secciones `/developers/sdks` (link TS + Python coming H2), `/developers/webhooks-as-code` (coming H2), `/developers/marketplace` (integraciones terceros coming H2) → banner "Próximamente FASE 30" + formulario waitlist.
+- `[23.N.1.5]` PostHog tracking: `developer_portal_viewed`, `api_key_created`, `first_api_request` → funnel analysis.
+
+**Criterio de done del módulo:**
+- [ ] /developers publicada y accesible sin auth.
+- [ ] OpenAPI spec v1 consumable con curl/Postman.
+- [ ] Waitlist H2 funcional.
+
+#### MÓDULO 23.N.2 — DMX Insights H2 pin (GC-22)
+
+**Pasos:**
+- `[23.N.2.1]` Crear sección pública `/insights` (stub H1 con teaser + newsletter signup + 3 artículos sample; full editorial H2):
+  - Newsletter signup (reusa `newsletter_subscriptions` FASE 21).
+  - Content strategy: "Monthly MX Real Estate Pulse" (basado en `/indices`), "Zone Deep Dives" (Del Valle Q1, Polanco Q2), "IE Insights" (scores behind-the-scenes).
+  - Podcast placeholder (H2): feed placeholder + "Suscríbete en Spotify/Apple" links + RSS.
+- `[23.N.2.2]` Monetización prevista H2: sponsored slots en newsletter (devs anunciando lanzamientos), podcast ads, paid premium tier ($99 MXN/mes) con reports trimestrales profundos.
+- `[23.N.2.3]` H1 solo captura: newsletter opt-in + topic preferences (survey al signup: "¿Qué contenido quieres? [zonas, índices, devs, inversión]").
+- `[23.N.2.4]` Cross-promoción: CTA "Suscríbete a DMX Insights" en emails transaccionales (weekly briefing, discover weekly, annual wrapped).
+- `[23.N.2.5]` Feature flag `insights.public_page` ON H1, `insights.premium_tier` OFF H1.
+
+**Criterio de done del módulo:**
+- [ ] /insights page live con newsletter signup funcional.
+- [ ] Preferences survey persiste en `newsletter_subscribers.interest_areas`.
+- [ ] CTA cross-promoción en ≥2 emails existentes.
+
 ### BLOQUE 23.M — ADR-008 compliance checks
 
 #### MÓDULO 23.M.1 — Validaciones finales
@@ -594,9 +634,33 @@ Cross-references:
 - [ ] PostHog events: `subscription_created`, `subscription_upgraded`, `subscription_canceled`, `api_request`, `api_ratelimit_hit`, `feature_gate_denied`.
 - [ ] Tag git `fase-23-complete`.
 
+## Features añadidas por GCs (delta v2)
+
+- **F-23-30** Developers portal público `/developers` (GC-1 foundation H1 → FASE 30 H2 bridge) con OpenAPI + quickstart + waitlist.
+- **F-23-31** DMX Insights H2 pin (GC-22): `/insights` teaser + newsletter + content strategy stub + cross-promoción.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-23-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 FASE 24 — Observabilidad + SRE (Sentry + PostHog + logs + SLO/SLI + runbooks + DR).
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent F) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)
