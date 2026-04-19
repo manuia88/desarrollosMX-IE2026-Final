@@ -6138,6 +6138,106 @@ export type Database = {
           },
         ]
       }
+      str_events_calendar: {
+        Row: {
+          country_code: string
+          created_at: string
+          date_from: string
+          date_to: string
+          event_name: string
+          id: string
+          impact_multiplier: number
+          market_id: string | null
+          meta: Json
+          notes: string | null
+          source: string
+          zone_id: string | null
+        }
+        Insert: {
+          country_code: string
+          created_at?: string
+          date_from: string
+          date_to: string
+          event_name: string
+          id?: string
+          impact_multiplier: number
+          market_id?: string | null
+          meta?: Json
+          notes?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Update: {
+          country_code?: string
+          created_at?: string
+          date_from?: string
+          date_to?: string
+          event_name?: string
+          id?: string
+          impact_multiplier?: number
+          market_id?: string | null
+          meta?: Json
+          notes?: string | null
+          source?: string
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_events_calendar_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "str_markets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      str_pricing_overrides: {
+        Row: {
+          created_at: string
+          created_by: string
+          currency: string
+          date: string
+          id: string
+          listing_id: string
+          meta: Json
+          override_price_minor: number
+          platform: string
+          reason: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          currency: string
+          date: string
+          id?: string
+          listing_id: string
+          meta?: Json
+          override_price_minor: number
+          platform: string
+          reason?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          currency?: string
+          date?: string
+          id?: string
+          listing_id?: string
+          meta?: Json
+          override_price_minor?: number
+          platform?: string
+          reason?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_pricing_overrides_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       str_host_migrations: {
         Row: {
           confidence: number
