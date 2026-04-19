@@ -90,6 +90,8 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "picocolors": "^1.1.1",
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "react-dom": "^19.2.5",
     "supabase": "^2.92.1",
     "tailwindcss": "^4.2.2",
