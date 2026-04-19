@@ -6,6 +6,7 @@ import { aiRouter } from '@/features/ia-generativa/routes/ai';
 import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { marketRouter } from '@/features/market/routes/market';
 import { scianRouter } from '@/features/scian/routes/scian';
+import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
 import { publicProcedure, router } from './init';
 
 export const appRouter = router({
@@ -21,6 +22,7 @@ export const appRouter = router({
   mfa: mfaRouter,
   roleRequest: roleRequestRouter,
   scian: scianRouter,
+  strScores: strScoresRouter,
 });
 
 export type AppRouter = typeof appRouter;
