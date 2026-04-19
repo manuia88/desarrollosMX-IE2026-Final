@@ -8,6 +8,7 @@ import { marketRouter } from '@/features/market/routes/market';
 import { scianRouter } from '@/features/scian/routes/scian';
 import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
 import { envRouter } from '@/features/str-intelligence/routes/env';
+import { hostMigrationsRouter } from '@/features/str-intelligence/routes/host-migrations';
 import { strHostsRouter } from '@/features/str-intelligence/routes/hosts';
 import { invisibleHotelsRouter } from '@/features/str-intelligence/routes/invisible-hotels';
 import { ltrStrConnectionRouter } from '@/features/str-intelligence/routes/ltr-connection';
@@ -33,6 +34,7 @@ export const appRouter = router({
   scian: scianRouter,
   ltrStrConnection: ltrStrConnectionRouter,
   strBreakeven: strBreakevenRouter,
+  hostMigrations: hostMigrationsRouter,
   strHosts: strHostsRouter,
   env: envRouter,
   invisibleHotels: invisibleHotelsRouter,

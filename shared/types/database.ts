@@ -6138,6 +6138,68 @@ export type Database = {
           },
         ]
       }
+      str_host_migrations: {
+        Row: {
+          confidence: number
+          first_detected_at: string
+          from_host_id: string | null
+          from_listing_id: string
+          from_platform: string
+          id: string
+          last_verified_at: string
+          market_id: string | null
+          match_features: Json
+          meta: Json
+          signature_hash: string
+          to_host_id: string | null
+          to_listing_id: string
+          to_platform: string
+          zone_id: string | null
+        }
+        Insert: {
+          confidence: number
+          first_detected_at?: string
+          from_host_id?: string | null
+          from_listing_id: string
+          from_platform: string
+          id?: string
+          last_verified_at?: string
+          market_id?: string | null
+          match_features?: Json
+          meta?: Json
+          signature_hash: string
+          to_host_id?: string | null
+          to_listing_id: string
+          to_platform: string
+          zone_id?: string | null
+        }
+        Update: {
+          confidence?: number
+          first_detected_at?: string
+          from_host_id?: string | null
+          from_listing_id?: string
+          from_platform?: string
+          id?: string
+          last_verified_at?: string
+          market_id?: string | null
+          match_features?: Json
+          meta?: Json
+          signature_hash?: string
+          to_host_id?: string | null
+          to_listing_id?: string
+          to_platform?: string
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_host_migrations_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "str_markets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       str_invisible_hotels: {
         Row: {
           bounding_radius_m: number
