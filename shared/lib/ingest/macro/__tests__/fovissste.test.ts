@@ -310,8 +310,28 @@ describe('extractFovisstePdf', () => {
     ).rejects.toThrow('fovissste_pdf_empty_text');
   });
 
-  it.skip('integración real con pdf-parse — skipped (paquete no instalado en H1)', async () => {
-    // Cuando pdf-parse se agregue al stack, desblockear y probar contra fixture.
+  it('defaultPdfParser: canonical not_installed error ya no se lanza con pdf-parse instalado', async () => {
+    let err: Error | null = null;
+    try {
+      await extractFovisstePdf(Buffer.from('not-a-pdf'), {
+        apiKey: 'test',
+        fetchImpl: mockFetchOk(validPdfExtract),
+      });
+    } catch (e) {
+      err = e as Error;
+    }
+    expect(err).not.toBeNull();
+    expect(err?.message).not.toBe('fovissste_pdf_parser_not_installed');
+  });
+
+  it('defaultPdfParser: pipeline end-to-end con PDF válido real (pdf-parse + LLM mock)', async () => {
+    const pdfBytes = buildMinimalPdf('FOVISSSTE Informe Trimestral 2026 T1');
+    const result = await extractFovisstePdf(pdfBytes, {
+      apiKey: 'test',
+      fetchImpl: mockFetchOk(validPdfExtract),
+    });
+    expect(result.report_period).toBe('2026-T1');
+    expect(result.creditos_otorgados_nacional.value).toBe(12345);
   });
 });
 
@@ -340,19 +360,11 @@ describe('fovisssteDriver', () => {
     }
   });
 
-  it('fetch dispatches kind=pdf → extractFovisstePdf (via injected fetch + parser)', async () => {
-    // Para probar el dispatch PDF path sin romper process.env, inyectamos a
-    // través del driver fetch directamente vía un wrapper: extractFovisstePdf
-    // consulta process.env.OPENAI_API_KEY. Seteamos temporal.
+  it('fetch dispatches kind=pdf → extractFovisstePdf (pipeline completo con PDF real)', async () => {
     const orig = process.env.OPENAI_API_KEY;
     process.env.OPENAI_API_KEY = 'sk-test';
-    // Mock global fetch temporal.
     const origFetch = globalThis.fetch;
     globalThis.fetch = mockFetchOk(validPdfExtract);
-    // pdf-parse no instalado → inyectamos vía monkey-patch del default parser:
-    // el driver llama extractFovisstePdf sin options.pdfParserImpl, por lo
-    // que caerá en defaultPdfParser y throwará. Este test verifica que el
-    // dispatch tipa correcto; confirmamos el error canónico.
     const ctx = {
       runId: 'r',
       source: 'fovissste',
@@ -361,12 +373,18 @@ describe('fovisssteDriver', () => {
       triggeredBy: null,
       startedAt: new Date(),
     };
-    await expect(
-      fovisssteDriver.fetch(ctx, { kind: 'pdf', buffer: Buffer.from('pdf-bytes') }),
-    ).rejects.toThrow('fovissste_pdf_parser_not_installed');
-    globalThis.fetch = origFetch;
-    if (orig !== undefined) process.env.OPENAI_API_KEY = orig;
-    else delete process.env.OPENAI_API_KEY;
+    try {
+      const pdfBytes = buildMinimalPdf('FOVISSSTE Driver Dispatch 2026');
+      const payload = await fovisssteDriver.fetch(ctx, { kind: 'pdf', buffer: pdfBytes });
+      expect(payload.kind).toBe('pdf');
+      if (payload.kind === 'pdf') {
+        expect(payload.extract.report_period).toBe('2026-T1');
+      }
+    } finally {
+      globalThis.fetch = origFetch;
+      if (orig !== undefined) process.env.OPENAI_API_KEY = orig;
+      else delete process.env.OPENAI_API_KEY;
+    }
   });
 
   it('fetch rechaza buffer ausente', async () => {
@@ -427,3 +445,32 @@ describe('fovisssteDriver', () => {
     expect(rows.every((r) => r.source_span.kind === 'page_quote')).toBe(true);
   });
 });
+
+function buildMinimalPdf(text: string): Buffer {
+  const safeText = text.replace(/[()\\]/g, (ch) => `\\${ch}`);
+  const content = `BT /F1 12 Tf 100 700 Td (${safeText}) Tj ET\n`;
+  const contentLen = Buffer.byteLength(content, 'utf8');
+  const stream = `<< /Length ${contentLen} >>\nstream\n${content}endstream\n`;
+  const header = '%PDF-1.4\n%\xE2\xE3\xCF\xD3\n';
+  const objects = [
+    '1 0 obj\n<</Type/Catalog/Pages 2 0 R>>\nendobj\n',
+    '2 0 obj\n<</Type/Pages/Kids[3 0 R]/Count 1/MediaBox[0 0 612 792]>>\nendobj\n',
+    '3 0 obj\n<</Type/Page/Parent 2 0 R/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>\nendobj\n',
+    '4 0 obj\n<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>\nendobj\n',
+    `5 0 obj\n${stream}endobj\n`,
+  ];
+  const offsets: number[] = [];
+  let cursor = Buffer.byteLength(header, 'binary');
+  for (const obj of objects) {
+    offsets.push(cursor);
+    cursor += Buffer.byteLength(obj, 'binary');
+  }
+  const xrefOffset = cursor;
+  const xrefEntries = offsets.map((o) => `${String(o).padStart(10, '0')} 00000 n \n`).join('');
+  const trailer = `xref\n0 6\n0000000000 65535 f \n${xrefEntries}trailer\n<</Size 6/Root 1 0 R>>\nstartxref\n${xrefOffset}\n%%EOF\n`;
+  return Buffer.concat([
+    Buffer.from(header, 'binary'),
+    ...objects.map((o) => Buffer.from(o, 'binary')),
+    Buffer.from(trailer, 'binary'),
+  ]);
+}

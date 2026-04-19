@@ -503,25 +503,40 @@ function extractRowsFromFovisstePdfExtract(extract: FovisssteExtract): Fovissste
   return out;
 }
 
-// pdf-parse no está instalado (fuera del stack H1 cerrado). La función real
-// throwea fovissste_pdf_parser_not_installed. Los tests inyectan pdfParserImpl
-// para simular extracción sin requerir la librería.
+// pdf-parse está en el stack H1 (docs/00_FOUNDATION/00.2_STACK). Dynamic import
+// para mantener el test suite sin el peso del PDF runtime cuando los tests usan
+// pdfParserImpl mock. Si el paquete se desinstala → fovissste_pdf_parser_not_installed;
+// si el PDF es inválido → el error real de pdf-parse propaga sin máscara.
 export type PdfParserImpl = (buffer: Buffer) => Promise<{ text: string; numpages?: number }>;
 
-async function defaultPdfParser(_buffer: Buffer): Promise<{ text: string; numpages?: number }> {
+async function defaultPdfParser(buffer: Buffer): Promise<{ text: string; numpages?: number }> {
+  let mod: unknown;
   try {
-    // biome-ignore lint/suspicious/noExplicitAny: dynamic optional dep
-    const mod = (await import('pdf-parse' as string).catch(() => null)) as any;
-    if (!mod) throw new Error('fovissste_pdf_parser_not_installed');
-    const parser = (mod.default ?? mod) as (b: Buffer) => Promise<{
-      text: string;
-      numpages?: number;
-    }>;
-    return await parser(_buffer);
-  } catch (e) {
-    if (e instanceof Error && e.message === 'fovissste_pdf_parser_not_installed') throw e;
+    mod = await import('pdf-parse' as string);
+  } catch {
     throw new Error('fovissste_pdf_parser_not_installed');
   }
+  const PDFParseCtor = (mod as { PDFParse?: new (opts: { data: Buffer }) => PdfParseInstance })
+    .PDFParse;
+  if (typeof PDFParseCtor !== 'function') throw new Error('fovissste_pdf_parser_not_installed');
+  const instance = new PDFParseCtor({ data: buffer });
+  try {
+    const result = await instance.getText();
+    const pages = result?.pages ?? [];
+    const text = pages.map((p) => p.text ?? '').join('\n');
+    return { text, numpages: pages.length };
+  } finally {
+    try {
+      await instance.destroy?.();
+    } catch {
+      /* best-effort */
+    }
+  }
+}
+
+interface PdfParseInstance {
+  getText(): Promise<{ pages?: { text?: string }[] }>;
+  destroy?(): Promise<void>;
 }
 
 export interface ExtractFovisstePdfOptions {

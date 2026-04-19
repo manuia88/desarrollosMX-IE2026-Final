@@ -206,10 +206,68 @@ describe('extractBbvaPdf', () => {
     ).rejects.toThrow('bbva_llm_invalid_json');
   });
 
-  it.skip('integración real con pdf-parse — skipped (paquete no instalado en H1)', async () => {
-    // Cuando pdf-parse se agregue al stack, desblockear y probar contra fixture.
+  it('defaultPdfParser: canonical not_installed error ya no se lanza con pdf-parse instalado', async () => {
+    // pdf-parse @ 2.4.5 está en deps (docs/00_FOUNDATION/00.2_STACK). Al pasar
+    // bytes que no son un PDF válido, el parser real debe rechazar con el
+    // error propio de pdf-parse — NO con el código canónico bbva_pdf_parser_not_installed.
+    let err: Error | null = null;
+    try {
+      await extractBbvaPdf(Buffer.from('not-a-pdf'), {
+        apiKey: 'test',
+        fetchImpl: mockFetchOk(validExtract),
+      });
+    } catch (e) {
+      err = e as Error;
+    }
+    expect(err).not.toBeNull();
+    expect(err?.message).not.toBe('bbva_pdf_parser_not_installed');
+  });
+
+  it('defaultPdfParser: pipeline end-to-end con PDF válido real (pdf-parse + LLM mock)', async () => {
+    // Fixture: PDF construido con pdfkit-like bytes mínimo. Prueba que pdf-parse
+    // extrae texto > 0 y el pipeline default (sin pdfParserImpl mock) completa.
+    const pdfBytes = buildMinimalPdf('BBVA Research Situacion Inmobiliaria 2026');
+    const result = await extractBbvaPdf(pdfBytes, {
+      apiKey: 'test',
+      fetchImpl: mockFetchOk(validExtract),
+    });
+    expect(result.report_period).toBe('2026-03');
+    expect(result.forecast_housing_prices_yoy.value).toBe(5.4);
   });
 });
+
+function buildMinimalPdf(text: string): Buffer {
+  const safeText = text.replace(/[()\\]/g, (ch) => `\\${ch}`);
+  const content = `BT /F1 12 Tf 100 700 Td (${safeText}) Tj ET\n`;
+  const contentLen = Buffer.byteLength(content, 'utf8');
+  const stream = `<< /Length ${contentLen} >>\nstream\n${content}endstream\n`;
+
+  const header = '%PDF-1.4\n%\xE2\xE3\xCF\xD3\n';
+  const objects = [
+    '1 0 obj\n<</Type/Catalog/Pages 2 0 R>>\nendobj\n',
+    '2 0 obj\n<</Type/Pages/Kids[3 0 R]/Count 1/MediaBox[0 0 612 792]>>\nendobj\n',
+    '3 0 obj\n<</Type/Page/Parent 2 0 R/Resources<</Font<</F1 4 0 R>>>>/Contents 5 0 R>>\nendobj\n',
+    '4 0 obj\n<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>\nendobj\n',
+    `5 0 obj\n${stream}endobj\n`,
+  ];
+
+  const offsets: number[] = [];
+  let cursor = Buffer.byteLength(header, 'binary');
+  for (const obj of objects) {
+    offsets.push(cursor);
+    cursor += Buffer.byteLength(obj, 'binary');
+  }
+  const xrefOffset = cursor;
+
+  const xrefEntries = offsets.map((o) => `${String(o).padStart(10, '0')} 00000 n \n`).join('');
+  const trailer = `xref\n0 6\n0000000000 65535 f \n${xrefEntries}trailer\n<</Size 6/Root 1 0 R>>\nstartxref\n${xrefOffset}\n%%EOF\n`;
+
+  return Buffer.concat([
+    Buffer.from(header, 'binary'),
+    ...objects.map((o) => Buffer.from(o, 'binary')),
+    Buffer.from(trailer, 'binary'),
+  ]);
+}
 
 describe('extractRowsFromBbvaExtract', () => {
   it('expande 3 metrics → rows con period_start=YYYY-MM-01', () => {
