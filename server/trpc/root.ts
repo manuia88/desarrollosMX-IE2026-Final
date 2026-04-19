@@ -11,6 +11,7 @@ import { envRouter } from '@/features/str-intelligence/routes/env';
 import { strHostsRouter } from '@/features/str-intelligence/routes/hosts';
 import { invisibleHotelsRouter } from '@/features/str-intelligence/routes/invisible-hotels';
 import { ltrStrConnectionRouter } from '@/features/str-intelligence/routes/ltr-connection';
+import { nomadRouter } from '@/features/str-intelligence/routes/nomad';
 import { photoCvRouter } from '@/features/str-intelligence/routes/photo-cv';
 import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
 import { strViabilityRouter } from '@/features/str-intelligence/routes/viability';
@@ -35,6 +36,7 @@ export const appRouter = router({
   strHosts: strHostsRouter,
   env: envRouter,
   invisibleHotels: invisibleHotelsRouter,
+  nomad: nomadRouter,
   photoCv: photoCvRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
