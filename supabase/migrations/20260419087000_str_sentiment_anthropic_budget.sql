@@ -83,8 +83,8 @@ as $$
       topics,
       exp(
         -ln(2)
-        * extract(day from (current_date - posted_at))
-        / nullif(p_decay_half_life_days, 0)
+        * (current_date - posted_at)::numeric
+        / nullif(p_decay_half_life_days, 0)::numeric
       ) as weight
     from reviews_in_scope
   ),

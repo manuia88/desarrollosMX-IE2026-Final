@@ -95,31 +95,45 @@ as $$
       and geom is not null
       and status = 'active'
   ),
-  by_host as (
+  centroids as (
     select
       host_id,
       market_id,
       count(*) as listings_count,
       st_centroid(st_collect(geom)) as centroid,
-      array_agg(listing_id) as listing_ids,
-      coalesce(
-        max(st_distance(geom::geography, st_centroid(st_collect(geom)) over (partition by host_id, market_id)::geography))::int,
-        0
-      ) as max_radius_m
+      array_agg(listing_id) as listing_ids
     from active_listings
     group by host_id, market_id
+  ),
+  with_radius as (
+    select
+      c.host_id,
+      c.market_id,
+      c.listings_count,
+      c.centroid,
+      c.listing_ids,
+      coalesce(
+        (
+          select max(st_distance(al.geom::geography, c.centroid::geography))::int
+          from active_listings al
+          where al.host_id = c.host_id
+            and al.market_id is not distinct from c.market_id
+        ),
+        0
+      ) as max_radius_m
+    from centroids c
   )
   select
-    by_host.host_id,
-    by_host.market_id,
-    by_host.listings_count::int,
-    st_x(by_host.centroid) as center_lon,
-    st_y(by_host.centroid) as center_lat,
-    by_host.max_radius_m,
-    by_host.listing_ids
-  from by_host
-  where by_host.listings_count >= p_min_listings
-    and by_host.max_radius_m <= p_max_radius_m;
+    with_radius.host_id,
+    with_radius.market_id,
+    with_radius.listings_count::int,
+    st_x(with_radius.centroid) as center_lon,
+    st_y(with_radius.centroid) as center_lat,
+    with_radius.max_radius_m,
+    with_radius.listing_ids
+  from with_radius
+  where with_radius.listings_count >= p_min_listings
+    and with_radius.max_radius_m <= p_max_radius_m;
 $$;
 
 comment on function public.detect_invisible_hotel_candidates(char, integer, integer) is

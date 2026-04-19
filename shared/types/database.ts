@@ -6138,54 +6138,6 @@ export type Database = {
           },
         ]
       }
-      str_reports: {
-        Row: {
-          customer_id: string | null
-          data_payload: Json | null
-          error_message: string | null
-          expires_at: string | null
-          generated_at: string | null
-          id: string
-          invoice_ref: string | null
-          meta: Json
-          pdf_url: string | null
-          requested_at: string
-          scope: Json
-          status: string
-          tier: number
-        }
-        Insert: {
-          customer_id?: string | null
-          data_payload?: Json | null
-          error_message?: string | null
-          expires_at?: string | null
-          generated_at?: string | null
-          id?: string
-          invoice_ref?: string | null
-          meta?: Json
-          pdf_url?: string | null
-          requested_at?: string
-          scope: Json
-          status?: string
-          tier: number
-        }
-        Update: {
-          customer_id?: string | null
-          data_payload?: Json | null
-          error_message?: string | null
-          expires_at?: string | null
-          generated_at?: string | null
-          id?: string
-          invoice_ref?: string | null
-          meta?: Json
-          pdf_url?: string | null
-          requested_at?: string
-          scope?: Json
-          status?: string
-          tier?: number
-        }
-        Relationships: []
-      }
       str_events_calendar: {
         Row: {
           country_code: string
@@ -6231,58 +6183,25 @@ export type Database = {
         }
         Relationships: [
           {
+            foreignKeyName: "str_events_calendar_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
             foreignKeyName: "str_events_calendar_market_id_fkey"
             columns: ["market_id"]
             isOneToOne: false
             referencedRelation: "str_markets"
             referencedColumns: ["id"]
           },
-        ]
-      }
-      str_pricing_overrides: {
-        Row: {
-          created_at: string
-          created_by: string
-          currency: string
-          date: string
-          id: string
-          listing_id: string
-          meta: Json
-          override_price_minor: number
-          platform: string
-          reason: string | null
-        }
-        Insert: {
-          created_at?: string
-          created_by: string
-          currency: string
-          date: string
-          id?: string
-          listing_id: string
-          meta?: Json
-          override_price_minor: number
-          platform: string
-          reason?: string | null
-        }
-        Update: {
-          created_at?: string
-          created_by?: string
-          currency?: string
-          date?: string
-          id?: string
-          listing_id?: string
-          meta?: Json
-          override_price_minor?: number
-          platform?: string
-          reason?: string | null
-        }
-        Relationships: [
           {
-            foreignKeyName: "str_pricing_overrides_currency_fkey"
-            columns: ["currency"]
+            foreignKeyName: "str_events_calendar_market_id_fkey"
+            columns: ["market_id"]
             isOneToOne: false
-            referencedRelation: "currencies"
-            referencedColumns: ["code"]
+            referencedRelation: "v_str_market_monthly"
+            referencedColumns: ["market_id"]
           },
         ]
       }
@@ -6345,6 +6264,75 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "str_markets"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_host_migrations_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "v_str_market_monthly"
+            referencedColumns: ["market_id"]
+          },
+        ]
+      }
+      str_hosts: {
+        Row: {
+          avg_occupancy_rate: number | null
+          avg_rating: number | null
+          avg_reviews_count: number | null
+          churn_risk: number | null
+          country_code: string
+          display_name: string | null
+          first_seen_at: string
+          host_id: string
+          last_updated_at: string
+          listings_count: number
+          meta: Json
+          retention_12m_rate: number | null
+          super_host_score: number | null
+          superhost_flag: boolean
+          tier: string | null
+        }
+        Insert: {
+          avg_occupancy_rate?: number | null
+          avg_rating?: number | null
+          avg_reviews_count?: number | null
+          churn_risk?: number | null
+          country_code: string
+          display_name?: string | null
+          first_seen_at?: string
+          host_id: string
+          last_updated_at?: string
+          listings_count?: number
+          meta?: Json
+          retention_12m_rate?: number | null
+          super_host_score?: number | null
+          superhost_flag?: boolean
+          tier?: string | null
+        }
+        Update: {
+          avg_occupancy_rate?: number | null
+          avg_rating?: number | null
+          avg_reviews_count?: number | null
+          churn_risk?: number | null
+          country_code?: string
+          display_name?: string | null
+          first_seen_at?: string
+          host_id?: string
+          last_updated_at?: string
+          listings_count?: number
+          meta?: Json
+          retention_12m_rate?: number | null
+          super_host_score?: number | null
+          superhost_flag?: boolean
+          tier?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_hosts_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
           },
         ]
       }
@@ -6415,73 +6403,32 @@ export type Database = {
             referencedColumns: ["code"]
           },
           {
+            foreignKeyName: "str_invisible_hotels_manual_reviewed_by_fkey"
+            columns: ["manual_reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_invisible_hotels_manual_reviewed_by_fkey"
+            columns: ["manual_reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "str_invisible_hotels_market_id_fkey"
             columns: ["market_id"]
             isOneToOne: false
             referencedRelation: "str_markets"
             referencedColumns: ["id"]
           },
-        ]
-      }
-      str_hosts: {
-        Row: {
-          avg_occupancy_rate: number | null
-          avg_rating: number | null
-          avg_reviews_count: number | null
-          churn_risk: number | null
-          country_code: string
-          display_name: string | null
-          first_seen_at: string
-          host_id: string
-          last_updated_at: string
-          listings_count: number
-          meta: Json
-          retention_12m_rate: number | null
-          super_host_score: number | null
-          superhost_flag: boolean
-          tier: string | null
-        }
-        Insert: {
-          avg_occupancy_rate?: number | null
-          avg_rating?: number | null
-          avg_reviews_count?: number | null
-          churn_risk?: number | null
-          country_code: string
-          display_name?: string | null
-          first_seen_at?: string
-          host_id: string
-          last_updated_at?: string
-          listings_count?: number
-          meta?: Json
-          retention_12m_rate?: number | null
-          super_host_score?: number | null
-          superhost_flag?: boolean
-          tier?: string | null
-        }
-        Update: {
-          avg_occupancy_rate?: number | null
-          avg_rating?: number | null
-          avg_reviews_count?: number | null
-          churn_risk?: number | null
-          country_code?: string
-          display_name?: string | null
-          first_seen_at?: string
-          host_id?: string
-          last_updated_at?: string
-          listings_count?: number
-          meta?: Json
-          retention_12m_rate?: number | null
-          super_host_score?: number | null
-          superhost_flag?: boolean
-          tier?: string | null
-        }
-        Relationships: [
           {
-            foreignKeyName: "str_hosts_country_code_fkey"
-            columns: ["country_code"]
+            foreignKeyName: "str_invisible_hotels_market_id_fkey"
+            columns: ["market_id"]
             isOneToOne: false
-            referencedRelation: "countries"
-            referencedColumns: ["code"]
+            referencedRelation: "v_str_market_monthly"
+            referencedColumns: ["market_id"]
           },
         ]
       }
@@ -8073,6 +8020,130 @@ export type Database = {
           width?: number | null
         }
         Relationships: []
+      }
+      str_pricing_overrides: {
+        Row: {
+          created_at: string
+          created_by: string
+          currency: string
+          date: string
+          id: string
+          listing_id: string
+          meta: Json
+          override_price_minor: number
+          platform: string
+          reason: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          currency: string
+          date: string
+          id?: string
+          listing_id: string
+          meta?: Json
+          override_price_minor: number
+          platform: string
+          reason?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          currency?: string
+          date?: string
+          id?: string
+          listing_id?: string
+          meta?: Json
+          override_price_minor?: number
+          platform?: string
+          reason?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_pricing_overrides_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_pricing_overrides_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_pricing_overrides_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      str_reports: {
+        Row: {
+          customer_id: string | null
+          data_payload: Json | null
+          error_message: string | null
+          expires_at: string | null
+          generated_at: string | null
+          id: string
+          invoice_ref: string | null
+          meta: Json
+          pdf_url: string | null
+          requested_at: string
+          scope: Json
+          status: string
+          tier: number
+        }
+        Insert: {
+          customer_id?: string | null
+          data_payload?: Json | null
+          error_message?: string | null
+          expires_at?: string | null
+          generated_at?: string | null
+          id?: string
+          invoice_ref?: string | null
+          meta?: Json
+          pdf_url?: string | null
+          requested_at?: string
+          scope: Json
+          status?: string
+          tier: number
+        }
+        Update: {
+          customer_id?: string | null
+          data_payload?: Json | null
+          error_message?: string | null
+          expires_at?: string | null
+          generated_at?: string | null
+          id?: string
+          invoice_ref?: string | null
+          meta?: Json
+          pdf_url?: string | null
+          requested_at?: string
+          scope?: Json
+          status?: string
+          tier?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_reports_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_reports_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       str_reviews: {
         Row: {
@@ -10749,6 +10820,22 @@ export type Database = {
             }
             Returns: string
           }
+      aggregate_zone_sentiment: {
+        Args: {
+          p_decay_half_life_days?: number
+          p_lookback_days?: number
+          p_market_id: string
+        }
+        Returns: {
+          market_id: string
+          negative_share: number
+          positive_share: number
+          reviews_analyzed: number
+          sentiment_simple_avg: number
+          sentiment_weighted_avg: number
+          topic_counts: Json
+        }[]
+      }
       anonymize_profile: { Args: { p_profile_id: string }; Returns: undefined }
       apply_cluster: {
         Args: {
@@ -10965,6 +11052,22 @@ export type Database = {
         Returns: boolean
       }
       decrypt_secret: { Args: { p_ciphertext: string }; Returns: string }
+      detect_invisible_hotel_candidates: {
+        Args: {
+          p_country_code: string
+          p_max_radius_m?: number
+          p_min_listings?: number
+        }
+        Returns: {
+          bounding_radius_m: number
+          center_lat: number
+          center_lon: number
+          host_id: string
+          listing_ids: string[]
+          listings_count: number
+          market_id: string
+        }[]
+      }
       disablelongtransactions: { Args: never; Returns: string }
       drop_constraints: {
         Args: {
@@ -11177,6 +11280,10 @@ export type Database = {
       }
       jsonb_diff: { Args: { a: Json; b: Json }; Returns: Json }
       longtransactionsenabled: { Args: never; Returns: boolean }
+      market_migration_alert_pct: {
+        Args: { p_lookback_days?: number; p_market_id: string }
+        Returns: number
+      }
       match_ai_memory: {
         Args: {
           p_embedding: string
@@ -11225,6 +11332,15 @@ export type Database = {
           calls: number
           endpoint_key: string
           estimated_cost_usd: number
+        }[]
+      }
+      monthly_anthropic_spend: {
+        Args: { p_month?: string }
+        Returns: {
+          budget_usd: number
+          month: string
+          pct: number
+          spent_usd: number
         }[]
       }
       partition_data_id: {
@@ -12003,6 +12119,21 @@ export type Database = {
       }
       verify_api_key: { Args: { p_raw_key: string }; Returns: string }
       verify_extension_api_key: { Args: { p_raw_key: string }; Returns: string }
+      zone_aqi_summary: {
+        Args: {
+          p_lookback_days?: number
+          p_market_id: string
+          p_radius_m?: number
+        }
+        Returns: {
+          aqi_avg: number
+          aqi_max: number
+          aqi_min: number
+          market_id: string
+          samples: number
+          stations_count: number
+        }[]
+      }
     }
     Enums: {
       market_capture_source:
