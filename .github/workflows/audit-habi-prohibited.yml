@@ -1,0 +1,89 @@
+name: Audit Habi prohibited
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: audit-habi-prohibited-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit-habi-prohibited:
+    name: Audit Habi prohibited
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Grep Habi integration patterns in source code
+        shell: bash
+        run: |
+          set -uo pipefail
+
+          # ADR-010 forbids any integration with Habi APIs/scraping.
+          # Search source-code paths only; documentation paths are explicitly excluded
+          # so ADRs and competitive intel can mention Habi without failing CI.
+
+          INCLUDE_PATHS=(src app lib server scripts supabase components shared features packages)
+          EXCLUDE_PATHS=(docs .github node_modules .next .vercel coverage dist build)
+
+          # Patterns that indicate prohibited integration (case-insensitive).
+          # Aligned with mensaje #1 inviolables founder: "habi.com", "api.habi",
+          # "HabiClient", "habiapi", "rest-api.habi", "from.*habi", "import.*habi".
+          PATTERNS=(
+            'habi\.com'
+            'api\.habi'
+            'HabiClient'
+            'habiapi'
+            'rest-api\.habi'
+            'from[[:space:]]+["'\''][^"'\'']*habi[^"'\'']*["'\'']'
+            'import[[:space:]]+[^;]*[[:space:]]+from[[:space:]]+["'\''][^"'\'']*habi[^"'\'']*["'\'']'
+          )
+
+          existing_paths=()
+          for p in "${INCLUDE_PATHS[@]}"; do
+            if [ -d "$p" ]; then existing_paths+=("$p"); fi
+          done
+
+          if [ ${#existing_paths[@]} -eq 0 ]; then
+            echo "::notice::No source paths present in repo yet — nothing to audit."
+            exit 0
+          fi
+
+          echo "Auditing Habi integration patterns in: ${existing_paths[*]}"
+          echo "Excluded paths (allowed to mention Habi): ${EXCLUDE_PATHS[*]}"
+
+          # Build grep --exclude-dir flags
+          exclude_flags=()
+          for d in "${EXCLUDE_PATHS[@]}"; do
+            exclude_flags+=(--exclude-dir="$d")
+          done
+          # Also exclude markdown files (docs may live near code)
+          exclude_flags+=(--exclude='*.md')
+
+          violations=0
+          for pattern in "${PATTERNS[@]}"; do
+            echo ""
+            echo "→ Pattern: $pattern"
+            if matches=$(grep -rEn -i "${exclude_flags[@]}" "$pattern" "${existing_paths[@]}" 2>/dev/null); then
+              echo "::error::ADR-010 violation: integración con Habi API/scraping detectada"
+              echo "$matches" | while IFS= read -r line; do
+                echo "::error::  $line"
+              done
+              violations=$((violations + 1))
+            else
+              echo "  (no matches)"
+            fi
+          done
+
+          if [ "$violations" -gt 0 ]; then
+            echo ""
+            echo "::error::Habi integration prohibited per ADR-010_IE_PIPELINE_ARCHITECTURE.md §D10"
+            echo "::error::Use Chrome Extension GC-27 or admin upload (see ADR-012 Scraping Policy)"
+            exit 1
+          fi
+
+          echo ""
+          echo "✓ No Habi integration patterns found. ADR-010 compliance OK."
