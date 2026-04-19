@@ -6005,6 +6005,66 @@ export type Database = {
         }
         Relationships: []
       }
+      str_cost_assumptions: {
+        Row: {
+          cleaning_pct: number
+          country_code: string
+          currency: string
+          last_reviewed_at: string
+          meta: Json
+          notes: string | null
+          platform_fee_pct: number
+          property_mgmt_pct: number
+          property_tax_annual_pct: number
+          utilities_monthly_minor: number
+          vacancy_buffer_pct: number
+          zone_tier: string
+        }
+        Insert: {
+          cleaning_pct: number
+          country_code: string
+          currency: string
+          last_reviewed_at?: string
+          meta?: Json
+          notes?: string | null
+          platform_fee_pct: number
+          property_mgmt_pct: number
+          property_tax_annual_pct: number
+          utilities_monthly_minor: number
+          vacancy_buffer_pct: number
+          zone_tier: string
+        }
+        Update: {
+          cleaning_pct?: number
+          country_code?: string
+          currency?: string
+          last_reviewed_at?: string
+          meta?: Json
+          notes?: string | null
+          platform_fee_pct?: number
+          property_mgmt_pct?: number
+          property_tax_annual_pct?: number
+          utilities_monthly_minor?: number
+          vacancy_buffer_pct?: number
+          zone_tier?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_cost_assumptions_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_cost_assumptions_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       str_listings: {
         Row: {
           bathrooms: number | null
