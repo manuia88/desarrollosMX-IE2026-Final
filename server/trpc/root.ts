@@ -6,6 +6,7 @@ import { aiRouter } from '@/features/ia-generativa/routes/ai';
 import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { marketRouter } from '@/features/market/routes/market';
 import { scianRouter } from '@/features/scian/routes/scian';
+import { ltrStrConnectionRouter } from '@/features/str-intelligence/routes/ltr-connection';
 import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
 import { strViabilityRouter } from '@/features/str-intelligence/routes/viability';
 import { publicProcedure, router } from './init';
@@ -23,6 +24,7 @@ export const appRouter = router({
   mfa: mfaRouter,
   roleRequest: roleRequestRouter,
   scian: scianRouter,
+  ltrStrConnection: ltrStrConnectionRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
 });

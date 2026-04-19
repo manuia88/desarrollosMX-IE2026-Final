@@ -8314,6 +8314,67 @@ export type Database = {
         }
         Relationships: []
       }
+      str_zone_regulations: {
+        Row: {
+          captured_at: string
+          country_code: string
+          effective_date: string | null
+          id: string
+          market_id: string | null
+          meta: Json
+          notes: string | null
+          restriction_type: string
+          source_url: string
+          zone_id: string | null
+        }
+        Insert: {
+          captured_at?: string
+          country_code: string
+          effective_date?: string | null
+          id?: string
+          market_id?: string | null
+          meta?: Json
+          notes?: string | null
+          restriction_type: string
+          source_url: string
+          zone_id?: string | null
+        }
+        Update: {
+          captured_at?: string
+          country_code?: string
+          effective_date?: string | null
+          id?: string
+          market_id?: string | null
+          meta?: Json
+          notes?: string | null
+          restriction_type?: string
+          source_url?: string
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_zone_regulations_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_zone_regulations_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "str_markets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_zone_regulations_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "v_str_market_monthly"
+            referencedColumns: ["market_id"]
+          },
+        ]
+      }
       subscriptions: {
         Row: {
           billing_cycle: string
@@ -9987,6 +10048,20 @@ export type Database = {
           privilege_type: string | null
           table_name: unknown
           table_schema: unknown
+        }
+        Relationships: []
+      }
+      v_ltr_str_connection: {
+        Row: {
+          country_code: string | null
+          currency: string | null
+          ltr_monthly_rent_median_minor: number | null
+          ltr_sample_listings: number | null
+          regime: string | null
+          str_ltr_ratio: number | null
+          str_monthly_revenue_median_minor: number | null
+          str_sample_months: number | null
+          zone_id: string | null
         }
         Relationships: []
       }
