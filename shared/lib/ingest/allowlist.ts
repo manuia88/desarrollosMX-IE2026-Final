@@ -48,6 +48,7 @@ export const ALLOWED_SOURCES = [
   'tinsa',
   'jll',
   'softec',
+  'partnership_feed',
 ] as const;
 
 export type AllowedSource = (typeof ALLOWED_SOURCES)[number];
