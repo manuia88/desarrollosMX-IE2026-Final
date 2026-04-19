@@ -6138,6 +6138,81 @@ export type Database = {
           },
         ]
       }
+      str_invisible_hotels: {
+        Row: {
+          bounding_radius_m: number
+          center_geom: unknown
+          cluster_id: string
+          confidence: number
+          country_code: string
+          detection_method: string
+          first_detected_at: string
+          host_id: string
+          last_verified_at: string
+          listings_count: number
+          manual_review_notes: string | null
+          manual_review_status: string
+          manual_reviewed_at: string | null
+          manual_reviewed_by: string | null
+          market_id: string | null
+          meta: Json
+          zone_id: string | null
+        }
+        Insert: {
+          bounding_radius_m: number
+          center_geom: unknown
+          cluster_id?: string
+          confidence: number
+          country_code: string
+          detection_method: string
+          first_detected_at?: string
+          host_id: string
+          last_verified_at?: string
+          listings_count: number
+          manual_review_notes?: string | null
+          manual_review_status?: string
+          manual_reviewed_at?: string | null
+          manual_reviewed_by?: string | null
+          market_id?: string | null
+          meta?: Json
+          zone_id?: string | null
+        }
+        Update: {
+          bounding_radius_m?: number
+          center_geom?: unknown
+          cluster_id?: string
+          confidence?: number
+          country_code?: string
+          detection_method?: string
+          first_detected_at?: string
+          host_id?: string
+          last_verified_at?: string
+          listings_count?: number
+          manual_review_notes?: string | null
+          manual_review_status?: string
+          manual_reviewed_at?: string | null
+          manual_reviewed_by?: string | null
+          market_id?: string | null
+          meta?: Json
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_invisible_hotels_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_invisible_hotels_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "str_markets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       str_hosts: {
         Row: {
           avg_occupancy_rate: number | null
