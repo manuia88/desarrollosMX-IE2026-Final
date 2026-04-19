@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 // @ts-check
 // Enforcement de ADR-018 (E2E Connectedness). Detecta UI desconectada:
 // botones sin handler, forms sin onSubmit, links muertos, handlers placeholder,
@@ -11,11 +12,11 @@
 //
 // Exit codes: 0 = no errors, 1 = errors detectados.
 
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import { parse } from '@typescript-eslint/parser';
 import { visitorKeys as tsVisitorKeys } from '@typescript-eslint/visitor-keys';
 import fg from 'fast-glob';
-import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
 import pc from 'picocolors';
 
 const ROOT = resolve(process.cwd());
@@ -177,12 +178,8 @@ function checkTsxNode(node, file, violations) {
     node.name.name === 'form'
   ) {
     const attrs = /** @type {any[]} */ (node.attributes ?? []);
-    const hasOnSubmit = attrs.some(
-      (a) => a.type === 'JSXAttribute' && a.name?.name === 'onSubmit',
-    );
-    const hasAction = attrs.some(
-      (a) => a.type === 'JSXAttribute' && a.name?.name === 'action',
-    );
+    const hasOnSubmit = attrs.some((a) => a.type === 'JSXAttribute' && a.name?.name === 'onSubmit');
+    const hasAction = attrs.some((a) => a.type === 'JSXAttribute' && a.name?.name === 'action');
     if (!hasOnSubmit && !hasAction) {
       violations.push({
         file: relative(file),
@@ -279,8 +276,7 @@ function checkRouterNode(node, file, code, violations) {
     node.callee.name === 'Error'
   ) {
     const before = code.slice(Math.max(0, node.range[0] - 50), node.range[0]);
-    const isThrow =
-      /throw\s*$/.test(before.replace(/\s+$/, '')) || /throw\s*\(\s*$/.test(before);
+    const isThrow = /throw\s*$/.test(before.replace(/\s+$/, '')) || /throw\s*\(\s*$/.test(before);
     if (!isThrow) return;
 
     const line = node.loc.start.line;
@@ -322,8 +318,7 @@ function isEmptyArrow(expr) {
 
 function isPlaceholderCall(expr) {
   if (!expr || expr.type !== 'ArrowFunctionExpression') return false;
-  const body =
-    expr.body?.type === 'BlockStatement' ? expr.body.body[0]?.expression : expr.body;
+  const body = expr.body?.type === 'BlockStatement' ? expr.body.body[0]?.expression : expr.body;
   if (!body || body.type !== 'CallExpression') return false;
   const callee = body.callee;
   if (callee?.type === 'Identifier' && callee.name === 'alert') return true;
@@ -344,7 +339,7 @@ function relative(abs) {
 /** @param {Violation[]} violations */
 function output(violations) {
   if (asJson) {
-    process.stdout.write(JSON.stringify(violations, null, 2) + '\n');
+    process.stdout.write(`${JSON.stringify(violations, null, 2)}\n`);
     if (!isCi) {
       summary(violations);
     }
@@ -367,7 +362,8 @@ function output(violations) {
 function summary(violations) {
   const errors = violations.filter((v) => v.severity === 'error').length;
   const warns = violations.filter((v) => v.severity === 'warn').length;
-  if (errors) console.log(pc.red(`\n${errors} error(s)`) + (warns ? pc.yellow(` · ${warns} warn(s)`) : ''));
+  if (errors)
+    console.log(pc.red(`\n${errors} error(s)`) + (warns ? pc.yellow(` · ${warns} warn(s)`) : ''));
   else if (warns) console.log(pc.yellow(`\n${warns} warn(s)`));
 }
 

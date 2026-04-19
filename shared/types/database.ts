@@ -7956,6 +7956,10 @@ export type Database = {
       }
       get_visible_asesor_ids: { Args: never; Returns: string[] }
       gettransactionid: { Args: never; Returns: unknown }
+      increment_api_budget_spend: {
+        Args: { p_amount: number; p_source: string }
+        Returns: undefined
+      }
       inherit_replica_identity: {
         Args: {
           p_child_tablename: string
@@ -8110,6 +8114,7 @@ export type Database = {
         Returns: undefined
       }
       request_account_deletion: { Args: never; Returns: string }
+      reset_api_budgets_monthly: { Args: never; Returns: number }
       resolve_features: { Args: { p_user_id?: string }; Returns: string[] }
       run_maintenance: {
         Args: {
