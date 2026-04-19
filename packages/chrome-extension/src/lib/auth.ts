@@ -4,6 +4,9 @@
 
 import { z } from 'zod';
 import { getApiBase } from './config';
+import { isValidTokenFormat } from './token-format';
+
+export { isValidTokenFormat };
 
 const TOKEN_KEY = 'dmx_auth_token';
 const USER_KEY = 'dmx_user';
@@ -15,10 +18,6 @@ export const dmxUserSchema = z.object({
   name: z.string().nullable(),
 });
 export type DmxUser = z.infer<typeof dmxUserSchema>;
-
-export function isValidTokenFormat(value: string): boolean {
-  return value.length >= 32 && value.length <= 512 && /^[A-Za-z0-9._-]+$/.test(value);
-}
 
 export async function getStoredToken(): Promise<string | null> {
   const result = await chrome.storage.local.get(TOKEN_KEY);

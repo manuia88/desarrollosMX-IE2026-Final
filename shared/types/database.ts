@@ -7988,6 +7988,13 @@ export type Database = {
           raw_key: string
         }[]
       }
+      issue_extension_token: {
+        Args: { p_label?: string }
+        Returns: {
+          api_key_id: string
+          raw_key: string
+        }[]
+      }
       jsonb_diff: { Args: { a: Json; b: Json }; Returns: Json }
       longtransactionsenabled: { Args: never; Returns: boolean }
       match_ai_memory: {
@@ -8101,6 +8108,29 @@ export type Database = {
         Returns: undefined
       }
       recompute_zone_tiers: { Args: never; Returns: number }
+      record_extension_capture: {
+        Args: {
+          p_address_raw: string
+          p_amenities?: Json
+          p_area_built_m2?: number
+          p_bathrooms?: number
+          p_bedrooms?: number
+          p_country_code: string
+          p_currency: string
+          p_listing_id: string
+          p_meta?: Json
+          p_operation: string
+          p_parking?: number
+          p_posted_at: string
+          p_price_minor: number
+          p_profile_id: string
+          p_property_type: string
+          p_raw_html_hash: string
+          p_seller_type?: string
+          p_source: string
+        }
+        Returns: number
+      }
       register_view: {
         Args: {
           p_dedup_key: string
@@ -8768,6 +8798,7 @@ export type Database = {
         Returns: boolean
       }
       verify_api_key: { Args: { p_raw_key: string }; Returns: string }
+      verify_extension_api_key: { Args: { p_raw_key: string }; Returns: string }
     }
     Enums: {
       market_capture_source:
