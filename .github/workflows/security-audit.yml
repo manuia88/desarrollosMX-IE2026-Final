@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUSKY: 0
+      AUDIT_RLS_STRICT: '1'
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://qxfuqwlktmhokwwlvggy.supabase.co' }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
     steps:
@@ -25,7 +26,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'npm'
       - run: npm ci
-      - name: Run audit-rls against remote Supabase
+      - name: Run audit-rls against remote Supabase (strict)
         run: node scripts/audit-rls.mjs
 
   grep-unsafe-selects:
