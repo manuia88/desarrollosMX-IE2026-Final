@@ -14,6 +14,7 @@ import { invisibleHotelsRouter } from '@/features/str-intelligence/routes/invisi
 import { ltrStrConnectionRouter } from '@/features/str-intelligence/routes/ltr-connection';
 import { nomadRouter } from '@/features/str-intelligence/routes/nomad';
 import { photoCvRouter } from '@/features/str-intelligence/routes/photo-cv';
+import { strPortfolioRouter } from '@/features/str-intelligence/routes/portfolio';
 import { strPricingRouter } from '@/features/str-intelligence/routes/pricing';
 import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
 import { strViabilityRouter } from '@/features/str-intelligence/routes/viability';
@@ -41,6 +42,7 @@ export const appRouter = router({
   invisibleHotels: invisibleHotelsRouter,
   nomad: nomadRouter,
   photoCv: photoCvRouter,
+  strPortfolio: strPortfolioRouter,
   strPricing: strPricingRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
