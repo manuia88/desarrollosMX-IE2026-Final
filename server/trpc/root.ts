@@ -19,6 +19,7 @@ import { strPricingRouter } from '@/features/str-intelligence/routes/pricing';
 import { strReportsRouter } from '@/features/str-intelligence/routes/reports';
 import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
 import { strViabilityRouter } from '@/features/str-intelligence/routes/viability';
+import { strWatchdogRouter } from '@/features/str-intelligence/routes/watchdog';
 import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
 import { publicProcedure, router } from './init';
 
@@ -46,6 +47,7 @@ export const appRouter = router({
   strPortfolio: strPortfolioRouter,
   strPricing: strPricingRouter,
   strReports: strReportsRouter,
+  strWatchdog: strWatchdogRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
   zoneInvestment: zoneInvestmentRouter,
