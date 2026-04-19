@@ -7726,6 +7726,10 @@ export type Database = {
         Args: { p_parent_table: string; p_type: string }
         Returns: Record<string, unknown>
       }
+      confidence_level_for: {
+        Args: { p_metric: string; p_sample_size: number; p_source: string }
+        Returns: string
+      }
       create_parent: {
         Args: {
           p_automatic_maintenance?: string
@@ -8106,6 +8110,17 @@ export type Database = {
       reapply_privileges: {
         Args: { p_parent_table: string }
         Returns: undefined
+      }
+      recompute_all_zone_tiers: { Args: never; Returns: number }
+      recompute_zone_tier: {
+        Args: {
+          p_country_code: string
+          p_months_tracked: number
+          p_projects_count: number
+          p_sales_count: number
+          p_zone_id: string
+        }
+        Returns: number
       }
       recompute_zone_tiers: { Args: never; Returns: number }
       record_extension_capture: {
