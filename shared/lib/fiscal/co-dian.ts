@@ -1,6 +1,7 @@
 import type { FiscalDocGenerator, FiscalDocStatus, InvoiceInput } from './generator';
 import { NotImplementedFiscalError } from './generator';
 
+// STUB — activar en FASE 16 (Contabilidad + CFDI / DIAN) con cliente DIAN CO.
 export class CODianGenerator implements FiscalDocGenerator {
   readonly country = 'CO';
   readonly provider = 'dian';

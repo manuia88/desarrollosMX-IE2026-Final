@@ -1,6 +1,7 @@
 import type { FiscalDocGenerator, FiscalDocStatus, InvoiceInput } from './generator';
 import { NotImplementedFiscalError } from './generator';
 
+// STUB — activar en FASE 16 (Contabilidad + CFDI / AFIP WSFE) con cliente AFIP AR.
 export class ARAfipGenerator implements FiscalDocGenerator {
   readonly country = 'AR';
   readonly provider = 'afip_wsfe';

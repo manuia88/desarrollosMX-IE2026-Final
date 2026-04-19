@@ -1,9 +1,14 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "crons": [
-    {
-      "path": "/api/cron/fx-snapshot",
-      "schedule": "0 12 * * *"
-    }
+    { "path": "/api/cron/fx-snapshot", "schedule": "0 12 * * *" },
+    { "path": "/api/cron/ingest/banxico", "schedule": "0 14 * * *" },
+    { "path": "/api/cron/ingest/inegi", "schedule": "0 15 15 * *" },
+    { "path": "/api/cron/ingest/denue", "schedule": "0 2 5 * *" },
+    { "path": "/api/cron/autofetch/bbva_research", "schedule": "0 16 25 * *" },
+    { "path": "/api/cron/autofetch/infonavit", "schedule": "0 16 10 * *" },
+    { "path": "/api/cron/autofetch/cnbv", "schedule": "0 16 20 * *" },
+    { "path": "/api/cron/autofetch/fovissste", "schedule": "0 17 20 1,4,7,10 *" },
+    { "path": "/api/cron/autofetch/shf", "schedule": "0 18 20 1,4,7,10 *" }
   ]
 }

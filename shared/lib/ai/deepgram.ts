@@ -1,4 +1,4 @@
-// Stub Deepgram — upgrade H2.
+// STUB — activar en FASE 31 (Agentic Marketplace H2) con SDK @deepgram/sdk.
 // Interfaz equivalente a useVoiceInput para permitir swap transparente.
 // Activación: feature flag shared.voice.deepgram (off en H1).
 

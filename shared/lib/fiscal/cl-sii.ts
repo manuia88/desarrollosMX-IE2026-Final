@@ -1,6 +1,7 @@
 import type { FiscalDocGenerator, FiscalDocStatus, InvoiceInput } from './generator';
 import { NotImplementedFiscalError } from './generator';
 
+// STUB — activar en FASE 16 (Contabilidad + DTE SII) con cliente SII CL.
 export class CLSiiGenerator implements FiscalDocGenerator {
   readonly country = 'CL';
   readonly provider = 'sii';

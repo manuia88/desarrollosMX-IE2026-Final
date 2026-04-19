@@ -1,6 +1,7 @@
 import type { FiscalDocGenerator, FiscalDocStatus, InvoiceInput } from './generator';
 import { NotImplementedFiscalError } from './generator';
 
+// STUB — activar en FASE 16 (Contabilidad + CFDI) con SDK facturapi.io.
 export class MXFacturapiGenerator implements FiscalDocGenerator {
   readonly country = 'MX';
   readonly provider = 'facturapi';

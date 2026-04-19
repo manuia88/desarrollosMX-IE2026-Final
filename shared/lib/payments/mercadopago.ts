@@ -7,6 +7,7 @@ import type {
 } from './provider';
 import { NotImplementedPaymentError } from './provider';
 
+// STUB — activar en FASE 23 (Monetización) con SDK mercadopago + claves prod.
 export class MercadoPagoProvider implements PaymentProvider {
   readonly name = 'mercadopago';
 
