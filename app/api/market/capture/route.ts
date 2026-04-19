@@ -84,5 +84,3 @@ export async function POST(request: Request) {
     listing_id: result.listingId,
   });
 }
-
-export const runtime = 'nodejs';

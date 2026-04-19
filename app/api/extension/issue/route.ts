@@ -43,5 +43,3 @@ export async function POST(request: Request) {
     raw_key: row.raw_key,
   });
 }
-
-export const runtime = 'nodejs';

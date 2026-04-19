@@ -41,5 +41,3 @@ export async function GET(request: Request) {
     name,
   });
 }
-
-export const runtime = 'nodejs';

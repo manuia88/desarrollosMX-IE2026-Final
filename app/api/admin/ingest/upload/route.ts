@@ -107,5 +107,4 @@ function sanitize(filename: string): string {
   return filename.replace(/[^A-Za-z0-9._-]/g, '_').slice(0, 120);
 }
 
-export const runtime = 'nodejs';
 export const maxDuration = 300;

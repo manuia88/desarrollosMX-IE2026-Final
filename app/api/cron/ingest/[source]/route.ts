@@ -42,5 +42,4 @@ export async function GET(request: Request, context: { params: Promise<{ source:
   }
 }
 
-export const runtime = 'nodejs';
 export const maxDuration = 300;
