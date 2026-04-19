@@ -11,6 +11,7 @@ import { strHostsRouter } from '@/features/str-intelligence/routes/hosts';
 import { ltrStrConnectionRouter } from '@/features/str-intelligence/routes/ltr-connection';
 import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
 import { strViabilityRouter } from '@/features/str-intelligence/routes/viability';
+import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
 import { publicProcedure, router } from './init';
 
 export const appRouter = router({
@@ -31,6 +32,7 @@ export const appRouter = router({
   strHosts: strHostsRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
+  zoneInvestment: zoneInvestmentRouter,
 });
 
 export type AppRouter = typeof appRouter;

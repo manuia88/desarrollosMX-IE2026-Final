@@ -17,6 +17,7 @@ export const MODEL_REGISTRY = {
   match: anthropicProvider('claude-sonnet-4-6'),
   marketing: openaiProvider('gpt-4o-mini'),
   simple_task: openaiProvider('gpt-4o-mini'),
+  haiku: anthropicProvider('claude-haiku-4-5'),
 } as const;
 
 export type ModelCategory = keyof typeof MODEL_REGISTRY;
