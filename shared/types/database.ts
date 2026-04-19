@@ -4645,6 +4645,79 @@ export type Database = {
         }
         Relationships: []
       }
+      ml_training_snapshots: {
+        Row: {
+          corpus_name: string
+          country_code: string | null
+          created_at: string
+          created_by: string | null
+          format: string
+          id: string
+          meta: Json
+          period_end: string | null
+          period_start: string | null
+          row_count: number
+          schema_hash: string
+          split: string | null
+          storage_path: string
+          version: string
+        }
+        Insert: {
+          corpus_name: string
+          country_code?: string | null
+          created_at?: string
+          created_by?: string | null
+          format: string
+          id?: string
+          meta?: Json
+          period_end?: string | null
+          period_start?: string | null
+          row_count: number
+          schema_hash: string
+          split?: string | null
+          storage_path: string
+          version: string
+        }
+        Update: {
+          corpus_name?: string
+          country_code?: string | null
+          created_at?: string
+          created_by?: string | null
+          format?: string
+          id?: string
+          meta?: Json
+          period_end?: string | null
+          period_start?: string | null
+          row_count?: number
+          schema_hash?: string
+          split?: string | null
+          storage_path?: string
+          version?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ml_training_snapshots_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "ml_training_snapshots_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ml_training_snapshots_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       part_config: {
         Row: {
           async_partitioning_in_progress: string | null
@@ -7836,6 +7909,60 @@ export type Database = {
         }
         Relationships: []
       }
+      str_reviews_labels: {
+        Row: {
+          id: number
+          labeled_at: string
+          labeled_by: string
+          meta: Json
+          notes: string | null
+          platform: string
+          posted_at: string
+          review_id: string
+          sentiment_label: number
+          topics_label: Json | null
+        }
+        Insert: {
+          id?: never
+          labeled_at?: string
+          labeled_by: string
+          meta?: Json
+          notes?: string | null
+          platform: string
+          posted_at: string
+          review_id: string
+          sentiment_label: number
+          topics_label?: Json | null
+        }
+        Update: {
+          id?: never
+          labeled_at?: string
+          labeled_by?: string
+          meta?: Json
+          notes?: string | null
+          platform?: string
+          posted_at?: string
+          review_id?: string
+          sentiment_label?: number
+          topics_label?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_reviews_labels_labeled_by_fkey"
+            columns: ["labeled_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "str_reviews_labels_labeled_by_fkey"
+            columns: ["labeled_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       str_reviews_p20251201: {
         Row: {
           fetched_at: string
@@ -10802,6 +10929,10 @@ export type Database = {
       mfa_mark_enabled: { Args: never; Returns: undefined }
       mfa_regenerate_backup_codes: { Args: never; Returns: string[] }
       mfa_reminders_tick: { Args: never; Returns: number }
+      ml_deterministic_split: {
+        Args: { p_listing_id: string }
+        Returns: string
+      }
       monthly_airroi_spend_by_endpoint: {
         Args: { p_month?: string }
         Returns: {
