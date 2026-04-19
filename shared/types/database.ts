@@ -5948,6 +5948,1552 @@ export type Database = {
         }
         Relationships: []
       }
+      str_listings: {
+        Row: {
+          bathrooms: number | null
+          bedrooms: number | null
+          capacity: number | null
+          country_code: string
+          fetched_at: string
+          first_seen_at: string
+          geom: unknown
+          h3_r8: string | null
+          host_id: string | null
+          last_seen_at: string
+          listing_id: string
+          listing_name: string | null
+          listing_url: string | null
+          market_id: string | null
+          meta: Json
+          platform: string
+          professional_management: boolean | null
+          property_type: string | null
+          room_type: string | null
+          run_id: string | null
+          status: string
+          superhost: boolean | null
+          zone_id: string | null
+        }
+        Insert: {
+          bathrooms?: number | null
+          bedrooms?: number | null
+          capacity?: number | null
+          country_code: string
+          fetched_at?: string
+          first_seen_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          host_id?: string | null
+          last_seen_at?: string
+          listing_id: string
+          listing_name?: string | null
+          listing_url?: string | null
+          market_id?: string | null
+          meta?: Json
+          platform: string
+          professional_management?: boolean | null
+          property_type?: string | null
+          room_type?: string | null
+          run_id?: string | null
+          status?: string
+          superhost?: boolean | null
+          zone_id?: string | null
+        }
+        Update: {
+          bathrooms?: number | null
+          bedrooms?: number | null
+          capacity?: number | null
+          country_code?: string
+          fetched_at?: string
+          first_seen_at?: string
+          geom?: unknown
+          h3_r8?: string | null
+          host_id?: string | null
+          last_seen_at?: string
+          listing_id?: string
+          listing_name?: string | null
+          listing_url?: string | null
+          market_id?: string | null
+          meta?: Json
+          platform?: string
+          professional_management?: boolean | null
+          property_type?: string | null
+          room_type?: string | null
+          run_id?: string | null
+          status?: string
+          superhost?: boolean | null
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_listings_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_listings_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "str_markets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      str_markets: {
+        Row: {
+          active_listings_count: number | null
+          airroi_country: string
+          airroi_district: string | null
+          airroi_locality: string
+          airroi_region: string
+          country_code: string
+          display_name: string
+          first_seen_at: string
+          id: string
+          last_refreshed_at: string | null
+          meta: Json
+          native_currency: string
+          zone_id: string | null
+        }
+        Insert: {
+          active_listings_count?: number | null
+          airroi_country: string
+          airroi_district?: string | null
+          airroi_locality: string
+          airroi_region: string
+          country_code: string
+          display_name: string
+          first_seen_at?: string
+          id?: string
+          last_refreshed_at?: string | null
+          meta?: Json
+          native_currency: string
+          zone_id?: string | null
+        }
+        Update: {
+          active_listings_count?: number | null
+          airroi_country?: string
+          airroi_district?: string | null
+          airroi_locality?: string
+          airroi_region?: string
+          country_code?: string
+          display_name?: string
+          first_seen_at?: string
+          id?: string
+          last_refreshed_at?: string | null
+          meta?: Json
+          native_currency?: string
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_markets_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_markets_native_currency_fkey"
+            columns: ["native_currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      str_monthly_snapshots: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_monthly_snapshots_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_monthly_snapshots_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_monthly_snapshots_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "str_markets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      str_monthly_snapshots_default: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20220101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20230101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20240101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20250101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20260101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20270101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20280101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20290101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_monthly_snapshots_p20300101: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at?: string
+          id?: never
+          listing_id: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: never
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      str_photos_metadata: {
+        Row: {
+          cv_labels: Json | null
+          cv_processed_at: string | null
+          cv_quality_score: number | null
+          fetched_at: string
+          height: number | null
+          id: number
+          listing_id: string
+          meta: Json
+          order_index: number
+          photo_url: string
+          platform: string
+          run_id: string | null
+          width: number | null
+        }
+        Insert: {
+          cv_labels?: Json | null
+          cv_processed_at?: string | null
+          cv_quality_score?: number | null
+          fetched_at?: string
+          height?: number | null
+          id?: never
+          listing_id: string
+          meta?: Json
+          order_index?: number
+          photo_url: string
+          platform: string
+          run_id?: string | null
+          width?: number | null
+        }
+        Update: {
+          cv_labels?: Json | null
+          cv_processed_at?: string | null
+          cv_quality_score?: number | null
+          fetched_at?: string
+          height?: number | null
+          id?: never
+          listing_id?: string
+          meta?: Json
+          order_index?: number
+          photo_url?: string
+          platform?: string
+          run_id?: string | null
+          width?: number | null
+        }
+        Relationships: []
+      }
+      str_reviews: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_default: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20251201: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20260101: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20260201: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20260301: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20260401: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20260501: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20260601: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20260701: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
+      str_reviews_p20260801: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id: string
+          meta?: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: never
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Relationships: []
+      }
       subscriptions: {
         Row: {
           billing_cycle: string
@@ -6421,6 +7967,126 @@ export type Database = {
           period_start?: string
           run_id?: string | null
           zone_id?: string | null
+        }
+        Relationships: []
+      }
+      template_public_str_monthly_snapshots: {
+        Row: {
+          adr_minor: number | null
+          avg_length_of_stay: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id: string | null
+          meta: Json
+          nights_available: number | null
+          nights_booked: number | null
+          occupancy_rate: number | null
+          period: string
+          platform: string
+          revenue_minor: number | null
+          revpar_minor: number | null
+          run_id: string | null
+        }
+        Insert: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code: string
+          currency: string
+          fetched_at: string
+          id: number
+          listing_id: string
+          market_id?: string | null
+          meta: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period: string
+          platform: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Update: {
+          adr_minor?: number | null
+          avg_length_of_stay?: number | null
+          country_code?: string
+          currency?: string
+          fetched_at?: string
+          id?: number
+          listing_id?: string
+          market_id?: string | null
+          meta?: Json
+          nights_available?: number | null
+          nights_booked?: number | null
+          occupancy_rate?: number | null
+          period?: string
+          platform?: string
+          revenue_minor?: number | null
+          revpar_minor?: number | null
+          run_id?: string | null
+        }
+        Relationships: []
+      }
+      template_public_str_reviews: {
+        Row: {
+          fetched_at: string
+          id: number
+          language: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating: number | null
+          review_id: string
+          review_text: string | null
+          reviewer_first_name: string | null
+          reviewer_id: string | null
+          run_id: string | null
+          sentiment_confidence: number | null
+          sentiment_score: number | null
+          sentiment_source_span: string | null
+          topics: Json | null
+        }
+        Insert: {
+          fetched_at: string
+          id: number
+          language?: string | null
+          listing_id: string
+          meta: Json
+          platform: string
+          posted_at: string
+          rating?: number | null
+          review_id: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
+        }
+        Update: {
+          fetched_at?: string
+          id?: number
+          language?: string | null
+          listing_id?: string
+          meta?: Json
+          platform?: string
+          posted_at?: string
+          rating?: number | null
+          review_id?: string
+          review_text?: string | null
+          reviewer_first_name?: string | null
+          reviewer_id?: string | null
+          run_id?: string | null
+          sentiment_confidence?: number | null
+          sentiment_score?: number | null
+          sentiment_source_span?: string | null
+          topics?: Json | null
         }
         Relationships: []
       }
@@ -7443,6 +9109,44 @@ export type Database = {
           table_schema: unknown
         }
         Relationships: []
+      }
+      v_str_zone_monthly: {
+        Row: {
+          adr_median_minor: number | null
+          airroi_district: string | null
+          airroi_locality: string | null
+          country_code: string | null
+          currency: string | null
+          market_id: string | null
+          occupancy_rate_avg: number | null
+          period: string | null
+          revenue_median_minor: number | null
+          revpar_median_minor: number | null
+          snapshots_count: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "str_markets_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_monthly_snapshots_currency_fkey"
+            columns: ["currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_monthly_snapshots_market_id_fkey"
+            columns: ["market_id"]
+            isOneToOne: false
+            referencedRelation: "str_markets"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Functions: {
