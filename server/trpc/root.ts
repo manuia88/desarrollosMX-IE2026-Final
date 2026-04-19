@@ -7,6 +7,7 @@ import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { marketRouter } from '@/features/market/routes/market';
 import { scianRouter } from '@/features/scian/routes/scian';
 import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
+import { envRouter } from '@/features/str-intelligence/routes/env';
 import { strHostsRouter } from '@/features/str-intelligence/routes/hosts';
 import { invisibleHotelsRouter } from '@/features/str-intelligence/routes/invisible-hotels';
 import { ltrStrConnectionRouter } from '@/features/str-intelligence/routes/ltr-connection';
@@ -31,6 +32,7 @@ export const appRouter = router({
   ltrStrConnection: ltrStrConnectionRouter,
   strBreakeven: strBreakevenRouter,
   strHosts: strHostsRouter,
+  env: envRouter,
   invisibleHotels: invisibleHotelsRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
