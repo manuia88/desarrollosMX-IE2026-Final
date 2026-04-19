@@ -6138,6 +6138,54 @@ export type Database = {
           },
         ]
       }
+      str_reports: {
+        Row: {
+          customer_id: string | null
+          data_payload: Json | null
+          error_message: string | null
+          expires_at: string | null
+          generated_at: string | null
+          id: string
+          invoice_ref: string | null
+          meta: Json
+          pdf_url: string | null
+          requested_at: string
+          scope: Json
+          status: string
+          tier: number
+        }
+        Insert: {
+          customer_id?: string | null
+          data_payload?: Json | null
+          error_message?: string | null
+          expires_at?: string | null
+          generated_at?: string | null
+          id?: string
+          invoice_ref?: string | null
+          meta?: Json
+          pdf_url?: string | null
+          requested_at?: string
+          scope: Json
+          status?: string
+          tier: number
+        }
+        Update: {
+          customer_id?: string | null
+          data_payload?: Json | null
+          error_message?: string | null
+          expires_at?: string | null
+          generated_at?: string | null
+          id?: string
+          invoice_ref?: string | null
+          meta?: Json
+          pdf_url?: string | null
+          requested_at?: string
+          scope?: Json
+          status?: string
+          tier?: number
+        }
+        Relationships: []
+      }
       str_events_calendar: {
         Row: {
           country_code: string

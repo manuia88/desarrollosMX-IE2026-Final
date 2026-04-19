@@ -16,6 +16,7 @@ import { nomadRouter } from '@/features/str-intelligence/routes/nomad';
 import { photoCvRouter } from '@/features/str-intelligence/routes/photo-cv';
 import { strPortfolioRouter } from '@/features/str-intelligence/routes/portfolio';
 import { strPricingRouter } from '@/features/str-intelligence/routes/pricing';
+import { strReportsRouter } from '@/features/str-intelligence/routes/reports';
 import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
 import { strViabilityRouter } from '@/features/str-intelligence/routes/viability';
 import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
@@ -44,6 +45,7 @@ export const appRouter = router({
   photoCv: photoCvRouter,
   strPortfolio: strPortfolioRouter,
   strPricing: strPricingRouter,
+  strReports: strReportsRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
   zoneInvestment: zoneInvestmentRouter,
