@@ -5,6 +5,7 @@ import { fxRouter } from '@/features/fx/routes/fx';
 import { aiRouter } from '@/features/ia-generativa/routes/ai';
 import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { marketRouter } from '@/features/market/routes/market';
+import { scianRouter } from '@/features/scian/routes/scian';
 import { publicProcedure, router } from './init';
 
 export const appRouter = router({
@@ -19,6 +20,7 @@ export const appRouter = router({
   memory: memoryRouter,
   mfa: mfaRouter,
   roleRequest: roleRequestRouter,
+  scian: scianRouter,
 });
 
 export type AppRouter = typeof appRouter;
