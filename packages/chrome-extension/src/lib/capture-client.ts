@@ -1,9 +1,8 @@
-// STUB — activar FASE 07 BLOQUE 7.E.4 con endpoint /api/market/capture firmado.
-// Skeleton: contrato del cliente HTTP. La firma HMAC y el endpoint real se cablean en 7.E.4.
+// Cliente HTTP para POST /api/market/capture. La firma HMAC server-side
+// (rate limit 500/h/user) se valida en el endpoint creado en 7.E.4.
 
+import { getApiBase } from './config';
 import type { MarketCapture } from './schema';
-
-const DEFAULT_API_BASE = 'https://desarrollosmx.com';
 
 export interface CaptureResponse {
   ok: boolean;
@@ -20,19 +19,24 @@ export async function postCapture(
   payload: MarketCapture,
   options: PostCaptureOptions,
 ): Promise<CaptureResponse> {
-  const base = options.apiBase ?? DEFAULT_API_BASE;
-  const res = await fetch(`${base}/api/market/capture`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-      authorization: `Bearer ${options.token}`,
-    },
-    body: JSON.stringify(payload),
-  });
-
-  if (!res.ok) {
-    return { ok: false, error: `HTTP ${res.status}` };
+  const base = options.apiBase ?? (await getApiBase());
+  let res: Response;
+  try {
+    res = await fetch(`${base}/api/market/capture`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${options.token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch {
+    return { ok: false, error: 'network_error' };
   }
+
+  if (res.status === 401) return { ok: false, error: 'unauthorized' };
+  if (res.status === 429) return { ok: false, error: 'rate_limited' };
+  if (!res.ok) return { ok: false, error: `http_${res.status}` };
 
   const json = (await res.json()) as { market_price_id?: string };
   return { ok: true, market_price_id: json.market_price_id ?? '' };

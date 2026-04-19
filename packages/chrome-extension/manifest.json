@@ -16,7 +16,7 @@
     "service_worker": "service-worker.js",
     "type": "module"
   },
-  "permissions": ["storage", "activeTab"],
+  "permissions": ["storage", "activeTab", "tabs"],
   "host_permissions": [
     "https://www.inmuebles24.com/*",
     "https://www.vivanuncios.com.mx/*",
