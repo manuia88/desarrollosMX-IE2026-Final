@@ -33,6 +33,7 @@ const ALLOWED_FILES = new Set([
   'shared/lib/ingest/__tests__/orchestrator.test.ts',
   'features/market/__tests__/capture.test.ts',
   'tests/security/forbidden-sources.test.ts',
+  'shared/lib/ingest/auto-fetch/__tests__/auto-fetcher.test.ts',
   'supabase/migrations/20260418080400_ingest_meta_schema.sql',
 ]);
 
