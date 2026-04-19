@@ -7,17 +7,26 @@
 > - `INEGI_TOKEN` — INEGI BIE API (registro gratuito https://www.inegi.org.mx/app/api)
 > - `MAPBOX_ACCESS_TOKEN` — Mapbox Traffic + geocoding (~$50-$200/mes según volumen)
 > - `AIRDNA_API_KEY` — AirDNA MarketMinder API (Enterprise $500+/mes — opcional H1, pin H2 si presupuesto tight)
-> - `GOOGLE_TRENDS_METHOD` — decisión: scraping via `google-trends-api` npm package (sin token, pero rate limited) ó SerpAPI ($50/mes)
-> - Anthropic API key ya existe (Fase 03) — usar GPT-4o-mini para extraer PDF BBVA Research
+> - Anthropic API key ya existe (Fase 03) — usar GPT-4o-mini para extraer PDF BBVA Research (con Constitutional AI rules, GC-7)
 > - Trigger.dev v3 account con workers activos (cron scheduler robusto)
+> - **Chrome browser + dev workflow** para cargar extensión sin firmar durante desarrollo (load unpacked). Publicación a Chrome Web Store posterior.
 > - Manu debe autorizar los crons en prod Supabase (concurrency limits) y aprobar lista de fuentes antes de activar producción
 > - **PROHIBIDO**: API Habi — constraint explícito en código + docs (razones: rate limit 3k calls/día, datos contaminados con sesgo de vendedor, costo no justificado vs valor)
-> **Resultado esperado:** Schema ingest completo (geo_data_points, geo_snapshots, macro_series, market_prices_secondary, search_trends, market_pulse, zone_price_index, zona_snapshots con particionamiento pg_partman), orchestrator con retry + dedup + audit, 7 ingestores MACRO + 17 GEO + 4 MERCADO activos con cron schedules, mapeo SCIAN propietario con 3 tiers y 12 macro categorías, admin upload UI para XLSX/CSV/PDF, confidence cascade thresholds seed, tier system seed. Tag `fase-07-complete`.
+> - **PROHIBIDO**: scraping server-side directo de Inmuebles24 / Vivanuncios / Propiedades.com / Mercadolibre Inmuebles / Mudafy — ver [ADR-012 Scraping Policy](../01_DECISIONES_ARQUITECTONICAS/ADR-012_SCRAPING_POLICY.md). Apify rechazó desplegar actors; TOS prohíben. Pivot H1: Chrome Extension (GC-27) + admin upload + partnerships H2+.
+> **Resultado esperado:** Schema ingest completo (geo_data_points, geo_snapshots, macro_series, market_prices_secondary, search_trends, market_pulse, zone_price_index, zona_snapshots con particionamiento pg_partman), orchestrator con retry + dedup + audit, 7 ingestores MACRO + 17 GEO + ingesta MERCADO pivotada (Chrome Ext GC-27 + Google Trends + admin upload Cushman/CBRE/Tinsa/JLL/Softec) conforme [ADR-012](../01_DECISIONES_ARQUITECTONICAS/ADR-012_SCRAPING_POLICY.md) y con lineamientos Constitutional AI (GC-7) en extracción LLM, mapeo SCIAN propietario con 3 tiers y 12 macro categorías (seed del Knowledge Graph B2B GC-18), admin upload UI para XLSX/CSV/PDF, confidence cascade thresholds seed, tier system seed. Tag `fase-07-complete`.
 > **Priority:** [H1]
 
 ## Contexto y objetivo
 
-El Intelligence Engine (IE) es el moat de DesarrollosMX. Esta fase habilita la capa de ingesta que alimenta los 118 scores de Fases 08-12. Las 50+ fuentes cubren las tres categorías: MACRO (tasa de referencia, INPC, IPV, cartera hipotecaria), GEO (comercios DENUE, incidencia FGJ, transporte GTFS, riesgos Atlas, servicios educación/salud/agua), MERCADO (precios secundarios Inmuebles24/Mudafy, Airbnb AirDNA, intención Google Trends, reports Cushman/CBRE). El mapeo SCIAN es IP propietario (el valor de "cercanía a comercios" depende de clasificar qué comercios importan). Esta fase deja los ingestores operativos; las métricas de Fases 08+ los consumen.
+El Intelligence Engine (IE) es el moat de DesarrollosMX. Esta fase habilita la capa de ingesta que alimenta los 118 scores de Fases 08-12. Las 50+ fuentes cubren las tres categorías: MACRO (tasa de referencia, INPC, IPV, cartera hipotecaria), GEO (comercios DENUE, incidencia FGJ, transporte GTFS, riesgos Atlas, servicios educación/salud/agua), MERCADO (intención Google Trends, ocupación AirDNA, listings capturados por Chrome Extension GC-27, reports PDF/XLSX de Cushman/CBRE/Tinsa/JLL/Softec vía admin upload). El mapeo SCIAN es IP propietario (el valor de "cercanía a comercios" depende de clasificar qué comercios importan) y actúa como seed del Knowledge Graph B2B (GC-18) que relaciona comercios × zonas × desarrollos. Esta fase deja los ingestores operativos; las métricas de Fases 08+ los consumen.
+
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-27 | Chrome Extension (Lusha pattern) | Permite a asesores/admins capturar listings de portales desde el browser sin violar TOS server-side | Bloque 7.E (módulos 7.E.1, 7.E.4, 7.E.5) |
+| GC-18 | Knowledge Graph B2B | Mapeo SCIAN propietario (3 tiers + 12 macro categorías) actúa como seed del grafo relacional comercios × zonas × desarrollos | Bloque 7.F |
+| GC-7 | Constitutional AI (never hallucinate) | Extracción LLM de PDFs (BBVA Research, Cushman, CBRE, Tinsa, JLL, Softec) con reglas: nunca inventar números, siempre citar span de origen, low confidence → manual review | Módulos 7.C.4, 7.E.4 |
 
 ## Bloques
 
@@ -198,8 +207,11 @@ El Intelligence Engine (IE) es el moat de DesarrollosMX. Esta fase habilita la c
   const ALLOWED_SOURCES = [
     'banxico','inegi','shf','bbva_research','cnbv','infonavit','fovissste',
     'denue','fgj','gtfs','atlas_riesgos','siged','clues','sacmex','rama','seduvi','catastro','paot','sedema','conagua','inah','profeco','locatel','mapbox_traffic',
-    'inmuebles24','mudafy','airdna','google_trends','cushman','cbre'
+    // Mercado: Chrome Extension (GC-27) + API oficiales + admin upload (ADR-012)
+    'chrome_ext_inmuebles24','chrome_ext_vivanuncios','chrome_ext_propiedades_com','chrome_ext_ml_inmuebles','chrome_ext_fb_marketplace',
+    'airdna','google_trends','cushman','cbre','tinsa','jll','softec'
     // 'habi' — PROHIBIDO explícitamente
+    // 'inmuebles24','mudafy','vivanuncios','propiedades_com' scraping server-side — PROHIBIDO (ADR-012)
   ] as const;
 
   export async function runIngest(job: IngestJob) {
@@ -469,47 +481,63 @@ El Intelligence Engine (IE) es el moat de DesarrollosMX. Esta fase habilita la c
 **Criterio de done del módulo:**
 - [ ] 7 fuentes implementadas (3 activas H1, 4 como stubs/low-freq).
 
-### BLOQUE 7.E — 4 ingestores MERCADO
+### BLOQUE 7.E — Market Data Ingestion (Chrome Extension + admin upload)
 
-#### MÓDULO 7.E.1 — Inmuebles24 / Mudafy scraping
+> **Scraping directo prohibido** — ver [ADR-012 Scraping Policy](../01_DECISIONES_ARQUITECTONICAS/ADR-012_SCRAPING_POLICY.md).
+> Apify rechazó desplegar actors; TOS Inmuebles24/Vivanuncios/Propiedades.com/ML prohíben server-side scraping.
+> Pivot: Chrome Extension usuarios (GC-27 Lusha pattern) + admin upload + partnerships H2+.
 
-**Pasos:**
-- `[7.E.1.1]` `shared/lib/ingest/market/inmuebles24.ts` + `mudafy.ts` con Playwright headless:
-  - Respetar robots.txt; rate limit 1 req cada 3 seg + User-Agent rotation + IP pool (opcional).
-  - Campos: listing_id, price, area_built_m2, bedrooms, bathrooms, operation, property_type, address (parse), posted_at, amenities.
-- `[7.E.1.2]` Cron **semanal** (balance costo vs freshness).
-- `[7.E.1.3]` Dedup por (source + listing_id).
-
-**Criterio de done del módulo:**
-- [ ] Cron scrape zonas piloto (Roma, Condesa, Polanco) sin ban.
-
-#### MÓDULO 7.E.2 — AirDNA
+#### MÓDULO 7.E.1 — Chrome Extension Framework (GC-27)
 
 **Pasos:**
-- `[7.E.2.1]` `shared/lib/ingest/market/airdna.ts` con API key (plan Enterprise). Endpoints: occupancy, ADR, RevPAR por zona.
-- `[7.E.2.2]` Si plan tight, defer H2.
+- `[7.E.1.1]` Crear `packages/chrome-extension/` en monorepo. Stack: Manifest V3 + TypeScript + Vite.
+- `[7.E.1.2]` Content scripts para Inmuebles24 / Vivanuncios / Propiedades.com / ML Inmuebles / FB Marketplace — detectan listing page y exponen botón overlay "Capturar en DMX".
+- `[7.E.1.3]` Popup (320×480) muestra estado auth + contador listings capturados + link a /asesor/capturas.
+- `[7.E.1.4]` Background service worker maneja auth (OAuth via DMX API token).
+- `[7.E.1.5]` Extracción DOM por site: title, price, area, bedrooms, bathrooms, address, amenities, fotos URLs, posted_at, listing_id, vendor contact if visible.
+- `[7.E.1.6]` Enrichment client-side: geocoding via Mapbox + zone_id assignment ST_Contains.
+- `[7.E.1.7]` POST `/api/market/capture` con payload firmado HMAC → insert en `market_prices_secondary` con `source='chrome_ext_<site>'` + `meta.captured_by = user_id`.
+- `[7.E.1.8]` UI asesor `/asesor/capturas` para ver su historial y editar.
 
 **Criterio de done del módulo:**
-- [ ] Stub listo (activable cuando cuenta exista).
+- [ ] Extensión cargada local (load unpacked), captura Inmuebles24 test, row en `market_prices_secondary`, flujo E2E verde.
 
-#### MÓDULO 7.E.3 — Google Trends
+#### MÓDULO 7.E.2 — Google Trends (API oficial)
 
 **Pasos:**
-- `[7.E.3.1]` `shared/lib/ingest/market/google-trends.ts` con `google-trends-api` npm package. Keywords: `"departamentos <colonia>"`, `"casas <ciudad>"`, `"venta <zona>"`.
-- `[7.E.3.2]` Cron **semanal**.
+- `[7.E.2.1]` Mantener implementación con `google-trends-api` npm package (API legítima, sin TOS issue). Keywords: `"departamentos <colonia>"`, `"casas <ciudad>"`, `"venta <zona>"`.
+- `[7.E.2.2]` Cron **semanal**.
 
 **Criterio de done del módulo:**
-- [ ] Trends por zona en `search_trends`.
+- [ ] `search_trends` por zona en BD.
 
-#### MÓDULO 7.E.4 — Cushman & Wakefield + CBRE (reports PDF manual upload)
+#### MÓDULO 7.E.3 — AirDNA (API pagada)
 
 **Pasos:**
-- `[7.E.4.1]` Admin upload UI `/admin/ingest/reports` para PDFs trimestrales Cushman/CBRE.
-- `[7.E.4.2]` GPT-4o-mini extrae métricas con schema Zod: vacancy_rate, asking_rent_usd_m2, cap_rate.
-- `[7.E.4.3]` Cron alerta admin cada trimestre ~día 30 del mes de cierre.
+- `[7.E.3.1]` Stub `shared/lib/ingest/market/airdna.ts` con API key (plan Enterprise) — implementación real si plan contratado. Endpoints: occupancy, ADR, RevPAR por zona.
+- `[7.E.3.2]` Cron **mensual**.
 
 **Criterio de done del módulo:**
-- [ ] Upload + extract funciona.
+- [ ] Stub listo (activable cuando cuenta exista) o ingesta activa si plan contratado.
+
+#### MÓDULO 7.E.4 — Admin upload (Cushman, CBRE, Tinsa, JLL, Softec)
+
+**Pasos:**
+- `[7.E.4.1]` UI `/admin/ingest/market` — upload XLSX/CSV/PDF de reports trimestrales (Cushman, CBRE, Tinsa, JLL, Softec).
+- `[7.E.4.2]` GPT-4o-mini extrae métricas estructuradas (vacancy_rate, cap_rate, asking_rent_usd_m2) con **Constitutional AI rules (GC-7)**: (a) nunca inventar números no presentes en el PDF; (b) cada campo extraído incluye `source_span` (página + texto literal); (c) si confidence <0.8 → marca row `needs_review=true` y no inserta hasta revisión admin.
+- `[7.E.4.3]` Cron alerta admin ~día 30 del mes de cierre.
+
+**Criterio de done del módulo:**
+- [ ] Upload + extract con source_span registrado + review flow operativo.
+
+#### MÓDULO 7.E.5 — Partnership stubs H2+ pin
+
+**Pasos:**
+- `[7.E.5.1]` Documentar en [ADR-012](../01_DECISIONES_ARQUITECTONICAS/ADR-012_SCRAPING_POLICY.md) lista de portales a negociar (Propiedades.com, Lamudi, Vivanuncios).
+- `[7.E.5.2]` Feature flag `market.partnership_feed.enabled` off H1. Stub de adapter genérico.
+
+**Criterio de done del módulo:**
+- [ ] Stub + flag registrados en `feature_registry`.
 
 ### BLOQUE 7.F — Mapeo SCIAN propietario (IP)
 
@@ -669,7 +697,7 @@ El Intelligence Engine (IE) es el moat de DesarrollosMX. Esta fase habilita la c
 - [ ] Orchestrator con retry + dedup + audit en `ingest_runs`.
 - [ ] 7 ingestores MACRO (Banxico, INEGI, SHF, BBVA Research, CNBV, Infonavit, FOVISSSTE) funcionales o con admin upload.
 - [ ] 17 ingestores GEO (DENUE, FGJ, GTFS, Atlas, SIGED, CLUES, SACMEX, RAMA stub, SEDUVI stub, Catastro stub, PAOT, SEDEMA, CONAGUA, INAH, PROFECO, Locatel, Mapbox Traffic) — al menos 8 activos H1.
-- [ ] 4 ingestores MERCADO (Inmuebles24/Mudafy, AirDNA, Google Trends, Cushman+CBRE).
+- [ ] Ingesta MERCADO pivotada (ADR-012): Chrome Extension Framework (GC-27) + Google Trends + AirDNA + admin upload Cushman/CBRE/Tinsa/JLL/Softec con Constitutional AI (GC-7).
 - [ ] Mapeo SCIAN con 3 tiers + 12 macro categorías + fórmulas ratio_PB/Shannon/Gentrification.
 - [ ] Cron schedules en Trigger.dev (11+ jobs).
 - [ ] Admin upload UI `/admin/ingest/upload`.
@@ -678,28 +706,50 @@ El Intelligence Engine (IE) es el moat de DesarrollosMX. Esta fase habilita la c
 - [ ] Tabla `zone_tiers` con función recompute.
 - [ ] Tag git: `fase-07-complete`.
 
-## Features implementadas en esta fase (≈ 20)
+## Features implementadas en esta fase (≈ 24)
 
 1. **F-07-01** 8 tablas ingest (macro_series, geo_data_points, geo_snapshots, market_prices_secondary, search_trends, market_pulse, zone_price_index, zona_snapshots) con pg_partman
 2. **F-07-02** Orchestrator de ingesta con retry + dedup + audit
 3. **F-07-03** Tabla `ingest_runs` tracking
-4. **F-07-04** Allowlist de 30 fuentes + runtime guard (Habi bloqueado)
+4. **F-07-04** Allowlist de fuentes + runtime guard (Habi + scraping server-side bloqueados — ADR-012)
 5. **F-07-05** Ingestor Banxico SIE (tasa_referencia, TIIE28, USD/MXN, tasa_hipotecaria)
 6. **F-07-06** Ingestor INEGI BIE (INPC, INPP, PIB, materiales, vivienda)
 7. **F-07-07** Ingestor SHF IPV con admin upload
-8. **F-07-08** Ingestor BBVA Research PDF + GPT-4o-mini extract
-9. **F-07-09** Ingestor DENUE con mapeo SCIAN (550k puntos CDMX)
+8. **F-07-08** Ingestor BBVA Research PDF + GPT-4o-mini con Constitutional AI (GC-7)
+9. **F-07-09** Ingestor DENUE con mapeo SCIAN (550k puntos CDMX) — seed Knowledge Graph B2B (GC-18)
 10. **F-07-10** Ingestor FGJ CDMX (datos abiertos)
 11. **F-07-11** Ingestor GTFS 5 sistemas (Metro, Metrobús, Tren, Cablebús, EcoBici)
 12. **F-07-12** Ingestores SIGED + CLUES + SACMEX
 13. **F-07-13** Ingestor Atlas Nacional de Riesgos (shapefiles)
-14. **F-07-14** Ingestor Inmuebles24 + Mudafy scraping Playwright
+14. **F-07-14** Chrome Extension Framework (GC-27 Lusha pattern) — Manifest V3 + 5 content scripts
 15. **F-07-15** Ingestor Google Trends semanal por zona
 16. **F-07-16** Ingestor AirDNA (stub + activación H2)
-17. **F-07-17** Admin upload UI Cushman/CBRE/FOVISSSTE PDF + XLSX
-18. **F-07-18** Mapeo SCIAN propietario 3 tiers + 12 macro categorías + fórmulas
+17. **F-07-17** Admin upload UI market reports (Cushman/CBRE/Tinsa/JLL/Softec) con Constitutional AI extraction
+18. **F-07-18** Mapeo SCIAN propietario 3 tiers + 12 macro categorías + fórmulas (Knowledge Graph seed GC-18)
 19. **F-07-19** 11+ crons Trigger.dev v3
 20. **F-07-20** Confidence thresholds seed + zone_tiers + recompute
+21. **F-07-21** Partnership stubs H2+ (Propiedades.com, Lamudi, Vivanuncios) con feature flags
+22. **F-07-22** UI `/asesor/capturas` historial de listings capturados por Chrome Extension
+23. **F-07-23** Endpoint `/api/market/capture` firmado HMAC para ingest desde extensión
+24. **F-07-24** Constitutional AI rules registry para LLM extraction (source_span + confidence threshold + manual review queue)
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-07-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
 
 ## Próxima fase
 
@@ -707,3 +757,4 @@ El Intelligence Engine (IE) es el moat de DesarrollosMX. Esta fase habilita la c
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent C) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

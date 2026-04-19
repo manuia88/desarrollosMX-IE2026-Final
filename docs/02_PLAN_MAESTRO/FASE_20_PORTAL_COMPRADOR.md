@@ -23,6 +23,16 @@ Crítico:
 - UPG 7.11 (Sub-etapa 7.11, contexto §23.1, upgrades 90-98) mapea directo a esta fase — 9 herramientas Buyer Experience con datos reales.
 - Copilot proactivo: inicia conversaciones cuando detecta oportunidad ("3 proyectos nuevos match tu búsqueda"). No es chatbot reactivo.
 
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-62 | Lifestyle DNA matching | Quiz 10 preguntas → perfil detallado → matching personalizado más allá de buyer_persona | Módulo 20.A.3 (nuevo onboarding extendido) + 20.E.2 (nuevo) |
+| GC-68 | Commute REAL calendar-aware | Integra Google Calendar; calcula commute a destinos frecuentes usando tráfico REAL Mapbox | Módulo 20.D.5 (nuevo en Property detail) |
+| GC-69 | Tax + fees true cost | ISAI + honorarios notario + predial proyectado + HOA: costo total verdadero | Módulo 20.D.6 (nuevo en Property detail) |
+| GC-71 | Compare 5 side-by-side | Ampliación del Comparador (hoy 2-5) con hard limit 5 + ordering + personalización Lifestyle DNA | Módulo 20.D.1 amplía |
+| GC-4 | Voice search español MX | Voice input default mobile + comandos "muéstrame X" + TTS proactivo | Módulo 20.H.3 amplía |
+
 ## Bloques
 
 ### BLOQUE 20.A — Layout `(comprador)` group + onboarding
@@ -56,6 +66,21 @@ Crítico:
 **Criterio de done del módulo:**
 - [ ] Flow 5 steps completa en <3 min.
 - [ ] buyer_persona persistido en `user_scores`.
+
+#### MÓDULO 20.A.3 — Lifestyle DNA quiz (GC-62)
+
+**Pasos:**
+- `[20.A.3.1]` Después del Step 5 onboarding (o accesible luego en `/comprador/lifestyle-dna`), quiz opcional pero incentivado (badge + 10% mejor matching):
+  - 10 preguntas dinámicas covering: rutinas diarias (remote/office/hybrid), entretenimiento preferido (cafés/parks/gym/nightlife/museos), tolerancia ruido, cercanía deseada a familia/trabajo/escuelas, transporte primary (car/transit/bike/walk), tipo vivienda conceptual (moderno/clásico/eco), mascota sí/no, visitas frecuentes (quiet vs social), ambiente vecindario (urbano dense / suburbano / mixed).
+- `[20.A.3.2]` Output: `lifestyle_dna` JSON (12 dimensiones 0-1) persisted en `user_scores.lifestyle_dna`.
+- `[20.A.3.3]` Matching engine C03 (FASE 10) lee `lifestyle_dna` como señal adicional (weight 25%) junto a filtros y buyer_persona.
+- `[20.A.3.4]` Personalización: homepage Netflix orden secciones se refina adicionalmente por dimensiones Lifestyle DNA.
+- `[20.A.3.5]` Re-quiz opcional en `/settings/preferences` — avisa al user que cambio recalibra matching.
+
+**Criterio de done del módulo:**
+- [ ] Quiz completa en <4 min.
+- [ ] Lifestyle DNA JSON persiste + visible en perfil.
+- [ ] Matching cambia con different DNA (A/B test).
 
 ### BLOQUE 20.B — 10 Pages — Dashboard, Lifestyle, Affordability
 
@@ -166,26 +191,30 @@ Crítico:
 
 ### BLOQUE 20.D — Pages 7-10: Comparador + Timing + Watchlist + Discover Weekly
 
-#### MÓDULO 20.D.1 — Page 7: Comparador (A08 multi-dimensional 8 dims)
+#### MÓDULO 20.D.1 — Page 7: Comparador 5 side-by-side (GC-71 + A08)
 
 **Pasos:**
-- `[20.D.1.1]` `/comprador/comparador/page.tsx` compara 2-5 unidades side-by-side.
-- `[20.D.1.2]` 8 dimensiones (columnas comparativas):
-  1. Precio + precio/m2
-  2. Ubicación + DMX Score
-  3. Amenidades count + premium score
-  4. Calidad constructiva (dev trust H05)
-  5. Inversión ROI 10y
-  6. Livability N08 + N10
-  7. Safety F01 + N04
-  8. Commute al lugar trabajo/escuela (isócronas F13)
-- `[20.D.1.3]` Radar chart overlayed 8 dims todas las unidades.
-- `[20.D.1.4]` Highlights: "Unit A gana en 5/8, Unit B en 2/8, Unit C en 1/8".
-- `[20.D.1.5]` AI narrative con recomendación weighted según buyer_persona.
+- `[20.D.1.1]` `/comprador/comparador/page.tsx` compara 2-5 unidades side-by-side (hard limit 5 — GC-71).
+- `[20.D.1.2]` 10 dimensiones (columnas comparativas, expandidas con GC-68 + GC-69):
+  1. Precio sticker + precio/m2
+  2. **True cost año 1 (GC-69)**: ISAI + notario + predial + HOA
+  3. Ubicación + DMX Score
+  4. Amenidades count + premium score
+  5. Calidad constructiva (dev trust H05)
+  6. Inversión ROI 10y
+  7. Livability N08 + N10
+  8. Safety F01 + N04
+  9. **Commute REAL (GC-68)**: tiempo ponderado a destinos calendar
+  10. **Lifestyle DNA fit (GC-62)**: score match contra lifestyle_dna del user
+- `[20.D.1.3]` Radar chart overlayed 10 dims todas las unidades.
+- `[20.D.1.4]` Highlights: "Unit A gana en 6/10, Unit B en 3/10, Unit C en 1/10".
+- `[20.D.1.5]` AI narrative con recomendación weighted según buyer_persona + Lifestyle DNA.
+- `[20.D.1.6]` Export PDF (compartir con family/asesor).
 
 **Criterio de done del módulo:**
-- [ ] Comparador 3 unidades renderiza 8 dims.
-- [ ] Highlights correctos.
+- [ ] Comparador 5 unidades renderiza 10 dims.
+- [ ] Lifestyle fit cambia ranking.
+- [ ] PDF export funcional.
 
 #### MÓDULO 20.D.2 — Page 8: Timing Optimizer (A07)
 
@@ -231,6 +260,41 @@ Crítico:
 - [ ] Cron lunes 8am genera recs.
 - [ ] Feedback mejora siguientes.
 
+#### MÓDULO 20.D.5 — Commute REAL calendar-aware (GC-68)
+
+**Pasos:**
+- `[20.D.5.1]` Integración Google Calendar OAuth (scope `calendar.readonly`) + opción manual para agregar destinos frecuentes.
+- `[20.D.5.2]` Componente `<CommuteRealPanel unitId>` en ficha proyecto (FASE 21) y comprador:
+  - Lista destinos top 3 últimos 30 días (office, schools hijos, padres, gym).
+  - Para cada destino → Mapbox Directions API con `depart_at = típico`: 8am, 18pm, sábado 11am. Usa `traffic='live'` para proyección con congestion actual.
+  - Display: "Oficina (Reforma): 28 min lunes 8am en auto / 42 min transit; 52 min miércoles lluvia."
+- `[20.D.5.3]` Score compuesto `commute_quality` 0-100 (weighted inverse por tiempo) añadido a comparador y scoring A10.
+- `[20.D.5.4]` Privacy: eventos calendar NO se guardan en BD, solo se extraen destinos agregados; opt-in explícito.
+
+**Criterio de done del módulo:**
+- [ ] Conectar Calendar + ver commute a 3 destinos test en <10s.
+- [ ] Tráfico live refleja diferencia hora pico vs fuera.
+
+#### MÓDULO 20.D.6 — Tax + fees true cost (GC-69)
+
+**Pasos:**
+- `[20.D.6.1]` Componente `<TrueCostPanel unitId>`: desglosa costo REAL de adquisición por encima del precio sticker:
+  - ISAI (estado-dependiente: CDMX 3%, Jalisco 2%, NL 2%).
+  - Honorarios notariales (0.5%-1.5% valor).
+  - Avalúo (~$5000-15000 MXN).
+  - Registro Público Propiedad (~0.25%).
+  - Predial proyectado año 1 (derivado de `catastral_value × tasa_municipio`).
+  - HOA / mantenimiento torre (si aplica).
+  - Seguros obligatorios (vida + daños si hipoteca).
+  - Gastos hipoteca (comisión apertura 1%, seguro vida banco, interés capitalizado).
+- `[20.D.6.2]` Output: precio sticker $X + verdadero costo año 1 $X × (1 + delta_pct). "Esta propiedad cuesta 6.3% más de lo que parece".
+- `[20.D.6.3]` Fuentes: tabla `tax_fees_by_state` seed MX (31 estados × 5 conceptos) + tabla `transfer_costs_table` + HOA desde `projects.maintenance_fee`.
+- `[20.D.6.4]` Visible en ficha proyecto FASE 21 tab Inversión + en Comparador (GC-71) + Simulador A02.
+
+**Criterio de done del módulo:**
+- [ ] Unit CDMX precio $5M → true cost año 1 = $5.3M con breakdown visible.
+- [ ] Seed 31 estados completo.
+
 ### BLOQUE 20.E — Personalización Netflix engine
 
 #### MÓDULO 20.E.1 — Persona engine
@@ -250,6 +314,16 @@ Crítico:
 **Criterio de done del módulo:**
 - [ ] Persona change actualiza sections.
 - [ ] Artwork per persona cargando.
+
+#### MÓDULO 20.E.2 — Lifestyle DNA personalization (GC-62 extensión)
+
+**Pasos:**
+- `[20.E.2.1]` Refinamiento: orden secciones dashboard combina `buyer_persona` (macro) + `lifestyle_dna` (micro). Ej: dos inversores con DNA distinto (uno "quiet_urban" vs "nightlife_heavy") ven distintos sub-orden de zones.
+- `[20.E.2.2]` `getArtworkForProject(projectId, persona, lifestyleDNA)` puede escoger thumbnails diferentes: Condesa nocturna para nightlife_heavy, Condesa mañana para quiet_urban.
+- `[20.E.2.3]` Re-quiz opcional cada 6 meses (cron notif "Actualiza tu Lifestyle DNA").
+
+**Criterio de done del módulo:**
+- [ ] 2 users mismo buyer_persona + DNA distinto → dashboards diferentes.
 
 ### BLOQUE 20.F — Family accounts
 
@@ -387,9 +461,10 @@ Crítico:
   - Matcher nuevo encontrado >85% confidence → Copilot inicia "¡Oye! Encontré un proyecto que creo que te va a encantar: {project}. ¿Quieres que te cuente más?".
   - Price drop en watchlist >5% → "{unit} bajó 7% a ${price}. ¿Te interesa revisarlo?".
   - Visita próxima → "Tu visita a {project} es mañana a las {time}. ¿Te genero la ruta con tiempo de traslado?".
-- `[20.H.3.3]` Voice input default mobile (PWA). Desktop: voice opcional pero teclear default.
-- `[20.H.3.4]` Voice command examples: "Muéstrame proyectos en Condesa bajo 4 millones con 2 recámaras".
-- `[20.H.3.5]` TTS responses opcional.
+- `[20.H.3.3]` **Voice search español MX (GC-4) default mobile** (PWA). Desktop: voice opcional pero teclear default. Usa Web Speech API con `lang='es-MX'`, fallback Whisper server-side si browser no soporta.
+- `[20.H.3.4]` Voice command examples: "Muéstrame proyectos en Condesa bajo 4 millones con 2 recámaras", "¿Cuánto me cuesta realmente este depa?", "Compárame este con los otros dos que vi ayer".
+- `[20.H.3.5]` TTS responses (ElevenLabs ES-MX voice para plan Pro, browser TTS gratis).
+- `[20.H.3.6]` Continuous conversation mode (push-to-talk o wake word "Hola DMX") respetando privacy; toggle claro on/off.
 
 **Criterio de done del módulo:**
 - [ ] Proactive trigger test dispara.
@@ -491,9 +566,36 @@ Mapeo UPG sub-etapa 7.11 contexto §23.1 — 9 herramientas Buyer Experience con
 
 **Dependencia cruzada:** Este archivo referencia M18 Dashboard Comprador + M19 Marketplace + M20 Ficha Proyecto (docs/04_MODULOS/) — Agente H BATCH 2 escribe.
 
+## Features añadidas por GCs (delta v2)
+
+- **F-20-41** Lifestyle DNA quiz + matching 25% weight (GC-62).
+- **F-20-42** Commute REAL calendar-aware (GC-68) con Google Calendar + Mapbox live traffic.
+- **F-20-43** Tax + fees true cost (GC-69) con seed 31 estados MX.
+- **F-20-44** Comparador 5 side-by-side (GC-71) con 10 dims + export PDF.
+- **F-20-45** Voice search español MX (GC-4) con Web Speech + Whisper fallback + TTS.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-20-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 FASE 21 — Portal Público (landing SPA + /explorar + /proyectos/[id] + /indices + /metodologia + /asesores/[slug] + SEO + A11y)
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

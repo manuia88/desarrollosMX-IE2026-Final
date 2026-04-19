@@ -16,6 +16,15 @@
 
 El portal desarrollador es donde los desarrolladores inmobiliarios gestionan su inventario, ven el pulse de mercado que afecta sus proyectos, y toman decisiones de pricing/absorción asistidas por el IE DMX. Es una **superficie B2B monetizable** (§21 contexto — Starter $999/mes, Pro $2,999, Enterprise custom) cuya diferenciación vs competidores (DD360, Monopolio, Pulppo-enterprise) es la **intelligence IE inline en cada card**: un dev no sólo ve "vendí 3 unidades este mes" sino "tu absorción 2.1x supera al benchmark 1.4x de Del Valle, y tu pricing Aparatado 3B está 4% sobre competencia — riesgo 17% en 45d".
 
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-81 | Site Selection AI | Query en lenguaje natural "dónde comprar terreno" → AI escanea IE + demographics + competencia | Módulo 15.A.4 (nuevo) |
+| GC-82 | Feasibility auto | Pegar link Catastro → cálculo automático cash flow + IRR + PMF preliminar | Módulo 15.F.3 amplía (ya existe UPG 85 — ahora con auto-fill por link) |
+| GC-87 | Dynamic pricing daily | Cron recalcula pricing óptimo por unidad basado en demanda / competencia / absorción | Módulo 15.E.8 (nuevo) |
+| GC-88 | Competitor radar | Monitoreo automático de desarrollos competidores en zona (alertas launch, cambios precio, inventario) | Módulo 15.E.9 (nuevo) |
+
 Crítico:
 - 7 tabs Analytics IE son **el producto más caro** del plan Pro — calidad de data visualization pedagógica (no números crudos).
 - `resolve_features()` debe gatear TODAS las features dev — sin excepciones. Un Free no ve Pricing Autopilot, Absorption Forecast ni Predicciones.
@@ -78,6 +87,19 @@ Crítico:
 - [ ] Login como Free dev no ve Tab Pricing (UpgradePrompt).
 - [ ] Upgrade simulado a Pro desbloquea tabs.
 - [ ] `resolve_features()` tarda <50ms.
+
+#### MÓDULO 15.A.4 — Site Selection AI (GC-81)
+
+**Pasos:**
+- `[15.A.4.1]` Ruta `/developer/site-selection` con input natural language: "Quiero terreno para 60 unidades residencial medio en CDMX norte, budget $60M MXN, target absorción 2/mes".
+- `[15.A.4.2]` Server procedure `developer.siteSelectionAI({ query })` Claude Sonnet function-calling con tools: `getZoneScores`, `getLandListings`, `getDemographics`, `getCompetition`, `getAbsorptionBenchmark`.
+- `[15.A.4.3]` Output estructurado: top 5 zonas ranked + rationale + map con pins + terrenos disponibles matching + score fit 0-100.
+- `[15.A.4.4]` Export PDF con análisis completo + comparables + caveats.
+- `[15.A.4.5]` Feature gated Pro+ (cost tracked ~$0.50 USD per query).
+
+**Criterio de done del módulo:**
+- [ ] Query test produce top 5 con rationale <30s.
+- [ ] Map renderiza pins con scores.
 
 ### BLOQUE 15.B — M11 Inventario Dev
 
@@ -300,6 +322,41 @@ Ruta `app/(developer)/analytics/page.tsx`. Top bar tabs: Demanda | Pricing | Abs
 - [ ] Los 3 sub-sections renderizan datos coherentes entre sí.
 - [ ] Narrative IA cruza las 3 predicciones lógicamente.
 
+#### MÓDULO 15.E.8 — Dynamic Pricing Daily (GC-87)
+
+**Pasos:**
+- `[15.E.8.1]` Cron `dynamic_pricing_daily` 2am por proyecto Pro+: recalcula precio óptimo per unidad usando:
+  - B03 Pricing Autopilot (ya implementado) + elasticidad zona (FASE 10).
+  - Demand signals últimos 7 días (búsquedas matching, wishlist adds, landing views).
+  - Competitor moves (ver GC-88) — si competencia bajó 3% hace 24h, ajusta ±1%.
+  - Absorción actual vs target (si absorción <target → lowering signal).
+- `[15.E.8.2]` Output `dynamic_pricing_suggestions` tabla (unit_id, current_price, suggested_price, delta_pct, rationale, confidence, expires_at=end_of_day).
+- `[15.E.8.3]` UI tab Pricing: toggle "Auto-apply" (si on, dev aprueba policy → cambios aplican con audit; si off, dev revisa cada mañana).
+- `[15.E.8.4]` Notif dev diaria con resumen sugerencias día.
+- `[15.E.8.5]` Feature gated Pro+ (Enterprise puede auto-apply).
+
+**Criterio de done del módulo:**
+- [ ] Cron genera sugerencias para 100 unidades en <90s.
+- [ ] Auto-apply respeta guard-rails (±3% máximo por día).
+
+#### MÓDULO 15.E.9 — Competitor Radar (GC-88)
+
+**Pasos:**
+- `[15.E.9.1]` Tabla `competitor_monitors` (project_id, competitor_project_id, metrics_tracked[], last_checked_at). Cada dev selecciona hasta 10 competidores (H1) o unlimited (Enterprise).
+- `[15.E.9.2]` Cron `competitor_radar_daily` 4am: para cada monitor consulta `project_competitors` + `market_prices_secondary` (captura Chrome Ext GC-27 FASE 07) + news web (Claude + web browse) → detecta cambios:
+  - Nuevo launch / nueva torre (scrape homepage or press release).
+  - Cambio precio ±2%.
+  - Inventario change (unidades disponibles delta).
+  - Cambio avance obra.
+  - Ads visibles FB/IG (Meta Ad Library API).
+- `[15.E.9.3]` Alertas `competitor_alerts` tabla + widget tab Competencia "Alertas últimas 7 días".
+- `[15.E.9.4]` AI narrative weekly: "Torre Vista bajó 4% en Apartado 2B; tu unidad equivalente ahora 6% sobre mercado".
+- `[15.E.9.5]` Feature gated Pro+.
+
+**Criterio de done del módulo:**
+- [ ] Monitor configurado detecta cambio precio test.
+- [ ] Alert aparece en UI <24h post-change.
+
 ### BLOQUE 15.F — UPG 7.10 Developer Intelligence (UPG 81-89)
 
 Mapeo directo contexto §23.1 sub-etapa 7.10: 9 herramientas con datos reales.
@@ -326,20 +383,21 @@ Mapeo directo contexto §23.1 sub-etapa 7.10: 9 herramientas con datos reales.
 - [ ] Percentiles calculados desde universo real de devs.
 - [ ] PDF descargable.
 
-#### MÓDULO 15.F.3 — UPG 85 Feasibility + UPG 86 Terrenos
+#### MÓDULO 15.F.3 — UPG 85 Feasibility auto (GC-82) + UPG 86 Terrenos
 
 **Pasos:**
 - `[15.F.3.1]` UPG 85 Feasibility Report (I03 producto B2B stub aquí, full Fase 23): ruta `/analytics/feasibility/new` wizard:
-  - Step 1: Subir polígono terreno (GeoJSON o dibujar en Mapbox).
-  - Step 2: Input programa (# unidades, m2 vendibles, mix prototipos).
-  - Step 3: Engine IE calcula: DMX Score zona, densidad permitida (uso suelo SEDUVI si disponible), absorción esperada B08 zonal, precio target, ROI preliminar.
-  - Step 4: Generar reporte PDF con análisis.
+  - Step 1: Subir polígono terreno (GeoJSON o dibujar en Mapbox) **o pegar link Catastro CDMX (GC-82)** → server parsea cuenta catastral + geometría + uso suelo automáticamente.
+  - Step 2: Input programa (# unidades, m2 vendibles, mix prototipos). Si link Catastro: sugiere programa óptimo basado en densidad permitida + comparables zona.
+  - Step 3: Engine IE calcula auto: DMX Score zona, densidad permitida (uso suelo SEDUVI si disponible), absorción esperada B08 zonal, precio target, **cash flow mensual + IRR 5y/10y + NPV + break-even month** (extensión GC-82).
+  - Step 4: Generar reporte PDF con análisis + comparables + sensitivity analysis (±10% precio, ±20% absorción).
 - `[15.F.3.2]` UPG 86 Terrenos disponibles: vista de terrenos en venta con scoring (consume `market_prices_secondary` filtered por tipo='terreno' + uso suelo).
 - `[15.F.3.3]` Filtros: alcaldía, m2 min/max, precio/m2, zonificación, densidad permitida, scoring IE.
 
 **Criterio de done del módulo:**
 - [ ] Wizard feasibility completado produce PDF con números reales.
 - [ ] Terrenos map muestra pines con score.
+- [ ] Pegar link Catastro auto-llena Step 1 + 2 en <10s (GC-82).
 
 #### MÓDULO 15.F.4 — UPG 87 Análisis Manzana + UPG 88 Oportunidades + UPG 89 Proyección
 
@@ -426,9 +484,35 @@ Mapeo directo contexto §23.1 sub-etapa 7.10: 9 herramientas con datos reales.
 - [ ] Tag git `fase-15-complete`.
 - [ ] Features entregados: 30 (target §9 briefing).
 
+## Features añadidas por GCs (delta v2)
+
+- **F-15-31** Site Selection AI (GC-81) natural language query + map ranking.
+- **F-15-32** Feasibility auto con link Catastro (GC-82) + cash flow + IRR.
+- **F-15-33** Dynamic Pricing Daily (GC-87) cron + auto-apply toggle.
+- **F-15-34** Competitor Radar (GC-88) daily cron + alertas.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-15-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 FASE 16 — Contabilidad Dev (CFDI 4.0 + SAT + bancos + payout + holdback + dunning + AML + ESG)
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

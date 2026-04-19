@@ -17,6 +17,12 @@
 
 La decisión del founder (§2.2 briefing) es contabilidad **full en H1** — no MVP contabilidad. El desarrollador MX vive en un paisaje fiscal complejo: CFDI 4.0 obligatorio, múltiples RFCs por holding+operadoras+fideicomisos, complementos (Pago, Notas de Crédito, REP Recibo Electrónico Pagos), SAT validación, conciliación bancaria manual hoy. DMX **absorbe toda esta complejidad** en un único módulo integrado al flow transaccional: cuando una operación se cierra en M07 del asesor (FASE 14), la factura se emite automáticamente, el payout se programa, la comisión se retiene hasta entrega, y el reporte P&L se actualiza.
 
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-56 | Commission + Tax Forecast | Forecast fiscal 3-6 meses (IVA por pagar, retenciones) cruzado con Commission Forecast FASE 14 | Módulo 16.J.3 (nuevo) |
+
 Crítico:
 - Multi-RFC por dev (holding + SPVs operadoras por proyecto + fideicomisos): la relación correcta es `developer_entities` (N) per `profile.id`, cada una con su propia FIEL.
 - FIEL cifrada en Vault con pgsodium — NUNCA plain text, NUNCA en env vars Vercel largas. Admin acceso solo via procedure con MFA.
@@ -446,6 +452,22 @@ Crítico:
 - [ ] PDF P&L descargable con formato correcto.
 - [ ] XLSX abre en Excel sin warnings.
 
+#### MÓDULO 16.J.3 — Tax pre-calc automation (GC-56 variante fiscal)
+
+**Pasos:**
+- `[16.J.3.1]` Cron `tax_forecast_monthly` día 1 cada mes: para cada `developer_entity` MX calcula:
+  - IVA trasladado vs acreditado (por cfdi emitidos + gastos deducibles).
+  - ISR estimado (utilidad fiscal preliminar × tarifa).
+  - Retenciones pendientes (IVA retenido 4%, ISR servicios).
+  - Cash flow proyectado 3-6 meses basado en operaciones abiertas + probability (cruza Commission Forecast FASE 14 GC-56).
+- `[16.J.3.2]` UI `/contabilidad/tax-forecast` con chart stacked bar months next 6 (IVA por pagar, ISR anticipado, retenciones).
+- `[16.J.3.3]` Alert "Próximo pago DIOT / DyP / ISR provisional" con 7 días de anticipación.
+- `[16.J.3.4]` Export PDF para contador externo.
+
+**Criterio de done del módulo:**
+- [ ] Forecast 3m coherente con operaciones/facturas reales.
+- [ ] Alerts se disparan correctamente.
+
 ### BLOQUE 16.K — UI dashboard contable
 
 #### MÓDULO 16.K.1 — Dashboard principal contabilidad
@@ -499,9 +521,32 @@ Crítico:
 - [ ] Tag git `fase-16-complete`.
 - [ ] Features entregados: 35 (target §9 briefing).
 
+## Features añadidas por GCs (delta v2)
+
+- **F-16-36** Tax pre-calc automation (GC-56 variante fiscal) con forecast 3-6m + alerts.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-16-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 FASE 17 — Document Intelligence Pipeline (PDFs/planos/docs oficiales → tabla verde/amarillo/rojo con AI)
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

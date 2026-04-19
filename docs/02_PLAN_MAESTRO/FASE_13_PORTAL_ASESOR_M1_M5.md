@@ -10,12 +10,27 @@
 > - Scores N0-N3 + N5 para intelligence cards inline (FASE 08-12).
 > - Seed `catalogos`: 17 tipos propiedad, 47 amenidades, 42 espacios, filtrados por país+tipo.
 > - Dataset seed de 3 asesores + 10 contactos + 5 captaciones + 3 búsquedas (`supabase/seed.sql`).
+> - **OCR service** (GC-38): Google Vision API key (preferido, ~$1.50/1000 imágenes) o Tesseract.js local fallback. Campo INE frente+reverso + business card (OCR general).
+> - **Web Speech API / Whisper** para voice input (GC-4) + ElevenLabs or browser TTS para morning briefing voz (GC-32).
+> - **Cron morning-briefing** configurado (dispatch 7am local por timezone).
 > **Resultado esperado:** 5 módulos M01-M05 del portal asesor operando en rutas `app/(asesor)/*` con layout Dopamine, componentes Card3D, integración IE inline, STATUS_MAP global, i18n 100%, tRPC cableado. Seguir pixel-perfect la spec visual de `docs/referencias-ui/M1-M5_*.tsx`. Tag `fase-13-complete`.
 > **Priority:** [H1]
 
 ## Contexto y objetivo
 
 Esta fase entrega la mitad del portal asesor: los primeros 5 módulos (Dashboard command center, Desarrollos, Contactos, Búsquedas, Captaciones). Son el core del día a día del asesor — los otros 4 (Tareas, Operaciones, Marketing, Estadísticas) van en FASE 14.
+
+## Game-changers integrados en esta fase
+
+| GC | Nombre | Impacto | Bloque/Módulo |
+|---|---|---|---|
+| GC-4 | AI Primary Interface (voice-first) | Copilot sidebar persistente con voice input + TTS para dashboard + comandos rápidos | Bloque 13.A, 13.B |
+| GC-32 | Morning Voice Briefing | Briefing diario leído en voz al login (C05 + TTS) | Módulo 13.B.7 (nuevo) |
+| GC-33 | WhatsApp auto-draft | Server procedure genera template WA personalizado con IE scores de zona para cualquier contacto/búsqueda | Módulo 13.D.4 (nuevo, cross-módulo) |
+| GC-38 | Scan INE / business card | Componente camera + OCR → contacto pre-poblado (anti-fricción M03) | Módulo 13.D.5 (nuevo) |
+| GC-50 | Birthday + Re-engagement | Calendar trigger detecta fechas clave (cumple, aniversario, 6m sin contacto) → flow notifs | Módulo 13.F.6 (nuevo) |
+| GC-26 | Enrichment Engine (Clay pattern) | Pipeline visual source → enrich → validate → push para contactos en M03 | Módulo 13.D.6 (nuevo) |
+| GC-27 | Chrome Extension integration | Dashboard muestra "Capturas recientes" desde extensión (FASE 07 GC-27) | Módulo 13.B.8 (nuevo) |
 
 Crítico:
 - Seguir spec visual EXACTA de `docs/referencias-ui/M1_Dashboard.tsx` a `M5_Captaciones.tsx` (son los JSX Dopamine finales v5.1 tropicalizados).
@@ -145,6 +160,31 @@ Crítico:
 - [ ] Buscar "gonzalez" devuelve contacto + búsquedas asociadas.
 - [ ] Shortcut "nc" abre modal captación.
 
+#### MÓDULO 13.B.7 — Morning Voice Briefing (GC-32)
+
+**Pasos:**
+- `[13.B.7.1]` Componente `shared/ui/ai/MorningBriefingVoice.tsx` — auto-trigger al login si `profiles.morning_voice_briefing=true` y hora local ∈ [6:00, 10:00).
+- `[13.B.7.2]` Server: reusa `intelligence.getMorningBriefing()` (FASE 12 C05) + función `generateVoiceNarrative(briefing, locale)` que produce texto TTS-friendly (~45-60s spoken).
+- `[13.B.7.3]` Reproducción con `browserTTS` (gratuito) por default, `elevenLabsTTS` opcional por plan Pro+.
+- `[13.B.7.4]` UI: waveform + controles Pausar/Saltar/Velocidad 0.75x-1.5x + transcript toggle.
+- `[13.B.7.5]` Respetar `prefers-reduced-motion` y `profiles.audio_enabled`. Silent fallback: render briefing textual normalmente.
+- `[13.B.7.6]` Telemetría: PostHog `morning_briefing_played` + `morning_briefing_dismissed`.
+
+**Criterio de done del módulo:**
+- [ ] Login 8am muestra briefing + lee voz en <3s.
+- [ ] Toggle en /settings/preferences persiste.
+
+#### MÓDULO 13.B.8 — Capturas recientes (Chrome Ext integration GC-27)
+
+**Pasos:**
+- `[13.B.8.1]` Widget Dashboard "Últimas capturas" consume `asesorCRM.getRecentCaptures({ limit: 5 })` que lee `market_prices_secondary` WHERE `meta.captured_by = user_id` ORDER BY fetched_at DESC.
+- `[13.B.8.2]` Cards con thumbnail + price + fuente (Inmuebles24 / Vivanuncios / ML / FB / Propiedades.com) + acción "Convertir a captación" (abre flow M05 con campos pre-llenados).
+- `[13.B.8.3]` CTA "Instalar extensión" si `profiles.chrome_ext_installed=false` + tutorial quick.
+
+**Criterio de done del módulo:**
+- [ ] Captura en extensión aparece en dashboard <30s.
+- [ ] Flow convertir→captación pre-llena 6/6 campos mínimos.
+
 ### BLOQUE 13.C — M02 Desarrollos
 
 #### MÓDULO 13.C.1 — Ruta y tabs
@@ -220,6 +260,51 @@ Crítico:
 **Criterio de done del módulo:**
 - [ ] Argumentario AI genera en <12s con ≥3 citations.
 - [ ] Merge flow funcional.
+
+#### MÓDULO 13.D.4 — WhatsApp auto-draft (GC-33)
+
+**Pasos:**
+- `[13.D.4.1]` Server procedure `asesorCRM.draftWaMessage({ contactId, intent: 'nurture'|'property_match'|'follow_up'|'birthday' })` genera template WA personalizado usando:
+  - Datos contacto (nombre, zonas de interés, temperatura, lastInteraction).
+  - IE scores zona preferida (Livability N8 + Momentum N11 + Safety F01 + Ecosystem F03).
+  - Claude Haiku (costo bajo, <800 tokens out) + schema Zod del output.
+- `[13.D.4.2]` Output: `{ draft_text, tokens_used, ie_citations: [...], cta_suggestion }` → NO envía, solo drafts.
+- `[13.D.4.3]` UI: botón "WA sugerido" en ficha contacto (M03) + búsqueda (M04) → modal con draft + botones "Copiar", "Abrir WA web con pre-fill", "Editar".
+- `[13.D.4.4]` Respeta ventana 24h Meta WA: si ventana activa → texto libre, si no → sugiere template aprobado.
+- `[13.D.4.5]` Feature gated `feature.wa_auto_draft` (free 2/mes, starter 20/mes, pro ilimitado).
+
+**Criterio de done del módulo:**
+- [ ] Draft se genera en <4s con ≥2 citations IE.
+- [ ] Botón "Abrir WA" abre `https://wa.me/{phone}?text={encoded}` correcto.
+
+#### MÓDULO 13.D.5 — Scan INE / Business Card (GC-38)
+
+**Pasos:**
+- `[13.D.5.1]` Componente `features/contactos/components/ScanContactCamera.tsx` usa `getUserMedia()` o upload file. 2 modos: `ine` (frente+reverso 2 capturas) y `business_card` (1 captura).
+- `[13.D.5.2]` Server endpoint `/api/ocr/contact-card` envía imagen a Google Vision API (DOCUMENT_TEXT_DETECTION) → retorna texto crudo.
+- `[13.D.5.3]` Post-process con Claude Haiku + schema Zod: extrae `{ first_name, last_name, curp?, rfc?, phones[], emails[], company?, position?, address?, birth_date? }`. Source spans + confidence por campo (GC-7 Constitutional).
+- `[13.D.5.4]` UI "Wizard nuevo contacto (scan)": preview fields con chips verde/ámbar/rojo por confidence; user puede editar. Submit crea `contactos` con origen=`scan_ine` o `scan_business_card`.
+- `[13.D.5.5]` Feature gated `feature.scan_contact` (free 3/mes, starter 30, pro ilimitado).
+
+**Criterio de done del módulo:**
+- [ ] Scan INE test extrae ≥8 campos correctos, genera contacto.
+- [ ] Confidence <0.7 aparece ámbar con edición requerida.
+
+#### MÓDULO 13.D.6 — Enrichment Engine visual pipeline (GC-26 Clay pattern)
+
+**Pasos:**
+- `[13.D.6.1]` Ruta `/contactos/enrichment` — canvas visual tipo Clay con nodes: `Source` → `Enrich` → `Validate` → `Push`.
+- `[13.D.6.2]` Nodes disponibles H1:
+  - Source: contactos sin email / sin teléfono / sin company.
+  - Enrich: reverse-phone lookup (Truecaller-like, stub H2), email finder (Hunter.io API, cap por plan), LinkedIn scrape via user (manual paste).
+  - Validate: email regex + MX check (quick NSLookup), phone country code match.
+  - Push: update contacto + log `enrichment_runs`.
+- `[13.D.6.3]` Pipeline guardable como preset + ejecución batch (background job) sobre 1-N contactos.
+- `[13.D.6.4]` Feature gated `feature.enrichment_engine` (starter 50 enrichments/mes, pro 500).
+
+**Criterio de done del módulo:**
+- [ ] Pipeline test sobre 10 contactos encuentra ≥3 emails nuevos.
+- [ ] Log `enrichment_runs` auditable.
 
 ### BLOQUE 13.E — M04 Búsquedas
 
@@ -349,6 +434,21 @@ Crítico:
 **Criterio de done del módulo:**
 - [ ] 4 herramientas accesibles desde captación.
 
+#### MÓDULO 13.F.6 — Birthday + Re-engagement triggers (GC-50)
+
+**Pasos:**
+- `[13.F.6.1]` Cron `birthday_and_reengagement_daily` 7:30 local por timezone: escanea `contactos` para calendario de fechas clave:
+  - `birthday_upcoming_3d` (si `birth_date` tiene mes/día a +3 días).
+  - `anniversary_6m_no_contact` (última interacción > 180 días).
+  - `property_anniversary_1y` (cerraron operación hace 1 año).
+- `[13.F.6.2]` Para cada match crea `tareas` (FASE 14) tipo `re_engagement` con sugerencia texto + draft WA (reusa GC-33 del 13.D.4).
+- `[13.F.6.3]` Widget "Re-engagement oportunidades" en Dashboard M01.
+- `[13.F.6.4]` Feature gated `feature.birthday_reengagement` (default ON plans Starter+).
+
+**Criterio de done del módulo:**
+- [ ] Contacto con birth_date +3d genera tarea con draft WA.
+- [ ] Widget aparece cuando hay ≥1 oportunidad.
+
 ### BLOQUE 13.G — Tests + seguridad + performance
 
 #### MÓDULO 13.G.1 — E2E Playwright asesor
@@ -395,9 +495,38 @@ Crítico:
 - [ ] Tag git: `fase-13-complete`.
 - [ ] Documentación: `docs/04_MODULOS/M01..M05_*.md` reflejan estado "implementado".
 
+## Features añadidas por GCs (delta v2)
+
+- **F-13-21** Morning Voice Briefing (GC-32) con TTS + transcript toggle.
+- **F-13-22** Capturas recientes widget (GC-27) integrado desde Chrome Extension FASE 07.
+- **F-13-23** WhatsApp auto-draft procedure (GC-33) con citations IE zona.
+- **F-13-24** Scan INE/Business Card OCR (GC-38) con confidence semáforo.
+- **F-13-25** Enrichment Engine visual pipeline (GC-26) Clay-pattern.
+- **F-13-26** Birthday + Re-engagement cron triggers (GC-50).
+- **F-13-27** AI voice-first primary interface (GC-4) en Copilot sidebar.
+
+## E2E VERIFICATION CHECKLIST
+
+Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md). Todos los items deben pasar antes del tag `fase-13-complete`.
+
+- [ ] Todos los botones UI mapeados en 03.13_E2E_CONNECTIONS_MAP
+- [ ] Todos los tRPC procedures implementados (no stubs sin marcar)
+- [ ] Todas las migrations aplicadas
+- [ ] Todos los triggers/cascades testeados
+- [ ] Permission enforcement validado para cada rol
+- [ ] Loading + error + empty states implementados
+- [ ] Mobile responsive verificado
+- [ ] Accessibility WCAG 2.1 AA
+- [ ] audit-dead-ui.mjs pasa sin violations (0 dead)
+- [ ] Playwright smoke tests covering happy paths pasan
+- [ ] PostHog events tracked para acciones clave
+- [ ] Sentry captures errors (validación runtime)
+- [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
+
 ## Próxima fase
 
 [FASE 14 — Portal Asesor M06-M09 (Tareas + Operaciones + Marketing + Estadísticas)](./FASE_14_PORTAL_ASESOR_M6_M10.md)
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17
+**Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)
