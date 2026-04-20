@@ -714,6 +714,86 @@ U5 + U6 + U7 + U9 + U10 + U12 + U13 + U14 + P1 + S1 + S2 + D1 + D2 + D3 + **D4 +
 
 ---
 
+## Implementación real BLOQUE 8.E — cerrado 2026-04-20
+
+Componentes Dopamine UI que materializan visualmente todo el backend acumulado
+de BLOQUEs 8.A-8.D (confidence cascade + tier gating + provenance + methodology
++ recommendations + ranking + time-series + validity).
+
+### Commits BLOQUE 8.E
+
+| Commit | Descripción |
+|---|---|
+| `c6078ee` | 8.E.1 — ConfidenceBadge + ScoreTransparencyPanel (E4) + ScoreRecommendationsCard (E5) + tests + i18n |
+| `e214bd5` | 8.E.2 — ScorePlaceholder tier gating + IntelligenceCard integración + tests |
+
+### Upgrades nuevos aplicados BLOQUE 8.E
+
+- **E4 ScoreTransparencyPanel**: panel/dialog unificado que expone 8 secciones sobre cada
+  score: (1) header score_id + value + ConfidenceBadge, (2) reasoning narrativo resuelto
+  desde `reasoning_template` + `template_vars` (U12), (3) methodology accordion (formula
+  + sources + weights + references) (U10), (4) provenance (U4) con name + period + count,
+  (5) comparable zones grid 3-up (U13) con delta visual, (6) ranking barra progress (D3),
+  (7) time-series deltas 3m/6m/12m (D2), (8) validity computed_at + valid_until (P1) +
+  footer link `/metodologia/<score_id>` (FASE 21 stub).
+- **E5 ScoreRecommendationsCard**: resuelve bucket del value/confidence
+  (low <40, medium 40-69, high ≥70, insufficient_data override) y renderiza
+  `methodology.recommendations[bucket]` como lista bullets i18n via next-intl. Callback
+  opcional `onAction(key)` cuando la recommendation incluye CTA interno.
+
+### Componentes nuevos Dopamine
+
+| Componente | Responsabilidad |
+|---|---|
+| `ConfidenceBadge` | 4 variantes confidence (high invisible, medium/low pills, insufficient_data + CTA explain) |
+| `ScoreTransparencyPanel` | E4 — panel transparencia full con 8 secciones |
+| `ScoreRecommendationsCard` | E5 — recomendaciones por bucket |
+| `ScorePlaceholder` | Tier-gated placeholder + admin bypass (isSuperadmin && forceFlag) |
+| `IntelligenceCard` | Grid score tiles integrando los 4 componentes + loading/empty/error ADR-018 |
+
+### Tests BLOQUE 8.E
+
+- confidence-badge: 4 casos (tone mapping por confidence level)
+- score-recommendations-card: 4 casos (bucket resolver + edge cases 40/69/70)
+- score-placeholder: 5 casos (canBypassPlaceholder con combinaciones gated/superadmin/flag)
+- score-transparency-panel: 5 casos (resolveReasoning template replacement + undefined)
+
+**Total BLOQUE 8.E**: 18/18 UI helper tests passing (lógica pura, sin DOM).
+
+### Decisiones autónomas BLOQUE 8.E
+
+- **Dialog en lugar de Popover/Modal split**: el plan sugería "popover desktop + modal
+  mobile" pero la infra del repo sólo tiene `shared/ui/primitives/dialog.tsx` y
+  `popover.tsx` separados. Dialog provee experiencia uniforme, accesible (focus trap,
+  Esc, aria-modal) en ambos viewports sin lógica de detección de breakpoint. Se
+  mantiene la API (open/onOpenChange) para intercambiar implementación después sin
+  cambios en consumers.
+- **Storybook no existe en el repo** — las stories exigidas por plan §BLOQUE 8.E se
+  aplazaron. Se cubre con tests de helpers pure + Playwright smoke cuando IntelligenceCard
+  aterrice en `features/ie/` (FASE 11). Infraestructura Storybook queda fuera de scope de
+  8.E (setup + deps ≥5 paquetes).
+- **React Testing Library / jsdom no instalados** — vitest corre en modo node. Tests
+  cubren helpers `resolveConfidenceTone`, `resolveRecommendationBucket`, `resolveReasoning`,
+  `canBypassPlaceholder` (funciones puras). Component rendering validation quedará
+  cubierto por Playwright cuando haya consumer real en FASE 11.
+- **Comparable zones / Ranking / Time-series como props opcionales en
+  ScoreTransparencyPanel** — el backend actual de CalculatorOutput no expone estos datos
+  (D2+D3+U13 requieren agregaciones multi-row futuras). El panel los renderiza SOLO si
+  el consumer los pasa; skip silent cuando undefined (no empty state noise en MVP).
+  Cuando 8.F exponga estos datos via cascades, el UI ya está listo.
+
+### Upgrades acumulados FASE 08 (8.A + 8.B + 8.C + 8.D + 8.E)
+
+U5 + U6 + U7 + U9 + U10 + U12 + U13 + U14 + P1 + S1 + S2 + D1 + D2 + D3 + D4 + D5 + D6 + D7 + BotID + **E4 + E5**.
+
+### Stubs BLOQUE 8.E
+
+- `a href="/metodologia/<score_id>"` en footer ScoreTransparencyPanel — ruta no existe
+  todavía (FASE 21). Acepta por ser `<a>` con href válido absoluto (no `#`), semántica
+  correcta. audit:e2e pasa.
+
+---
+
 ## Próxima fase
 
 [FASE 09 — IE Scores Nivel 1](./FASE_09_IE_SCORES_N1.md)
