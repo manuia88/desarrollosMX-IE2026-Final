@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "_comment": "score-worker usa auth nativa de Vercel (header x-vercel-cron-secret). NO requiere CRON_SECRET env var custom. FASE 08 BLOQUE 8.A.4 (U1 v2 upgrade). vercel.ts migration diferida (decisión autónoma). Ref: https://vercel.com/docs/cron-jobs/manage-cron-jobs#securing-cron-jobs",
   "crons": [
     { "path": "/api/cron/fx-snapshot", "schedule": "0 12 * * *" },
     { "path": "/api/cron/ingest/banxico", "schedule": "0 14 * * *" },
@@ -9,6 +10,7 @@
     { "path": "/api/cron/autofetch/infonavit", "schedule": "0 16 10 * *" },
     { "path": "/api/cron/autofetch/cnbv", "schedule": "0 16 20 * *" },
     { "path": "/api/cron/autofetch/fovissste", "schedule": "0 17 20 1,4,7,10 *" },
-    { "path": "/api/cron/autofetch/shf", "schedule": "0 18 20 1,4,7,10 *" }
+    { "path": "/api/cron/autofetch/shf", "schedule": "0 18 20 1,4,7,10 *" },
+    { "path": "/api/cron/score-worker", "schedule": "*/1 * * * *" }
   ]
 }

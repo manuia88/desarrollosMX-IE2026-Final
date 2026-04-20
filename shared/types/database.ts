@@ -6386,6 +6386,510 @@ export type Database = {
         }
         Relationships: []
       }
+      score_history_p20260901: {
+        Row: {
+          archived_at: string
+          citations: Json
+          components: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: number
+          inputs_used: Json
+          level: number
+          period_date: string
+          provenance: Json
+          score_label: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Insert: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id?: never
+          inputs_used?: Json
+          level: number
+          period_date: string
+          provenance?: Json
+          score_label?: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Update: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence?: string
+          country_code?: string
+          entity_id?: string
+          entity_type?: string
+          id?: never
+          inputs_used?: Json
+          level?: number
+          period_date?: string
+          provenance?: Json
+          score_label?: string | null
+          score_type?: string
+          score_value?: number
+          tier?: number
+          valid_from?: string
+          valid_until?: string
+        }
+        Relationships: []
+      }
+      score_history_p20261001: {
+        Row: {
+          archived_at: string
+          citations: Json
+          components: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: number
+          inputs_used: Json
+          level: number
+          period_date: string
+          provenance: Json
+          score_label: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Insert: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id?: never
+          inputs_used?: Json
+          level: number
+          period_date: string
+          provenance?: Json
+          score_label?: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Update: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence?: string
+          country_code?: string
+          entity_id?: string
+          entity_type?: string
+          id?: never
+          inputs_used?: Json
+          level?: number
+          period_date?: string
+          provenance?: Json
+          score_label?: string | null
+          score_type?: string
+          score_value?: number
+          tier?: number
+          valid_from?: string
+          valid_until?: string
+        }
+        Relationships: []
+      }
+      score_history_p20261101: {
+        Row: {
+          archived_at: string
+          citations: Json
+          components: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: number
+          inputs_used: Json
+          level: number
+          period_date: string
+          provenance: Json
+          score_label: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Insert: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id?: never
+          inputs_used?: Json
+          level: number
+          period_date: string
+          provenance?: Json
+          score_label?: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Update: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence?: string
+          country_code?: string
+          entity_id?: string
+          entity_type?: string
+          id?: never
+          inputs_used?: Json
+          level?: number
+          period_date?: string
+          provenance?: Json
+          score_label?: string | null
+          score_type?: string
+          score_value?: number
+          tier?: number
+          valid_from?: string
+          valid_until?: string
+        }
+        Relationships: []
+      }
+      score_history_p20261201: {
+        Row: {
+          archived_at: string
+          citations: Json
+          components: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: number
+          inputs_used: Json
+          level: number
+          period_date: string
+          provenance: Json
+          score_label: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Insert: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id?: never
+          inputs_used?: Json
+          level: number
+          period_date: string
+          provenance?: Json
+          score_label?: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Update: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence?: string
+          country_code?: string
+          entity_id?: string
+          entity_type?: string
+          id?: never
+          inputs_used?: Json
+          level?: number
+          period_date?: string
+          provenance?: Json
+          score_label?: string | null
+          score_type?: string
+          score_value?: number
+          tier?: number
+          valid_from?: string
+          valid_until?: string
+        }
+        Relationships: []
+      }
+      score_history_p20270101: {
+        Row: {
+          archived_at: string
+          citations: Json
+          components: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: number
+          inputs_used: Json
+          level: number
+          period_date: string
+          provenance: Json
+          score_label: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Insert: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id?: never
+          inputs_used?: Json
+          level: number
+          period_date: string
+          provenance?: Json
+          score_label?: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Update: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence?: string
+          country_code?: string
+          entity_id?: string
+          entity_type?: string
+          id?: never
+          inputs_used?: Json
+          level?: number
+          period_date?: string
+          provenance?: Json
+          score_label?: string | null
+          score_type?: string
+          score_value?: number
+          tier?: number
+          valid_from?: string
+          valid_until?: string
+        }
+        Relationships: []
+      }
+      score_history_p20270201: {
+        Row: {
+          archived_at: string
+          citations: Json
+          components: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: number
+          inputs_used: Json
+          level: number
+          period_date: string
+          provenance: Json
+          score_label: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Insert: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id?: never
+          inputs_used?: Json
+          level: number
+          period_date: string
+          provenance?: Json
+          score_label?: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Update: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence?: string
+          country_code?: string
+          entity_id?: string
+          entity_type?: string
+          id?: never
+          inputs_used?: Json
+          level?: number
+          period_date?: string
+          provenance?: Json
+          score_label?: string | null
+          score_type?: string
+          score_value?: number
+          tier?: number
+          valid_from?: string
+          valid_until?: string
+        }
+        Relationships: []
+      }
+      score_history_p20270301: {
+        Row: {
+          archived_at: string
+          citations: Json
+          components: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: number
+          inputs_used: Json
+          level: number
+          period_date: string
+          provenance: Json
+          score_label: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Insert: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id?: never
+          inputs_used?: Json
+          level: number
+          period_date: string
+          provenance?: Json
+          score_label?: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Update: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence?: string
+          country_code?: string
+          entity_id?: string
+          entity_type?: string
+          id?: never
+          inputs_used?: Json
+          level?: number
+          period_date?: string
+          provenance?: Json
+          score_label?: string | null
+          score_type?: string
+          score_value?: number
+          tier?: number
+          valid_from?: string
+          valid_until?: string
+        }
+        Relationships: []
+      }
+      score_history_p20270401: {
+        Row: {
+          archived_at: string
+          citations: Json
+          components: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: number
+          inputs_used: Json
+          level: number
+          period_date: string
+          provenance: Json
+          score_label: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Insert: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence: string
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id?: never
+          inputs_used?: Json
+          level: number
+          period_date: string
+          provenance?: Json
+          score_label?: string | null
+          score_type: string
+          score_value: number
+          tier: number
+          valid_from: string
+          valid_until: string
+        }
+        Update: {
+          archived_at?: string
+          citations?: Json
+          components?: Json
+          confidence?: string
+          country_code?: string
+          entity_id?: string
+          entity_type?: string
+          id?: never
+          inputs_used?: Json
+          level?: number
+          period_date?: string
+          provenance?: Json
+          score_label?: string | null
+          score_type?: string
+          score_value?: number
+          tier?: number
+          valid_from?: string
+          valid_until?: string
+        }
+        Relationships: []
+      }
       score_recalculation_queue: {
         Row: {
           attempts: number
@@ -12019,6 +12523,21 @@ export type Database = {
         Args: { p_parent_table: string; p_type: string }
         Returns: Record<string, unknown>
       }
+      claim_pending_score_jobs: {
+        Args: { p_limit?: number }
+        Returns: {
+          attempts: number
+          batch_mode: boolean
+          country_code: string
+          entity_id: string
+          entity_type: string
+          id: string
+          priority: number
+          scheduled_for: string
+          score_id: string
+          triggered_by: string
+        }[]
+      }
       confidence_level_for: {
         Args: { p_metric: string; p_sample_size: number; p_source: string }
         Returns: string
@@ -12178,6 +12697,10 @@ export type Database = {
         Returns: Json
       }
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
+      finalize_score_job: {
+        Args: { p_error?: string; p_id: string; p_success: boolean }
+        Returns: Json
+      }
       geometry: { Args: { "": string }; Returns: unknown }
       geometry_above: {
         Args: { geom1: unknown; geom2: unknown }
@@ -12455,6 +12978,7 @@ export type Database = {
       }
       postgis_version: { Args: never; Returns: string }
       postgis_wagyu_version: { Args: never; Returns: string }
+      queue_metrics_summary: { Args: never; Returns: Json }
       reapply_privileges: {
         Args: { p_parent_table: string }
         Returns: undefined
