@@ -656,6 +656,64 @@ U5 version semver · U6 snapshot tests 16 fixtures · U7 PostHog props · U9 fix
 
 ---
 
+## Implementación real BLOQUE 8.D — cerrado 2026-04-20
+
+Producto estrella I01 DMX Estimate en su versión MVP H1 (regresión lineal). Target comercial
+$15-50K/licencia API B2B (ADR-013).
+
+### Commits BLOQUE 8.D
+
+| Commit | Descripción |
+|---|---|
+| `b11783e` | Pre-step 0: migration `20260420063332_avm_estimates.sql` + RLS S1 + indexes + valid_until D7 cache window |
+| `3425edd` | 8.D.1 — feature engineering 47 variables + normalization + 7 tests |
+| `89fc46d` | 8.D.2 — model H1 regression + coefficients seed + comparables fetcher + 12 tests |
+| `4e0654d` | 8.D.3 — endpoint /api/v1/estimate + BotID + D4+D5+D6+D7 + Zod schemas + 20 tests |
+| `332d4be` | 8.D.4 — AVM pricing tiers + gating + /estimate page stub |
+
+### Upgrades nuevos aplicados BLOQUE 8.D
+
+- **D4 MAE tracking + intervalos de confianza**: cada estimate persiste
+  `{mae_estimated_pct, ci_low, ci_high, confidence_score}`. mae derivado de R² + variance
+  comparables + penalty_missing. confidence = clamp(100 − 2×mae, 0, 100).
+- **D5 adjustments explícitos auditables**: response.adjustments[] con
+  `{feature, value_pct, source, weight, confidence, explanation_i18n_key}`. source ∈
+  {`regression_coefficient`, `comparable_overlay`, `market_context`}. Habilita
+  explicabilidad total para B2B (aseguradoras, bancos).
+- **D6 counter-estimate**: además del estimate principal (regression), endpoint devuelve
+  `estimate_alternative` (median price_m2 comparables × sup_m2). `spread_pct = ABS diff / estimate`.
+  spread > 15% → `flag_uncertain:true` + recomendación visita presencial. spread ≤ 15% →
+  `flag_corroborated:true`. Diferencial vs Habi (ellos solo dan 1 número).
+- **D7 cache 24h por fingerprint**: `sha256(canonicalInput).slice(0,16)`. Pre-compute lookup
+  `WHERE fingerprint=X AND valid_until>now() LIMIT 1`. Hit → `cached:true` + `computed_at` histórico.
+  Cache invalidation cascade vía market_prices_secondary → BLOQUE 8.F.
+- **BotID Basic (free)**: `botid@1.5.11` wrap endpoint para bloquear scrapers. Free tier (sin
+  api_key) requiere BotID challenge passed. Pro/Enterprise (api_pro_*, api_ent_*) bypass
+  completo. Basic mode GRATIS en todos los planes Vercel. Deep Analysis es paid (Pro + $1/1000)
+  — no habilitado en H1.
+
+### Tests BLOQUE 8.D
+
+- features 7 (length 47, determinismo, missing tracking, overrides, one-hot, ordinal)
+- model-h1 7 (semver, predict length guard, metadata, 10 seed properties ±50%, mae penalty, variance)
+- comparables 5 (fetch fallback, maxResults, median × sup, <3 null, pares average)
+- schemas 10 (request/response validation, enums, null opt)
+- endpoint 10 (invalid json/schema, response shape, D4, D5, D6, D7 cache hit, rate limit 429,
+  Pro bypass unlimited, p95 <500ms)
+
+**Total BLOQUE 8.D**: 39/39 AVM tests passing.
+
+### Upgrades acumulados FASE 08 (8.A + 8.B + 8.C + 8.D)
+
+U5 + U6 + U7 + U9 + U10 + U12 + U13 + U14 + P1 + S1 + S2 + D1 + D2 + D3 + **D4 + D5 + D6 + D7** + BotID.
+
+### Stubs BLOQUE 8.D
+
+- `app/[locale]/(public)/estimate/page.tsx` STUB FASE 21 portal público UI completa. 4 señales
+  ADR-018: comentario STUB + badge `[próximamente]` + link docs API + documentado en plan.
+
+---
+
 ## Próxima fase
 
 [FASE 09 — IE Scores Nivel 1](./FASE_09_IE_SCORES_N1.md)
