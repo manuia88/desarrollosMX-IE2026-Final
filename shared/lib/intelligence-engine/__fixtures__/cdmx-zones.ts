@@ -1408,3 +1408,390 @@ export function getFixtureByName(name: string): CdmxZoneFixture | undefined {
 export function getFixtureByZoneId(zoneId: string): CdmxZoneFixture | undefined {
   return CDMX_ZONES.find((z) => z.zona_id === zoneId);
 }
+
+// ============================================================
+// Extensiones sesión 2 BLOQUE 8.B parte 2/2 — sources adicionales
+// Mantienen schema separado del CdmxZoneSources core para no romper tests
+// sesión 1. Cada calculator consume su tabla por zona_name.
+// ============================================================
+
+// H04 Credit Demand — CNBV créditos hipotecarios + Infonavit demanda.
+export interface CnbvData {
+  readonly creditos_hipotecarios_12m: number;
+  readonly hogares_municipio: number;
+  readonly creditos_6m_anteriores: number;
+  readonly creditos_6m_actual: number;
+}
+
+export const CDMX_CNBV: Readonly<Record<string, CnbvData>> = {
+  'San Ángel': {
+    creditos_hipotecarios_12m: 800,
+    hogares_municipio: 14000,
+    creditos_6m_anteriores: 380,
+    creditos_6m_actual: 420,
+  },
+  Clavería: {
+    creditos_hipotecarios_12m: 600,
+    hogares_municipio: 18000,
+    creditos_6m_anteriores: 290,
+    creditos_6m_actual: 310,
+  },
+  'Del Valle': {
+    creditos_hipotecarios_12m: 1400,
+    hogares_municipio: 21000,
+    creditos_6m_anteriores: 680,
+    creditos_6m_actual: 720,
+  },
+  'Coyoacán Centro': {
+    creditos_hipotecarios_12m: 650,
+    hogares_municipio: 16000,
+    creditos_6m_anteriores: 320,
+    creditos_6m_actual: 330,
+  },
+  'Cuajimalpa Centro': {
+    creditos_hipotecarios_12m: 180,
+    hogares_municipio: 7300,
+    creditos_6m_anteriores: 85,
+    creditos_6m_actual: 95,
+  },
+  'Roma Norte': {
+    creditos_hipotecarios_12m: 500,
+    hogares_municipio: 11700,
+    creditos_6m_anteriores: 230,
+    creditos_6m_actual: 270,
+  },
+  Lindavista: {
+    creditos_hipotecarios_12m: 700,
+    hogares_municipio: 22700,
+    creditos_6m_anteriores: 340,
+    creditos_6m_actual: 360,
+  },
+  'Iztacalco Centro': {
+    creditos_hipotecarios_12m: 300,
+    hogares_municipio: 17300,
+    creditos_6m_anteriores: 150,
+    creditos_6m_actual: 150,
+  },
+  'Iztapalapa Sur': {
+    creditos_hipotecarios_12m: 600,
+    hogares_municipio: 40000,
+    creditos_6m_anteriores: 310,
+    creditos_6m_actual: 290,
+  },
+  'Contreras Centro': {
+    creditos_hipotecarios_12m: 120,
+    hogares_municipio: 6000,
+    creditos_6m_anteriores: 58,
+    creditos_6m_actual: 62,
+  },
+  Polanco: {
+    creditos_hipotecarios_12m: 380,
+    hogares_municipio: 9300,
+    creditos_6m_anteriores: 190,
+    creditos_6m_actual: 190,
+  },
+  'Milpa Alta Centro': {
+    creditos_hipotecarios_12m: 40,
+    hogares_municipio: 3200,
+    creditos_6m_anteriores: 18,
+    creditos_6m_actual: 22,
+  },
+  'Tláhuac Centro': {
+    creditos_hipotecarios_12m: 200,
+    hogares_municipio: 14000,
+    creditos_6m_anteriores: 105,
+    creditos_6m_actual: 95,
+  },
+  'Tlalpan Centro': {
+    creditos_hipotecarios_12m: 420,
+    hogares_municipio: 12700,
+    creditos_6m_anteriores: 200,
+    creditos_6m_actual: 220,
+  },
+  Tepito: {
+    creditos_hipotecarios_12m: 100,
+    hogares_municipio: 13700,
+    creditos_6m_anteriores: 50,
+    creditos_6m_actual: 50,
+  },
+  'Xochimilco Centro': {
+    creditos_hipotecarios_12m: 180,
+    hogares_municipio: 10700,
+    creditos_6m_anteriores: 90,
+    creditos_6m_actual: 90,
+  },
+};
+
+// H08 Heritage Zone — INAH polígonos + monumentos + zonas arqueológicas.
+export interface InahData {
+  readonly dentro_centro_historico: boolean;
+  readonly dentro_buffer_centro: boolean;
+  readonly monumentos_500m: number;
+  readonly zonas_arqueologicas_2km: number;
+}
+
+export const CDMX_INAH: Readonly<Record<string, InahData>> = {
+  'San Ángel': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 6,
+    zonas_arqueologicas_2km: 0,
+  },
+  Clavería: {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 1,
+    zonas_arqueologicas_2km: 0,
+  },
+  'Del Valle': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 0,
+    zonas_arqueologicas_2km: 0,
+  },
+  'Coyoacán Centro': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 8,
+    zonas_arqueologicas_2km: 0,
+  },
+  'Cuajimalpa Centro': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 0,
+    zonas_arqueologicas_2km: 0,
+  },
+  'Roma Norte': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: true,
+    monumentos_500m: 4,
+    zonas_arqueologicas_2km: 0,
+  },
+  Lindavista: {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 0,
+    zonas_arqueologicas_2km: 0,
+  },
+  'Iztacalco Centro': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 2,
+    zonas_arqueologicas_2km: 0,
+  },
+  'Iztapalapa Sur': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 1,
+    zonas_arqueologicas_2km: 1,
+  },
+  'Contreras Centro': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 1,
+    zonas_arqueologicas_2km: 0,
+  },
+  Polanco: {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 3,
+    zonas_arqueologicas_2km: 0,
+  },
+  'Milpa Alta Centro': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 2,
+    zonas_arqueologicas_2km: 1,
+  },
+  'Tláhuac Centro': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 1,
+    zonas_arqueologicas_2km: 0,
+  },
+  'Tlalpan Centro': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 3,
+    zonas_arqueologicas_2km: 1,
+  },
+  Tepito: {
+    dentro_centro_historico: true,
+    dentro_buffer_centro: true,
+    monumentos_500m: 12,
+    zonas_arqueologicas_2km: 1,
+  },
+  'Xochimilco Centro': {
+    dentro_centro_historico: false,
+    dentro_buffer_centro: false,
+    monumentos_500m: 5,
+    zonas_arqueologicas_2km: 2,
+  },
+};
+
+// H10 Water Crisis — CONAGUA acuíferos + SACMEX cortes (extiende SacmexCounts).
+export interface ConaguaData {
+  readonly sobreexplotacion_acuifero_pct: number;
+  readonly nivel_acuifero_delta_12m_m: number; // negativo = descenso (crisis)
+}
+
+export const CDMX_CONAGUA: Readonly<Record<string, ConaguaData>> = {
+  'San Ángel': { sobreexplotacion_acuifero_pct: 8, nivel_acuifero_delta_12m_m: -0.4 },
+  Clavería: { sobreexplotacion_acuifero_pct: 12, nivel_acuifero_delta_12m_m: -0.6 },
+  'Del Valle': { sobreexplotacion_acuifero_pct: 5, nivel_acuifero_delta_12m_m: -0.2 },
+  'Coyoacán Centro': { sobreexplotacion_acuifero_pct: 6, nivel_acuifero_delta_12m_m: -0.3 },
+  'Cuajimalpa Centro': { sobreexplotacion_acuifero_pct: 15, nivel_acuifero_delta_12m_m: -0.8 },
+  'Roma Norte': { sobreexplotacion_acuifero_pct: 10, nivel_acuifero_delta_12m_m: -0.5 },
+  Lindavista: { sobreexplotacion_acuifero_pct: 14, nivel_acuifero_delta_12m_m: -0.7 },
+  'Iztacalco Centro': { sobreexplotacion_acuifero_pct: 18, nivel_acuifero_delta_12m_m: -0.9 },
+  'Iztapalapa Sur': { sobreexplotacion_acuifero_pct: 35, nivel_acuifero_delta_12m_m: -2.8 },
+  'Contreras Centro': { sobreexplotacion_acuifero_pct: 4, nivel_acuifero_delta_12m_m: -0.1 },
+  Polanco: { sobreexplotacion_acuifero_pct: 3, nivel_acuifero_delta_12m_m: -0.1 },
+  'Milpa Alta Centro': { sobreexplotacion_acuifero_pct: 22, nivel_acuifero_delta_12m_m: -1.4 },
+  'Tláhuac Centro': { sobreexplotacion_acuifero_pct: 28, nivel_acuifero_delta_12m_m: -2.1 },
+  'Tlalpan Centro': { sobreexplotacion_acuifero_pct: 8, nivel_acuifero_delta_12m_m: -0.3 },
+  Tepito: { sobreexplotacion_acuifero_pct: 16, nivel_acuifero_delta_12m_m: -0.8 },
+  'Xochimilco Centro': { sobreexplotacion_acuifero_pct: 30, nivel_acuifero_delta_12m_m: -2.5 },
+};
+
+// A04 Arbitrage + A01 Affordability — mercado primario vs secundario.
+export interface MarketData {
+  readonly precio_m2_primaria_mxn: number;
+  readonly precio_m2_secundaria_mxn: number;
+  readonly ingreso_mediano_mensual_mxn: number;
+}
+
+export const CDMX_MARKET: Readonly<Record<string, MarketData>> = {
+  'San Ángel': {
+    precio_m2_primaria_mxn: 58000,
+    precio_m2_secundaria_mxn: 50000,
+    ingreso_mediano_mensual_mxn: 42000,
+  },
+  Clavería: {
+    precio_m2_primaria_mxn: 32000,
+    precio_m2_secundaria_mxn: 28000,
+    ingreso_mediano_mensual_mxn: 18000,
+  },
+  'Del Valle': {
+    precio_m2_primaria_mxn: 62000,
+    precio_m2_secundaria_mxn: 55000,
+    ingreso_mediano_mensual_mxn: 45000,
+  },
+  'Coyoacán Centro': {
+    precio_m2_primaria_mxn: 54000,
+    precio_m2_secundaria_mxn: 48000,
+    ingreso_mediano_mensual_mxn: 35000,
+  },
+  'Cuajimalpa Centro': {
+    precio_m2_primaria_mxn: 48000,
+    precio_m2_secundaria_mxn: 38000,
+    ingreso_mediano_mensual_mxn: 28000,
+  },
+  'Roma Norte': {
+    precio_m2_primaria_mxn: 78000,
+    precio_m2_secundaria_mxn: 60000,
+    ingreso_mediano_mensual_mxn: 40000,
+  },
+  Lindavista: {
+    precio_m2_primaria_mxn: 36000,
+    precio_m2_secundaria_mxn: 32000,
+    ingreso_mediano_mensual_mxn: 22000,
+  },
+  'Iztacalco Centro': {
+    precio_m2_primaria_mxn: 28000,
+    precio_m2_secundaria_mxn: 25000,
+    ingreso_mediano_mensual_mxn: 15000,
+  },
+  'Iztapalapa Sur': {
+    precio_m2_primaria_mxn: 22000,
+    precio_m2_secundaria_mxn: 20000,
+    ingreso_mediano_mensual_mxn: 12000,
+  },
+  'Contreras Centro': {
+    precio_m2_primaria_mxn: 35000,
+    precio_m2_secundaria_mxn: 30000,
+    ingreso_mediano_mensual_mxn: 20000,
+  },
+  Polanco: {
+    precio_m2_primaria_mxn: 95000,
+    precio_m2_secundaria_mxn: 85000,
+    ingreso_mediano_mensual_mxn: 80000,
+  },
+  'Milpa Alta Centro': {
+    precio_m2_primaria_mxn: 18000,
+    precio_m2_secundaria_mxn: 16000,
+    ingreso_mediano_mensual_mxn: 10000,
+  },
+  'Tláhuac Centro': {
+    precio_m2_primaria_mxn: 20000,
+    precio_m2_secundaria_mxn: 18000,
+    ingreso_mediano_mensual_mxn: 12000,
+  },
+  'Tlalpan Centro': {
+    precio_m2_primaria_mxn: 38000,
+    precio_m2_secundaria_mxn: 34000,
+    ingreso_mediano_mensual_mxn: 24000,
+  },
+  Tepito: {
+    precio_m2_primaria_mxn: 30000,
+    precio_m2_secundaria_mxn: 27000,
+    ingreso_mediano_mensual_mxn: 12000,
+  },
+  'Xochimilco Centro': {
+    precio_m2_primaria_mxn: 26000,
+    precio_m2_secundaria_mxn: 22000,
+    ingreso_mediano_mensual_mxn: 14000,
+  },
+};
+
+// A03 Migration — % búsquedas foraneas hacia zona.
+export interface SearchDemographicData {
+  readonly pct_busquedas_foraneas: number; // % de búsquedas que vienen de otras alcaldías/estados
+  readonly top_origen_estado: string;
+}
+
+export const CDMX_SEARCH: Readonly<Record<string, SearchDemographicData>> = {
+  'San Ángel': { pct_busquedas_foraneas: 38, top_origen_estado: 'MX Edo' },
+  Clavería: { pct_busquedas_foraneas: 22, top_origen_estado: 'MX Edo' },
+  'Del Valle': { pct_busquedas_foraneas: 45, top_origen_estado: 'Jalisco' },
+  'Coyoacán Centro': { pct_busquedas_foraneas: 42, top_origen_estado: 'Nuevo León' },
+  'Cuajimalpa Centro': { pct_busquedas_foraneas: 30, top_origen_estado: 'MX Edo' },
+  'Roma Norte': { pct_busquedas_foraneas: 65, top_origen_estado: 'US/CA (remote)' },
+  Lindavista: { pct_busquedas_foraneas: 18, top_origen_estado: 'MX Edo' },
+  'Iztacalco Centro': { pct_busquedas_foraneas: 12, top_origen_estado: 'MX Edo' },
+  'Iztapalapa Sur': { pct_busquedas_foraneas: 8, top_origen_estado: 'MX Edo' },
+  'Contreras Centro': { pct_busquedas_foraneas: 20, top_origen_estado: 'MX Edo' },
+  Polanco: { pct_busquedas_foraneas: 58, top_origen_estado: 'Nuevo León' },
+  'Milpa Alta Centro': { pct_busquedas_foraneas: 5, top_origen_estado: 'MX Edo' },
+  'Tláhuac Centro': { pct_busquedas_foraneas: 10, top_origen_estado: 'MX Edo' },
+  'Tlalpan Centro': { pct_busquedas_foraneas: 32, top_origen_estado: 'MX Edo' },
+  Tepito: { pct_busquedas_foraneas: 15, top_origen_estado: 'MX Edo' },
+  'Xochimilco Centro': { pct_busquedas_foraneas: 25, top_origen_estado: 'MX Edo' },
+};
+
+// D07 STR vs LTR — AirROI ADR + occupancy + revpar.
+export interface AirroiData {
+  readonly adr_usd: number;
+  readonly occupancy_pct: number;
+  readonly revpar_usd: number;
+  readonly listings_count: number;
+}
+
+export const CDMX_AIRROI: Readonly<Record<string, AirroiData>> = {
+  'San Ángel': { adr_usd: 120, occupancy_pct: 62, revpar_usd: 74, listings_count: 320 },
+  Clavería: { adr_usd: 55, occupancy_pct: 48, revpar_usd: 26, listings_count: 85 },
+  'Del Valle': { adr_usd: 95, occupancy_pct: 65, revpar_usd: 62, listings_count: 420 },
+  'Coyoacán Centro': { adr_usd: 110, occupancy_pct: 68, revpar_usd: 75, listings_count: 380 },
+  'Cuajimalpa Centro': { adr_usd: 140, occupancy_pct: 55, revpar_usd: 77, listings_count: 95 },
+  'Roma Norte': { adr_usd: 185, occupancy_pct: 78, revpar_usd: 144, listings_count: 1250 },
+  Lindavista: { adr_usd: 50, occupancy_pct: 40, revpar_usd: 20, listings_count: 110 },
+  'Iztacalco Centro': { adr_usd: 45, occupancy_pct: 38, revpar_usd: 17, listings_count: 60 },
+  'Iztapalapa Sur': { adr_usd: 35, occupancy_pct: 32, revpar_usd: 11, listings_count: 45 },
+  'Contreras Centro': { adr_usd: 65, occupancy_pct: 42, revpar_usd: 27, listings_count: 35 },
+  Polanco: { adr_usd: 220, occupancy_pct: 72, revpar_usd: 158, listings_count: 580 },
+  'Milpa Alta Centro': { adr_usd: 40, occupancy_pct: 28, revpar_usd: 11, listings_count: 12 },
+  'Tláhuac Centro': { adr_usd: 40, occupancy_pct: 35, revpar_usd: 14, listings_count: 22 },
+  'Tlalpan Centro': { adr_usd: 72, occupancy_pct: 52, revpar_usd: 37, listings_count: 160 },
+  Tepito: { adr_usd: 48, occupancy_pct: 52, revpar_usd: 25, listings_count: 85 },
+  'Xochimilco Centro': { adr_usd: 85, occupancy_pct: 58, revpar_usd: 49, listings_count: 120 },
+};

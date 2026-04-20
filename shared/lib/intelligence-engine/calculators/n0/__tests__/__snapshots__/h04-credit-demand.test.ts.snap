@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`H04 Credit Demand calculator > 16 zonas CDMX — snapshot + confidence matches CNBV cascade 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.h04.saludable",
+    "ratio": 3.333,
+    "trend": "creciendo",
+    "value": 82,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "label": "ie.score.h04.debil",
+    "ratio": 2,
+    "trend": "creciendo",
+    "value": 55,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.h04.saludable",
+    "ratio": 4.063,
+    "trend": "estable",
+    "value": 87,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "label": "ie.score.h04.moderada",
+    "ratio": 2.466,
+    "trend": "creciendo",
+    "value": 67,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "label": "ie.score.h04.saludable",
+    "ratio": 6.667,
+    "trend": "creciendo",
+    "value": 97,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h04.debil",
+    "ratio": 1.734,
+    "trend": "estable",
+    "value": 48,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "label": "ie.score.h04.debil",
+    "ratio": 1.5,
+    "trend": "decreciendo",
+    "value": 43,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.h04.saludable",
+    "ratio": 3.084,
+    "trend": "creciendo",
+    "value": 81,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "medium",
+    "label": "ie.score.h04.estancada",
+    "ratio": 1.25,
+    "trend": "creciendo",
+    "value": 36,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.h04.saludable",
+    "ratio": 4.086,
+    "trend": "estable",
+    "value": 87,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.h04.saludable",
+    "ratio": 4.274,
+    "trend": "creciendo",
+    "value": 88,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "label": "ie.score.h04.saludable",
+    "ratio": 5.714,
+    "trend": "creciendo",
+    "value": 98,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.h04.estancada",
+    "ratio": 0.73,
+    "trend": "estable",
+    "value": 22,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "label": "ie.score.h04.saludable",
+    "ratio": 3.307,
+    "trend": "creciendo",
+    "value": 82,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "label": "ie.score.h04.debil",
+    "ratio": 1.429,
+    "trend": "decreciendo",
+    "value": 41,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h04.debil",
+    "ratio": 1.682,
+    "trend": "estable",
+    "value": 47,
+  },
+}
+`;

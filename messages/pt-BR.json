@@ -223,6 +223,13 @@
         "critical": "Custos em crise",
         "insufficient": "Dados INPP insuficientes"
       },
+      "h04": {
+        "saludable": "Demanda de crédito saudável",
+        "moderada": "Demanda de crédito moderada",
+        "debil": "Demanda de crédito fraca",
+        "estancada": "Mercado de crédito estagnado",
+        "insufficient": "Dados CNBV insuficientes"
+      },
       "h06": {
         "pending_h2": "Disponível na FASE 29 (dados 0311 Locatel pendentes)"
       }

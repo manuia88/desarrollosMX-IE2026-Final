@@ -223,6 +223,13 @@
         "critical": "Critical cost pressure",
         "insufficient": "Insufficient INPP data"
       },
+      "h04": {
+        "saludable": "Healthy credit demand",
+        "moderada": "Moderate credit demand",
+        "debil": "Weak credit demand",
+        "estancada": "Stagnant credit market",
+        "insufficient": "Insufficient CNBV data"
+      },
       "h06": {
         "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
       }
