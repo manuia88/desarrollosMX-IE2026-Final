@@ -7140,6 +7140,50 @@ export type Database = {
           },
         ]
       }
+      score_weights: {
+        Row: {
+          country_code: string
+          created_at: string
+          created_by: string | null
+          dimension_score_id: string
+          id: string
+          score_id: string
+          valid_from: string
+          valid_until: string | null
+          weight: number
+        }
+        Insert: {
+          country_code: string
+          created_at?: string
+          created_by?: string | null
+          dimension_score_id: string
+          id?: string
+          score_id: string
+          valid_from?: string
+          valid_until?: string | null
+          weight: number
+        }
+        Update: {
+          country_code?: string
+          created_at?: string
+          created_by?: string | null
+          dimension_score_id?: string
+          id?: string
+          score_id?: string
+          valid_from?: string
+          valid_until?: string | null
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "score_weights_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       search_trends: {
         Row: {
           country_code: string
@@ -12939,6 +12983,15 @@ export type Database = {
         Returns: number
       }
       fn_cascade_macro_updated: { Args: { p_country: string }; Returns: number }
+      fn_cascade_score_updated: {
+        Args: {
+          p_country: string
+          p_entity_id: string
+          p_entity_type: string
+          p_source_score_id: string
+        }
+        Returns: number
+      }
       geometry: { Args: { "": string }; Returns: unknown }
       geometry_above: {
         Args: { geom1: unknown; geom2: unknown }
