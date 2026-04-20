@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N05 Infrastructure Resilience calculator > 16 zonas CDMX — snapshot 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "seismic": 85,
+    "transit": 66,
+    "value": 79,
+    "water": 84,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "seismic": 100,
+    "transit": 0,
+    "value": 58,
+    "water": 60,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "seismic": 85,
+    "transit": 80,
+    "value": 81,
+    "water": 76,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "seismic": 60,
+    "transit": 0,
+    "value": 43,
+    "water": 64,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "seismic": 85,
+    "transit": 100,
+    "value": 92,
+    "water": 92,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "seismic": 30,
+    "transit": 44,
+    "value": 42,
+    "water": 56,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "seismic": 30,
+    "transit": 22,
+    "value": 19,
+    "water": 0,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "seismic": 45,
+    "transit": 70,
+    "value": 59,
+    "water": 68,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "high",
+    "seismic": 100,
+    "transit": 0,
+    "value": 43,
+    "water": 10,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "seismic": 85,
+    "transit": 100,
+    "value": 93,
+    "water": 96,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "seismic": 85,
+    "transit": 100,
+    "value": 86,
+    "water": 72,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "seismic": 85,
+    "transit": 100,
+    "value": 90,
+    "water": 88,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "seismic": 60,
+    "transit": 100,
+    "value": 73,
+    "water": 64,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "seismic": 85,
+    "transit": 26,
+    "value": 66,
+    "water": 80,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "seismic": 30,
+    "transit": 22,
+    "value": 26,
+    "water": 24,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "seismic": 30,
+    "transit": 24,
+    "value": 28,
+    "water": 30,
+  },
+}
+`;

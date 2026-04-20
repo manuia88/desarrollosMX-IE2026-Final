@@ -385,6 +385,30 @@
           }
         }
       },
+      "n05": {
+        "alta_resiliencia": "High resilience",
+        "resiliencia_balanceada": "Balanced resilience",
+        "resiliencia_moderada": "Moderate resilience",
+        "baja_resiliencia": "Low resilience",
+        "insufficient": "Insufficient Atlas/SACMEX/GTFS data",
+        "recommendations": {
+          "low": {
+            "0": "Zone vulnerable to shocks — review home insurance and contingencies",
+            "1": "Consider zones with better transit redundancy and fewer water cuts"
+          },
+          "medium": {
+            "0": "Balanced resilience — no critical alerts but improvement areas exist",
+            "1": "Acceptable location against seismic events or sporadic cuts"
+          },
+          "high": {
+            "0": "High resilience — zone prepared to absorb shocks",
+            "1": "Keep cost expectations aligned with robust infrastructure"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next ingest"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",
