@@ -236,7 +236,7 @@ export const h09CommuteTimeCalculator: Calculator = {
       params.destino_lng,
     );
     if (cached) {
-      return {
+      const cachedOut: CalculatorOutput = {
         score_value: cached.score_value,
         score_label: getLabelKey(cached.score_value, 'high'),
         components: { ...cached.components, cache_hit: true },
@@ -265,8 +265,9 @@ export const h09CommuteTimeCalculator: Calculator = {
           destino_lat: params.destino_lat,
           destino_lng: params.destino_lng,
         },
-        valid_until: cached.valid_until ?? undefined,
+        ...(cached.valid_until ? { valid_until: cached.valid_until } : {}),
       };
+      return cachedOut;
     }
 
     // 2. Mapbox fetch (server-only token)
