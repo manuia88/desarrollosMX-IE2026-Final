@@ -1,0 +1,1062 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > ejerce los 16 calculators en las 16 zonas (256 combinaciones) 1`] = `
+{
+  "claveria": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 63,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 60,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 61,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 53,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 48,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "contreras_centro": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 64,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 60,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 62,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 49,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "coyoacan_centro": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 66,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 60,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 64,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 50,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "cuajimalpa_centro": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 62,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 60,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 60,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 53,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 47,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "del_valle": {
+    "A02": {
+      "confidence": "high",
+      "value": 90,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 2,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 84,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 92,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 72,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 29,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 80,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 50,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 76,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 65,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "iztacalco_centro": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 61,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 60,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 59,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 53,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 46,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "iztapalapa_sur": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 32,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 0,
+    },
+    "B01": {
+      "confidence": "medium",
+      "value": 30,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 72,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 33,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 58,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 25,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 23,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "lindavista": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 65,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 60,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 63,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 50,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "milpa_alta_centro": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 31,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 0,
+    },
+    "B01": {
+      "confidence": "medium",
+      "value": 30,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 72,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 32,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 58,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 25,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 22,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "polanco": {
+    "A02": {
+      "confidence": "high",
+      "value": 90,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 2,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 85,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 92,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 72,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 29,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 81,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 50,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 76,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 66,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "roma_norte": {
+    "A02": {
+      "confidence": "high",
+      "value": 90,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 2,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 83,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 92,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 72,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 29,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 79,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 50,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 76,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 64,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "san_angel": {
+    "A02": {
+      "confidence": "high",
+      "value": 90,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 2,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 81,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 92,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 72,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 29,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 77,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 76,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 62,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "tepito": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 41,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 0,
+    },
+    "B01": {
+      "confidence": "medium",
+      "value": 30,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 72,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 42,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 55,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 25,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 30,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "tlahuac_centro": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 63,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 60,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 61,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 53,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 48,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "tlalpan_centro": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 59,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 60,
+    },
+    "B01": {
+      "confidence": "high",
+      "value": 51,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 52,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 57,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 54,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 45,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+  "xochimilco_centro": {
+    "A02": {
+      "confidence": "high",
+      "value": 20,
+    },
+    "A05": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "A06": {
+      "confidence": "high",
+      "value": 37,
+    },
+    "A12": {
+      "confidence": "medium",
+      "value": 0,
+    },
+    "B01": {
+      "confidence": "medium",
+      "value": 30,
+    },
+    "B02": {
+      "confidence": "high",
+      "value": 1,
+    },
+    "B04": {
+      "confidence": "medium",
+      "value": 100,
+    },
+    "B07": {
+      "confidence": "medium",
+      "value": 50,
+    },
+    "B08": {
+      "confidence": "high",
+      "value": 0,
+    },
+    "D05": {
+      "confidence": "high",
+      "value": 100,
+    },
+    "D06": {
+      "confidence": "high",
+      "value": 72,
+    },
+    "F08": {
+      "confidence": "high",
+      "value": 38,
+    },
+    "F12": {
+      "confidence": "high",
+      "value": 57,
+    },
+    "H05": {
+      "confidence": "high",
+      "value": 25,
+    },
+    "H07": {
+      "confidence": "high",
+      "value": 27,
+    },
+    "H14": {
+      "confidence": "insufficient_data",
+      "value": 0,
+    },
+  },
+}
+`;
