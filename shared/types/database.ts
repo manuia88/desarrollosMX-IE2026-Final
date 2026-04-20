@@ -5443,6 +5443,7 @@ export type Database = {
           id: string
           inputs_used: Json
           level: number
+          ml_explanations: Json
           period_date: string
           project_id: string
           provenance: Json
@@ -5450,6 +5451,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          stability_index: number | null
           tier: number
           trend_direction: string | null
           trend_vs_previous: number | null
@@ -5466,6 +5468,7 @@ export type Database = {
           id?: string
           inputs_used?: Json
           level: number
+          ml_explanations?: Json
           period_date: string
           project_id: string
           provenance?: Json
@@ -5473,6 +5476,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          stability_index?: number | null
           tier: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -5489,6 +5493,7 @@ export type Database = {
           id?: string
           inputs_used?: Json
           level?: number
+          ml_explanations?: Json
           period_date?: string
           project_id?: string
           provenance?: Json
@@ -5496,6 +5501,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          stability_index?: number | null
           tier?: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -5870,6 +5876,169 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "public_profiles"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      score_change_deliveries: {
+        Row: {
+          attempt: number
+          country_code: string
+          delta_pct: number
+          enqueued_at: string
+          entity_id: string
+          entity_type: string
+          id: string
+          last_attempt_at: string | null
+          new_value: number
+          next_attempt_at: string | null
+          payload: Json
+          period_date: string
+          prev_value: number | null
+          score_id: string
+          status: string
+          webhook_id: string
+        }
+        Insert: {
+          attempt?: number
+          country_code: string
+          delta_pct: number
+          enqueued_at?: string
+          entity_id: string
+          entity_type: string
+          id?: string
+          last_attempt_at?: string | null
+          new_value: number
+          next_attempt_at?: string | null
+          payload: Json
+          period_date: string
+          prev_value?: number | null
+          score_id: string
+          status?: string
+          webhook_id: string
+        }
+        Update: {
+          attempt?: number
+          country_code?: string
+          delta_pct?: number
+          enqueued_at?: string
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          last_attempt_at?: string | null
+          new_value?: number
+          next_attempt_at?: string | null
+          payload?: Json
+          period_date?: string
+          prev_value?: number | null
+          score_id?: string
+          status?: string
+          webhook_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "score_change_deliveries_webhook_id_fkey"
+            columns: ["webhook_id"]
+            isOneToOne: false
+            referencedRelation: "score_change_webhooks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      score_change_webhooks: {
+        Row: {
+          country_codes: string[]
+          created_at: string
+          created_by: string | null
+          enabled: boolean
+          entity_types: string[]
+          hmac_secret: string
+          id: string
+          last_delivery_at: string | null
+          last_delivery_status: string | null
+          min_delta_pct: number
+          score_ids: string[]
+          subscription_name: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          country_codes?: string[]
+          created_at?: string
+          created_by?: string | null
+          enabled?: boolean
+          entity_types?: string[]
+          hmac_secret: string
+          id?: string
+          last_delivery_at?: string | null
+          last_delivery_status?: string | null
+          min_delta_pct?: number
+          score_ids?: string[]
+          subscription_name: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          country_codes?: string[]
+          created_at?: string
+          created_by?: string | null
+          enabled?: boolean
+          entity_types?: string[]
+          hmac_secret?: string
+          id?: string
+          last_delivery_at?: string | null
+          last_delivery_status?: string | null
+          min_delta_pct?: number
+          score_ids?: string[]
+          subscription_name?: string
+          updated_at?: string
+          url?: string
+        }
+        Relationships: []
+      }
+      score_comparison_matrix: {
+        Row: {
+          cluster_key: string
+          col_count: number
+          computed_at: string
+          country_code: string
+          id: string
+          matrix: Json
+          row_count: number
+          score_ids: string[]
+          valid_until: string
+          zone_ids: string[]
+        }
+        Insert: {
+          cluster_key: string
+          col_count: number
+          computed_at?: string
+          country_code: string
+          id?: string
+          matrix: Json
+          row_count: number
+          score_ids: string[]
+          valid_until: string
+          zone_ids: string[]
+        }
+        Update: {
+          cluster_key?: string
+          col_count?: number
+          computed_at?: string
+          country_code?: string
+          id?: string
+          matrix?: Json
+          row_count?: number
+          score_ids?: string[]
+          valid_until?: string
+          zone_ids?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "score_comparison_matrix_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
           },
         ]
       }
@@ -12075,12 +12244,14 @@ export type Database = {
           id: string
           inputs_used: Json
           level: number
+          ml_explanations: Json
           period_date: string
           provenance: Json
           ranking: Json
           score_label: string | null
           score_type: string
           score_value: number
+          stability_index: number | null
           tier: number
           trend_direction: string | null
           trend_vs_previous: number | null
@@ -12099,12 +12270,14 @@ export type Database = {
           id?: string
           inputs_used?: Json
           level: number
+          ml_explanations?: Json
           period_date: string
           provenance?: Json
           ranking?: Json
           score_label?: string | null
           score_type: string
           score_value: number
+          stability_index?: number | null
           tier: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -12123,12 +12296,14 @@ export type Database = {
           id?: string
           inputs_used?: Json
           level?: number
+          ml_explanations?: Json
           period_date?: string
           provenance?: Json
           ranking?: Json
           score_label?: string | null
           score_type?: string
           score_value?: number
+          stability_index?: number | null
           tier?: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
