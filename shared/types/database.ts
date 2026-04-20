@@ -1260,6 +1260,75 @@ export type Database = {
           },
         ]
       }
+      avm_estimates: {
+        Row: {
+          adjustments: Json
+          api_key_id: string | null
+          ci_high: number | null
+          ci_low: number | null
+          comparables: Json
+          confidence_score: number | null
+          created_at: string
+          estimate: number
+          estimate_alternative: number | null
+          fingerprint: string
+          flag_corroborated: boolean
+          flag_uncertain: boolean
+          id: string
+          mae_estimated_pct: number | null
+          market_context: Json
+          provenance: Json
+          request_input: Json
+          spread_pct: number | null
+          user_id: string | null
+          valid_until: string
+        }
+        Insert: {
+          adjustments?: Json
+          api_key_id?: string | null
+          ci_high?: number | null
+          ci_low?: number | null
+          comparables?: Json
+          confidence_score?: number | null
+          created_at?: string
+          estimate: number
+          estimate_alternative?: number | null
+          fingerprint: string
+          flag_corroborated?: boolean
+          flag_uncertain?: boolean
+          id?: string
+          mae_estimated_pct?: number | null
+          market_context?: Json
+          provenance?: Json
+          request_input: Json
+          spread_pct?: number | null
+          user_id?: string | null
+          valid_until?: string
+        }
+        Update: {
+          adjustments?: Json
+          api_key_id?: string | null
+          ci_high?: number | null
+          ci_low?: number | null
+          comparables?: Json
+          confidence_score?: number | null
+          created_at?: string
+          estimate?: number
+          estimate_alternative?: number | null
+          fingerprint?: string
+          flag_corroborated?: boolean
+          flag_uncertain?: boolean
+          id?: string
+          mae_estimated_pct?: number | null
+          market_context?: Json
+          provenance?: Json
+          request_input?: Json
+          spread_pct?: number | null
+          user_id?: string | null
+          valid_until?: string
+        }
+        Relationships: []
+      }
       broker_companies: {
         Row: {
           contact_email: string | null
