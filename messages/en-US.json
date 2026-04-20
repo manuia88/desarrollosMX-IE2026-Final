@@ -663,6 +663,99 @@
         "perfil_mixto": "Mixed buyer persona",
         "perfil_difuso": "Diffuse buyer persona",
         "insufficient": "Insufficient data to profile"
+      },
+      "f09": {
+        "excelente": "Excellent value opportunity",
+        "buena": "Good price-to-value ratio",
+        "regular": "Regular value",
+        "sobreprecio": "Overpriced vs fair value",
+        "insufficient": "Insufficient data to assess value"
+      },
+      "f10": {
+        "inicial": "Early-stage gentrification",
+        "media": "Mid-stage gentrification",
+        "tardia": "Late-stage gentrification",
+        "post_gentrificada": "Post-gentrified zone",
+        "insufficient": "Insufficient gentrification data"
+      },
+      "b03": {
+        "saludable": "Healthy pricing, no adjustments",
+        "ajustes_menores": "Minor pricing adjustments recommended",
+        "requiere_accion": "Pricing action required",
+        "insufficient": "Insufficient pricing data"
+      },
+      "b05": {
+        "expansion": "Expansion phase of cycle",
+        "recuperacion": "Recovery phase of cycle",
+        "pico": "Cycle peak",
+        "contraccion": "Contraction phase of cycle",
+        "insufficient": "Insufficient cycle data"
+      },
+      "b09": {
+        "breakeven_rapido": "Fast breakeven projected",
+        "breakeven_moderado": "Moderate breakeven",
+        "breakeven_tardio": "Late breakeven",
+        "no_breakeven": "No breakeven projected in 24 months",
+        "insufficient": "Insufficient cash flow data"
+      },
+      "b10": {
+        "lift_alto": "High revenue lift",
+        "lift_medio": "Medium revenue lift",
+        "lift_bajo": "Low revenue lift",
+        "sin_lift": "No expected lift",
+        "insufficient": "Insufficient data to optimize"
+      },
+      "b13": {
+        "amenity_mix_excelente": "Excellent amenity mix",
+        "amenity_mix_regular": "Regular amenity mix",
+        "amenity_mix_pobre": "Poor amenity mix",
+        "insufficient": "Insufficient data for amenity ROI"
+      },
+      "b14": {
+        "mix_dominante": "Clear dominant persona",
+        "mix_mixto": "Balanced persona mix",
+        "mix_difuso": "Diffuse persona mix",
+        "insufficient": "Insufficient project persona data"
+      },
+      "b15": {
+        "ventana_optima": "Optimal launch window",
+        "ventana_aceptable": "Acceptable window",
+        "ventana_suboptima": "Sub-optimal window, consider waiting",
+        "insufficient": "Insufficient timing data"
+      },
+      "c01": {
+        "caliente": "Hot lead",
+        "tibio": "Warm lead",
+        "frio": "Cold lead",
+        "insufficient": "Insufficient lead signals"
+      },
+      "c03": {
+        "match_excelente": "Excellent match",
+        "match_bueno": "Good match",
+        "match_parcial": "Partial match",
+        "match_pobre": "Poor match",
+        "insufficient": "Insufficient match data"
+      },
+      "d03": {
+        "undersupply_oportunidad": "Undersupply — opportunity",
+        "equilibrado": "Supply balanced with demand",
+        "oversupply_moderado": "Moderate oversupply",
+        "oversupply_riesgo": "Oversupply risk",
+        "insufficient": "Insufficient pipeline data"
+      },
+      "h12": {
+        "oportunidad_alta": "High opportunity zone",
+        "oportunidad_media": "Medium opportunity zone",
+        "estable": "Stable zone",
+        "declive": "Declining zone",
+        "insufficient": "Insufficient opportunity data"
+      },
+      "h16": {
+        "gentrificada_post_2017": "Zone gentrified post-2017",
+        "apreciacion_activa": "Active appreciation in progress",
+        "estable": "Stable neighborhood, no change",
+        "declive": "Neighborhood in decline",
+        "insufficient": "Insufficient evolution data"
       }
     },
     "confidence": {

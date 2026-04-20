@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`B05 Market Cycle calculator > snapshot 4 fases del ciclo 1`] = `
+{
+  "contraccion": {
+    "confidence": "low",
+    "confidence_pct": 45,
+    "fase": "contraccion",
+    "label": "ie.score.b05.contraccion",
+    "value": 20,
+  },
+  "expansion": {
+    "confidence": "medium",
+    "confidence_pct": 70,
+    "fase": "expansion",
+    "label": "ie.score.b05.expansion",
+    "value": 80,
+  },
+  "pico": {
+    "confidence": "medium",
+    "confidence_pct": 70,
+    "fase": "pico",
+    "label": "ie.score.b05.pico",
+    "value": 40,
+  },
+  "recuperacion": {
+    "confidence": "medium",
+    "confidence_pct": 70,
+    "fase": "recuperacion",
+    "label": "ie.score.b05.recuperacion",
+    "value": 60,
+  },
+}
+`;

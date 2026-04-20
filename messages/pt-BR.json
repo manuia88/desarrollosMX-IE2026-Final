@@ -663,6 +663,99 @@
         "perfil_mixto": "Perfil de comprador misto",
         "perfil_difuso": "Perfil de comprador difuso",
         "insufficient": "Dados insuficientes para perfilar"
+      },
+      "f09": {
+        "excelente": "Oportunidade de valor excelente",
+        "buena": "Boa relação preço-valor",
+        "regular": "Valor regular",
+        "sobreprecio": "Sobrepreço frente ao valor justo",
+        "insufficient": "Dados insuficientes para valorar"
+      },
+      "f10": {
+        "inicial": "Gentrificação em fase inicial",
+        "media": "Gentrificação em fase média",
+        "tardia": "Gentrificação em fase tardia",
+        "post_gentrificada": "Zona pós-gentrificada",
+        "insufficient": "Dados insuficientes de gentrificação"
+      },
+      "b03": {
+        "saludable": "Precificação saudável, sem ajustes",
+        "ajustes_menores": "Ajustes menores recomendados",
+        "requiere_accion": "Requer ação de precificação",
+        "insufficient": "Dados insuficientes de precificação"
+      },
+      "b05": {
+        "expansion": "Fase de expansão do ciclo",
+        "recuperacion": "Fase de recuperação do ciclo",
+        "pico": "Pico do ciclo",
+        "contraccion": "Fase de contração do ciclo",
+        "insufficient": "Dados insuficientes do ciclo"
+      },
+      "b09": {
+        "breakeven_rapido": "Breakeven rápido projetado",
+        "breakeven_moderado": "Breakeven moderado",
+        "breakeven_tardio": "Breakeven tardio",
+        "no_breakeven": "Sem breakeven projetado em 24 meses",
+        "insufficient": "Dados insuficientes de fluxo de caixa"
+      },
+      "b10": {
+        "lift_alto": "Lift de receita alto",
+        "lift_medio": "Lift de receita médio",
+        "lift_bajo": "Lift de receita baixo",
+        "sin_lift": "Sem lift esperado",
+        "insufficient": "Dados insuficientes para otimizar"
+      },
+      "b13": {
+        "amenity_mix_excelente": "Mix de amenidades excelente",
+        "amenity_mix_regular": "Mix de amenidades regular",
+        "amenity_mix_pobre": "Mix de amenidades pobre",
+        "insufficient": "Dados insuficientes para ROI de amenidades"
+      },
+      "b14": {
+        "mix_dominante": "Persona dominante clara",
+        "mix_mixto": "Mix de personas balanceado",
+        "mix_difuso": "Mix de personas difuso",
+        "insufficient": "Dados insuficientes de perfil do projeto"
+      },
+      "b15": {
+        "ventana_optima": "Janela de lançamento ótima",
+        "ventana_aceptable": "Janela aceitável",
+        "ventana_suboptima": "Janela subótima, considere esperar",
+        "insufficient": "Dados insuficientes de timing"
+      },
+      "c01": {
+        "caliente": "Lead quente",
+        "tibio": "Lead morno",
+        "frio": "Lead frio",
+        "insufficient": "Sinais insuficientes do lead"
+      },
+      "c03": {
+        "match_excelente": "Match excelente",
+        "match_bueno": "Bom match",
+        "match_parcial": "Match parcial",
+        "match_pobre": "Match fraco",
+        "insufficient": "Dados insuficientes para match"
+      },
+      "d03": {
+        "undersupply_oportunidad": "Subabastecimento — oportunidade",
+        "equilibrado": "Oferta equilibrada com demanda",
+        "oversupply_moderado": "Superoferta moderada",
+        "oversupply_riesgo": "Risco de superoferta",
+        "insufficient": "Dados insuficientes de pipeline"
+      },
+      "h12": {
+        "oportunidad_alta": "Zona de alta oportunidade",
+        "oportunidad_media": "Zona de oportunidade média",
+        "estable": "Zona estável",
+        "declive": "Zona em declínio",
+        "insufficient": "Dados insuficientes de oportunidade"
+      },
+      "h16": {
+        "gentrificada_post_2017": "Bairro gentrificado pós-2017",
+        "apreciacion_activa": "Apreciação ativa em curso",
+        "estable": "Bairro estável sem mudança",
+        "declive": "Bairro em declínio",
+        "insufficient": "Dados insuficientes de evolução"
       }
     },
     "confidence": {
