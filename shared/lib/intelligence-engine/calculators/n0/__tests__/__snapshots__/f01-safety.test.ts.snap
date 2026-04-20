@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`F01 Safety calculator > 16 zonas CDMX — valores en [0,100] + confidence coherente + snapshot 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.f01.muy_seguro",
+    "trend": "mejorando",
+    "value": 80,
+  },
+  "Contreras Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f01.seguro",
+    "trend": "mejorando",
+    "value": 75,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.f01.muy_seguro",
+    "trend": "mejorando",
+    "value": 80,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f01.seguro",
+    "trend": "mejorando",
+    "value": 70,
+  },
+  "Del Valle": {
+    "confidence": "medium",
+    "label": "ie.score.f01.muy_seguro",
+    "trend": "mejorando",
+    "value": 89,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "label": "ie.score.f01.seguro",
+    "trend": "mejorando",
+    "value": 73,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "label": "ie.score.f01.seguro",
+    "trend": "empeorando",
+    "value": 62,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.f01.seguro",
+    "trend": "estable",
+    "value": 75,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f01.seguro",
+    "trend": "mejorando",
+    "value": 66,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.f01.moderado",
+    "trend": "empeorando",
+    "value": 50,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.f01.riesgoso",
+    "trend": "mejorando",
+    "value": 19,
+  },
+  "San Ángel": {
+    "confidence": "medium",
+    "label": "ie.score.f01.muy_seguro",
+    "trend": "mejorando",
+    "value": 81,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.f01.riesgoso",
+    "trend": "empeorando",
+    "value": 0,
+  },
+  "Tlalpan Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f01.seguro",
+    "trend": "mejorando",
+    "value": 76,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "label": "ie.score.f01.seguro",
+    "trend": "mejorando",
+    "value": 75,
+  },
+  "Xochimilco Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f01.seguro",
+    "trend": "mejorando",
+    "value": 76,
+  },
+}
+`;

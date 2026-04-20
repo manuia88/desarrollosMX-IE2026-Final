@@ -159,6 +159,13 @@
   },
   "ie": {
     "score": {
+      "f01": {
+        "muy_seguro": "Muy seguro",
+        "seguro": "Seguro",
+        "moderado": "Seguridad moderada",
+        "riesgoso": "Alto riesgo",
+        "insufficient": "Datos de FGJ insuficientes"
+      },
       "f04": {
         "pending_h2": "Disponible en FASE 29 (datos RAMA pendientes)"
       },
