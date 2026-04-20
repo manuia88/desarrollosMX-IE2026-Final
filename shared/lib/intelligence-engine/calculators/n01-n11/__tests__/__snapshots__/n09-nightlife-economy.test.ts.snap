@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N09 Nightlife Economy calculator > 16 zonas CDMX — snapshot 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "density": 71.17,
+    "safety": 80,
+    "value": 67,
+    "venues": 107,
+  },
+  "Contreras Centro": {
+    "confidence": "medium",
+    "density": 58.52,
+    "safety": 94,
+    "value": 57,
+    "venues": 46,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "density": 79.84,
+    "safety": 84,
+    "value": 76,
+    "venues": 190,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "medium",
+    "density": 63.22,
+    "safety": 88,
+    "value": 61,
+    "venues": 63,
+  },
+  "Del Valle": {
+    "confidence": "medium",
+    "density": 81.35,
+    "safety": 90,
+    "value": 79,
+    "venues": 210,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "density": 66.42,
+    "safety": 72,
+    "value": 61,
+    "venues": 78,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "density": 61.98,
+    "safety": 0,
+    "value": 43,
+    "venues": 58,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "density": 70,
+    "safety": 72,
+    "value": 64,
+    "venues": 99,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "medium",
+    "density": 48.31,
+    "safety": 96,
+    "value": 48,
+    "venues": 23,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "density": 92.21,
+    "safety": 80,
+    "value": 87,
+    "venues": 430,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "density": 92.38,
+    "safety": 52,
+    "value": 79,
+    "venues": 435,
+  },
+  "San Ángel": {
+    "confidence": "medium",
+    "density": 79.02,
+    "safety": 88,
+    "value": 76,
+    "venues": 180,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "density": 77.24,
+    "safety": 0,
+    "value": 54,
+    "venues": 160,
+  },
+  "Tlalpan Centro": {
+    "confidence": "medium",
+    "density": 68.9,
+    "safety": 86,
+    "value": 66,
+    "venues": 92,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "density": 61.98,
+    "safety": 80,
+    "value": 58,
+    "venues": 58,
+  },
+  "Xochimilco Centro": {
+    "confidence": "medium",
+    "density": 67.71,
+    "safety": 88,
+    "value": 65,
+    "venues": 85,
+  },
+}
+`;

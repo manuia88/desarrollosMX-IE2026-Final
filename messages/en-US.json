@@ -481,6 +481,30 @@
           }
         }
       },
+      "n09": {
+        "hub_nocturno": "Nightlife hub",
+        "actividad_alta": "High nightlife activity",
+        "actividad_balanceada": "Balanced nightlife",
+        "zona_dormitorio": "Bedroom community",
+        "insufficient": "Insufficient DENUE/FGJ data",
+        "recommendations": {
+          "low": {
+            "0": "Bedroom community — limited nightlife, plan to travel to other zones",
+            "1": "Ideal for those who prioritize quiet nights"
+          },
+          "medium": {
+            "0": "Balanced nightlife — restaurants and light entertainment available",
+            "1": "Check specific noise levels and hours near the address"
+          },
+          "high": {
+            "0": "Nightlife hub — wide gastronomic and cultural offering",
+            "1": "Consider ambient noise — check acoustic reviews before buying"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next DENUE/FGJ ingest"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",

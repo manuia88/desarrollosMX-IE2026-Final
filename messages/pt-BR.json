@@ -481,6 +481,30 @@
           }
         }
       },
+      "n09": {
+        "hub_nocturno": "Hub noturno",
+        "actividad_alta": "Alta atividade noturna",
+        "actividad_balanceada": "Atividade noturna equilibrada",
+        "zona_dormitorio": "Zona dormitório",
+        "insufficient": "Dados DENUE/FGJ insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Zona dormitório — vida noturna limitada, planeje deslocamentos",
+            "1": "Ideal para quem prioriza tranquilidade noturna"
+          },
+          "medium": {
+            "0": "Atividade noturna equilibrada — restaurantes e entretenimento leve",
+            "1": "Verifique níveis de ruído e horários próximos ao endereço"
+          },
+          "high": {
+            "0": "Hub noturno — ampla oferta gastronômica e cultural",
+            "1": "Considere ruído ambiente e verifique reviews antes de comprar"
+          },
+          "insufficient_data": {
+            "0": "Dados insuficientes — avaliação disponível após próxima ingestão DENUE/FGJ"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum acelerando",
         "estable": "Momentum estável",
