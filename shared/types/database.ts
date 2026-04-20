@@ -12934,6 +12934,11 @@ export type Database = {
         Args: { p_error?: string; p_id: string; p_success: boolean }
         Returns: Json
       }
+      fn_cascade_geo_data_updated: {
+        Args: { p_country: string; p_source: string; p_zone_id: string }
+        Returns: number
+      }
+      fn_cascade_macro_updated: { Args: { p_country: string }; Returns: number }
       geometry: { Args: { "": string }; Returns: unknown }
       geometry_above: {
         Args: { geom1: unknown; geom2: unknown }
