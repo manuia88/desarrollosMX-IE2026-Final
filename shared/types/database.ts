@@ -5517,6 +5517,50 @@ export type Database = {
           },
         ]
       }
+      property_comparables: {
+        Row: {
+          comparable_properties: Json
+          computed_at: string
+          country_code: string
+          id: string
+          k: number
+          period_date: string
+          property_id: string
+          score_id: string
+          valid_until: string | null
+        }
+        Insert: {
+          comparable_properties?: Json
+          computed_at?: string
+          country_code: string
+          id?: string
+          k?: number
+          period_date: string
+          property_id: string
+          score_id: string
+          valid_until?: string | null
+        }
+        Update: {
+          comparable_properties?: Json
+          computed_at?: string
+          country_code?: string
+          id?: string
+          k?: number
+          period_date?: string
+          property_id?: string
+          score_id?: string
+          valid_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_comparables_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       rate_limit_log: {
         Row: {
           count: number
