@@ -180,6 +180,13 @@
         "limitada": "Limitada",
         "insufficient": "Datos DENUE insuficientes"
       },
+      "f05": {
+        "excelente": "Servicio hídrico excelente",
+        "bueno": "Servicio hídrico bueno",
+        "precario": "Servicio hídrico precario",
+        "crisis": "Crisis hídrica",
+        "insufficient": "Datos SACMEX insuficientes"
+      },
       "f04": {
         "pending_h2": "Disponible en FASE 29 (datos RAMA pendientes)"
       },

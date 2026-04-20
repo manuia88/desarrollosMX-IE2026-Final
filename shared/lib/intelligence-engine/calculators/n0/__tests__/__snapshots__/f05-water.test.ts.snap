@@ -1,0 +1,86 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`F05 Water calculator > 16 zonas CDMX — snapshot + confidence matches SACMEX cascade 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.f05.excelente",
+    "value": 85,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "label": "ie.score.f05.bueno",
+    "value": 65,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.f05.excelente",
+    "value": 81,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "label": "ie.score.f05.bueno",
+    "value": 68,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "label": "ie.score.f05.excelente",
+    "value": 96,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "label": "ie.score.f05.bueno",
+    "value": 62,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "label": "ie.score.f05.crisis",
+    "value": 10,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.f05.bueno",
+    "value": 76,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "high",
+    "label": "ie.score.f05.crisis",
+    "value": 32,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.f05.excelente",
+    "value": 98,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.f05.excelente",
+    "value": 80,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "label": "ie.score.f05.excelente",
+    "value": 94,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.f05.bueno",
+    "value": 68,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "label": "ie.score.f05.excelente",
+    "value": 84,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "label": "ie.score.f05.crisis",
+    "value": 38,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "label": "ie.score.f05.precario",
+    "value": 43,
+  },
+}
+`;
