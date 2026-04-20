@@ -477,6 +477,21 @@ TODO #21 — Upgrade Vercel Pro cuando producción demande mayor frecuencia
   Alternativa H1 si se necesita más frecuencia antes upgrade: GitHub Actions
     schedule cron */5 * * * * gratis llamando webhook DMX score-worker.
 
+TODO #23 — FASE 26 DMX Social + Listing Intelligence Platform MVP
+  Status: 🟡 AGENDADO — mini-fase post FASE 10 validación free-tier
+  Origen: sesiones FASE 10 pre-flight (founder decisiones 2026-04-20):
+          - Social intelligence Brandwatch-style (L43-L52)
+          - WhatsApp groups + páginas inmobiliarias MX data (L53-L58)
+          - Free-tier architecture validada ~$5-15 USD/mes
+  Scope: pipeline integrado WhatsApp + Chrome extension expandida + social
+         APIs free tier + opendata → external_listings table + alimentación
+         scores IE + admin dashboard
+  Estimado: 4-6 sesiones CC
+  Gating: validar ≥1,000 listings/mes útiles en primer sprint antes de
+          justificar upgrade paid APIs (IG masivo, X/Twitter, Apify Pro).
+  Docs: ADR-025 consolidador + FASE_26_LISTING_INTELLIGENCE_PLATFORM.md stub
+  NO bloquea FASE 10 (IE Scores N2+N3+N4). Ejecutar como mini-fase separada.
+
 TODO #22 — Playwright smoke CI integration post-FASE 09
   Status: 🟡 AGENDADO — housekeeping post-FASE 09
   Origen: FASE 09 sesión 2/2 BLOQUE 9.E.2 (commit 23dc528).

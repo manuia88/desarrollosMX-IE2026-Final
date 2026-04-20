@@ -269,6 +269,239 @@
 - **Inspiración:** GitHub Trending, Product Hunt Trending, Twitter Trends, Hacker News
 - **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_21_PORTAL_PUBLICO.md` §Laterals pipeline
 
+### L30 — DMX Personality Score (16Personalities pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** basado en A10 Lifestyle Match, crear tipos de comprador con narrativa rica y nombre memorable ("Tipo INVESTOR_EXPLORER: prefieres zonas emergentes con momentum alto").
+- **Para qué sirve:** 16Personalities dominó testing con branding memorable. Gente comparte "soy tipo X".
+- **Beneficio concreto:** tribalismo + viralidad orgánica + lock-in emocional.
+- **Fase target:** FASE 20 (Portal Comprador — post N3 A10 Lifestyle Match FASE 10)
+- **Dependencia data:** A10 Lifestyle Match (FASE 10) + H14 Buyer Persona (FASE 09)
+- **Inspiración:** 16Personalities, Myers-Briggs, Enneagram, BuzzFeed quizzes
+
+### L31 — Multiplayer collaborative analysis (Figma pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** 2+ usuarios (pareja, familia) colaboran en mismo análisis en tiempo real con live cursors + comentarios + votos.
+- **Para qué sirve:** 70% decisiones de compra son en pareja. Figma democratizó colaboración en diseño.
+- **Beneficio concreto:** producto verdaderamente útil para compra real vs portales single-user.
+- **Fase target:** FASE 20 (Portal Comprador — Family Accounts integration)
+- **Dependencia data:** RLS multi-user + Supabase Realtime + account linking
+- **Inspiración:** Figma, Google Docs, Miro, Notion shared workspaces
+
+### L32 — DMX Zone Certified (Airbnb Superhost pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** zonas con scores top consistentes 12+ meses reciben certificación "DMX Certified".
+- **Para qué sirve:** Airbnb Superhost creó signal de calidad. DMX certification = marca de confianza.
+- **Beneficio concreto:** incentiva devs/propietarios a mejorar scores + brand authority + SEO.
+- **Fase target:** FASE 23 (Monetización — programa badges + premium tier)
+- **Dependencia data:** score_history ≥12m + E01 Full Project Score (FASE 10)
+- **Inspiración:** Airbnb Superhost, TripAdvisor Excellence, Michelin Stars
+
+### L33 — Predictive Portfolio 20 años (Wealthfront pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** dashboard personal con proyección 20 años del patrimonio inmobiliario del usuario.
+- **Para qué sirve:** Wealthfront creó categoría robo-advisor. DMX para real estate.
+- **Beneficio concreto:** retention tool masivo + premium tier ticket alto.
+- **Fase target:** FASE 20 (Portal Comprador) + FASE 23 (Monetización premium tier)
+- **Dependencia data:** A11 Patrimonio 20y (FASE 10) + E02 Portfolio Optimizer (FASE 10) + AVM I01
+- **Inspiración:** Wealthfront, Betterment, Personal Capital, M1 Finance
+
+### L34 — DMX Weekly Newsletter auto-generated (The Hustle pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** newsletter semanal con insights IE auto-generado por AI: top zonas moviéndose, anomalías, trends.
+- **Para qué sirve:** The Hustle vendido $27M. Morning Brew $75M. Canal distribución + brand asset.
+- **Beneficio concreto:** lista email masiva + autoridad mercado + canal owned.
+- **Fase target:** FASE 22 (Marketing/Comms) + activar post Resend SMTP FASE 22
+- **Dependencia data:** delta tracking D2 + N11 Momentum + L50 Crisis Alerting + AI Claude
+- **Inspiración:** The Hustle, Morning Brew, Axios, Stratechery
+
+### L35 — AI Co-pilot Deep Analysis mode (Cursor pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** extensión Copilot ⌘J con modo investigación profunda — pregunta compleja → AI investiga múltiples scores + genera reporte estructurado.
+- **Para qué sirve:** Cursor creó paradigma developer tools. DMX para AI real estate advisor.
+- **Beneficio concreto:** diferenciador brutal vs portales pasivos + killer feature B2B.
+- **Fase target:** FASE 12 (IE AI Scores N5) extensión o FASE dedicada post-FASE 12
+- **Dependencia data:** tRPC ieScores router (FASE 09) + Claude API + N5 AI scores (FASE 12)
+- **Inspiración:** Cursor, GitHub Copilot Chat, Devin, Perplexity Pro
+
+### L37 — Ready-to-Buy Score del comprador (Experian pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** score del usuario mismo (no la propiedad): bureau crediticio + comportamiento DMX + holdings = qué tan listo está para comprar.
+- **Para qué sirve:** Experian dominó credit scoring. DMX crea "credit score inmobiliario".
+- **Beneficio concreto:** dual revenue (vender a bancos + feature premium comprador).
+- **Fase target:** FASE 18 (Legal+Pagos+Crediticio) + FASE 23 (producto B2B bancos)
+- **Dependencia data:** pre-aprobación multi-banco FASE 18 + behavior DMX + holdings registrados
+- **Inspiración:** Experian, Equifax, FICO, Credit Karma, Nubank Credit Score
+
+### L38 — Zone ESG Rating (MSCI ESG pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** rating sostenibilidad ambiental + equidad social + gobernanza por zona.
+- **Para qué sirve:** MSCI ESG dominó inversión institucional. Fondos ESG pagan premium.
+- **Beneficio concreto:** canal ventas gestores activos institucionales (ticket alto) + impact investing.
+- **Fase target:** FASE 23 (Monetización — producto B2B institucional)
+- **Dependencia data:** H07 Environmental + N07 Water Security + F12 Risk Map + compliance ambiental data
+- **Inspiración:** MSCI ESG, Sustainalytics, GRESB (real estate ESG), S&P ESG
+
+### L40 — Insurance Bid Engine (Lemonade pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 lateral session)
+- **Qué es:** propietario sube propiedad → DMX genera risk score → múltiples aseguradoras ofertan automáticamente.
+- **Para qué sirve:** Lemonade revolucionó home insurance con AI+transparencia. DMX = "Kayak del seguro".
+- **Beneficio concreto:** revenue por póliza intermediada + moat (aseguradoras construyen sobre DMX).
+- **Fase target:** FASE 23 (Monetización — producto B2B2C marketplace aseguradoras)
+- **Dependencia data:** DMX-IRE Risk Score (FASE 11) + AVM I01 + partnerships aseguradoras
+- **Inspiración:** Lemonade, Hippo, Root Insurance, Metromile
+
+### L42 — Zone News Radar (Bloomberg News pattern — merged into L43 Social Radar)
+- **Status:** 🟢 proposed — merged conceptualmente con L43 (Social Radar Dashboard cubre news + social)
+- **Qué es:** NLP sobre noticias + redes sociales mencionando zonas → early signals.
+- **Decisión:** no implementar aislado; parte de L43 Social Radar Dashboard (same data pipeline).
+
+### L43 — DMX Social Radar Dashboard (Brandwatch pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** dashboard tiempo real menciones zonas/desarrolladores/proyectos en redes sociales (X, IG, TikTok, Reddit, foros MX) con sentiment analysis agregado.
+- **Para qué sirve:** Brandwatch dominó consumer intelligence. DMX equivalente real estate.
+- **Beneficio concreto:** producto B2B premium ($500-2000/mes enterprise) + devs monitorean proyecto + compradores reality check vs marketing.
+- **Fase target:** FASE 19 (Portal Admin Market Observatory) + FASE 23 (Monetización B2B) + cross-ADR-025 Social Intelligence
+- **Dependencia data:** social listening APIs (Reddit + YouTube free, IG/X pay) + NLP Claude + news scrapers
+- **Inspiración:** Brandwatch, Sprout Social, Meltwater, Talkwalker, Mention
+
+### L44 — Real-Time Zone Feed (X/Twitter pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** feed cronológico inverso de TODO lo que pasa en zonas seguidas: score changes, nuevas propiedades, transacciones, anomalías, news.
+- **Para qué sirve:** Twitter creó "real-time feed". DMX = "Twitter del real estate MX".
+- **Beneficio concreto:** retention diaria masiva + addiction pattern + engagement orgánico.
+- **Fase target:** FASE 20 (Portal Comprador) + FASE 21 (Portal Público)
+- **Dependencia data:** L4 Watchlist + D21 webhooks score changes + L29 trending zones
+- **Inspiración:** X/Twitter timeline, Bluesky, Threads
+
+### L45 — Residente-Verified Reviews (Threads verified pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** SOLO residentes verificados (factura luz, contrato renta, escritura) pueden dejar reviews con fotos/videos/voice notes.
+- **Para qué sirve:** Google Reviews lleno fakes. Threads limitó verified. DMX para zonas.
+- **Beneficio concreto:** data moat brutal + trust factor + accountability + SEO autoridad.
+- **Fase target:** FASE 20 + FASE 21 (Portal Público ficha zona) + ADR-025
+- **Dependencia data:** verification pipeline (OCR facturas + contratos) + UGC moderation
+- **Inspiración:** Threads verified, Nextdoor neighbors verified, LinkedIn verified
+
+### L46 — DMX Spaces audio rooms (X Spaces pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** rooms audio en vivo sobre temas específicos ("¿Comprar Narvarte vs Del Valle?") con expertos + residentes. Grabación auto + transcripción AI + searchable.
+- **Para qué sirve:** X Spaces reactivó conversaciones de calidad. DMX democratiza consejo inmobiliario.
+- **Beneficio concreto:** community moat + content UGC + sponsor opportunities (devs pagan).
+- **Fase target:** FASE 22 (Marketing/Comms + UGC engine)
+- **Dependencia data:** infra audio streaming (WebRTC o LiveKit o Daily.co) + transcripción Claude/Whisper
+- **Inspiración:** X Spaces, Clubhouse, Discord Stage channels
+
+### L47 — Community Notes para Desarrolladores (X Community Notes pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** developers hacen claims en marketing → comunidad verificada agrega notas correctivas → top voted aparecen públicamente.
+- **Para qué sirve:** X transparencia crowd-sourced destruyó misinformation. DMX destruye marketing inflado developers.
+- **Beneficio concreto:** accountability + brand moral + trust diferencial BRUTAL vs portales.
+- **Fase target:** FASE 21 (Portal Público ficha proyecto) + ADR-025
+- **Dependencia data:** sistema verificación users (L45) + voting mechanism + moderation
+- **Inspiración:** X Community Notes, Wikipedia citations, Stack Overflow community moderation
+
+### L48 — Trending Topics Real Estate extended (X Trending + L29)
+- **Status:** 🟡 approved — merged con L29
+- **Qué es:** extensión L29 con hashtags + events + news trending + API pública para press.
+- **Fase target:** FASE 21 (extensión ruta `/trending`)
+
+### L49 — Influencer Map Real Estate MX (Brandwatch influencer ID)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** identificar top voices real estate MX social (brokers, content creators, journalists, inversores) con métrica "influence score" por zona.
+- **Para qué sirve:** Brandwatch cobra premium. DMX para real estate.
+- **Beneficio concreto:** producto B2B premium (agencias marketing, devs sponsorship).
+- **Fase target:** FASE 19 (Admin analytics) + FASE 23 (Monetización B2B)
+- **Dependencia data:** L43 Social Radar pipeline + graph analytics
+- **Inspiración:** Brandwatch Influencer Marketing, Traackr, Klear, HypeAuditor
+
+### L50 — Crisis Alerting Zones (Brandwatch crisis mode)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** detección automática eventos disruptivos combinando news + social + police reports + SACMEX outages. Alerta: "Roma Norte mención 300% 24h + sentiment -50pts → CRISIS POSIBLE".
+- **Para qué sirve:** Brandwatch crisis dashboards salvan brands. DMX salva decisiones compra/inversión tiempo real.
+- **Beneficio concreto:** "DMX te alertó 48h antes" + retention + B2B (aseguradoras).
+- **Fase target:** FASE 19 (Admin Market Observatory) + FASE 24 (Observabilidad SRE)
+- **Dependencia data:** L43 Social Radar + U11 anomaly detection (FASE 08) + L4 watchlist push
+- **Inspiración:** Brandwatch Crisis Management, Dataminr, CrisisHub
+
+### L51 — Voice Notes Residentes (Threads voice notes pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** residentes graban audio 30-60s "¿Cómo es vivir aquí?". Transcripción AI + sentiment + keywords + audio embebido ficha zona.
+- **Para qué sirve:** Threads popularizó voice authentic. Más emocional que texto.
+- **Beneficio concreto:** authentic content + diferencial vs scrapers Google Reviews + SEO long-tail.
+- **Fase target:** FASE 20 (Portal Comprador UGC) + FASE 21 (Portal Público ficha zona)
+- **Dependencia data:** L45 verificación residentes + audio storage + Whisper/Claude transcripción
+- **Inspiración:** Threads voice notes, WhatsApp voice messages, SoundCloud
+
+### L52 — "For You" Personalized Feed (TikTok/Threads algorithmic pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, FASE 10 social intelligence session)
+- **Qué es:** algoritmo personalizado mostrando zonas + oportunidades + news + score changes según behavioral signals (PPD). Infinite scroll vertical mobile.
+- **Para qué sirve:** TikTok/Threads dominan attention con algos personalizados.
+- **Beneficio concreto:** retention killer + addiction pattern + nuevo paradigma discovery inmobiliario.
+- **Fase target:** FASE 20 (Portal Comprador mobile-first)
+- **Dependencia data:** PPD Capa 3 inference engine + embedding vectors + recommendation algo
+- **Inspiración:** TikTok For You, Threads For You, Instagram Reels algo, Twitter For You
+
+### L53 — DMX Project Intelligence Pipeline (Product Hunt + Brandwatch pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, project intelligence session) — scope free-tier
+- **Qué es:** pipeline monitoreo curated cuentas oficiales developers/brokers MX en redes sociales para detectar nuevos proyectos/lanzamientos ANTES que lleguen a portales.
+- **Para qué sirve:** 3-6 meses signal temprano vs Inmuebles24. Data sistemática de lanzamientos que nadie más captura.
+- **Beneficio concreto:** early access alerts B2C + competitive intel B2B + alimenta B15 Launch Timing + market launch reports trimestrales.
+- **Fase target:** FASE 26 (nueva — DMX Social + Listing Intelligence Platform) — ver ADR-025
+- **Dependencia data:** Apify actors curated / Puppeteer self-hosted + Claude Haiku NLP + lista curada ~50 cuentas top MX + Reddit API + YouTube API
+- **Arquitectura free-tier:** GitHub Actions cron + Claude API micro + Supabase incluido = $5-15 USD/mes total
+- **Inspiración:** Product Hunt (discovery signals) + Brandwatch (social listening) + Pitchbook (deal intelligence)
+
+### L54 — Developer Claim Cross-Check (accountability pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, project intelligence session)
+- **Qué es:** cada claim developer en marketing (IG, LinkedIn, website) se compara con histórico DMX: "Dev X dice 'entrega Q4 2026' — históricamente retrasa 4m → probable Q1 2027".
+- **Para qué sirve:** accountability brutal. Datos vs marketing inflado.
+- **Beneficio concreto:** trust factor para compradores + presión mejora developers + diferencial brand.
+- **Fase target:** FASE 21 (Portal Público ficha proyecto) + L47 Community Notes integration
+- **Dependencia data:** L53 Project Intelligence + operaciones históricas DMX + H05 Trust Score
+- **Inspiración:** Politifact fact-checking, Ground News bias meter, Retraction Watch
+
+### L55 — Broker Performance Leaderboard (gamification + transparency)
+- **Status:** 🟡 approved (founder OK 2026-04-20, project intelligence session)
+- **Qué es:** basado en posts + listings + cierres, ranking público top brokers MX por zona/tipo.
+- **Para qué sirve:** transparencia compradores + presión positiva brokers + feature retention brokers (quieren subir en ranking).
+- **Beneficio concreto:** engagement brokers + trust compradores + discovery tool + feature gated premium opcional.
+- **Fase target:** FASE 19 (Admin analytics) + FASE 21 (Portal Público directorio brokers)
+- **Dependencia data:** L53 posts brokers + operaciones cerradas DMX + reviews + response time métricas
+- **Inspiración:** LinkedIn SSI, Strava leaderboards, GitHub contribution graph, Upwork top rated
+
+### L56 — Zone Signal Dashboard / DMX Terminal (Bloomberg Terminal pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, project intelligence session) — cruza con L12 DMX Pro Terminal
+- **Qué es:** dashboard real-time unificado: social mentions + news + score changes + listings + transacciones + anomalías + financial context (macro).
+- **Para qué sirve:** Bloomberg Terminal creó categoría "financial intelligence platform". DMX para real estate.
+- **Beneficio concreto:** producto B2B premium ARR alto + posicionamiento "Bloomberg del real estate MX".
+- **Fase target:** FASE 23 (Monetización) — consolidado con L12 DMX Pro Terminal
+- **Dependencia data:** L43 Social Radar + L53 Project Intelligence + todos los scores IE + macro_series
+- **Inspiración:** Bloomberg Terminal, Refinitiv Eikon, Capital IQ, FactSet
+
+### L57 — WhatsApp/Email Integration Monitoring for Brokers
+- **Status:** 🟡 approved (founder OK 2026-04-20, project intelligence session) — scope free-tier
+- **Qué es:** brokers forwardean listings/oportunidades a DMX bot (WhatsApp Business + email inbound). Bot auto-extract + enrich + guarda. Ellos ganan organización, DMX gana data.
+- **Para qué sirve:** captura listings de corretaje exclusivos que NO llegan a portales.
+- **Beneficio concreto:** data única + acquisition channel brokers + alimenta B07 Competitive Intel.
+- **Fase target:** FASE 26 (DMX Listing Intelligence Platform)
+- **Dependencia data:** WhatsApp Business API provider (Twilio/Gupshup/360Dialog) + email inbound parsing (SendGrid/Mailgun) + Claude NLP + Vision
+- **Arquitectura free-tier:** WhatsApp Business tier 1000 conversaciones/mes gratis + email procesamiento self-hosted
+- **Inspiración:** Superhuman email AI, Notion Mail, Intercom inbound
+
+### L58 — DMX Listing Intelligence Layer (unified pipeline)
+- **Status:** 🟡 approved (founder OK 2026-04-20, project intelligence session) — scope free-tier MVP
+- **Qué es:** pipeline unificado que integra WhatsApp groups + Chrome extension expandida + páginas inmobiliarias MX (Re/Max, Century 21, Coldwell, Engel & Völkers, Houm, La Haus, Lamudi, Casas y Terrenos) + social listening L53 + opendata (RUV, Catastro) en tabla `external_listings` para analytics internos (NO expose público).
+- **Para qué sirve:** agregar data que nadie más usa sistemáticamente. Alimenta scores agregados + competitive intel B2B.
+- **Beneficio concreto:** **data más completa que cualquier portal MX** + listings de corretaje exclusivos 3-6 meses antes que portales + market benchmarks precios preventa reales.
+- **Fase target:** FASE 26 (DMX Social + Listing Intelligence Platform) — hub consolidador
+- **Dependencia data:** Chrome extension (FASE 07 GC-27) expandida + WhatsApp export pipeline + Puppeteer self-hosted GH Actions + partnerships inmobiliarias medianas
+- **Arquitectura free-tier:** $5-15 USD/mes (solo Claude API usage para NLP) — detalles en ADR-025
+- **NO expose público** — alimenta scores agregados + analytics interno + reports B2B solo
+- **Respeta ADR-012** — NO scraping server-side Habi/Inmuebles24/ML; user-side Chrome ext + partnerships + opendata
+- **Inmobiliarias reales MX verificadas:** RE/MAX, Century 21, Coldwell Banker, Engel & Völkers, Houm (digital MX-native), La Haus (regional), Lamudi (portal 1.2M visits/mes), Casas y Terrenos (GDL-based) — correcciones sobre menciones previas incorrectas (Allegra/Hawah no existen como major players)
+- **Inspiración arquitectura:** Similar a Plaid (unified data layer) + Bright Data (multi-source scraping) + Brandwatch (social listening)
+- **Cross-ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-025_SOCIAL_LISTING_INTELLIGENCE.md` (nuevo) + `docs/02_PLAN_MAESTRO/FASE_26_LISTING_INTELLIGENCE_PLATFORM.md` (nuevo stub)
+
 ---
 
 ## Histórico (ejecutados)
