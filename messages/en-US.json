@@ -756,6 +756,91 @@
         "estable": "Stable neighborhood, no change",
         "declive": "Neighborhood in decline",
         "insufficient": "Insufficient evolution data"
+      },
+      "a07": {
+        "buy_now": "Ideal moment to buy",
+        "wait_3m": "Wait 3 months recommended",
+        "wait_6m": "Wait 6 months recommended",
+        "wait_12m": "Wait 12 months recommended",
+        "insufficient": "Insufficient timing data"
+      },
+      "a08": {
+        "top_claro": "Clear top vs peers",
+        "competitivo": "Competitive vs peers",
+        "mid": "Middle position",
+        "rezagado": "Lagging vs peers",
+        "insufficient": "Insufficient comparative data"
+      },
+      "a09": {
+        "bajo": "Low buyer risk",
+        "moderado": "Moderate buyer risk",
+        "alto": "High buyer risk",
+        "muy_alto": "Very high buyer risk",
+        "insufficient": "Insufficient risk data"
+      },
+      "a10": {
+        "match_excelente": "Excellent lifestyle match",
+        "match_bueno": "Good lifestyle match",
+        "match_regular": "Regular lifestyle match",
+        "match_pobre": "Poor lifestyle match",
+        "insufficient": "Insufficient lifestyle data"
+      },
+      "a11": {
+        "crecimiento_alto": "High wealth growth",
+        "crecimiento_medio": "Medium wealth growth",
+        "crecimiento_bajo": "Low wealth growth",
+        "sin_crecimiento": "No projected growth",
+        "insufficient": "Insufficient wealth data"
+      },
+      "b06": {
+        "alta_viabilidad": "High project viability",
+        "moderada": "Moderate viability",
+        "marginal": "Marginal viability",
+        "no_viable": "Project not viable",
+        "insufficient": "Insufficient viability data"
+      },
+      "b11": {
+        "excelente": "Excellent channel",
+        "bueno": "Good channel",
+        "regular": "Regular channel",
+        "pobre": "Poor channel",
+        "insufficient": "Insufficient channel data"
+      },
+      "c04": {
+        "precio": "Price objection detected",
+        "ubicacion": "Location objection detected",
+        "seguridad": "Security objection detected",
+        "construccion": "Construction objection detected",
+        "condiciones": "Terms objection detected",
+        "otra": "Objection classified as other",
+        "insufficient": "Insufficient data to refute"
+      },
+      "c06": {
+        "forecast_alto": "High commission forecast",
+        "forecast_medio": "Medium commission forecast",
+        "forecast_bajo": "Low commission forecast",
+        "forecast_nulo": "Null commission forecast",
+        "insufficient": "Pipeline insufficient to project"
+      },
+      "d04": {
+        "fuertemente_correlacionado": "Scores strongly correlated",
+        "parcialmente_correlacionado": "Scores partially correlated",
+        "independiente": "Scores independent from each other",
+        "insufficient": "Insufficient data for correlation"
+      },
+      "h13": {
+        "top_site": "Top site for development",
+        "candidato": "Viable candidate",
+        "marginal": "Marginal site",
+        "descartar": "Site to discard",
+        "insufficient": "Insufficient site selection data"
+      },
+      "h15": {
+        "excelente": "Excellent due diligence",
+        "aceptable": "Acceptable due diligence",
+        "observaciones": "Due diligence with observations",
+        "bloqueante": "Due diligence blockers",
+        "insufficient": "Checklist pending completion"
       }
     },
     "confidence": {
