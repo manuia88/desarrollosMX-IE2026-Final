@@ -1,0 +1,47 @@
+// Framework de calculators IE — contrato uniforme para los 118 scores
+// implementados en BLOQUEs 8.B/8.C (N0) y fases siguientes.
+// Referencia: docs/02_PLAN_MAESTRO/FASE_08_IE_SCORES_N0.md §8.A.2.1 +
+// ADR-010 §D4.
+
+import type { SupabaseClient } from '@supabase/supabase-js';
+import type { ProvenanceRecord } from './types';
+
+export type Confidence = 'high' | 'medium' | 'low' | 'insufficient_data';
+
+export interface CalculatorInput {
+  readonly zoneId?: string;
+  readonly projectId?: string;
+  readonly userId?: string;
+  readonly countryCode: string;
+  readonly periodDate: string; // ISO YYYY-MM-DD
+  // Parámetros opcionales on-demand (ej. destino para H09 Commute).
+  readonly params?: Readonly<Record<string, unknown>>;
+}
+
+export interface CalculatorCitation {
+  readonly source: string;
+  readonly url?: string;
+  readonly period?: string;
+  readonly count?: number;
+}
+
+export interface CalculatorOutput<TComponents extends object = Record<string, unknown>> {
+  readonly score_value: number; // 0-100 canónico
+  readonly score_label: string; // interpretación i18n-friendly
+  readonly components: TComponents;
+  readonly inputs_used: Readonly<Record<string, unknown>>;
+  readonly confidence: Confidence;
+  readonly citations: readonly CalculatorCitation[];
+  readonly trend_vs_previous?: number;
+  readonly trend_direction?: 'mejorando' | 'estable' | 'empeorando';
+  // REQUIRED U4 — cada calculator declara sus fuentes en formato estándar.
+  // Sin provenance, runScore rechaza el output.
+  readonly provenance: ProvenanceRecord;
+}
+
+export interface Calculator<TComponents extends object = Record<string, unknown>> {
+  readonly scoreId: string;
+  readonly version: string; // semver del calculator
+  readonly tier: 1 | 2 | 3 | 4;
+  run(input: CalculatorInput, supabase: SupabaseClient): Promise<CalculatorOutput<TComponents>>;
+}
