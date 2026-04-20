@@ -10,7 +10,9 @@
 //   - api_key Pro/Enterprise (format `api_pro_*` o `api_ent_*`) → unlimited
 //   - Sin api_key → 5 requests por (ip) ventana 30d rolling
 
-export type TierName = 'free' | 'pro' | 'enterprise';
+import { AVM_TIERS, type AvmTier } from './pricing-tiers';
+
+export type TierName = AvmTier;
 
 export interface RateLimitDecision {
   readonly allowed: boolean;
@@ -26,7 +28,7 @@ export function classifyTierFromApiKey(apiKey: string | null): TierName {
   return 'free';
 }
 
-const FREE_MONTHLY_QUOTA = 5;
+const FREE_MONTHLY_QUOTA = AVM_TIERS.free.quota;
 const WINDOW_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 
 interface CounterEntry {
