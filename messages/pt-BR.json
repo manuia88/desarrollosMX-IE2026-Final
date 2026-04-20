@@ -756,6 +756,91 @@
         "estable": "Bairro estável sem mudança",
         "declive": "Bairro em declínio",
         "insufficient": "Dados insuficientes de evolução"
+      },
+      "a07": {
+        "buy_now": "Momento ideal para comprar",
+        "wait_3m": "Esperar 3 meses recomendado",
+        "wait_6m": "Esperar 6 meses recomendado",
+        "wait_12m": "Esperar 12 meses recomendado",
+        "insufficient": "Dados insuficientes para timing"
+      },
+      "a08": {
+        "top_claro": "Topo comparativo claro",
+        "competitivo": "Competitivo entre comparáveis",
+        "mid": "Posição intermediária",
+        "rezagado": "Atrasado vs comparáveis",
+        "insufficient": "Dados insuficientes para comparar"
+      },
+      "a09": {
+        "bajo": "Risco comprador baixo",
+        "moderado": "Risco comprador moderado",
+        "alto": "Risco comprador alto",
+        "muy_alto": "Risco comprador muito alto",
+        "insufficient": "Dados insuficientes de risco"
+      },
+      "a10": {
+        "match_excelente": "Match de lifestyle excelente",
+        "match_bueno": "Bom match de lifestyle",
+        "match_regular": "Match de lifestyle regular",
+        "match_pobre": "Match de lifestyle fraco",
+        "insufficient": "Dados insuficientes de lifestyle"
+      },
+      "a11": {
+        "crecimiento_alto": "Crescimento patrimonial alto",
+        "crecimiento_medio": "Crescimento patrimonial médio",
+        "crecimiento_bajo": "Crescimento patrimonial baixo",
+        "sin_crecimiento": "Sem crescimento projetado",
+        "insufficient": "Dados insuficientes de patrimônio"
+      },
+      "b06": {
+        "alta_viabilidad": "Alta viabilidade do projeto",
+        "moderada": "Viabilidade moderada",
+        "marginal": "Viabilidade marginal",
+        "no_viable": "Projeto inviável",
+        "insufficient": "Dados insuficientes de viabilidade"
+      },
+      "b11": {
+        "excelente": "Canal excelente",
+        "bueno": "Canal bom",
+        "regular": "Canal regular",
+        "pobre": "Canal fraco",
+        "insufficient": "Dados insuficientes do canal"
+      },
+      "c04": {
+        "precio": "Objeção de preço detectada",
+        "ubicacion": "Objeção de localização detectada",
+        "seguridad": "Objeção de segurança detectada",
+        "construccion": "Objeção de construção detectada",
+        "condiciones": "Objeção de condições detectada",
+        "otra": "Objeção classificada como outra",
+        "insufficient": "Dados insuficientes para refutar"
+      },
+      "c06": {
+        "forecast_alto": "Forecast comissões alto",
+        "forecast_medio": "Forecast comissões médio",
+        "forecast_bajo": "Forecast comissões baixo",
+        "forecast_nulo": "Forecast comissões nulo",
+        "insufficient": "Pipeline insuficiente para projetar"
+      },
+      "d04": {
+        "fuertemente_correlacionado": "Scores fortemente correlacionados",
+        "parcialmente_correlacionado": "Scores parcialmente correlacionados",
+        "independiente": "Scores independentes entre si",
+        "insufficient": "Dados insuficientes para correlação"
+      },
+      "h13": {
+        "top_site": "Top terreno para desenvolvimento",
+        "candidato": "Candidato viável",
+        "marginal": "Terreno marginal",
+        "descartar": "Terreno a descartar",
+        "insufficient": "Dados insuficientes para seleção de terreno"
+      },
+      "h15": {
+        "excelente": "Due diligence excelente",
+        "aceptable": "Due diligence aceitável",
+        "observaciones": "Due diligence com observações",
+        "bloqueante": "Due diligence com bloqueadores",
+        "insufficient": "Checklist pendente"
       }
     },
     "confidence": {
