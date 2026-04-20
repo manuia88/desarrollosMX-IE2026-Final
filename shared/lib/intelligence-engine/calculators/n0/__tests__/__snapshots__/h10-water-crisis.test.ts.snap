@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`H10 Water Crisis calculator > 16 zonas CDMX — snapshot cruzando SACMEX + CONAGUA 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.h10.sin_crisis",
+    "severidad": "moderada",
+    "value": 78,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "label": "ie.score.h10.sin_crisis",
+    "severidad": "leve",
+    "value": 85,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.h10.sin_crisis",
+    "severidad": "leve",
+    "value": 85,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "label": "ie.score.h10.estres_moderado",
+    "severidad": "moderada",
+    "value": 68,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "label": "ie.score.h10.sin_crisis",
+    "severidad": "leve",
+    "value": 91,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h10.estres_moderado",
+    "severidad": "moderada",
+    "value": 62,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "label": "ie.score.h10.crisis_severa",
+    "severidad": "critica",
+    "value": 2,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.h10.estres_moderado",
+    "severidad": "moderada",
+    "value": 71,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "high",
+    "label": "ie.score.h10.crisis_activa",
+    "severidad": "grave",
+    "value": 42,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.h10.sin_crisis",
+    "severidad": "leve",
+    "value": 95,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.h10.sin_crisis",
+    "severidad": "moderada",
+    "value": 78,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "label": "ie.score.h10.sin_crisis",
+    "severidad": "leve",
+    "value": 85,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.h10.estres_moderado",
+    "severidad": "moderada",
+    "value": 67,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "label": "ie.score.h10.sin_crisis",
+    "severidad": "leve",
+    "value": 84,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "label": "ie.score.h10.crisis_activa",
+    "severidad": "grave",
+    "value": 32,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h10.crisis_activa",
+    "severidad": "critica",
+    "value": 28,
+  },
+}
+`;

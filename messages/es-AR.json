@@ -244,6 +244,13 @@
         "extenso": "Commute extenso",
         "insufficient": "Datos de ruta insuficientes"
       },
+      "h10": {
+        "sin_crisis": "Sin crisis hídrica",
+        "estres_moderado": "Estrés hídrico moderado",
+        "crisis_activa": "Crisis hídrica activa",
+        "crisis_severa": "Crisis hídrica severa",
+        "insufficient": "Datos SACMEX/CONAGUA insuficientes"
+      },
       "h06": {
         "pending_h2": "Disponible en FASE 29 (datos 0311 Locatel pendientes)"
       }

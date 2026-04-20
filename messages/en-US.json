@@ -244,6 +244,13 @@
         "extenso": "Long commute",
         "insufficient": "Insufficient route data"
       },
+      "h10": {
+        "sin_crisis": "No water crisis",
+        "estres_moderado": "Moderate water stress",
+        "crisis_activa": "Active water crisis",
+        "crisis_severa": "Severe water crisis",
+        "insufficient": "Insufficient SACMEX/CONAGUA data"
+      },
       "h06": {
         "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
       }
