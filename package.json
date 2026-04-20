@@ -26,6 +26,7 @@
     "audit:e2e": "node scripts/audit-dead-ui.mjs",
     "audit:e2e:ci": "node scripts/audit-dead-ui.mjs --ci --json",
     "audit:habi": "node scripts/audit-forbidden-habi.mjs",
+    "registry:snapshot": "node --experimental-strip-types scripts/registry-snapshot.mjs",
     "test:security": "vitest run tests/security --passWithNoTests",
     "prepare": "husky"
   },
