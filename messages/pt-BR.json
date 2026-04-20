@@ -457,6 +457,30 @@
           }
         }
       },
+      "n08": {
+        "muy_walkable": "Muito caminhável",
+        "walkable": "Caminhável",
+        "mixto": "Caminhabilidade mista",
+        "requiere_auto": "Zona dependente de carro",
+        "insufficient": "Dados DENUE/GTFS insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Zona dependente de carro — considere custos de combustível/estacionamento",
+            "1": "Considere zonas com Metrô a 500 m se depender de transporte público"
+          },
+          "medium": {
+            "0": "Caminhabilidade mista — combine caminhada + transporte para tarefas diárias",
+            "1": "Verifique amenidades específicas perto do endereço"
+          },
+          "high": {
+            "0": "Zona caminhável — resolve a maioria das tarefas a pé",
+            "1": "Mantenha expectativas de custo alinhadas a zona prime caminhável"
+          },
+          "insufficient_data": {
+            "0": "Dados insuficientes — avaliação disponível após próxima ingestão DENUE/GTFS"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum acelerando",
         "estable": "Momentum estável",

@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N08 Walkability MX calculator > 16 zonas CDMX — snapshot 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "connectivity": 45,
+    "density": 65.61,
+    "diversity": 79.61,
+    "value": 75,
+  },
+  "Contreras Centro": {
+    "confidence": "insufficient_data",
+    "connectivity": 0,
+    "density": 56.44,
+    "diversity": 78.32,
+    "value": 49,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "connectivity": 60,
+    "density": 67.92,
+    "diversity": 82.35,
+    "value": 80,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "insufficient_data",
+    "connectivity": 0,
+    "density": 60.42,
+    "diversity": 80.08,
+    "value": 56,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "connectivity": 100,
+    "density": 72.86,
+    "diversity": 82.58,
+    "value": 89,
+  },
+  "Iztacalco Centro": {
+    "confidence": "medium",
+    "connectivity": 30,
+    "density": 61.6,
+    "diversity": 75.44,
+    "value": 66,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "medium",
+    "connectivity": 15,
+    "density": 58.61,
+    "diversity": 70.27,
+    "value": 55,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "connectivity": 45,
+    "density": 64.52,
+    "diversity": 80.52,
+    "value": 75,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "insufficient_data",
+    "connectivity": 0,
+    "density": 48.36,
+    "diversity": 71.72,
+    "value": 38,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "connectivity": 100,
+    "density": 79.26,
+    "diversity": 86.68,
+    "value": 91,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "connectivity": 100,
+    "density": 77.34,
+    "diversity": 83.19,
+    "value": 90,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "connectivity": 90,
+    "density": 69.83,
+    "diversity": 83.84,
+    "value": 86,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "connectivity": 100,
+    "density": 73.12,
+    "diversity": 55.82,
+    "value": 82,
+  },
+  "Tlalpan Centro": {
+    "confidence": "medium",
+    "connectivity": 15,
+    "density": 62.32,
+    "diversity": 78,
+    "value": 65,
+  },
+  "Tláhuac Centro": {
+    "confidence": "medium",
+    "connectivity": 15,
+    "density": 58.11,
+    "diversity": 73.64,
+    "value": 54,
+  },
+  "Xochimilco Centro": {
+    "confidence": "insufficient_data",
+    "connectivity": 0,
+    "density": 59.55,
+    "diversity": 74.57,
+    "value": 54,
+  },
+}
+`;

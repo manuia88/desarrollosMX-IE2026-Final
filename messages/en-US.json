@@ -457,6 +457,30 @@
           }
         }
       },
+      "n08": {
+        "muy_walkable": "Very walkable",
+        "walkable": "Walkable",
+        "mixto": "Mixed walkability",
+        "requiere_auto": "Car-dependent zone",
+        "insufficient": "Insufficient DENUE/GTFS data",
+        "recommendations": {
+          "low": {
+            "0": "Car-dependent zone — factor in fuel/parking costs",
+            "1": "Consider zones with Metro or Metrobús within 500 m if you rely on public transport"
+          },
+          "medium": {
+            "0": "Mixed walkability — combine walking + transit for daily errands",
+            "1": "Check specific amenities near the address"
+          },
+          "high": {
+            "0": "Walkable zone — handles most errands on foot",
+            "1": "Keep cost expectations aligned with prime walkable zone"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next DENUE/GTFS ingest"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",

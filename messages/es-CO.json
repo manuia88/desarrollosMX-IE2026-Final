@@ -457,6 +457,30 @@
           }
         }
       },
+      "n08": {
+        "muy_walkable": "Muy caminable",
+        "walkable": "Caminable",
+        "mixto": "Caminabilidad mixta",
+        "requiere_auto": "Zona requiere vehículo",
+        "insufficient": "Datos DENUE/GTFS insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Zona requiere vehículo — considera costos de combustible/parqueadero",
+            "1": "Considera zonas con TransMilenio a 500 m si dependes de transporte público"
+          },
+          "medium": {
+            "0": "Caminabilidad mixta — combina caminata + transporte para tareas diarias",
+            "1": "Revisa amenidades específicas cerca del domicilio"
+          },
+          "high": {
+            "0": "Zona caminable — resuelves la mayoría de tareas a pie",
+            "1": "Mantén expectativas de costo asociadas a zona prime caminable"
+          },
+          "insufficient_data": {
+            "0": "Datos insuficientes — evaluación disponible tras próxima ingesta DENUE/GTFS"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum en aceleración",
         "estable": "Momentum estable",
