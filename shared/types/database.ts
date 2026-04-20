@@ -3225,6 +3225,68 @@ export type Database = {
         }
         Relationships: []
       }
+      market_anomalies: {
+        Row: {
+          ack: boolean
+          ack_at: string | null
+          ack_by: string | null
+          baseline_samples_count: number
+          country_code: string
+          detected_at: string
+          deviation_sigma: number
+          entity_id: string
+          entity_type: string
+          id: string
+          notes: string | null
+          period_date: string
+          score_id: string
+          value_baseline: number
+          value_current: number
+        }
+        Insert: {
+          ack?: boolean
+          ack_at?: string | null
+          ack_by?: string | null
+          baseline_samples_count: number
+          country_code: string
+          detected_at?: string
+          deviation_sigma: number
+          entity_id: string
+          entity_type: string
+          id?: string
+          notes?: string | null
+          period_date: string
+          score_id: string
+          value_baseline: number
+          value_current: number
+        }
+        Update: {
+          ack?: boolean
+          ack_at?: string | null
+          ack_by?: string | null
+          baseline_samples_count?: number
+          country_code?: string
+          detected_at?: string
+          deviation_sigma?: number
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          notes?: string | null
+          period_date?: string
+          score_id?: string
+          value_baseline?: number
+          value_current?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "market_anomalies_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       market_prices_secondary: {
         Row: {
           address_raw: string | null
@@ -5326,6 +5388,7 @@ export type Database = {
       }
       project_scores: {
         Row: {
+          anomaly: Json | null
           citations: Json
           components: Json
           computed_at: string
@@ -5348,6 +5411,7 @@ export type Database = {
           valid_until: string | null
         }
         Insert: {
+          anomaly?: Json | null
           citations?: Json
           components?: Json
           computed_at?: string
@@ -5370,6 +5434,7 @@ export type Database = {
           valid_until?: string | null
         }
         Update: {
+          anomaly?: Json | null
           citations?: Json
           components?: Json
           computed_at?: string
@@ -11910,6 +11975,7 @@ export type Database = {
       }
       zone_scores: {
         Row: {
+          anomaly: Json | null
           citations: Json
           comparable_zones: Json
           components: Json
@@ -11933,6 +11999,7 @@ export type Database = {
           zone_id: string
         }
         Insert: {
+          anomaly?: Json | null
           citations?: Json
           comparable_zones?: Json
           components?: Json
@@ -11956,6 +12023,7 @@ export type Database = {
           zone_id: string
         }
         Update: {
+          anomaly?: Json | null
           citations?: Json
           comparable_zones?: Json
           components?: Json

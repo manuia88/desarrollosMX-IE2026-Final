@@ -6,6 +6,7 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { recordSpend } from '@/shared/lib/ingest/cost-tracker';
+import { detectAndRecordAnomaly } from '@/shared/lib/intelligence-engine/anomaly/detector';
 import { hashUserIdForTelemetry } from '@/shared/lib/telemetry/hash-user-id';
 import { posthog } from '@/shared/lib/telemetry/posthog';
 import { SupabaseScoreQueue } from '../queue';
@@ -34,6 +35,7 @@ export interface RunScoreOptions {
   readonly calculatorOverride?: Calculator;
   readonly skipEnqueueCascade?: boolean; // util en tests para no golpear RPC
   readonly skipPersist?: boolean;
+  readonly skipAnomalyCheck?: boolean; // util en tests
 }
 
 export type RunScoreResult =
@@ -150,6 +152,34 @@ export async function runScore(
       };
     }
     persisted = true;
+
+    // U11 + F3 — Anomaly detection post-persist.
+    // Consulta score_history rolling 30d, compara contra baseline (mean + stddev).
+    // Si deviation > 3σ: INSERT market_anomalies + UPDATE zone/project.anomaly.
+    // No bloquea runScore — error silencioso, best-effort telemetría.
+    if (!options.skipAnomalyCheck) {
+      const entityType =
+        registry.category === 'comprador'
+          ? 'user'
+          : registry.category === 'proyecto'
+            ? 'project'
+            : 'zone';
+      const entityId = input.zoneId ?? input.projectId ?? input.userId;
+      if (entityId) {
+        try {
+          await detectAndRecordAnomaly(supabase, {
+            scoreId: registry.score_id,
+            entityType,
+            entityId,
+            countryCode: input.countryCode,
+            periodDate: input.periodDate,
+            currentValue: output.score_value,
+          });
+        } catch {
+          // best-effort
+        }
+      }
+    }
   }
 
   // Enqueue cascades downstream — scores que dependen de este.
