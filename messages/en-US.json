@@ -558,6 +558,51 @@
       "medium": "Limited data",
       "low": "Calculated with few data points",
       "insufficient": "Score coming soon"
+    },
+    "confidence_meta": {
+      "high_desc": "Based on sufficient volume and recent data",
+      "medium_desc": "Based on limited data from recent months",
+      "low_desc": "Calculated with few data points available",
+      "insufficient_data_desc": "Not enough data yet to compute this score",
+      "cta_explain": "Why"
+    },
+    "placeholder": {
+      "title": "Score coming soon",
+      "generic_requirement": "Waiting for data maturity in the area"
+    },
+    "transparency": {
+      "methodology": "Methodology",
+      "reasoning": "Reasoning",
+      "provenance": "Sources",
+      "comparable_zones": "Comparable zones",
+      "ranking": "Ranking",
+      "time_series": "Trend",
+      "validity": "Validity",
+      "see_full": "View full methodology",
+      "computed_at": "Computed on",
+      "valid_until": "Valid until",
+      "rank_fmt": "Rank {rank} of {total}",
+      "delta_3m": "Δ 3m",
+      "delta_6m": "Δ 6m",
+      "delta_12m": "Δ 12m",
+      "formula": "Formula",
+      "sources": "Sources",
+      "weights": "Weights",
+      "references": "References",
+      "cta_open": "View details",
+      "close": "Close"
+    },
+    "recommendations": {
+      "heading": "What to do with this info",
+      "empty": "No recommendations available",
+      "cta": "Recommendations"
+    },
+    "card": {
+      "empty_title": "No scores available",
+      "empty_desc": "Not enough data to show scores for this area",
+      "error_title": "Could not load scores",
+      "error_desc": "Try again in a few seconds",
+      "retry": "Retry"
     }
   }
 }

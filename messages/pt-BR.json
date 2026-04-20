@@ -558,6 +558,51 @@
       "medium": "Dados limitados",
       "low": "Calculado com poucos dados",
       "insufficient": "Score em breve"
+    },
+    "confidence_meta": {
+      "high_desc": "Baseado em volume suficiente e dados recentes",
+      "medium_desc": "Baseado em dados limitados dos últimos meses",
+      "low_desc": "Calculado com poucos dados disponíveis na região",
+      "insufficient_data_desc": "Ainda não há dados suficientes para calcular este score",
+      "cta_explain": "Por quê"
+    },
+    "placeholder": {
+      "title": "Score em breve",
+      "generic_requirement": "Aguardando maturidade de dados na região"
+    },
+    "transparency": {
+      "methodology": "Metodologia",
+      "reasoning": "Raciocínio",
+      "provenance": "Fontes",
+      "comparable_zones": "Regiões comparáveis",
+      "ranking": "Ranking",
+      "time_series": "Evolução",
+      "validity": "Validade",
+      "see_full": "Ver metodologia completa",
+      "computed_at": "Calculado em",
+      "valid_until": "Válido até",
+      "rank_fmt": "Posição {rank} de {total}",
+      "delta_3m": "Δ 3m",
+      "delta_6m": "Δ 6m",
+      "delta_12m": "Δ 12m",
+      "formula": "Fórmula",
+      "sources": "Fontes",
+      "weights": "Pesos",
+      "references": "Referências",
+      "cta_open": "Ver detalhes",
+      "close": "Fechar"
+    },
+    "recommendations": {
+      "heading": "O que fazer com esta info",
+      "empty": "Sem recomendações disponíveis",
+      "cta": "Recomendações"
+    },
+    "card": {
+      "empty_title": "Sem scores disponíveis",
+      "empty_desc": "Não há dados suficientes para exibir scores nesta região",
+      "error_title": "Não foi possível carregar os scores",
+      "error_desc": "Tente novamente em alguns segundos",
+      "retry": "Tentar novamente"
     }
   }
 }
