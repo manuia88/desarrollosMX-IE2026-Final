@@ -313,6 +313,30 @@
           }
         }
       },
+      "n02": {
+        "hub_laboral": "Accessible job hub",
+        "acceso_bueno": "Good employment access",
+        "acceso_moderado": "Moderate employment access",
+        "aislada": "Employment-isolated zone",
+        "insufficient": "Insufficient DENUE/GTFS data",
+        "recommendations": {
+          "low": {
+            "0": "Employment-isolated zone — evaluate commute time/cost",
+            "1": "Consider zones with Metro or Metrobús within 1 km"
+          },
+          "medium": {
+            "0": "Acceptable employment access — check specific routes to your workplace",
+            "1": "Combine public transport with short walking legs"
+          },
+          "high": {
+            "0": "Job hub — wide employment offer reachable in 45 minutes",
+            "1": "Keep cost expectations aligned with a high-access zone"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — refresh after next DENUE/GTFS ingest"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",

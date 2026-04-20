@@ -752,5 +752,17 @@ Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR
 FASE 21 — Portal Público (landing SPA + /explorar + /proyectos/[id] + /indices + /metodologia + /asesores/[slug] + SEO + A11y)
 
 ---
+
+## Laterals pipeline (proposed durante ejecución previa)
+
+Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
+
+Aplican en esta fase:
+- **L4 Watchlist + Alertas de zonas** (Robinhood pattern) — usuario sigue 5-10 zonas y recibe push notifications cuando algún score cambia >10%. Bloque sugerido: integrar en BLOQUE 20 (mi DMX dashboard) o nuevo BLOQUE 20.WATCH dedicado. Aprovecha delta tracking D2 ya implementado en BLOQUE 8.C.
+- **L9 Suscripción a zonas con newsletter mensual** (Substack pattern) — newsletter mensual por zona con cambios scores + nuevas propiedades + opportunities. Bloque sugerido: integrar en BLOQUE 20 (notifications/preferences) + activar al desbloquear Resend SMTP en FASE 22.
+
+Al ejecutar FASE 20, revisar status en pipeline maestro y confirmar incorporación al scope.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
 **Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

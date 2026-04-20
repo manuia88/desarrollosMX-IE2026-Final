@@ -64,3 +64,21 @@ Zero imports cross-feature — todo lo compartido va en `/shared/`.
 Este repo se construye fase por fase (FASE 00 → FASE 29) siguiendo el contrato en `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md`. Plan operativo en `docs/02_PLAN_MAESTRO/FASE_NN_*.md`. ADRs cerrados en `docs/01_DECISIONES_ARQUITECTONICAS/`.
 
 Cualquier conflicto entre docs se resuelve por la jerarquía del contrato. Si no se resuelve, **preguntar**.
+
+## Comunicación con founder (Manu)
+
+Manu no es técnico. Reglas estrictas de respuesta:
+
+- **Cuando proponga upgrades, mejoras, optimizaciones o cambios:** explicar en lenguaje natural y sencillo. Estructura obligatoria por upgrade:
+  1. **Qué es** (1 línea, sin jerga)
+  2. **Para qué sirve** (1-2 líneas, en términos de producto o usuario)
+  3. **Beneficio concreto** (1 línea, qué mejora real aporta)
+  - NO incluir: nombres de tablas, funciones, flags TypeScript, jerga DevOps, paths de archivos.
+  - SÍ incluir: analogías cotidianas si ayudan.
+- **SIEMPRE que Manu pregunte "algún upgrade?" o equivalente:** dar 2 categorías obligatorias:
+  - **Upgrades DIRECTOS** al módulo/bloque actual (qué se puede mejorar en lo que se está construyendo)
+  - **Upgrades LATERALES** pensando en empresas que crearon nuevas categorías que revolucionaron el mundo (Spotify Wrapped, Strava Segments, Robinhood, Yelp, Zillow Zestimate, etc.) — qué features adicionales podrían posicionar a DMX como categoría nueva, no como portal más.
+- Respuestas cortas, sin rollos. Una idea por bloque.
+- Zero asumir: si requiere decisión de producto → proponer A/B/C con recomendación explícita.
+- Zero gasto sin validación previa (regla inviolable).
+- Comandos siempre con context tag explícito: `[Claude Code terminal]`, `[Terminal Mac mini]`, `[Vercel Dashboard]`, `[Supabase Dashboard]`, `[GitHub web]`, `[Browser — servicio X]`.

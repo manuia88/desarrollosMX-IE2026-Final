@@ -281,10 +281,13 @@ Tooling y proceso detallado:
 7. GESTIÓN DE SESIÓN Y CONTEXTO
 ═══════════════════════════════════════════════════════════════
 
+REGLA ÚNICA (founder decision 2026-04-19, override v5):
 70% → aviso informativo (continúas trabajando)
-90% → paras al siguiente MÓDULO completo + §5.D
-95% → paras inmediato + §5.D (hard stop)
-Nunca comprimir manualmente. Nunca continuar tras 95% sin OK.
+75-91% → avisos informativos opcionales (sin pausar)
+92% → HARD STOP único + §5.D inmediato
+
+NO hay pausas previas. NO hay segundo umbral. 92% es el único stop automático.
+Nunca comprimir manualmente. Nunca continuar tras 92% sin OK explícito.
 
 Al retomar en sesión nueva:
 - Este contrato está en docs/05_OPERACIONAL/CONTRATO_EJECUCION.md
@@ -325,3 +328,91 @@ TODO #4 — Upgrade Vercel CLI (51.5.0 → 51.7.0)
   Status: 🟢 OPCIONAL — sin urgencia
   Comando: pnpm add -g vercel@latest (o npm i -g vercel@latest)
   No bloquea housekeeping ni próximas fases.
+
+TODO #5 — Reconciliar nombres stubs F15/H17/D11/I07/I08 inventados BLOQUE 8.A
+  Status: 🟡 ACTIVO — housekeeping post-FASE 08
+  Origen: BLOQUE 8.A decisión autónoma #2 (commit 4215611)
+  Acción: decidir si esos 5 IDs se mantienen formalmente o se renombran a
+          FUTURE_STUB_0N hasta que catálogo 03.8 los defina con propósito.
+  Estimado: 15min (review catálogo + rename si aplica).
+
+TODO #6 — Formalizar pattern compute() puro factorizado en CONTRATO/ADR
+  Status: 🟡 ACTIVO — housekeeping post-FASE 08
+  Origen: BLOQUE 8.B parte 1/2 decisión autónoma #6 (compute() puro
+          separado de Calculator class).
+  Acción: documentar en sección Convenciones del CONTRATO o crear ADR-024
+          "Pure compute functions for IE calculators".
+  Beneficio: tests directos sin mock supabase + reutilización H2 (gradient
+             boosting puede llamar compute() en feature engineering).
+
+TODO #7 — Registry superseded_by para versionado A/B
+  Status: 🟡 AGENDADO — BLOQUE 8.F o housekeeping post-FASE 08
+  Acción: agregar campo opcional superseded_by: string en
+          ScoreRegistryEntry. Habilita migración A/B cuando salga F01
+          v2.0.0 manteniendo histórico v1.0.0.
+
+TODO #8 — zone_scores LIST partition por country_code
+  Status: 🟡 AGENDADO — BLOQUE 8.F
+  Razón: 1,800 colonias × 32 scores × 12 updates/año = 691K rows/año.
+         Sin partition, queries por zone_id se degradan tras ~3 años.
+         LIST partition por country habilita multi-país H2 nativo.
+
+TODO #9 — Upstash rate limit en /api/admin/queue-metrics
+  Status: 🟡 AGENDADO — BLOQUE 8.E o 8.F
+  Razón: endpoint admin sin throttle. Si superadmin token leak →
+         query DB intensiva sin límite. 60 req/min suficiente.
+
+TODO #10 — PostHog dashboards "IE Health" + "IE Cost Tracker"
+  Status: 🟢 POST-FASE 08 — observabilidad operacional
+  Datos ya emitidos: ie.score.calculated (BLOQUE 8.A) + props extendidas
+  U7 (BLOQUE 8.B parte 2) + ie.cost.tracked (cost-tracker.ts).
+  Acción: configurar 2 dashboards PostHog cuando portal admin (FASE 19) live.
+
+TODO #11 — freshness_score 0-100 en CalculatorOutput
+  Status: 🟡 AGENDADO — BLOQUE 8.E (UI confidence)
+  Razón: independiente del value, indicador qué tan fresca está la data
+         que alimentó el score. Habilita badge "Datos antiguos" UI.
+
+TODO #12 — N11 DMX Momentum priority commit en BLOQUE 8.C
+  Status: 🟡 RECORDATORIO — BLOQUE 8.C
+  Razón: N11 alimenta DMX-MOM (producto B2B licenciable $20-50K). Debe
+         ser primer commit de 8.C, no último. Killer asset diferencial.
+
+TODO #13 — tRPC scores router accesible desde Copilot ⌘J
+  Status: 🟡 AGENDADO — FASE 09
+  Razón: Copilot AI-native (FASE 03) running pero sin tool calling para
+         scores. Gap UX. FASE 09 implementa router; agregar registro
+         como tool en MCP de Copilot mismo bloque.
+
+TODO #14 — Validar Mapbox token usado solo server-side en H09
+  Status: 🟡 ACTIVO — durante BLOQUE 8.B parte 2/2
+  Razón: H09 calculator debe usar MAPBOX_SECRET_TOKEN o equivalente
+         server-side. Verificar NO hay fallback a NEXT_PUBLIC_MAPBOX_TOKEN
+         en path runScore. NEXT_PUBLIC_* solo para mapas client-side.
+
+TODO #15 — registerCalculator() wiring runtime (los 21 N0 de BLOQUE 8.B)
+  Status: 🟡 AGENDADO — BLOQUE 8.F (cascades + wiring)
+  Origen: BLOQUE 8.B parte 2/2 inferencia #4 (commit 4ad1398).
+  Estado actual: CALCULATOR_LOADERS vacío en runScore. Los 21 calculators
+                 N0 existen como código + tests passing, pero el worker
+                 cron NO puede invocarlos en producción hasta que cada uno
+                 se registre vía registerCalculator(scoreId, loader) al
+                 startup.
+  Acción BLOQUE 8.F:
+    - Crear shared/lib/intelligence-engine/calculators/n0/index.ts que
+      registra los 21 N0 al import.
+    - Crear shared/lib/intelligence-engine/calculators/n01-n11/index.ts
+      para los 11 N01-N11 (BLOQUE 8.C).
+    - Importar ambos índices al startup (next.config o instrument.ts).
+  Estimado: 30 min. Bloqueante para que el worker score-worker (BLOQUE 8.A)
+            ejecute calculators reales en producción.
+
+TODO #16 — TELEMETRY_SALT en Vercel Production + Preview envs
+  Status: 🔴 PRE-DEPLOY OBLIGATORIO — antes de tag fase-08-complete
+  Origen: BLOQUE 8.B parte 2/2 decisión autónoma #5.
+  Acción: agregar TELEMETRY_SALT (random fixed string, ej. 32 bytes hex)
+          a Vercel envs Production + Preview. Sensitive ON. NO rotar
+          después de deploy (rompería continuidad de hashes históricos
+          en PostHog dashboards).
+  Razón: hash-user-id.ts cae a DEFAULT_SALT hardcoded si env missing,
+         lo cual hace hashes diferentes entre dev/prod y rompe analítica.

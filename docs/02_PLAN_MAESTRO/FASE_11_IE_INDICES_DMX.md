@@ -297,4 +297,17 @@ Esta fase construye:
 [FASE 12 — IE AI Scores N5 + Intelligence Cards + Mapa 7 Capas](./FASE_12_IE_AI_SCORES_N5.md)
 
 ---
+
+## Laterals pipeline (proposed durante ejecución previa)
+
+Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
+
+Aplican en esta fase:
+- **L1 Zona Wrapped anual** (Spotify Wrapped pattern) — capitalizar score history acumulado en resumen visual compartible. Bloque sugerido: nuevo BLOQUE 11.WRAP al cierre de FASE 11.
+- **L6 DMX Vibe Score™** (Zillow Zestimate pattern) — definir como índice oficial DMX-VIBE en `dmx_indices` combinando N01+N08+N09+N11. Bloque sugerido: integrar en BLOQUE 11.A (definición índices) + decisión legal registro marca.
+- **L8 Today's Top Movers** (Robinhood pattern) — dashboard público `/indices/movers` con top 10 zonas que más subieron/bajaron en N11 momentum. Bloque sugerido: nuevo BLOQUE 11.MOVERS post-cierre N11 ≥3 meses data.
+
+Al ejecutar FASE 11, revisar status en pipeline maestro y confirmar incorporación al scope.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17

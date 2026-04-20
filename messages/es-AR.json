@@ -313,6 +313,30 @@
           }
         }
       },
+      "n02": {
+        "hub_laboral": "Hub laboral accesible",
+        "acceso_bueno": "Buen acceso laboral",
+        "acceso_moderado": "Acceso laboral moderado",
+        "aislada": "Zona laboralmente aislada",
+        "insufficient": "Datos DENUE/GTFS insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Zona laboralmente aislada — evaluá tiempo/costo de traslado",
+            "1": "Considerá zonas con Subte o Metrobús a 1 km"
+          },
+          "medium": {
+            "0": "Acceso laboral aceptable — revisá rutas a tu trabajo",
+            "1": "Combiná transporte público + tramo a pie"
+          },
+          "high": {
+            "0": "Hub de empleos — amplia oferta accesible en 45 minutos",
+            "1": "Mantené expectativas de costo asociadas a zona con alto acceso"
+          },
+          "insufficient_data": {
+            "0": "Datos insuficientes — actualización tras próxima ingesta DENUE/GTFS"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum en aceleración",
         "estable": "Momentum estable",
