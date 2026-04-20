@@ -424,4 +424,16 @@ Crítico:
 FASE 20 — Portal Comprador (10 pages + personalización Netflix + UPG 7.11 Buyer Experience)
 
 ---
+
+## Laterals pipeline (proposed durante ejecución previa)
+
+Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
+
+Aplican en esta fase:
+- **L20 DMX Data Quality Dashboard** (Datadog pattern) — observability pública del IE: scores actualizados/min, cascades fallidas, latencia worker, freshness por fuente, queue depth. Bloque sugerido: integrar en M17 Market Observatory como tab "IE Health" o nuevo M18 dedicado.
+- **L21 DMX Pipeline Audit Trail** (Vercel Functions Logs pattern) — log explorable por score: cascade trigger → queue → worker → persist → downstream cascades. Bloque sugerido: integrar en M16 Dashboard Admin como UI drill-down sobre score_history + cascade execution logs.
+
+Al ejecutar FASE 19, revisar status en pipeline maestro y confirmar incorporación al scope.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17

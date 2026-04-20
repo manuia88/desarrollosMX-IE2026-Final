@@ -434,4 +434,16 @@ Cross-references:
 FASE 25 — Performance + Mobile (PWA H1 + optimizaciones + mobile-first UX).
 
 ---
+
+## Laterals pipeline (proposed durante ejecución previa)
+
+Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
+
+Aplican en esta fase:
+- **L20 DMX Data Quality Dashboard** (Datadog pattern) — observability pública del IE como producto público (Status Page tipo Stripe). Bloque sugerido: nuevo BLOQUE 24.PUBLIC_STATUS — exposición externa de métricas operacionales del IE como brand asset.
+- **L21 DMX Pipeline Audit Trail** (Vercel Functions Logs pattern) — exposición de audit trail de scores como capability B2B. Bloque sugerido: integrar en setup logging Vercel + Sentry + PostHog ya planeado, agregando endpoint `/api/v1/scores/{id}/audit` con log completo cascade trace.
+
+Al ejecutar FASE 24, revisar status en pipeline maestro y confirmar incorporación al scope.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent F) | **Fecha:** 2026-04-17

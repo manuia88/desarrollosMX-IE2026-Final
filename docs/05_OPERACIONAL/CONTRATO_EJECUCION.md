@@ -428,3 +428,32 @@ TODO #17 — Activar BotID protection en Vercel Project Dashboard
                 post-launch con data real de patrones de ataque scrapers.
   Razón: endpoint AVM público es target obvio scrapers competencia.
          Free tier 5/mes se evade trivialmente sin BotID.
+
+TODO #18 — Setup Storybook para componentes Dopamine
+  Status: 🟡 AGENDADO — FASE 11 o housekeeping post-FASE 08
+  Origen: BLOQUE 8.E decisión autónoma #2 (commit 4cadb92).
+  Estado actual: 5 componentes UI Dopamine creados (ConfidenceBadge,
+                 ScoreTransparencyPanel, ScoreRecommendationsCard,
+                 ScorePlaceholder, IntelligenceCard) sin stories Storybook.
+                 Plan FASE 08 §8.E.1.1 pidió "Storybook story por cada
+                 variante" como criterio de done.
+  Razón aplazado: infra Storybook no existe en repo. Setup quedaría fuera
+                  scope BLOQUE 8.E.
+  Acción FASE 11 o housekeeping:
+    - Instalar Storybook 8 + addons (a11y, viewport, dark mode)
+    - Configurar Tailwind v4 + tokens CSS-first
+    - Crear stories para los 5 componentes BLOQUE 8.E (variantes + states)
+    - Agregar a CI como check opcional (npm run storybook:build)
+  Estimado: 2-4 horas setup + 2-4 horas stories.
+
+TODO #19 — Setup jsdom + Testing Library para visual UI tests
+  Status: 🟡 AGENDADO — FASE 11 cuando IntelligenceCard tenga consumer real
+  Origen: BLOQUE 8.E decisión autónoma #3 (commit 4cadb92).
+  Estado actual: tests de UI cubren solo lógica pura (4 helpers, 18 casos).
+                 Visual rendering + interacción no testeado en unit tests.
+                 Cobertura esperada vía Playwright cuando aterrice features/ie/.
+  Acción FASE 11:
+    - Instalar @testing-library/react + jsdom (vitest config)
+    - Migrar 18 helper tests + agregar component render tests
+    - Habilita testing snapshot visual + a11y + interactions sin Playwright
+  Estimado: 1-2 horas setup + 4-8 horas migración + nuevos tests.

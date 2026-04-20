@@ -671,6 +671,7 @@ Aplican en esta fase:
 - **L11 Closing-as-a-Service revenue** (Stripe Atlas pattern) — pricing + monetización del bundle definido en FASE 18. Sugerido: 1-2% del valor de transacción + tier "Concierge" $5K-15K para closings premium. Wire en feature_registry como producto separado.
 - **L12 DMX Pro Terminal** (Bloomberg Terminal pattern) — interface premium con AVM + portfolio analytics + market alerts + comparables avanzados, suscripción $299-999/mes. Mercado pro LATAM underserved. Bloque sugerido: nuevo BLOQUE 23.PRO_TERMINAL como producto B2B premium en feature_registry.
 - **L13 DMX Property API como infraestructura B2B** (Plaid pattern) — TODA la intelligence (scores, índices, comparables, AVM, risk) expuesta como API unificada con SDK + docs públicas. Stripe-like pricing $0.01-1.00/call. Bloque sugerido: BLOQUE 23.API_AS_PRODUCT (alineado ADR-013) — formalizar SDK npm + docs developer + API key management + observabilidad.
+- **L23 DMX Concierge Onboarding B2B** (Stripe Atlas pattern) — proceso onboarding asistido (1-on-1 + setup) para clientes B2B (devs/asesores/aseguradoras), $5K-15K por setup. Bloque sugerido: nuevo BLOQUE 23.CONCIERGE como tier premium en feature_registry — incluye playbook humano + setup técnico personalizado + casos de uso documentados.
 
 Al ejecutar FASE 23, revisar status en pipeline maestro y confirmar incorporación al scope.
 
