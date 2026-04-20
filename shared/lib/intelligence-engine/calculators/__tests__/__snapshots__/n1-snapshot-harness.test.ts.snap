@@ -37,7 +37,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 96,
     },
     "D05": {
       "confidence": "high",
@@ -103,7 +103,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 96,
     },
     "D05": {
       "confidence": "high",
@@ -169,7 +169,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 96,
     },
     "D05": {
       "confidence": "high",
@@ -235,7 +235,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 96,
     },
     "D05": {
       "confidence": "high",
@@ -273,7 +273,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "A05": {
       "confidence": "high",
-      "value": 2,
+      "value": 8,
     },
     "A06": {
       "confidence": "high",
@@ -301,7 +301,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 100,
     },
     "D05": {
       "confidence": "high",
@@ -367,7 +367,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 96,
     },
     "D05": {
       "confidence": "high",
@@ -433,7 +433,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 67,
     },
     "D05": {
       "confidence": "high",
@@ -499,7 +499,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 96,
     },
     "D05": {
       "confidence": "high",
@@ -565,7 +565,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 67,
     },
     "D05": {
       "confidence": "high",
@@ -603,7 +603,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "A05": {
       "confidence": "high",
-      "value": 2,
+      "value": 8,
     },
     "A06": {
       "confidence": "high",
@@ -631,7 +631,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 100,
     },
     "D05": {
       "confidence": "high",
@@ -669,7 +669,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "A05": {
       "confidence": "high",
-      "value": 2,
+      "value": 8,
     },
     "A06": {
       "confidence": "high",
@@ -697,7 +697,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 100,
     },
     "D05": {
       "confidence": "high",
@@ -735,7 +735,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "A05": {
       "confidence": "high",
-      "value": 2,
+      "value": 8,
     },
     "A06": {
       "confidence": "high",
@@ -763,7 +763,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 100,
     },
     "D05": {
       "confidence": "high",
@@ -829,7 +829,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 67,
     },
     "D05": {
       "confidence": "high",
@@ -895,7 +895,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 96,
     },
     "D05": {
       "confidence": "high",
@@ -961,7 +961,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 96,
     },
     "D05": {
       "confidence": "high",
@@ -1027,7 +1027,7 @@ exports[`N1 snapshot harness — 16 calculators × 16 zonas CDMX = 256 casos > e
     },
     "B08": {
       "confidence": "high",
-      "value": 0,
+      "value": 67,
     },
     "D05": {
       "confidence": "high",

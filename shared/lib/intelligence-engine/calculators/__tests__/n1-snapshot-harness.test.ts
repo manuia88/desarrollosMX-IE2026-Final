@@ -93,7 +93,7 @@ function runA05(p: ZoneProfile) {
     downPayment: 0.2,
     loanYears: 20,
     predial_anual_2026_mxn: p.precio_m2 * 80 * 0.001,
-    macro: { tasa_hipotecaria_avg: 10.5 },
+    macro: { tasa: 0.105 },
     plusvalia_10y_estimada_mxn: p.precio_m2 * 80 * (p.macro_momentum / 100) * 10,
   });
 }
@@ -148,12 +148,20 @@ function runB02(p: ZoneProfile) {
 function runB04(p: ZoneProfile) {
   return computeB04ProductMarketFit({
     project_units: [
-      { unit_id: `${p.key}-u1`, recamaras: 2, precio_mxn: p.precio_m2 * 80, m2: 80 },
-      { unit_id: `${p.key}-u2`, recamaras: 3, precio_mxn: p.precio_m2 * 120, m2: 120 },
+      { recamaras: 2, precio: p.precio_m2 * 80, ubicacion_zona: p.key, superficie_m2: 80 },
+      { recamaras: 3, precio: p.precio_m2 * 120, ubicacion_zona: p.key, superficie_m2: 120 },
     ],
     demanda_busquedas: [
-      { recamaras: 2, precio_max_mxn: p.precio_m2 * 85, count: Math.round(p.intensity) },
-      { recamaras: 3, precio_max_mxn: p.precio_m2 * 130, count: Math.round(p.intensity / 2) },
+      {
+        recamaras_filter: [2],
+        precio_range: { max: p.precio_m2 * 85 },
+        count: Math.round(p.intensity),
+      },
+      {
+        recamaras_filter: [3],
+        precio_range: { max: p.precio_m2 * 130 },
+        count: Math.round(p.intensity / 2),
+      },
     ],
   });
 }
@@ -162,13 +170,13 @@ function runB07(p: ZoneProfile) {
   const mk = (id: string, mult: number) => ({
     project_id: id,
     precio_m2: p.precio_m2 * mult,
-    amenidades_count: Math.round(p.intensity / 10),
-    tamano_promedio_m2: 90,
-    absorcion_12m_pct: p.intensity / 2,
-    marketing_spend_proxy: p.intensity,
-    days_on_market: 180 - p.intensity,
-    quality_score: p.intensity,
-    momentum_zona_n11: p.macro_momentum,
+    amenidades: Math.round(p.intensity / 10),
+    tamano: 90,
+    absorcion: p.intensity / 2,
+    marketing_spend: p.intensity,
+    dom: 180 - p.intensity,
+    quality: p.intensity,
+    momentum: p.macro_momentum,
   });
   return computeB07CompetitiveIntel({
     my_project: mk(`${p.key}-self`, 1),
@@ -181,7 +189,7 @@ function runB08(p: ZoneProfile) {
     project_id: `${p.key}-proj`,
     ventas_ultimos_6m: Array.from({ length: 6 }, (_, i) => ({
       month: `2025-${String(i + 1).padStart(2, '0')}`,
-      unidades: Math.max(1, Math.round(p.intensity / 20) + (i % 3)),
+      count: Math.max(1, Math.round(p.intensity / 20) + (i % 3)),
     })),
     momentum_zone_n11: p.macro_momentum,
     b01_demand: p.intensity,

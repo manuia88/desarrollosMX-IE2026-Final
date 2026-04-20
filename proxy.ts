@@ -60,7 +60,8 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
     pathname === '/favicon.ico' ||
-    pathname.startsWith('/design-system')
+    pathname.startsWith('/design-system') ||
+    pathname.startsWith('/ie-playground')
   ) {
     const pass = NextResponse.next({ request: req });
     return applySecurityHeaders(pass, nonce, isDev);
