@@ -13,20 +13,22 @@ export interface AvmPropertyInput {
   readonly amenidades: readonly string[];
   readonly estado_conservacion: EstadoConservacion;
   readonly tipo_propiedad: TipoPropiedad;
-  readonly sup_terreno_m2?: number;
-  readonly medio_banos?: number;
-  readonly estacionamientos?: number;
-  readonly edad_anos?: number;
-  readonly piso?: number;
-  readonly condiciones?: {
-    readonly roof_garden?: boolean;
-    readonly orientacion?: OrientacionCardinal;
-    readonly vista_parque?: boolean;
-    readonly amenidades_premium_count?: number;
-    readonly anos_escritura?: number;
-    readonly seguridad_interna?: boolean;
-    readonly mascotas_ok?: boolean;
-  };
+  readonly sup_terreno_m2?: number | undefined;
+  readonly medio_banos?: number | undefined;
+  readonly estacionamientos?: number | undefined;
+  readonly edad_anos?: number | undefined;
+  readonly piso?: number | undefined;
+  readonly condiciones?:
+    | {
+        readonly roof_garden?: boolean | undefined;
+        readonly orientacion?: OrientacionCardinal | undefined;
+        readonly vista_parque?: boolean | undefined;
+        readonly amenidades_premium_count?: number | undefined;
+        readonly anos_escritura?: number | undefined;
+        readonly seguridad_interna?: boolean | undefined;
+        readonly mascotas_ok?: boolean | undefined;
+      }
+    | undefined;
 }
 
 export interface AvmFeatureVector {

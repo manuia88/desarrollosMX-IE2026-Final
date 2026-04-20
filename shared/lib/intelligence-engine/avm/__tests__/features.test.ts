@@ -99,7 +99,7 @@ describe('AVM features — buildFeatureVector', () => {
     const dIdx = FEATURE_NAMES.indexOf('tipo_depto');
     const cIdx = FEATURE_NAMES.indexOf('tipo_casa');
     const tIdx = FEATURE_NAMES.indexOf('tipo_townhouse');
-    const raw = (name: string) => {
+    const raw = (name: (typeof FEATURE_NAMES)[number]) => {
       // z-score con mean/std → para 0 value si mean>0, zscore es negativo.
       // Aquí solo verificamos que los 3 one-hot dan el mismo valor (0 raw).
       return fv.values[FEATURE_NAMES.indexOf(name)];
