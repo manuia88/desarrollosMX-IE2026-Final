@@ -289,6 +289,30 @@
       "h06": {
         "pending_h2": "Disponível na FASE 29 (dados 0311 Locatel pendentes)"
       },
+      "n01": {
+        "hiperdiverso": "Ecossistema hiperdiverso",
+        "diverso": "Ecossistema diverso",
+        "moderado": "Ecossistema moderado",
+        "homogeneo": "Ecossistema homogêneo",
+        "insufficient": "Dados DENUE insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Zona com ecossistema limitado — poucas amenidades a pé",
+            "1": "Considere zonas vizinhas com maior diversidade comercial"
+          },
+          "medium": {
+            "0": "Diversidade comercial média — cobre o básico",
+            "1": "Verifique se as categorias presentes combinam com seu estilo de vida"
+          },
+          "high": {
+            "0": "Ecossistema robusto — alta probabilidade de encontrar tudo a pé",
+            "1": "Mantenha expectativas de custo alinhadas com a qualidade da zona"
+          },
+          "insufficient_data": {
+            "0": "Dados DENUE insuficientes — avaliação disponível após a próxima atualização"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum acelerando",
         "estable": "Momentum estável",

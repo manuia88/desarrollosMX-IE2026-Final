@@ -1,0 +1,166 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N01 Ecosystem Diversity (Shannon-Wiener) calculator > 16 zonas CDMX — snapshot + valores en [0,100] + confidence coherente 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "shannon": 1.978,
+    "top": [
+      "retail",
+      "gastronomia",
+      "salud",
+    ],
+    "value": 80,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "shannon": 1.946,
+    "top": [
+      "retail",
+      "gastronomia",
+      "automotriz",
+    ],
+    "value": 78,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "shannon": 2.046,
+    "top": [
+      "gastronomia",
+      "retail",
+      "servicios_profesionales",
+    ],
+    "value": 82,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "shannon": 1.99,
+    "top": [
+      "retail",
+      "gastronomia",
+      "servicios_profesionales",
+    ],
+    "value": 80,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "shannon": 2.052,
+    "top": [
+      "retail",
+      "gastronomia",
+      "servicios_profesionales",
+    ],
+    "value": 83,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "shannon": 1.875,
+    "top": [
+      "retail",
+      "gastronomia",
+      "salud",
+    ],
+    "value": 75,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "shannon": 1.746,
+    "top": [
+      "retail",
+      "gastronomia",
+      "automotriz",
+    ],
+    "value": 70,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "shannon": 2.001,
+    "top": [
+      "retail",
+      "gastronomia",
+      "salud",
+    ],
+    "value": 81,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "medium",
+    "shannon": 1.782,
+    "top": [
+      "retail",
+      "gastronomia",
+      "automotriz",
+    ],
+    "value": 72,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "shannon": 2.154,
+    "top": [
+      "retail",
+      "gastronomia",
+      "servicios_profesionales",
+    ],
+    "value": 87,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "shannon": 2.067,
+    "top": [
+      "gastronomia",
+      "retail",
+      "servicios_profesionales",
+    ],
+    "value": 83,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "shannon": 2.083,
+    "top": [
+      "retail",
+      "gastronomia",
+      "servicios_profesionales",
+    ],
+    "value": 84,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "shannon": 1.387,
+    "top": [
+      "retail",
+      "gastronomia",
+      "automotriz",
+    ],
+    "value": 56,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "shannon": 1.938,
+    "top": [
+      "retail",
+      "gastronomia",
+      "servicios_profesionales",
+    ],
+    "value": 78,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "shannon": 1.83,
+    "top": [
+      "retail",
+      "gastronomia",
+      "automotriz",
+    ],
+    "value": 74,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "shannon": 1.853,
+    "top": [
+      "retail",
+      "gastronomia",
+      "cultura_entretenimiento",
+    ],
+    "value": 75,
+  },
+}
+`;

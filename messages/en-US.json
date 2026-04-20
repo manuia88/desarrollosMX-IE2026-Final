@@ -289,6 +289,30 @@
       "h06": {
         "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
       },
+      "n01": {
+        "hiperdiverso": "Hyper-diverse ecosystem",
+        "diverso": "Diverse ecosystem",
+        "moderado": "Moderate ecosystem",
+        "homogeneo": "Homogeneous ecosystem",
+        "insufficient": "Insufficient DENUE data",
+        "recommendations": {
+          "low": {
+            "0": "Zone with limited ecosystem — few walkable amenities",
+            "1": "Consider neighboring zones with greater commercial diversity"
+          },
+          "medium": {
+            "0": "Moderate commercial diversity — covers the basics",
+            "1": "Check if present categories match your lifestyle"
+          },
+          "high": {
+            "0": "Robust ecosystem — high probability of finding everything on foot",
+            "1": "Keep cost expectations aligned with this zone's quality"
+          },
+          "insufficient_data": {
+            "0": "Insufficient DENUE data — assessment available after next update"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",
