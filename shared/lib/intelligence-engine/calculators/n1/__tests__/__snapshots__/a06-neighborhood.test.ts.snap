@@ -1,0 +1,71 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`A06 Neighborhood calculator > snapshot 4 escenarios — zona alta (default), zona media (family), zona baja (digital_nomad), mixed (senior) 1`] = `
+{
+  "alta_default": {
+    "bucket": "excelente",
+    "buyer_persona": "default",
+    "confidence": "medium",
+    "coverage_pct": 100,
+    "label": "ie.score.a06.excelente",
+    "missing": [],
+    "pesos_aplicados": {
+      "F08": 0.3,
+      "H01": 0.2,
+      "H02": 0.15,
+      "N08": 0.2,
+      "N10": 0.15,
+    },
+    "value": 83,
+  },
+  "baja_digital_nomad": {
+    "bucket": "regular",
+    "buyer_persona": "digital_nomad",
+    "confidence": "medium",
+    "coverage_pct": 100,
+    "label": "ie.score.a06.regular",
+    "missing": [],
+    "pesos_aplicados": {
+      "F08": 0.3,
+      "H01": 0.05,
+      "H02": 0.1,
+      "N08": 0.3,
+      "N10": 0.25,
+    },
+    "value": 41,
+  },
+  "media_family": {
+    "bucket": "buena",
+    "buyer_persona": "family",
+    "confidence": "medium",
+    "coverage_pct": 100,
+    "label": "ie.score.a06.buena",
+    "missing": [],
+    "pesos_aplicados": {
+      "F08": 0.3,
+      "H01": 0.3,
+      "H02": 0.15,
+      "N08": 0.15,
+      "N10": 0.1,
+    },
+    "value": 60,
+  },
+  "mixed_senior": {
+    "bucket": "excelente",
+    "buyer_persona": "senior",
+    "confidence": "medium",
+    "coverage_pct": 60,
+    "label": "ie.score.a06.excelente",
+    "missing": [
+      "H02",
+      "N10",
+    ],
+    "pesos_aplicados": {
+      "F08": 0.5,
+      "H01": 0.2,
+      "N08": 0.3,
+    },
+    "value": 81,
+  },
+}
+`;

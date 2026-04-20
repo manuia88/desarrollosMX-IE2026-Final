@@ -4,6 +4,7 @@ import { roleRequestRouter } from '@/features/auth/routes/role-request';
 import { fxRouter } from '@/features/fx/routes/fx';
 import { aiRouter } from '@/features/ia-generativa/routes/ai';
 import { memoryRouter } from '@/features/ia-generativa/routes/memory';
+import { ieScoresRouter } from '@/features/ie/routes/scores';
 import { marketRouter } from '@/features/market/routes/market';
 import { scianRouter } from '@/features/scian/routes/scian';
 import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
@@ -41,6 +42,7 @@ export const appRouter = router({
   hostMigrations: hostMigrationsRouter,
   strHosts: strHostsRouter,
   env: envRouter,
+  ieScores: ieScoresRouter,
   invisibleHotels: invisibleHotelsRouter,
   nomad: nomadRouter,
   photoCv: photoCvRouter,

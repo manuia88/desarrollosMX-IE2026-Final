@@ -1,0 +1,41 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`F08 Life Quality Index calculator > snapshot 4 escenarios — zona alta, media, baja, mixed 1`] = `
+{
+  "del_valle_alta": {
+    "bucket": "muy_buena",
+    "confidence": "low",
+    "coverage_pct": 100,
+    "label": "ie.score.f08.muy_buena",
+    "missing": [],
+    "value": 82,
+  },
+  "iztacalco_media": {
+    "bucket": "regular",
+    "confidence": "low",
+    "coverage_pct": 100,
+    "label": "ie.score.f08.regular",
+    "missing": [],
+    "value": 59,
+  },
+  "iztapalapa_sur_baja": {
+    "bucket": "regular",
+    "confidence": "low",
+    "coverage_pct": 100,
+    "label": "ie.score.f08.regular",
+    "missing": [],
+    "value": 40,
+  },
+  "mixed_gaps_h01_h02": {
+    "bucket": "buena",
+    "confidence": "low",
+    "coverage_pct": 78,
+    "label": "ie.score.f08.buena",
+    "missing": [
+      "H01",
+      "H02",
+    ],
+    "value": 74,
+  },
+}
+`;

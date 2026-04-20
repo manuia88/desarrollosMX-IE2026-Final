@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:e2e": "playwright test",
+    "test:e2e:phase-09": "playwright test tests/e2e/fase-09-n1-scores.spec.ts",
     "test:a11y": "playwright test tests/e2e/a11y.spec.ts",
     "format": "biome format --write .",
     "db:types": "supabase gen types typescript --project-id qxfuqwlktmhokwwlvggy > shared/types/database.ts",
@@ -28,6 +29,7 @@
     "audit:habi": "node scripts/audit-forbidden-habi.mjs",
     "registry:snapshot": "node --experimental-strip-types scripts/registry-snapshot.mjs",
     "cascades:export": "node --experimental-strip-types scripts/cascades-export.mjs",
+    "scores:lineage-export": "node --experimental-strip-types scripts/scores-lineage-export.mjs",
     "test:security": "vitest run tests/security --passWithNoTests",
     "prepare": "husky"
   },

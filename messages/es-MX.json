@@ -551,6 +551,118 @@
             "0": "Datos insuficientes — N11 requiere ≥50 proyectos y 6 meses de historial"
           }
         }
+      },
+      "f08": {
+        "muy_buena": "Calidad de vida excepcional",
+        "buena": "Calidad de vida alta",
+        "regular": "Calidad de vida aceptable",
+        "baja": "Calidad de vida limitada",
+        "insufficient": "Datos insuficientes para calidad de vida"
+      },
+      "f12": {
+        "muy_seguro": "Riesgo muy bajo",
+        "seguro": "Riesgo bajo",
+        "moderado": "Riesgo moderado",
+        "alto": "Riesgo alto",
+        "extremo": "Riesgo extremo",
+        "insufficient": "Datos insuficientes para evaluar riesgo"
+      },
+      "h07": {
+        "excelente": "Calidad ambiental excelente",
+        "buena": "Calidad ambiental buena",
+        "moderada": "Calidad ambiental moderada",
+        "contaminada": "Calidad ambiental deteriorada",
+        "insufficient": "Datos insuficientes para evaluar ambiente"
+      },
+      "a02": {
+        "excelente": "Inversión con retorno excelente",
+        "buena": "Inversión atractiva",
+        "marginal": "Inversión marginal, evalúa con cuidado",
+        "mala": "Inversión no recomendada",
+        "insufficient": "Datos insuficientes para simular inversión"
+      },
+      "a05": {
+        "muy_eficiente": "Costo total muy eficiente vs. plusvalía",
+        "eficiente": "Costo total contenido",
+        "costoso": "Costo total elevado",
+        "muy_costoso": "Costo total supera ampliamente el valor",
+        "insufficient": "Datos insuficientes para calcular TCO"
+      },
+      "a06": {
+        "excelente": "Barrio ideal para ti",
+        "buena": "Buen barrio para ti",
+        "regular": "Barrio aceptable",
+        "baja": "Barrio poco afín a tu perfil",
+        "insufficient": "Datos insuficientes para el match de barrio"
+      },
+      "a12": {
+        "precio_justo": "Precio alineado con valor justo",
+        "precio_cercano": "Precio cercano al valor justo",
+        "precio_desviado": "Precio desviado del valor de mercado",
+        "precio_anomalo": "Precio anómalo respecto al mercado",
+        "insufficient": "Comparables insuficientes en la zona"
+      },
+      "b01": {
+        "muy_alta_demanda": "Demanda muy alta",
+        "alta_demanda": "Alta demanda",
+        "demanda_media": "Demanda media",
+        "baja_demanda": "Baja demanda",
+        "insufficient": "Datos insuficientes de demanda"
+      },
+      "b02": {
+        "margen_sano": "Margen sano",
+        "presion_moderada": "Presión moderada sobre margen",
+        "presion_alta": "Presión de margen alta",
+        "margen_critico": "Margen crítico",
+        "insufficient": "Datos insuficientes de costos/INPP"
+      },
+      "b04": {
+        "excelente": "Encaje producto-mercado excelente",
+        "bueno": "Buen encaje producto-mercado",
+        "regular": "Encaje regular producto-mercado",
+        "mal_fit": "Producto desalineado con la demanda",
+        "insufficient": "Datos insuficientes de búsquedas o inventario"
+      },
+      "b07": {
+        "lider": "Líder de zona sobre competidores",
+        "fuerte": "Posición fuerte vs competidores",
+        "parejo": "Perfil parejo con competidores",
+        "rezagado": "Rezagado frente a competidores",
+        "insufficient": "Se requieren competidores comparables"
+      },
+      "b08": {
+        "rapida": "Absorción rápida proyectada",
+        "saludable": "Absorción saludable",
+        "lenta": "Absorción lenta",
+        "estancada": "Absorción estancada",
+        "insufficient": "Sin suficientes ventas históricas para forecast"
+      },
+      "d05": {
+        "rapida": "Gentrificación rápida",
+        "media": "Gentrificación fase media",
+        "leve": "Gentrificación leve",
+        "estable": "Zona estable sin gentrificación",
+        "insufficient": "Datos insuficientes de gentrificación"
+      },
+      "d06": {
+        "zona_en_crisis": "Zona en crisis de accesibilidad",
+        "zona_tensionada": "Zona tensionada por accesibilidad",
+        "zona_estable": "Zona estable de accesibilidad",
+        "insufficient": "Datos insuficientes para evaluar crisis"
+      },
+      "h05": {
+        "excelente": "Desarrolladora de excelente reputación",
+        "alto": "Desarrolladora con reputación alta",
+        "aceptable": "Reputación aceptable",
+        "bajo": "Reputación baja",
+        "critico": "Reputación crítica — revisa con cuidado",
+        "insufficient": "Desarrolladora sin histórico suficiente"
+      },
+      "h14": {
+        "perfil_claro": "Perfil de comprador claro",
+        "perfil_mixto": "Perfil de comprador mixto",
+        "perfil_difuso": "Perfil de comprador difuso",
+        "insufficient": "Datos insuficientes para perfilar"
       }
     },
     "confidence": {
@@ -590,7 +702,11 @@
       "weights": "Pesos",
       "references": "Referencias",
       "cta_open": "Ver detalle",
-      "close": "Cerrar"
+      "close": "Cerrar",
+      "dependencies": "Dependencias",
+      "depends_on": "Depende de",
+      "used_by": "Usado por",
+      "lineage_depth": "Profundidad upstream: {upstream} — downstream: {downstream}"
     },
     "recommendations": {
       "heading": "Qué hacer con esta info",

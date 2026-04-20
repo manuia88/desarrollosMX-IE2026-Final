@@ -6,6 +6,7 @@ import type {
   CalculatorOutput,
   Confidence,
 } from '@/shared/lib/intelligence-engine/calculators/base';
+import { getScoreLineage } from '@/shared/lib/intelligence-engine/cascades/score-lineage';
 import type { ScoreRegistryEntry } from '@/shared/lib/intelligence-engine/registry';
 import { cn } from '../primitives/cn';
 import { Dialog } from '../primitives/dialog';
@@ -52,6 +53,8 @@ export interface ScoreTransparencyPanelProps {
   ranking?: ScoreRankingInfo;
   timeSeries?: ScoreTimeSeriesInfo;
   locale?: string;
+  /** D10 FASE 09 — muestra upstream + downstream dependencies del SCORE_REGISTRY. */
+  showDependencyTree?: boolean;
 }
 
 export function resolveReasoning(
@@ -96,9 +99,15 @@ export function ScoreTransparencyPanel({
   ranking,
   timeSeries,
   locale = 'es-MX',
+  showDependencyTree = false,
 }: ScoreTransparencyPanelProps) {
   const t = useTranslations();
   const [methodologyExpanded, setMethodologyExpanded] = useState(false);
+
+  const lineage = useMemo(
+    () => (showDependencyTree ? getScoreLineage(registryEntry.score_id) : null),
+    [showDependencyTree, registryEntry.score_id],
+  );
 
   const reasoning = useMemo(
     () =>
@@ -299,6 +308,41 @@ export function ScoreTransparencyPanel({
                   </span>
                 </li>
               </ul>
+            </section>
+          ) : null}
+
+          {lineage &&
+          (lineage.root.dependencies.length > 0 || lineage.root.dependents.length > 0) ? (
+            <section aria-label={t('ie.transparency.dependencies')}>
+              <h4 className={sectionHeading}>{t('ie.transparency.dependencies')}</h4>
+              <div className="flex flex-col gap-2 text-[var(--text-sm)] text-[var(--color-text-secondary)]">
+                {lineage.root.dependencies.length > 0 ? (
+                  <div>
+                    <span className="font-[var(--font-weight-semibold)]">
+                      {t('ie.transparency.depends_on')}:
+                    </span>{' '}
+                    <span className="font-[var(--font-mono)] text-[var(--text-xs)]">
+                      {lineage.root.dependencies.join(', ')}
+                    </span>
+                  </div>
+                ) : null}
+                {lineage.root.dependents.length > 0 ? (
+                  <div>
+                    <span className="font-[var(--font-weight-semibold)]">
+                      {t('ie.transparency.used_by')}:
+                    </span>{' '}
+                    <span className="font-[var(--font-mono)] text-[var(--text-xs)]">
+                      {lineage.root.dependents.join(', ')}
+                    </span>
+                  </div>
+                ) : null}
+                <div className="text-[var(--text-xs)] text-[var(--color-text-muted)]">
+                  {t('ie.transparency.lineage_depth', {
+                    upstream: lineage.depth_upstream,
+                    downstream: lineage.depth_downstream,
+                  })}
+                </div>
+              </div>
             </section>
           ) : null}
 

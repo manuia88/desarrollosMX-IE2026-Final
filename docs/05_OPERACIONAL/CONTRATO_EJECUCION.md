@@ -477,6 +477,22 @@ TODO #21 — Upgrade Vercel Pro cuando producción demande mayor frecuencia
   Alternativa H1 si se necesita más frecuencia antes upgrade: GitHub Actions
     schedule cron */5 * * * * gratis llamando webhook DMX score-worker.
 
+TODO #22 — Playwright smoke CI integration post-FASE 09
+  Status: 🟡 AGENDADO — housekeeping post-FASE 09
+  Origen: FASE 09 sesión 2/2 BLOQUE 9.E.2 (commit 23dc528).
+  Estado actual: 4 smoke tests tests/e2e/fase-09-n1-scores.spec.ts
+                 pasan localmente (npm run test:e2e:phase-09) con dev
+                 server + chromium headless. NO integrados a GitHub
+                 Actions aún.
+  Acción:
+    - Crear workflow .github/workflows/playwright-e2e.yml ejecutando
+      npx playwright install --with-deps chromium + npm run test:e2e:phase-09
+      en PR targets que tocan /shared/ui/dopamine/ o /features/ie/.
+    - Agregar como required status check para merge a main.
+    - Secrets: configurar SUPABASE_* mínimos para build dev server.
+  Estimado: 1-2 horas setup + debug primer run.
+  Bloqueante para merge main FASE 09: NO (smoke tests opcionales).
+
 TODO #20 — IE_MONTHLY_BUDGET_USD en Vercel Production + Preview envs
   Status: 🔴 PRE-DEPLOY OBLIGATORIO — antes de merge main
   Origen: BLOQUE 8.F.7 F4 cost guard rails (FASE 08 cierre).
@@ -529,3 +545,37 @@ H07 Environmental, A02 Investment Sim, A05 TCO 10y, A06 Neighborhood, A12
 Price Fairness, B01 Demand Heatmap, B02 Margin Pressure, B04 PMF, B07
 Competitive Intel, B08 Absorption Forecast, D05 Gentrification macro, D06
 Affordability Crisis, H05 Trust Score, H14 Buyer Persona)
+
+═══════════════════════════════════════════════════════════════
+10. FASE 09 CERRADA — Estado consolidado 2026-04-20
+═══════════════════════════════════════════════════════════════
+
+Tag git: fase-09-complete
+Branch: fase-09/ie-scores-n1 (sin push pendiente decisión founder)
+
+Split ejecución: 2 sesiones (9.A+9.B+9.C+D8-D11 sesión 1; fix A12 +
+9.D UI + 9.E Playwright sesión 2). Decisión autónoma founder 2026-04-20:
+fix A12 multiplicador × 4 (gap alto = score bajo) para alinear con
+semántica Price Fairness.
+
+Entregables:
+- 16 calculators N1 puros (compute functions + Calculator class) +
+  tests unitarios + snapshot harness 256 casos (16 N1 × 16 zonas CDMX)
+- tRPC router features/ie (5 procedures: list, getByZone,
+  getDependencies, getTierGate, getHistory) + 5 React hooks
+  consumer + ZoneIntelligenceCard wrapper
+- 4 Playwright smoke tests verdes contra /ie-playground dev-only
+  (app/(dev)/ie-playground) — fixtures mock sin dependencia tRPC real
+- 4 upgrades aplicados (D8 weights runtime + D9 fallback graceful +
+  D10 score lineage graph + D11 cascade downstream N1↔N0)
+- Migration 20260420090000_ie_n1_weights_and_cascade.sql + allowlist
+  v9/v10
+
+Tests: >1400 passing (1010 FASE 08 + ~400 FASE 09)
+Verificaciones cierre fase: 14/14 ✓ (typecheck, lint, tests, db:types,
+                            audit:e2e, audit:rls STRICT, build prod OK,
+                            Playwright smoke 4 verdes)
+
+Próxima fase: FASE 10 — IE Scores Nivel 2 y 3 (P08, P09, I07, I08, D02,
+D04, D08, D09, D10, N23, A13, M5, R2, R4 — niveles compuestos y
+producto-final sobre N0+N1).

@@ -484,17 +484,18 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
   },
 
   // --------------- Nivel 1 — Combinaciones simples (16) ---------------
+  // FASE 09 — dependencies + calculator_paths actualizados per plan P1 §9.A-9.C.
   {
     score_id: 'F08',
     name: 'Life Quality Index',
     level: 1,
     category: 'zona',
     tier: 2,
-    dependencies: ['F01', 'F02', 'F03', 'F04', 'H01', 'H02'],
+    dependencies: ['F01', 'F02', 'F03', 'H01', 'H02', 'N08', 'N01', 'N04', 'H07'],
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f08-life-quality-index-lqi',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n1/f08-life-quality.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/f08-life-quality-index.ts',
     country_codes: ['MX'],
   },
   {
@@ -503,11 +504,11 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     level: 1,
     category: 'zona',
     tier: 1,
-    dependencies: ['H03', 'F05', 'F06', 'H10'],
+    dependencies: ['H03', 'N07', 'F01', 'F06', 'N05'],
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f12-risk-map',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n1/f12-risk-map.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/f12-risk-map.ts',
     country_codes: ['MX'],
   },
   {
@@ -520,7 +521,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h07-environmental',
     confidence_sources: ['rama', 'conagua', 'sedema', 'paot'],
-    calculator_path: 'features/scores/lib/calculators/n1/h07-environmental.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/h07-environmental.ts',
     country_codes: ['MX'],
   },
   {
@@ -533,7 +534,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['macro_updated'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a02-investment-simulation',
     confidence_sources: ['macro_series', 'market_prices_secondary'],
-    calculator_path: 'features/scores/lib/calculators/n1/a02-investment-simulation.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/a02-investment-simulation.ts',
     country_codes: ['MX'],
   },
   {
@@ -546,7 +547,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['macro_updated'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a05-tco-10y',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n1/a05-tco.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/a05-tco-10y.ts',
     country_codes: ['MX'],
   },
   {
@@ -555,11 +556,11 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     level: 1,
     category: 'comprador',
     tier: 1,
-    dependencies: ['F03', 'N01', 'F08'],
+    dependencies: ['F08', 'H01', 'H02', 'N08', 'N10'],
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a06-neighborhood',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n1/a06-neighborhood.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/a06-neighborhood.ts',
     country_codes: ['MX'],
   },
   {
@@ -572,7 +573,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['price_changed'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a12-price-fairness',
     confidence_sources: ['unidades', 'market_prices_secondary'],
-    calculator_path: 'features/scores/lib/calculators/n1/a12-price-fairness.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/a12-price-fairness.ts',
     country_codes: ['MX'],
   },
   {
@@ -585,7 +586,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['search_behavior'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b01-demand-heatmap',
     confidence_sources: ['search_logs', 'wishlist'],
-    calculator_path: 'features/scores/lib/calculators/n1/b01-demand-heatmap.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/b01-demand-heatmap.ts',
     country_codes: ['MX'],
   },
   {
@@ -598,7 +599,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['macro_updated', 'price_changed'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b02-margin-pressure',
     confidence_sources: ['inegi_inpp'],
-    calculator_path: 'features/scores/lib/calculators/n1/b02-margin-pressure.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/b02-margin-pressure.ts',
     country_codes: ['MX'],
   },
   {
@@ -611,7 +612,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['feedback_registered', 'search_behavior'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b04-product-market-fit',
     confidence_sources: ['feedback', 'views'],
-    calculator_path: 'features/scores/lib/calculators/n1/b04-pmf.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/b04-product-market-fit.ts',
     country_codes: ['MX'],
   },
   {
@@ -624,7 +625,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b07-competitive-intel',
     confidence_sources: ['project_competitors'],
-    calculator_path: 'features/scores/lib/calculators/n1/b07-competitive-intel.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/b07-competitive-intel.ts',
     country_codes: ['MX'],
   },
   {
@@ -633,11 +634,11 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     level: 1,
     category: 'dev',
     tier: 3,
-    dependencies: [],
+    dependencies: ['N11', 'B01', 'B04'],
     triggers_cascade: ['unit_sold'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b08-absorption-forecast',
     confidence_sources: ['inventory_snapshots'],
-    calculator_path: 'features/scores/lib/calculators/n1/b08-absorption.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/b08-absorption-forecast.ts',
     country_codes: ['MX'],
   },
   {
@@ -646,11 +647,11 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     level: 1,
     category: 'mercado',
     tier: 3,
-    dependencies: ['N01', 'N03'],
+    dependencies: ['N03', 'A04', 'N01'],
     triggers_cascade: ['geo_data_updated:denue'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d05-gentrification-macro',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n1/d05-gentrification.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/d05-gentrification.ts',
     country_codes: ['MX'],
   },
   {
@@ -663,7 +664,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['macro_updated'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d06-affordability-crisis',
     confidence_sources: ['macro_series', 'inegi'],
-    calculator_path: 'features/scores/lib/calculators/n1/d06-affordability-crisis.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/d06-affordability-crisis.ts',
     country_codes: ['MX'],
   },
   {
@@ -672,11 +673,11 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     level: 1,
     category: 'dev',
     tier: 2,
-    dependencies: [],
+    dependencies: ['H14'],
     triggers_cascade: ['feedback_registered'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h05-trust-score',
     confidence_sources: ['reviews', 'operaciones'],
-    calculator_path: 'features/scores/lib/calculators/n1/h05-trust.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/h05-trust-score.ts',
     country_codes: ['MX'],
   },
   {
@@ -689,7 +690,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['search_behavior'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h14-buyer-persona',
     confidence_sources: ['search_logs', 'behavior'],
-    calculator_path: 'features/scores/lib/calculators/n1/h14-buyer-persona.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n1/h14-buyer-persona.ts',
     country_codes: ['MX'],
   },
 

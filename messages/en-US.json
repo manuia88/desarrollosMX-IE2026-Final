@@ -551,6 +551,118 @@
             "0": "Insufficient data — N11 requires ≥50 projects and 6 months of history"
           }
         }
+      },
+      "f08": {
+        "muy_buena": "Exceptional quality of life",
+        "buena": "High quality of life",
+        "regular": "Acceptable quality of life",
+        "baja": "Limited quality of life",
+        "insufficient": "Insufficient data for quality of life"
+      },
+      "f12": {
+        "muy_seguro": "Very low risk",
+        "seguro": "Low risk",
+        "moderado": "Moderate risk",
+        "alto": "High risk",
+        "extremo": "Extreme risk",
+        "insufficient": "Insufficient data to assess risk"
+      },
+      "h07": {
+        "excelente": "Excellent environmental quality",
+        "buena": "Good environmental quality",
+        "moderada": "Moderate environmental quality",
+        "contaminada": "Polluted environment",
+        "insufficient": "Insufficient data to assess environment"
+      },
+      "a02": {
+        "excelente": "Investment with excellent returns",
+        "buena": "Attractive investment",
+        "marginal": "Marginal investment, evaluate carefully",
+        "mala": "Investment not recommended",
+        "insufficient": "Insufficient data to simulate investment"
+      },
+      "a05": {
+        "muy_eficiente": "Very efficient total cost vs. appreciation",
+        "eficiente": "Contained total cost",
+        "costoso": "High total cost",
+        "muy_costoso": "Total cost far exceeds value",
+        "insufficient": "Insufficient data to compute TCO"
+      },
+      "a06": {
+        "excelente": "Ideal neighborhood for you",
+        "buena": "Good neighborhood for you",
+        "regular": "Acceptable neighborhood",
+        "baja": "Neighborhood not aligned with your profile",
+        "insufficient": "Insufficient data for neighborhood match"
+      },
+      "a12": {
+        "precio_justo": "Price aligned with fair value",
+        "precio_cercano": "Price close to fair value",
+        "precio_desviado": "Price deviates from market value",
+        "precio_anomalo": "Anomalous price vs. market",
+        "insufficient": "Insufficient comparables in zone"
+      },
+      "b01": {
+        "muy_alta_demanda": "Very high demand",
+        "alta_demanda": "High demand",
+        "demanda_media": "Medium demand",
+        "baja_demanda": "Low demand",
+        "insufficient": "Insufficient demand data"
+      },
+      "b02": {
+        "margen_sano": "Healthy margin",
+        "presion_moderada": "Moderate margin pressure",
+        "presion_alta": "High margin pressure",
+        "margen_critico": "Critical margin",
+        "insufficient": "Insufficient cost/INPP data"
+      },
+      "b04": {
+        "excelente": "Excellent product-market fit",
+        "bueno": "Good product-market fit",
+        "regular": "Regular product-market fit",
+        "mal_fit": "Product misaligned with demand",
+        "insufficient": "Insufficient search or inventory data"
+      },
+      "b07": {
+        "lider": "Zone leader over competitors",
+        "fuerte": "Strong position vs competitors",
+        "parejo": "Even profile with competitors",
+        "rezagado": "Lagging behind competitors",
+        "insufficient": "Comparable competitors required"
+      },
+      "b08": {
+        "rapida": "Rapid projected absorption",
+        "saludable": "Healthy absorption",
+        "lenta": "Slow absorption",
+        "estancada": "Stalled absorption",
+        "insufficient": "Not enough sales history for forecast"
+      },
+      "d05": {
+        "rapida": "Rapid gentrification",
+        "media": "Mid-stage gentrification",
+        "leve": "Mild gentrification",
+        "estable": "Stable zone, no gentrification",
+        "insufficient": "Insufficient gentrification data"
+      },
+      "d06": {
+        "zona_en_crisis": "Zone in affordability crisis",
+        "zona_tensionada": "Zone strained by affordability",
+        "zona_estable": "Zone with stable affordability",
+        "insufficient": "Insufficient data to assess crisis"
+      },
+      "h05": {
+        "excelente": "Developer with excellent reputation",
+        "alto": "Developer with high reputation",
+        "aceptable": "Acceptable reputation",
+        "bajo": "Low reputation",
+        "critico": "Critical reputation — review carefully",
+        "insufficient": "Developer without sufficient history"
+      },
+      "h14": {
+        "perfil_claro": "Clear buyer persona",
+        "perfil_mixto": "Mixed buyer persona",
+        "perfil_difuso": "Diffuse buyer persona",
+        "insufficient": "Insufficient data to profile"
       }
     },
     "confidence": {
@@ -590,7 +702,11 @@
       "weights": "Weights",
       "references": "References",
       "cta_open": "View details",
-      "close": "Close"
+      "close": "Close",
+      "dependencies": "Dependencies",
+      "depends_on": "Depends on",
+      "used_by": "Used by",
+      "lineage_depth": "Upstream depth: {upstream} — downstream: {downstream}"
     },
     "recommendations": {
       "heading": "What to do with this info",

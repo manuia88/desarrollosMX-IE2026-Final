@@ -297,4 +297,32 @@ Pantallas-cartas que muestran cada score con su desglose.
 [FASE 10 — IE Scores Nivel 2 y 3](./FASE_10_IE_SCORES_N2_N3.md)
 
 ---
-**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17
+
+## Implementación real — Cierre FASE 09 (2026-04-20)
+
+Tag: `fase-09-complete`. Branch: `fase-09/ie-scores-n1`.
+
+**Split en 2 sesiones** (contexto + scope):
+
+**Sesión 1/2 — 16 calculators + upgrades D8-D11** (commits `078b1b6` → `4ed11c9`):
+- 16 N1 compute functions + tests + snapshot harness parcial.
+- D8: tabla `score_weights` runtime + endpoint admin POST/GET.
+- D9: fallback `renormalizeWeights` para dimensiones faltantes.
+- D10: `getScoreLineage` + API `/api/admin/scores/dependencies/:scoreId` + script export mermaid.
+- D11: triggers SQL cascade downstream N1↔N0 (`trg_*_cascade_ins/upd`).
+- Migration única `20260420090000_ie_n1_weights_and_cascade.sql` + `audit_rls_allowlist_v10`.
+
+**Sesión 2/2 — A12 fix + 9.D UI + 9.E Playwright** (commits `6d9a70d` → `23dc528`):
+- Fix A12: multiplicador × 4 (founder decision 2026-04-20). Fórmula `score = max(0, 100 − gap_pct × 4)` — gap 0% = 100, gap 12.5% = 50, gap 25%+ = 0. Consistente con semántica Price Fairness.
+- 9.D.1 `features/ie/routes/scores.ts` — router tRPC 5 procedures (list, getByZone, getDependencies, getTierGate, getHistory).
+- 9.D.2 `features/ie/hooks/` — useZoneScores, useZoneScoresByLevel, useScoreHistory, useScoreDependencies, useTierGate (cache 5m / 1h / 15m / SWR).
+- 9.D.3 `features/ie/hooks/use-force-ie-flag.ts` — admin bypass via `?force_ie=1`. ScorePlaceholder ya tenía `canBypassPlaceholder`.
+- 9.D.4 `features/ie/components/zone-intelligence-card.tsx` — wrapper que wire useZoneScores + SCORE_REGISTRY → IntelligenceCard (loading / empty / error states).
+- 9.E.1 `shared/lib/intelligence-engine/calculators/__tests__/n1-snapshot-harness.test.ts` — 256 casos (16 N1 × 16 zonas CDMX) en matriz snapshot estable.
+- 9.E.2 `tests/e2e/fase-09-n1-scores.spec.ts` — 4 Playwright smoke tests verdes contra `/ie-playground` dev-only (`app/(dev)/ie-playground/`). Proxy actualizado para bypass auth en dev.
+
+**Upgrades aplicados (acumulados FASE 09):**
+[✓] D8 weights runtime · [✓] D9 fallback graceful · [✓] D10 score lineage · [✓] D11 cascade N1↔N0
+
+---
+**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17 · **Cierre:** 2026-04-20
