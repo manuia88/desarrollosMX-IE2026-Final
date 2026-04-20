@@ -4,6 +4,7 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
+import { canExecuteCascade, estimateCascadeCost } from './cost-guard';
 import { CASCADE_GRAPH, type CascadeEventName } from './dependency-graph';
 
 export const ReplayInputSchema = z.object({
@@ -107,9 +108,22 @@ export async function executeReplay(
     };
   }
 
-  // Real enqueue: out of scope BLOQUE 8.F — emit jobs sería expensive sin
-  // cost-guard (F4). Dejar stub que retorna 0 jobs pero persiste log.
-  // Consumers reales wire cuando 8.F.7 cost-guard esté wired en este flow.
+  // F4 — Cost guard check antes de real enqueue. Si excede budget → abort.
+  const estimate = estimateCascadeCost(scores.length, targetCount);
+  const guard = await canExecuteCascade(supabase, estimate);
+  if (!guard.allowed) {
+    return {
+      ok: false,
+      log_id: logId,
+      jobs_enqueued: 0,
+      scores_affected: scores,
+      dry_run: false,
+      error: guard.reason ?? 'cost_guard_denied',
+    };
+  }
+
+  // Real enqueue stub: jobs_enqueued=0 hasta que consumer wire enqueue_score_recalc
+  // per score × per entity. Infraestructura lista (cost guard + audit log).
   return {
     ok: true,
     log_id: logId,
