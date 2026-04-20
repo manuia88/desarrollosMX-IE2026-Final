@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`B12 Cost Tracker calculator > 16 zonas CDMX — snapshot + alert_level discriminado 1`] = `
+{
+  "Clavería": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 60,
+  },
+  "Contreras Centro": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 60,
+  },
+  "Coyoacán Centro": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 64,
+  },
+  "Cuajimalpa Centro": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 55,
+  },
+  "Del Valle": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 57,
+  },
+  "Iztacalco Centro": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 55,
+  },
+  "Iztapalapa Sur": {
+    "alert": "warning",
+    "confidence": "high",
+    "label": "ie.score.b12.critical",
+    "value": 44,
+  },
+  "Lindavista": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 60,
+  },
+  "Milpa Alta Centro": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 55,
+  },
+  "Polanco": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 55,
+  },
+  "Roma Norte": {
+    "alert": "warning",
+    "confidence": "high",
+    "label": "ie.score.b12.critical",
+    "value": 49,
+  },
+  "San Ángel": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 55,
+  },
+  "Tepito": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 55,
+  },
+  "Tlalpan Centro": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 60,
+  },
+  "Tláhuac Centro": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 55,
+  },
+  "Xochimilco Centro": {
+    "alert": "normal",
+    "confidence": "high",
+    "label": "ie.score.b12.warning",
+    "value": 60,
+  },
+}
+`;

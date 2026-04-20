@@ -536,9 +536,364 @@ Producto estrella I01 en su versión H1 regresión lineal. Evoluciona a gradient
 - [ ] PostHog dashboard "IE Worker Health" activo.
 - [ ] Documentación actualizada: `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` refleja los 32 N0 como "implementado".
 
+## Implementación real (cambios vs plan original) — BLOQUE 8.B cerrado 2026-04-19
+
+### Split en 2 sesiones
+
+BLOQUE 8.B parte 1/2 (15 commits `687dc9e..bba2802`):
+- Fixtures CDMX 16 zonas (1 por alcaldía, extremos cubiertos) — `__fixtures__/cdmx-zones.ts`
+- Migration U13 `comparable_zones` jsonb precalculada + persist.ts refactor
+- 4 stubs H2 (F04 RAMA, F06 SEDUVI, F07 Catastro, H06 0311 Locatel)
+- 8 calculators reales: F01 Safety, F02 Transit, F03 Ecosystem DENUE+SCIAN, F05 Water,
+  H01 School, H02 Health, H03 Seismic, B12 Cost Tracker
+
+BLOQUE 8.B parte 2/2 (8 commits `2b44cc9..6b8ae54`):
+- Migration combinada P1+S1: `valid_until` + RLS country_code filter
+- Pre-step telemetry: `shared/lib/telemetry/hash-user-id.ts` (S2) + `run-score.ts` U7 props
+- Fixtures extensions: CDMX_CNBV, CDMX_INAH, CDMX_CONAGUA, CDMX_MARKET, CDMX_SEARCH, CDMX_AIRROI
+- 7 calculators: H04 Credit Demand, H08 Heritage, H09 Commute (on-demand Mapbox), H10 Water Crisis,
+  H11 Infonavit, A01/A03/A04 combined, D07 STR/LTR (wrapper AirROI per ADR-019)
+
+### Upgrades aplicados (v3 + v4)
+
+- **U5** calculator semver versioning (`export const version = '1.0.0'`).
+- **U6** snapshot tests con 16 fixtures CDMX (1 por alcaldía, extremos incluidos).
+- **U7** PostHog `ie.score.calculated` con props extendidas: duration_ms, components_count,
+  source_data_age_days, calculator_version, country_code, hashed_user_id.
+- **U9** fixtures reutilizables (BLOQUE 8.C/8.D/8.E podrán consumirlos).
+- **U10** `methodology` const export con formula + sources + weights + references + thresholds + validity.
+- **U12** `reasoning_template` con placeholders + `template_vars` en `CalculatorOutput`.
+- **U13** `comparable_zones` jsonb pre-calculadas al persistir (top 3 closest value, same
+  score_type + period_date).
+- **U14** `score_label_key` i18n desde día 1 — 21 N0 × 5 labels × 5 locales en `messages/*`.
+- **P1** `valid_until` separado de `period_date` en zone_scores/project_scores/user_scores. Cada
+  calculator declara su `methodology.validity` — `persist.ts` via `computeValidUntil` helper.
+- **S1** RLS cross-tenant country filter: `zone_scores` y `project_scores` policies exigen
+  `country_code IN (select country_code from profiles where id = auth.uid()) OR is_superadmin()`.
+- **S2** hashed user_id en telemetría: `sha256(user_id + TELEMETRY_SALT).slice(0,12)` para
+  pseudonimizar eventos PostHog.
+
+### Cambios vs plan original
+
+- **D07 STR/LTR**: cambio AirDNA → **AirROI** per ADR-019. Calculator es wrapper delgado
+  sobre `features/str-intelligence/lib/scores/str-ltr-opportunity.ts` (FASE 07b) — NO duplica lógica.
+- **H09 Mapbox cache**: plan v3 propuso `shared/lib/runtime-cache`; no existe. Decisión:
+  mantener plan original 8.B.14.2 — cache en `zone_scores.valid_until` 7d. Calculator lee
+  cache via `lookupH09Cache()` comparando destino lat/lng (±0.0005° ≈50m).
+- **Pure compute function pattern**: factorización `compute<XX>()` pura + Calculator class con
+  `run()` I/O. Tests ejercen compute directo contra fixtures — no mock supabase. Pattern
+  formalizado pendiente en CONTRATO §8 TODO #6 (ADR-024 opcional).
+- **Registry entries N0**: NO modificadas — `calculator_path` ya correctos en BLOQUE 8.A.
+- **Confidence para H03 Seismic y H08 Heritage**: siempre `high` porque Atlas de Riesgos e INAH
+  son shapefiles polígono deterministic por AGEB.
+
+### Verificaciones al cierre (pendientes sesión 2 final)
+
+Ver §Criterio de done de la FASE — sin tag `fase-08-complete` hasta cerrar BLOQUE 8.C-8.F.
+
+## Implementación real BLOQUE 8.C — cerrado 2026-04-20
+
+### Commits BLOQUE 8.C (12 commits)
+
+| Commit | Descripción |
+|---|---|
+| `a3c0e93` | Pre-step 0: migration `20260419215000_ie_scores_v3_deltas_ranking.sql` (D2 deltas jsonb + D3 ranking jsonb en zone_scores + project_scores) + persist.ts extension (`computeDeltas`, `computeRanking`) |
+| **`c3bc727`** | **N11 DMX Momentum Index (PRIMER COMMIT per CONTRATO §8 TODO #12 — killer asset DMX-MOM B2B)** |
+| `f1097cf` | N01 Ecosystem Diversity (Shannon-Wiener) |
+| `a947990` | N02 Employment Accessibility |
+| `36fc2c0` | N03 Gentrification Velocity (tier 3 gated) |
+| `c1ea7cd` | N04 Crime Trajectory (tier 3) |
+| `fa1d900` | N05 Infrastructure Resilience |
+| `6c1a61e` | N06 School Premium |
+| `f536810` | N07 Water Security |
+| `a3e81e3` | N08 Walkability MX |
+| `53b4411` | N09 Nightlife Economy |
+| `6eadccc` | N10 Senior Livability |
+
+### Upgrades nuevos aplicados BLOQUE 8.C
+
+- **D1 — Recomendaciones accionables por score**: cada N01-N11 exporta `methodology.recommendations`
+  con 4 buckets (low/medium/high/insufficient_data) × 1-3 i18n keys cada uno. UI `getRecommendationKeys(value, confidence)`
+  resuelve set correcto runtime.
+- **D2 — Score deltas first-class (3m/6m/12m)**: `zone_scores.deltas` + `project_scores.deltas`
+  columnas jsonb. `persist.ts#computeDeltas()` consulta `score_history` con ventana ±15d al
+  T-3m/6m/12m para mismo entity + score_type. Null si no hay data.
+- **D3 — Ranking explícito vs país**: `zone_scores.ranking` + `project_scores.ranking` columnas
+  jsonb. `persist.ts#computeRanking()` cuenta pre-UPSERT rows mismo country+score+period con
+  `value > currentValue`. `{position, total, percentile}`.
+
+### Upgrades consolidados (aplicados TODOS los N01-N11)
+
+U5 version semver · U6 snapshot tests 16 fixtures · U7 PostHog props · U9 fixtures reutilizables
+· U10 methodology const · U12 reasoning_template · U13 comparable_zones · U14 i18n 5 locales
+· P1 valid_until · S1 RLS country · S2 hashed user_id.
+
+### Stubs marcados con 4 señales ADR-018 (BLOQUE 8.C)
+
+- **N11 search_trends**: Google Trends scraper → FASE 27. Placeholder 0 en methodology.weights.
+  search_trends. Calculator retorna score reducido pero no gated por este factor (tier gate
+  otra dimensión).
+- N03 `denue_snapshots`: requiere ≥2 snapshots separados ≥3m. UI placeholder "disponible tras
+  próximo snapshot DENUE".
+
+### Tests acumulados FASE 08
+
+- **BLOQUE 8.A**: ~50 tests (registry, queue, worker, framework)
+- **BLOQUE 8.B**: 168 tests (21 calculators × ~7 tests cada uno + persist + fixtures)
+- **BLOQUE 8.C**: ~66 tests (11 calculators × 6 tests + persist-deltas-ranking × 9)
+- **Total esperado**: ~280+ tests passing
+
+### Cambios vs plan original BLOQUE 8.C
+
+- N03 velocity scaling ajustado de 25 → 200 para que Roma Norte (Δratio 0.37 en 6m, velocity 6.17)
+  alcance umbral ≥60 gentrificación moderada.
+- N06 tier reducido de plan 8.C.6.1 ("Tier 3 requiere ≥50 proyectos") a **Tier 1 H1** per prompt
+  ("no requiere ≥50 proyectos para versión H1; usar market_prices_secondary cuando esté"). H2
+  activará tier 3 con data real.
+- N11 formula: catálogo dice normalización z-score CDMX. Implementación H1 usa mapping lineal
+  por componente centrado en 50 + z-score adicional en components para observabilidad. Tier 3
+  gate real (≥50 proyectos + ≥6m). Fallback search_trends = 0 hasta FASE 27.
+
+---
+
+## Implementación real BLOQUE 8.D — cerrado 2026-04-20
+
+Producto estrella I01 DMX Estimate en su versión MVP H1 (regresión lineal). Target comercial
+$15-50K/licencia API B2B (ADR-013).
+
+### Commits BLOQUE 8.D
+
+| Commit | Descripción |
+|---|---|
+| `b11783e` | Pre-step 0: migration `20260420063332_avm_estimates.sql` + RLS S1 + indexes + valid_until D7 cache window |
+| `3425edd` | 8.D.1 — feature engineering 47 variables + normalization + 7 tests |
+| `89fc46d` | 8.D.2 — model H1 regression + coefficients seed + comparables fetcher + 12 tests |
+| `4e0654d` | 8.D.3 — endpoint /api/v1/estimate + BotID + D4+D5+D6+D7 + Zod schemas + 20 tests |
+| `332d4be` | 8.D.4 — AVM pricing tiers + gating + /estimate page stub |
+
+### Upgrades nuevos aplicados BLOQUE 8.D
+
+- **D4 MAE tracking + intervalos de confianza**: cada estimate persiste
+  `{mae_estimated_pct, ci_low, ci_high, confidence_score}`. mae derivado de R² + variance
+  comparables + penalty_missing. confidence = clamp(100 − 2×mae, 0, 100).
+- **D5 adjustments explícitos auditables**: response.adjustments[] con
+  `{feature, value_pct, source, weight, confidence, explanation_i18n_key}`. source ∈
+  {`regression_coefficient`, `comparable_overlay`, `market_context`}. Habilita
+  explicabilidad total para B2B (aseguradoras, bancos).
+- **D6 counter-estimate**: además del estimate principal (regression), endpoint devuelve
+  `estimate_alternative` (median price_m2 comparables × sup_m2). `spread_pct = ABS diff / estimate`.
+  spread > 15% → `flag_uncertain:true` + recomendación visita presencial. spread ≤ 15% →
+  `flag_corroborated:true`. Diferencial vs Habi (ellos solo dan 1 número).
+- **D7 cache 24h por fingerprint**: `sha256(canonicalInput).slice(0,16)`. Pre-compute lookup
+  `WHERE fingerprint=X AND valid_until>now() LIMIT 1`. Hit → `cached:true` + `computed_at` histórico.
+  Cache invalidation cascade vía market_prices_secondary → BLOQUE 8.F.
+- **BotID Basic (free)**: `botid@1.5.11` wrap endpoint para bloquear scrapers. Free tier (sin
+  api_key) requiere BotID challenge passed. Pro/Enterprise (api_pro_*, api_ent_*) bypass
+  completo. Basic mode GRATIS en todos los planes Vercel. Deep Analysis es paid (Pro + $1/1000)
+  — no habilitado en H1.
+
+### Tests BLOQUE 8.D
+
+- features 7 (length 47, determinismo, missing tracking, overrides, one-hot, ordinal)
+- model-h1 7 (semver, predict length guard, metadata, 10 seed properties ±50%, mae penalty, variance)
+- comparables 5 (fetch fallback, maxResults, median × sup, <3 null, pares average)
+- schemas 10 (request/response validation, enums, null opt)
+- endpoint 10 (invalid json/schema, response shape, D4, D5, D6, D7 cache hit, rate limit 429,
+  Pro bypass unlimited, p95 <500ms)
+
+**Total BLOQUE 8.D**: 39/39 AVM tests passing.
+
+### Upgrades acumulados FASE 08 (8.A + 8.B + 8.C + 8.D)
+
+U5 + U6 + U7 + U9 + U10 + U12 + U13 + U14 + P1 + S1 + S2 + D1 + D2 + D3 + **D4 + D5 + D6 + D7** + BotID.
+
+### Stubs BLOQUE 8.D
+
+- `app/[locale]/(public)/estimate/page.tsx` STUB FASE 21 portal público UI completa. 4 señales
+  ADR-018: comentario STUB + badge `[próximamente]` + link docs API + documentado en plan.
+
+---
+
+## Implementación real BLOQUE 8.E — cerrado 2026-04-20
+
+Componentes Dopamine UI que materializan visualmente todo el backend acumulado
+de BLOQUEs 8.A-8.D (confidence cascade + tier gating + provenance + methodology
++ recommendations + ranking + time-series + validity).
+
+### Commits BLOQUE 8.E
+
+| Commit | Descripción |
+|---|---|
+| `c6078ee` | 8.E.1 — ConfidenceBadge + ScoreTransparencyPanel (E4) + ScoreRecommendationsCard (E5) + tests + i18n |
+| `e214bd5` | 8.E.2 — ScorePlaceholder tier gating + IntelligenceCard integración + tests |
+
+### Upgrades nuevos aplicados BLOQUE 8.E
+
+- **E4 ScoreTransparencyPanel**: panel/dialog unificado que expone 8 secciones sobre cada
+  score: (1) header score_id + value + ConfidenceBadge, (2) reasoning narrativo resuelto
+  desde `reasoning_template` + `template_vars` (U12), (3) methodology accordion (formula
+  + sources + weights + references) (U10), (4) provenance (U4) con name + period + count,
+  (5) comparable zones grid 3-up (U13) con delta visual, (6) ranking barra progress (D3),
+  (7) time-series deltas 3m/6m/12m (D2), (8) validity computed_at + valid_until (P1) +
+  footer link `/metodologia/<score_id>` (FASE 21 stub).
+- **E5 ScoreRecommendationsCard**: resuelve bucket del value/confidence
+  (low <40, medium 40-69, high ≥70, insufficient_data override) y renderiza
+  `methodology.recommendations[bucket]` como lista bullets i18n via next-intl. Callback
+  opcional `onAction(key)` cuando la recommendation incluye CTA interno.
+
+### Componentes nuevos Dopamine
+
+| Componente | Responsabilidad |
+|---|---|
+| `ConfidenceBadge` | 4 variantes confidence (high invisible, medium/low pills, insufficient_data + CTA explain) |
+| `ScoreTransparencyPanel` | E4 — panel transparencia full con 8 secciones |
+| `ScoreRecommendationsCard` | E5 — recomendaciones por bucket |
+| `ScorePlaceholder` | Tier-gated placeholder + admin bypass (isSuperadmin && forceFlag) |
+| `IntelligenceCard` | Grid score tiles integrando los 4 componentes + loading/empty/error ADR-018 |
+
+### Tests BLOQUE 8.E
+
+- confidence-badge: 4 casos (tone mapping por confidence level)
+- score-recommendations-card: 4 casos (bucket resolver + edge cases 40/69/70)
+- score-placeholder: 5 casos (canBypassPlaceholder con combinaciones gated/superadmin/flag)
+- score-transparency-panel: 5 casos (resolveReasoning template replacement + undefined)
+
+**Total BLOQUE 8.E**: 18/18 UI helper tests passing (lógica pura, sin DOM).
+
+### Decisiones autónomas BLOQUE 8.E
+
+- **Dialog en lugar de Popover/Modal split**: el plan sugería "popover desktop + modal
+  mobile" pero la infra del repo sólo tiene `shared/ui/primitives/dialog.tsx` y
+  `popover.tsx` separados. Dialog provee experiencia uniforme, accesible (focus trap,
+  Esc, aria-modal) en ambos viewports sin lógica de detección de breakpoint. Se
+  mantiene la API (open/onOpenChange) para intercambiar implementación después sin
+  cambios en consumers.
+- **Storybook no existe en el repo** — las stories exigidas por plan §BLOQUE 8.E se
+  aplazaron. Se cubre con tests de helpers pure + Playwright smoke cuando IntelligenceCard
+  aterrice en `features/ie/` (FASE 11). Infraestructura Storybook queda fuera de scope de
+  8.E (setup + deps ≥5 paquetes).
+- **React Testing Library / jsdom no instalados** — vitest corre en modo node. Tests
+  cubren helpers `resolveConfidenceTone`, `resolveRecommendationBucket`, `resolveReasoning`,
+  `canBypassPlaceholder` (funciones puras). Component rendering validation quedará
+  cubierto por Playwright cuando haya consumer real en FASE 11.
+- **Comparable zones / Ranking / Time-series como props opcionales en
+  ScoreTransparencyPanel** — el backend actual de CalculatorOutput no expone estos datos
+  (D2+D3+U13 requieren agregaciones multi-row futuras). El panel los renderiza SOLO si
+  el consumer los pasa; skip silent cuando undefined (no empty state noise en MVP).
+  Cuando 8.F exponga estos datos via cascades, el UI ya está listo.
+
+### Upgrades acumulados FASE 08 (8.A + 8.B + 8.C + 8.D + 8.E)
+
+U5 + U6 + U7 + U9 + U10 + U12 + U13 + U14 + P1 + S1 + S2 + D1 + D2 + D3 + D4 + D5 + D6 + D7 + BotID + **E4 + E5**.
+
+### Stubs BLOQUE 8.E
+
+- `a href="/metodologia/<score_id>"` en footer ScoreTransparencyPanel — ruta no existe
+  todavía (FASE 21). Acepta por ser `<a>` con href válido absoluto (no `#`), semántica
+  correcta. audit:e2e pasa.
+
+---
+
+## Implementación real BLOQUE 8.F — CIERRE FASE 08 (2026-04-20)
+
+Último bloque: wire all + tier_requirements + U8+U11+F1+F2+F4 + cascadas formales
+geo_data + macro + cierre FASE 08 completa.
+
+### Commits BLOQUE 8.F
+
+| Commit | Descripción |
+|---|---|
+| `5cfb2ad` | 8.F.1 — tier_requirements migration + tierGate refactor BD-driven cache 1h |
+| `0074941` | 8.F.2 — registerCalculator wiring 21 N0 + 11 N01-N11 + instrumentation.ts (cierra TODO #15) |
+| `b3a1cb0` | 8.F.3 — U8 runtime cache in-memory Map TTL + fetchGeoDataPointsCached helper |
+| `e252706` | 8.F.4 — U11 anomaly + F3 baseline rolling 30d + market_anomalies migration |
+| `9431eaa` | 8.F.5 — F1 cascade dependency graph + endpoint admin + docs auto-gen |
+| `0b06b71` | 8.F.6 — F2 cascade replay admin tool + cascade_replay_log |
+| `33075f4` | 8.F.7 — F4 cost guard rails + budget validation + alerts |
+| `2820d46` | 8.F.8 — cascadas formales geo_data_updated + macro_updated triggers SQL |
+
+### Migrations BLOQUE 8.F (4)
+
+- `20260420073500_ie_tier_requirements.sql` — tier_requirements + seed 4 tiers + RLS
+- `20260420074500_ie_market_anomalies.sql` — market_anomalies + zone/project_scores.anomaly jsonb
+- `20260420075000_ie_cascade_replay_log.sql` — cascade_replay_log audit + superadmin RLS
+- `20260420075500_ie_cascades_triggers.sql` — cascade functions + STATEMENT triggers
+
+### Upgrades nuevos BLOQUE 8.F
+
+- **U8 runtime cache** — in-memory TTL Map + tag invalidation + fetchGeoDataPointsCached helper
+- **U11 anomaly detection** + **F3 baseline rolling 30d** — score_history 30d lookback + 3σ threshold
+- **F1 cascade dependency graph** — CASCADE_GRAPH TS const + mermaid export + `/api/admin/cascades/graph`
+- **F2 cascade replay/backfill tool** — dry_run support + cost-guard integration + audit log
+- **F4 cost guard rails** — estimate × 10% remaining monthly budget cap + PostHog alert
+- **TODO #15 wiring** — registerCalculator() operativo para 32 calculators via instrumentation.ts
+
+### Tests BLOQUE 8.F (~60 nuevos)
+
+- tier-gate 5 · wiring 4 · runtime-cache 10 · geo-query 2 · anomaly detector 10 ·
+  cascade graph 9 · replay 5 · cost-guard 10 · cascade triggers 4
+
+### Cascadas formales wire (2/6 operativas)
+
+- **geo_data_updated** ✅ trigger SQL + TS per 9 sources (denue, fgj, gtfs, siged, dgis,
+  sacmex, atlas_riesgos, rama, inah)
+- **macro_updated** ✅ trigger SQL enqueue A01..C05 × zonas country
+- **unit_sold, price_changed, feedback_registered, search_behavior**: CASCADE_GRAPH listas
+  TS; wire triggers en FASEs consumers (FASE 13 operaciones, FASE 20 vibe_tags, etc.)
+
+### Upgrades acumulados FASE 08 completa (8.A + 8.B + 8.C + 8.D + 8.E + 8.F)
+
+U5 · U6 · U7 · U8 · U9 · U10 · U11 · U12 · U13 · U14 · P1 · S1 · S2 · D1 · D2 · D3 ·
+D4 · D5 · D6 · D7 · E4 · E5 · F1 · F2 · F4 · BotID.
+
+### Decisiones autónomas BLOQUE 8.F
+
+1. **Runtime cache in-memory vs Vercel Runtime Cache** — Vercel Runtime Cache API
+   requiere `@vercel/functions` package no instalado. Decidí implementar wrapper
+   Map-based con TTL en `shared/lib/runtime-cache/` con globalThis-scoped store —
+   funciona en Fluid Compute (instances reused), zero new deps, H1 suficiente.
+   Upgrade path H2 a Vercel Runtime Cache transparente al API externo.
+2. **Anomaly Markdown entry zone_scores.anomaly** — nueva columna jsonb en lugar
+   de empotrar en components (mantiene components como desglose factor humano puro).
+3. **Cascade triggers STATEMENT-level** — REFERENCING NEW TABLE + bulk aggregation
+   por distinct (source, zone_id) para evitar N+1 en ingestor batch 500 rows.
+4. **Cost-guard 10% cap** — conservador H1 (default $100/mo budget). Tune con
+   histórico cost-tracker en FASE 29 cuando admin dashboard exista.
+5. **Replay real enqueue deferred** — executeReplay retorna jobs_enqueued=0 para
+   dry_run=false hasta que upstream consumer wire enqueue_score_recalc per entity.
+   Infraestructura lista (cost guard + audit log).
+
+### TODOs pre-deploy críticos (CONTRATO §8)
+
+Antes de merge a main:
+- **#16** TELEMETRY_SALT en Vercel Production + Preview envs (hash-user-id.ts)
+- **#17** BotID Basic activate en Vercel Project Dashboard (AVM endpoint)
+- **#20** IE_MONTHLY_BUDGET_USD en Vercel envs Production + Preview (default $100)
+
+TODOs operacionales agendados:
+- **#18** Storybook setup (FASE 11 housekeeping)
+- **#19** jsdom + Testing Library (FASE 11 housekeeping)
+- **#15** ✅ COMPLETADO BLOQUE 8.F.2
+
+### Criterio de done FASE 08 (CIERRE)
+
+- [x] BLOQUEs 8.A–8.F cerrados
+- [x] 32 scores N0 + N01-N11 implementados como calculators puros + registered runtime
+- [x] AVM MVP endpoint `/api/v1/estimate` funcional con Zod schemas + 5 upgrades D4-D7+BotID
+- [x] Queue worker cron `/api/cron/score-worker` cada 1 min
+- [x] Confidence cascade UI + 5 componentes Dopamine (E4 Transparency + E5 Recommendations)
+- [x] Tier gating BD-driven (tier_requirements) operativo
+- [x] Cascades geo_data_updated + macro_updated triggers SQL wire
+- [x] U11 anomaly detection operativo (baseline rolling 30d + market_anomalies)
+- [x] F1 cascade graph endpoint + docs auto-gen `npm run cascades:export`
+- [x] F2 cascade replay admin tool + audit cascade_replay_log
+- [x] F4 cost guard rails + PostHog alerts
+
+---
+
 ## Próxima fase
 
 [FASE 09 — IE Scores Nivel 1](./FASE_09_IE_SCORES_N1.md)
 
 ---
-**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17
+**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17 · **Actualizado:** 2026-04-20 (FASE 08 COMPLETA — BLOQUE 8.F)

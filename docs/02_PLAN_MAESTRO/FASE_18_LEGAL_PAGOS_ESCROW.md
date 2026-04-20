@@ -497,4 +497,15 @@ Crítico:
 FASE 19 — Portal Admin (17 pages + Market Observatory 7 capas Mapbox + super-admin tools)
 
 ---
+
+## Laterals pipeline (proposed durante ejecución previa)
+
+Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
+
+Aplican en esta fase:
+- **L11 Closing-as-a-Service** (Stripe Atlas pattern) — combinar AVM + escrow + CFDI + due diligence + contratos en producto cierre inmobiliario end-to-end. Revenue 1-2% del valor por transacción. Bloque sugerido: BLOQUE 18.CLOSING_BUNDLE que orchestra los componentes ya implementados (escrow nativo, CFDI 4.0, Mifiel firma, AVM I01) en flow único producto-friendly.
+
+Al ejecutar FASE 18, revisar status en pipeline maestro y confirmar incorporación al scope.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17

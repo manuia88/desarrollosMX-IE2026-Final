@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N06 School Premium calculator > 16 zonas CDMX — snapshot 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "premium_pct": 5,
+    "top_20": 1,
+    "value": 20,
+  },
+  "Contreras Centro": {
+    "confidence": "low",
+    "premium_pct": 0,
+    "top_20": 0,
+    "value": 0,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "premium_pct": 10,
+    "top_20": 2,
+    "value": 40,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "medium",
+    "premium_pct": 1,
+    "top_20": 0,
+    "value": 3,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "premium_pct": 20,
+    "top_20": 3,
+    "value": 75,
+  },
+  "Iztacalco Centro": {
+    "confidence": "low",
+    "premium_pct": 0,
+    "top_20": 0,
+    "value": 0,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "low",
+    "premium_pct": 0,
+    "top_20": 0,
+    "value": 0,
+  },
+  "Lindavista": {
+    "confidence": "medium",
+    "premium_pct": 1,
+    "top_20": 0,
+    "value": 3,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "low",
+    "premium_pct": 0,
+    "top_20": 0,
+    "value": 0,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "premium_pct": 24,
+    "top_20": 4,
+    "value": 87,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "premium_pct": 12,
+    "top_20": 2,
+    "value": 46,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "premium_pct": 16,
+    "top_20": 3,
+    "value": 63,
+  },
+  "Tepito": {
+    "confidence": "low",
+    "premium_pct": 0,
+    "top_20": 0,
+    "value": 0,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "premium_pct": 6,
+    "top_20": 1,
+    "value": 23,
+  },
+  "Tláhuac Centro": {
+    "confidence": "low",
+    "premium_pct": 0,
+    "top_20": 0,
+    "value": 0,
+  },
+  "Xochimilco Centro": {
+    "confidence": "low",
+    "premium_pct": 0,
+    "top_20": 0,
+    "value": 0,
+  },
+}
+`;

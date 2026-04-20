@@ -1,0 +1,2337 @@
+{
+  "generated_at": "2026-04-20T07:49:42.745Z",
+  "version": 1,
+  "count": 118,
+  "by_level": {
+    "0": 32,
+    "1": 18,
+    "2": 15,
+    "3": 12,
+    "4": 7,
+    "5": 34
+  },
+  "entries": [
+    {
+      "score_id": "F01",
+      "name": "Safety",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:fgj"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f01-safety",
+      "confidence_sources": [
+        "fgj"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/f01-safety.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F02",
+      "name": "Transit",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:gtfs"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f02-transit",
+      "confidence_sources": [
+        "gtfs"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/f02-transit.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F03",
+      "name": "Ecosystem DENUE",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:denue"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f03-ecosystem-denue-base--n01-es-diversidad",
+      "confidence_sources": [
+        "denue"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/f03-ecosystem.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F04",
+      "name": "Air Quality",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:rama"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f04-air-quality-h2-activa",
+      "confidence_sources": [
+        "rama"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/f04-air-quality.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F05",
+      "name": "Water",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:sacmex"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f05-water",
+      "confidence_sources": [
+        "sacmex"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/f05-water.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F06",
+      "name": "Land Use",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:seduvi"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f06-land-use",
+      "confidence_sources": [
+        "seduvi"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/f06-land-use.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F07",
+      "name": "Predial",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:catastro_cdmx"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f07-predial",
+      "confidence_sources": [
+        "catastro_cdmx"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/f07-predial.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H01",
+      "name": "School Quality",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:siged"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h01-school-quality",
+      "confidence_sources": [
+        "siged"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h01-school-quality.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H02",
+      "name": "Health Access",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:dgis"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h02-health-access",
+      "confidence_sources": [
+        "dgis"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h02-health-access.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H03",
+      "name": "Seismic Risk",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:atlas_riesgos"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h03-seismic-risk",
+      "confidence_sources": [
+        "atlas_riesgos"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h03-seismic-risk.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H04",
+      "name": "Credit Demand",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h04-credit-demand",
+      "confidence_sources": [
+        "cnbv"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h04-credit-demand.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H06",
+      "name": "City Services",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:locatel_0311"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h06-city-services",
+      "confidence_sources": [
+        "locatel_0311"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h06-city-services.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H08",
+      "name": "Heritage Zone",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:inah"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h08-heritage-zone",
+      "confidence_sources": [
+        "inah"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h08-heritage-zone.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H09",
+      "name": "Commute Time",
+      "level": 0,
+      "category": "comprador",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h09-commute-time-on-demand",
+      "confidence_sources": [
+        "mapbox"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h09-commute-time.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H10",
+      "name": "Water Crisis",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:sacmex",
+        "geo_data_updated:conagua"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h10-water-crisis",
+      "confidence_sources": [
+        "sacmex",
+        "conagua"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h10-water-crisis.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H11",
+      "name": "Infonavit Calc",
+      "level": 0,
+      "category": "comprador",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h11-infonavit-calc",
+      "confidence_sources": [
+        "infonavit"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/h11-infonavit.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A01",
+      "name": "Affordability",
+      "level": 0,
+      "category": "comprador",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a01-affordability",
+      "confidence_sources": [
+        "macro_series",
+        "infonavit"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/a01-affordability.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A03",
+      "name": "Migration",
+      "level": 0,
+      "category": "comprador",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated",
+        "search_behavior"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a03-migration",
+      "confidence_sources": [
+        "search_logs",
+        "shf"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/a03-migration.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A04",
+      "name": "Arbitrage",
+      "level": 0,
+      "category": "comprador",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated",
+        "price_changed"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a04-arbitrage",
+      "confidence_sources": [
+        "market_prices_secondary",
+        "unidades"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/a04-arbitrage.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B12",
+      "name": "Cost Tracker",
+      "level": 0,
+      "category": "dev",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b12-cost-tracker",
+      "confidence_sources": [
+        "inegi_inpp"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/b12-cost-tracker.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D07",
+      "name": "STR vs LTR",
+      "level": 0,
+      "category": "mercado",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d07-str-vs-ltr",
+      "confidence_sources": [
+        "airroi",
+        "market_prices_secondary"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n0/d07-str-ltr.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N01",
+      "name": "Ecosystem Diversity (Shannon-Wiener)",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:denue"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n01-ecosystem-diversity-shannon-wiener",
+      "confidence_sources": [
+        "denue"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n01-ecosystem-diversity.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N02",
+      "name": "Employment Accessibility",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:denue",
+        "geo_data_updated:gtfs"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n02-employment-accessibility",
+      "confidence_sources": [
+        "denue",
+        "gtfs"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n02-employment-accessibility.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N03",
+      "name": "Gentrification Velocity",
+      "level": 0,
+      "category": "zona",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:denue"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n03-gentrification-velocity",
+      "confidence_sources": [
+        "denue_snapshots"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n03-gentrification-velocity.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N04",
+      "name": "Crime Trajectory",
+      "level": 0,
+      "category": "zona",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:fgj"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n04-crime-trajectory",
+      "confidence_sources": [
+        "fgj"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n04-crime-trajectory.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N05",
+      "name": "Infrastructure Resilience",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:atlas_riesgos",
+        "geo_data_updated:sacmex",
+        "geo_data_updated:gtfs"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n05-infrastructure-resilience",
+      "confidence_sources": [
+        "atlas_riesgos",
+        "sacmex",
+        "gtfs"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n05-infrastructure-resilience.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N06",
+      "name": "School Premium",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:siged",
+        "price_changed"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n06-school-premium",
+      "confidence_sources": [
+        "siged",
+        "market_prices_secondary"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n06-school-premium.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N07",
+      "name": "Water Security",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:sacmex",
+        "geo_data_updated:conagua"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n07-water-security",
+      "confidence_sources": [
+        "sacmex",
+        "conagua"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n07-water-security.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N08",
+      "name": "Walkability MX",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:denue",
+        "geo_data_updated:gtfs"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n08-walkability-mx",
+      "confidence_sources": [
+        "denue",
+        "gtfs"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n08-walkability-mx.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N09",
+      "name": "Nightlife Economy",
+      "level": 0,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:denue",
+        "geo_data_updated:fgj"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n09-nightlife-economy",
+      "confidence_sources": [
+        "denue",
+        "fgj"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n09-nightlife-economy.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N10",
+      "name": "Senior Livability",
+      "level": 0,
+      "category": "comprador",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "geo_data_updated:dgis",
+        "geo_data_updated:denue"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n10-senior-livability",
+      "confidence_sources": [
+        "dgis",
+        "denue"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n10-senior-livability.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "N11",
+      "name": "DMX Momentum (monthly)",
+      "level": 0,
+      "category": "zona",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "price_changed",
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#n11-dmx-momentum-index",
+      "confidence_sources": [
+        "denue",
+        "fgj",
+        "market_prices_secondary"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n01-n11/n11-dmx-momentum-index.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F08",
+      "name": "Life Quality Index",
+      "level": 1,
+      "category": "zona",
+      "tier": 2,
+      "dependencies": [
+        "F01",
+        "F02",
+        "F03",
+        "F04",
+        "H01",
+        "H02"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f08-life-quality-index-lqi",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/f08-life-quality.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F12",
+      "name": "Risk Map",
+      "level": 1,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [
+        "H03",
+        "F05",
+        "F06",
+        "H10"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f12-risk-map",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/f12-risk-map.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H07",
+      "name": "Environmental",
+      "level": 1,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [
+        "F04"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h07-environmental",
+      "confidence_sources": [
+        "rama",
+        "conagua",
+        "sedema",
+        "paot"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/h07-environmental.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A02",
+      "name": "Investment Simulation",
+      "level": 1,
+      "category": "comprador",
+      "tier": 2,
+      "dependencies": [
+        "A01"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a02-investment-simulation",
+      "confidence_sources": [
+        "macro_series",
+        "market_prices_secondary"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/a02-investment-simulation.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A05",
+      "name": "TCO 10y",
+      "level": 1,
+      "category": "comprador",
+      "tier": 2,
+      "dependencies": [
+        "A01",
+        "F07"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a05-tco-10y",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/a05-tco.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A06",
+      "name": "Neighborhood",
+      "level": 1,
+      "category": "comprador",
+      "tier": 1,
+      "dependencies": [
+        "F03",
+        "N01",
+        "F08"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a06-neighborhood",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/a06-neighborhood.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A12",
+      "name": "Price Fairness",
+      "level": 1,
+      "category": "proyecto",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [
+        "price_changed"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a12-price-fairness",
+      "confidence_sources": [
+        "unidades",
+        "market_prices_secondary"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/a12-price-fairness.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B01",
+      "name": "Demand Heatmap",
+      "level": 1,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "search_behavior"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b01-demand-heatmap",
+      "confidence_sources": [
+        "search_logs",
+        "wishlist"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/b01-demand-heatmap.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B02",
+      "name": "Margin Pressure",
+      "level": 1,
+      "category": "dev",
+      "tier": 2,
+      "dependencies": [
+        "B12"
+      ],
+      "triggers_cascade": [
+        "macro_updated",
+        "price_changed"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b02-margin-pressure",
+      "confidence_sources": [
+        "inegi_inpp"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/b02-margin-pressure.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B04",
+      "name": "Product-Market Fit",
+      "level": 1,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "feedback_registered",
+        "search_behavior"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b04-product-market-fit",
+      "confidence_sources": [
+        "feedback",
+        "views"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/b04-pmf.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B07",
+      "name": "Competitive Intel",
+      "level": 1,
+      "category": "dev",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b07-competitive-intel",
+      "confidence_sources": [
+        "project_competitors"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/b07-competitive-intel.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B08",
+      "name": "Absorption Forecast",
+      "level": 1,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "unit_sold"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b08-absorption-forecast",
+      "confidence_sources": [
+        "inventory_snapshots"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/b08-absorption.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D05",
+      "name": "Gentrification (macro)",
+      "level": 1,
+      "category": "mercado",
+      "tier": 3,
+      "dependencies": [
+        "N01",
+        "N03"
+      ],
+      "triggers_cascade": [
+        "geo_data_updated:denue"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d05-gentrification-macro",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/d05-gentrification.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D06",
+      "name": "Affordability Crisis",
+      "level": 1,
+      "category": "mercado",
+      "tier": 2,
+      "dependencies": [
+        "A01"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d06-affordability-crisis",
+      "confidence_sources": [
+        "macro_series",
+        "inegi"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/d06-affordability-crisis.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H05",
+      "name": "Trust Score",
+      "level": 1,
+      "category": "dev",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [
+        "feedback_registered"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h05-trust-score",
+      "confidence_sources": [
+        "reviews",
+        "operaciones"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/h05-trust.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H14",
+      "name": "Buyer Persona",
+      "level": 1,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "search_behavior"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h14-buyer-persona",
+      "confidence_sources": [
+        "search_logs",
+        "behavior"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n1/h14-buyer-persona.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F09",
+      "name": "Value Score",
+      "level": 2,
+      "category": "zona",
+      "tier": 2,
+      "dependencies": [
+        "F08",
+        "A12"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f09-value-score",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/f09-value.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F10",
+      "name": "Gentrification 2.0",
+      "level": 2,
+      "category": "zona",
+      "tier": 3,
+      "dependencies": [
+        "D05"
+      ],
+      "triggers_cascade": [
+        "geo_data_updated:denue"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f10-gentrification-20",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/f10-gentrification.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B03",
+      "name": "Pricing Autopilot",
+      "level": 2,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [
+        "A12",
+        "B08",
+        "B07"
+      ],
+      "triggers_cascade": [
+        "unit_sold",
+        "price_changed"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b03-pricing-autopilot",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/b03-pricing.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B05",
+      "name": "Market Cycle",
+      "level": 2,
+      "category": "mercado",
+      "tier": 3,
+      "dependencies": [
+        "B08"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b05-market-cycle",
+      "confidence_sources": [
+        "macro_series"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/b05-market-cycle.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B09",
+      "name": "Cash Flow",
+      "level": 2,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [
+        "B12"
+      ],
+      "triggers_cascade": [
+        "unit_sold"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b09-cash-flow",
+      "confidence_sources": [
+        "operaciones",
+        "esquemas_pago"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/b09-cashflow.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B10",
+      "name": "Unit Revenue Opt",
+      "level": 2,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [
+        "A12"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b10-unit-revenue-optimization",
+      "confidence_sources": [
+        "unidades"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/b10-unit-revenue.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B13",
+      "name": "Amenity ROI",
+      "level": 2,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b13-amenity-roi",
+      "confidence_sources": [
+        "unidades",
+        "market_prices_secondary"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/b13-amenity-roi.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B14",
+      "name": "Buyer Persona Proyecto",
+      "level": 2,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [
+        "H14"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b14-buyer-persona-proyecto",
+      "confidence_sources": [
+        "search_logs"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/b14-buyer-persona-proyecto.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B15",
+      "name": "Launch Timing",
+      "level": 2,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [
+        "B05"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b15-launch-timing",
+      "confidence_sources": [
+        "search_trends",
+        "macro_series"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/b15-launch-timing.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "C01",
+      "name": "Lead Score",
+      "level": 2,
+      "category": "dev",
+      "tier": 4,
+      "dependencies": [],
+      "triggers_cascade": [
+        "feedback_registered",
+        "search_behavior"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#c01-lead-score",
+      "confidence_sources": [
+        "feedback",
+        "behavior"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/c01-lead-score.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "C03",
+      "name": "Matching Engine",
+      "level": 2,
+      "category": "comprador",
+      "tier": 4,
+      "dependencies": [],
+      "triggers_cascade": [
+        "search_behavior"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#c03-matching-engine",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/c03-matching.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D03",
+      "name": "Supply Pipeline",
+      "level": 2,
+      "category": "mercado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d03-supply-pipeline",
+      "confidence_sources": [
+        "projects",
+        "seduvi"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/d03-supply-pipeline.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H12",
+      "name": "Zona Oportunidad",
+      "level": 2,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [
+        "N03",
+        "F09",
+        "N11"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h12-zona-oportunidad",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/h12-zona-oportunidad.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H16",
+      "name": "Neighborhood Evolution",
+      "level": 2,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [
+        "N01",
+        "F10"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h16-neighborhood-evolution",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n2/h16-neighborhood-evolution.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A07",
+      "name": "Timing Optimizer",
+      "level": 3,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [
+        "B05",
+        "A02"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a07-timing-optimizer",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/a07-timing.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A08",
+      "name": "Comparador Multi-D",
+      "level": 3,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [
+        "F08",
+        "H05",
+        "A12"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a08-comparador-multi-dimensional",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/a08-comparador.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A09",
+      "name": "Risk Score Comprador",
+      "level": 3,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [
+        "H03",
+        "N04",
+        "H10",
+        "F12",
+        "N09"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a09-risk-score-comprador",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/a09-risk-comprador.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A10",
+      "name": "Lifestyle Match",
+      "level": 3,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [
+        "F03",
+        "N01",
+        "N08",
+        "N09",
+        "H01"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a10-lifestyle-match",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/a10-lifestyle.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "A11",
+      "name": "Patrimonio 20y",
+      "level": 3,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [
+        "A02",
+        "N11",
+        "A05"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a11-patrimonio-20y",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/a11-patrimonio.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B06",
+      "name": "Project Genesis",
+      "level": 3,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b06-project-genesis",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/b06-project-genesis.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "B11",
+      "name": "Channel Performance",
+      "level": 3,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b11-channel-performance",
+      "confidence_sources": [
+        "operaciones"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/b11-channel.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "C04",
+      "name": "Objection Killer (AI)",
+      "level": 3,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "feedback_registered"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#c04-objection-killer",
+      "confidence_sources": [
+        "interaction_feedback"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/c04-objection-killer.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "C06",
+      "name": "Commission Forecast",
+      "level": 3,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#c06-commission-forecast",
+      "confidence_sources": [
+        "pipeline",
+        "operaciones"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/c06-commission.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D04",
+      "name": "Cross Correlation",
+      "level": 3,
+      "category": "mercado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d04-cross-correlation",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/d04-cross-correlation.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H13",
+      "name": "Site Selection AI",
+      "level": 3,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h13-site-selection-ai",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/h13-site-selection.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H15",
+      "name": "Due Diligence",
+      "level": 3,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h15-due-diligence",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n3/h15-due-diligence.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "E01",
+      "name": "Full Project Score (interno)",
+      "level": 4,
+      "category": "proyecto",
+      "tier": 3,
+      "dependencies": [
+        "B08",
+        "B03",
+        "B09",
+        "A12",
+        "B07",
+        "B04"
+      ],
+      "triggers_cascade": [
+        "unit_sold",
+        "price_changed"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#e01-full-project-score-interno",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n4/e01-full-project.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "G01",
+      "name": "Full Score 2.0 (público)",
+      "level": 4,
+      "category": "proyecto",
+      "tier": 3,
+      "dependencies": [
+        "E01"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#g01-full-score-20-publico",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n4/g01-full-score.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "E02",
+      "name": "Portfolio Optimizer",
+      "level": 4,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [
+        "E01"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#e02-portfolio-optimizer",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n4/e02-portfolio.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "E03",
+      "name": "Predictive Close",
+      "level": 4,
+      "category": "dev",
+      "tier": 4,
+      "dependencies": [],
+      "triggers_cascade": [
+        "feedback_registered"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#e03-predictive-close",
+      "confidence_sources": [
+        "operaciones"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n4/e03-predictive-close.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "E04",
+      "name": "Anomaly Detector",
+      "level": 4,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#e04-anomaly-detector",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n4/e04-anomaly.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D09",
+      "name": "Ecosystem Health",
+      "level": 4,
+      "category": "mercado",
+      "tier": 2,
+      "dependencies": [
+        "N01",
+        "N04",
+        "N07",
+        "F08"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d09-ecosystem-health",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n4/d09-ecosystem-health.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D02",
+      "name": "Zona Ranking",
+      "level": 4,
+      "category": "zona",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "unit_sold"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d02-zona-ranking",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n4/d02-zona-ranking.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "C02",
+      "name": "Argumentario (AI)",
+      "level": 5,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#asesor-3",
+      "confidence_sources": [
+        "claude",
+        "projects"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/c02-argumentario.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "C05",
+      "name": "Weekly Briefing (AI)",
+      "level": 5,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#asesor-3",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/c05-weekly-briefing.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "C08",
+      "name": "Dossier Inversión (AI)",
+      "level": 5,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#asesor-3",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/c08-dossier.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "E05",
+      "name": "Market Narrative",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#agregados-4",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/e05-market-narrative.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "E06",
+      "name": "Developer Benchmark",
+      "level": 5,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#agregados-4",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/e06-developer-benchmark.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "E07",
+      "name": "Scenario Planning",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#agregados-4",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/e07-scenario.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "E08",
+      "name": "Auto Report",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#agregados-4",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/e08-auto-report.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "G02",
+      "name": "Narrative 2.0",
+      "level": 5,
+      "category": "proyecto",
+      "tier": 3,
+      "dependencies": [
+        "G01"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#full-score-4",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/g02-narrative.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "G03",
+      "name": "Due Diligence Report",
+      "level": 5,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [
+        "H15"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#full-score-4",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/g03-dd-report.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "G04",
+      "name": "Zone Comparison",
+      "level": 5,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#full-score-4",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/g04-zone-comparison.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "G05",
+      "name": "Impact Predictor",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#full-score-4",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/g05-impact-predictor.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D01",
+      "name": "Market Pulse",
+      "level": 5,
+      "category": "mercado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#mercado-3",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/d01-market-pulse.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D08",
+      "name": "Foreign Investment",
+      "level": 5,
+      "category": "mercado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#mercado-3",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/d08-foreign-investment.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D10",
+      "name": "API Gateway Score",
+      "level": 5,
+      "category": "producto",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#mercado-3",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/d10-api-gateway.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F11",
+      "name": "Supply Pipeline Zone",
+      "level": 5,
+      "category": "zona",
+      "tier": 3,
+      "dependencies": [
+        "D03"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#zona-5",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/f11-supply-pipeline-zone.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F13",
+      "name": "Commute Isócronas",
+      "level": 5,
+      "category": "comprador",
+      "tier": 2,
+      "dependencies": [
+        "H09"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#zona-5",
+      "confidence_sources": [
+        "mapbox",
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/f13-commute-isochrones.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F14",
+      "name": "Neighborhood Change",
+      "level": 5,
+      "category": "comprador",
+      "tier": 3,
+      "dependencies": [
+        "H16"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#zona-5",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/f14-neighborhood-change.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F16",
+      "name": "Hipotecas Comparador",
+      "level": 5,
+      "category": "comprador",
+      "tier": 2,
+      "dependencies": [
+        "H04",
+        "H11"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#zona-5",
+      "confidence_sources": [
+        "claude",
+        "macro_series"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/f16-hipotecas-comparador.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F17",
+      "name": "Site Selection",
+      "level": 5,
+      "category": "dev",
+      "tier": 3,
+      "dependencies": [
+        "H13"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#zona-5",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/f17-site-selection.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "I01",
+      "name": "DMX Estimate (AVM MX)",
+      "level": 5,
+      "category": "producto",
+      "tier": 4,
+      "dependencies": [],
+      "triggers_cascade": [
+        "price_changed",
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#productos-i01-i06-6",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "shared/lib/intelligence-engine/avm/model-h1.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "I02",
+      "name": "Market Intelligence Report",
+      "level": 5,
+      "category": "producto",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#productos-i01-i06-6",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/i02-mkt-intelligence.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "I03",
+      "name": "Feasibility Report",
+      "level": 5,
+      "category": "producto",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#productos-i01-i06-6",
+      "confidence_sources": [
+        "claude"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/i03-feasibility.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "I04",
+      "name": "Índices Licenciables",
+      "level": 5,
+      "category": "producto",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#productos-i01-i06-6",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/i04-indices-licenciables.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "I05",
+      "name": "Insurance Risk API",
+      "level": 5,
+      "category": "producto",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#productos-i01-i06-6",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/i05-insurance-risk.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "I06",
+      "name": "Valuador Automático",
+      "level": 5,
+      "category": "producto",
+      "tier": 4,
+      "dependencies": [
+        "I01"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#productos-i01-i06-6",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/n5/i06-valuador-automatico.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "DMX-IPV",
+      "name": "Índice Precio-Valor",
+      "level": 5,
+      "category": "agregado",
+      "tier": 2,
+      "dependencies": [
+        "F08",
+        "F09",
+        "N11",
+        "A12",
+        "N01"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-ipv-indice-precio-valor",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-ipv.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "DMX-IAB",
+      "name": "Índice Absorción Benchmark",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [
+        "B08"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-iab-indice-absorcion-benchmark",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-iab.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "DMX-IDS",
+      "name": "Índice Desarrollo Social",
+      "level": 5,
+      "category": "agregado",
+      "tier": 1,
+      "dependencies": [
+        "F08",
+        "H01",
+        "H02",
+        "N01",
+        "N02",
+        "F01",
+        "F02"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-ids-indice-desarrollo-social-integrado",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-ids.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "DMX-IRE",
+      "name": "Índice Riesgo Estructural",
+      "level": 5,
+      "category": "agregado",
+      "tier": 1,
+      "dependencies": [
+        "H03",
+        "N07",
+        "F01",
+        "F06",
+        "N05"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-ire-indice-riesgo-estructural",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-ire.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "DMX-ICO",
+      "name": "Índice Costo Oportunidad",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-ico-indice-costo-oportunidad",
+      "confidence_sources": [
+        "macro_series"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-ico.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "DMX-MOM",
+      "name": "Momentum Index (monthly)",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [
+        "N11"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-mom-momentum-index-nuevo-v4",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-mom.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "DMX-LIV",
+      "name": "Livability Index",
+      "level": 5,
+      "category": "agregado",
+      "tier": 1,
+      "dependencies": [
+        "F08",
+        "N08",
+        "N01",
+        "N10",
+        "N07",
+        "H01",
+        "H02",
+        "N02",
+        "N04"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-liv-livability-index-nuevo-v4",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-liv.ts",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "F15",
+      "name": "Cultura & Ocio (STUB H2)",
+      "level": 1,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#stubs-h2-futuros",
+      "confidence_sources": [
+        "stub"
+      ],
+      "calculator_path": "STUB — activar FASE 29 con cultura_ocio ingestor",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "H17",
+      "name": "Aire Interior & Ventilación (STUB H2)",
+      "level": 1,
+      "category": "zona",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#stubs-h2-futuros",
+      "confidence_sources": [
+        "stub"
+      ],
+      "calculator_path": "STUB — activar FASE 29 con BMS/IoT ingestor",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "D11",
+      "name": "ESG Disclosure Score (STUB H3)",
+      "level": 2,
+      "category": "mercado",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#stubs-h3-futuros",
+      "confidence_sources": [
+        "stub"
+      ],
+      "calculator_path": "STUB — activar FASE 31 con ESG ingestor",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "I07",
+      "name": "Portfolio Analytics API (STUB H3)",
+      "level": 5,
+      "category": "producto",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#stubs-h3-futuros",
+      "confidence_sources": [
+        "stub"
+      ],
+      "calculator_path": "STUB — activar FASE 33 con portfolio ingestor",
+      "country_codes": [
+        "MX"
+      ]
+    },
+    {
+      "score_id": "I08",
+      "name": "Compliance Score CNBV (STUB H3)",
+      "level": 5,
+      "category": "producto",
+      "tier": 3,
+      "dependencies": [],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#stubs-h3-futuros",
+      "confidence_sources": [
+        "stub"
+      ],
+      "calculator_path": "STUB — activar FASE 34 con CNBV compliance",
+      "country_codes": [
+        "MX"
+      ]
+    }
+  ]
+}

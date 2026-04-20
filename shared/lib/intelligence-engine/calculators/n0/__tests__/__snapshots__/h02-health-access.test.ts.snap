@@ -1,0 +1,86 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`H02 Health Access calculator > 16 zonas CDMX — snapshot + confidence matches DGIS cascade 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.h02.buena",
+    "value": 67,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "label": "ie.score.h02.limitada",
+    "value": 17,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.h02.buena",
+    "value": 71,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "label": "ie.score.h02.limitada",
+    "value": 25,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "label": "ie.score.h02.excelente",
+    "value": 92,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h02.moderada",
+    "value": 58,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "label": "ie.score.h02.limitada",
+    "value": 20,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.h02.buena",
+    "value": 70,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "medium",
+    "label": "ie.score.h02.limitada",
+    "value": 10,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.h02.excelente",
+    "value": 96,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.h02.excelente",
+    "value": 94,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "label": "ie.score.h02.buena",
+    "value": 73,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.h02.buena",
+    "value": 75,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "label": "ie.score.h02.buena",
+    "value": 64,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "label": "ie.score.h02.limitada",
+    "value": 32,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h02.limitada",
+    "value": 28,
+  },
+}
+`;

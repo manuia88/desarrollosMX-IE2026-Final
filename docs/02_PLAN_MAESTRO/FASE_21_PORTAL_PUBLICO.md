@@ -580,5 +580,16 @@ Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR
 FASE 22 — Marketing + Comms (Notifs multi-canal + WA Business + Webhooks consumers + Auto-gen piezas + Academia)
 
 ---
+
+## Laterals pipeline (proposed durante ejecución previa)
+
+Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
+
+Aplican en esta fase:
+- **L15 Score Layers Toggle** (Strava Heatmaps pattern) — usuario activa/desactiva visualización de scores específicos como capas overlay sobre /explorar. Bloque sugerido: integrar en `/explorar` con panel de toggle layers (safety, walkability, water, momentum, etc.) sobre Mapbox heatmaps.
+
+Al ejecutar FASE 21, revisar status en pipeline maestro y confirmar incorporación al scope.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
 **Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

@@ -62,6 +62,14 @@ Server-side job que recalcula `inferred_preferences jsonb` del usuario a partir 
 - `neighborhood_stickiness` (% de tiempo en una zona vs exploración)
 - `session_time_of_day`
 - `property_story_sections_read`
+- `score_reactions` (👍🔥😱❤️ por dimensión IE — ver L18 lateral, founder approved 2026-04-20)
+  - 👍 = neutral_positive (peso bajo, signal "OK con esta dimensión")
+  - 🔥 = strong_positive (peso alto, signal "esta dimensión me importa mucho")
+  - 😱 = strong_negative (peso alto, signal "deal-breaker en esta dimensión")
+  - ❤️ = emotional_match (peso alto en dimensión emocional específicamente)
+  - Cada reacción se mapea a deltas de `confidence` por dimensión 6D (emotional/técnico/urbano/financiero/espacial/inversión)
+  - Frictionless data point: usuario reacciona en 1 click vs 30s contestando micro-question
+  - Source: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` §L18
 
 El engine recalcula cada N eventos o **daily** (cron). Output:
 

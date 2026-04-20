@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N03 Gentrification Velocity calculator > 16 zonas CDMX — snapshot con 2 snapshots cada una 1`] = `
+{
+  "Clavería": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 51,
+    "velocity": 0.589,
+  },
+  "Contreras Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 51,
+    "velocity": 0.41,
+  },
+  "Coyoacán Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 53,
+    "velocity": 1.648,
+  },
+  "Cuajimalpa Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 50,
+    "velocity": 0.126,
+  },
+  "Del Valle": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 51,
+    "velocity": 0.549,
+  },
+  "Iztacalco Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 50,
+    "velocity": 0.2,
+  },
+  "Iztapalapa Sur": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 50,
+    "velocity": 0.091,
+  },
+  "Lindavista": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 51,
+    "velocity": 0.659,
+  },
+  "Milpa Alta Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 51,
+    "velocity": 0.299,
+  },
+  "Polanco": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 49,
+    "velocity": -0.304,
+  },
+  "Roma Norte": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 62,
+    "velocity": 6.137,
+  },
+  "San Ángel": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 59,
+    "velocity": 4.539,
+  },
+  "Tepito": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 50,
+    "velocity": 0.056,
+  },
+  "Tlalpan Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 52,
+    "velocity": 1.03,
+  },
+  "Tláhuac Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 50,
+    "velocity": 0.118,
+  },
+  "Xochimilco Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "value": 51,
+    "velocity": 0.286,
+  },
+}
+`;

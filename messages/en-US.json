@@ -156,5 +156,453 @@
   },
   "Currency": {
     "convertedFrom": "≈ {amount}"
+  },
+  "ie": {
+    "score": {
+      "f01": {
+        "muy_seguro": "Very safe",
+        "seguro": "Safe",
+        "moderado": "Moderate safety",
+        "riesgoso": "High risk",
+        "insufficient": "Insufficient FGJ data"
+      },
+      "f02": {
+        "excelente": "Excellent transit",
+        "bueno": "Good transit",
+        "moderado": "Moderate transit",
+        "limitado": "Limited transit",
+        "insufficient": "Insufficient GTFS data"
+      },
+      "f03": {
+        "diversa_robusta": "Diverse and robust",
+        "diversa": "Diverse",
+        "moderada": "Moderate",
+        "limitada": "Limited",
+        "insufficient": "Insufficient DENUE data"
+      },
+      "f05": {
+        "excelente": "Excellent water service",
+        "bueno": "Good water service",
+        "precario": "Precarious water service",
+        "crisis": "Water crisis",
+        "insufficient": "Insufficient SACMEX data"
+      },
+      "f04": {
+        "pending_h2": "Available in PHASE 29 (RAMA data pending)"
+      },
+      "f06": {
+        "pending_h2": "Available in PHASE 29 (SEDUVI data pending)"
+      },
+      "f07": {
+        "pending_h2": "Available in PHASE 29 (Catastro data pending)"
+      },
+      "h01": {
+        "excelente": "Excellent education",
+        "buena": "Good education",
+        "moderada": "Moderate education",
+        "limitada": "Limited education",
+        "insufficient": "Insufficient SIGED data"
+      },
+      "h02": {
+        "excelente": "Excellent health access",
+        "buena": "Good health access",
+        "moderada": "Moderate health access",
+        "limitada": "Limited health access",
+        "insufficient": "Insufficient DGIS data"
+      },
+      "h03": {
+        "bajo": "Low seismic risk",
+        "medio": "Medium seismic risk",
+        "alto": "High seismic risk",
+        "muy_alto": "Very high seismic risk",
+        "insufficient": "Insufficient Atlas data"
+      },
+      "b12": {
+        "normal": "Normal cost index",
+        "warning": "Rising cost pressure",
+        "critical": "Critical cost pressure",
+        "insufficient": "Insufficient INPP data"
+      },
+      "h04": {
+        "saludable": "Healthy credit demand",
+        "moderada": "Moderate credit demand",
+        "debil": "Weak credit demand",
+        "estancada": "Stagnant credit market",
+        "insufficient": "Insufficient CNBV data"
+      },
+      "h08": {
+        "patrimonial": "Heritage zone",
+        "con_heritage": "Has heritage value",
+        "escaso": "Limited heritage",
+        "sin_heritage": "No notable heritage",
+        "insufficient": "Insufficient INAH data"
+      },
+      "h09": {
+        "excelente": "Excellent commute",
+        "bueno": "Good commute",
+        "moderado": "Moderate commute",
+        "extenso": "Long commute",
+        "insufficient": "Insufficient route data"
+      },
+      "h10": {
+        "sin_crisis": "No water crisis",
+        "estres_moderado": "Moderate water stress",
+        "crisis_activa": "Active water crisis",
+        "crisis_severa": "Severe water crisis",
+        "insufficient": "Insufficient SACMEX/CONAGUA data"
+      },
+      "h11": {
+        "capacidad_alta": "High Infonavit credit capacity",
+        "capacidad_media": "Medium Infonavit credit capacity",
+        "capacidad_baja": "Low Infonavit credit capacity",
+        "capacidad_minima": "Minimal Infonavit credit capacity",
+        "insufficient": "Insufficient Infonavit data"
+      },
+      "a01": {
+        "accesible": "Affordable",
+        "medio_esfuerzo": "Medium effort",
+        "tensionada": "Strained",
+        "inaccesible": "Unaffordable",
+        "insufficient": "Insufficient data"
+      },
+      "a03": {
+        "alta_migracion": "High inbound migration",
+        "migracion_moderada": "Moderate migration",
+        "flujo_residual": "Residual flow",
+        "sin_migracion": "No migration",
+        "insufficient": "Insufficient data"
+      },
+      "a04": {
+        "arbitraje_alto": "High arbitrage",
+        "arbitraje_moderado": "Moderate arbitrage",
+        "arbitraje_bajo": "Low arbitrage",
+        "sin_arbitraje": "No arbitrage",
+        "insufficient": "Insufficient data"
+      },
+      "d07": {
+        "str_favorece": "STR favors",
+        "str_moderado": "STR slight advantage",
+        "paridad": "STR/LTR parity",
+        "ltr_favorece": "LTR favors",
+        "insufficient": "Insufficient STR/LTR data"
+      },
+      "h06": {
+        "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
+      },
+      "n01": {
+        "hiperdiverso": "Hyper-diverse ecosystem",
+        "diverso": "Diverse ecosystem",
+        "moderado": "Moderate ecosystem",
+        "homogeneo": "Homogeneous ecosystem",
+        "insufficient": "Insufficient DENUE data",
+        "recommendations": {
+          "low": {
+            "0": "Zone with limited ecosystem — few walkable amenities",
+            "1": "Consider neighboring zones with greater commercial diversity"
+          },
+          "medium": {
+            "0": "Moderate commercial diversity — covers the basics",
+            "1": "Check if present categories match your lifestyle"
+          },
+          "high": {
+            "0": "Robust ecosystem — high probability of finding everything on foot",
+            "1": "Keep cost expectations aligned with this zone's quality"
+          },
+          "insufficient_data": {
+            "0": "Insufficient DENUE data — assessment available after next update"
+          }
+        }
+      },
+      "n02": {
+        "hub_laboral": "Accessible job hub",
+        "acceso_bueno": "Good employment access",
+        "acceso_moderado": "Moderate employment access",
+        "aislada": "Employment-isolated zone",
+        "insufficient": "Insufficient DENUE/GTFS data",
+        "recommendations": {
+          "low": {
+            "0": "Employment-isolated zone — evaluate commute time/cost",
+            "1": "Consider zones with Metro or Metrobús within 1 km"
+          },
+          "medium": {
+            "0": "Acceptable employment access — check specific routes to your workplace",
+            "1": "Combine public transport with short walking legs"
+          },
+          "high": {
+            "0": "Job hub — wide employment offer reachable in 45 minutes",
+            "1": "Keep cost expectations aligned with a high-access zone"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — refresh after next DENUE/GTFS ingest"
+          }
+        }
+      },
+      "n03": {
+        "gentrificacion_rapida": "Rapid gentrification",
+        "gentrificacion_moderada": "Moderate gentrification",
+        "cambio_leve": "Mild change",
+        "estable": "Stable zone",
+        "insufficient": "Score available after 2 DENUE snapshots (≥3 months apart)",
+        "recommendations": {
+          "low": {
+            "0": "Stable zone — low displacement risk from price pressure",
+            "1": "Appreciation expectation aligned with inflation"
+          },
+          "medium": {
+            "0": "Mild change — monitor prices and new openings every 6 months",
+            "1": "Zone with improvement potential without extreme inflation pressure"
+          },
+          "high": {
+            "0": "Rapid gentrification — evaluate buying timing before the price jump",
+            "1": "Check cultural diversity to avoid homogenization risk"
+          },
+          "insufficient_data": {
+            "0": "Score available after the next DENUE snapshot (≥3 months)"
+          }
+        }
+      },
+      "n04": {
+        "mejorando_fuerte": "Strongly improving safety",
+        "mejorando": "Improving safety",
+        "estable": "Stable safety",
+        "empeorando": "Worsening safety",
+        "insufficient": "Insufficient FGJ trajectory data",
+        "recommendations": {
+          "low": {
+            "0": "Worsening trend — evaluate safety before buying",
+            "1": "Review FGJ figures by category (violent vs property crimes)"
+          },
+          "medium": {
+            "0": "Stable trajectory — no significant 12-month changes",
+            "1": "Monitor quarterly FGJ reports for the zone"
+          },
+          "high": {
+            "0": "Improving trajectory — sustained crime reduction",
+            "1": "Attractive zone for families and long-term investment"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next FGJ update"
+          }
+        }
+      },
+      "n05": {
+        "alta_resiliencia": "High resilience",
+        "resiliencia_balanceada": "Balanced resilience",
+        "resiliencia_moderada": "Moderate resilience",
+        "baja_resiliencia": "Low resilience",
+        "insufficient": "Insufficient Atlas/SACMEX/GTFS data",
+        "recommendations": {
+          "low": {
+            "0": "Zone vulnerable to shocks — review home insurance and contingencies",
+            "1": "Consider zones with better transit redundancy and fewer water cuts"
+          },
+          "medium": {
+            "0": "Balanced resilience — no critical alerts but improvement areas exist",
+            "1": "Acceptable location against seismic events or sporadic cuts"
+          },
+          "high": {
+            "0": "High resilience — zone prepared to absorb shocks",
+            "1": "Keep cost expectations aligned with robust infrastructure"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next ingest"
+          }
+        }
+      },
+      "n06": {
+        "premium_prime": "Prime zone for families",
+        "premium_alto": "High school premium",
+        "premium_moderado": "Moderate school premium",
+        "sin_premium": "No school premium detected",
+        "insufficient": "Insufficient SIGED/market data",
+        "recommendations": {
+          "low": {
+            "0": "No premium detected — price opportunity without educational compromise",
+            "1": "Evaluate individual schools before ruling out the zone"
+          },
+          "medium": {
+            "0": "Moderate premium — market aligned with average educational quality",
+            "1": "Compare price/m² with adjacent zones of similar quality"
+          },
+          "high": {
+            "0": "Prime zone for families — expect to pay premium for school proximity",
+            "1": "Check school availability before buying — high demand"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next SIGED/market ingest"
+          }
+        }
+      },
+      "n07": {
+        "seguridad_alta": "High water security",
+        "seguridad_aceptable": "Acceptable water security",
+        "tension_moderada": "Moderate water stress",
+        "crisis_cronica": "Chronic water crisis",
+        "insufficient": "Insufficient SACMEX/CONAGUA data",
+        "recommendations": {
+          "low": {
+            "0": "Chronic water crisis — plan for cistern + additional tank",
+            "1": "Factor in private water-truck costs during dry season"
+          },
+          "medium": {
+            "0": "Moderate water stress — check rationing schedule",
+            "1": "Install filters and pressure backup"
+          },
+          "high": {
+            "0": "Zone with water security — reliable continuous service",
+            "1": "Keep cost expectations aligned with robust water infrastructure"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next SACMEX/CONAGUA ingest"
+          }
+        }
+      },
+      "n08": {
+        "muy_walkable": "Very walkable",
+        "walkable": "Walkable",
+        "mixto": "Mixed walkability",
+        "requiere_auto": "Car-dependent zone",
+        "insufficient": "Insufficient DENUE/GTFS data",
+        "recommendations": {
+          "low": {
+            "0": "Car-dependent zone — factor in fuel/parking costs",
+            "1": "Consider zones with Metro or Metrobús within 500 m if you rely on public transport"
+          },
+          "medium": {
+            "0": "Mixed walkability — combine walking + transit for daily errands",
+            "1": "Check specific amenities near the address"
+          },
+          "high": {
+            "0": "Walkable zone — handles most errands on foot",
+            "1": "Keep cost expectations aligned with prime walkable zone"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next DENUE/GTFS ingest"
+          }
+        }
+      },
+      "n09": {
+        "hub_nocturno": "Nightlife hub",
+        "actividad_alta": "High nightlife activity",
+        "actividad_balanceada": "Balanced nightlife",
+        "zona_dormitorio": "Bedroom community",
+        "insufficient": "Insufficient DENUE/FGJ data",
+        "recommendations": {
+          "low": {
+            "0": "Bedroom community — limited nightlife, plan to travel to other zones",
+            "1": "Ideal for those who prioritize quiet nights"
+          },
+          "medium": {
+            "0": "Balanced nightlife — restaurants and light entertainment available",
+            "1": "Check specific noise levels and hours near the address"
+          },
+          "high": {
+            "0": "Nightlife hub — wide gastronomic and cultural offering",
+            "1": "Consider ambient noise — check acoustic reviews before buying"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next DENUE/FGJ ingest"
+          }
+        }
+      },
+      "n10": {
+        "ideal_senior": "Ideal zone for seniors",
+        "apta_senior": "Senior-friendly",
+        "aceptable": "Acceptable for seniors",
+        "poco_apta": "Not senior-friendly",
+        "insufficient": "Insufficient DGIS/SIGED/GTFS data",
+        "recommendations": {
+          "low": {
+            "0": "Not senior-friendly — hospital far and demanding transit",
+            "1": "Consider zones with 2nd-level hospital <1.5 km and metrobús nearby"
+          },
+          "medium": {
+            "0": "Acceptable zone — check specific accessibility of the address",
+            "1": "Prioritize ground floors or buildings with elevators"
+          },
+          "high": {
+            "0": "Ideal for seniors — health, diversity and low-effort transit",
+            "1": "High demand from this profile — expect to pay a premium"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next ingest"
+          }
+        }
+      },
+      "n11": {
+        "aceleracion": "Momentum accelerating",
+        "estable": "Momentum stable",
+        "desaceleracion": "Momentum decelerating",
+        "insufficient": "Momentum available once ≥50 projects + 6 months of data are met",
+        "recommendations": {
+          "low": {
+            "0": "Zone decelerating — less favorable buying timing",
+            "1": "Compare with neighboring zones showing accelerating momentum"
+          },
+          "medium": {
+            "0": "Stable zone — no immediate opportunity signals",
+            "1": "Monitor F08, A12 and N01 indicators in the next 3-6 months"
+          },
+          "high": {
+            "0": "Zone accelerating — favorable momentum to buy before the next hike",
+            "1": "Expected 12-month appreciation above CDMX average"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — N11 requires ≥50 projects and 6 months of history"
+          }
+        }
+      }
+    },
+    "confidence": {
+      "high": "High confidence",
+      "medium": "Limited data",
+      "low": "Calculated with few data points",
+      "insufficient": "Score coming soon"
+    },
+    "confidence_meta": {
+      "high_desc": "Based on sufficient volume and recent data",
+      "medium_desc": "Based on limited data from recent months",
+      "low_desc": "Calculated with few data points available",
+      "insufficient_data_desc": "Not enough data yet to compute this score",
+      "cta_explain": "Why"
+    },
+    "placeholder": {
+      "title": "Score coming soon",
+      "generic_requirement": "Waiting for data maturity in the area"
+    },
+    "transparency": {
+      "methodology": "Methodology",
+      "reasoning": "Reasoning",
+      "provenance": "Sources",
+      "comparable_zones": "Comparable zones",
+      "ranking": "Ranking",
+      "time_series": "Trend",
+      "validity": "Validity",
+      "see_full": "View full methodology",
+      "computed_at": "Computed on",
+      "valid_until": "Valid until",
+      "rank_fmt": "Rank {rank} of {total}",
+      "delta_3m": "Δ 3m",
+      "delta_6m": "Δ 6m",
+      "delta_12m": "Δ 12m",
+      "formula": "Formula",
+      "sources": "Sources",
+      "weights": "Weights",
+      "references": "References",
+      "cta_open": "View details",
+      "close": "Close"
+    },
+    "recommendations": {
+      "heading": "What to do with this info",
+      "empty": "No recommendations available",
+      "cta": "Recommendations"
+    },
+    "card": {
+      "empty_title": "No scores available",
+      "empty_desc": "Not enough data to show scores for this area",
+      "error_title": "Could not load scores",
+      "error_desc": "Try again in a few seconds",
+      "retry": "Retry"
+    }
   }
 }

@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`H03 Seismic Risk calculator > 16 zonas CDMX — snapshot + confidence high (Atlas shapefile) 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.h03.medio",
+    "value": 70,
+    "zona": "II",
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "label": "ie.score.h03.bajo",
+    "value": 100,
+    "zona": "I",
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.h03.medio",
+    "value": 70,
+    "zona": "II",
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "label": "ie.score.h03.alto",
+    "value": 40,
+    "zona": "IIIa",
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "label": "ie.score.h03.medio",
+    "value": 70,
+    "zona": "II",
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h03.muy_alto",
+    "value": 0,
+    "zona": "IIIc",
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "label": "ie.score.h03.muy_alto",
+    "value": 0,
+    "zona": "IIIc",
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.h03.alto",
+    "value": 25,
+    "zona": "IIIb",
+  },
+  "Milpa Alta Centro": {
+    "confidence": "high",
+    "label": "ie.score.h03.bajo",
+    "value": 100,
+    "zona": "I",
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.h03.medio",
+    "value": 70,
+    "zona": "II",
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.h03.medio",
+    "value": 70,
+    "zona": "II",
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "label": "ie.score.h03.medio",
+    "value": 70,
+    "zona": "II",
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.h03.alto",
+    "value": 40,
+    "zona": "IIIa",
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "label": "ie.score.h03.medio",
+    "value": 70,
+    "zona": "II",
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "label": "ie.score.h03.muy_alto",
+    "value": 0,
+    "zona": "IIIc",
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h03.muy_alto",
+    "value": 0,
+    "zona": "IIIc",
+  },
+}
+`;

@@ -1,0 +1,86 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N02 Employment Accessibility calculator > 16 zonas CDMX — snapshot + discriminación 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "empleos": 757,
+    "value": 72,
+  },
+  "Contreras Centro": {
+    "confidence": "insufficient_data",
+    "empleos": 163,
+    "value": 55,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "empleos": 1068,
+    "value": 76,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "insufficient_data",
+    "empleos": 237,
+    "value": 59,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "empleos": 2805,
+    "value": 86,
+  },
+  "Iztacalco Centro": {
+    "confidence": "medium",
+    "empleos": 458,
+    "value": 67,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "medium",
+    "empleos": 299,
+    "value": 62,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "empleos": 681,
+    "value": 71,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "insufficient_data",
+    "empleos": 77,
+    "value": 47,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "empleos": 6924,
+    "value": 96,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "empleos": 6357,
+    "value": 95,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "empleos": 1528,
+    "value": 80,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "empleos": 2619,
+    "value": 85,
+  },
+  "Tlalpan Centro": {
+    "confidence": "medium",
+    "empleos": 364,
+    "value": 64,
+  },
+  "Tláhuac Centro": {
+    "confidence": "medium",
+    "empleos": 279,
+    "value": 61,
+  },
+  "Xochimilco Centro": {
+    "confidence": "medium",
+    "empleos": 294,
+    "value": 62,
+  },
+}
+`;

@@ -1,0 +1,102 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N07 Water Security calculator > 16 zonas CDMX — snapshot 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "dias": 8,
+    "sobreexp": 12,
+    "value": 77,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "dias": 20,
+    "sobreexp": 4,
+    "value": 67,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "dias": 12,
+    "sobreexp": 6,
+    "value": 77,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "dias": 18,
+    "sobreexp": 15,
+    "value": 62,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "dias": 4,
+    "sobreexp": 5,
+    "value": 89,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "dias": 22,
+    "sobreexp": 18,
+    "value": 55,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "dias": 85,
+    "sobreexp": 35,
+    "value": 0,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "dias": 16,
+    "sobreexp": 14,
+    "value": 65,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "high",
+    "dias": 45,
+    "sobreexp": 22,
+    "value": 25,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "dias": 2,
+    "sobreexp": 3,
+    "value": 94,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "dias": 14,
+    "sobreexp": 10,
+    "value": 71,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "dias": 6,
+    "sobreexp": 8,
+    "value": 84,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "dias": 18,
+    "sobreexp": 16,
+    "value": 61,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "dias": 10,
+    "sobreexp": 8,
+    "value": 78,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "dias": 38,
+    "sobreexp": 28,
+    "value": 31,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "dias": 35,
+    "sobreexp": 30,
+    "value": 33,
+  },
+}
+`;
