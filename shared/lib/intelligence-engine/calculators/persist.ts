@@ -87,7 +87,11 @@ function buildRow(
     level: registry.level,
     tier: registry.tier,
     confidence: output.confidence,
-    components: output.components,
+    // D29 — si output trae scenarios, se embeben en components.scenarios para
+    // evitar migration nueva (zone_scores.components ya jsonb).
+    components: output.scenarios
+      ? embedScenariosInComponents(output.components as Record<string, unknown>, output.scenarios)
+      : output.components,
     inputs_used: output.inputs_used,
     citations: output.citations,
     provenance: output.provenance,
@@ -99,6 +103,20 @@ function buildRow(
     // D19 — ml_explanations jsonb (empty {} si no aplica).
     ml_explanations: output.ml_explanations ?? {},
   };
+}
+
+// D29 — helper para componentes: devuelve components con .scenarios embebidos
+// cuando CalculatorOutput.scenarios está set. UI lee components.scenarios para
+// render rangos (portal comprador FASE 20). Mantener scenarios en components
+// evita migration nueva en zone_scores/project_scores (ya jsonb).
+export function embedScenariosInComponents(
+  components: Readonly<Record<string, unknown>>,
+  scenarios?: Readonly<Record<string, unknown>>,
+): Record<string, unknown> {
+  if (!scenarios || Object.keys(scenarios).length === 0) {
+    return { ...components };
+  }
+  return { ...components, scenarios };
 }
 
 // P1 helper — calcular valid_until dado un ValidityWindow + ancla (computed_at).

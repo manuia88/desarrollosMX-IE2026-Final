@@ -49,6 +49,18 @@ export interface CalculatorOutput<TComponents extends object = Record<string, un
   // OPCIONAL D25 FASE 10 — stability 0-1 derivado de score_history rolling 12m.
   // Si el calculator no lo provee, persist.ts lo calcula y escribe directamente.
   readonly stability_index?: number;
+  // OPCIONAL D29 FASE 10 SESIÓN 2/3 — multi-scenario output.
+  // Calculators como A07/A09/A11 devuelven variantes (optimistic/base/pessimistic
+  // o buy_now/wait_3m/6m/12m). UI (portal comprador) renderiza rangos vs punto.
+  readonly scenarios?: Readonly<Record<string, ScenarioOutput>>;
+}
+
+// D29 — resultado per escenario nombrado. value 0-100, rationale opcional
+// string corto para UI, confidence per escenario (puede bajar si menos data).
+export interface ScenarioOutput {
+  readonly value: number;
+  readonly confidence: Confidence;
+  readonly rationale?: string;
 }
 
 // P1 — Validity window por calculator. Expresado en units discretos. persist.ts
