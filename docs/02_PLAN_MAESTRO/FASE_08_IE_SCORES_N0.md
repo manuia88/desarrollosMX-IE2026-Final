@@ -591,6 +591,69 @@ BLOQUE 8.B parte 2/2 (8 commits `2b44cc9..6b8ae54`):
 
 Ver §Criterio de done de la FASE — sin tag `fase-08-complete` hasta cerrar BLOQUE 8.C-8.F.
 
+## Implementación real BLOQUE 8.C — cerrado 2026-04-20
+
+### Commits BLOQUE 8.C (12 commits)
+
+| Commit | Descripción |
+|---|---|
+| `a3c0e93` | Pre-step 0: migration `20260419215000_ie_scores_v3_deltas_ranking.sql` (D2 deltas jsonb + D3 ranking jsonb en zone_scores + project_scores) + persist.ts extension (`computeDeltas`, `computeRanking`) |
+| **`c3bc727`** | **N11 DMX Momentum Index (PRIMER COMMIT per CONTRATO §8 TODO #12 — killer asset DMX-MOM B2B)** |
+| `f1097cf` | N01 Ecosystem Diversity (Shannon-Wiener) |
+| `a947990` | N02 Employment Accessibility |
+| `36fc2c0` | N03 Gentrification Velocity (tier 3 gated) |
+| `c1ea7cd` | N04 Crime Trajectory (tier 3) |
+| `fa1d900` | N05 Infrastructure Resilience |
+| `6c1a61e` | N06 School Premium |
+| `f536810` | N07 Water Security |
+| `a3e81e3` | N08 Walkability MX |
+| `53b4411` | N09 Nightlife Economy |
+| `6eadccc` | N10 Senior Livability |
+
+### Upgrades nuevos aplicados BLOQUE 8.C
+
+- **D1 — Recomendaciones accionables por score**: cada N01-N11 exporta `methodology.recommendations`
+  con 4 buckets (low/medium/high/insufficient_data) × 1-3 i18n keys cada uno. UI `getRecommendationKeys(value, confidence)`
+  resuelve set correcto runtime.
+- **D2 — Score deltas first-class (3m/6m/12m)**: `zone_scores.deltas` + `project_scores.deltas`
+  columnas jsonb. `persist.ts#computeDeltas()` consulta `score_history` con ventana ±15d al
+  T-3m/6m/12m para mismo entity + score_type. Null si no hay data.
+- **D3 — Ranking explícito vs país**: `zone_scores.ranking` + `project_scores.ranking` columnas
+  jsonb. `persist.ts#computeRanking()` cuenta pre-UPSERT rows mismo country+score+period con
+  `value > currentValue`. `{position, total, percentile}`.
+
+### Upgrades consolidados (aplicados TODOS los N01-N11)
+
+U5 version semver · U6 snapshot tests 16 fixtures · U7 PostHog props · U9 fixtures reutilizables
+· U10 methodology const · U12 reasoning_template · U13 comparable_zones · U14 i18n 5 locales
+· P1 valid_until · S1 RLS country · S2 hashed user_id.
+
+### Stubs marcados con 4 señales ADR-018 (BLOQUE 8.C)
+
+- **N11 search_trends**: Google Trends scraper → FASE 27. Placeholder 0 en methodology.weights.
+  search_trends. Calculator retorna score reducido pero no gated por este factor (tier gate
+  otra dimensión).
+- N03 `denue_snapshots`: requiere ≥2 snapshots separados ≥3m. UI placeholder "disponible tras
+  próximo snapshot DENUE".
+
+### Tests acumulados FASE 08
+
+- **BLOQUE 8.A**: ~50 tests (registry, queue, worker, framework)
+- **BLOQUE 8.B**: 168 tests (21 calculators × ~7 tests cada uno + persist + fixtures)
+- **BLOQUE 8.C**: ~66 tests (11 calculators × 6 tests + persist-deltas-ranking × 9)
+- **Total esperado**: ~280+ tests passing
+
+### Cambios vs plan original BLOQUE 8.C
+
+- N03 velocity scaling ajustado de 25 → 200 para que Roma Norte (Δratio 0.37 en 6m, velocity 6.17)
+  alcance umbral ≥60 gentrificación moderada.
+- N06 tier reducido de plan 8.C.6.1 ("Tier 3 requiere ≥50 proyectos") a **Tier 1 H1** per prompt
+  ("no requiere ≥50 proyectos para versión H1; usar market_prices_secondary cuando esté"). H2
+  activará tier 3 con data real.
+- N11 formula: catálogo dice normalización z-score CDMX. Implementación H1 usa mapping lineal
+  por componente centrado en 50 + z-score adicional en components para observabilidad. Tier 3
+  gate real (≥50 proyectos + ≥6m). Fallback search_trends = 0 hasta FASE 27.
+
 ---
 
 ## Próxima fase
