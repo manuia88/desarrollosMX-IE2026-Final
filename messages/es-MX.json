@@ -237,6 +237,13 @@
         "sin_heritage": "Sin heritage notable",
         "insufficient": "Datos INAH insuficientes"
       },
+      "h09": {
+        "excelente": "Commute excelente",
+        "bueno": "Commute bueno",
+        "moderado": "Commute moderado",
+        "extenso": "Commute extenso",
+        "insufficient": "Datos de ruta insuficientes"
+      },
       "h06": {
         "pending_h2": "Disponible en FASE 29 (datos 0311 Locatel pendientes)"
       }
