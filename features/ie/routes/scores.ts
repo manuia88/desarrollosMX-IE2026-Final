@@ -1,6 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import { router } from '@/server/trpc/init';
 import { authenticatedProcedure } from '@/server/trpc/middleware';
+import { tierGate } from '@/shared/lib/intelligence-engine/calculators/tier-gate';
 import { getScoreLineage } from '@/shared/lib/intelligence-engine/cascades/score-lineage';
 import { SCORE_REGISTRY } from '@/shared/lib/intelligence-engine/registry';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
@@ -8,6 +9,7 @@ import {
   ieScoresGetByZoneInput,
   ieScoresGetDependenciesInput,
   ieScoresGetHistoryInput,
+  ieScoresGetTierGateInput,
   ieScoresListInput,
 } from '../schemas/scores';
 
@@ -103,6 +105,23 @@ export const ieScoresRouter = router({
       }
       return lineage;
     }),
+
+  getTierGate: authenticatedProcedure.input(ieScoresGetTierGateInput).query(async ({ input }) => {
+    const entry = SCORE_REGISTRY.find((e) => e.score_id === input.score_id);
+    if (!entry) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: `score_id ${input.score_id} not registered`,
+      });
+    }
+    const supabase = createAdminClient();
+    const gate = await tierGate(entry.tier, input.country_code, supabase);
+    return {
+      score_id: entry.score_id,
+      tier: entry.tier,
+      ...gate,
+    };
+  }),
 
   getHistory: authenticatedProcedure.input(ieScoresGetHistoryInput).query(async ({ input }) => {
     if (input.from > input.to) {

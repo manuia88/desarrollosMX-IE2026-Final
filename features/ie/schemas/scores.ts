@@ -40,3 +40,9 @@ export const ieScoresGetHistoryInput = z.object({
   to: z.string().date(),
 });
 export type IEScoresGetHistoryInput = z.infer<typeof ieScoresGetHistoryInput>;
+
+export const ieScoresGetTierGateInput = z.object({
+  score_id: scoreCodeSchema,
+  country_code: countryCodeSchema.default('MX'),
+});
+export type IEScoresGetTierGateInput = z.infer<typeof ieScoresGetTierGateInput>;
