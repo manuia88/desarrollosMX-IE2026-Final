@@ -258,6 +258,27 @@
         "capacidad_minima": "Capacidad crediticia Infonavit mínima",
         "insufficient": "Datos Infonavit insuficientes"
       },
+      "a01": {
+        "accesible": "Accesible",
+        "medio_esfuerzo": "Esfuerzo medio",
+        "tensionada": "Tensionada",
+        "inaccesible": "Inaccesible",
+        "insufficient": "Datos insuficientes"
+      },
+      "a03": {
+        "alta_migracion": "Alta migración entrante",
+        "migracion_moderada": "Migración moderada",
+        "flujo_residual": "Flujo residual",
+        "sin_migracion": "Sin migración",
+        "insufficient": "Datos insuficientes"
+      },
+      "a04": {
+        "arbitraje_alto": "Arbitraje alto",
+        "arbitraje_moderado": "Arbitraje moderado",
+        "arbitraje_bajo": "Arbitraje bajo",
+        "sin_arbitraje": "Sin arbitraje",
+        "insufficient": "Datos insuficientes"
+      },
       "h06": {
         "pending_h2": "Disponible en FASE 29 (datos 0311 Locatel pendientes)"
       }
