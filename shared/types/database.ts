@@ -11109,6 +11109,33 @@ export type Database = {
         }
         Relationships: []
       }
+      tier_requirements: {
+        Row: {
+          description: string
+          min_closed_ops: number
+          min_months_data: number
+          min_projects: number
+          tier: number
+          updated_at: string
+        }
+        Insert: {
+          description: string
+          min_closed_ops?: number
+          min_months_data?: number
+          min_projects?: number
+          tier: number
+          updated_at?: string
+        }
+        Update: {
+          description?: string
+          min_closed_ops?: number
+          min_months_data?: number
+          min_projects?: number
+          tier?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_scores: {
         Row: {
           citations: Json

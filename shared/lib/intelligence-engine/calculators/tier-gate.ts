@@ -1,9 +1,7 @@
 // Tier gating — determina si un score puede calcularse dada la madurez de datos.
 // Tier 1 siempre activo (día 1 con fuentes externas).
-// Tier 2 ≥10 proyectos en zona. Tier 3 ≥50 proyectos + 6 meses. Tier 4 ≥100 ventas cerradas.
-//
-// Fallback hardcoded hasta que la migration 8.F.1 cree la tabla tier_requirements.
-// TODO migrar a tier_requirements tras 8.F.1.
+// Tier 2-4 leen umbrales desde public.tier_requirements (BLOQUE 8.F.1).
+// Cache in-memory por country con TTL 1h evita query repetida por tick worker.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { ScoreTier } from '../registry';
@@ -16,7 +14,7 @@ export interface TierGateResult {
   readonly threshold?: number;
 }
 
-interface TierFallbackRequirement {
+export interface TierRequirement {
   readonly tier: ScoreTier;
   readonly minProjects: number;
   readonly minClosedOps: number;
@@ -24,7 +22,9 @@ interface TierFallbackRequirement {
   readonly description: string;
 }
 
-const TIER_FALLBACK: Readonly<Record<ScoreTier, TierFallbackRequirement>> = {
+type TierMap = Readonly<Record<ScoreTier, TierRequirement>>;
+
+const TIER_FALLBACK: TierMap = {
   1: {
     tier: 1,
     minProjects: 0,
@@ -55,15 +55,72 @@ const TIER_FALLBACK: Readonly<Record<ScoreTier, TierFallbackRequirement>> = {
   },
 };
 
+interface CacheEntry {
+  map: TierMap;
+  fetchedAt: number;
+}
+
+const CACHE_TTL_MS = 60 * 60 * 1000;
+const cache = new Map<string, CacheEntry>();
+
+export function clearTierRequirementsCache(): void {
+  cache.clear();
+}
+
+type LooseClient = SupabaseClient<Record<string, unknown>>;
+function lax(s: SupabaseClient): LooseClient {
+  return s as unknown as LooseClient;
+}
+
+async function loadTierRequirements(
+  supabase: SupabaseClient,
+  countryCode: string,
+): Promise<TierMap> {
+  const cached = cache.get(countryCode);
+  if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) {
+    return cached.map;
+  }
+
+  try {
+    const { data, error } = await lax(supabase)
+      .from('tier_requirements')
+      .select('tier, min_projects, min_closed_ops, min_months_data, description');
+    if (error || !Array.isArray(data) || data.length === 0) {
+      return TIER_FALLBACK;
+    }
+    const map: Record<number, TierRequirement> = { ...TIER_FALLBACK };
+    for (const row of data as Array<{
+      tier: number;
+      min_projects: number;
+      min_closed_ops: number;
+      min_months_data: number;
+      description: string;
+    }>) {
+      if (row.tier >= 1 && row.tier <= 4) {
+        map[row.tier] = {
+          tier: row.tier as ScoreTier,
+          minProjects: row.min_projects,
+          minClosedOps: row.min_closed_ops,
+          minMonthsData: row.min_months_data,
+          description: row.description,
+        };
+      }
+    }
+    const result = map as TierMap;
+    cache.set(countryCode, { map: result, fetchedAt: Date.now() });
+    return result;
+  } catch {
+    return TIER_FALLBACK;
+  }
+}
+
 export async function tierGate(
   tier: ScoreTier,
   countryCode: string,
-  _supabase: SupabaseClient,
+  supabase: SupabaseClient,
 ): Promise<TierGateResult> {
-  // Tier 1 = siempre pasa. Plan 8.A.2.4.
   if (tier === 1) return { gated: false };
 
-  // MX-only durante H1. Otros countries se añaden en ADR-003.
   if (countryCode !== 'MX') {
     return {
       gated: true,
@@ -72,12 +129,12 @@ export async function tierGate(
     };
   }
 
-  // Fallback hardcoded. TODO migrar a tier_requirements tras 8.F.1.
-  const req = TIER_FALLBACK[tier];
+  const requirements = await loadTierRequirements(supabase, countryCode);
+  const req = requirements[tier];
 
-  // En H1 todavía no existen 50+ proyectos en BD — todo tier >=2 gated
-  // hasta que DMX tenga inventario activo. Cuando 8.F.1 exponga counts
-  // reales, esta rama consulta project_count_by_country() etc.
+  // H1: no hay 50+ proyectos aún en BD. Todo tier >= 2 gated hasta que haya
+  // inventario real. Cuando project counters estén wired (FASE 10+), esta
+  // rama consulta project_count_by_country() y compara vs req.minProjects.
   return {
     gated: true,
     reason: 'tier_insufficient',
