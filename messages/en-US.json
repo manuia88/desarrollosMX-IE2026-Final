@@ -156,5 +156,27 @@
   },
   "Currency": {
     "convertedFrom": "≈ {amount}"
+  },
+  "ie": {
+    "score": {
+      "f04": {
+        "pending_h2": "Available in PHASE 29 (RAMA data pending)"
+      },
+      "f06": {
+        "pending_h2": "Available in PHASE 29 (SEDUVI data pending)"
+      },
+      "f07": {
+        "pending_h2": "Available in PHASE 29 (Catastro data pending)"
+      },
+      "h06": {
+        "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
+      }
+    },
+    "confidence": {
+      "high": "High confidence",
+      "medium": "Limited data",
+      "low": "Calculated with few data points",
+      "insufficient": "Score coming soon"
+    }
   }
 }

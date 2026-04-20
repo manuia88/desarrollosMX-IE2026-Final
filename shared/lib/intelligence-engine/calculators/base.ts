@@ -27,7 +27,7 @@ export interface CalculatorCitation {
 
 export interface CalculatorOutput<TComponents extends object = Record<string, unknown>> {
   readonly score_value: number; // 0-100 canónico
-  readonly score_label: string; // interpretación i18n-friendly
+  readonly score_label: string; // i18n key — ej. 'ie.score.f01.muy_seguro' (U14)
   readonly components: TComponents;
   readonly inputs_used: Readonly<Record<string, unknown>>;
   readonly confidence: Confidence;
@@ -37,6 +37,9 @@ export interface CalculatorOutput<TComponents extends object = Record<string, un
   // REQUIRED U4 — cada calculator declara sus fuentes en formato estándar.
   // Sin provenance, runScore rechaza el output.
   readonly provenance: ProvenanceRecord;
+  // OPCIONAL U12 — vars para resolver reasoning_template del calculator sin
+  // alucinación (Copilot ⌘J FASE 12). Shape libre string|number.
+  readonly template_vars?: Readonly<Record<string, string | number>>;
 }
 
 export interface Calculator<TComponents extends object = Record<string, unknown>> {

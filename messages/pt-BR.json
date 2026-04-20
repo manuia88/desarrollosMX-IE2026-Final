@@ -156,5 +156,27 @@
   },
   "Currency": {
     "convertedFrom": "≈ {amount}"
+  },
+  "ie": {
+    "score": {
+      "f04": {
+        "pending_h2": "Disponível na FASE 29 (dados RAMA pendentes)"
+      },
+      "f06": {
+        "pending_h2": "Disponível na FASE 29 (dados SEDUVI pendentes)"
+      },
+      "f07": {
+        "pending_h2": "Disponível na FASE 29 (dados Catastro pendentes)"
+      },
+      "h06": {
+        "pending_h2": "Disponível na FASE 29 (dados 0311 Locatel pendentes)"
+      }
+    },
+    "confidence": {
+      "high": "Alta confiança",
+      "medium": "Dados limitados",
+      "low": "Calculado com poucos dados",
+      "insufficient": "Score em breve"
+    }
   }
 }
