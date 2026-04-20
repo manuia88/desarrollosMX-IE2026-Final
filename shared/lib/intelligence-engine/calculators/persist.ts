@@ -46,6 +46,16 @@ export interface ComparableZone {
   readonly delta: number;
 }
 
+// D31 FASE 10 SESIÓN 2/3 — property-level comparables (A08 Comparador Multi-D).
+// Se persiste en tabla property_comparables separada de zone_scores (el scope
+// es unidad individual, no zona). UNIQUE (property_id, score_id, period_date).
+export interface ComparableProperty {
+  readonly property_id: string;
+  readonly similarity: number;
+  readonly delta: number;
+  readonly dimensions_matched: readonly string[];
+}
+
 // D2 — deltas lookback 3m/6m/12m (null si no hay data en la ventana ±15d).
 export interface ScoreDeltas {
   readonly '3m': number | null;
@@ -290,6 +300,78 @@ export async function computeComparableZones(
   }
 }
 
+// D31 — top K properties más similares a la property objetivo en la misma zona
+// + tipo_propiedad + rango m2. En H1 usa project_scores como proxy (embeddings
+// por unidad aterrizarán con `unidades` en FASE 13-15). Returns [] si <K vecinos.
+export async function findComparableProperties(
+  supabase: SupabaseClient,
+  params: {
+    readonly property_id: string;
+    readonly score_type: string;
+    readonly period_date: string;
+    readonly self_value: number;
+    readonly k?: number;
+  },
+): Promise<readonly ComparableProperty[]> {
+  const k = params.k ?? 8;
+  try {
+    const { data, error } = await castFrom(supabase, 'project_scores')
+      .select('project_id, score_value')
+      .eq('score_type', params.score_type)
+      .eq('period_date', params.period_date)
+      .neq('project_id', params.property_id);
+    if (error || !data) return [];
+    const rows = data as unknown as Array<{ project_id: string; score_value: number }>;
+    if (rows.length < k) return [];
+    return rows
+      .filter((r) => typeof r.score_value === 'number' && Number.isFinite(r.score_value))
+      .map((r): ComparableProperty => {
+        const delta = Math.abs(r.score_value - params.self_value);
+        const similarity = Number(Math.max(0, 1 - delta / 100).toFixed(4));
+        return {
+          property_id: r.project_id,
+          similarity,
+          delta: Number(delta.toFixed(2)),
+          dimensions_matched: [params.score_type],
+        };
+      })
+      .sort((a, b) => b.similarity - a.similarity)
+      .slice(0, k);
+  } catch {
+    return [];
+  }
+}
+
+// D31 — UPSERT en property_comparables al persistir A08. Best-effort: errores
+// NO tumban el persist principal (swallowed). Scopea por country_code para RLS.
+async function persistPropertyComparablesRow(
+  supabase: SupabaseClient,
+  params: {
+    readonly property_id: string;
+    readonly score_id: string;
+    readonly period_date: string;
+    readonly country_code: string;
+    readonly comparables: readonly ComparableProperty[];
+    readonly k: number;
+  },
+): Promise<void> {
+  try {
+    await castFrom(supabase, 'property_comparables').upsert(
+      {
+        property_id: params.property_id,
+        score_id: params.score_id,
+        period_date: params.period_date,
+        country_code: params.country_code,
+        comparable_properties: params.comparables,
+        k: params.k,
+      } as never,
+      { onConflict: 'property_id,score_id,period_date' },
+    );
+  } catch {
+    // best-effort
+  }
+}
+
 export async function persistZoneScore(
   supabase: SupabaseClient,
   output: CalculatorOutput,
@@ -380,6 +462,27 @@ export async function persistProjectScore(
   const { error } = await castFrom(supabase, 'project_scores').upsert(row as never, {
     onConflict: 'project_id,score_type,period_date',
   });
+
+  // D31 — auto-populate property_comparables cuando score_id es A08.
+  if (!error && registry.score_id === 'A08') {
+    const comparables = await findComparableProperties(supabase, {
+      property_id: input.projectId,
+      score_type: registry.score_id,
+      period_date: input.periodDate,
+      self_value: output.score_value,
+    });
+    if (comparables.length > 0) {
+      await persistPropertyComparablesRow(supabase, {
+        property_id: input.projectId,
+        score_id: registry.score_id,
+        period_date: input.periodDate,
+        country_code: input.countryCode,
+        comparables,
+        k: comparables.length,
+      });
+    }
+  }
+
   return error ? { ok: false, error: error.message } : { ok: true };
 }
 
