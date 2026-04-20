@@ -1722,6 +1722,30 @@ export type Database = {
           },
         ]
       }
+      enigh_zone_income: {
+        Row: {
+          id: string
+          median_salary_mxn: number | null
+          salary_range_distribution: Json
+          snapshot_date: string
+          zone_id: string
+        }
+        Insert: {
+          id?: string
+          median_salary_mxn?: number | null
+          salary_range_distribution?: Json
+          snapshot_date: string
+          zone_id: string
+        }
+        Update: {
+          id?: string
+          median_salary_mxn?: number | null
+          salary_range_distribution?: Json
+          snapshot_date?: string
+          zone_id?: string
+        }
+        Relationships: []
+      }
       feature_registry: {
         Row: {
           category: string
@@ -2434,6 +2458,33 @@ export type Database = {
           run_id?: string | null
           source?: string
           value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      inegi_census_zone_stats: {
+        Row: {
+          age_distribution: Json
+          dominant_profession: string | null
+          id: string
+          profession_distribution: Json
+          snapshot_date: string
+          zone_id: string
+        }
+        Insert: {
+          age_distribution?: Json
+          dominant_profession?: string | null
+          id?: string
+          profession_distribution?: Json
+          snapshot_date: string
+          zone_id: string
+        }
+        Update: {
+          age_distribution?: Json
+          dominant_profession?: string | null
+          id?: string
+          profession_distribution?: Json
+          snapshot_date?: string
           zone_id?: string
         }
         Relationships: []
@@ -12721,6 +12772,18 @@ export type Database = {
           },
         ]
       }
+      zone_demographics_cache: {
+        Row: {
+          age_distribution: Json | null
+          dominant_profession: string | null
+          median_salary_mxn: number | null
+          profession_distribution: Json | null
+          salary_range_distribution: Json | null
+          snapshot_date: string | null
+          zone_id: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       _postgis_deprecate: {
@@ -13193,6 +13256,7 @@ export type Database = {
         Returns: Json
       }
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
+      exec_refresh_zone_demographics_cache: { Args: never; Returns: undefined }
       finalize_score_job: {
         Args: { p_error?: string; p_id: string; p_success: boolean }
         Returns: Json
