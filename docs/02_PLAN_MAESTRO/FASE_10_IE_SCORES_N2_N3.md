@@ -2,8 +2,8 @@
 
 > **Estado:** EN EJECUCIÓN — split 3 sesiones.
 > SESIÓN 1/3 (14 N2 + infra D13/D14/D16/D18/D19/D21/D25) completa 2026-04-20.
-> SESIÓN 2/3 (12 N3 personal+comparativos) pendiente.
-> SESIÓN 3/3 (7 N4 agregados + tag `fase-10-complete`) pendiente.
+> SESIÓN 2/3 (12 N3 + D29+D30+D31+D32 + L-69+L-31 + MV zone_demographics_cache) completa 2026-04-20.
+> SESIÓN 3/3 (7 N4 agregados + D18 activation + tag `fase-10-complete`) pendiente.
 > **Duración estimada:** 5 sesiones Claude Code (~20 horas con agentes paralelos)
 > **Dependencias:** FASE 08 (N0 framework + AVM), FASE 09 (N1 cards)
 > **Bloqueantes externos:**
