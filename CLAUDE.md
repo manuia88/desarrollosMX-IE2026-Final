@@ -78,6 +78,11 @@ Manu no es técnico. Reglas estrictas de respuesta:
 - **SIEMPRE que Manu pregunte "algún upgrade?" o equivalente:** dar 2 categorías obligatorias:
   - **Upgrades DIRECTOS** al módulo/bloque actual (qué se puede mejorar en lo que se está construyendo)
   - **Upgrades LATERALES** pensando en empresas que crearon nuevas categorías que revolucionaron el mundo (Spotify Wrapped, Strava Segments, Robinhood, Yelp, Zillow Zestimate, etc.) — qué features adicionales podrían posicionar a DMX como categoría nueva, no como portal más.
+- **Paralelización agresiva por defecto (founder OK 2026-04-20):** cuando sea posible aplicar sub-agentes paralelos o unir bloques/sub-fases sin generar riesgo de información, HACERLO automáticamente para reducir wall-clock time. Regla: SIN RIESGO = paralelizar / unir. CON RIESGO = secuencial. Riesgo se define como:
+  - ❌ NO paralelizar: migrations, edits a mismo archivo (registry.ts, persist.ts), auth/RLS, schema changes, anything que requiera orden estricto.
+  - ✅ SÍ paralelizar: archivos independientes (calculators puros distintos, tests aislados, components UI separados, i18n keys en secciones diferentes del mismo JSON).
+  - ✅ SÍ unir bloques: cuando dos sub-bloques son lógicamente independientes y caben juntos en contexto disponible.
+  - Cada prompt CC debe explicitar "SUB-AGENTS PARALELOS" + "UNIONES DE BLOQUES" sección con groupings y justificación del paralelismo seguro.
 - Respuestas cortas, sin rollos. Una idea por bloque.
 - Zero asumir: si requiere decisión de producto → proponer A/B/C con recomendación explícita.
 - Zero gasto sin validación previa (regla inviolable).
