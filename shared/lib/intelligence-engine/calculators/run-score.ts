@@ -7,6 +7,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { recordSpend } from '@/shared/lib/ingest/cost-tracker';
 import { detectAndRecordAnomaly } from '@/shared/lib/intelligence-engine/anomaly/detector';
+import { generateNarrative } from '@/shared/lib/intelligence-engine/narrative/ai-narrative';
 import { hashUserIdForTelemetry } from '@/shared/lib/telemetry/hash-user-id';
 import { posthog } from '@/shared/lib/telemetry/posthog';
 import { SupabaseScoreQueue } from '../queue';
@@ -140,6 +141,12 @@ export async function runScore(
     };
   }
 
+  // D32 FASE 10 SESIÓN 2/3 — AI narrative runtime pre-N5.
+  // Si el calculator declara methodology.ai_narrative === true, invoca Claude
+  // Haiku para generar narrativa natural. Cache 24h + trackExternalCost.
+  // El calculator expone methodology vía import dinámico (no en output).
+  output = await maybeGenerateNarrative(output, scoreId, input);
+
   let persisted = false;
   if (!options.skipPersist) {
     const persister = pickPersister(registry);
@@ -271,6 +278,52 @@ function emitScoreCalculatedEvent(args: {
   } catch {
     // Telemetría es best-effort — nunca tumba runScore.
   }
+}
+
+// D32 — si el calculator declara methodology.ai_narrative: true, invoca
+// Claude Haiku con el reasoning_template + components. Injecta el resultado
+// en output.components.ai_narrative (preservando el resto). trackExternalCost
+// registra el spend para cost guard (F4). Best-effort: errores no tumban.
+async function maybeGenerateNarrative(
+  output: CalculatorOutput,
+  scoreId: string,
+  input: CalculatorInput,
+): Promise<CalculatorOutput> {
+  const calcMeta = CALCULATOR_META.get(scoreId);
+  if (!calcMeta || !calcMeta.ai_narrative || !calcMeta.reasoning_template) return output;
+  const entityId = input.zoneId ?? input.projectId ?? input.userId ?? 'unknown';
+  try {
+    const res = await generateNarrative({
+      scoreId,
+      entityId,
+      components: output.components as Record<string, unknown>,
+      template: calcMeta.reasoning_template,
+    });
+    if (res.cost_usd > 0) {
+      await recordSpend(`ie_narrative:${scoreId}`, res.cost_usd);
+    }
+    return {
+      ...output,
+      components: {
+        ...(output.components as Record<string, unknown>),
+        ai_narrative: res.text,
+        ai_narrative_cached: res.cached,
+      },
+    };
+  } catch {
+    return output;
+  }
+}
+
+// Registro opt-in para calculators con AI narrative. El calculator llama
+// registerCalculatorMeta(scoreId, { ai_narrative: true, reasoning_template }).
+export interface CalculatorMeta {
+  readonly ai_narrative?: boolean;
+  readonly reasoning_template?: string;
+}
+const CALCULATOR_META = new Map<string, CalculatorMeta>();
+export function registerCalculatorMeta(scoreId: string, meta: CalculatorMeta): void {
+  CALCULATOR_META.set(scoreId, meta);
 }
 
 // U3 — helper exposed para calculators que llaman APIs externas con costo.
