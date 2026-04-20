@@ -536,9 +536,66 @@ Producto estrella I01 en su versión H1 regresión lineal. Evoluciona a gradient
 - [ ] PostHog dashboard "IE Worker Health" activo.
 - [ ] Documentación actualizada: `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` refleja los 32 N0 como "implementado".
 
+## Implementación real (cambios vs plan original) — BLOQUE 8.B cerrado 2026-04-19
+
+### Split en 2 sesiones
+
+BLOQUE 8.B parte 1/2 (15 commits `687dc9e..bba2802`):
+- Fixtures CDMX 16 zonas (1 por alcaldía, extremos cubiertos) — `__fixtures__/cdmx-zones.ts`
+- Migration U13 `comparable_zones` jsonb precalculada + persist.ts refactor
+- 4 stubs H2 (F04 RAMA, F06 SEDUVI, F07 Catastro, H06 0311 Locatel)
+- 8 calculators reales: F01 Safety, F02 Transit, F03 Ecosystem DENUE+SCIAN, F05 Water,
+  H01 School, H02 Health, H03 Seismic, B12 Cost Tracker
+
+BLOQUE 8.B parte 2/2 (8 commits `2b44cc9..6b8ae54`):
+- Migration combinada P1+S1: `valid_until` + RLS country_code filter
+- Pre-step telemetry: `shared/lib/telemetry/hash-user-id.ts` (S2) + `run-score.ts` U7 props
+- Fixtures extensions: CDMX_CNBV, CDMX_INAH, CDMX_CONAGUA, CDMX_MARKET, CDMX_SEARCH, CDMX_AIRROI
+- 7 calculators: H04 Credit Demand, H08 Heritage, H09 Commute (on-demand Mapbox), H10 Water Crisis,
+  H11 Infonavit, A01/A03/A04 combined, D07 STR/LTR (wrapper AirROI per ADR-019)
+
+### Upgrades aplicados (v3 + v4)
+
+- **U5** calculator semver versioning (`export const version = '1.0.0'`).
+- **U6** snapshot tests con 16 fixtures CDMX (1 por alcaldía, extremos incluidos).
+- **U7** PostHog `ie.score.calculated` con props extendidas: duration_ms, components_count,
+  source_data_age_days, calculator_version, country_code, hashed_user_id.
+- **U9** fixtures reutilizables (BLOQUE 8.C/8.D/8.E podrán consumirlos).
+- **U10** `methodology` const export con formula + sources + weights + references + thresholds + validity.
+- **U12** `reasoning_template` con placeholders + `template_vars` en `CalculatorOutput`.
+- **U13** `comparable_zones` jsonb pre-calculadas al persistir (top 3 closest value, same
+  score_type + period_date).
+- **U14** `score_label_key` i18n desde día 1 — 21 N0 × 5 labels × 5 locales en `messages/*`.
+- **P1** `valid_until` separado de `period_date` en zone_scores/project_scores/user_scores. Cada
+  calculator declara su `methodology.validity` — `persist.ts` via `computeValidUntil` helper.
+- **S1** RLS cross-tenant country filter: `zone_scores` y `project_scores` policies exigen
+  `country_code IN (select country_code from profiles where id = auth.uid()) OR is_superadmin()`.
+- **S2** hashed user_id en telemetría: `sha256(user_id + TELEMETRY_SALT).slice(0,12)` para
+  pseudonimizar eventos PostHog.
+
+### Cambios vs plan original
+
+- **D07 STR/LTR**: cambio AirDNA → **AirROI** per ADR-019. Calculator es wrapper delgado
+  sobre `features/str-intelligence/lib/scores/str-ltr-opportunity.ts` (FASE 07b) — NO duplica lógica.
+- **H09 Mapbox cache**: plan v3 propuso `shared/lib/runtime-cache`; no existe. Decisión:
+  mantener plan original 8.B.14.2 — cache en `zone_scores.valid_until` 7d. Calculator lee
+  cache via `lookupH09Cache()` comparando destino lat/lng (±0.0005° ≈50m).
+- **Pure compute function pattern**: factorización `compute<XX>()` pura + Calculator class con
+  `run()` I/O. Tests ejercen compute directo contra fixtures — no mock supabase. Pattern
+  formalizado pendiente en CONTRATO §8 TODO #6 (ADR-024 opcional).
+- **Registry entries N0**: NO modificadas — `calculator_path` ya correctos en BLOQUE 8.A.
+- **Confidence para H03 Seismic y H08 Heritage**: siempre `high` porque Atlas de Riesgos e INAH
+  son shapefiles polígono deterministic por AGEB.
+
+### Verificaciones al cierre (pendientes sesión 2 final)
+
+Ver §Criterio de done de la FASE — sin tag `fase-08-complete` hasta cerrar BLOQUE 8.C-8.F.
+
+---
+
 ## Próxima fase
 
 [FASE 09 — IE Scores Nivel 1](./FASE_09_IE_SCORES_N1.md)
 
 ---
-**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17
+**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17 · **Actualizado:** 2026-04-19 (BLOQUE 8.B cerrado)
