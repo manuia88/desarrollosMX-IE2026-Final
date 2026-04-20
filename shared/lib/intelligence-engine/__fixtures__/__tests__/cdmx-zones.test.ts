@@ -41,7 +41,7 @@ describe('cdmx-zones fixtures', () => {
 
   it('CDMX_ZONE_IDS key count === 16 y coincide con zonas', () => {
     expect(Object.keys(CDMX_ZONE_IDS)).toHaveLength(16);
-    const idSet = new Set(Object.values(CDMX_ZONE_IDS));
+    const idSet = new Set<string>(Object.values(CDMX_ZONE_IDS));
     for (const z of CDMX_ZONES) {
       expect(idSet.has(z.zona_id), `${z.zona_name}`).toBe(true);
     }
