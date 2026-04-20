@@ -889,7 +889,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['macro_updated'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a07-timing-optimizer',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/a07-timing.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/a07-timing-optimizer.ts',
     country_codes: ['MX'],
   },
   {
@@ -902,7 +902,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a08-comparador-multi-dimensional',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/a08-comparador.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/a08-comparador-multi-d.ts',
     country_codes: ['MX'],
   },
   {
@@ -915,7 +915,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a09-risk-score-comprador',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/a09-risk-comprador.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/a09-risk-score-comprador.ts',
     country_codes: ['MX'],
   },
   {
@@ -928,7 +928,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a10-lifestyle-match',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/a10-lifestyle.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/a10-lifestyle-match.ts',
     country_codes: ['MX'],
   },
   {
@@ -941,7 +941,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['macro_updated'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a11-patrimonio-20y',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/a11-patrimonio.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/a11-patrimonio-20y.ts',
     country_codes: ['MX'],
   },
   {
@@ -954,7 +954,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b06-project-genesis',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/b06-project-genesis.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/b06-project-genesis.ts',
     country_codes: ['MX'],
   },
   {
@@ -967,7 +967,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b11-channel-performance',
     confidence_sources: ['operaciones'],
-    calculator_path: 'features/scores/lib/calculators/n3/b11-channel.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/b11-channel-performance.ts',
     country_codes: ['MX'],
   },
   {
@@ -980,7 +980,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['feedback_registered'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#c04-objection-killer',
     confidence_sources: ['interaction_feedback'],
-    calculator_path: 'features/scores/lib/calculators/n3/c04-objection-killer.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/c04-objection-killer.ts',
     country_codes: ['MX'],
   },
   {
@@ -993,7 +993,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#c06-commission-forecast',
     confidence_sources: ['pipeline', 'operaciones'],
-    calculator_path: 'features/scores/lib/calculators/n3/c06-commission.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/c06-commission-forecast.ts',
     country_codes: ['MX'],
   },
   {
@@ -1006,7 +1006,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d04-cross-correlation',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/d04-cross-correlation.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/d04-cross-correlation.ts',
     country_codes: ['MX'],
   },
   {
@@ -1019,7 +1019,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h13-site-selection-ai',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/h13-site-selection.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/h13-site-selection-ai.ts',
     country_codes: ['MX'],
   },
   {
@@ -1032,7 +1032,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h15-due-diligence',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/n3/h15-due-diligence.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/n3/h15-due-diligence.ts',
     country_codes: ['MX'],
   },
 
