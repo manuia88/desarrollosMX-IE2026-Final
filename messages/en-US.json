@@ -288,6 +288,29 @@
       },
       "h06": {
         "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
+      },
+      "n11": {
+        "aceleracion": "Momentum accelerating",
+        "estable": "Momentum stable",
+        "desaceleracion": "Momentum decelerating",
+        "insufficient": "Momentum available once ≥50 projects + 6 months of data are met",
+        "recommendations": {
+          "low": {
+            "0": "Zone decelerating — less favorable buying timing",
+            "1": "Compare with neighboring zones showing accelerating momentum"
+          },
+          "medium": {
+            "0": "Stable zone — no immediate opportunity signals",
+            "1": "Monitor F08, A12 and N01 indicators in the next 3-6 months"
+          },
+          "high": {
+            "0": "Zone accelerating — favorable momentum to buy before the next hike",
+            "1": "Expected 12-month appreciation above CDMX average"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — N11 requires ≥50 projects and 6 months of history"
+          }
+        }
       }
     },
     "confidence": {

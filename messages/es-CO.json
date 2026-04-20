@@ -288,6 +288,29 @@
       },
       "h06": {
         "pending_h2": "Disponible en FASE 29 (datos 0311 Locatel pendientes)"
+      },
+      "n11": {
+        "aceleracion": "Momentum en aceleración",
+        "estable": "Momentum estable",
+        "desaceleracion": "Momentum en desaceleración",
+        "insufficient": "Momentum disponible al cumplir ≥50 proyectos + 6 meses de datos",
+        "recommendations": {
+          "low": {
+            "0": "Zona en desaceleración — timing de compra menos favorable",
+            "1": "Compara con zonas vecinas con momentum en aceleración"
+          },
+          "medium": {
+            "0": "Zona estable — sin señales de oportunidad inmediata",
+            "1": "Monitorea los indicadores F08, A12 y N01 en los próximos 3-6 meses"
+          },
+          "high": {
+            "0": "Zona en aceleración — momentum favorable para comprar antes del alza",
+            "1": "Expectativa de valorización superior al promedio CDMX en 12 meses"
+          },
+          "insufficient_data": {
+            "0": "Datos insuficientes — N11 requiere ≥50 proyectos y 6 meses de historial"
+          }
+        }
       }
     },
     "confidence": {

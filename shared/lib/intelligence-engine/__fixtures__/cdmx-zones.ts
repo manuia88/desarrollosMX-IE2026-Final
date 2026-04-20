@@ -1769,6 +1769,612 @@ export const CDMX_SEARCH: Readonly<Record<string, SearchDemographicData>> = {
   'Xochimilco Centro': { pct_busquedas_foraneas: 25, top_origen_estado: 'MX Edo' },
 };
 
+// ============================================================
+// Extensiones BLOQUE 8.C — fixtures N01-N11 (IP propietaria DMX).
+// ============================================================
+
+// N03 Gentrification Velocity — snapshot previo DENUE (≥3 meses atrás).
+// Mismo shape que CdmxZoneSources.denue. Habilita Δ(ratio_PB)/Δ(meses).
+export interface DenueSnapshotEntry {
+  readonly snapshot_date: string; // ISO YYYY-MM-DD
+  readonly total: number;
+  readonly tier_counts: {
+    readonly high: number;
+    readonly standard: number;
+    readonly basic: number;
+  };
+  readonly by_macro_category: Readonly<Record<string, number>>;
+}
+
+// 2 snapshots por zona: T-6m y T-0 (actual). El de T-0 espeja CDMX_ZONES.denue.
+// Ratio_PB = high/basic. Gentrificación rápida = Δratio creciente.
+export const CDMX_DENUE_SNAPSHOTS: Readonly<Record<string, readonly DenueSnapshotEntry[]>> = {
+  'San Ángel': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 580,
+      tier_counts: { high: 160, standard: 300, basic: 120 },
+      by_macro_category: { gastronomia: 120, retail: 150 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 620,
+      tier_counts: { high: 185, standard: 320, basic: 115 },
+      by_macro_category: { gastronomia: 135, retail: 155 },
+    },
+  ],
+  Clavería: [
+    {
+      snapshot_date: '2025-10-15',
+      total: 410,
+      tier_counts: { high: 55, standard: 215, basic: 140 },
+      by_macro_category: { gastronomia: 90 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 420,
+      tier_counts: { high: 60, standard: 220, basic: 140 },
+      by_macro_category: { gastronomia: 95 },
+    },
+  ],
+  'Del Valle': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 780,
+      tier_counts: { high: 220, standard: 410, basic: 150 },
+      by_macro_category: { gastronomia: 170 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 820,
+      tier_counts: { high: 240, standard: 420, basic: 160 },
+      by_macro_category: { gastronomia: 185 },
+    },
+  ],
+  'Coyoacán Centro': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 500,
+      tier_counts: { high: 130, standard: 270, basic: 100 },
+      by_macro_category: { gastronomia: 135 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 520,
+      tier_counts: { high: 140, standard: 280, basic: 100 },
+      by_macro_category: { gastronomia: 145 },
+    },
+  ],
+  'Cuajimalpa Centro': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 250,
+      tier_counts: { high: 38, standard: 125, basic: 87 },
+      by_macro_category: { gastronomia: 52 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 260,
+      tier_counts: { high: 40, standard: 130, basic: 90 },
+      by_macro_category: { gastronomia: 55 },
+    },
+  ],
+  // Roma Norte — gentrificación rápida: Δratio PB notable.
+  'Roma Norte': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 1050,
+      tier_counts: { high: 380, standard: 460, basic: 210 },
+      by_macro_category: { gastronomia: 290, retail: 245, cafeterias: 18 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 1240,
+      tier_counts: { high: 480, standard: 540, basic: 220 },
+      by_macro_category: { gastronomia: 340, retail: 285, cafeterias: 30 },
+    },
+  ],
+  Lindavista: [
+    {
+      snapshot_date: '2025-10-15',
+      total: 370,
+      tier_counts: { high: 50, standard: 195, basic: 125 },
+      by_macro_category: { gastronomia: 80 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 380,
+      tier_counts: { high: 55, standard: 200, basic: 125 },
+      by_macro_category: { gastronomia: 85 },
+    },
+  ],
+  'Iztacalco Centro': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 285,
+      tier_counts: { high: 18, standard: 140, basic: 127 },
+      by_macro_category: { gastronomia: 70 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 290,
+      tier_counts: { high: 20, standard: 140, basic: 130 },
+      by_macro_category: { gastronomia: 72 },
+    },
+  ],
+  'Iztapalapa Sur': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 215,
+      tier_counts: { high: 9, standard: 80, basic: 126 },
+      by_macro_category: { gastronomia: 52 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 220,
+      tier_counts: { high: 10, standard: 80, basic: 130 },
+      by_macro_category: { gastronomia: 55 },
+    },
+  ],
+  'Contreras Centro': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 175,
+      tier_counts: { high: 18, standard: 88, basic: 69 },
+      by_macro_category: { gastronomia: 40 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 180,
+      tier_counts: { high: 20, standard: 90, basic: 70 },
+      by_macro_category: { gastronomia: 42 },
+    },
+  ],
+  Polanco: [
+    {
+      snapshot_date: '2025-10-15',
+      total: 1440,
+      tier_counts: { high: 620, standard: 570, basic: 250 },
+      by_macro_category: { gastronomia: 310, retail: 330 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 1480,
+      tier_counts: { high: 640, standard: 580, basic: 260 },
+      by_macro_category: { gastronomia: 320, retail: 340 },
+    },
+  ],
+  'Milpa Alta Centro': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 80,
+      tier_counts: { high: 1, standard: 28, basic: 51 },
+      by_macro_category: { gastronomia: 20 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 85,
+      tier_counts: { high: 2, standard: 30, basic: 53 },
+      by_macro_category: { gastronomia: 22 },
+    },
+  ],
+  'Tláhuac Centro': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 205,
+      tier_counts: { high: 14, standard: 93, basic: 98 },
+      by_macro_category: { gastronomia: 53 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 210,
+      tier_counts: { high: 15, standard: 95, basic: 100 },
+      by_macro_category: { gastronomia: 55 },
+    },
+  ],
+  'Tlalpan Centro': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 300,
+      tier_counts: { high: 65, standard: 155, basic: 80 },
+      by_macro_category: { gastronomia: 75 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 310,
+      tier_counts: { high: 70, standard: 160, basic: 80 },
+      by_macro_category: { gastronomia: 80 },
+    },
+  ],
+  Tepito: [
+    {
+      snapshot_date: '2025-10-15',
+      total: 830,
+      tier_counts: { high: 58, standard: 295, basic: 477 },
+      by_macro_category: { gastronomia: 135 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 840,
+      tier_counts: { high: 60, standard: 300, basic: 480 },
+      by_macro_category: { gastronomia: 140 },
+    },
+  ],
+  'Xochimilco Centro': [
+    {
+      snapshot_date: '2025-10-15',
+      total: 235,
+      tier_counts: { high: 33, standard: 108, basic: 94 },
+      by_macro_category: { gastronomia: 68 },
+    },
+    {
+      snapshot_date: '2026-04-15',
+      total: 240,
+      tier_counts: { high: 35, standard: 110, basic: 95 },
+      by_macro_category: { gastronomia: 70 },
+    },
+  ],
+};
+
+// N04 Crime Trajectory — FGJ ventana 12m partida en 6m actual + 6m previo.
+// Penaliza aumento violentos, premia drops patrimoniales.
+export interface FgjTrajectoryData {
+  readonly count_6m_actual: number;
+  readonly count_6m_prev: number;
+  readonly violentos_6m_actual: number;
+  readonly violentos_6m_prev: number;
+  readonly patrimoniales_6m_actual: number;
+  readonly patrimoniales_6m_prev: number;
+}
+
+export const CDMX_FGJ_TRAJECTORY: Readonly<Record<string, FgjTrajectoryData>> = {
+  'San Ángel': {
+    count_6m_actual: 20,
+    count_6m_prev: 22,
+    violentos_6m_actual: 3,
+    violentos_6m_prev: 3,
+    patrimoniales_6m_actual: 13,
+    patrimoniales_6m_prev: 15,
+  },
+  Clavería: {
+    count_6m_actual: 28,
+    count_6m_prev: 30,
+    violentos_6m_actual: 5,
+    violentos_6m_prev: 5,
+    patrimoniales_6m_actual: 17,
+    patrimoniales_6m_prev: 18,
+  },
+  'Del Valle': {
+    count_6m_actual: 18,
+    count_6m_prev: 20,
+    violentos_6m_actual: 2,
+    violentos_6m_prev: 3,
+    patrimoniales_6m_actual: 11,
+    patrimoniales_6m_prev: 13,
+  },
+  'Coyoacán Centro': {
+    count_6m_actual: 25,
+    count_6m_prev: 27,
+    violentos_6m_actual: 4,
+    violentos_6m_prev: 4,
+    patrimoniales_6m_actual: 15,
+    patrimoniales_6m_prev: 17,
+  },
+  'Cuajimalpa Centro': {
+    count_6m_actual: 16,
+    count_6m_prev: 18,
+    violentos_6m_actual: 3,
+    violentos_6m_prev: 3,
+    patrimoniales_6m_actual: 10,
+    patrimoniales_6m_prev: 10,
+  },
+  // Condesa/Roma Norte — drop robo transeúnte -15%+ patrimoniales notable.
+  'Roma Norte': {
+    count_6m_actual: 70,
+    count_6m_prev: 75,
+    violentos_6m_actual: 11,
+    violentos_6m_prev: 13,
+    patrimoniales_6m_actual: 44,
+    patrimoniales_6m_prev: 51,
+  },
+  Lindavista: {
+    count_6m_actual: 42,
+    count_6m_prev: 46,
+    violentos_6m_actual: 7,
+    violentos_6m_prev: 7,
+    patrimoniales_6m_actual: 28,
+    patrimoniales_6m_prev: 30,
+  },
+  'Iztacalco Centro': {
+    count_6m_actual: 35,
+    count_6m_prev: 37,
+    violentos_6m_actual: 7,
+    violentos_6m_prev: 7,
+    patrimoniales_6m_actual: 20,
+    patrimoniales_6m_prev: 22,
+  },
+  // Iztapalapa — trajectory empeorando (violentos +18%).
+  'Iztapalapa Sur': {
+    count_6m_actual: 110,
+    count_6m_prev: 100,
+    violentos_6m_actual: 32,
+    violentos_6m_prev: 26,
+    patrimoniales_6m_actual: 58,
+    patrimoniales_6m_prev: 54,
+  },
+  'Contreras Centro': {
+    count_6m_actual: 11,
+    count_6m_prev: 13,
+    violentos_6m_actual: 1,
+    violentos_6m_prev: 2,
+    patrimoniales_6m_actual: 8,
+    patrimoniales_6m_prev: 8,
+  },
+  Polanco: {
+    count_6m_actual: 35,
+    count_6m_prev: 37,
+    violentos_6m_actual: 5,
+    violentos_6m_prev: 5,
+    patrimoniales_6m_actual: 25,
+    patrimoniales_6m_prev: 27,
+  },
+  'Milpa Alta Centro': {
+    count_6m_actual: 9,
+    count_6m_prev: 9,
+    violentos_6m_actual: 1,
+    violentos_6m_prev: 1,
+    patrimoniales_6m_actual: 6,
+    patrimoniales_6m_prev: 6,
+  },
+  'Tláhuac Centro': {
+    count_6m_actual: 26,
+    count_6m_prev: 29,
+    violentos_6m_actual: 5,
+    violentos_6m_prev: 5,
+    patrimoniales_6m_actual: 15,
+    patrimoniales_6m_prev: 17,
+  },
+  'Tlalpan Centro': {
+    count_6m_actual: 22,
+    count_6m_prev: 26,
+    violentos_6m_actual: 3,
+    violentos_6m_prev: 4,
+    patrimoniales_6m_actual: 14,
+    patrimoniales_6m_prev: 16,
+  },
+  Tepito: {
+    count_6m_actual: 195,
+    count_6m_prev: 185,
+    violentos_6m_actual: 50,
+    violentos_6m_prev: 45,
+    patrimoniales_6m_actual: 110,
+    patrimoniales_6m_prev: 110,
+  },
+  'Xochimilco Centro': {
+    count_6m_actual: 20,
+    count_6m_prev: 22,
+    violentos_6m_actual: 3,
+    violentos_6m_prev: 3,
+    patrimoniales_6m_actual: 13,
+    patrimoniales_6m_prev: 13,
+  },
+};
+
+// N06 School Premium — premio pagado por m² por proximidad top 20% escuelas.
+// Baseline: CDMX_MARKET.precio_m2_secundaria_mxn (mercado secundario zona).
+// Premium proxy = proyectos_cerca_top_school_m2 − baseline m². Para H1 mock —
+// cuando FASE 07 market_prices_secondary live, se deriva estadísticamente.
+export interface SchoolPremiumData {
+  readonly baseline_m2_mxn: number;
+  readonly premium_near_top_m2_mxn: number; // m² pagado por viviendas <500m de top 20% school
+  readonly premium_pct: number; // precomputed (premium/baseline − 1) × 100
+}
+
+export const CDMX_SCHOOL_PREMIUM: Readonly<Record<string, SchoolPremiumData>> = {
+  'San Ángel': { baseline_m2_mxn: 50000, premium_near_top_m2_mxn: 58000, premium_pct: 16 },
+  Clavería: { baseline_m2_mxn: 28000, premium_near_top_m2_mxn: 29500, premium_pct: 5 },
+  'Del Valle': { baseline_m2_mxn: 55000, premium_near_top_m2_mxn: 66000, premium_pct: 20 },
+  'Coyoacán Centro': { baseline_m2_mxn: 48000, premium_near_top_m2_mxn: 52800, premium_pct: 10 },
+  'Cuajimalpa Centro': { baseline_m2_mxn: 38000, premium_near_top_m2_mxn: 38380, premium_pct: 1 },
+  'Roma Norte': { baseline_m2_mxn: 60000, premium_near_top_m2_mxn: 67200, premium_pct: 12 },
+  Lindavista: { baseline_m2_mxn: 32000, premium_near_top_m2_mxn: 32320, premium_pct: 1 },
+  'Iztacalco Centro': { baseline_m2_mxn: 25000, premium_near_top_m2_mxn: 25000, premium_pct: 0 },
+  'Iztapalapa Sur': { baseline_m2_mxn: 20000, premium_near_top_m2_mxn: 20000, premium_pct: 0 },
+  'Contreras Centro': { baseline_m2_mxn: 30000, premium_near_top_m2_mxn: 30000, premium_pct: 0 },
+  Polanco: { baseline_m2_mxn: 85000, premium_near_top_m2_mxn: 105000, premium_pct: 24 },
+  'Milpa Alta Centro': { baseline_m2_mxn: 16000, premium_near_top_m2_mxn: 16000, premium_pct: 0 },
+  'Tláhuac Centro': { baseline_m2_mxn: 18000, premium_near_top_m2_mxn: 18000, premium_pct: 0 },
+  'Tlalpan Centro': { baseline_m2_mxn: 34000, premium_near_top_m2_mxn: 36040, premium_pct: 6 },
+  Tepito: { baseline_m2_mxn: 27000, premium_near_top_m2_mxn: 27000, premium_pct: 0 },
+  'Xochimilco Centro': {
+    baseline_m2_mxn: 22000,
+    premium_near_top_m2_mxn: 22000,
+    premium_pct: 0,
+  },
+};
+
+// N11 DMX Momentum Index — deltas de F08/A12/N01/N03 + search_trends + precio 12m.
+// Inputs precalculados mock H1. FASE 27 llega con Google Trends real.
+export interface MomentumInputs {
+  readonly f08_delta_12m: number; // delta LQI últimos 12m (puntos absolutos 0-100)
+  readonly a12_delta_12m: number; // delta Price Fairness últimos 12m
+  readonly n01_delta_12m: number; // delta Shannon diversity últimos 12m
+  readonly n03_velocity: number; // gentrificación velocity (0-100 normalizado)
+  readonly search_trends_delta_3m: number; // % Δ búsquedas 3m (stub Google Trends FASE 27)
+  readonly price_m2_delta_12m_pct: number; // % Δ precio mediano m² 12m
+  readonly proyectos_zona: number; // # proyectos — tier 3 gate (≥50)
+  readonly meses_data_disponible: number; // tier 3 gate (≥6 meses)
+}
+
+// Narvarte caso target ≥80 (gentrificación rápida + precio +8% + cafeterías).
+// Cuajimalpa ≈medio. Iztapalapa Sur en desaceleración/bajo.
+// Polanco consolidado (alto pero estable, no explosivo → ≤75).
+export const CDMX_MOMENTUM_INPUTS: Readonly<Record<string, MomentumInputs>> = {
+  'San Ángel': {
+    f08_delta_12m: 2.1,
+    a12_delta_12m: 1.5,
+    n01_delta_12m: 0.04,
+    n03_velocity: 8,
+    search_trends_delta_3m: 5,
+    price_m2_delta_12m_pct: 6,
+    proyectos_zona: 52,
+    meses_data_disponible: 12,
+  },
+  Clavería: {
+    f08_delta_12m: 0.5,
+    a12_delta_12m: -0.2,
+    n01_delta_12m: 0.01,
+    n03_velocity: 3,
+    search_trends_delta_3m: 1,
+    price_m2_delta_12m_pct: 3,
+    proyectos_zona: 18,
+    meses_data_disponible: 9,
+  },
+  'Del Valle': {
+    f08_delta_12m: 2.8,
+    a12_delta_12m: 1.2,
+    n01_delta_12m: 0.03,
+    n03_velocity: 6,
+    search_trends_delta_3m: 4,
+    price_m2_delta_12m_pct: 5,
+    proyectos_zona: 85,
+    meses_data_disponible: 18,
+  },
+  'Coyoacán Centro': {
+    f08_delta_12m: 1.5,
+    a12_delta_12m: 0.5,
+    n01_delta_12m: 0.02,
+    n03_velocity: 5,
+    search_trends_delta_3m: 2,
+    price_m2_delta_12m_pct: 4,
+    proyectos_zona: 55,
+    meses_data_disponible: 14,
+  },
+  'Cuajimalpa Centro': {
+    f08_delta_12m: 0.8,
+    a12_delta_12m: 0.2,
+    n01_delta_12m: 0.01,
+    n03_velocity: 3,
+    search_trends_delta_3m: 1,
+    price_m2_delta_12m_pct: 3,
+    proyectos_zona: 52,
+    meses_data_disponible: 8,
+  },
+  // Narvarte proxy: Roma Norte como zona killer momentum ≥80.
+  'Roma Norte': {
+    f08_delta_12m: 4.5,
+    a12_delta_12m: 3.0,
+    n01_delta_12m: 0.08,
+    n03_velocity: 18,
+    search_trends_delta_3m: 12,
+    price_m2_delta_12m_pct: 9,
+    proyectos_zona: 120,
+    meses_data_disponible: 24,
+  },
+  Lindavista: {
+    f08_delta_12m: 0.3,
+    a12_delta_12m: 0,
+    n01_delta_12m: 0.01,
+    n03_velocity: 2,
+    search_trends_delta_3m: 0,
+    price_m2_delta_12m_pct: 2,
+    proyectos_zona: 35,
+    meses_data_disponible: 12,
+  },
+  'Iztacalco Centro': {
+    f08_delta_12m: -0.2,
+    a12_delta_12m: -0.3,
+    n01_delta_12m: 0,
+    n03_velocity: 1,
+    search_trends_delta_3m: -1,
+    price_m2_delta_12m_pct: 1,
+    proyectos_zona: 15,
+    meses_data_disponible: 6,
+  },
+  // Iztapalapa Sur → tier 3 gated (proyectos < 50).
+  'Iztapalapa Sur': {
+    f08_delta_12m: -1.0,
+    a12_delta_12m: -1.5,
+    n01_delta_12m: -0.02,
+    n03_velocity: 0,
+    search_trends_delta_3m: -3,
+    price_m2_delta_12m_pct: 0,
+    proyectos_zona: 8,
+    meses_data_disponible: 4,
+  },
+  'Contreras Centro': {
+    f08_delta_12m: 0.2,
+    a12_delta_12m: 0,
+    n01_delta_12m: 0,
+    n03_velocity: 2,
+    search_trends_delta_3m: 0,
+    price_m2_delta_12m_pct: 2,
+    proyectos_zona: 12,
+    meses_data_disponible: 10,
+  },
+  // Polanco consolidado ≈75-80 (mercado caliente pero estable).
+  Polanco: {
+    f08_delta_12m: 3.0,
+    a12_delta_12m: 2.0,
+    n01_delta_12m: 0.05,
+    n03_velocity: 8,
+    search_trends_delta_3m: 7,
+    price_m2_delta_12m_pct: 6,
+    proyectos_zona: 95,
+    meses_data_disponible: 36,
+  },
+  'Milpa Alta Centro': {
+    f08_delta_12m: 0,
+    a12_delta_12m: 0,
+    n01_delta_12m: 0,
+    n03_velocity: 1,
+    search_trends_delta_3m: 0,
+    price_m2_delta_12m_pct: 1,
+    proyectos_zona: 3,
+    meses_data_disponible: 3,
+  },
+  'Tláhuac Centro': {
+    f08_delta_12m: -0.3,
+    a12_delta_12m: -0.2,
+    n01_delta_12m: 0,
+    n03_velocity: 1,
+    search_trends_delta_3m: -1,
+    price_m2_delta_12m_pct: 1,
+    proyectos_zona: 14,
+    meses_data_disponible: 7,
+  },
+  'Tlalpan Centro': {
+    f08_delta_12m: 1.2,
+    a12_delta_12m: 0.8,
+    n01_delta_12m: 0.02,
+    n03_velocity: 4,
+    search_trends_delta_3m: 2,
+    price_m2_delta_12m_pct: 3,
+    proyectos_zona: 48,
+    meses_data_disponible: 11,
+  },
+  Tepito: {
+    f08_delta_12m: 0.1,
+    a12_delta_12m: -0.5,
+    n01_delta_12m: 0,
+    n03_velocity: 1,
+    search_trends_delta_3m: 0,
+    price_m2_delta_12m_pct: 2,
+    proyectos_zona: 22,
+    meses_data_disponible: 8,
+  },
+  'Xochimilco Centro': {
+    f08_delta_12m: 0.5,
+    a12_delta_12m: 0.2,
+    n01_delta_12m: 0.01,
+    n03_velocity: 2,
+    search_trends_delta_3m: 1,
+    price_m2_delta_12m_pct: 2,
+    proyectos_zona: 20,
+    meses_data_disponible: 10,
+  },
+};
+
 // D07 STR vs LTR — AirROI ADR + occupancy + revpar.
 export interface AirroiData {
   readonly adr_usd: number;

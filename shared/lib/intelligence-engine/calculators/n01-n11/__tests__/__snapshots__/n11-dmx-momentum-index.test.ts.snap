@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`N11 DMX Momentum Index calculator > 16 zonas CDMX — snapshot + discriminación + tier gate logic 1`] = `
+{
+  "Clavería": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 18/50 proyectos, 9/6 meses data.",
+    "value": 0,
+  },
+  "Contreras Centro": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 12/50 proyectos, 10/6 meses data.",
+    "value": 0,
+  },
+  "Coyoacán Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "gated": false,
+    "gated_reason": null,
+    "value": 54,
+  },
+  "Cuajimalpa Centro": {
+    "bucket": "medium",
+    "confidence": "high",
+    "gated": false,
+    "gated_reason": null,
+    "value": 48,
+  },
+  "Del Valle": {
+    "bucket": "medium",
+    "confidence": "high",
+    "gated": false,
+    "gated_reason": null,
+    "value": 61,
+  },
+  "Iztacalco Centro": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 15/50 proyectos, 6/6 meses data.",
+    "value": 0,
+  },
+  "Iztapalapa Sur": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 8/50 proyectos, 4/6 meses data.",
+    "value": 0,
+  },
+  "Lindavista": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 35/50 proyectos, 12/6 meses data.",
+    "value": 0,
+  },
+  "Milpa Alta Centro": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 3/50 proyectos, 3/6 meses data.",
+    "value": 0,
+  },
+  "Polanco": {
+    "bucket": "medium",
+    "confidence": "high",
+    "gated": false,
+    "gated_reason": null,
+    "value": 68,
+  },
+  "Roma Norte": {
+    "bucket": "high",
+    "confidence": "high",
+    "gated": false,
+    "gated_reason": null,
+    "value": 85,
+  },
+  "San Ángel": {
+    "bucket": "medium",
+    "confidence": "high",
+    "gated": false,
+    "gated_reason": null,
+    "value": 62,
+  },
+  "Tepito": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 22/50 proyectos, 8/6 meses data.",
+    "value": 0,
+  },
+  "Tlalpan Centro": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 48/50 proyectos, 11/6 meses data.",
+    "value": 0,
+  },
+  "Tláhuac Centro": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 14/50 proyectos, 7/6 meses data.",
+    "value": 0,
+  },
+  "Xochimilco Centro": {
+    "bucket": "low",
+    "confidence": "insufficient_data",
+    "gated": true,
+    "gated_reason": "Tier 3 gated: 20/50 proyectos, 10/6 meses data.",
+    "value": 0,
+  },
+}
+`;
