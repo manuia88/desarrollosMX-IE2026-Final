@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`F12 Risk Map (N1) calculator > snapshot: escenarios múltiples de perfil zonal 1`] = `
+{
+  "del_valle_balanceado": {
+    "confidence": "high",
+    "dominante": "sismico",
+    "label": "ie.score.f12.seguro",
+    "value": 72,
+  },
+  "deps_incompletas": {
+    "confidence": "medium",
+    "dominante": "sismico",
+    "label": "ie.score.f12.seguro",
+    "value": 60,
+  },
+  "iztapalapa_riesgoso": {
+    "confidence": "high",
+    "dominante": "hidrico",
+    "label": "ie.score.f12.alto",
+    "value": 28,
+  },
+  "polanco_seguro": {
+    "confidence": "high",
+    "dominante": "social",
+    "label": "ie.score.f12.muy_seguro",
+    "value": 83,
+  },
+  "tlalpan_laderas": {
+    "confidence": "high",
+    "dominante": "infraestructura",
+    "label": "ie.score.f12.alto",
+    "value": 35,
+  },
+  "xochimilco_hidrico": {
+    "confidence": "high",
+    "dominante": "hidrico",
+    "label": "ie.score.f12.moderado",
+    "value": 41,
+  },
+}
+`;

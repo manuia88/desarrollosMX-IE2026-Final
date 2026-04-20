@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T07:49:42.745Z",
+  "generated_at": "2026-04-20T09:27:47.420Z",
   "version": 1,
   "count": 118,
   "by_level": {
@@ -652,16 +652,19 @@
         "F01",
         "F02",
         "F03",
-        "F04",
         "H01",
-        "H02"
+        "H02",
+        "N08",
+        "N01",
+        "N04",
+        "H07"
       ],
       "triggers_cascade": [],
       "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f08-life-quality-index-lqi",
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/f08-life-quality.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/f08-life-quality-index.ts",
       "country_codes": [
         "MX"
       ]
@@ -674,16 +677,17 @@
       "tier": 1,
       "dependencies": [
         "H03",
-        "F05",
+        "N07",
+        "F01",
         "F06",
-        "H10"
+        "N05"
       ],
       "triggers_cascade": [],
       "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f12-risk-map",
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/f12-risk-map.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/f12-risk-map.ts",
       "country_codes": [
         "MX"
       ]
@@ -705,7 +709,7 @@
         "sedema",
         "paot"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/h07-environmental.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/h07-environmental.ts",
       "country_codes": [
         "MX"
       ]
@@ -727,7 +731,7 @@
         "macro_series",
         "market_prices_secondary"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/a02-investment-simulation.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/a02-investment-simulation.ts",
       "country_codes": [
         "MX"
       ]
@@ -749,7 +753,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/a05-tco.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/a05-tco-10y.ts",
       "country_codes": [
         "MX"
       ]
@@ -761,16 +765,18 @@
       "category": "comprador",
       "tier": 1,
       "dependencies": [
-        "F03",
-        "N01",
-        "F08"
+        "F08",
+        "H01",
+        "H02",
+        "N08",
+        "N10"
       ],
       "triggers_cascade": [],
       "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#a06-neighborhood",
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/a06-neighborhood.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/a06-neighborhood.ts",
       "country_codes": [
         "MX"
       ]
@@ -790,7 +796,7 @@
         "unidades",
         "market_prices_secondary"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/a12-price-fairness.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/a12-price-fairness.ts",
       "country_codes": [
         "MX"
       ]
@@ -810,7 +816,7 @@
         "search_logs",
         "wishlist"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/b01-demand-heatmap.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/b01-demand-heatmap.ts",
       "country_codes": [
         "MX"
       ]
@@ -832,7 +838,7 @@
       "confidence_sources": [
         "inegi_inpp"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/b02-margin-pressure.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/b02-margin-pressure.ts",
       "country_codes": [
         "MX"
       ]
@@ -853,7 +859,7 @@
         "feedback",
         "views"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/b04-pmf.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/b04-product-market-fit.ts",
       "country_codes": [
         "MX"
       ]
@@ -870,7 +876,7 @@
       "confidence_sources": [
         "project_competitors"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/b07-competitive-intel.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/b07-competitive-intel.ts",
       "country_codes": [
         "MX"
       ]
@@ -881,7 +887,11 @@
       "level": 1,
       "category": "dev",
       "tier": 3,
-      "dependencies": [],
+      "dependencies": [
+        "N11",
+        "B01",
+        "B04"
+      ],
       "triggers_cascade": [
         "unit_sold"
       ],
@@ -889,7 +899,7 @@
       "confidence_sources": [
         "inventory_snapshots"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/b08-absorption.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/b08-absorption-forecast.ts",
       "country_codes": [
         "MX"
       ]
@@ -901,8 +911,9 @@
       "category": "mercado",
       "tier": 3,
       "dependencies": [
-        "N01",
-        "N03"
+        "N03",
+        "A04",
+        "N01"
       ],
       "triggers_cascade": [
         "geo_data_updated:denue"
@@ -911,7 +922,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/d05-gentrification.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/d05-gentrification.ts",
       "country_codes": [
         "MX"
       ]
@@ -933,7 +944,7 @@
         "macro_series",
         "inegi"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/d06-affordability-crisis.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/d06-affordability-crisis.ts",
       "country_codes": [
         "MX"
       ]
@@ -944,7 +955,9 @@
       "level": 1,
       "category": "dev",
       "tier": 2,
-      "dependencies": [],
+      "dependencies": [
+        "H14"
+      ],
       "triggers_cascade": [
         "feedback_registered"
       ],
@@ -953,7 +966,7 @@
         "reviews",
         "operaciones"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/h05-trust.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/h05-trust-score.ts",
       "country_codes": [
         "MX"
       ]
@@ -973,7 +986,7 @@
         "search_logs",
         "behavior"
       ],
-      "calculator_path": "features/scores/lib/calculators/n1/h14-buyer-persona.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n1/h14-buyer-persona.ts",
       "country_codes": [
         "MX"
       ]

@@ -1,0 +1,42 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`H07 Environmental (N1) calculator > snapshot: escenarios múltiples zonales 1`] = `
+{
+  "chapultepec_excelente": {
+    "blend": "f04_plus_parques",
+    "confidence": "high",
+    "label": "ie.score.h07.excelente",
+    "value": 88,
+  },
+  "del_valle_media": {
+    "blend": "f04_only",
+    "confidence": "high",
+    "label": "ie.score.h07.buena",
+    "value": 55,
+  },
+  "f04_missing": {
+    "blend": "f04_only",
+    "confidence": "insufficient_data",
+    "label": "ie.score.h07.insufficient",
+    "value": 0,
+  },
+  "iztapalapa_contaminada": {
+    "blend": "f04_only",
+    "confidence": "high",
+    "label": "ie.score.h07.contaminada",
+    "value": 25,
+  },
+  "polanco_buena": {
+    "blend": "f04_plus_parques",
+    "confidence": "high",
+    "label": "ie.score.h07.buena",
+    "value": 73,
+  },
+  "xochimilco_parques_air_regular": {
+    "blend": "f04_plus_parques",
+    "confidence": "high",
+    "label": "ie.score.h07.buena",
+    "value": 58,
+  },
+}
+`;
