@@ -505,6 +505,30 @@
           }
         }
       },
+      "n10": {
+        "ideal_senior": "Zona ideal adultos mayores",
+        "apta_senior": "Apta para adultos mayores",
+        "aceptable": "Aceptable para adultos mayores",
+        "poco_apta": "Poco apta para adultos mayores",
+        "insufficient": "Datos DGIS/SIGED/GTFS insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Zona poco apta — hospital lejos y transporte demandante",
+            "1": "Considera zonas con hospital 2º nivel <1.5 km y metrobús cercano"
+          },
+          "medium": {
+            "0": "Zona aceptable — revisa accesibilidad específica del domicilio",
+            "1": "Privilegia plantas bajas o edificios con elevador"
+          },
+          "high": {
+            "0": "Zona ideal para adultos mayores — salud, diversidad y transporte bajo esfuerzo",
+            "1": "Alta demanda para esta persona — espera pagar premium"
+          },
+          "insufficient_data": {
+            "0": "Datos insuficientes — evaluación disponible tras próxima ingesta"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum en aceleración",
         "estable": "Momentum estable",

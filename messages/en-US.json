@@ -505,6 +505,30 @@
           }
         }
       },
+      "n10": {
+        "ideal_senior": "Ideal zone for seniors",
+        "apta_senior": "Senior-friendly",
+        "aceptable": "Acceptable for seniors",
+        "poco_apta": "Not senior-friendly",
+        "insufficient": "Insufficient DGIS/SIGED/GTFS data",
+        "recommendations": {
+          "low": {
+            "0": "Not senior-friendly — hospital far and demanding transit",
+            "1": "Consider zones with 2nd-level hospital <1.5 km and metrobús nearby"
+          },
+          "medium": {
+            "0": "Acceptable zone — check specific accessibility of the address",
+            "1": "Prioritize ground floors or buildings with elevators"
+          },
+          "high": {
+            "0": "Ideal for seniors — health, diversity and low-effort transit",
+            "1": "High demand from this profile — expect to pay a premium"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next ingest"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",

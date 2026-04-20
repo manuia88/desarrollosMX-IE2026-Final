@@ -505,6 +505,30 @@
           }
         }
       },
+      "n10": {
+        "ideal_senior": "Zona ideal para idosos",
+        "apta_senior": "Amigável para idosos",
+        "aceptable": "Aceitável para idosos",
+        "poco_apta": "Pouco amigável para idosos",
+        "insufficient": "Dados DGIS/SIGED/GTFS insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Zona pouco amigável — hospital distante e transporte exigente",
+            "1": "Considere zonas com hospital de 2º nível <1.5 km e BRT próximo"
+          },
+          "medium": {
+            "0": "Zona aceitável — verifique acessibilidade específica do endereço",
+            "1": "Priorize térreos ou edifícios com elevador"
+          },
+          "high": {
+            "0": "Zona ideal para idosos — saúde, diversidade e transporte de baixo esforço",
+            "1": "Alta demanda deste perfil — espere pagar premium"
+          },
+          "insufficient_data": {
+            "0": "Dados insuficientes — avaliação disponível após próxima ingestão"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum acelerando",
         "estable": "Momentum estável",
