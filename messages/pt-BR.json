@@ -409,6 +409,30 @@
           }
         }
       },
+      "n06": {
+        "premium_prime": "Zona prime para famílias",
+        "premium_alto": "Alto premium escolar",
+        "premium_moderado": "Premium escolar moderado",
+        "sin_premium": "Sem premium escolar detectado",
+        "insufficient": "Dados SIGED/mercado insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Sem premium detectado — oportunidade de preço sem compromisso educativo",
+            "1": "Avalie escolas individuais antes de descartar a zona"
+          },
+          "medium": {
+            "0": "Premium moderado — mercado alinhado à qualidade educativa média",
+            "1": "Compare preço/m² com zonas vizinhas de qualidade similar"
+          },
+          "high": {
+            "0": "Zona prime para famílias — espere pagar premium por proximidade escolar",
+            "1": "Verifique vagas escolares antes de comprar — alta demanda"
+          },
+          "insufficient_data": {
+            "0": "Dados insuficientes — avaliação disponível após próxima ingestão SIGED/mercado"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum acelerando",
         "estable": "Momentum estável",

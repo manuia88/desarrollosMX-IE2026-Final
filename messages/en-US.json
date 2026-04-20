@@ -409,6 +409,30 @@
           }
         }
       },
+      "n06": {
+        "premium_prime": "Prime zone for families",
+        "premium_alto": "High school premium",
+        "premium_moderado": "Moderate school premium",
+        "sin_premium": "No school premium detected",
+        "insufficient": "Insufficient SIGED/market data",
+        "recommendations": {
+          "low": {
+            "0": "No premium detected — price opportunity without educational compromise",
+            "1": "Evaluate individual schools before ruling out the zone"
+          },
+          "medium": {
+            "0": "Moderate premium — market aligned with average educational quality",
+            "1": "Compare price/m² with adjacent zones of similar quality"
+          },
+          "high": {
+            "0": "Prime zone for families — expect to pay premium for school proximity",
+            "1": "Check school availability before buying — high demand"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next SIGED/market ingest"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",
