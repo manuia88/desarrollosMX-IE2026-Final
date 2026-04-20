@@ -5274,6 +5274,7 @@ export type Database = {
           tier: number
           trend_direction: string | null
           trend_vs_previous: number | null
+          valid_until: string | null
         }
         Insert: {
           citations?: Json
@@ -5293,6 +5294,7 @@ export type Database = {
           tier: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
+          valid_until?: string | null
         }
         Update: {
           citations?: Json
@@ -5312,6 +5314,7 @@ export type Database = {
           tier?: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
+          valid_until?: string | null
         }
         Relationships: [
           {
@@ -11050,6 +11053,7 @@ export type Database = {
           trend_direction: string | null
           trend_vs_previous: number | null
           user_id: string
+          valid_until: string | null
         }
         Insert: {
           citations?: Json
@@ -11069,6 +11073,7 @@ export type Database = {
           trend_direction?: string | null
           trend_vs_previous?: number | null
           user_id: string
+          valid_until?: string | null
         }
         Update: {
           citations?: Json
@@ -11088,6 +11093,7 @@ export type Database = {
           trend_direction?: string | null
           trend_vs_previous?: number | null
           user_id?: string
+          valid_until?: string | null
         }
         Relationships: [
           {
@@ -11819,6 +11825,7 @@ export type Database = {
           tier: number
           trend_direction: string | null
           trend_vs_previous: number | null
+          valid_until: string | null
           zone_id: string
         }
         Insert: {
@@ -11839,6 +11846,7 @@ export type Database = {
           tier: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
+          valid_until?: string | null
           zone_id: string
         }
         Update: {
@@ -11859,6 +11867,7 @@ export type Database = {
           tier?: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
+          valid_until?: string | null
           zone_id?: string
         }
         Relationships: [

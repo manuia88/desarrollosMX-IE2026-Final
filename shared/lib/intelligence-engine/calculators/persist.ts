@@ -57,9 +57,23 @@ function buildRow(
     provenance: output.provenance,
     trend_vs_previous: output.trend_vs_previous ?? null,
     trend_direction: output.trend_direction ?? null,
+    valid_until: output.valid_until ?? null,
     period_date: input.periodDate,
     computed_at: new Date().toISOString(),
   };
+}
+
+// P1 helper — calcular valid_until dado un ValidityWindow + ancla (computed_at).
+// Centraliza la aritmética para los calculators que usan methodology.validity.
+export function computeValidUntil(
+  anchor: Date,
+  window: { unit: 'hours' | 'days' | 'months'; value: number },
+): string {
+  const d = new Date(anchor.getTime());
+  if (window.unit === 'hours') d.setUTCHours(d.getUTCHours() + window.value);
+  else if (window.unit === 'days') d.setUTCDate(d.getUTCDate() + window.value);
+  else d.setUTCMonth(d.getUTCMonth() + window.value);
+  return d.toISOString();
 }
 
 // U13 — top 3 zonas mismo score+period con valor más cercano (ABS delta ASC).

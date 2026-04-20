@@ -6,6 +6,8 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { recordSpend } from '@/shared/lib/ingest/cost-tracker';
+import { hashUserIdForTelemetry } from '@/shared/lib/telemetry/hash-user-id';
+import { posthog } from '@/shared/lib/telemetry/posthog';
 import { SupabaseScoreQueue } from '../queue';
 import { getScoreById, type ScoreRegistryEntry } from '../registry';
 import type { Calculator, CalculatorInput, CalculatorOutput } from './base';
@@ -114,6 +116,7 @@ export async function runScore(
     };
   }
 
+  const compute_start_ms = performance.now();
   let output: CalculatorOutput;
   try {
     output = await calculator.run(input, supabase);
@@ -124,6 +127,7 @@ export async function runScore(
       registry,
     };
   }
+  const duration_ms = Math.round(performance.now() - compute_start_ms);
 
   // U4 — provenance obligatorio. Si el calculator no lo declara, fail explícito.
   if (!isProvenanceValid(output.provenance)) {
@@ -176,7 +180,67 @@ export async function runScore(
     }
   }
 
+  // U7 — PostHog event ie.score.calculated con props extendidas + hashed user_id (S2).
+  // No-op si NEXT_PUBLIC_POSTHOG_KEY no está set (ver shared/lib/telemetry/posthog.ts).
+  emitScoreCalculatedEvent({ input, registry, output, duration_ms });
+
   return { kind: 'ok', output, registry, persisted };
+}
+
+function computeSourceDataAgeDays(
+  provenance: CalculatorOutput['provenance'],
+  computed_at_ms: number,
+): number | null {
+  if (!provenance || !Array.isArray(provenance.sources)) return null;
+  let max_age_days = 0;
+  let any_snapshot = false;
+  for (const s of provenance.sources) {
+    if (!s.snapshot_date) continue;
+    const snap_ms = Date.parse(s.snapshot_date);
+    if (Number.isNaN(snap_ms)) continue;
+    any_snapshot = true;
+    const days = Math.floor((computed_at_ms - snap_ms) / (1000 * 60 * 60 * 24));
+    if (days > max_age_days) max_age_days = days;
+  }
+  return any_snapshot ? max_age_days : null;
+}
+
+function emitScoreCalculatedEvent(args: {
+  input: CalculatorInput;
+  registry: ScoreRegistryEntry;
+  output: CalculatorOutput;
+  duration_ms: number;
+}): void {
+  try {
+    const { input, registry, output, duration_ms } = args;
+    const components_count =
+      output.components && typeof output.components === 'object'
+        ? Object.keys(output.components).length
+        : 0;
+    const source_data_age_days = computeSourceDataAgeDays(output.provenance, Date.now());
+    const distinctId = input.userId
+      ? hashUserIdForTelemetry(input.userId)
+      : (input.zoneId ?? input.projectId ?? 'ie-anonymous');
+    posthog.capture({
+      distinctId,
+      event: 'ie.score.calculated',
+      properties: {
+        score_id: registry.score_id,
+        zone_id: input.zoneId ?? null,
+        project_id: input.projectId ?? null,
+        hashed_user_id: input.userId ? hashUserIdForTelemetry(input.userId) : null,
+        value: output.score_value,
+        confidence: output.confidence,
+        components_count,
+        duration_ms,
+        source_data_age_days,
+        calculator_version: output.provenance?.calculator_version ?? 'unknown',
+        country_code: input.countryCode,
+      },
+    });
+  } catch {
+    // Telemetría es best-effort — nunca tumba runScore.
+  }
 }
 
 // U3 — helper exposed para calculators que llaman APIs externas con costo.

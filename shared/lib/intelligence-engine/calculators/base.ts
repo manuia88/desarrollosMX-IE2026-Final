@@ -40,6 +40,17 @@ export interface CalculatorOutput<TComponents extends object = Record<string, un
   // OPCIONAL U12 — vars para resolver reasoning_template del calculator sin
   // alucinación (Copilot ⌘J FASE 12). Shape libre string|number.
   readonly template_vars?: Readonly<Record<string, string | number>>;
+  // OPCIONAL P1 — valid_until timestamp explícito. Si se omite, persist.ts lo
+  // deriva de methodology.validity (ver ValidityWindow) sumando al computed_at.
+  readonly valid_until?: string;
+}
+
+// P1 — Validity window por calculator. Expresado en units discretos. persist.ts
+// calcula valid_until = computed_at + window al UPSERT si el calculator no lo
+// override.
+export interface ValidityWindow {
+  readonly unit: 'hours' | 'days' | 'months';
+  readonly value: number;
 }
 
 export interface Calculator<TComponents extends object = Record<string, unknown>> {
