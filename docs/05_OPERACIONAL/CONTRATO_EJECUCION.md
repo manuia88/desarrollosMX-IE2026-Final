@@ -461,24 +461,21 @@ TODO #19 — Setup jsdom + Testing Library para visual UI tests
     - Habilita testing snapshot visual + a11y + interactions sin Playwright
   Estimado: 1-2 horas setup + 4-8 horas migración + nuevos tests.
 
-TODO #21 — Scheduler externo para score-worker (decidir antes de FASE 09)
-  Status: 🟡 ACTIVO — bloqueado por límite Vercel Free plan
-  Origen: PR #16 deployment fail Vercel (4 fix commits intentando reducir
-          frecuencia, finalmente removido cron de vercel.json para pasar
-          deploy). Plan Free permite max ~9 crons; #10 score-worker
-          rechazado independiente de frecuencia.
-  Estado actual: worker code intacto (/api/cron/score-worker/route.ts),
-                 invocable manual con curl + DEV_CRON_SECRET. Sin scheduler
-                 automático en producción.
-  3 opciones:
-    A) Upgrade Vercel Hobby/Free → Pro ($20/mo) — habilita 40 crons + cada minuto
-    B) trigger.dev free tier — scheduler externo gratis, llama webhook DMX
-    C) GitHub Actions schedule — cron */5 * * * * gratis, llama webhook DMX
-  Recomendación: C (GitHub Actions) — costo $0, infra ya conocida, control
-                 total. Trigger.dev tiene tier free pero más infra externa.
-                 Pro Vercel justificable cuando volumen real H2 demande.
-  Acción: implementar opción elegida durante housekeeping pre-FASE 09 o
-          como mini-fase dedicada.
+TODO #21 — Upgrade Vercel Pro cuando producción demande mayor frecuencia
+  Status: 🟢 RESUELTO H1 con cron daily — upgrade pendiente H2 producción
+  Origen: PR #16 deployment fail Vercel (5 fix commits para identificar
+          causa). Plan Free acepta cron diario; rechaza hourly/cada-X-min
+          independiente de cantidad total.
+  Solución H1 aplicada: score-worker cron "0 8 * * *" (daily 8am UTC = 2am
+                        CDMX) — alineado con resto de crons existentes.
+                        Cascadas event-driven (BLOQUE 8.F) cubren la mayoría
+                        de updates en runtime, worker tick diario procesa
+                        backlog acumulado.
+  Trigger upgrade Vercel Pro ($20/mo): cuando volumen real H2 demande
+    procesamiento sub-hora. Habilita cron por minuto + 40 cron jobs total.
+  Decisión founder 2026-04-20: "ya que estemos 100% producción, pagamos Pro".
+  Alternativa H1 si se necesita más frecuencia antes upgrade: GitHub Actions
+    schedule cron */5 * * * * gratis llamando webhook DMX score-worker.
 
 TODO #20 — IE_MONTHLY_BUDGET_USD en Vercel Production + Preview envs
   Status: 🔴 PRE-DEPLOY OBLIGATORIO — antes de merge main
