@@ -166,6 +166,13 @@
         "riesgoso": "High risk",
         "insufficient": "Insufficient FGJ data"
       },
+      "f02": {
+        "excelente": "Excellent transit",
+        "bueno": "Good transit",
+        "moderado": "Moderate transit",
+        "limitado": "Limited transit",
+        "insufficient": "Insufficient GTFS data"
+      },
       "f04": {
         "pending_h2": "Available in PHASE 29 (RAMA data pending)"
       },

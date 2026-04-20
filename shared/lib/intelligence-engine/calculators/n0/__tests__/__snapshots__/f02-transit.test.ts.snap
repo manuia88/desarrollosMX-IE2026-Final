@@ -1,0 +1,86 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`F02 Transit calculator > 16 zonas CDMX — snapshot valores + confidence 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.f02.limitado",
+    "value": 32,
+  },
+  "Contreras Centro": {
+    "confidence": "insufficient_data",
+    "label": "ie.score.f02.insufficient",
+    "value": 0,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.f02.limitado",
+    "value": 36,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "insufficient_data",
+    "label": "ie.score.f02.insufficient",
+    "value": 0,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "label": "ie.score.f02.bueno",
+    "value": 77,
+  },
+  "Iztacalco Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f02.limitado",
+    "value": 26,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "medium",
+    "label": "ie.score.f02.limitado",
+    "value": 21,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.f02.limitado",
+    "value": 33,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "insufficient_data",
+    "label": "ie.score.f02.insufficient",
+    "value": 0,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.f02.excelente",
+    "value": 80,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.f02.excelente",
+    "value": 80,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "label": "ie.score.f02.moderado",
+    "value": 46,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.f02.bueno",
+    "value": 71,
+  },
+  "Tlalpan Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f02.limitado",
+    "value": 7,
+  },
+  "Tláhuac Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f02.limitado",
+    "value": 21,
+  },
+  "Xochimilco Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f02.limitado",
+    "value": 21,
+  },
+}
+`;

@@ -166,6 +166,13 @@
         "riesgoso": "Alto risco",
         "insufficient": "Dados FGJ insuficientes"
       },
+      "f02": {
+        "excelente": "Transporte excelente",
+        "bueno": "Bom transporte",
+        "moderado": "Transporte moderado",
+        "limitado": "Transporte limitado",
+        "insufficient": "Dados GTFS insuficientes"
+      },
       "f04": {
         "pending_h2": "Disponível na FASE 29 (dados RAMA pendentes)"
       },
