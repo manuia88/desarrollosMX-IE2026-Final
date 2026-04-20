@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T16:41:23.763Z",
+  "generated_at": "2026-04-20T19:12:12.165Z",
   "version": 1,
   "count": 118,
   "by_level": {
@@ -999,14 +999,15 @@
       "tier": 2,
       "dependencies": [
         "F08",
-        "A12"
+        "A12",
+        "N11"
       ],
       "triggers_cascade": [],
       "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#f09-value-score",
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/f09-value.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/f09-value.ts",
       "country_codes": [
         "MX"
       ]
@@ -1018,6 +1019,10 @@
       "category": "zona",
       "tier": 3,
       "dependencies": [
+        "N03",
+        "N04",
+        "N01",
+        "A04",
         "D05"
       ],
       "triggers_cascade": [
@@ -1027,7 +1032,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/f10-gentrification.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/f10-gentrification-2.ts",
       "country_codes": [
         "MX"
       ]
@@ -1041,7 +1046,8 @@
       "dependencies": [
         "A12",
         "B08",
-        "B07"
+        "B07",
+        "N11"
       ],
       "triggers_cascade": [
         "unit_sold",
@@ -1051,7 +1057,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/b03-pricing.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/b03-pricing-autopilot.ts",
       "country_codes": [
         "MX"
       ]
@@ -1063,7 +1069,10 @@
       "category": "mercado",
       "tier": 3,
       "dependencies": [
-        "B08"
+        "B01",
+        "B08",
+        "N11",
+        "A12"
       ],
       "triggers_cascade": [
         "macro_updated"
@@ -1072,7 +1081,7 @@
       "confidence_sources": [
         "macro_series"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/b05-market-cycle.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/b05-market-cycle.ts",
       "country_codes": [
         "MX"
       ]
@@ -1084,7 +1093,10 @@
       "category": "dev",
       "tier": 3,
       "dependencies": [
-        "B12"
+        "B08",
+        "B12",
+        "B05",
+        "B10"
       ],
       "triggers_cascade": [
         "unit_sold"
@@ -1094,7 +1106,7 @@
         "operaciones",
         "esquemas_pago"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/b09-cashflow.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/b09-cash-flow.ts",
       "country_codes": [
         "MX"
       ]
@@ -1106,6 +1118,9 @@
       "category": "dev",
       "tier": 3,
       "dependencies": [
+        "C01",
+        "B03",
+        "B04",
         "A12"
       ],
       "triggers_cascade": [],
@@ -1113,7 +1128,7 @@
       "confidence_sources": [
         "unidades"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/b10-unit-revenue.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/b10-unit-revenue-opt.ts",
       "country_codes": [
         "MX"
       ]
@@ -1124,14 +1139,19 @@
       "level": 2,
       "category": "dev",
       "tier": 3,
-      "dependencies": [],
+      "dependencies": [
+        "B07",
+        "N01",
+        "F08",
+        "B04"
+      ],
       "triggers_cascade": [],
       "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#b13-amenity-roi",
       "confidence_sources": [
         "unidades",
         "market_prices_secondary"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/b13-amenity-roi.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/b13-amenity-roi.ts",
       "country_codes": [
         "MX"
       ]
@@ -1150,7 +1170,7 @@
       "confidence_sources": [
         "search_logs"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/b14-buyer-persona-proyecto.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/b14-buyer-persona-proyecto.ts",
       "country_codes": [
         "MX"
       ]
@@ -1162,7 +1182,10 @@
       "category": "dev",
       "tier": 3,
       "dependencies": [
-        "B05"
+        "B05",
+        "D03",
+        "N11",
+        "B01"
       ],
       "triggers_cascade": [
         "macro_updated"
@@ -1172,7 +1195,7 @@
         "search_trends",
         "macro_series"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/b15-launch-timing.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/b15-launch-timing.ts",
       "country_codes": [
         "MX"
       ]
@@ -1193,7 +1216,7 @@
         "feedback",
         "behavior"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/c01-lead-score.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/c01-lead-score.ts",
       "country_codes": [
         "MX"
       ]
@@ -1204,7 +1227,9 @@
       "level": 2,
       "category": "comprador",
       "tier": 4,
-      "dependencies": [],
+      "dependencies": [
+        "N11"
+      ],
       "triggers_cascade": [
         "search_behavior"
       ],
@@ -1212,7 +1237,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/c03-matching.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/c03-matching-engine.ts",
       "country_codes": [
         "MX"
       ]
@@ -1223,14 +1248,16 @@
       "level": 2,
       "category": "mercado",
       "tier": 3,
-      "dependencies": [],
+      "dependencies": [
+        "B01"
+      ],
       "triggers_cascade": [],
       "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#d03-supply-pipeline",
       "confidence_sources": [
         "projects",
         "seduvi"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/d03-supply-pipeline.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/d03-supply-pipeline.ts",
       "country_codes": [
         "MX"
       ]
@@ -1242,16 +1269,16 @@
       "category": "comprador",
       "tier": 3,
       "dependencies": [
-        "N03",
         "F09",
-        "N11"
+        "N11",
+        "A04"
       ],
       "triggers_cascade": [],
       "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#h12-zona-oportunidad",
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/h12-zona-oportunidad.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/h12-zona-oportunidad.ts",
       "country_codes": [
         "MX"
       ]
@@ -1263,7 +1290,6 @@
       "category": "comprador",
       "tier": 3,
       "dependencies": [
-        "N01",
         "F10"
       ],
       "triggers_cascade": [],
@@ -1271,7 +1297,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n2/h16-neighborhood-evolution.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n2/h16-neighborhood-evolution.ts",
       "country_codes": [
         "MX"
       ]

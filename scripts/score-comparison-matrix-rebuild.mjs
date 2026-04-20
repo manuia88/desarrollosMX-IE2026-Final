@@ -12,9 +12,24 @@ import { createClient } from '@supabase/supabase-js';
 
 const SCORES_TO_INCLUDE = [
   // Core N1
-  'F08', 'F12', 'H07', 'A06', 'A12', 'B01', 'B02', 'H05', 'H14',
+  'F08',
+  'F12',
+  'H07',
+  'A06',
+  'A12',
+  'B01',
+  'B02',
+  'H05',
+  'H14',
   // N2 de interés A08 comparador (8 dimensions N3)
-  'F09', 'F10', 'B03', 'B05', 'B09', 'B13', 'H12', 'H16',
+  'F09',
+  'F10',
+  'B03',
+  'B05',
+  'B09',
+  'B13',
+  'H12',
+  'H16',
 ];
 
 const VALID_DAYS = 1;
@@ -47,7 +62,6 @@ function buildMatrix(rows) {
 }
 
 async function rebuildCountry(admin, countryCode) {
-  const today = new Date().toISOString().slice(0, 10);
   const validUntil = new Date();
   validUntil.setUTCDate(validUntil.getUTCDate() + VALID_DAYS);
 
