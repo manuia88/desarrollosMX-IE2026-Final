@@ -361,6 +361,30 @@
           }
         }
       },
+      "n04": {
+        "mejorando_fuerte": "Strongly improving safety",
+        "mejorando": "Improving safety",
+        "estable": "Stable safety",
+        "empeorando": "Worsening safety",
+        "insufficient": "Insufficient FGJ trajectory data",
+        "recommendations": {
+          "low": {
+            "0": "Worsening trend — evaluate safety before buying",
+            "1": "Review FGJ figures by category (violent vs property crimes)"
+          },
+          "medium": {
+            "0": "Stable trajectory — no significant 12-month changes",
+            "1": "Monitor quarterly FGJ reports for the zone"
+          },
+          "high": {
+            "0": "Improving trajectory — sustained crime reduction",
+            "1": "Attractive zone for families and long-term investment"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next FGJ update"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",

@@ -361,6 +361,30 @@
           }
         }
       },
+      "n04": {
+        "mejorando_fuerte": "Segurança melhorando forte",
+        "mejorando": "Segurança melhorando",
+        "estable": "Segurança estável",
+        "empeorando": "Segurança piorando",
+        "insufficient": "Dados FGJ insuficientes para trajetória",
+        "recommendations": {
+          "low": {
+            "0": "Tendência piorando — avalie segurança antes de comprar",
+            "1": "Consulte dados FGJ por categoria (violentos vs patrimoniais)"
+          },
+          "medium": {
+            "0": "Trajetória estável — sem mudanças significativas em 12 meses",
+            "1": "Monitore relatórios FGJ trimestrais da zona"
+          },
+          "high": {
+            "0": "Trajetória melhorando — redução sustentada de crimes",
+            "1": "Zona atrativa para famílias e investimento de longo prazo"
+          },
+          "insufficient_data": {
+            "0": "Dados insuficientes — avaliação disponível após próxima atualização FGJ"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum acelerando",
         "estable": "Momentum estável",
