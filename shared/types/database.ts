@@ -11803,6 +11803,7 @@ export type Database = {
       zone_scores: {
         Row: {
           citations: Json
+          comparable_zones: Json
           components: Json
           computed_at: string
           confidence: string
@@ -11822,6 +11823,7 @@ export type Database = {
         }
         Insert: {
           citations?: Json
+          comparable_zones?: Json
           components?: Json
           computed_at?: string
           confidence: string
@@ -11841,6 +11843,7 @@ export type Database = {
         }
         Update: {
           citations?: Json
+          comparable_zones?: Json
           components?: Json
           computed_at?: string
           confidence?: string

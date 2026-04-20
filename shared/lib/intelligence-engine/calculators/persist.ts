@@ -5,6 +5,11 @@
 // Las 3 funciones respetan UNIQUE(entity_id, score_type, period_date) y el
 // trigger archive_score_before_update (BEFORE UPDATE) inserta la fila anterior
 // en score_history automáticamente — no se llama explícitamente desde aquí.
+//
+// U13 v3 — comparable_zones precalculadas al persistir (solo zone_scores).
+// Migration 20260419213000_ie_zone_scores_comparable_zones.sql agrega la
+// columna jsonb. Top 3 zonas con mismo score_type + period_date y valor más
+// cercano (ABS(value - new_value) ASC). Vacío [] si <3 zonas disponibles.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { ScoreRegistryEntry } from '../registry';
@@ -22,6 +27,12 @@ function castFrom(supabase: SupabaseClient, table: string) {
 export interface PersistResult {
   readonly ok: boolean;
   readonly error?: string;
+}
+
+export interface ComparableZone {
+  readonly zone_id: string;
+  readonly value: number;
+  readonly delta: number;
 }
 
 function buildRow(
@@ -51,6 +62,43 @@ function buildRow(
   };
 }
 
+// U13 — top 3 zonas mismo score+period con valor más cercano (ABS delta ASC).
+// Returns [] si <3 zonas disponibles o si la query falla.
+export async function computeComparableZones(
+  supabase: SupabaseClient,
+  scoreType: string,
+  periodDate: string,
+  selfZoneId: string,
+  selfValue: number,
+): Promise<readonly ComparableZone[]> {
+  try {
+    const { data, error } = await castFrom(supabase, 'zone_scores')
+      .select('zone_id, score_value')
+      .eq('score_type', scoreType)
+      .eq('period_date', periodDate)
+      .neq('zone_id', selfZoneId);
+
+    if (error || !data) return [];
+
+    const rows = data as unknown as Array<{ zone_id: string; score_value: number }>;
+    if (rows.length < 3) return [];
+
+    return rows
+      .filter((r) => typeof r.score_value === 'number' && Number.isFinite(r.score_value))
+      .map(
+        (r): ComparableZone => ({
+          zone_id: r.zone_id,
+          value: r.score_value,
+          delta: Math.abs(r.score_value - selfValue),
+        }),
+      )
+      .sort((a, b) => a.delta - b.delta)
+      .slice(0, 3);
+  } catch {
+    return [];
+  }
+}
+
 export async function persistZoneScore(
   supabase: SupabaseClient,
   output: CalculatorOutput,
@@ -58,7 +106,18 @@ export async function persistZoneScore(
   input: CalculatorInput,
 ): Promise<PersistResult> {
   if (!input.zoneId) return { ok: false, error: 'zoneId required for zone score' };
+
+  const comparableZones = await computeComparableZones(
+    supabase,
+    registry.score_id,
+    input.periodDate,
+    input.zoneId,
+    output.score_value,
+  );
+
   const row = buildRow(output, registry, input, 'zone_id', input.zoneId);
+  row.comparable_zones = comparableZones;
+
   const { error } = await castFrom(supabase, 'zone_scores').upsert(row as never, {
     onConflict: 'zone_id,score_type,period_date',
   });
