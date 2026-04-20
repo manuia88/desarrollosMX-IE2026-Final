@@ -433,6 +433,30 @@
           }
         }
       },
+      "n07": {
+        "seguridad_alta": "High water security",
+        "seguridad_aceptable": "Acceptable water security",
+        "tension_moderada": "Moderate water stress",
+        "crisis_cronica": "Chronic water crisis",
+        "insufficient": "Insufficient SACMEX/CONAGUA data",
+        "recommendations": {
+          "low": {
+            "0": "Chronic water crisis — plan for cistern + additional tank",
+            "1": "Factor in private water-truck costs during dry season"
+          },
+          "medium": {
+            "0": "Moderate water stress — check rationing schedule",
+            "1": "Install filters and pressure backup"
+          },
+          "high": {
+            "0": "Zone with water security — reliable continuous service",
+            "1": "Keep cost expectations aligned with robust water infrastructure"
+          },
+          "insufficient_data": {
+            "0": "Insufficient data — assessment available after next SACMEX/CONAGUA ingest"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",

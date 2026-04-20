@@ -433,6 +433,30 @@
           }
         }
       },
+      "n07": {
+        "seguridad_alta": "Seguridad hídrica alta",
+        "seguridad_aceptable": "Seguridad hídrica aceptable",
+        "tension_moderada": "Tensión hídrica moderada",
+        "crisis_cronica": "Crisis hídrica crónica",
+        "insufficient": "Datos SACMEX/CONAGUA insuficientes",
+        "recommendations": {
+          "low": {
+            "0": "Crisis hídrica crónica — planea tanque adicional",
+            "1": "Considera costos de carros tanque en temporada seca"
+          },
+          "medium": {
+            "0": "Tensión hídrica moderada — revisa calendario de racionamiento",
+            "1": "Instala filtros y presurización como respaldo"
+          },
+          "high": {
+            "0": "Zona con seguridad hídrica — servicio continuo confiable",
+            "1": "Mantén expectativas de costo asociadas a infraestructura hídrica robusta"
+          },
+          "insufficient_data": {
+            "0": "Datos insuficientes — evaluación disponible tras próxima ingesta SACMEX/CONAGUA"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum en aceleración",
         "estable": "Momentum estable",
