@@ -251,6 +251,13 @@
         "crisis_severa": "Severe water crisis",
         "insufficient": "Insufficient SACMEX/CONAGUA data"
       },
+      "h11": {
+        "capacidad_alta": "High Infonavit credit capacity",
+        "capacidad_media": "Medium Infonavit credit capacity",
+        "capacidad_baja": "Low Infonavit credit capacity",
+        "capacidad_minima": "Minimal Infonavit credit capacity",
+        "insufficient": "Insufficient Infonavit data"
+      },
       "h06": {
         "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
       }

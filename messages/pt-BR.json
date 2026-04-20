@@ -251,6 +251,13 @@
         "crisis_severa": "Crise hídrica severa",
         "insufficient": "Dados SACMEX/CONAGUA insuficientes"
       },
+      "h11": {
+        "capacidad_alta": "Alta capacidade de crédito Infonavit",
+        "capacidad_media": "Capacidade de crédito Infonavit média",
+        "capacidad_baja": "Capacidade de crédito Infonavit baixa",
+        "capacidad_minima": "Capacidade de crédito Infonavit mínima",
+        "insufficient": "Dados Infonavit insuficientes"
+      },
       "h06": {
         "pending_h2": "Disponível na FASE 29 (dados 0311 Locatel pendentes)"
       }
