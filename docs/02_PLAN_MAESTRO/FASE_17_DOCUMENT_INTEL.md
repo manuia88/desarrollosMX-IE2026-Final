@@ -499,5 +499,16 @@ Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR
 FASE 18 — Legal + Pagos + Escrow (Mifiel + Stripe Connect + apartado + pre-aprobación crediticia)
 
 ---
+
+## Laterals pipeline (proposed durante ejecución previa)
+
+Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
+
+Aplican en esta fase:
+- **L10 DMX Property Fax** (Carfax pattern) — historial completo propiedad (ventas pasadas, avalúos, gravámenes, cambios uso suelo, propietarios anonymized) en reporte único firmado DMX, vendible $50-200/reporte. Bloque sugerido: nuevo BLOQUE 17.PROPERTY_FAX que combina Document Intel pipeline + AVM I01 + score history en producto B2C estandarizado.
+
+Al ejecutar FASE 17, revisar status en pipeline maestro y confirmar incorporación al scope.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
 **Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)

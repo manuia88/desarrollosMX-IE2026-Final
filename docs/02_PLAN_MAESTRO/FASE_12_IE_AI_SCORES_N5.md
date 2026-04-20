@@ -336,4 +336,15 @@ Framework: cada N5 tiene (a) prompt versionado en `ai_prompt_versions`, (b) inpu
 [FASE 13 — Portal Asesor M01-M05](./FASE_13_PORTAL_ASESOR_M1_M5.md)
 
 ---
+
+## Laterals pipeline (proposed durante ejecución previa)
+
+Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
+
+Aplican en esta fase:
+- **L14 DMX Living Map** (Trulia Crime Map pattern) — capa visual unificada de TODOS los scores DMX en mapa interactivo con heatmaps superponibles. Killer feature visual + viral. Bloque sugerido: integrar en BLOQUE Mapa 7 Capas Mapbox como capa "All Scores Heatmap" + UI toggle por dimensión (safety, walkability, water, momentum, etc.).
+
+Al ejecutar FASE 12, revisar status en pipeline maestro y confirmar incorporación al scope.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17
