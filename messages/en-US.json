@@ -196,6 +196,33 @@
       "f07": {
         "pending_h2": "Available in PHASE 29 (Catastro data pending)"
       },
+      "h01": {
+        "excelente": "Excellent education",
+        "buena": "Good education",
+        "moderada": "Moderate education",
+        "limitada": "Limited education",
+        "insufficient": "Insufficient SIGED data"
+      },
+      "h02": {
+        "excelente": "Excellent health access",
+        "buena": "Good health access",
+        "moderada": "Moderate health access",
+        "limitada": "Limited health access",
+        "insufficient": "Insufficient DGIS data"
+      },
+      "h03": {
+        "bajo": "Low seismic risk",
+        "medio": "Medium seismic risk",
+        "alto": "High seismic risk",
+        "muy_alto": "Very high seismic risk",
+        "insufficient": "Insufficient Atlas data"
+      },
+      "b12": {
+        "normal": "Normal cost index",
+        "warning": "Rising cost pressure",
+        "critical": "Critical cost pressure",
+        "insufficient": "Insufficient INPP data"
+      },
       "h06": {
         "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
       }

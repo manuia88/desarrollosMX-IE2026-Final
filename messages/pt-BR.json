@@ -196,6 +196,33 @@
       "f07": {
         "pending_h2": "Disponível na FASE 29 (dados Catastro pendentes)"
       },
+      "h01": {
+        "excelente": "Educação excelente",
+        "buena": "Educação boa",
+        "moderada": "Educação moderada",
+        "limitada": "Educação limitada",
+        "insufficient": "Dados SIGED insuficientes"
+      },
+      "h02": {
+        "excelente": "Acesso a saúde excelente",
+        "buena": "Acesso a saúde bom",
+        "moderada": "Acesso a saúde moderado",
+        "limitada": "Acesso a saúde limitado",
+        "insufficient": "Dados DGIS insuficientes"
+      },
+      "h03": {
+        "bajo": "Risco sísmico baixo",
+        "medio": "Risco sísmico médio",
+        "alto": "Risco sísmico alto",
+        "muy_alto": "Risco sísmico muito alto",
+        "insufficient": "Dados Atlas Riscos insuficientes"
+      },
+      "b12": {
+        "normal": "Custos normais",
+        "warning": "Custos em alta",
+        "critical": "Custos em crise",
+        "insufficient": "Dados INPP insuficientes"
+      },
       "h06": {
         "pending_h2": "Disponível na FASE 29 (dados 0311 Locatel pendentes)"
       }
