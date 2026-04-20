@@ -764,6 +764,9 @@ Aplican en esta fase:
 - **L17 Score Story formato vertical** (Snapchat Stories pattern) — experiencia móvil-first inmersiva tap por tap mostrando cada dimensión de la zona. Bloque sugerido: nuevo modo "explorar zona inmersivo" en mobile, complementario al modo desktop tabular.
 - **L18 Score Reactions con emoji DUAL PURPOSE** (Discord Reactions pattern) — usuarios reaccionan con 👍🔥😱❤️ a cada score. CRÍTICO: cada reacción es signal behavioral para PPD Capa 3 inference engine (ADR-021 actualizado 2026-04-20). Bloque sugerido: integrar en BLOQUE 20.L M-VIBE-TAGS-UI o nuevo BLOQUE 20.REACTIONS — wire al engine de inferencia preferences automático.
 - **L19 Comparison Gallery drag-and-drop** (Notion Galleries pattern) — usuario arrastra hasta 5 zonas/propiedades a canvas compartible para comparar visualmente. CRUZA con innovation #26 ya aprobada (Comparador Multidimensional) — extender con UX free-form drag-drop estilo Notion + share kit.
+- **L25 Score Health Check periódico** (Mint pattern) — dashboard semanal/mensual personalizado "salud de tu zona/portfolio" con F08 + A05 + A12 + tendencias. Bloque sugerido: nueva sección "Salud" en dashboard portal comprador, alimentada por delta tracking D2 + email mensual via Resend (FASE 22).
+- **L26 Zone Discovery Swipe** (Tinder pattern) — swipe deck móvil para pre-filtrar zonas por match N1 antes de listings detallados. CRUZA con innovations #5 Visual Preference Learning + #10 Swipe Mode ya aprobadas. Extender con uso de N1 buyer_persona H14 + alimentar PPD Capa 3 inference engine.
+- **L28 AI Portfolio Recommender** (Wealthfront pattern) — comprador da presupuesto + preferencias → AI recomienda portfolio óptimo (1 o múltiples propiedades). Bloque sugerido: nuevo BLOQUE 20.PORTFOLIO_RECOMMENDER usando N1 scores A02 + A05 + A06 + A12 + AVM I01 + buyer_persona H14.
 
 Al ejecutar FASE 20, revisar status en pipeline maestro y confirmar incorporación al scope.
 

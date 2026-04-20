@@ -587,6 +587,7 @@ Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
 
 Aplican en esta fase:
 - **L15 Score Layers Toggle** (Strava Heatmaps pattern) — usuario activa/desactiva visualización de scores específicos como capas overlay sobre /explorar. Bloque sugerido: integrar en `/explorar` con panel de toggle layers (safety, walkability, water, momentum, etc.) sobre Mapbox heatmaps.
+- **L29 DMX Trending Zones público** (GitHub Trending pattern) — página pública `/trending` con zonas más exploradas/buscadas en últimas 24h/semana/mes. Discovery social + viralidad orgánica + SEO. Bloque sugerido: nueva ruta `/trending` alimentada por N1 score B01 Demand Heatmap + search_logs + project_views.
 
 Al ejecutar FASE 21, revisar status en pipeline maestro y confirmar incorporación al scope.
 
