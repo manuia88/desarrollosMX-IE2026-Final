@@ -10,9 +10,6 @@ import {
 } from '@/shared/lib/intelligence-engine/cascades/dependency-graph';
 import { createClient } from '@/shared/lib/supabase/server';
 
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
-
 export async function GET() {
   const supabase = await createClient();
   const { data: isSuper, error } = await supabase.rpc('is_superadmin');

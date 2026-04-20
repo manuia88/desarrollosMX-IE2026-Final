@@ -6,9 +6,6 @@ import { executeReplay, ReplayInputSchema } from '@/shared/lib/intelligence-engi
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { createClient } from '@/shared/lib/supabase/server';
 
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
-
 export async function POST(req: Request) {
   const supabase = await createClient();
   const { data: isSuper, error: rpcError } = await supabase.rpc('is_superadmin');

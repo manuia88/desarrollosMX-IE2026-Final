@@ -101,7 +101,7 @@ async function persistAnomaly(
   marker: AnomalyMarker,
 ): Promise<boolean> {
   try {
-    const { error } = await lax(supabase).from('market_anomalies').insert({
+    const row = {
       score_id: input.scoreId,
       entity_type: input.entityType,
       entity_id: input.entityId,
@@ -111,7 +111,8 @@ async function persistAnomaly(
       value_baseline: marker.baseline,
       deviation_sigma: marker.deviation_sigma,
       baseline_samples_count: marker.samples,
-    });
+    } as never;
+    const { error } = await lax(supabase).from('market_anomalies').insert(row);
     if (error) return false;
   } catch {
     return false;
@@ -133,9 +134,10 @@ async function updateScoreAnomalyFlag(
   if (!table) return;
   try {
     const idColumn = input.entityType === 'zone' ? 'zone_id' : 'project_id';
+    const payload = { anomaly: marker } as never;
     await lax(supabase)
       .from(table)
-      .update({ anomaly: marker })
+      .update(payload)
       .eq(idColumn, input.entityId)
       .eq('score_type', input.scoreId)
       .eq('period_date', input.periodDate);

@@ -13,8 +13,6 @@ import { NextResponse } from 'next/server';
 import { runScore } from '@/shared/lib/intelligence-engine/calculators/run-score';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
 export const maxDuration = 300;
 
 interface ClaimedJob {

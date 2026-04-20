@@ -78,19 +78,20 @@ export async function executeReplay(
   // Persist audit log entry
   let logId: string | undefined;
   try {
+    const insertRow = {
+      triggered_by: triggeredBy,
+      cascade_event: input.cascade_event,
+      target_filter: input.target_filter,
+      period_from: input.period_from,
+      period_to: input.period_to,
+      dry_run: input.dry_run,
+      jobs_enqueued: input.dry_run ? 0 : jobsPlanned,
+      status: input.dry_run ? 'completed' : 'started',
+      completed_at: input.dry_run ? new Date().toISOString() : null,
+    } as never;
     const { data } = await lax(supabase)
       .from('cascade_replay_log')
-      .insert({
-        triggered_by: triggeredBy,
-        cascade_event: input.cascade_event,
-        target_filter: input.target_filter,
-        period_from: input.period_from,
-        period_to: input.period_to,
-        dry_run: input.dry_run,
-        jobs_enqueued: input.dry_run ? 0 : jobsPlanned,
-        status: input.dry_run ? 'completed' : 'started',
-        completed_at: input.dry_run ? new Date().toISOString() : null,
-      })
+      .insert(insertRow)
       .select('id')
       .single();
     logId = (data as { id?: string } | null)?.id;
@@ -98,14 +99,14 @@ export async function executeReplay(
     // log best-effort
   }
 
+  const base = {
+    jobs_enqueued: 0,
+    scores_affected: scores,
+    ...(logId !== undefined ? { log_id: logId } : {}),
+  };
+
   if (input.dry_run) {
-    return {
-      ok: true,
-      log_id: logId,
-      jobs_enqueued: 0,
-      scores_affected: scores,
-      dry_run: true,
-    };
+    return { ok: true, dry_run: true, ...base };
   }
 
   // F4 — Cost guard check antes de real enqueue. Si excede budget → abort.
@@ -114,21 +115,13 @@ export async function executeReplay(
   if (!guard.allowed) {
     return {
       ok: false,
-      log_id: logId,
-      jobs_enqueued: 0,
-      scores_affected: scores,
       dry_run: false,
       error: guard.reason ?? 'cost_guard_denied',
+      ...base,
     };
   }
 
   // Real enqueue stub: jobs_enqueued=0 hasta que consumer wire enqueue_score_recalc
   // per score × per entity. Infraestructura lista (cost guard + audit log).
-  return {
-    ok: true,
-    log_id: logId,
-    jobs_enqueued: 0,
-    scores_affected: scores,
-    dry_run: false,
-  };
+  return { ok: true, dry_run: false, ...base };
 }
