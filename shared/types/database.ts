@@ -5262,12 +5262,14 @@ export type Database = {
           computed_at: string
           confidence: string
           country_code: string
+          deltas: Json
           id: string
           inputs_used: Json
           level: number
           period_date: string
           project_id: string
           provenance: Json
+          ranking: Json
           score_label: string | null
           score_type: string
           score_value: number
@@ -5282,12 +5284,14 @@ export type Database = {
           computed_at?: string
           confidence: string
           country_code: string
+          deltas?: Json
           id?: string
           inputs_used?: Json
           level: number
           period_date: string
           project_id: string
           provenance?: Json
+          ranking?: Json
           score_label?: string | null
           score_type: string
           score_value: number
@@ -5302,12 +5306,14 @@ export type Database = {
           computed_at?: string
           confidence?: string
           country_code?: string
+          deltas?: Json
           id?: string
           inputs_used?: Json
           level?: number
           period_date?: string
           project_id?: string
           provenance?: Json
+          ranking?: Json
           score_label?: string | null
           score_type?: string
           score_value?: number
@@ -11814,11 +11820,13 @@ export type Database = {
           computed_at: string
           confidence: string
           country_code: string
+          deltas: Json
           id: string
           inputs_used: Json
           level: number
           period_date: string
           provenance: Json
+          ranking: Json
           score_label: string | null
           score_type: string
           score_value: number
@@ -11835,11 +11843,13 @@ export type Database = {
           computed_at?: string
           confidence: string
           country_code: string
+          deltas?: Json
           id?: string
           inputs_used?: Json
           level: number
           period_date: string
           provenance?: Json
+          ranking?: Json
           score_label?: string | null
           score_type: string
           score_value: number
@@ -11856,11 +11866,13 @@ export type Database = {
           computed_at?: string
           confidence?: string
           country_code?: string
+          deltas?: Json
           id?: string
           inputs_used?: Json
           level?: number
           period_date?: string
           provenance?: Json
+          ranking?: Json
           score_label?: string | null
           score_type?: string
           score_value?: number

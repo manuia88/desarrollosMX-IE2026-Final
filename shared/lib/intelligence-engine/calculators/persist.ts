@@ -10,6 +10,17 @@
 // Migration 20260419213000_ie_zone_scores_comparable_zones.sql agrega la
 // columna jsonb. Top 3 zonas con mismo score_type + period_date y valor más
 // cercano (ABS(value - new_value) ASC). Vacío [] si <3 zonas disponibles.
+//
+// D2 v4 — deltas first-class (3m/6m/12m).
+// Migration 20260419215000_ie_scores_v3_deltas_ranking.sql agrega columna
+// jsonb deltas en zone_scores + project_scores. persist.ts consulta
+// score_history lookback ±15 días al T-3m/6m/12m y computa delta =
+// currentValue − lookbackValue. null si no hay data en la ventana.
+//
+// D3 v4 — ranking explícito vs todas zonas país.
+// Mismo migration agrega columna jsonb ranking. persist.ts cuenta pre-UPSERT
+// zonas/proyectos mismo country+score+period con value > currentValue.
+// position = count + 1. percentile = (1 − position/total) × 100.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { ScoreRegistryEntry } from '../registry';
@@ -33,6 +44,21 @@ export interface ComparableZone {
   readonly zone_id: string;
   readonly value: number;
   readonly delta: number;
+}
+
+// D2 — deltas lookback 3m/6m/12m (null si no hay data en la ventana ±15d).
+export interface ScoreDeltas {
+  readonly '3m': number | null;
+  readonly '6m': number | null;
+  readonly '12m': number | null;
+}
+
+// D3 — ranking vs todas zonas/proyectos mismo country+score+period.
+// position = count(value > currentValue) + 1. percentile = (1 − position/total) × 100.
+export interface ScoreRanking {
+  readonly position: number;
+  readonly total: number;
+  readonly percentile: number;
 }
 
 function buildRow(
@@ -74,6 +100,118 @@ export function computeValidUntil(
   else if (window.unit === 'days') d.setUTCDate(d.getUTCDate() + window.value);
   else d.setUTCMonth(d.getUTCMonth() + window.value);
   return d.toISOString();
+}
+
+// D2 — helper: sustrae N meses a una ISO date YYYY-MM-DD (UTC-safe).
+function subtractMonths(periodDate: string, months: number): Date {
+  const d = new Date(`${periodDate}T00:00:00Z`);
+  d.setUTCMonth(d.getUTCMonth() - months);
+  return d;
+}
+
+// D2 — helper: ventana ±15 días alrededor de target, devuelve ISO YYYY-MM-DD.
+function windowBounds(target: Date): { from: string; to: string } {
+  const from = new Date(target.getTime());
+  from.setUTCDate(from.getUTCDate() - 15);
+  const to = new Date(target.getTime());
+  to.setUTCDate(to.getUTCDate() + 15);
+  return {
+    from: from.toISOString().slice(0, 10),
+    to: to.toISOString().slice(0, 10),
+  };
+}
+
+// D2 — delta vs score_history lookback (3m, 6m o 12m) ±15 días.
+// Returns null si no hay fila archivada en la ventana.
+async function lookbackDelta(
+  supabase: SupabaseClient,
+  entityType: 'zone' | 'project',
+  entityId: string,
+  scoreType: string,
+  periodDate: string,
+  months: number,
+  currentValue: number,
+): Promise<number | null> {
+  try {
+    const target = subtractMonths(periodDate, months);
+    const { from, to } = windowBounds(target);
+    const { data, error } = await castFrom(supabase, 'score_history')
+      .select('score_value, period_date')
+      .eq('entity_type', entityType)
+      .eq('entity_id', entityId)
+      .eq('score_type', scoreType)
+      .gte('period_date', from)
+      .lte('period_date', to)
+      .order('period_date', { ascending: false })
+      .limit(1);
+    if (error || !data || (data as unknown[]).length === 0) return null;
+    const rows = data as unknown as Array<{ score_value: number }>;
+    const firstRow = rows[0];
+    if (!firstRow) return null;
+    const prev = firstRow.score_value;
+    if (typeof prev !== 'number' || !Number.isFinite(prev)) return null;
+    return Number((currentValue - prev).toFixed(3));
+  } catch {
+    return null;
+  }
+}
+
+// D2 — retorna los 3 deltas en paralelo.
+export async function computeDeltas(
+  supabase: SupabaseClient,
+  entityType: 'zone' | 'project',
+  entityId: string,
+  scoreType: string,
+  periodDate: string,
+  currentValue: number,
+): Promise<ScoreDeltas> {
+  const [d3, d6, d12] = await Promise.all([
+    lookbackDelta(supabase, entityType, entityId, scoreType, periodDate, 3, currentValue),
+    lookbackDelta(supabase, entityType, entityId, scoreType, periodDate, 6, currentValue),
+    lookbackDelta(supabase, entityType, entityId, scoreType, periodDate, 12, currentValue),
+  ]);
+  return { '3m': d3, '6m': d6, '12m': d12 };
+}
+
+// D3 — ranking pre-UPSERT: cuenta filas mismo bucket con value > currentValue.
+// Returns {} si la query falla o no hay otras entidades (total<=1 trata como sin ranking).
+export async function computeRanking(
+  supabase: SupabaseClient,
+  table: 'zone_scores' | 'project_scores',
+  scoreType: string,
+  periodDate: string,
+  countryCode: string,
+  currentValue: number,
+): Promise<ScoreRanking | Record<string, never>> {
+  try {
+    const baseFilter = castFrom(supabase, table)
+      .select('score_value', { count: 'exact', head: false })
+      .eq('country_code', countryCode)
+      .eq('score_type', scoreType)
+      .eq('period_date', periodDate);
+
+    // total count (no head — queremos data también para robustez).
+    const totalRes = await baseFilter;
+    if (totalRes.error || typeof totalRes.count !== 'number') return {};
+    const existing = totalRes.count;
+    const total = existing + 1; // incluye la fila que estamos a punto de UPSERT
+
+    // position = # rows con value > currentValue + 1.
+    const higherRes = await castFrom(supabase, table)
+      .select('score_value', { count: 'exact', head: true })
+      .eq('country_code', countryCode)
+      .eq('score_type', scoreType)
+      .eq('period_date', periodDate)
+      .gt('score_value', currentValue);
+    if (higherRes.error || typeof higherRes.count !== 'number') return {};
+
+    const position = higherRes.count + 1;
+    if (total <= 1) return {}; // sin ranking significativo
+    const percentile = Number((((total - position) / total) * 100).toFixed(2));
+    return { position, total, percentile };
+  } catch {
+    return {};
+  }
 }
 
 // U13 — top 3 zonas mismo score+period con valor más cercano (ABS delta ASC).
@@ -121,16 +259,36 @@ export async function persistZoneScore(
 ): Promise<PersistResult> {
   if (!input.zoneId) return { ok: false, error: 'zoneId required for zone score' };
 
-  const comparableZones = await computeComparableZones(
-    supabase,
-    registry.score_id,
-    input.periodDate,
-    input.zoneId,
-    output.score_value,
-  );
+  const [comparableZones, deltas, ranking] = await Promise.all([
+    computeComparableZones(
+      supabase,
+      registry.score_id,
+      input.periodDate,
+      input.zoneId,
+      output.score_value,
+    ),
+    computeDeltas(
+      supabase,
+      'zone',
+      input.zoneId,
+      registry.score_id,
+      input.periodDate,
+      output.score_value,
+    ),
+    computeRanking(
+      supabase,
+      'zone_scores',
+      registry.score_id,
+      input.periodDate,
+      input.countryCode,
+      output.score_value,
+    ),
+  ]);
 
   const row = buildRow(output, registry, input, 'zone_id', input.zoneId);
   row.comparable_zones = comparableZones;
+  row.deltas = deltas;
+  row.ranking = ranking;
 
   const { error } = await castFrom(supabase, 'zone_scores').upsert(row as never, {
     onConflict: 'zone_id,score_type,period_date',
@@ -145,7 +303,30 @@ export async function persistProjectScore(
   input: CalculatorInput,
 ): Promise<PersistResult> {
   if (!input.projectId) return { ok: false, error: 'projectId required for project score' };
+
+  const [deltas, ranking] = await Promise.all([
+    computeDeltas(
+      supabase,
+      'project',
+      input.projectId,
+      registry.score_id,
+      input.periodDate,
+      output.score_value,
+    ),
+    computeRanking(
+      supabase,
+      'project_scores',
+      registry.score_id,
+      input.periodDate,
+      input.countryCode,
+      output.score_value,
+    ),
+  ]);
+
   const row = buildRow(output, registry, input, 'project_id', input.projectId);
+  row.deltas = deltas;
+  row.ranking = ranking;
+
   const { error } = await castFrom(supabase, 'project_scores').upsert(row as never, {
     onConflict: 'project_id,score_type,period_date',
   });
