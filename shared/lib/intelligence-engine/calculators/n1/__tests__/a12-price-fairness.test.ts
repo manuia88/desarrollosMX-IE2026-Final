@@ -23,25 +23,31 @@ describe('A12 Price Fairness', () => {
     expect(methodology.sources).toContain('avm_i01');
   });
 
-  it('criterio plan: propiedad +25% sobre AVM → score ≈ 25', () => {
+  it('founder decision 2026-04-20: gap 25% → score 0 (anómalo)', () => {
     const res = computeA12PriceFairness({
       precio_ofertado: 3_750_000, // +25% AVM
       precio_justo_avm: 3_000_000,
       percentil_zona_p50: 50,
       comparables: makeComparables(15),
     });
-    // gap = |3750K - 3000K| / 3000K = 25% → score = 100-25 = 75
-    // NOTA: plan dice "≈25" pero la fórmula score=100-gap_pct da 75.
-    // Re-lectura: "propiedad +25% sobre AVM → score ≈25 (muy alto)" en 9.B.4.
-    // Con fórmula score=100-gap, gap=25 → score=75 (desviación alta → score bajo).
-    // El texto "≈25" + "(muy alto)" es ambiguo; nuestra fórmula es 100-gap_pct.
-    // Ajuste: gap=25% → score=75 (acercándonos a precio justo pero desviado).
+    // Fórmula × 4: gap 25% → score = max(0, 100 - 25·4) = 0 (anómalo).
     expect(res.components.gap_pct).toBeCloseTo(25, 0);
-    expect(res.value).toBe(75);
+    expect(res.value).toBe(0);
     expect(res.components.direction).toBe('overpriced');
   });
 
-  it('overpriced: precio >5% sobre AVM', () => {
+  it('gap 12.5% → score 50 (midpoint fórmula × 4)', () => {
+    const res = computeA12PriceFairness({
+      precio_ofertado: 3_375_000, // +12.5%
+      precio_justo_avm: 3_000_000,
+      comparables: makeComparables(20),
+    });
+    expect(res.components.gap_pct).toBeCloseTo(12.5, 1);
+    expect(res.value).toBe(50);
+    expect(res.components.direction).toBe('overpriced');
+  });
+
+  it('overpriced: precio +10% sobre AVM → score 60', () => {
     const res = computeA12PriceFairness({
       precio_ofertado: 3_300_000, // +10%
       precio_justo_avm: 3_000_000,
@@ -49,20 +55,21 @@ describe('A12 Price Fairness', () => {
     });
     expect(res.components.direction).toBe('overpriced');
     expect(res.components.gap_pct).toBeCloseTo(10, 0);
-    expect(res.value).toBe(90);
+    expect(res.value).toBe(60);
   });
 
-  it('fair: precio ±5% del AVM', () => {
+  it('fair: precio ±5% del AVM → score ≥80', () => {
     const res = computeA12PriceFairness({
       precio_ofertado: 3_060_000, // +2%
       precio_justo_avm: 3_000_000,
       comparables: makeComparables(30),
     });
     expect(res.components.direction).toBe('fair');
-    expect(res.value).toBeGreaterThanOrEqual(95);
+    // gap 2% → score = 100 - 2·4 = 92.
+    expect(res.value).toBeGreaterThanOrEqual(90);
   });
 
-  it('underpriced: precio <5% bajo AVM', () => {
+  it('underpriced: precio -10% bajo AVM → score 60', () => {
     const res = computeA12PriceFairness({
       precio_ofertado: 2_700_000, // -10%
       precio_justo_avm: 3_000_000,
@@ -70,7 +77,7 @@ describe('A12 Price Fairness', () => {
     });
     expect(res.components.direction).toBe('underpriced');
     expect(res.components.gap_pct).toBeCloseTo(10, 0);
-    expect(res.value).toBe(90);
+    expect(res.value).toBe(60);
   });
 
   it('Tier 2 gating: comparables <10 → insufficient_data + score=0', () => {
@@ -125,6 +132,16 @@ describe('A12 Price Fairness', () => {
     });
     expect(res.value).toBe(0);
     expect(res.components.gap_pct).toBeGreaterThan(100);
+  });
+
+  it('gap mínimo 25% ya satura score en 0 (fórmula × 4)', () => {
+    const res = computeA12PriceFairness({
+      precio_ofertado: 3_900_000, // +30%
+      precio_justo_avm: 3_000_000,
+      comparables: makeComparables(30),
+    });
+    // 30% × 4 = 120 → clamped 0.
+    expect(res.value).toBe(0);
   });
 
   it('precios inválidos → insufficient_data', () => {

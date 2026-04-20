@@ -2,12 +2,15 @@
 // respecto al AVM (Automatic Valuation Model) y los comparables de la zona.
 // Plan 9.B.4. Catálogo 03.8 §A12. Tier 2. Categoría proyecto (output project_scores).
 //
-// FÓRMULA:
+// FÓRMULA (founder decision 2026-04-20 — multiplicador × 4):
 //   gap_pct = |precio_ofertado − precio_justo_avm| / precio_justo_avm × 100
-//   score   = max(0, 100 − gap_pct)
+//   score   = max(0, 100 − gap_pct × 4)
 //
-// Score alto = precio justo (AVM ≈ ofertado).
-// Score bajo = desviación grande (ambos lados — overpriced o underpriced).
+// Semántica Price Fairness: precio justo vs mercado.
+//   gap 0%   → score 100 (precio exactamente justo)
+//   gap 12.5% → score 50
+//   gap 25%  → score 0 (anómalo, overpriced o underpriced)
+// Score alto = precio justo. Score bajo = desviación grande (ambos lados).
 //
 // DIRECTION:
 //   overpriced   → precio_ofertado > precio_justo_avm · 1.05 (>+5%)
@@ -25,12 +28,15 @@ export const version = '1.0.0';
 
 export const MIN_COMPARABLES = 10;
 
+export const GAP_MULTIPLIER = 4;
+
 export const methodology = {
   formula:
-    'gap_pct = |ofertado − AVM| / AVM · 100; score = max(0, 100 − gap_pct). Tier 2 requires ≥10 comparables en zona.',
+    'gap_pct = |ofertado − AVM| / AVM · 100; score = max(0, 100 − gap_pct · 4). Tier 2 requires ≥10 comparables en zona.',
   sources: ['unidades', 'market_prices_secondary', 'avm_i01'],
   weights: {
     fair_band_pct: 0.05,
+    gap_multiplier: GAP_MULTIPLIER,
     min_comparables: MIN_COMPARABLES,
   },
   references: [
@@ -141,7 +147,7 @@ export function computeA12PriceFairness(input: A12RawInput): A12ComputeResult {
   const gap_signed_pct = (gap_absoluto / input.precio_justo_avm) * 100;
   const gap_pct = Math.abs(gap_signed_pct);
   const direction = classifyDirection(gap_signed_pct);
-  const value = Math.max(0, Math.min(100, Math.round(100 - gap_pct)));
+  const value = Math.max(0, Math.min(100, Math.round(100 - gap_pct * GAP_MULTIPLIER)));
 
   // Confidence basado en comparables_count: high ≥30, medium ≥15, low ≥10.
   let confidence: Confidence;
