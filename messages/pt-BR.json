@@ -279,6 +279,13 @@
         "sin_arbitraje": "Sem arbitragem",
         "insufficient": "Dados insuficientes"
       },
+      "d07": {
+        "str_favorece": "STR favorece",
+        "str_moderado": "STR leve vantagem",
+        "paridad": "STR/LTR paridade",
+        "ltr_favorece": "LTR favorece",
+        "insufficient": "Dados STR/LTR insuficientes"
+      },
       "h06": {
         "pending_h2": "Disponível na FASE 29 (dados 0311 Locatel pendentes)"
       }

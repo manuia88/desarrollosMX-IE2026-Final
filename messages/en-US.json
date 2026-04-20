@@ -279,6 +279,13 @@
         "sin_arbitraje": "No arbitrage",
         "insufficient": "Insufficient data"
       },
+      "d07": {
+        "str_favorece": "STR favors",
+        "str_moderado": "STR slight advantage",
+        "paridad": "STR/LTR parity",
+        "ltr_favorece": "LTR favors",
+        "insufficient": "Insufficient STR/LTR data"
+      },
       "h06": {
         "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
       }

@@ -1,0 +1,86 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`D07 STR vs LTR calculator (wrapper sobre str-intelligence) > 16 zonas CDMX — snapshot basado en CDMX_AIRROI 1`] = `
+{
+  "Clavería": {
+    "ratio": 1.056,
+    "regime": "parity",
+    "value": 50,
+  },
+  "Contreras Centro": {
+    "ratio": 1.092,
+    "regime": "parity",
+    "value": 50,
+  },
+  "Coyoacán Centro": {
+    "ratio": 2.9920000000000004,
+    "regime": "str_outperforms",
+    "value": 70,
+  },
+  "Cuajimalpa Centro": {
+    "ratio": 3.08,
+    "regime": "str_strongly_outperforms",
+    "value": 90,
+  },
+  "Del Valle": {
+    "ratio": 2.47,
+    "regime": "str_outperforms",
+    "value": 70,
+  },
+  "Iztacalco Centro": {
+    "ratio": 0.684,
+    "regime": "ltr_outperforms",
+    "value": 20,
+  },
+  "Iztapalapa Sur": {
+    "ratio": 0.44800000000000006,
+    "regime": "ltr_outperforms",
+    "value": 20,
+  },
+  "Lindavista": {
+    "ratio": 0.8,
+    "regime": "parity",
+    "value": 50,
+  },
+  "Milpa Alta Centro": {
+    "ratio": 0.44800000000000006,
+    "regime": "ltr_outperforms",
+    "value": 18,
+  },
+  "Polanco": {
+    "ratio": 6.336,
+    "regime": "str_strongly_outperforms",
+    "value": 90,
+  },
+  "Roma Norte": {
+    "ratio": 5.772,
+    "regime": "str_strongly_outperforms",
+    "value": 90,
+  },
+  "San Ángel": {
+    "ratio": 2.9760000000000004,
+    "regime": "str_outperforms",
+    "value": 70,
+  },
+  "Tepito": {
+    "ratio": 0.9984000000000001,
+    "regime": "parity",
+    "value": 50,
+  },
+  "Tlalpan Centro": {
+    "ratio": 1.4975999999999998,
+    "regime": "parity",
+    "value": 50,
+  },
+  "Tláhuac Centro": {
+    "ratio": 0.56,
+    "regime": "ltr_outperforms",
+    "value": 19,
+  },
+  "Xochimilco Centro": {
+    "ratio": 1.972,
+    "regime": "str_outperforms",
+    "value": 70,
+  },
+}
+`;
