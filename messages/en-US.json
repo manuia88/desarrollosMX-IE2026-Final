@@ -230,6 +230,13 @@
         "estancada": "Stagnant credit market",
         "insufficient": "Insufficient CNBV data"
       },
+      "h08": {
+        "patrimonial": "Heritage zone",
+        "con_heritage": "Has heritage value",
+        "escaso": "Limited heritage",
+        "sin_heritage": "No notable heritage",
+        "insufficient": "Insufficient INAH data"
+      },
       "h06": {
         "pending_h2": "Available in PHASE 29 (0311 Locatel data pending)"
       }

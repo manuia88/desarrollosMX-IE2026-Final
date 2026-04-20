@@ -1,0 +1,86 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`H08 Heritage Zone calculator > 16 zonas CDMX — snapshot 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.h08.sin_heritage",
+    "value": 6,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "label": "ie.score.h08.sin_heritage",
+    "value": 6,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.h08.con_heritage",
+    "value": 40,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "label": "ie.score.h08.sin_heritage",
+    "value": 0,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "label": "ie.score.h08.sin_heritage",
+    "value": 0,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h08.sin_heritage",
+    "value": 12,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "label": "ie.score.h08.escaso",
+    "value": 16,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.h08.sin_heritage",
+    "value": 0,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "high",
+    "label": "ie.score.h08.escaso",
+    "value": 22,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.h08.escaso",
+    "value": 18,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.h08.con_heritage",
+    "value": 44,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "label": "ie.score.h08.escaso",
+    "value": 36,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.h08.patrimonial",
+    "value": 90,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "label": "ie.score.h08.escaso",
+    "value": 28,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "label": "ie.score.h08.sin_heritage",
+    "value": 6,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "label": "ie.score.h08.con_heritage",
+    "value": 50,
+  },
+}
+`;

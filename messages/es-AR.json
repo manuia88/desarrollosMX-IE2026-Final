@@ -230,6 +230,13 @@
         "estancada": "Mercado crediticio estancado",
         "insufficient": "Datos CNBV insuficientes"
       },
+      "h08": {
+        "patrimonial": "Zona patrimonial",
+        "con_heritage": "Con valor patrimonial",
+        "escaso": "Heritage escaso",
+        "sin_heritage": "Sin heritage notable",
+        "insufficient": "Datos INAH insuficientes"
+      },
       "h06": {
         "pending_h2": "Disponible en FASE 29 (datos 0311 Locatel pendientes)"
       }
