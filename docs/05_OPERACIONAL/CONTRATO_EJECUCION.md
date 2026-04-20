@@ -417,17 +417,20 @@ TODO #16 — TELEMETRY_SALT en Vercel Production + Preview envs
   Razón: hash-user-id.ts cae a DEFAULT_SALT hardcoded si env missing,
          lo cual hace hashes diferentes entre dev/prod y rompe analítica.
 
-TODO #17 — Activar BotID protection en Vercel Project Dashboard
-  Status: 🔴 PRE-DEPLOY OBLIGATORIO — antes de tag fase-08-complete
-  Origen: BLOQUE 8.D inferencia #3 (commit 4e0654d).
-  Acción: en [Vercel Dashboard] → Project desarrollos-mx-ie-2026-final →
-          Settings → Security → BotID → enable "Basic" mode (free).
-          Sin esto, checkBotId() en /api/v1/estimate retorna 200 fake
-          o falla silenciosamente en producción.
-  Modo elegido: Basic (free). Deep Analysis ($1/1000 calls) decidible
-                post-launch con data real de patrones de ataque scrapers.
-  Razón: endpoint AVM público es target obvio scrapers competencia.
-         Free tier 5/mes se evade trivialmente sin BotID.
+TODO #17 — BotID protection (CORREGIDO 2026-04-20)
+  Status: ✅ AUTO-ACTIVO post-deploy (SDK code-level, NO requiere Dashboard)
+  Origen: BLOQUE 8.D inferencia #3 (commit 4e0654d). Corrección clarificada
+          2026-04-20 tras confusion founder con Bot Protection (producto WAF
+          distinto a BotID SDK).
+  Realidad: package @vercel/botid@1.5.11 instalado en BLOQUE 8.D activa
+            BotID Basic mode automáticamente al deploy. Cero config Dashboard.
+  No confundir con: Vercel Firewall → Bot Management → "Bot Protection"
+                    (producto SEPARADO, WAF nivel red, opcional, dejarlo OFF
+                    por ahora). BotID SDK protege solo endpoints específicos
+                    como /api/v1/estimate.
+  Upgrade futuro: BotID Deep Analysis ($1/1000 calls) sí requiere Dashboard
+                  activate + paid plan. Decidible post-launch con data real
+                  de patrones de ataque scrapers.
 
 TODO #18 — Setup Storybook para componentes Dopamine
   Status: 🟡 AGENDADO — FASE 11 o housekeeping post-FASE 08
@@ -457,3 +460,56 @@ TODO #19 — Setup jsdom + Testing Library para visual UI tests
     - Migrar 18 helper tests + agregar component render tests
     - Habilita testing snapshot visual + a11y + interactions sin Playwright
   Estimado: 1-2 horas setup + 4-8 horas migración + nuevos tests.
+
+TODO #20 — IE_MONTHLY_BUDGET_USD en Vercel Production + Preview envs
+  Status: 🔴 PRE-DEPLOY OBLIGATORIO — antes de merge main
+  Origen: BLOQUE 8.F.7 F4 cost guard rails (FASE 08 cierre).
+  Default: $100 USD/mes (conservador H1).
+  Acción: en [Vercel Dashboard] → Project desarrollos-mx-ie-2026-final →
+          Settings → Environment Variables → agregar IE_MONTHLY_BUDGET_USD=100
+          en Production + Preview. Sensitive OFF (es número, no secreto).
+  Razón: F4 cost guard valida cascadas vs budget mensual. Sin este env,
+         fallback hardcoded a $100. Founder puede ajustar después con data
+         real de cost-tracker (incluido FASE 07 + U3 BLOQUE 8.A).
+  Tune H2: con histórico real cost_log + 3 meses operación, calibrar real.
+
+═══════════════════════════════════════════════════════════════
+9. FASE 08 CERRADA — Estado consolidado 2026-04-20
+═══════════════════════════════════════════════════════════════
+
+Tag git: fase-08-complete (commit final BLOQUE 8.F)
+Branch: fase-08/ie-scores-n0 (sin push pendiente decisión founder)
+
+Entregables:
+- 32 calculators N0 (21 originales F01-F07/H01-H11/A01-A04/B12/D07 + 11 nuevos N01-N11)
+- AVM I01 MVP "DMX Estimate" con regresión H1 + BotID protection + endpoint /api/v1/estimate
+- 5 componentes UI Dopamine (ConfidenceBadge, ScoreTransparencyPanel,
+  ScoreRecommendationsCard, ScorePlaceholder, IntelligenceCard)
+- 9 migrations BD (queue, validity/RLS, deltas/ranking, avm_estimates,
+  tier_requirements, market_anomalies, cascade_replay_log, cascade triggers,
+  allowlist v8)
+- 2 cascadas formales wire (geo_data_updated × 9 sources + macro_updated)
+- Endpoints admin (/api/admin/cascades/{graph,replay} + /api/admin/queue-metrics)
+- 26 upgrades aplicados acumulados (U5-U14, P1, S1-S2, D1-D7, E4-E5, F1-F4,
+  U8, U11, BotID)
+
+Tests: 1010 passing / 2 skipped
+Verificaciones cierre fase: 16/16 ✓ (typecheck, lint, tests, db:types,
+                            audit:e2e, audit:rls STRICT, build prod OK)
+
+Cascadas restantes (4) wire en FASEs consumers:
+- unit_sold → FASE 13-15 (Portal Asesor con flow ventas)
+- price_changed → FASE 14 (CRM precios)
+- feedback_registered → FASE 13 (interaction_feedback flows)
+- search_behavior → FASE 20-21 (portales con search_logs)
+
+Pre-deploy CRÍTICOS (founder ejecutar antes de merge main):
+- TODO #16 TELEMETRY_SALT
+- TODO #17 BotID Basic activate
+- TODO #20 IE_MONTHLY_BUDGET_USD
+
+Próxima fase: FASE 09 — IE Scores Nivel 1 (16 scores: F08 LQI, F12 Risk Map,
+H07 Environmental, A02 Investment Sim, A05 TCO 10y, A06 Neighborhood, A12
+Price Fairness, B01 Demand Heatmap, B02 Margin Pressure, B04 PMF, B07
+Competitive Intel, B08 Absorption Forecast, D05 Gentrification macro, D06
+Affordability Crisis, H05 Trust Score, H14 Buyer Persona)
