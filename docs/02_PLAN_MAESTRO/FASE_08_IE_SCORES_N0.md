@@ -794,9 +794,106 @@ U5 + U6 + U7 + U9 + U10 + U12 + U13 + U14 + P1 + S1 + S2 + D1 + D2 + D3 + D4 + D
 
 ---
 
+## Implementación real BLOQUE 8.F — CIERRE FASE 08 (2026-04-20)
+
+Último bloque: wire all + tier_requirements + U8+U11+F1+F2+F4 + cascadas formales
+geo_data + macro + cierre FASE 08 completa.
+
+### Commits BLOQUE 8.F
+
+| Commit | Descripción |
+|---|---|
+| `5cfb2ad` | 8.F.1 — tier_requirements migration + tierGate refactor BD-driven cache 1h |
+| `0074941` | 8.F.2 — registerCalculator wiring 21 N0 + 11 N01-N11 + instrumentation.ts (cierra TODO #15) |
+| `b3a1cb0` | 8.F.3 — U8 runtime cache in-memory Map TTL + fetchGeoDataPointsCached helper |
+| `e252706` | 8.F.4 — U11 anomaly + F3 baseline rolling 30d + market_anomalies migration |
+| `9431eaa` | 8.F.5 — F1 cascade dependency graph + endpoint admin + docs auto-gen |
+| `0b06b71` | 8.F.6 — F2 cascade replay admin tool + cascade_replay_log |
+| `33075f4` | 8.F.7 — F4 cost guard rails + budget validation + alerts |
+| `2820d46` | 8.F.8 — cascadas formales geo_data_updated + macro_updated triggers SQL |
+
+### Migrations BLOQUE 8.F (4)
+
+- `20260420073500_ie_tier_requirements.sql` — tier_requirements + seed 4 tiers + RLS
+- `20260420074500_ie_market_anomalies.sql` — market_anomalies + zone/project_scores.anomaly jsonb
+- `20260420075000_ie_cascade_replay_log.sql` — cascade_replay_log audit + superadmin RLS
+- `20260420075500_ie_cascades_triggers.sql` — cascade functions + STATEMENT triggers
+
+### Upgrades nuevos BLOQUE 8.F
+
+- **U8 runtime cache** — in-memory TTL Map + tag invalidation + fetchGeoDataPointsCached helper
+- **U11 anomaly detection** + **F3 baseline rolling 30d** — score_history 30d lookback + 3σ threshold
+- **F1 cascade dependency graph** — CASCADE_GRAPH TS const + mermaid export + `/api/admin/cascades/graph`
+- **F2 cascade replay/backfill tool** — dry_run support + cost-guard integration + audit log
+- **F4 cost guard rails** — estimate × 10% remaining monthly budget cap + PostHog alert
+- **TODO #15 wiring** — registerCalculator() operativo para 32 calculators via instrumentation.ts
+
+### Tests BLOQUE 8.F (~60 nuevos)
+
+- tier-gate 5 · wiring 4 · runtime-cache 10 · geo-query 2 · anomaly detector 10 ·
+  cascade graph 9 · replay 5 · cost-guard 10 · cascade triggers 4
+
+### Cascadas formales wire (2/6 operativas)
+
+- **geo_data_updated** ✅ trigger SQL + TS per 9 sources (denue, fgj, gtfs, siged, dgis,
+  sacmex, atlas_riesgos, rama, inah)
+- **macro_updated** ✅ trigger SQL enqueue A01..C05 × zonas country
+- **unit_sold, price_changed, feedback_registered, search_behavior**: CASCADE_GRAPH listas
+  TS; wire triggers en FASEs consumers (FASE 13 operaciones, FASE 20 vibe_tags, etc.)
+
+### Upgrades acumulados FASE 08 completa (8.A + 8.B + 8.C + 8.D + 8.E + 8.F)
+
+U5 · U6 · U7 · U8 · U9 · U10 · U11 · U12 · U13 · U14 · P1 · S1 · S2 · D1 · D2 · D3 ·
+D4 · D5 · D6 · D7 · E4 · E5 · F1 · F2 · F4 · BotID.
+
+### Decisiones autónomas BLOQUE 8.F
+
+1. **Runtime cache in-memory vs Vercel Runtime Cache** — Vercel Runtime Cache API
+   requiere `@vercel/functions` package no instalado. Decidí implementar wrapper
+   Map-based con TTL en `shared/lib/runtime-cache/` con globalThis-scoped store —
+   funciona en Fluid Compute (instances reused), zero new deps, H1 suficiente.
+   Upgrade path H2 a Vercel Runtime Cache transparente al API externo.
+2. **Anomaly Markdown entry zone_scores.anomaly** — nueva columna jsonb en lugar
+   de empotrar en components (mantiene components como desglose factor humano puro).
+3. **Cascade triggers STATEMENT-level** — REFERENCING NEW TABLE + bulk aggregation
+   por distinct (source, zone_id) para evitar N+1 en ingestor batch 500 rows.
+4. **Cost-guard 10% cap** — conservador H1 (default $100/mo budget). Tune con
+   histórico cost-tracker en FASE 29 cuando admin dashboard exista.
+5. **Replay real enqueue deferred** — executeReplay retorna jobs_enqueued=0 para
+   dry_run=false hasta que upstream consumer wire enqueue_score_recalc per entity.
+   Infraestructura lista (cost guard + audit log).
+
+### TODOs pre-deploy críticos (CONTRATO §8)
+
+Antes de merge a main:
+- **#16** TELEMETRY_SALT en Vercel Production + Preview envs (hash-user-id.ts)
+- **#17** BotID Basic activate en Vercel Project Dashboard (AVM endpoint)
+- **#20** IE_MONTHLY_BUDGET_USD en Vercel envs Production + Preview (default $100)
+
+TODOs operacionales agendados:
+- **#18** Storybook setup (FASE 11 housekeeping)
+- **#19** jsdom + Testing Library (FASE 11 housekeeping)
+- **#15** ✅ COMPLETADO BLOQUE 8.F.2
+
+### Criterio de done FASE 08 (CIERRE)
+
+- [x] BLOQUEs 8.A–8.F cerrados
+- [x] 32 scores N0 + N01-N11 implementados como calculators puros + registered runtime
+- [x] AVM MVP endpoint `/api/v1/estimate` funcional con Zod schemas + 5 upgrades D4-D7+BotID
+- [x] Queue worker cron `/api/cron/score-worker` cada 1 min
+- [x] Confidence cascade UI + 5 componentes Dopamine (E4 Transparency + E5 Recommendations)
+- [x] Tier gating BD-driven (tier_requirements) operativo
+- [x] Cascades geo_data_updated + macro_updated triggers SQL wire
+- [x] U11 anomaly detection operativo (baseline rolling 30d + market_anomalies)
+- [x] F1 cascade graph endpoint + docs auto-gen `npm run cascades:export`
+- [x] F2 cascade replay admin tool + audit cascade_replay_log
+- [x] F4 cost guard rails + PostHog alerts
+
+---
+
 ## Próxima fase
 
 [FASE 09 — IE Scores Nivel 1](./FASE_09_IE_SCORES_N1.md)
 
 ---
-**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17 · **Actualizado:** 2026-04-19 (BLOQUE 8.B cerrado)
+**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17 · **Actualizado:** 2026-04-20 (FASE 08 COMPLETA — BLOQUE 8.F)
