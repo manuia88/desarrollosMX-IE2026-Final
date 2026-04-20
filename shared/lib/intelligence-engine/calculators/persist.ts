@@ -86,6 +86,8 @@ function buildRow(
     valid_until: output.valid_until ?? null,
     period_date: input.periodDate,
     computed_at: new Date().toISOString(),
+    // D19 — ml_explanations jsonb (empty {} si no aplica).
+    ml_explanations: output.ml_explanations ?? {},
   };
 }
 
@@ -214,6 +216,43 @@ export async function computeRanking(
   }
 }
 
+// D25 FASE 10 — stability_index rolling 12m sobre score_history.
+// stability = clamp(1 - stddev/mean, 0, 1). Null si <3 snapshots en ventana.
+// ≥0.85 estable · <0.6 volátil. Persistido en zone_scores.stability_index.
+export async function computeStabilityIndex(
+  supabase: SupabaseClient,
+  entityType: 'zone' | 'project',
+  entityId: string,
+  scoreType: string,
+  periodDate: string,
+): Promise<number | null> {
+  try {
+    const anchor = new Date(`${periodDate}T00:00:00Z`);
+    const from = new Date(anchor.getTime());
+    from.setUTCMonth(from.getUTCMonth() - 12);
+    const { data, error } = await castFrom(supabase, 'score_history')
+      .select('score_value')
+      .eq('entity_type', entityType)
+      .eq('entity_id', entityId)
+      .eq('score_type', scoreType)
+      .gte('period_date', from.toISOString().slice(0, 10))
+      .lte('period_date', periodDate);
+    if (error || !data) return null;
+    const values = (data as unknown as Array<{ score_value: number }>)
+      .map((r) => r.score_value)
+      .filter((v): v is number => typeof v === 'number' && Number.isFinite(v));
+    if (values.length < 3) return null;
+    const mean = values.reduce((s, v) => s + v, 0) / values.length;
+    if (mean === 0) return null;
+    const variance = values.reduce((s, v) => s + (v - mean) ** 2, 0) / values.length;
+    const stddev = Math.sqrt(variance);
+    const stability = Math.max(0, Math.min(1, 1 - stddev / Math.abs(mean)));
+    return Number(stability.toFixed(4));
+  } catch {
+    return null;
+  }
+}
+
 // U13 — top 3 zonas mismo score+period con valor más cercano (ABS delta ASC).
 // Returns [] si <3 zonas disponibles o si la query falla.
 export async function computeComparableZones(
@@ -259,7 +298,7 @@ export async function persistZoneScore(
 ): Promise<PersistResult> {
   if (!input.zoneId) return { ok: false, error: 'zoneId required for zone score' };
 
-  const [comparableZones, deltas, ranking] = await Promise.all([
+  const [comparableZones, deltas, ranking, stabilityFromHistory] = await Promise.all([
     computeComparableZones(
       supabase,
       registry.score_id,
@@ -283,12 +322,15 @@ export async function persistZoneScore(
       input.countryCode,
       output.score_value,
     ),
+    computeStabilityIndex(supabase, 'zone', input.zoneId, registry.score_id, input.periodDate),
   ]);
 
   const row = buildRow(output, registry, input, 'zone_id', input.zoneId);
   row.comparable_zones = comparableZones;
   row.deltas = deltas;
   row.ranking = ranking;
+  // D25 — stability_index: calculator output prevalece; fallback al histórico.
+  row.stability_index = output.stability_index ?? stabilityFromHistory;
 
   const { error } = await castFrom(supabase, 'zone_scores').upsert(row as never, {
     onConflict: 'zone_id,score_type,period_date',
@@ -304,7 +346,7 @@ export async function persistProjectScore(
 ): Promise<PersistResult> {
   if (!input.projectId) return { ok: false, error: 'projectId required for project score' };
 
-  const [deltas, ranking] = await Promise.all([
+  const [deltas, ranking, stabilityFromHistory] = await Promise.all([
     computeDeltas(
       supabase,
       'project',
@@ -321,11 +363,19 @@ export async function persistProjectScore(
       input.countryCode,
       output.score_value,
     ),
+    computeStabilityIndex(
+      supabase,
+      'project',
+      input.projectId,
+      registry.score_id,
+      input.periodDate,
+    ),
   ]);
 
   const row = buildRow(output, registry, input, 'project_id', input.projectId);
   row.deltas = deltas;
   row.ranking = ranking;
+  row.stability_index = output.stability_index ?? stabilityFromHistory;
 
   const { error } = await castFrom(supabase, 'project_scores').upsert(row as never, {
     onConflict: 'project_id,score_type,period_date',

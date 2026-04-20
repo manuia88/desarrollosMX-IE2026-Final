@@ -90,15 +90,16 @@ export function explainPrediction(input: ExplainInput): Explanation {
         ? 'positive'
         : 'negative';
 
-    raw.push({
+    const contributor: Contributor = {
       feature: f.name,
-      label: f.label,
+      ...(f.label !== undefined ? { label: f.label } : {}),
       current_value: f.value,
       perturbed_value: upValue,
       impact_pts: Number(impact.toFixed(4)),
       direction,
       relative_weight_pct: 0,
-    });
+    };
+    raw.push(contributor);
   }
 
   const totalAbs = raw.reduce((acc, c) => acc + Math.abs(c.impact_pts), 0);

@@ -43,6 +43,12 @@ export interface CalculatorOutput<TComponents extends object = Record<string, un
   // OPCIONAL P1 — valid_until timestamp explícito. Si se omite, persist.ts lo
   // deriva de methodology.validity (ver ValidityWindow) sumando al computed_at.
   readonly valid_until?: string;
+  // OPCIONAL D19 FASE 10 — explanations LIME-style para ML scores (H14, E03).
+  // Persiste en zone_scores.ml_explanations / project_scores.ml_explanations.
+  readonly ml_explanations?: Readonly<Record<string, unknown>>;
+  // OPCIONAL D25 FASE 10 — stability 0-1 derivado de score_history rolling 12m.
+  // Si el calculator no lo provee, persist.ts lo calcula y escribe directamente.
+  readonly stability_index?: number;
 }
 
 // P1 — Validity window por calculator. Expresado en units discretos. persist.ts
