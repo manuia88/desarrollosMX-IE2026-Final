@@ -416,3 +416,15 @@ TODO #16 — TELEMETRY_SALT en Vercel Production + Preview envs
           en PostHog dashboards).
   Razón: hash-user-id.ts cae a DEFAULT_SALT hardcoded si env missing,
          lo cual hace hashes diferentes entre dev/prod y rompe analítica.
+
+TODO #17 — Activar BotID protection en Vercel Project Dashboard
+  Status: 🔴 PRE-DEPLOY OBLIGATORIO — antes de tag fase-08-complete
+  Origen: BLOQUE 8.D inferencia #3 (commit 4e0654d).
+  Acción: en [Vercel Dashboard] → Project desarrollos-mx-ie-2026-final →
+          Settings → Security → BotID → enable "Basic" mode (free).
+          Sin esto, checkBotId() en /api/v1/estimate retorna 200 fake
+          o falla silenciosamente en producción.
+  Modo elegido: Basic (free). Deep Analysis ($1/1000 calls) decidible
+                post-launch con data real de patrones de ataque scrapers.
+  Razón: endpoint AVM público es target obvio scrapers competencia.
+         Free tier 5/mes se evade trivialmente sin BotID.

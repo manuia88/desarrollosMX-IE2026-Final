@@ -760,6 +760,10 @@ Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
 Aplican en esta fase:
 - **L4 Watchlist + Alertas de zonas** (Robinhood pattern) — usuario sigue 5-10 zonas y recibe push notifications cuando algún score cambia >10%. Bloque sugerido: integrar en BLOQUE 20 (mi DMX dashboard) o nuevo BLOQUE 20.WATCH dedicado. Aprovecha delta tracking D2 ya implementado en BLOQUE 8.C.
 - **L9 Suscripción a zonas con newsletter mensual** (Substack pattern) — newsletter mensual por zona con cambios scores + nuevas propiedades + opportunities. Bloque sugerido: integrar en BLOQUE 20 (notifications/preferences) + activar al desbloquear Resend SMTP en FASE 22.
+- **L16 Insight Cards auto-generadas** (Apple Health Trends pattern) — tarjetas auto-generadas con observaciones personalizadas ("Tu zona favorita Roma Norte mejoró +15 en walkability este mes"). Bloque sugerido: nueva sección "Para ti" o "Tu DNA" en dashboard portal comprador, alimentada por delta tracking D2 + watchlist L4 + behavioral inference engine PPD Capa 3.
+- **L17 Score Story formato vertical** (Snapchat Stories pattern) — experiencia móvil-first inmersiva tap por tap mostrando cada dimensión de la zona. Bloque sugerido: nuevo modo "explorar zona inmersivo" en mobile, complementario al modo desktop tabular.
+- **L18 Score Reactions con emoji DUAL PURPOSE** (Discord Reactions pattern) — usuarios reaccionan con 👍🔥😱❤️ a cada score. CRÍTICO: cada reacción es signal behavioral para PPD Capa 3 inference engine (ADR-021 actualizado 2026-04-20). Bloque sugerido: integrar en BLOQUE 20.L M-VIBE-TAGS-UI o nuevo BLOQUE 20.REACTIONS — wire al engine de inferencia preferences automático.
+- **L19 Comparison Gallery drag-and-drop** (Notion Galleries pattern) — usuario arrastra hasta 5 zonas/propiedades a canvas compartible para comparar visualmente. CRUZA con innovation #26 ya aprobada (Comparador Multidimensional) — extender con UX free-form drag-drop estilo Notion + share kit.
 
 Al ejecutar FASE 20, revisar status en pipeline maestro y confirmar incorporación al scope.
 

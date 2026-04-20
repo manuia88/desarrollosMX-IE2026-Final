@@ -117,6 +117,58 @@
 - **Inspiración:** Trulia Crime Map, Zillow Heat Maps, NYC Mortgage Map, Strava Global Heatmap
 - **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_12_IE_AI_SCORES_N5.md` §Laterals pipeline
 
+### L15 — Score Layers Toggle (Strava Heatmaps pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, BLOQUE 8.E lateral session)
+- **Qué es:** usuario activa/desactiva visualización de scores específicos como capas overlay (safety, walkability, water, momentum) sobre mapa o card.
+- **Para qué sirve:** Strava reinventó el descubrimiento ("muéstrame solo lo que me interesa hoy"). Filter visual en lugar de listado.
+- **Beneficio concreto:** UX personalizado + revisita constante (cambia capa, descubre algo nuevo) + permite usar mismo mapa para audiencias distintas (familia vs inversor).
+- **Fase target:** FASE 12 (Mapa 7 Capas) + FASE 21 (Portal Público /explorar)
+- **Dependencia data:** scores N0-N5 disponibles + UI Mapbox heatmap layers
+- **Inspiración:** Strava Heatmaps (running/biking/winter), Google Maps "Layers", Waze "Reports"
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_12_IE_AI_SCORES_N5.md` y `FASE_21_PORTAL_PUBLICO.md` §Laterals pipeline
+
+### L16 — Insight Cards auto-generadas (Apple Health Trends pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, BLOQUE 8.E lateral session)
+- **Qué es:** tarjetas pequeñas auto-generadas con observaciones personalizadas ("Tu zona favorita Roma Norte mejoró +15 en walkability este mes").
+- **Para qué sirve:** Apple Health domina engagement con esto sin spam invasivo. Notificación contextual valiosa.
+- **Beneficio concreto:** sensación de app que "le habla a usted" personalizado + revisita orgánica + diferencia vs portales que solo muestran listings.
+- **Fase target:** FASE 20 (portal comprador — sección "Para ti" o "Tu DNA")
+- **Dependencia data:** delta tracking D2 + watchlist L4 + behavioral inference engine PPD Capa 3
+- **Inspiración:** Apple Health Trends, Google Activity Insights, Strava "Suffer Score" insights
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_20_PORTAL_COMPRADOR.md` §Laterals pipeline
+
+### L17 — Score Story formato vertical inmersivo (Snapchat Stories pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, BLOQUE 8.E lateral session)
+- **Qué es:** experiencia móvil-first inmersiva tipo Story: tap por tap muestra cada dimensión de la zona (walkability → safety → schools → momentum → recommendations).
+- **Para qué sirve:** Snapchat reinventó cómo consumimos info en móvil. Formato vertical full-screen con storytelling guiado.
+- **Beneficio concreto:** posicionamiento mobile-native + tiempo en app aumenta drásticamente + perfecto para compartir captura/screen-record.
+- **Fase target:** FASE 20 (portal comprador — modo "explorar zona inmersivo")
+- **Dependencia data:** scores N0-N5 + reasoning_template U12 + score_label_key U14
+- **Inspiración:** Snapchat Stories, Instagram Stories, TikTok For You feed, NYTimes "Snow Fall"
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_20_PORTAL_COMPRADOR.md` §Laterals pipeline
+
+### L18 — Score Reactions con emoji (Discord Reactions pattern) — DUAL PURPOSE
+- **Status:** 🟡 approved (founder OK 2026-04-20, BLOQUE 8.E lateral session)
+- **Qué es:** usuarios reaccionan a un score con emoji (👍🔥😱❤️) en 1 click.
+- **Para qué sirve dual:**
+  - **Engagement:** Discord democratizó feedback social ligero sin reviews complejos. Frictionless data point + viralidad ligera.
+  - **PPD Signal source (CRÍTICO):** cada reacción es signal behavioral para Capa 3 inference engine de ADR-021. 👍=neutral_positive, 🔥=strong_positive (esta dimensión me importa mucho), 😱=strong_negative (deal-breaker), ❤️=emotional_match. Mapea a confidence deltas por dimensión 6D del DNA del comprador.
+- **Beneficio concreto:** doble valor por mismo feature — engagement social + alimento al match engine personalizado sin necesidad de micro-questions explícitas. 1 reacción = 1 signal de confianza alta para PPD.
+- **Fase target:** FASE 20 (portal comprador — UI score detail + integración inference engine PPD)
+- **Dependencia data:** scores N0-N5 + behavioral inference engine PPD Capa 3 (ADR-021)
+- **Inspiración:** Discord Reactions, Slack Emoji Reactions, Linear Issue Reactions, GitHub PR Reactions
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_20_PORTAL_COMPRADOR.md` §Laterals pipeline + `docs/01_DECISIONES_ARQUITECTONICAS/ADR-021_PROGRESSIVE_PREFERENCE_DISCOVERY.md` §Capa 3 (Score Reactions agregado como signal source 2026-04-20)
+
+### L19 — Comparison Gallery drag-and-drop (Notion Galleries pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, BLOQUE 8.E lateral session)
+- **Qué es:** usuario arrastra hasta 5 zonas/propiedades a un canvas compartible para comparar visualmente side-by-side.
+- **Para qué sirve:** Notion creó la categoría "free-form workspace". DMX puede ser el "Notion del real estate decision-making".
+- **Beneficio concreto:** comparador real (no tabla aburrida) + viralidad cuando se comparte canvas + perfecto para decisiones en pareja/familia.
+- **Fase target:** FASE 20 (portal comprador — "Comparador Multidimensional" ya en innovations #26)
+- **Dependencia data:** scores N0-N5 + comparable_zones U13 + ranking D3 + screenshot/share kit
+- **Inspiración:** Notion Galleries, Miro Boards, Figma FigJam, Pinterest Boards
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_20_PORTAL_COMPRADOR.md` §Laterals pipeline (cruza con innovation #26 ya aprobada)
+
 ---
 
 ## Histórico (ejecutados)

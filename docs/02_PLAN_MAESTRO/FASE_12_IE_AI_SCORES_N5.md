@@ -343,6 +343,7 @@ Ver registro maestro: `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md`
 
 Aplican en esta fase:
 - **L14 DMX Living Map** (Trulia Crime Map pattern) — capa visual unificada de TODOS los scores DMX en mapa interactivo con heatmaps superponibles. Killer feature visual + viral. Bloque sugerido: integrar en BLOQUE Mapa 7 Capas Mapbox como capa "All Scores Heatmap" + UI toggle por dimensión (safety, walkability, water, momentum, etc.).
+- **L15 Score Layers Toggle** (Strava Heatmaps pattern) — usuario activa/desactiva visualización de scores específicos como capas overlay. Complementa L14 con interactividad de filtrado. Bloque sugerido: integrar como controles UI del DMX Living Map (toggle layers panel).
 
 Al ejecutar FASE 12, revisar status en pipeline maestro y confirmar incorporación al scope.
 
