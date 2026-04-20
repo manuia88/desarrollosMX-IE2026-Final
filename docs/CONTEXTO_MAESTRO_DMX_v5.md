@@ -1355,3 +1355,32 @@ Queda pendiente:
 ---
 
 **Fin del documento maestro.** 26 secciones, ~28 fuentes primarias consolidadas, sin inventar nada que no estuviera en biblia/docx/jsx/repo. Todo gap señalado explícitamente. BD real manda sobre cualquier mención en este doc.
+
+---
+
+## Addendum 2026-04-20 — Social + Listing + Global Benchmarks
+
+**Nuevos ADRs post v5:**
+- **ADR-025** Social + Listing Intelligence Layer — nuevo pilar estratégico paralelo al IE core. Consolida 29 laterales L30-L58 + nueva FASE 26 (Listing Intelligence Platform MVP free-tier $5-15 USD/mes).
+- **ADR-026** Global PropTech Benchmarks Research — referencia-only con 65 features/cross-functions/laterales de 10+ empresas globales (Reonomy, HouseCanary, Placer, ATTOM, CoStar, Cherre, CompStak, Opendoor, Zillow, Redfin). NO implementación automática, backlog H2+.
+
+**Pipeline laterales extendido:**
+- `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` ahora contiene 72 laterales L1-L72 + 16 cross-functions (CF-L1-8 local MX, CF-G1-8 global) documentadas.
+
+**Empresas MX analizadas (research competitivo 2026-04-20):**
+- Metric Analysis (ValueChat WhatsApp IA — 2.7M appraisal records)
+- Brandata (vocación predio + mapa interactivo demo gratis)
+- DatAlpine (pricing tiered público $899-$1,199 USD/mes + hedonic/Monte Carlo econometría)
+- Phiqus (multi-sector retail/inmobiliario/corporativo + visión artificial)
+- Datoz (commercial real estate 44 mercados + FIBRAs — Barclays/Waltons/Prologis/JLL/Colliers/Macquarie/Vesta clientes enterprise)
+- Tinsa México (25 años, Stima AVM EAA-endorsed, Pulso Inmobiliario trimestral, parte Accumin 20 empresas 3 continentes)
+
+**Correcciones menciones previas incorrectas:**
+- Allegra / Hawah omitidas de ADR-025 — no aparecen como major players MX en web search 2026-04-20
+
+**Product packaging strategy (agendado TODO #25 CONTRATO §8):**
+9 personas identificadas con Jobs-to-be-Done → docs suite `docs/08_PRODUCTOS/` pendiente ejecución post FASE 10:
+  Developer · Asesor/Broker · Comprador residencial · Inversor residencial · FIBRA/Fondo institucional · Aseguradora · Banco/Fintech · Gobierno/Policy · Inspector/Valuador
+
+**Upgrades directos propuestos pendientes founder approval (TODO #24 CONTRATO §8):**
+D12, D15, D17, D20, D22-D28 — 10 upgrades adicionales derivados de research. NO integrados a FASE 10 scope actual (session split 2026-04-20).

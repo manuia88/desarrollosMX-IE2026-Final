@@ -510,13 +510,265 @@ _Vacío hasta primer lateral entregado._
 
 ---
 
+### L59 — WhatsApp-Native IE Copilot (Metric ValueChat upgrade)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** extender Copilot ⌘J DMX accesible directo via WhatsApp Business Bot con acceso al IE completo (no solo valuación como Metric ValueChat).
+- **Para qué sirve:** WhatsApp es canal #1 MX real estate (brokers + compradores). ValueChat de Metric solo hace valuación; DMX expone 118 scores + AVM + recomendaciones conversacionales.
+- **Beneficio concreto:** acceso masivo audiencia sin friction app/registro + diferencial vs Metric (50x más features por mismo canal).
+- **Fase target:** FASE 22 (Marketing+Comms + WhatsApp Business)
+- **Dependencia data:** Copilot ⌘J (FASE 03) + Claude API + WhatsApp Business API provider
+- **Inspiración:** Metric ValueChat (solo valuación) → DMX upgrade (IE completo)
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_22_MARKETING_COMMS.md`
+
+### L60 — LandAnalyzer Wizard standalone (Brandata vocación predio upgrade)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** empaquetar B06 Project Genesis + H13 Site Selection + AVM + scores zona + Monte Carlo en wizard UI "Tengo terreno → qué construir".
+- **Para qué sirve:** Brandata cobra consulting manual por vocación predio. DMX automatiza con data + IA.
+- **Beneficio concreto:** producto B2B standalone vendible $5K-15K/análisis. Diferencial: automated + IE scores vs Brandata manual research.
+- **Fase target:** FASE 23 (Monetización — producto B2B developer tier)
+- **Dependencia data:** B06 + H13 (FASE 10) + AVM I01 + scores zona + Monte Carlo econometría
+- **Inspiración:** Brandata estudio vocación predio (consultoría humana) → DMX automatizado
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_23_MONETIZACION.md`
+
+### L61 — Property Features CV Extraction (Phiqus visión artificial upgrade)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** Claude Vision sobre fotos listings propiedad → extract amenities + condition + calidad terminaciones automáticamente.
+- **Para qué sirve:** alimenta AVM accuracy + data enrichment sin labor manual. Phiqus tiene CV genérico, DMX aplica específico real estate.
+- **Beneficio concreto:** mejora AVM accuracy 15-25% + data sobre calidad única vs portales sin CV.
+- **Fase target:** FASE 17 (Document Intelligence Pipeline)
+- **Dependencia data:** Claude Vision API + fotos listings (Chrome ext + admin upload) + AVM I01 integration
+- **Inspiración:** Phiqus visión artificial retail → DMX visión artificial real estate
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_17_DOCUMENT_INTEL.md`
+
+### L62 — Zone Environmental Report PDF (Datlas LAUR.AI upgrade)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** PDF auto-generado con 50+ variables en 1/3/5km radius combinando scores DMX (F08 LQI + F12 Risk Map + H07 Environmental + N07 Water Security + más).
+- **Para qué sirve:** Datlas cobra por LAUR.AI reports. DMX produce report más rico con 118 scores vs Datlas 50 variables planos.
+- **Beneficio concreto:** producto B2C/B2B $50-200/reporte + diferencial "DMX Environmental Report" con IE jerárquico.
+- **Fase target:** FASE 21 (Portal Público — generar PDF on-demand) + FASE 23 (pricing B2B)
+- **Dependencia data:** scores F08/F12/H07/N07/N05/etc + React-PDF template + admin branding options
+- **Inspiración:** Datlas LAUR.AI Environmental Reports
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_21_PORTAL_PUBLICO.md`
+
+### L63 — ExpansionEngine Multi-Location B2B (Datlas DOR.AI upgrade)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** multi-location analysis producto para retailers/franquicias (Oxxo, 7-Eleven, bancos, restaurantes) usando N02 Employment + H13 Site Selection + Placer-like foot traffic.
+- **Para qué sirve:** Datlas DOR.AI vende a retailers. DMX enfoque residencial pero puede expandir vertical retail/franchise.
+- **Beneficio concreto:** nuevo vertical B2B high-ticket (franchises pagan $10K-50K/análisis + SaaS recurring).
+- **Fase target:** FASE 23 (Monetización — producto B2B franchise/retail tier)
+- **Dependencia data:** N02 (FASE 08) + H13 (FASE 10) + foot traffic data (Placer-like futuro o CV street view)
+- **Inspiración:** Datlas DOR.AI + Placer.ai site selection
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_23_MONETIZACION.md`
+
+### L64 — DMX Commercial Tier (industrial + oficinas + retail) — Datoz/Tinsa pattern
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session) — H2
+- **Qué es:** expandir DMX de residencial-only a commercial real estate (industrial/oficinas/retail) — match Datoz cobertura (44 mercados) y Tinsa all-asset-types.
+- **Para qué sirve:** Datoz FIBRAs + fondos (Barclays, Prologis, Waltons, Macquarie, Vesta) son clientes high-ticket. Tinsa 25 años cobertura full. DMX residencial-first pero expandable.
+- **Beneficio concreto:** abrir canal ventas institucional (tickets $50K-500K/año) + posicionamiento LATAM-native vs Datoz/Tinsa.
+- **Fase target:** H2 post consolidación residencial (FASE 27+ nueva o extender FASE 26)
+- **Dependencia data:** scores adaptados comercial + ingesta data FIBRAs (mercados industriales/oficinas/retail) + partnerships
+- **Inspiración:** Datoz (44 mercados comerciales MX) + Tinsa (all asset types) + CoStar (commercial global líder)
+- **Cross-ref:** ADR nuevo H2 "DMX Commercial Vertical"
+
+### L65 — Pricing público transparente tiered (DatAlpine pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** publicar pricing tiers en landing DMX como DatAlpine ($899-$1,199 USD/mes + Free tier + Enterprise $395K-$750K MXN/año).
+- **Para qué sirve:** elimina fricción lead gen vs "request demo" opaco (Datoz/Tinsa/Brandata/Phiqus todos opacos). DatAlpine demuestra que funciona.
+- **Beneficio concreto:** conversion rate 3-5x mayor + sales cycle shorter + self-serve tier viable.
+- **Fase target:** FASE 23 (Monetización — estrategia pricing completa)
+- **Dependencia data:** decisión founder tiers + landing pricing page + Stripe Checkout integration
+- **Inspiración:** DatAlpine Panorama/Horizon/Vision + ATTOM 30-day free trial + Apify $5 free credits
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_23_MONETIZACION.md`
+
+### L66 — Gender-disaggregated Credit Analytics (DatAlpine + ESG lens)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** análisis créditos otorgados disaggregated por género (Infonavit + CNBV data ya ingestada FASE 07).
+- **Para qué sirve:** DatAlpine lo tiene como feature. Diferencial ESG + inclusion analytics.
+- **Beneficio concreto:** alimenta DMX-IDS Desarrollo Social (FASE 11) + producto B2B para bancos ESG-focused + impact investors.
+- **Fase target:** FASE 11 (DMX-IDS Índice Desarrollo Social)
+- **Dependencia data:** H04 Credit Demand + H11 Infonavit (FASE 08) + INEGI Census gender breakdown
+- **Inspiración:** DatAlpine gender credits + MSCI ESG
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_11_IE_INDICES_DMX.md`
+
+### L67 — Time on Market público FREE tier (DatAlpine Panorama hook)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** exponer subset B08 Absorption Forecast en ruta pública `/zona/[slug]/market` sin auth — hook SEO/growth.
+- **Para qué sirve:** DatAlpine Panorama FREE tier valida que "Time on Market" es killer hook. DMX tiene data (B08 FASE 09).
+- **Beneficio concreto:** tráfico SEO orgánico + lead gen + hook de conversión a tier Pro.
+- **Fase target:** FASE 21 (Portal Público — nuevas rutas market)
+- **Dependencia data:** B08 Absorption Forecast (FASE 09) ya implementado
+- **Inspiración:** DatAlpine Panorama FREE
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_21_PORTAL_PUBLICO.md`
+
+### L68 — Projected Credits forward-looking 12-24 meses (DatAlpine Horizon upgrade)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** proyección créditos hipotecarios forward 12-24 meses por zona combinando macro Banxico + pipeline demanda + inventory.
+- **Para qué sirve:** DatAlpine tiene Projected Credits. DMX tiene H04 Credit Demand actual, upgrade a forward.
+- **Beneficio concreto:** producto B2B para bancos/Infonavit + scoring oportunidades + alimenta H04 next gen.
+- **Fase target:** FASE 10 extensión H04 (agregar forecasting) o FASE 18 (Legal+Pagos) como producto
+- **Dependencia data:** H04 (FASE 08) + macro_series + time series regression
+- **Inspiración:** DatAlpine Horizon "Projected Credits Distributed (Amount/Value)"
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_10_IE_SCORES_N2_N3.md` extensión + `FASE_18_LEGAL_PAGOS_ESCROW.md`
+
+### L69 — Demand+Salary+Professions profiling per zona (DatAlpine + Phiqus)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session) — candidato integrar a FASE 10
+- **Qué es:** nuevo score N13 "Zone Demographics Profile" usando INEGI Census + ENIGH (ingestada FASE 07): quién vive aquí (profesiones/edades/géneros/salarios) + match con H14 Buyer Persona.
+- **Para qué sirve:** DatAlpine Horizon tiene "Demand & Salary + Professions & Trades". DMX tiene data INEGI pero no profiling activado.
+- **Beneficio concreto:** enriquece H14 Buyer Persona match + producto B2B marketing geotargeted + ESG insights.
+- **Fase target:** FASE 10 extensión H14 (N3) + FASE 23 (producto B2B marketing tier)
+- **Dependencia data:** INEGI Census + ENIGH (FASE 07 ingestado) + H14 Buyer Persona (FASE 09)
+- **Inspiración:** DatAlpine Demand+Salary+Professions + Phiqus segmentación audiencia
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_10_IE_SCORES_N2_N3.md` H14 upgrade
+
+### L70 — Space Optimization layout producto (DatAlpine Vision tier)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** recomendaciones uso espacios internos proyectos nuevos (qué mix unidades, qué amenidades premium según zona + buyer persona).
+- **Para qué sirve:** DatAlpine Vision tier incluye Space Optimization. DMX tiene B10 Unit Revenue + B13 Amenity ROI (FASE 10) como backend.
+- **Beneficio concreto:** producto B2B developer tier Vision-equivalent. Recomendaciones accionables layout vs DatAlpine estático.
+- **Fase target:** FASE 10 extensión B10/B13 + FASE 23 (producto B2B developer tier)
+- **Dependencia data:** B10 Unit Revenue + B13 Amenity ROI (FASE 10) + H14 Buyer Persona
+- **Inspiración:** DatAlpine Vision Space Optimization
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_10_IE_SCORES_N2_N3.md` B10+B13 extension
+
+### L71 — Customizable Branded PDF Reports (DatAlpine + Tinsa pattern)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session)
+- **Qué es:** generador PDFs auto-gen con logo cliente para presentar — Financial Feasibility + Market Analysis + Risk Assessment branded.
+- **Para qué sirve:** DatAlpine Premium Services ofrece "Customizable Reports for Effective Presentations". Tinsa Pulso Inmobiliario es report equivalente.
+- **Beneficio concreto:** producto value-add B2B (devs, brokers presentan a inversores) + complementa L62 + L32 Zone Certified.
+- **Fase target:** FASE 23 (Monetización — feature addon todos los tiers B2B)
+- **Dependencia data:** scores + methodology + React-PDF o Puppeteer PDF gen + admin branding config
+- **Inspiración:** DatAlpine Premium Reports + Tinsa Pulso Inmobiliario
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_23_MONETIZACION.md`
+
+### L72 — Heat maps by colonies standalone producto (DatAlpine + Trulia)
+- **Status:** 🟡 approved (founder OK 2026-04-20, research competitivo MX session) — cruza L14 DMX Living Map
+- **Qué es:** visualización standalone de heat maps por dimensión (precio/m², demand, momentum, safety, etc) — ya planeado en L14 pero enfocar como feature core + posible producto separado.
+- **Para qué sirve:** DatAlpine incluye "Heat maps by colonies highlighting key areas" como feature clave. Trulia Crime Map fue killer feature $3.5B acquisition.
+- **Beneficio concreto:** feature visual core FASE 12 + posible tier público FREE (growth hook SEO) + complementa L29 Trending + L14 Living Map.
+- **Fase target:** FASE 12 (Mapa 7 Capas) integración con L14 DMX Living Map
+- **Dependencia data:** scores por zona + Mapbox heatmap layers + UI toggle dimensiones
+- **Inspiración:** DatAlpine Heat maps + Trulia Crime Map (adquirido Zillow $3.5B)
+- **Cross-ref:** `docs/02_PLAN_MAESTRO/FASE_12_IE_AI_SCORES_N5.md` (ya L14/L15 anotados)
+
+---
+
+## Cross-Functions LOCALES MX (CF-L1 a CF-L8)
+
+Combinaciones de features de las 6 empresas MX (Metric, Brandata, DatAlpine, Phiqus, Datoz, Tinsa) con capacidades DMX existentes — generan productos únicos que ninguna empresa MX tiene en solitario.
+
+### CF-L1 — "DMX Pulso Inmobiliario" trimestral
+- **Qué es:** reporte trimestral PDF branded que combina N11 DMX Momentum + DMX-IPV + DMX-LIV + N03 Gentrification Velocity en publicación periódica — **match Tinsa Pulso Inmobiliario pero automated + live data**.
+- **Inputs DMX:** N11 + DMX-IPV + DMX-LIV + N03 + PDF generator + dist newsletter.
+- **Diferencial:** Tinsa es consultoría manual lenta, DMX es auto-gen desde data live.
+- **Fase target:** FASE 11 (Índices DMX) + FASE 22 (distribución newsletter)
+
+### CF-L2 — "WhatsApp IE Copilot completo"
+- **Qué es:** TODO el IE conversacional via WhatsApp (no solo valuación como Metric ValueChat).
+- **Inputs DMX:** Copilot ⌘J (FASE 03) + 118 scores + AVM + WhatsApp Business API.
+- **Diferencial:** Metric solo valuación; DMX 50x más features mismo canal.
+- **Fase target:** FASE 22 (Marketing+Comms).
+
+### CF-L3 — "LandAnalyzer Enterprise"
+- **Qué es:** "tengo terreno → qué construir" con scores IE + Monte Carlo scenarios + AVM — match Brandata vocación predio + DatAlpine econometría combined.
+- **Inputs DMX:** B06 Project Genesis + H13 Site Selection + AVM I01 + Monte Carlo.
+- **Diferencial:** Brandata research manual + DatAlpine econometría separados; DMX unifica ambas.
+- **Fase target:** FASE 23 (Monetización — producto B2B developer).
+
+### CF-L4 — "Property Explorer vector-based"
+- **Qué es:** 8 propiedades similares usando pgvector embeddings semánticos (más sofisticado que DatAlpine algoritmo básico).
+- **Inputs DMX:** pgvector (FASE 01) + embeddings de propiedades + distance search.
+- **Diferencial:** DatAlpine usa similarity por features numéricos; DMX usa semantic embeddings.
+- **Fase target:** FASE 10 extension + FASE 20 (Portal Comprador).
+
+### CF-L5 — "Zone Demographics Profile N13"
+- **Qué es:** nuevo score N13 usando INEGI Census + ENIGH profiling (DatAlpine Demand+Salary+Phiqus segmentación combined).
+- **Inputs DMX:** INEGI (FASE 07) + H14 Buyer Persona (FASE 09) + PPD behavioral.
+- **Diferencial:** DatAlpine profiling estático; DMX profiling + PPD behavioral + 118 scores context.
+- **Fase target:** FASE 10 (candidato inclusión scope N3/N4).
+
+### CF-L6 — "Financial Feasibility Pro"
+- **Qué es:** producto B2B dev grande: viabilidad financiera + scenarios + AVM + cost tracker (DatAlpine Financial + Phiqus simulator + DMX B02/B09/B12).
+- **Inputs DMX:** B02 Margin Pressure + B09 Cash Flow + B12 Cost Tracker + AVM.
+- **Diferencial:** DMX B12 usa INEGI INPP real live vs DatAlpine static.
+- **Fase target:** FASE 23 (producto B2B developer tier).
+
+### CF-L7 — "DMX Enterprise Dashboard"
+- **Qué es:** dashboard B2B unificado clientes institucionales (FIBRAs, fondos, devs grandes) — match Alpine Dashboard + Datoz Analytics 2.0.
+- **Inputs DMX:** 118 scores + cascadas tiempo real + L20 Data Quality + L56 Zone Signal Dashboard.
+- **Diferencial:** Alpine/Datoz estáticos; DMX real-time con cascadas.
+- **Fase target:** FASE 19 (Portal Admin Market Observatory) + FASE 23 (tier Enterprise).
+
+### CF-L8 — "DMX Comprehensive Appraisal"
+- **Qué es:** AVM multi-metodología (hedonic + comparable + income-based) con 118 scores como inputs adicionales — match Tinsa Stima EAA-endorsed.
+- **Inputs DMX:** AVM I01 + hedonic model + 118 scores feature vector + pgvector similarity.
+- **Diferencial:** Tinsa Stima es modelo clásico europeo; DMX combina ML + scores IE únicos.
+- **Fase target:** FASE 12 (AVM H2 gradient boosting) — pursue EAA o equivalente MX certification H2.
+
+---
+
+## Cross-Functions GLOBALES (CF-G1 a CF-G8)
+
+Combinaciones con benchmarks globales (CoStar + Big 4 brokers) y features DMX — documentan cómo DMX puede competir/superar con lo que tenemos.
+
+### CF-G1 — "DMX Mexico Deep Data" (vs CoStar geographic moat)
+- **Qué es:** foco MX deep data + scores IE únicos posicionamiento LATAM-native — CoStar no tiene presencia MX fuerte.
+- **Inputs DMX:** FASE 07 ingesta 50+ fuentes MX + L58 Listing Intelligence + marketplace propio.
+- **Diferencial:** CoStar cobertura US/Europa; DMX moat geográfico MX + expansion LATAM.
+- **Fase target:** continuo (FASE 07 ingesta + FASE 26 L58).
+
+### CF-G2 — "DMX Marketplace IE-embedded" (vs LoopNet)
+- **Qué es:** DMX marketplace propio donde cada listing trae contexto IE completo (scores + deltas + ranking + comparables).
+- **Inputs DMX:** marketplace core + 118 scores + cascades + UI IntelligenceCard.
+- **Diferencial:** LoopNet marketplace sin IE; DMX marketplace + IE embedded.
+- **Fase target:** FASE 20 (Portal Comprador) + FASE 21 (Portal Público /explorar).
+
+### CF-G3 — "DMX Digital Twin 3D" (vs CoStar 3D)
+- **Qué es:** upgrade Mapbox 7 capas a 3D digital twin zones con score overlays — L2 pipeline.
+- **Inputs DMX:** Mapbox (FASE 12) + 3D layer (Mapbox 3D o Cesium) + scores overlays.
+- **Diferencial:** CoStar tiene 3D limitado a property level; DMX 3D con heatmaps IE overlaid.
+- **Fase target:** H2 extensión FASE 12.
+
+### CF-G4 — "DMX Quarterly Market Intelligence" (vs CBRE/JLL research manual)
+- **Qué es:** reporte trimestral LATAM competing con CBRE/JLL reports pero automated + regional focus.
+- **Inputs DMX:** 118 scores + índices DMX + L34 Newsletter + PDF generator.
+- **Diferencial:** CBRE/JLL reports consultoría manual cara; DMX auto-gen con IE data.
+- **Fase target:** FASE 22 (Marketing+Comms) + FASE 23 (producto B2B research subscription).
+
+### CF-G5 — "DMX AI Consulting-as-a-Service" (vs Big 4 consulting)
+- **Qué es:** Agentic AI consulting automatizado competing con Big 4 (CBRE/JLL/Colliers/Newmark) consulting tradicional.
+- **Inputs DMX:** Copilot Deep Analysis L35 + Cherre-style Agent.STUDIO + DMX API.
+- **Diferencial:** Big 4 consulting humano $$$; DMX AI consulting $$ scalable.
+- **Fase target:** H2 producto estrella "DMX Consulting AI" post consolidación core.
+
+### CF-G6 — "DMX Conversational Discovery" (vs Zillow AI Mode MX)
+- **Qué es:** descubrimiento propiedades conversacional + PPD behavioral inference — Zillow tiene en US, nadie en MX.
+- **Inputs DMX:** Copilot ⌘J + PPD Capa 3 + matching engine.
+- **Diferencial:** Zillow AI Mode US; DMX primer AI Mode MX con PPD personalization.
+- **Fase target:** FASE 20 (Portal Comprador — ya planeado Copilot).
+
+### CF-G7 — "DMX Broker Aggregator MX" (vs CompStak global)
+- **Qué es:** crowdsourced broker data network MX match CompStak modelo pero WhatsApp-native.
+- **Inputs DMX:** L57 WhatsApp Integration + L58 Listing Intelligence + broker incentives.
+- **Diferencial:** CompStak US only; DMX primer crowdsourced broker network MX.
+- **Fase target:** FASE 26 (Listing Intelligence Platform).
+
+### CF-G8 — "DMX Collaborative RE Decisions" (vs Newmark tech collaborative)
+- **Qué es:** multiplayer colaboración compra real estate + Copilot + PPD dual — Newmark tiene approach B2B, DMX consumer + pro.
+- **Inputs DMX:** L31 Multiplayer Analysis + Copilot + PPD + Family Accounts.
+- **Diferencial:** Newmark B2B tech; DMX consumer + pro unificados.
+- **Fase target:** FASE 20 (Portal Comprador Family Accounts).
+
+---
+
 ## Convenciones
 
 - Cada lateral nuevo se registra aquí Y en su FASE target con sección `## Laterals pipeline` al final del archivo.
 - Cuando founder aprueba lateral nuevo durante ejecución de fase, anotarlo aquí ANTES de continuar.
 - Al cerrar una FASE, revisar laterals pipeline → ¿alguno aplicaba? Sí → status update.
 - Categorías de inspiración válidas: empresas que crearon nuevas categorías (no copies de competidores directos).
+- Cross-functions (CF-L/CF-G) son combinaciones derivadas de análisis competitivo — empaquetan features existentes en productos cohesivos.
 
 ---
 
 **Autor:** PM Sr Dev (sesión BLOQUE 8.C lateral upgrades) | **Fecha inicio:** 2026-04-19
+**Última actualización:** 2026-04-20 — L59-L72 + CF-L1-8 + CF-G1-8 pos análisis competitivo MX+global (6 empresas MX + CoStar + Big 4)

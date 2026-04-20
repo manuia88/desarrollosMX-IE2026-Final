@@ -477,6 +477,37 @@ TODO #21 — Upgrade Vercel Pro cuando producción demande mayor frecuencia
   Alternativa H1 si se necesita más frecuencia antes upgrade: GitHub Actions
     schedule cron */5 * * * * gratis llamando webhook DMX score-worker.
 
+TODO #24 — Upgrades directos propuestos pendientes approval founder
+  Status: 🟢 PROPUESTOS — session 2026-04-20, aún no aprobados formalmente
+  Origen: analysis sesiones FASE 08-10 + research competitivo 2026-04-20.
+  Lista (10 upgrades directos IE adicionales):
+    D12 Score explanations AI-generated runtime (Claude Haiku dinámico)
+    D15 Score version migration con backfill controlled (gradual rollout)
+    D17 ML model versioning + drift detection (E03 + H14)
+    D20 Continuous learning feedback loop (re-entrenamiento mensual)
+    D22 Data freshness SLA per score (garantía explícita)
+    D23 Benchmarks cross-country (CDMX vs Bogotá vs BA — requiere data CO/AR)
+    D24 Performance monitoring per calculator (duration p50/p95/p99)
+    D26 SDK TypeScript npm package "dmx-scores" (ADR-013 API as Product)
+    D27 Voice interface Copilot (STT/TTS) — aplicable H2
+    D28 AR preview móvil — H3
+  Acción: revisar por founder + priorizar cuáles integrar a FASEs futuras o descartar.
+  Bloqueo: NO integrar a FASE 10 scope actual (session split decisión founder 2026-04-20).
+
+TODO #25 — Product Packaging docs suite (9 personas + ~15 productos empaquetados)
+  Status: 🟡 AGENDADO — post FASE 10 sesión 1/3 cierre
+  Origen: founder request 2026-04-20 — empaquetar features en productos por persona.
+  Docs a generar:
+    - docs/08_PRODUCTOS/FEATURE_INVENTORY.md (consolidado 150+ features únicos IDs)
+    - docs/08_PRODUCTOS/PERSONA_MAP.md (9 personas con Jobs-to-be-Done)
+    - docs/08_PRODUCTOS/PRODUCT_CATALOG.md (~15 productos empaquetados con tier pricing)
+    - docs/08_PRODUCTOS/COMPETITIVE_POSITIONING.md (matriz producto vs competidor)
+  9 personas identificadas: Developer · Asesor/Broker · Comprador residencial · Inversor
+    residencial · FIBRA/Fondo institucional · Aseguradora · Banco/Fintech · Gobierno/Policy ·
+    Inspector/Valuador
+  Estimado: 2 sesiones CC docs dedicadas
+  Paralelo ok: no bloquea FASE 10 ejecución
+
 TODO #23 — FASE 26 DMX Social + Listing Intelligence Platform MVP
   Status: 🟡 AGENDADO — mini-fase post FASE 10 validación free-tier
   Origen: sesiones FASE 10 pre-flight (founder decisiones 2026-04-20):
