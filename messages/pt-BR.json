@@ -173,6 +173,13 @@
         "limitado": "Transporte limitado",
         "insufficient": "Dados GTFS insuficientes"
       },
+      "f03": {
+        "diversa_robusta": "Diversa e robusta",
+        "diversa": "Diversa",
+        "moderada": "Moderada",
+        "limitada": "Limitada",
+        "insufficient": "Dados DENUE insuficientes"
+      },
       "f04": {
         "pending_h2": "Disponível na FASE 29 (dados RAMA pendentes)"
       },

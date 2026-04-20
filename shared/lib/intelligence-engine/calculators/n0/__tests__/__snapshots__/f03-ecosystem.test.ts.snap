@@ -1,0 +1,118 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`F03 Ecosystem DENUE calculator > 16 zonas CDMX — snapshot + confidence matches DENUE cascade 1`] = `
+{
+  "Clavería": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 1.978,
+    "total": 420,
+    "value": 70,
+  },
+  "Contreras Centro": {
+    "confidence": "high",
+    "label": "ie.score.f03.moderada",
+    "shannon": 1.946,
+    "total": 180,
+    "value": 41,
+  },
+  "Coyoacán Centro": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 2.046,
+    "total": 520,
+    "value": 75,
+  },
+  "Cuajimalpa Centro": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 1.99,
+    "total": 260,
+    "value": 69,
+  },
+  "Del Valle": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 2.052,
+    "total": 820,
+    "value": 77,
+  },
+  "Iztacalco Centro": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 1.875,
+    "total": 290,
+    "value": 66,
+  },
+  "Iztapalapa Sur": {
+    "confidence": "high",
+    "label": "ie.score.f03.limitada",
+    "shannon": 1.746,
+    "total": 220,
+    "value": 38,
+  },
+  "Lindavista": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 2.001,
+    "total": 380,
+    "value": 70,
+  },
+  "Milpa Alta Centro": {
+    "confidence": "medium",
+    "label": "ie.score.f03.limitada",
+    "shannon": 1.782,
+    "total": 85,
+    "value": 35,
+  },
+  "Polanco": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa_robusta",
+    "shannon": 2.154,
+    "total": 1480,
+    "value": 82,
+  },
+  "Roma Norte": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa_robusta",
+    "shannon": 2.067,
+    "total": 1240,
+    "value": 80,
+  },
+  "San Ángel": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 2.083,
+    "total": 620,
+    "value": 77,
+  },
+  "Tepito": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 1.387,
+    "total": 840,
+    "value": 65,
+  },
+  "Tlalpan Centro": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 1.938,
+    "total": 310,
+    "value": 71,
+  },
+  "Tláhuac Centro": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 1.83,
+    "total": 210,
+    "value": 65,
+  },
+  "Xochimilco Centro": {
+    "confidence": "high",
+    "label": "ie.score.f03.diversa",
+    "shannon": 1.853,
+    "total": 240,
+    "value": 67,
+  },
+}
+`;
