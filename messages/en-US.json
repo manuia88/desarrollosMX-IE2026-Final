@@ -337,6 +337,30 @@
           }
         }
       },
+      "n03": {
+        "gentrificacion_rapida": "Rapid gentrification",
+        "gentrificacion_moderada": "Moderate gentrification",
+        "cambio_leve": "Mild change",
+        "estable": "Stable zone",
+        "insufficient": "Score available after 2 DENUE snapshots (≥3 months apart)",
+        "recommendations": {
+          "low": {
+            "0": "Stable zone — low displacement risk from price pressure",
+            "1": "Appreciation expectation aligned with inflation"
+          },
+          "medium": {
+            "0": "Mild change — monitor prices and new openings every 6 months",
+            "1": "Zone with improvement potential without extreme inflation pressure"
+          },
+          "high": {
+            "0": "Rapid gentrification — evaluate buying timing before the price jump",
+            "1": "Check cultural diversity to avoid homogenization risk"
+          },
+          "insufficient_data": {
+            "0": "Score available after the next DENUE snapshot (≥3 months)"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum accelerating",
         "estable": "Momentum stable",

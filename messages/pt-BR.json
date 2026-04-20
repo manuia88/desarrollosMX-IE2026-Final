@@ -337,6 +337,30 @@
           }
         }
       },
+      "n03": {
+        "gentrificacion_rapida": "Gentrificação rápida",
+        "gentrificacion_moderada": "Gentrificação moderada",
+        "cambio_leve": "Mudança leve",
+        "estable": "Zona estável",
+        "insufficient": "Score disponível após 2 snapshots DENUE (≥3 meses)",
+        "recommendations": {
+          "low": {
+            "0": "Zona estável — baixo risco de deslocamento por preço",
+            "1": "Expectativa de valorização alinhada à inflação"
+          },
+          "medium": {
+            "0": "Mudança leve — monitore preços e aberturas a cada 6 meses",
+            "1": "Zona com potencial sem pressão inflacionária extrema"
+          },
+          "high": {
+            "0": "Gentrificação rápida — avalie timing de compra antes da alta",
+            "1": "Verifique diversidade cultural para evitar homogeneização"
+          },
+          "insufficient_data": {
+            "0": "Score disponível após próximo snapshot DENUE (≥3 meses)"
+          }
+        }
+      },
       "n11": {
         "aceleracion": "Momentum acelerando",
         "estable": "Momentum estável",
