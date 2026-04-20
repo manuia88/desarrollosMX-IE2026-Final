@@ -1388,6 +1388,51 @@ export type Database = {
           },
         ]
       }
+      cascade_replay_log: {
+        Row: {
+          cascade_event: string
+          completed_at: string | null
+          dry_run: boolean
+          error: string | null
+          id: string
+          jobs_enqueued: number
+          period_from: string | null
+          period_to: string | null
+          started_at: string
+          status: string
+          target_filter: Json
+          triggered_by: string | null
+        }
+        Insert: {
+          cascade_event: string
+          completed_at?: string | null
+          dry_run?: boolean
+          error?: string | null
+          id?: string
+          jobs_enqueued?: number
+          period_from?: string | null
+          period_to?: string | null
+          started_at?: string
+          status?: string
+          target_filter?: Json
+          triggered_by?: string | null
+        }
+        Update: {
+          cascade_event?: string
+          completed_at?: string | null
+          dry_run?: boolean
+          error?: string | null
+          id?: string
+          jobs_enqueued?: number
+          period_from?: string | null
+          period_to?: string | null
+          started_at?: string
+          status?: string
+          target_filter?: Json
+          triggered_by?: string | null
+        }
+        Relationships: []
+      }
       confidence_thresholds: {
         Row: {
           metric: string
