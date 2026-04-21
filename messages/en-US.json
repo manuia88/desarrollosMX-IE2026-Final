@@ -947,5 +947,205 @@
       "error_desc": "Try again in a few seconds",
       "retry": "Retry"
     }
+  },
+  "IndicesPublic": {
+    "page": {
+      "title": "DMX Indices",
+      "subtitle": "Open rankings of 15 real-estate indices for Mexican neighborhoods, districts and cities",
+      "meta_description": "DMX real-estate indices — S&P-style rankings for neighborhoods, districts and cities. Open methodology.",
+      "tab_all": "All",
+      "empty": "No data available for this period",
+      "loading": "Loading ranking…",
+      "last_update": "Last update: {date}",
+      "as_of": "Data as of {date}",
+      "period_label": "Period",
+      "scope_label": "Scope",
+      "country_label": "Country"
+    },
+    "detail": {
+      "title": "{code} — {scope}",
+      "meta_description": "{code} index detail for {scope} in {country}",
+      "ranking_in_scope": "Rank #{rank} of {scope_type_plural}",
+      "percentile": "Percentile {percentile}",
+      "trend": "Trend: {arrow} {delta}",
+      "methodology_link": "See methodology",
+      "value_label": "Value",
+      "confidence_label": "Confidence",
+      "components_title": "Components",
+      "inputs_title": "Inputs",
+      "calculated_at": "Calculated: {date}",
+      "valid_until": "Valid until: {date}"
+    },
+    "movers": {
+      "title": "Top Movers — Daily Ranking",
+      "subtitle": "Neighborhoods with the largest change vs. previous period",
+      "meta_description": "DMX daily top movers — neighborhoods with the largest percentage change",
+      "up": "Up",
+      "down": "Down",
+      "direction_toggle": "Toggle direction"
+    },
+    "ranking": {
+      "col_rank": "#",
+      "col_scope": "Area",
+      "col_value": "Value",
+      "col_band": "Band",
+      "col_confidence": "Confidence",
+      "col_trend": "Δ vs prior",
+      "col_percentile": "Percentile",
+      "col_actions": "Actions",
+      "sort_asc": "Sort ascending",
+      "sort_desc": "Sort descending",
+      "search_placeholder": "Search area…",
+      "no_results": "No results"
+    },
+    "confidence": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low",
+      "insufficient_data": "Insufficient data"
+    },
+    "band": {
+      "excelente": "Excellent",
+      "bueno": "Good",
+      "regular": "Average",
+      "bajo": "Low"
+    },
+    "trend": {
+      "mejorando": "Improving",
+      "estable": "Stable",
+      "empeorando": "Declining"
+    },
+    "scope": {
+      "colonia": "Neighborhood",
+      "alcaldia": "District",
+      "city": "City",
+      "estado": "State",
+      "colonia_plural": "neighborhoods",
+      "alcaldia_plural": "districts",
+      "city_plural": "cities",
+      "estado_plural": "states"
+    },
+    "share": {
+      "heading": "Share",
+      "whatsapp": "Share via WhatsApp",
+      "twitter": "Share on X",
+      "linkedin": "Share on LinkedIn",
+      "copy_link": "Copy link",
+      "copied": "Link copied",
+      "share_text": "Check out the DMX {code} index ranking"
+    },
+    "methodology": {
+      "title": "DMX Methodology",
+      "subtitle": "Formulas, weights and changes for the 15 indices",
+      "meta_description": "Open DMX methodology — formulas, weights and S&P-style changelog for all 15 indices",
+      "detail_title": "Methodology — {code}",
+      "detail_meta_description": "Formula, weights and changelog for the {code} index",
+      "version_label": "Version {version}",
+      "effective_from": "Effective from {date}",
+      "effective_to": "Effective until {date}",
+      "active": "Active",
+      "weights_title": "Weights",
+      "formula_title": "Formula",
+      "changelog_title": "Changelog",
+      "download_pdf": "Download PDF",
+      "pdf_unavailable": "PDF not available",
+      "pdf_cover_subtitle": "Full methodology and active version",
+      "pdf_generated_at": "Generated on {date}",
+      "pdf_footer_disclaimer": "Official DMX document — methodology at desarrollosmx.com/metodologia",
+      "no_methodology": "No published methodology"
+    },
+    "pro": {
+      "title": "DMX Pro Terminal",
+      "subtitle": "Dense filterable view — 15 indices × areas",
+      "meta_description": "DMX pro terminal — dense filterable matrix of indices and areas",
+      "filter_index": "Filter index",
+      "filter_scope": "Filter scope",
+      "filter_country": "Filter country",
+      "export_csv": "Export CSV",
+      "reset_filters": "Reset filters"
+    },
+    "backtest": {
+      "title": "DMX Backtest",
+      "subtitle": "Historical index simulation by area",
+      "meta_description": "DMX indices backtest — historical simulation to compare areas",
+      "from_label": "From",
+      "to_label": "To",
+      "add_scope": "Add area",
+      "remove_scope": "Remove area",
+      "run": "Run",
+      "disclaimer": "Simulation based on closed historical series. Not a guarantee of future results.",
+      "compare_heading": "Compare areas",
+      "return_label": "Return %",
+      "volatility_label": "Volatility"
+    },
+    "indices": {
+      "IPV": {
+        "name": "Property Value Index",
+        "short": "Value",
+        "tagline": "Sustained real-estate appreciation"
+      },
+      "IAB": {
+        "name": "Neighborhood Amenities Index",
+        "short": "Amenities",
+        "tagline": "Local services and commerce"
+      },
+      "IDS": {
+        "name": "Healthy Density Index",
+        "short": "Density",
+        "tagline": "Density vs. quality of life balance"
+      },
+      "IRE": { "name": "Effective Rent Index", "short": "Rent", "tagline": "Real rental yield" },
+      "ICO": {
+        "name": "Connectivity Index",
+        "short": "Connectivity",
+        "tagline": "Transit and mobility"
+      },
+      "MOM": {
+        "name": "Momentum Index",
+        "short": "Momentum",
+        "tagline": "Real-time market dynamics"
+      },
+      "LIV": {
+        "name": "Livability Index",
+        "short": "Livability",
+        "tagline": "Integral quality of life"
+      },
+      "FAM": { "name": "Family Index", "short": "Families", "tagline": "Family suitability" },
+      "YNG": {
+        "name": "Young Adults Index",
+        "short": "Young",
+        "tagline": "Appeal for young adults"
+      },
+      "GRN": {
+        "name": "Green Index",
+        "short": "Green",
+        "tagline": "Green space and sustainability"
+      },
+      "STR": {
+        "name": "STR Index",
+        "short": "Short Term",
+        "tagline": "Airbnb-style profitability"
+      },
+      "INV": {
+        "name": "Investment Index",
+        "short": "Investment",
+        "tagline": "Attractiveness to investors"
+      },
+      "DEV": {
+        "name": "Development Index",
+        "short": "Development",
+        "tagline": "Construction activity"
+      },
+      "GNT": {
+        "name": "Gentrification Index",
+        "short": "Gentrification",
+        "tagline": "Displacement pressure"
+      },
+      "STA": {
+        "name": "Stability Index",
+        "short": "Stability",
+        "tagline": "Resilience and consistency"
+      }
+    }
   }
 }

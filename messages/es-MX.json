@@ -947,5 +947,213 @@
       "error_desc": "Intenta de nuevo en unos segundos",
       "retry": "Reintentar"
     }
+  },
+  "IndicesPublic": {
+    "page": {
+      "title": "Índices DMX",
+      "subtitle": "Rankings abiertos de 15 índices de colonias, alcaldías y ciudades de México",
+      "meta_description": "Índices inmobiliarios DMX — rankings S&P-style para colonias, alcaldías y ciudades. Metodología abierta.",
+      "tab_all": "Todos",
+      "empty": "Sin datos disponibles para este periodo",
+      "loading": "Cargando ranking…",
+      "last_update": "Última actualización: {date}",
+      "as_of": "Datos al {date}",
+      "period_label": "Periodo",
+      "scope_label": "Ámbito",
+      "country_label": "País"
+    },
+    "detail": {
+      "title": "{code} — {scope}",
+      "meta_description": "Detalle del índice {code} para {scope} en {country}",
+      "ranking_in_scope": "Posición #{rank} de {scope_type_plural}",
+      "percentile": "Percentil {percentile}",
+      "trend": "Tendencia: {arrow} {delta}",
+      "methodology_link": "Ver metodología",
+      "value_label": "Valor",
+      "confidence_label": "Confianza",
+      "components_title": "Componentes",
+      "inputs_title": "Insumos",
+      "calculated_at": "Calculado: {date}",
+      "valid_until": "Vigente hasta: {date}"
+    },
+    "movers": {
+      "title": "Top Movers — Ranking Diario",
+      "subtitle": "Colonias con mayor cambio vs. periodo previo",
+      "meta_description": "Top movers diarios de los índices DMX — colonias con mayor cambio porcentual",
+      "up": "Suben",
+      "down": "Bajan",
+      "direction_toggle": "Cambiar dirección"
+    },
+    "ranking": {
+      "col_rank": "#",
+      "col_scope": "Zona",
+      "col_value": "Valor",
+      "col_band": "Banda",
+      "col_confidence": "Confianza",
+      "col_trend": "Δ vs anterior",
+      "col_percentile": "Percentil",
+      "col_actions": "Acciones",
+      "sort_asc": "Orden ascendente",
+      "sort_desc": "Orden descendente",
+      "search_placeholder": "Buscar zona…",
+      "no_results": "Sin resultados"
+    },
+    "confidence": {
+      "high": "Alta",
+      "medium": "Media",
+      "low": "Baja",
+      "insufficient_data": "Sin datos"
+    },
+    "band": {
+      "excelente": "Excelente",
+      "bueno": "Bueno",
+      "regular": "Regular",
+      "bajo": "Bajo"
+    },
+    "trend": {
+      "mejorando": "Mejorando",
+      "estable": "Estable",
+      "empeorando": "Empeorando"
+    },
+    "scope": {
+      "colonia": "Colonia",
+      "alcaldia": "Alcaldía",
+      "city": "Ciudad",
+      "estado": "Estado",
+      "colonia_plural": "colonias",
+      "alcaldia_plural": "alcaldías",
+      "city_plural": "ciudades",
+      "estado_plural": "estados"
+    },
+    "share": {
+      "heading": "Compartir",
+      "whatsapp": "Compartir por WhatsApp",
+      "twitter": "Compartir en X",
+      "linkedin": "Compartir en LinkedIn",
+      "copy_link": "Copiar enlace",
+      "copied": "Enlace copiado",
+      "share_text": "Mira el ranking DMX del índice {code}"
+    },
+    "methodology": {
+      "title": "Metodología DMX",
+      "subtitle": "Fórmulas, pesos y cambios de los 15 índices",
+      "meta_description": "Metodología abierta DMX — fórmulas, pesos y changelog S&P-style de los 15 índices",
+      "detail_title": "Metodología — {code}",
+      "detail_meta_description": "Fórmula, pesos y changelog del índice {code}",
+      "version_label": "Versión {version}",
+      "effective_from": "Vigente desde {date}",
+      "effective_to": "Vigente hasta {date}",
+      "active": "Activa",
+      "weights_title": "Pesos",
+      "formula_title": "Fórmula",
+      "changelog_title": "Changelog",
+      "download_pdf": "Descargar PDF",
+      "pdf_unavailable": "PDF no disponible",
+      "pdf_cover_subtitle": "Metodología completa y versión activa",
+      "pdf_generated_at": "Generado el {date}",
+      "pdf_footer_disclaimer": "Documento oficial DMX — metodología disponible en desarrollosmx.com/metodologia",
+      "no_methodology": "Sin metodología publicada"
+    },
+    "pro": {
+      "title": "DMX Pro Terminal",
+      "subtitle": "Vista densa filtrable — 15 índices × colonias",
+      "meta_description": "Terminal profesional DMX — matriz densa filtrable de índices y zonas",
+      "filter_index": "Filtrar índice",
+      "filter_scope": "Filtrar ámbito",
+      "filter_country": "Filtrar país",
+      "export_csv": "Exportar CSV",
+      "reset_filters": "Limpiar filtros"
+    },
+    "backtest": {
+      "title": "Backtest DMX",
+      "subtitle": "Simulación histórica de índices por zona",
+      "meta_description": "Backtest de índices DMX — evolución histórica simulada para comparar zonas",
+      "from_label": "Desde",
+      "to_label": "Hasta",
+      "add_scope": "Agregar zona",
+      "remove_scope": "Quitar zona",
+      "run": "Calcular",
+      "disclaimer": "Simulación basada en series históricas cerradas. No constituye garantía de resultados futuros.",
+      "compare_heading": "Comparar zonas",
+      "return_label": "Retorno %",
+      "volatility_label": "Volatilidad"
+    },
+    "indices": {
+      "IPV": {
+        "name": "Índice de Plusvalía",
+        "short": "Plusvalía",
+        "tagline": "Revalorización inmobiliaria sostenida"
+      },
+      "IAB": {
+        "name": "Índice de Amenidades Barriales",
+        "short": "Amenidades",
+        "tagline": "Servicios y comercio local"
+      },
+      "IDS": {
+        "name": "Índice de Densidad Saludable",
+        "short": "Densidad",
+        "tagline": "Balance densidad y calidad de vida"
+      },
+      "IRE": {
+        "name": "Índice de Renta Efectiva",
+        "short": "Renta",
+        "tagline": "Rendimiento real del alquiler"
+      },
+      "ICO": {
+        "name": "Índice de Conectividad",
+        "short": "Conectividad",
+        "tagline": "Transporte y movilidad"
+      },
+      "MOM": {
+        "name": "Índice de Momentum",
+        "short": "Momentum",
+        "tagline": "Dinámica de mercado en tiempo real"
+      },
+      "LIV": {
+        "name": "Índice de Livability",
+        "short": "Livability",
+        "tagline": "Calidad de vida integral"
+      },
+      "FAM": {
+        "name": "Índice Familiar",
+        "short": "Familias",
+        "tagline": "Idoneidad para familias"
+      },
+      "YNG": {
+        "name": "Índice Joven",
+        "short": "Jóvenes",
+        "tagline": "Atractivo para adultos jóvenes"
+      },
+      "GRN": {
+        "name": "Índice Verde",
+        "short": "Verde",
+        "tagline": "Espacios verdes y sustentabilidad"
+      },
+      "STR": {
+        "name": "Índice STR",
+        "short": "Rentas Cortas",
+        "tagline": "Rentabilidad Airbnb-style"
+      },
+      "INV": {
+        "name": "Índice de Inversión",
+        "short": "Inversión",
+        "tagline": "Atractivo para inversionistas"
+      },
+      "DEV": {
+        "name": "Índice de Desarrollo",
+        "short": "Desarrollo",
+        "tagline": "Actividad constructiva"
+      },
+      "GNT": {
+        "name": "Índice de Gentrificación",
+        "short": "Gentrificación",
+        "tagline": "Presión de desplazamiento"
+      },
+      "STA": {
+        "name": "Índice de Estabilidad",
+        "short": "Estabilidad",
+        "tagline": "Resiliencia y consistencia"
+      }
+    }
   }
 }
