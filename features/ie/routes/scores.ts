@@ -1,10 +1,14 @@
 import { TRPCError } from '@trpc/server';
 import { router } from '@/server/trpc/init';
 import { authenticatedProcedure } from '@/server/trpc/middleware';
+import { filterRowsForPublic } from '@/shared/lib/intelligence-engine/calculators/score-visibility';
 import { tierGate } from '@/shared/lib/intelligence-engine/calculators/tier-gate';
 import { getScoreLineage } from '@/shared/lib/intelligence-engine/cascades/score-lineage';
 import { SCORE_REGISTRY } from '@/shared/lib/intelligence-engine/registry';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
+
+const ADMIN_ROLES: ReadonlySet<string> = new Set(['superadmin', 'mb_admin']);
+
 import {
   ieScoresGetByZoneInput,
   ieScoresGetDependenciesInput,
@@ -40,7 +44,7 @@ const SELECT_COLUMNS =
   'zone_id, country_code, score_type, score_value, score_label, level, tier, confidence, components, inputs_used, citations, provenance, deltas, ranking, comparable_zones, trend_direction, trend_vs_previous, valid_until, period_date, computed_at' as const;
 
 export const ieScoresRouter = router({
-  list: authenticatedProcedure.input(ieScoresListInput).query(async ({ input }) => {
+  list: authenticatedProcedure.input(ieScoresListInput).query(async ({ input, ctx }) => {
     const supabase = createAdminClient();
     let query = supabase
       .from('zone_scores')
@@ -59,7 +63,20 @@ export const ieScoresRouter = router({
     if (error) {
       throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
     }
-    return (data ?? []) as readonly ZoneScoreRow[];
+    const rows = (data ?? []) as readonly ZoneScoreRow[];
+
+    // D18 — si el caller NO es admin, filtra campos sensibles según
+    // ie_score_visibility_rules. Internal scores (E01/E02/E03) desaparecen
+    // de la respuesta; public scores (G01/D02/D09) se filtran a allowed_fields.
+    const isAdmin = ctx.profile ? ADMIN_ROLES.has(ctx.profile.rol) : false;
+    if (!isAdmin) {
+      const filtered = await filterRowsForPublic(
+        supabase,
+        rows as unknown as ReadonlyArray<Record<string, unknown>>,
+      );
+      return filtered as unknown as readonly ZoneScoreRow[];
+    }
+    return rows;
   }),
 
   getByZone: authenticatedProcedure.input(ieScoresGetByZoneInput).query(async ({ input }) => {
