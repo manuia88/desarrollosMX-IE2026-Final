@@ -13,9 +13,11 @@
 
 import { NextResponse } from 'next/server';
 import {
+  type CalculateMigrationFlowsBatchSummary,
   type CalculatePulseBatchSummary,
   type CDMXBatchSummary,
   calculateAllIndicesForCDMXColonias,
+  calculateAllMigrationFlowsForCDMXColonias,
   calculateAllPulseForCDMXColonias,
 } from '@/shared/lib/intelligence-engine/calculators/indices';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
@@ -76,6 +78,11 @@ export async function POST(request: Request): Promise<NextResponse> {
   let pulseScopesProcessed = 0;
   let pulseComputed = 0;
   let pulseFailures = 0;
+  let migrationScopesProcessed = 0;
+  let migrationFlowsUpserted = 0;
+  let migrationFailures = 0;
+  let migrationSourcesReal: readonly string[] = [];
+  let migrationSourcesStub: readonly string[] = [];
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -111,6 +118,33 @@ export async function POST(request: Request): Promise<NextResponse> {
         });
       }
     }
+
+    // BLOQUE 11.G — Migration Flow fan-out.
+    // Corre solo en quarterly/annual dispatches (granularidad trimestral,
+    // evita ruido estadístico mensual con solo RPP real).
+    // Falla de flows NO tumba dispatch (try/catch aislado, mismo patrón que pulse).
+    if (dispatched === 'quarterly' || dispatched === 'annual') {
+      try {
+        const migrationResult: CalculateMigrationFlowsBatchSummary =
+          await calculateAllMigrationFlowsForCDMXColonias({
+            periodDate,
+            supabase,
+          });
+        migrationScopesProcessed = migrationResult.scopes_processed;
+        migrationFlowsUpserted = migrationResult.flows_upserted;
+        migrationFailures = migrationResult.failures;
+        migrationSourcesReal = migrationResult.sources_real;
+        migrationSourcesStub = migrationResult.sources_stub;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errors.push({ stage: `${dispatched}:migration_flow`, message });
+        console.error('[dmx-indices-master] migration_flow dispatch failed', {
+          dispatched,
+          message,
+          error: err,
+        });
+      }
+    }
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     errors.push({ stage: dispatched, message });
@@ -130,6 +164,11 @@ export async function POST(request: Request): Promise<NextResponse> {
     pulse_scopes_processed: pulseScopesProcessed,
     pulse_computed: pulseComputed,
     pulse_failures: pulseFailures,
+    flows_scopes_processed: migrationScopesProcessed,
+    flows_upserted: migrationFlowsUpserted,
+    flows_failures: migrationFailures,
+    flows_sources_real: migrationSourcesReal,
+    flows_sources_stub: migrationSourcesStub,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

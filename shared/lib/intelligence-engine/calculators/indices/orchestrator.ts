@@ -21,6 +21,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 import type { Calculator, CalculatorInput, Confidence } from '../base';
+import { aggregateFlowsForCDMXColonias } from '../migration';
 import { runPulseScoreForScope } from '../pulse';
 import dmxDevCalculator from './dev';
 import dmxFamCalculator from './fam';
@@ -584,5 +585,48 @@ export async function calculateAllPulseForCDMXColonias(
     pulse_computed,
     failures,
     duration_ms: Date.now() - start,
+  };
+}
+
+// BLOQUE 11.G — Migration Flow batch orchestrator.
+// Thin wrapper sobre aggregateFlowsForCDMXColonias (vive en ../migration).
+// Se invoca desde el dispatcher trimestral (cron). Paridad de shape con
+// CDMXBatchSummary para que el cron consuma uniforme.
+
+export interface CalculateMigrationFlowsBatchSummary {
+  readonly scopes_processed: number;
+  readonly flows_upserted: number;
+  readonly failures: number;
+  readonly duration_ms: number;
+  readonly sources_real: readonly string[];
+  readonly sources_stub: readonly string[];
+}
+
+export interface CalculateAllMigrationFlowsParams {
+  readonly periodDate: string;
+  readonly supabase: SupabaseClient;
+  readonly zoneIds?: readonly string[];
+  readonly scopeType?: 'colonia' | 'alcaldia' | 'city' | 'estado';
+  readonly chunkSize?: number;
+}
+
+export async function calculateAllMigrationFlowsForCDMXColonias(
+  params: CalculateAllMigrationFlowsParams,
+): Promise<CalculateMigrationFlowsBatchSummary> {
+  const summary = await aggregateFlowsForCDMXColonias({
+    periodDate: params.periodDate,
+    supabase: params.supabase,
+    ...(params.zoneIds ? { zoneIds: params.zoneIds } : {}),
+    ...(params.scopeType ? { scopeType: params.scopeType } : {}),
+    ...(params.chunkSize !== undefined ? { chunkSize: params.chunkSize } : {}),
+  });
+
+  return {
+    scopes_processed: summary.scopes_processed,
+    flows_upserted: summary.flows_upserted,
+    failures: summary.failures,
+    duration_ms: summary.duration_ms,
+    sources_real: summary.sources_real as readonly string[],
+    sources_stub: summary.sources_stub as readonly string[],
   };
 }

@@ -1201,5 +1201,35 @@
     "units_people": "pessoas",
     "units_calls": "chamadas",
     "aria_pulse_chart": "Gráfico de pulso últimos 12 meses"
+  },
+  "MigrationFlow": {
+    "page": {
+      "title": "Fluxos migratórios",
+      "meta_description": "Mapa de fluxos migratórios entre zonas: de onde para onde se movem as pessoas.",
+      "subtitle": "De onde para onde as pessoas se movem entre zonas",
+      "loading": "Carregando fluxos migratórios…",
+      "error": "Não foi possível carregar os fluxos migratórios.",
+      "empty": "Ainda não há fluxos migratórios para mostrar."
+    },
+    "heroTitle": "Fluxos migratórios",
+    "heroSubtitle": "Visualize de onde para onde as pessoas se movem entre bairros, municípios e cidades, combinando fontes públicas e perfis.",
+    "mapTitle": "Mapa de fluxos",
+    "empty": "Ainda não há fluxos migratórios para mostrar.",
+    "filter_period": "Período",
+    "filter_decile_min": "Decil mínimo",
+    "filter_decile_max": "Decil máximo",
+    "filter_direction": "Direção",
+    "filter_direction_inflow": "Entrada",
+    "filter_direction_outflow": "Saída",
+    "table_title": "Top fluxos migratórios",
+    "table_rank": "#",
+    "table_origin": "Origem",
+    "table_destination": "Destino",
+    "table_volume": "Volume",
+    "table_pct": "% do total",
+    "table_decile": "Decil",
+    "aria_map": "Mapa de fluxos migratórios entre zonas",
+    "aria_table": "Tabela dos principais fluxos migratórios",
+    "breadcrumb": "Fluxos migratórios"
   }
 }

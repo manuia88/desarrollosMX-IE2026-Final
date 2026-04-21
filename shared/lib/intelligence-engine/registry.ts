@@ -1711,6 +1711,25 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     country_codes: ['MX'],
   },
 
+  // --------------- Migration Flow — BLOQUE 11.G ---------------
+  // Mapa "de dónde a dónde se mueven los mexicanos" entre zonas. level 5
+  // agregado, tier 2 público, combina RPP escrituras (primaria) + 3 stubs H1
+  // (INEGI ENADID, INE credencial, LinkedIn). Persiste en
+  // public.zone_migration_flows con granularidad trimestral.
+  {
+    score_id: 'MIGRATION_FLOW',
+    name: 'Migration Flow',
+    level: 5,
+    category: 'agregado',
+    tier: 2,
+    dependencies: [],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#migration-flow',
+    confidence_sources: ['rpp_escrituras', 'inegi_enadid', 'ine_credencial', 'linkedin'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/migration/flow-aggregator.ts',
+    country_codes: ['MX'],
+  },
+
   // --------------- Stubs futuros H2+ (5) ---------------
   // Placeholder entries que llegarán post-H1. Marcados [STUB — FASE 29+].
   {

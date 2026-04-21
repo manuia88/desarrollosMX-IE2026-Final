@@ -1193,5 +1193,35 @@
     "units_people": "people",
     "units_calls": "calls",
     "aria_pulse_chart": "Pulse chart last 12 months"
+  },
+  "MigrationFlow": {
+    "page": {
+      "title": "Migration flows",
+      "meta_description": "Map of migration flows between zones: where people are moving from and to.",
+      "subtitle": "Where people move from and to, between zones",
+      "loading": "Loading migration flows…",
+      "error": "We couldn't load migration flows.",
+      "empty": "No migration flows available yet."
+    },
+    "heroTitle": "Migration flows",
+    "heroSubtitle": "Visualize where people move from and to between neighborhoods, municipalities, and cities, combining public sources and profiles.",
+    "mapTitle": "Flow map",
+    "empty": "No migration flows available yet.",
+    "filter_period": "Period",
+    "filter_decile_min": "Min decile",
+    "filter_decile_max": "Max decile",
+    "filter_direction": "Direction",
+    "filter_direction_inflow": "Inflow",
+    "filter_direction_outflow": "Outflow",
+    "table_title": "Top migration flows",
+    "table_rank": "#",
+    "table_origin": "Origin",
+    "table_destination": "Destination",
+    "table_volume": "Volume",
+    "table_pct": "% of total",
+    "table_decile": "Decile",
+    "aria_map": "Migration flows map between zones",
+    "aria_table": "Top migration flows table",
+    "breadcrumb": "Migration flows"
   }
 }

@@ -25,6 +25,7 @@ import { strWatchdogRouter } from '@/features/str-intelligence/routes/watchdog';
 import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
 import { publicProcedure, router } from './init';
 import { causalRouter } from './routers/causal';
+import { migrationFlowRouter } from './routers/migration-flow';
 import { pulseRouter } from './routers/pulse';
 
 export const appRouter = router({
@@ -39,6 +40,7 @@ export const appRouter = router({
   me: meRouter,
   memory: memoryRouter,
   mfa: mfaRouter,
+  migrationFlow: migrationFlowRouter,
   roleRequest: roleRequestRouter,
   scian: scianRouter,
   ltrStrConnection: ltrStrConnectionRouter,
