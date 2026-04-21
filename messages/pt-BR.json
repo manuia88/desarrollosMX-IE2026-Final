@@ -1155,5 +1155,25 @@
         "tagline": "Resiliência e consistência"
       }
     }
+  },
+  "Causal": {
+    "title": "Por que {scopeLabel}",
+    "loading": "Gerando explicação…",
+    "error": "Não conseguimos gerar a explicação agora. Tente novamente.",
+    "locale_fallback": "Explicação disponível apenas em espanhol no momento.",
+    "generated_by": "DMX Intelligence",
+    "sources_button": "Ver fontes",
+    "sources_hide": "Ocultar fontes",
+    "copy_button": "Copiar",
+    "copy_success": "Copiado",
+    "sources_empty": "Sem fontes adicionais",
+    "example_calc_header": "Exemplo de cálculo real",
+    "cached_badge": "em cache",
+    "citation_type": {
+      "score": "Score",
+      "macro": "Macro",
+      "geo": "Geo",
+      "news": "Notícia"
+    }
   }
 }
