@@ -1730,6 +1730,34 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     country_codes: ['MX'],
   },
 
+  // --------------- Trend Genome — BLOQUE 11.H ---------------
+  // "Alpha-seeking radar" B2B premium: detecta zonas emergentes 12-18 meses
+  // antes que suban precios mainstream combinando Instagram geo-tags públicos
+  // (Apify, ADR-027 compliance) + DENUE aperturas alpha (cafés especialidad,
+  // galerías, fine dining) + Migration inflow high-income (11.G) + price
+  // velocity invertido + search volume. level 5 agregado, tier 3 Pro+ gated.
+  // Persiste en public.zone_alpha_alerts + public.influencer_heat_zones
+  // (granularidad trimestral).
+  {
+    score_id: 'TREND_GENOME',
+    name: 'Trend Genome',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['MIGRATION_FLOW', 'PULSE'],
+    triggers_cascade: ['geo_data_updated:denue'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#trend-genome',
+    confidence_sources: [
+      'instagram_apify',
+      'denue_alpha_classifier',
+      'zone_migration_flows',
+      'zona_snapshots',
+      'google_trends',
+    ],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/alpha/trend-genome.ts',
+    country_codes: ['MX'],
+  },
+
   // --------------- Stubs futuros H2+ (5) ---------------
   // Placeholder entries que llegarán post-H1. Marcados [STUB — FASE 29+].
   {

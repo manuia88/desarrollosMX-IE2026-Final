@@ -20,6 +20,8 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 
+import type { AlphaScopeType } from '@/features/trend-genome/types';
+import { detectNewAlphaZones } from '../alpha/alerts-engine';
 import type { Calculator, CalculatorInput, Confidence } from '../base';
 import { aggregateFlowsForCDMXColonias } from '../migration';
 import { runPulseScoreForScope } from '../pulse';
@@ -628,5 +630,101 @@ export async function calculateAllMigrationFlowsForCDMXColonias(
     duration_ms: summary.duration_ms,
     sources_real: summary.sources_real as readonly string[],
     sources_stub: summary.sources_stub as readonly string[],
+  };
+}
+
+// BLOQUE 11.H — Trend Genome batch orchestrator.
+// Descubre zonas CDMX, corre calculateTrendGenome() vía detectNewAlphaZones()
+// en chunks de 10. detectNewAlphaZones() persiste alerts en zone_alpha_alerts
+// para zonas con alpha_score ≥70 (UPGRADE #1 drift detection incluido). Falla
+// individual no tumba el batch — errors loggeados al caller (cron route).
+
+export interface CalculateTrendGenomeBatchSummary {
+  readonly zones_processed: number;
+  readonly alphas_detected: number;
+  readonly alerts_triggered: number;
+  readonly failures: number;
+  readonly sources_real: readonly string[];
+  readonly sources_stub: readonly string[];
+  readonly duration_ms: number;
+}
+
+export interface CalculateAllTrendGenomeForCDMXColoniasParams {
+  readonly periodDate: string;
+  readonly supabase: SupabaseClient;
+  readonly zoneIds?: readonly string[];
+  readonly scopeType?: AlphaScopeType;
+  readonly chunkSize?: number;
+  readonly fetchImpl?: typeof fetch;
+  readonly apifyToken?: string;
+}
+
+// Sources classification: Instagram + DENUE son reales (adapters implementados
+// sub-agent A). Migration es real (zone_migration_flows poblado por 11.G).
+// Price_velocity es data interna. Search_volume (Google Trends) es STUB H1.
+const TREND_GENOME_SOURCES_REAL: readonly string[] = [
+  'apify_instagram',
+  'denue_alpha_classifier',
+  'zone_migration_flows',
+  'zona_snapshots',
+] as const;
+const TREND_GENOME_SOURCES_STUB: readonly string[] = ['google_trends_stub'] as const;
+
+export async function calculateAllTrendGenomeForCDMXColonias(
+  params: CalculateAllTrendGenomeForCDMXColoniasParams,
+): Promise<CalculateTrendGenomeBatchSummary> {
+  const start = Date.now();
+  const chunkSize = params.chunkSize ?? CDMX_CHUNK_SIZE;
+  const scopeType: AlphaScopeType = params.scopeType ?? 'colonia';
+  const zoneIds =
+    params.zoneIds ?? (await discoverCDMXColoniaZones(params.supabase, params.periodDate));
+
+  if (zoneIds.length === 0) {
+    return {
+      zones_processed: 0,
+      alphas_detected: 0,
+      alerts_triggered: 0,
+      failures: 0,
+      sources_real: TREND_GENOME_SOURCES_REAL,
+      sources_stub: TREND_GENOME_SOURCES_STUB,
+      duration_ms: Date.now() - start,
+    };
+  }
+
+  let alphasDetected = 0;
+  let alertsTriggered = 0;
+  let failures = 0;
+
+  for (let i = 0; i < zoneIds.length; i += chunkSize) {
+    const chunk = zoneIds.slice(i, i + chunkSize);
+    // detectNewAlphaZones acepta una lista zoneIds; corremos un call por chunk
+    // (internamente itera secuencial por zona — preserva orden para fetchImpl
+    // rate limits). Promise.all paraleliza chunks con solo 1 call cada uno.
+    try {
+      const result = await detectNewAlphaZones({
+        periodDate: params.periodDate,
+        supabase: params.supabase,
+        zoneIds: chunk,
+        scopeType,
+        ...(params.fetchImpl ? { fetchImpl: params.fetchImpl } : {}),
+        ...(params.apifyToken ? { apifyToken: params.apifyToken } : {}),
+      });
+      for (const d of result.detections) {
+        if (d.alpha_score >= 70) alphasDetected += 1;
+      }
+      alertsTriggered += result.alerts_triggered;
+    } catch {
+      failures += chunk.length;
+    }
+  }
+
+  return {
+    zones_processed: zoneIds.length,
+    alphas_detected: alphasDetected,
+    alerts_triggered: alertsTriggered,
+    failures,
+    sources_real: TREND_GENOME_SOURCES_REAL,
+    sources_stub: TREND_GENOME_SOURCES_STUB,
+    duration_ms: Date.now() - start,
   };
 }

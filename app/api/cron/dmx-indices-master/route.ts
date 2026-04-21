@@ -15,10 +15,12 @@ import { NextResponse } from 'next/server';
 import {
   type CalculateMigrationFlowsBatchSummary,
   type CalculatePulseBatchSummary,
+  type CalculateTrendGenomeBatchSummary,
   type CDMXBatchSummary,
   calculateAllIndicesForCDMXColonias,
   calculateAllMigrationFlowsForCDMXColonias,
   calculateAllPulseForCDMXColonias,
+  calculateAllTrendGenomeForCDMXColonias,
 } from '@/shared/lib/intelligence-engine/calculators/indices';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 
@@ -83,6 +85,12 @@ export async function POST(request: Request): Promise<NextResponse> {
   let migrationFailures = 0;
   let migrationSourcesReal: readonly string[] = [];
   let migrationSourcesStub: readonly string[] = [];
+  let alphaZonesProcessed = 0;
+  let alphasDetected = 0;
+  let alertsTriggered = 0;
+  let alphaFailures = 0;
+  let alphaSourcesReal: readonly string[] = [];
+  let alphaSourcesStub: readonly string[] = [];
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -144,6 +152,32 @@ export async function POST(request: Request): Promise<NextResponse> {
           error: err,
         });
       }
+
+      // BLOQUE 11.H — Trend Genome fan-out. Corre en quarterly/annual después
+      // de migration_flow (Trend Genome consume zone_migration_flows fresh para
+      // migration_inflow signal decile ≥7). Falla NO tumba dispatch (try/catch
+      // aislado, mismo patrón que pulse + migration).
+      try {
+        const alphaResult: CalculateTrendGenomeBatchSummary =
+          await calculateAllTrendGenomeForCDMXColonias({
+            periodDate,
+            supabase,
+          });
+        alphaZonesProcessed = alphaResult.zones_processed;
+        alphasDetected = alphaResult.alphas_detected;
+        alertsTriggered = alphaResult.alerts_triggered;
+        alphaFailures = alphaResult.failures;
+        alphaSourcesReal = alphaResult.sources_real;
+        alphaSourcesStub = alphaResult.sources_stub;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errors.push({ stage: `${dispatched}:trend_genome`, message });
+        console.error('[dmx-indices-master] trend_genome dispatch failed', {
+          dispatched,
+          message,
+          error: err,
+        });
+      }
     }
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
@@ -169,6 +203,12 @@ export async function POST(request: Request): Promise<NextResponse> {
     flows_failures: migrationFailures,
     flows_sources_real: migrationSourcesReal,
     flows_sources_stub: migrationSourcesStub,
+    alpha_zones_processed: alphaZonesProcessed,
+    alphas_detected: alphasDetected,
+    alerts_triggered: alertsTriggered,
+    alpha_failures: alphaFailures,
+    alpha_sources_real: alphaSourcesReal,
+    alpha_sources_stub: alphaSourcesStub,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

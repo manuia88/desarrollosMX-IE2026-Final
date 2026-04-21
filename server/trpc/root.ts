@@ -27,6 +27,7 @@ import { publicProcedure, router } from './init';
 import { causalRouter } from './routers/causal';
 import { migrationFlowRouter } from './routers/migration-flow';
 import { pulseRouter } from './routers/pulse';
+import { trendGenomeRouter } from './routers/trend-genome';
 
 export const appRouter = router({
   health: publicProcedure.query(() => ({
@@ -60,6 +61,7 @@ export const appRouter = router({
   strWatchdog: strWatchdogRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
+  trendGenome: trendGenomeRouter,
   zoneInvestment: zoneInvestmentRouter,
 });
 

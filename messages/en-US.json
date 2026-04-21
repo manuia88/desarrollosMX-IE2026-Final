@@ -1223,5 +1223,52 @@
     "aria_map": "Migration flows map between zones",
     "aria_table": "Top migration flows table",
     "breadcrumb": "Migration flows"
+  },
+  "TrendGenome": {
+    "page": {
+      "title": "Trend Genome — alpha zones",
+      "meta_description": "Alpha zones radar: neighborhoods with early gentrification signals detected 12-18 months before mainstream.",
+      "subtitle": "Early signals, before prices rise.",
+      "loading": "Loading alpha zones…",
+      "error": "We couldn't load alpha zones.",
+      "empty": "No active alpha zones yet."
+    },
+    "breadcrumb": "Indices",
+    "hero": {
+      "title": "Trend Genome",
+      "subtitle": "Discover neighborhoods with early gentrification signals 12-18 months before mainstream."
+    },
+    "cta": {
+      "upgrade_pro": "Upgrade to Pro+ to unlock {count} alpha zones detected this quarter."
+    },
+    "card": {
+      "alpha_score_label": "Alpha score",
+      "time_to_mainstream_label": "Time to mainstream",
+      "months": "months"
+    },
+    "tier": {
+      "confirmed": "Confirmed",
+      "speculative": "Speculative",
+      "golden_opportunity": "Golden opportunity",
+      "watchlist": "Watchlist"
+    },
+    "needs_review": "Needs review",
+    "signals": {
+      "chef": "Chefs",
+      "gallery": "Galleries",
+      "creator": "Creators",
+      "specialty_cafe": "Specialty cafés",
+      "alpha_openings": "Alpha openings 6m",
+      "migration_decile": "Migration decile",
+      "pulse_score": "Pulse",
+      "contribution_label": "Contribution to score"
+    },
+    "teaser": {
+      "count": "{count} alpha zones detected this quarter"
+    },
+    "aria": {
+      "card": "Alpha zone {zoneId}",
+      "list": "Alpha zones list"
+    }
   }
 }

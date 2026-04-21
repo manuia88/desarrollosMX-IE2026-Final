@@ -1231,5 +1231,52 @@
     "aria_map": "Mapa de fluxos migratórios entre zonas",
     "aria_table": "Tabela dos principais fluxos migratórios",
     "breadcrumb": "Fluxos migratórios"
+  },
+  "TrendGenome": {
+    "page": {
+      "title": "Trend Genome — zonas alpha",
+      "meta_description": "Radar de zonas alpha: bairros com sinais precoces de gentrificação 12-18 meses antes do mainstream.",
+      "subtitle": "Sinais precoces, antes dos preços subirem.",
+      "loading": "Carregando zonas alpha…",
+      "error": "Não foi possível carregar as zonas alpha.",
+      "empty": "Ainda não há zonas alpha ativas."
+    },
+    "breadcrumb": "Índices",
+    "hero": {
+      "title": "Trend Genome",
+      "subtitle": "Descubra bairros com sinais de gentrificação precoce 12-18 meses antes do mainstream."
+    },
+    "cta": {
+      "upgrade_pro": "Atualize para Pro+ e desbloqueie {count} zonas alpha detectadas neste trimestre."
+    },
+    "card": {
+      "alpha_score_label": "Alpha score",
+      "time_to_mainstream_label": "Tempo até o mainstream",
+      "months": "meses"
+    },
+    "tier": {
+      "confirmed": "Confirmada",
+      "speculative": "Especulativa",
+      "golden_opportunity": "Oportunidade de ouro",
+      "watchlist": "Watchlist"
+    },
+    "needs_review": "Revisão humana",
+    "signals": {
+      "chef": "Chefs",
+      "gallery": "Galerias",
+      "creator": "Creators",
+      "specialty_cafe": "Cafés especialidade",
+      "alpha_openings": "Aberturas alpha 6m",
+      "migration_decile": "Decil migração",
+      "pulse_score": "Pulse",
+      "contribution_label": "Contribuição para o score"
+    },
+    "teaser": {
+      "count": "{count} zonas alpha detectadas neste trimestre"
+    },
+    "aria": {
+      "card": "Zona alpha {zoneId}",
+      "list": "Lista de zonas alpha"
+    }
   }
 }
