@@ -16,6 +16,10 @@ export interface CalculatorInput {
   readonly periodDate: string; // ISO YYYY-MM-DD
   // Parámetros opcionales on-demand (ej. destino para H09 Commute).
   readonly params?: Readonly<Record<string, unknown>>;
+  // D33 FASE 10 SESIÓN 3/3 — multi-tenant scoping para N4 producto institucional
+  // (E01/E02/E03). NULL = scope global (default H1 backward compat). Validado
+  // contra tenant_scopes table en runScore vía validateTenantScope().
+  readonly tenant_id?: string;
 }
 
 export interface CalculatorCitation {

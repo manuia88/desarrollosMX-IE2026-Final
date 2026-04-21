@@ -19,6 +19,7 @@ import {
   persistUserScore,
   persistZoneScore,
 } from './persist';
+import { type TenantScopeResult, validateTenantScope } from './tenant-scope';
 import { type TierGateResult, tierGate } from './tier-gate';
 import { isProvenanceValid } from './types';
 
@@ -49,6 +50,11 @@ export type RunScoreResult =
   | {
       readonly kind: 'gated';
       readonly gate: TierGateResult;
+      readonly registry: ScoreRegistryEntry;
+    }
+  | {
+      readonly kind: 'tenant_violation';
+      readonly violation: NonNullable<TenantScopeResult['violation']>;
       readonly registry: ScoreRegistryEntry;
     }
   | {
@@ -103,6 +109,15 @@ export async function runScore(
       error: `country_not_supported:${input.countryCode} for ${scoreId}`,
       registry,
     };
+  }
+
+  // D33 — multi-tenant scoping para N4 institucional (E01/E02/E03).
+  // Si ie_score_visibility_rules.tenant_scope_required=true y input.tenant_id
+  // missing o desconocido → reject antes de calcular. Resto de scores pasa
+  // permisivo (scope global).
+  const tenantCheck = await validateTenantScope(input, scoreId, supabase);
+  if (!tenantCheck.ok && tenantCheck.violation) {
+    return { kind: 'tenant_violation', violation: tenantCheck.violation, registry };
   }
 
   const gate = await tierGate(registry.tier, input.countryCode, supabase);

@@ -81,6 +81,9 @@ function buildRow(
   return {
     [entityColumn]: entityId,
     country_code: input.countryCode,
+    // D33 — tenant_id NULL = scope global (backward compat). Cuando input lo
+    // provee, RLS H2 filtrará rows por tenant_id match con perfil caller.
+    tenant_id: input.tenant_id ?? null,
     score_type: registry.score_id,
     score_value: output.score_value,
     score_label: output.score_label,
