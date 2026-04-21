@@ -1049,6 +1049,9 @@
       "changelog_title": "Changelog",
       "download_pdf": "Download PDF",
       "pdf_unavailable": "PDF not available",
+      "pdf_cover_subtitle": "Full methodology and active version",
+      "pdf_generated_at": "Generated on {date}",
+      "pdf_footer_disclaimer": "Official DMX document — methodology at desarrollosmx.com/metodologia",
       "no_methodology": "No published methodology"
     },
     "pro": {

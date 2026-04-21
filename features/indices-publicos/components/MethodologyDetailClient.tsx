@@ -120,27 +120,25 @@ export function MethodologyDetailClient({ indexCode, today }: MethodologyDetailC
           </span>
         ) : null}
 
-        <button
-          type="button"
-          disabled
-          aria-disabled="true"
-          aria-label={t('methodology.pdf_unavailable')}
-          title={t('methodology.pdf_unavailable')}
+        <a
+          href={`/api/metodologia/${indexCode}/pdf`}
+          aria-label={t('methodology.download_pdf')}
+          download={`dmx-metodologia-${indexCode}.pdf`}
           style={{
             marginLeft: 'auto',
             padding: '8px 16px',
             borderRadius: 'var(--radius-md, 8px)',
             border: '1px solid var(--color-border-subtle, rgba(0,0,0,0.08))',
-            background: 'var(--color-surface-muted, rgba(0,0,0,0.04))',
-            color: 'var(--color-text-tertiary, var(--color-text-secondary))',
+            background: 'var(--color-surface-raised, white)',
+            color: 'var(--color-text-primary)',
             fontSize: 'var(--text-sm)',
             fontWeight: 'var(--font-weight-medium, 500)',
-            cursor: 'not-allowed',
-            opacity: 0.6,
+            textDecoration: 'none',
+            cursor: 'pointer',
           }}
         >
           {t('methodology.download_pdf')}
-        </button>
+        </a>
       </section>
 
       <section aria-label={t('methodology.weights_title')}>
