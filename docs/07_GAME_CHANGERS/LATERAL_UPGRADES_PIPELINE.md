@@ -1236,6 +1236,76 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Industria origen:** Morningstar style-box + Bloomberg multi-metric cards
 - **Dependencia data:** dmx_indices (11.A) + AlphaZoneCard component (ya existe 11.H.6)
 
+### L118 — Scorecard executive 1-pager dense summary (lateral 11.I diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing & Communications — press asset)
+- **Qué es:** versión 1-pager del Scorecard Nacional con data densa visual estilo Bloomberg one-pager. Complementa el PDF 40-80 páginas completo.
+- **Para qué sirve:** medios + fondos quieren skim rápido sin leer 40 páginas. One-pager = primer asset que share en Twitter/LinkedIn.
+- **Beneficio concreto:** viralidad PR + clic-through al PDF completo desde one-pager.
+- **Fase target:** FASE 22 Marketing (press asset kit ampliado)
+- **Industria origen:** Bloomberg one-pager briefings + McKinsey exec summary format
+- **Dependencia data:** Scorecard Nacional data quarterly ya existente + diseño Figma template
+
+### L119 — Scorecard infografía redes sociales descargable (lateral 11.I diferido)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.U Stickers — generator infra reutilizable)
+- **Qué es:** PNG shareable optimizados Twitter (1200×675) + LinkedIn (1200×627) + Instagram (1080×1080) con top 3 insights Scorecard. Reusa generator Sharp/SVG de 11.U.
+- **Para qué sirve:** amplificación social orgánica masiva cuando se publica Scorecard trimestral.
+- **Beneficio concreto:** shares redes sociales 10x vs solo PDF link.
+- **Fase target:** FASE 11 XL BLOQUE 11.U Stickers (generator infra reusable)
+- **Industria origen:** Axios Infographics + Visual Capitalist shareable cards
+- **Dependencia data:** Scorecard quarterly + 11.U sticker generator + SVG templates brand
+
+### L120 — Scorecard audio summary podcast auto-TTS (lateral 11.I diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing — podcast strategy)
+- **Qué es:** audio 5-7 min TTS auto-generado del executive summary del Scorecard trimestral. Publicado en Spotify/Apple Podcasts "DMX Pulse Trimestral".
+- **Para qué sirve:** audiencia podcast durante commute + amplificación asincrónica del Scorecard.
+- **Beneficio concreto:** content evergreen cross-platform + top-of-mind B2B commuters.
+- **Fase target:** FASE 22 Marketing (podcast strategy integrada con Alpha Podcast L111)
+- **Industria origen:** Bloomberg Surveillance podcast + FT News Briefing
+- **Dependencia data:** executive narrative (11.I.3) + TTS pipeline (ElevenLabs/Lovo)
+
+### L121 — Scorecard citation format academic crossref BibTeX (lateral 11.I diferido)
+
+- **Status:** ⚪ backlog (FASE 23 Monetización — academia partnerships + citation system)
+- **Qué es:** cada Scorecard quarterly tiene DOI + formato citation BibTeX/APA/MLA listo para academia. "DesarrollosMX (2026). Scorecard Nacional Q1 2026. https://doi.org/10.xxxxx"
+- **Para qué sirve:** universidades (ITAM, Tec, UNAM economía urbana) pueden citar DMX como fuente académica formal. Amplifica autoridad.
+- **Beneficio concreto:** referencias académicas orgánicas + partnerships universidades H2.
+- **Fase target:** FASE 23 Monetización (academia partnerships + citation infra)
+- **Industria origen:** S&P Global + NBER working papers citation format
+- **Dependencia data:** CrossRef DOI registration + metadata formal + bibliography generator
+
+### L122 — Scorecard × Living Atlas link colonia wiki (cross-function 11.I × 11.S)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.S Living Atlas)
+- **Qué es:** en el PDF Scorecard y landing, cada colonia mencionada linkea a su página wiki `/atlas/[colonia]` (11.S). Navegación cruzada producto completo.
+- **Para qué sirve:** discovery orgánico — lector Scorecard descubre contenido wiki profundo de cada colonia + reduce bounce.
+- **Beneficio concreto:** time-on-site +30% + producto coherente brand.
+- **Fase target:** FASE 11 XL BLOQUE 11.S Living Atlas (integración bidireccional)
+- **Industria origen:** Wikipedia internal linking + Financial Times related articles
+- **Dependencia data:** Living Atlas pages (11.S) + Scorecard generator (11.I) + URL resolver
+
+### L123 — Scorecard × Widget embed sections (cross-function 11.I × 11.L)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.L APIs REST + Widget)
+- **Qué es:** sections del Scorecard (ej. "Top 5 Magnet", "Executive Summary") embebibles como iframe en medios. Medios pueden integrar Scorecard sin republicar.
+- **Para qué sirve:** El Economista puede embed "Scorecard DMX Q1 — sección Magnet/Exodus" directo en su artículo. Amplificación + backlinks masivos.
+- **Beneficio concreto:** SEO backlinks + distribución nativa en medios + brand amplification.
+- **Fase target:** FASE 11 XL BLOQUE 11.L APIs REST + Widget (nuevo widget type: Scorecard section)
+- **Industria origen:** Bloomberg Embed + Twitter/X tweet embeds
+- **Dependencia data:** Widget embed infra (11.L.1) + Scorecard sections modular (11.I.1)
+
+### L124 — Scorecard × Newsletter mensual digest (cross-function 11.I × 11.J)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.J Newsletter)
+- **Qué es:** newsletter mensual incluye preview del Scorecard quarterly (2 meses antes publish) + after-publish digest resumido con link al PDF completo.
+- **Para qué sirve:** nurture audience newsletter antes + durante el push trimestral. Aumenta conversion a PDF download.
+- **Beneficio concreto:** open rate newsletter +20% estimado + audience building pre-publish.
+- **Fase target:** FASE 11 XL BLOQUE 11.J Newsletter (integración Scorecard hooks)
+- **Industria origen:** Morning Brew pre-issue hooks + Axios AM preview cards
+- **Dependencia data:** Newsletter infra (11.J) + Scorecard calendar publish + MJML template section
+
 ### Cross-references FASE 11 XL append
 
 - `docs/CONTEXTO_MAESTRO_DMX_v5.md` Addendum 2026-04-21 FASE 11 XL
@@ -1245,4 +1315,4 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-027_FASE_11_XL_METODOLOGIA_INDICES.md`
 - `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md` §8 TODOs #27-#36
 
-**Última actualización:** 2026-04-21 — L73-L117 (45 laterales FASE 11 XL, +35 nuevos detectados en BLOQUES 11.D/E/F/G/H) + status updates L1/L8/L22 a in_progress + asignación hogar concreto en bloques 11.G/I/J/L/N/T/Z + FASE 22/23/34/38 (0 items sin destino)
+**Última actualización:** 2026-04-21 — L73-L124 (52 laterales FASE 11 XL, +42 nuevos detectados en BLOQUES 11.D/E/F/G/H/I) + status updates L1/L8/L22 a in_progress + asignación hogar concreto en bloques 11.G/I/J/L/N/S/T/U/Z + FASE 22/23/34/38 (0 items sin destino)
