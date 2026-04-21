@@ -841,6 +841,55 @@
         "observaciones": "Due diligence com observações",
         "bloqueante": "Due diligence com bloqueadores",
         "insufficient": "Checklist pendente"
+      },
+      "e01": {
+        "excelente": "Projeto excelente",
+        "bueno": "Projeto bom",
+        "regular": "Projeto regular",
+        "pobre": "Projeto abaixo da média",
+        "insufficient": "Dados insuficientes do projeto"
+      },
+      "g01": {
+        "excelente": "DMX Score excelente",
+        "bueno": "DMX Score bom",
+        "regular": "DMX Score regular",
+        "pobre": "DMX Score baixo",
+        "insufficient": "DMX Score disponível em breve"
+      },
+      "e02": {
+        "excelente": "Portfólio excelente risco-retorno",
+        "bueno": "Portfólio bom",
+        "regular": "Portfólio regular",
+        "pobre": "Portfólio requer rebalanceamento",
+        "insufficient": "Portfólio insuficiente para Sharpe"
+      },
+      "e03": {
+        "hot": "Deal muito provável de fechar",
+        "warm": "Deal provável",
+        "cold": "Deal frio",
+        "stalled": "Deal estagnado",
+        "insufficient": "Sinais insuficientes para previsão"
+      },
+      "e04": {
+        "estable": "Mercado estável",
+        "leve": "Anomalia leve",
+        "moderada": "Anomalia moderada",
+        "alta": "Anomalia alta",
+        "insufficient": "Sem baseline suficiente"
+      },
+      "d09": {
+        "excelente": "Ecossistema saudável",
+        "bueno": "Ecossistema bom",
+        "regular": "Ecossistema regular",
+        "pobre": "Ecossistema frágil",
+        "insufficient": "Dados insuficientes do ecossistema"
+      },
+      "d02": {
+        "top_decil": "Top 10% do país",
+        "top_cuartil": "Top 25% do país",
+        "medio": "Ranking médio",
+        "bajo": "Ranking baixo",
+        "insufficient": "Ranking pendente"
       }
     },
     "confidence": {

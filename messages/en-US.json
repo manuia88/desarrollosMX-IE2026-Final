@@ -841,6 +841,55 @@
         "observaciones": "Due diligence with observations",
         "bloqueante": "Due diligence blockers",
         "insufficient": "Checklist pending completion"
+      },
+      "e01": {
+        "excelente": "Excellent project",
+        "bueno": "Good project",
+        "regular": "Average project",
+        "pobre": "Below-average project",
+        "insufficient": "Insufficient project data"
+      },
+      "g01": {
+        "excelente": "Excellent DMX Score",
+        "bueno": "Good DMX Score",
+        "regular": "Average DMX Score",
+        "pobre": "Low DMX Score",
+        "insufficient": "DMX Score coming soon"
+      },
+      "e02": {
+        "excelente": "Excellent risk-return portfolio",
+        "bueno": "Good portfolio",
+        "regular": "Average portfolio",
+        "pobre": "Portfolio needs rebalancing",
+        "insufficient": "Insufficient portfolio for Sharpe"
+      },
+      "e03": {
+        "hot": "Deal very likely to close",
+        "warm": "Likely deal",
+        "cold": "Cold deal",
+        "stalled": "Stalled deal",
+        "insufficient": "Insufficient signals to predict"
+      },
+      "e04": {
+        "estable": "Stable market",
+        "leve": "Mild anomaly",
+        "moderada": "Moderate anomaly",
+        "alta": "High anomaly",
+        "insufficient": "Insufficient baseline"
+      },
+      "d09": {
+        "excelente": "Healthy ecosystem",
+        "bueno": "Good ecosystem",
+        "regular": "Average ecosystem",
+        "pobre": "Fragile ecosystem",
+        "insufficient": "Insufficient ecosystem data"
+      },
+      "d02": {
+        "top_decil": "Top 10% of country",
+        "top_cuartil": "Top 25% of country",
+        "medio": "Mid-ranking",
+        "bajo": "Low ranking",
+        "insufficient": "Ranking pending"
       }
     },
     "confidence": {
