@@ -10,16 +10,19 @@ export async function register(): Promise<void> {
     { registerN1Calculators },
     { registerN2Calculators },
     { registerN3Calculators },
+    { registerN4Calculators },
   ] = await Promise.all([
     import('@/shared/lib/intelligence-engine/calculators/n0'),
     import('@/shared/lib/intelligence-engine/calculators/n01-n11'),
     import('@/shared/lib/intelligence-engine/calculators/n1'),
     import('@/shared/lib/intelligence-engine/calculators/n2'),
     import('@/shared/lib/intelligence-engine/calculators/n3'),
+    import('@/shared/lib/intelligence-engine/calculators/n4'),
   ]);
   registerN0Calculators();
   registerN01ToN11Calculators();
   registerN1Calculators();
   registerN2Calculators();
   registerN3Calculators();
+  registerN4Calculators();
 }
