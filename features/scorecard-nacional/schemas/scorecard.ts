@@ -129,6 +129,7 @@ export const alphaLifecycleTransitionSchema = z.object({
   to_state: alphaLifecycleStateSchema,
   detected_at: z.string(),
   alpha_score_at_transition: z.number().nullable(),
+  reason: z.string(),
 });
 
 // ---------------- Ranking schema ----------------

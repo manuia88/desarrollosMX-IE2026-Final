@@ -3,6 +3,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useRef } from 'react';
+import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
@@ -102,9 +103,10 @@ export function MapboxChoropleth({
         for (const row of geoRows) {
           const band = isScoreBand(row.score_band) ? row.score_band : resolveScoreBand(row.value);
           const color = interpolateRedGreen(row.value);
+          const label = resolveZoneLabelSync({ scopeType, scopeId: row.scope_id });
           const el = document.createElement('button');
           el.type = 'button';
-          el.setAttribute('aria-label', `${row.scope_id}: ${row.value.toFixed(1)}`);
+          el.setAttribute('aria-label', `${label}: ${row.value.toFixed(1)}`);
           el.style.width = '22px';
           el.style.height = '22px';
           el.style.borderRadius = '50%';
@@ -120,7 +122,7 @@ export function MapboxChoropleth({
 
           const popupHtml = `
             <div style="font-family: var(--font-sans, system-ui); font-size: 12px; min-width: 140px;">
-              <strong>${row.scope_id}</strong><br/>
+              <strong>${label}</strong><br/>
               ${t('detail.value_label')}: ${row.value.toFixed(1)}<br/>
               #${row.ranking_in_scope ?? '—'} ${t(`scope.${scopeType}_plural`)}<br/>
               <span style="color:${color}">${t(`band.${band}`)}</span>
@@ -199,7 +201,7 @@ export function MapboxChoropleth({
                 </LabelPill>
               </div>
               <div className="mt-2 text-sm font-semibold text-[color:var(--color-text-primary)] truncate">
-                {row.scope_id}
+                {resolveZoneLabelSync({ scopeType, scopeId: row.scope_id })}
               </div>
               <div className="mt-1 text-2xl font-semibold tabular-nums text-[color:var(--color-text-primary)]">
                 {row.value.toFixed(1)}

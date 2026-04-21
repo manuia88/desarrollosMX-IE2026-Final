@@ -2,12 +2,25 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
-import { buildCausalTimeline } from '@/features/scorecard-nacional/lib/causal-timeline';
+import {
+  buildCausalTimeline,
+  type IndexCode,
+  isIndexCode,
+} from '@/features/scorecard-nacional/lib/causal-timeline';
 import { locales } from '@/shared/lib/i18n/config';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 
 interface PageProps {
   params: Promise<{ locale: string; colonia: string }>;
+  searchParams?: Promise<Record<string, string | string[] | undefined>>;
+}
+
+const HISTORIA_FALLBACK_INDEX: IndexCode = 'DMX-MOM';
+
+function resolveIndexCodeFromParam(raw: string | string[] | undefined): IndexCode {
+  const candidate = Array.isArray(raw) ? raw[0] : raw;
+  if (typeof candidate === 'string' && isIndexCode(candidate)) return candidate;
+  return HISTORIA_FALLBACK_INDEX;
 }
 
 interface PulseCurrentRow {
@@ -57,13 +70,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function HistoriaColoniaPage({ params }: PageProps) {
+export default async function HistoriaColoniaPage({ params, searchParams }: PageProps) {
   const { locale, colonia } = await params;
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: 'ScorecardNacional' });
 
+  const resolvedSearchParams = (await searchParams) ?? {};
+  const indexCode = resolveIndexCodeFromParam(resolvedSearchParams.indice);
+
   // Public render: zero LLM cost. Consume raw data + deterministic stub.
-  const bundle = await buildCausalTimeline(colonia, 'MX', 12).catch(() => null);
+  const bundle = await buildCausalTimeline(colonia, 'MX', 12, { indexCode }).catch(() => null);
   if (!bundle || bundle.entries.length === 0) {
     notFound();
   }

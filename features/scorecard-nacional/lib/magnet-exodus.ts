@@ -9,6 +9,7 @@
 // (cost budget).
 
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { batchResolveZoneLabels } from '@/shared/lib/market/zone-label-resolver';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import type { MagnetExodusRanking, MagnetExodusRow, MagnetExodusTier } from '../types';
 
@@ -193,8 +194,27 @@ export async function buildMagnetExodusRanking(
   const flows = await fetchFlows(client, countryCode, periodDate);
   const aggs = aggregateByZone(flows);
 
-  const topMagnets = buildRows(aggs, countryCode, periodDate, 'magnet', limit);
-  const topExodus = buildRows(aggs, countryCode, periodDate, 'exodus', limit);
+  const rawMagnets = buildRows(aggs, countryCode, periodDate, 'magnet', limit);
+  const rawExodus = buildRows(aggs, countryCode, periodDate, 'exodus', limit);
+
+  const allRows = [...rawMagnets, ...rawExodus];
+  const labels = await batchResolveZoneLabels(
+    allRows.map((r) => ({ scopeType: r.scope_type, scopeId: r.zone_id, countryCode })),
+    { supabase },
+  );
+  const labelByIndex = new Map<number, string>();
+  allRows.forEach((_row, i) => {
+    const label = labels[i];
+    if (label) labelByIndex.set(i, label);
+  });
+  const topMagnets: readonly MagnetExodusRow[] = rawMagnets.map((r, i) => ({
+    ...r,
+    zone_label: labelByIndex.get(i) ?? r.zone_label,
+  }));
+  const topExodus: readonly MagnetExodusRow[] = rawExodus.map((r, i) => ({
+    ...r,
+    zone_label: labelByIndex.get(rawMagnets.length + i) ?? r.zone_label,
+  }));
 
   let proseMd: string | null = buildStubProse(topMagnets, topExodus);
   if (opts.proseHook) {

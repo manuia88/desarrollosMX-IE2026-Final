@@ -11,6 +11,7 @@
 // invocarlo; aquí solo transportamos el resultado al bundle.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { resolveZoneLabel } from '@/shared/lib/market/zone-label-resolver';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import type { Database } from '@/shared/types/database';
 import type { CausalTimelineBundle, CausalTimelineEntry } from '../types';
@@ -21,10 +22,39 @@ type CausalHookResult = { text: string; citations: string[] };
 export type CausalHook = (prompt: string) => Promise<CausalHookResult>;
 export type AlphaJourneyHook = (zoneId: string) => Promise<string | null>;
 
+// Conjunto autoritativo de los 15 índices DMX (registry.ts score_id 'DMX-*').
+// Usado para tipar y validar el metric_id propagado a CausalTimelineEntry.
+export const DMX_INDEX_CODES = [
+  'DMX-IPV',
+  'DMX-IAB',
+  'DMX-IDS',
+  'DMX-IRE',
+  'DMX-ICO',
+  'DMX-MOM',
+  'DMX-LIV',
+  'DMX-FAM',
+  'DMX-YNG',
+  'DMX-GRN',
+  'DMX-STR',
+  'DMX-INV',
+  'DMX-DEV',
+  'DMX-GNT',
+  'DMX-STA',
+] as const;
+
+export type IndexCode = (typeof DMX_INDEX_CODES)[number];
+
+export function isIndexCode(candidate: string): candidate is IndexCode {
+  return (DMX_INDEX_CODES as readonly string[]).includes(candidate);
+}
+
+export const DEFAULT_INDEX_CODE: IndexCode = 'DMX-IPV';
+
 interface BuildCausalTimelineOptions {
   readonly supabase?: CausalClient;
   readonly causalHook?: CausalHook;
   readonly alphaJourneyHook?: AlphaJourneyHook;
+  readonly indexCode?: IndexCode;
 }
 
 interface CausalExplanationRow {
@@ -84,13 +114,14 @@ async function fetchExplanations(
 function rowsToEntries(
   rows: readonly CausalExplanationRow[],
   zoneLabel: string,
+  indexCode: IndexCode,
 ): readonly CausalTimelineEntry[] {
   return rows.map(
     (r): CausalTimelineEntry => ({
       zone_id: r.scope_id,
       zone_label: zoneLabel,
       period_date: r.period_date,
-      metric_id: 'DMX-IPV',
+      metric_id: indexCode,
       value: null,
       delta: null,
       explanation_md: r.explanation_md,
@@ -137,12 +168,20 @@ export async function buildCausalTimeline(
   opts: BuildCausalTimelineOptions = {},
 ): Promise<CausalTimelineBundle> {
   const supabase = opts.supabase ?? createAdminClient();
+  const indexCode: IndexCode = opts.indexCode ?? DEFAULT_INDEX_CODE;
   const now = new Date();
   const sinceIso = monthsAgoIso(months, now);
 
   const rows = await fetchExplanations(supabase, zoneId, sinceIso, months);
-  const zoneLabel = zoneId; // Resolver stub — sin helper market todavía (L ADR-pending).
-  const entries = rowsToEntries(rows, zoneLabel);
+  const firstRow = rows[0];
+  const scopeType = firstRow ? firstRow.scope_type : 'colonia';
+  const zoneLabel = await resolveZoneLabel({
+    scopeType,
+    scopeId: zoneId,
+    countryCode,
+    supabase,
+  });
+  const entries = rowsToEntries(rows, zoneLabel, indexCode);
 
   let narrativeMd = '';
   if (opts.causalHook && entries.length > 0) {
@@ -158,10 +197,9 @@ export async function buildCausalTimeline(
     alphaJourneyMd = await opts.alphaJourneyHook(zoneId);
   }
 
-  // Unused param retained in signature for future country-scoped filters;
-  // today causal_explanations has no country_code column — consumer must
+  // countryCode used by zone-label resolver to scope zona_snapshots lookup;
+  // causal_explanations itself has no country_code column — consumer must
   // already filter zoneId by country at resolution time.
-  void countryCode;
 
   return {
     zone_id: zoneId,

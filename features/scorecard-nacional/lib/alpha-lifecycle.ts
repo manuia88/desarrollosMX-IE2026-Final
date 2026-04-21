@@ -5,10 +5,19 @@
 // computa counts_by_state, transiciones del período vs anterior, y case studies
 // con narrativa opcional vía storyHook.
 //
-// v1 heuristic — ML refinement FASE 22. Implementación H1 intencionalmente
-// simple para habilitar Scorecard trimestral sin acoplamiento con ranking ML.
+// Heurística determinista (BLOQUE 11.I.bis.4) con ventanas explícitas:
+//   - emerging: detected_at <6 meses + alpha_score >=50
+//   - alpha:    alpha_score >=75 Y >=65 últimos 3 meses
+//   - peaked:   alpha_score cayó >=15pts desde peak en últimos 3 meses
+//   - matured:  alpha_score 50-70 sostenido + >18 meses desde emerging +
+//               volatilidad ventana <20pts
+//   - declining: alpha_score cayó >=25% desde peak
+//
+// Cada transición incluye `reason` justificativo. Degrade graceful: historial
+// insuficiente → emerging con reason='insufficient_history'.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { batchResolveZoneLabels } from '@/shared/lib/market/zone-label-resolver';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import type {
   AlphaLifecycleCaseStudy,
@@ -58,47 +67,139 @@ function monthsBetween(fromIso: string, toIso: string): number {
   return Math.max(0, (to - from) / MONTH_MS);
 }
 
-// Pure helper: derive lifecycle state from a chronological history of
-// alpha_score observations (ASC by period_date).
-export function deriveState(
+export interface DerivedState {
+  readonly state: AlphaLifecycleState;
+  readonly reason: string;
+}
+
+// Ventanas deterministas (en meses).
+const WINDOW_RECENT_MONTHS = 3;
+const WINDOW_MATURED_MIN_MONTHS = 18;
+const WINDOW_EMERGING_MAX_MONTHS = 6;
+const VOLATILITY_WINDOW_THRESHOLD = 20; // pts max-min en historia reciente
+
+// Umbrales de score.
+const SCORE_EMERGING_MIN = 50;
+const SCORE_ALPHA_MIN = 75;
+const SCORE_ALPHA_SUSTAIN_MIN = 65;
+const PEAK_DROP_PEAKED = 15; // pts
+const PEAK_DROP_DECLINING_PCT = 0.25; // 25%
+const SCORE_MATURED_LOW = 50;
+const SCORE_MATURED_HIGH = 70;
+
+// Pure helper: derive lifecycle state + reason from a chronological history of
+// alpha_score observations (ASC by period_date). Deterministic — sin ML.
+export function deriveStateWithReason(
   alphaHistory: readonly AlphaHistoryPoint[],
   referenceDateIso?: string,
-): AlphaLifecycleState {
-  if (alphaHistory.length === 0) return 'emerging';
+): DerivedState {
+  if (alphaHistory.length === 0) {
+    return { state: 'emerging', reason: 'insufficient_history' };
+  }
 
   const sorted = [...alphaHistory].sort((a, b) => a.period_date.localeCompare(b.period_date));
   const last = sorted[sorted.length - 1];
-  if (!last) return 'emerging';
+  if (!last) return { state: 'emerging', reason: 'insufficient_history' };
+
   const lastScore = last.alpha_score;
   const firstDetected = sorted[0]?.period_date ?? last.period_date;
   const refDate = referenceDateIso ?? last.period_date;
   const monthsSinceFirst = monthsBetween(firstDetected, refDate);
   const peakScore = sorted.reduce((max, p) => Math.max(max, p.alpha_score), 0);
+  const tail = sorted.slice(-WINDOW_RECENT_MONTHS);
+  const tailScores = tail.map((p) => p.alpha_score);
+  const tailMin = tailScores.length > 0 ? Math.min(...tailScores) : lastScore;
+  const tailMax = tailScores.length > 0 ? Math.max(...tailScores) : lastScore;
+  const tailRange = tailMax - tailMin;
 
-  // peaked: >80 sustained consecutive in the last 3 observations.
-  if (sorted.length >= 2) {
-    const tail = sorted.slice(-3);
-    const allAbove80 = tail.length >= 2 && tail.every((p) => p.alpha_score > 80);
-    if (allAbove80) return 'peaked';
+  // declining: peak drop >=25% y último <40 (caída cuantitativa + absoluta)
+  //   También si peakScore > 60 y caída relativa >=25%.
+  if (peakScore > 0) {
+    const dropPct = (peakScore - lastScore) / peakScore;
+    if (dropPct >= PEAK_DROP_DECLINING_PCT && peakScore >= 60 && lastScore < peakScore) {
+      if (lastScore < 60 || dropPct >= 0.4) {
+        return {
+          state: 'declining',
+          reason: `alpha_score dropped from ${peakScore.toFixed(0)} to ${lastScore.toFixed(0)} (-${(dropPct * 100).toFixed(0)}% from peak)`,
+        };
+      }
+    }
   }
 
-  // declining: last_score <40 after historical peak >60.
-  if (lastScore < 40 && peakScore > 60) return 'declining';
+  // peaked: caída >=15pts desde peak en ventana reciente AND peak estuvo en
+  // rango alpha (>=70). Indica que la zona pasó su punto máximo.
+  if (peakScore >= 70 && tail.length >= 2) {
+    const peakInTail = Math.max(...tailScores);
+    const dropFromPeak = peakScore - lastScore;
+    if (dropFromPeak >= PEAK_DROP_PEAKED && lastScore < peakInTail - 3) {
+      return {
+        state: 'peaked',
+        reason: `alpha_score dropped from ${peakScore.toFixed(0)} to ${lastScore.toFixed(0)} over last ${tail.length} months (-${dropFromPeak.toFixed(0)}pts)`,
+      };
+    }
+  }
 
-  // matured: score 40-60 and >24 months since first detected.
-  if (lastScore >= 40 && lastScore < 60 && monthsSinceFirst > 24) return 'matured';
+  // alpha: alpha_score >=75 con sustain >=65 en últimos 3 meses.
+  if (lastScore >= SCORE_ALPHA_MIN && tail.every((p) => p.alpha_score >= SCORE_ALPHA_SUSTAIN_MIN)) {
+    return {
+      state: 'alpha',
+      reason: `alpha_score ${lastScore.toFixed(0)} sustained >=${SCORE_ALPHA_SUSTAIN_MIN} for last ${tail.length} months`,
+    };
+  }
 
-  // alpha: last_score >=60 and within 24 months of first detection.
-  if (lastScore >= 60 && monthsSinceFirst < 24) return 'alpha';
+  // alpha secondary path: último >=65 y peak reciente >=75 (mantiene calor).
+  if (lastScore >= SCORE_ALPHA_SUSTAIN_MIN && tailMax >= SCORE_ALPHA_MIN && monthsSinceFirst < 24) {
+    return {
+      state: 'alpha',
+      reason: `alpha_score ${lastScore.toFixed(0)} within 24m of detection, peak ${tailMax.toFixed(0)} recent`,
+    };
+  }
 
-  // alpha (long-lived, still hot): last_score >=60 but >24 months — treat as
-  // alpha still, distinguished from matured by score.
-  if (lastScore >= 60) return 'alpha';
+  // matured: 50-70 sostenido + >18m + baja volatilidad.
+  if (
+    lastScore >= SCORE_MATURED_LOW &&
+    lastScore <= SCORE_MATURED_HIGH &&
+    monthsSinceFirst > WINDOW_MATURED_MIN_MONTHS &&
+    tailRange < VOLATILITY_WINDOW_THRESHOLD
+  ) {
+    return {
+      state: 'matured',
+      reason: `alpha_score ${lastScore.toFixed(0)} stable (range ${tailRange.toFixed(0)}pts) after ${monthsSinceFirst.toFixed(0)} months`,
+    };
+  }
 
-  // emerging: low-medium, first period detected or short history.
-  if (lastScore >= 40 && lastScore < 60) return 'emerging';
+  // emerging: detectado hace poco (<6m) con score >=50, O historial corto.
+  if (monthsSinceFirst < WINDOW_EMERGING_MAX_MONTHS && lastScore >= SCORE_EMERGING_MIN) {
+    return {
+      state: 'emerging',
+      reason: `detected ${monthsSinceFirst.toFixed(1)} months ago with alpha_score ${lastScore.toFixed(0)}`,
+    };
+  }
 
-  return 'emerging';
+  // emerging fallback: score 40-64 sin señales claras de otro estado.
+  if (lastScore >= 40 && lastScore < SCORE_ALPHA_SUSTAIN_MIN) {
+    return {
+      state: 'emerging',
+      reason: `alpha_score ${lastScore.toFixed(0)} — emerging band without consolidation`,
+    };
+  }
+
+  // Catch-all: score demasiado bajo pero sin evidencia de peak previo → emerging.
+  return {
+    state: 'emerging',
+    reason:
+      peakScore < 60
+        ? `alpha_score ${lastScore.toFixed(0)} — insufficient signal for promotion`
+        : `alpha_score ${lastScore.toFixed(0)} — no matching state criteria`,
+  };
+}
+
+// Backward-compat: deriveState devuelve sólo el estado.
+export function deriveState(
+  alphaHistory: readonly AlphaHistoryPoint[],
+  referenceDateIso?: string,
+): AlphaLifecycleState {
+  return deriveStateWithReason(alphaHistory, referenceDateIso).state;
 }
 
 function normalizeSignals(signals: unknown): readonly string[] {
@@ -274,33 +375,72 @@ export async function computeAlphaLifecycle(
     return d.toISOString().slice(0, 10);
   })();
 
+  interface ZoneResolutionItem {
+    readonly zone_id: string;
+    readonly scope_type: string;
+  }
+  const resolutionItems: ZoneResolutionItem[] = [];
+  const zoneKeyToLabel = new Map<string, string>();
+
+  for (const [, rows] of byZone) {
+    const sorted = rows.slice().sort((a, b) => a.detected_at.localeCompare(b.detected_at));
+    const last = sorted[sorted.length - 1];
+    if (!last) continue;
+    const key = `${last.scope_type}:${last.zone_id}`;
+    if (!zoneKeyToLabel.has(key)) {
+      zoneKeyToLabel.set(key, last.zone_id);
+      resolutionItems.push({ zone_id: last.zone_id, scope_type: last.scope_type });
+    }
+  }
+
+  if (resolutionItems.length > 0) {
+    const labels = await batchResolveZoneLabels(
+      resolutionItems.map((r) => ({
+        scopeType: r.scope_type,
+        scopeId: r.zone_id,
+        countryCode,
+      })),
+      { supabase },
+    );
+    resolutionItems.forEach((r, i) => {
+      const key = `${r.scope_type}:${r.zone_id}`;
+      zoneKeyToLabel.set(key, labels[i] ?? r.zone_id);
+    });
+  }
+
   for (const [, rows] of byZone) {
     const sorted = rows.slice().sort((a, b) => a.detected_at.localeCompare(b.detected_at));
     const last = sorted[sorted.length - 1];
     if (!last) continue;
 
     const history = toHistory(sorted);
-    const currentState = deriveState(history, `${periodDate}T23:59:59Z`);
+    const currentDerived = deriveStateWithReason(history, `${periodDate}T23:59:59Z`);
+    const currentState = currentDerived.state;
     const priorHistory = history.filter((h) => h.period_date <= priorRefDate);
     const priorState =
-      priorHistory.length > 0 ? deriveState(priorHistory, `${priorRefDate}T23:59:59Z`) : null;
+      priorHistory.length > 0
+        ? deriveStateWithReason(priorHistory, `${priorRefDate}T23:59:59Z`).state
+        : null;
 
     counts[currentState] += 1;
+
+    const resolvedLabel = zoneKeyToLabel.get(`${last.scope_type}:${last.zone_id}`) ?? last.zone_id;
 
     if (priorState !== currentState) {
       transitions.push({
         zone_id: last.zone_id,
-        zone_label: last.zone_id,
+        zone_label: resolvedLabel,
         from_state: priorState,
         to_state: currentState,
         detected_at: last.detected_at,
         alpha_score_at_transition: last.alpha_score,
+        reason: currentDerived.reason,
       });
     }
 
     zoneStates.push({
       zone_id: last.zone_id,
-      zone_label: last.zone_id,
+      zone_label: resolvedLabel,
       state: currentState,
       lastScore: last.alpha_score,
       firstDetectedAt: sorted[0]?.detected_at ?? last.detected_at,

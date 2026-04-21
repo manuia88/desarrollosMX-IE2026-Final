@@ -134,6 +134,7 @@ function buildMinimalBundle(): ScorecardBundle {
           to_state: 'peaked',
           detected_at: '2026-01-15',
           alpha_score_at_transition: 87.3,
+          reason: 'alpha_score dropped from 95 to 73 over 3 months',
         },
       ],
       case_studies: [
@@ -152,6 +153,7 @@ function buildMinimalBundle(): ScorecardBundle {
               to_state: 'emerging',
               detected_at: '2024-01-01',
               alpha_score_at_transition: 62.1,
+              reason: 'first detection',
             },
           ],
         },

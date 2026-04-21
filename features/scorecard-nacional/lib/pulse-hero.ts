@@ -7,6 +7,7 @@
 // pure SQL aggregation — safe to run on every Scorecard PDF generation.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { batchResolveZoneLabels } from '@/shared/lib/market/zone-label-resolver';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import type { Database } from '@/shared/types/database';
 import type { PulseHeroMetric } from '../types';
@@ -77,11 +78,13 @@ function roundTwo(n: number): number {
 
 type RankedZone = PulseHeroMetric['top_zones'][number];
 
-function rankZones(
+async function rankZones(
   rows: readonly PulseRow[],
   previousByScope: ReadonlyMap<string, number>,
   direction: 'top' | 'bottom',
-): readonly RankedZone[] {
+  countryCode: string,
+  supabase: PulseClient,
+): Promise<readonly RankedZone[]> {
   const filtered = rows.filter(
     (r): r is PulseRow & { pulse_score: number } =>
       r.pulse_score !== null && Number.isFinite(r.pulse_score),
@@ -90,12 +93,17 @@ function rankZones(
     if (direction === 'top') return b.pulse_score - a.pulse_score;
     return a.pulse_score - b.pulse_score;
   });
-  return sorted.slice(0, 5).map((r) => {
+  const top = sorted.slice(0, 5);
+  const labels = await batchResolveZoneLabels(
+    top.map((r) => ({ scopeType: 'colonia', scopeId: r.scope_id, countryCode })),
+    { supabase },
+  );
+  return top.map((r, i) => {
     const prev = previousByScope.get(r.scope_id);
     const delta = prev === undefined ? null : roundTwo(r.pulse_score - prev);
     return {
       zone_id: r.scope_id,
-      zone_label: r.scope_id,
+      zone_label: labels[i] ?? r.scope_id,
       pulse: Math.round(r.pulse_score),
       delta,
     } satisfies RankedZone;
@@ -124,13 +132,18 @@ export async function buildPulseHero(
     }
   }
 
+  const [topZones, bottomZones] = await Promise.all([
+    rankZones(currentRows, previousByScope, 'top', countryCode, supabase),
+    rankZones(currentRows, previousByScope, 'bottom', countryCode, supabase),
+  ]);
+
   return {
     country_code: countryCode,
     period_date: periodDate,
     pulse_national: pulseNational,
     delta_vs_previous: deltaVsPrevious,
-    top_zones: rankZones(currentRows, previousByScope, 'top'),
-    bottom_zones: rankZones(currentRows, previousByScope, 'bottom'),
+    top_zones: topZones,
+    bottom_zones: bottomZones,
   };
 }
 

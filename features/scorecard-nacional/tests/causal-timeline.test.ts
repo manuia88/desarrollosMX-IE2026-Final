@@ -1,7 +1,13 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { describe, expect, it, vi } from 'vitest';
 import type { Database } from '@/shared/types/database';
-import { buildCausalTimeline } from '../lib/causal-timeline';
+import {
+  buildCausalTimeline,
+  DEFAULT_INDEX_CODE,
+  DMX_INDEX_CODES,
+  type IndexCode,
+  isIndexCode,
+} from '../lib/causal-timeline';
 
 type TestSupabase = SupabaseClient<Database>;
 
@@ -107,5 +113,51 @@ describe('buildCausalTimeline', () => {
     const supabase = createFakeSupabase(MOCK_ROWS);
     const bundle = await buildCausalTimeline('roma-norte', 'MX', 12, { supabase });
     expect(bundle.entries[0]?.citations).toContain('score:IPV:roma-norte:2026-01');
+  });
+
+  it('defaults metric_id to DMX-IPV when indexCode is omitted', async () => {
+    const supabase = createFakeSupabase(MOCK_ROWS);
+    const bundle = await buildCausalTimeline('roma-norte', 'MX', 12, { supabase });
+    expect(DEFAULT_INDEX_CODE).toBe('DMX-IPV');
+    for (const entry of bundle.entries) {
+      expect(entry.metric_id).toBe('DMX-IPV');
+    }
+  });
+
+  it('propagates a custom indexCode to every entry metric_id', async () => {
+    const supabase = createFakeSupabase(MOCK_ROWS);
+    const bundle = await buildCausalTimeline('roma-norte', 'MX', 12, {
+      supabase,
+      indexCode: 'DMX-MOM',
+    });
+    expect(bundle.entries).toHaveLength(3);
+    for (const entry of bundle.entries) {
+      expect(entry.metric_id).toBe('DMX-MOM');
+    }
+  });
+
+  it('supports all 15 DMX indices without crash', async () => {
+    for (const code of DMX_INDEX_CODES) {
+      const supabase = createFakeSupabase(MOCK_ROWS);
+      const bundle = await buildCausalTimeline('roma-norte', 'MX', 12, {
+        supabase,
+        indexCode: code,
+      });
+      expect(bundle.entries[0]?.metric_id).toBe(code);
+    }
+  });
+});
+
+describe('IndexCode validation helpers', () => {
+  it('exports exactly 15 canonical DMX index codes', () => {
+    expect(DMX_INDEX_CODES).toHaveLength(15);
+  });
+
+  it('isIndexCode accepts valid codes and rejects others', () => {
+    const valid: IndexCode = 'DMX-STA';
+    expect(isIndexCode(valid)).toBe(true);
+    expect(isIndexCode('DMX-XXX')).toBe(false);
+    expect(isIndexCode('')).toBe(false);
+    expect(isIndexCode('dmx-ipv')).toBe(false);
   });
 });

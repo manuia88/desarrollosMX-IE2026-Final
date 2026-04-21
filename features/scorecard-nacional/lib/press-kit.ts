@@ -13,6 +13,8 @@ import type { ReactElement } from 'react';
 import { createElement } from 'react';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import type { PressKitBundle, PressKitChart, PressKitQuote, ScorecardBundle } from '../types';
+import type { ChartData, ChartPlatform } from './chart-generator';
+import { dimensionsFor, renderChartSVG, svgToBuffer } from './chart-generator';
 import { SCORECARD_PDF_TOKENS } from './pdf-generator';
 
 // ---------- Constants ----------
@@ -210,84 +212,48 @@ function buildReleaseDocument(releaseMd: string): ReactElement {
   );
 }
 
-// ---------- Stub PNG (1x1 transparent) ----------
+// ---------- SVG chart payload builder ----------
 //
-// H1: PNG generation stub — FASE 22 Marketing reemplaza con chart renderer real
-// (headless chart-to-PNG). Este buffer es un PNG válido de 1 pixel transparente
-// suficiente para smoke tests + pipeline.
+// SVG nativo publicable; PNG requiere @napi-rs/canvas (blocker founder).
+// Cada chart se materializa con data real del bundle; degrade graceful a
+// placeholder SVG cuando faltan datos.
 
-const STUB_PNG_BYTES = Uint8Array.from([
-  0x89,
-  0x50,
-  0x4e,
-  0x47,
-  0x0d,
-  0x0a,
-  0x1a,
-  0x0a, // signature
-  0x00,
-  0x00,
-  0x00,
-  0x0d,
-  0x49,
-  0x48,
-  0x44,
-  0x52,
-  0x00,
-  0x00,
-  0x00,
-  0x01,
-  0x00,
-  0x00,
-  0x00,
-  0x01,
-  0x08,
-  0x06,
-  0x00,
-  0x00,
-  0x00,
-  0x1f,
-  0x15,
-  0xc4,
-  0x89,
-  0x00,
-  0x00,
-  0x00,
-  0x0d,
-  0x49,
-  0x44,
-  0x41,
-  0x54,
-  0x78,
-  0x9c,
-  0x63,
-  0x00,
-  0x01,
-  0x00,
-  0x00,
-  0x05,
-  0x00,
-  0x01,
-  0x0d,
-  0x0a,
-  0x2d,
-  0xb4,
-  0x00,
-  0x00,
-  0x00,
-  0x00,
-  0x49,
-  0x45,
-  0x4e,
-  0x44,
-  0xae,
-  0x42,
-  0x60,
-  0x82,
-]);
+const CHART_PLATFORM: ChartPlatform = 'twitter';
 
-function stubChartPng(): Buffer {
-  return Buffer.from(STUB_PNG_BYTES);
+function buildChartData(
+  slug: (typeof CHART_SLUGS)[number],
+  bundle: ScorecardBundle,
+): ChartData | null {
+  const title = CHART_TITLES[slug];
+  switch (slug) {
+    case 'pulse-national-trend': {
+      const current = bundle.pulse_hero;
+      const baseValue = current.pulse_national;
+      const delta = current.delta_vs_previous ?? 0;
+      // H1: sin serie histórica en el bundle — derivamos 2 puntos (anterior/actual)
+      // suficientes para graficar trayectoria. FASE 22 conecta histórico real.
+      const previousValue = baseValue - delta;
+      return {
+        kind: 'pulse-national-trend',
+        title,
+        points: [
+          { period_date: 'anterior', value: previousValue },
+          { period_date: current.period_date, value: baseValue },
+        ],
+        pulse_current: current,
+      };
+    }
+    case 'top-magnets-ranking':
+      return { kind: 'top-magnets-ranking', title, ranking: bundle.magnet_exodus };
+    case 'top-exodus-ranking':
+      return { kind: 'top-exodus-ranking', title, ranking: bundle.magnet_exodus };
+    case 'alpha-lifecycle-sankey':
+      return { kind: 'alpha-lifecycle-sankey', title, summary: bundle.alpha_lifecycle };
+    case 'sustainability-ids-top10':
+      return { kind: 'sustainability-ids-top10', title, section: bundle.sustainability };
+    default:
+      return null;
+  }
 }
 
 // ---------- Storage helpers ----------
@@ -361,23 +327,35 @@ async function buildQuotes(
 
 // ---------- Chart generation ----------
 
-async function buildCharts(reportId: string): Promise<readonly PressKitChart[]> {
+async function buildCharts(bundle: ScorecardBundle): Promise<readonly PressKitChart[]> {
   const charts: PressKitChart[] = [];
+  const { width, height } = dimensionsFor(CHART_PLATFORM);
 
   for (const slug of CHART_SLUGS) {
-    const buffer = stubChartPng();
-    const path = `${reportId}/${slug}.png`;
+    const data = buildChartData(slug, bundle);
+    const svg = data
+      ? renderChartSVG(data, { platform: CHART_PLATFORM })
+      : renderChartSVG(
+          {
+            kind: 'pulse-national-trend',
+            title: CHART_TITLES[slug],
+            points: [],
+          },
+          { platform: CHART_PLATFORM },
+        );
+    const buffer = svgToBuffer(svg);
+    const path = `${bundle.report_id}/${slug}.svg`;
     const url = await uploadToPressKit({
       path,
       buffer,
-      contentType: 'image/png',
+      contentType: 'image/svg+xml',
     });
     charts.push({
       slug,
       title: CHART_TITLES[slug],
       png_url: url ?? '',
-      width: 800,
-      height: 500,
+      width,
+      height,
     });
   }
 
@@ -408,7 +386,7 @@ export async function generatePressKit(
   }
 
   const quotes = await buildQuotes(bundle, narrativeHook);
-  const charts = await buildCharts(bundle.report_id);
+  const charts = await buildCharts(bundle);
 
   const publishedUrl = `/press/scorecard-${bundle.report_id.toLowerCase()}`;
 

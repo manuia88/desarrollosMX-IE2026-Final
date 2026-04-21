@@ -37,6 +37,7 @@ import {
   buildSankeyTransitionData,
   computeAlphaLifecycle,
   deriveState,
+  deriveStateWithReason,
 } from '../lib/alpha-lifecycle';
 import type { AlphaLifecycleTransition } from '../types';
 
@@ -44,53 +45,98 @@ beforeEach(() => {
   mockAlerts = [];
 });
 
-describe('deriveState', () => {
-  it('returns emerging for empty history', () => {
+describe('deriveState — deterministic windows', () => {
+  it('returns emerging with insufficient_history for empty history', () => {
     expect(deriveState([])).toBe('emerging');
+    const { reason } = deriveStateWithReason([]);
+    expect(reason).toBe('insufficient_history');
   });
 
-  it('returns peaked when recent scores stay above 80', () => {
+  it('returns alpha when alpha_score >=75 sustained >=65 for last 3 months', () => {
     const history = [
       { period_date: '2025-10-01', alpha_score: 72 },
       { period_date: '2025-11-01', alpha_score: 82 },
       { period_date: '2025-12-01', alpha_score: 85 },
       { period_date: '2026-01-01', alpha_score: 88 },
     ];
-    expect(deriveState(history)).toBe('peaked');
+    expect(deriveState(history, '2026-02-01')).toBe('alpha');
+    const { reason } = deriveStateWithReason(history, '2026-02-01');
+    expect(reason).toMatch(/sustained/);
   });
 
-  it('returns alpha when last_score >=60 within 24 months', () => {
+  it('returns peaked when alpha_score falls >=15pts from historical peak', () => {
     const history = [
-      { period_date: '2025-06-01', alpha_score: 55 },
-      { period_date: '2026-01-01', alpha_score: 72 },
+      { period_date: '2025-06-01', alpha_score: 70 },
+      { period_date: '2025-08-01', alpha_score: 85 },
+      { period_date: '2025-10-01', alpha_score: 82 },
+      { period_date: '2025-12-01', alpha_score: 68 },
+      { period_date: '2026-01-01', alpha_score: 62 },
     ];
-    expect(deriveState(history, '2026-03-01')).toBe('alpha');
+    expect(deriveState(history, '2026-02-01')).toBe('peaked');
+    const { reason } = deriveStateWithReason(history, '2026-02-01');
+    expect(reason).toMatch(/dropped/);
   });
 
-  it('returns emerging when last_score 40-59', () => {
+  it('returns emerging when detected <6m ago with alpha_score >=50', () => {
     const history = [
-      { period_date: '2025-09-01', alpha_score: 42 },
-      { period_date: '2026-01-01', alpha_score: 51 },
+      { period_date: '2025-12-01', alpha_score: 51 },
+      { period_date: '2026-01-01', alpha_score: 55 },
     ];
     expect(deriveState(history, '2026-02-01')).toBe('emerging');
+    const { reason } = deriveStateWithReason(history, '2026-02-01');
+    expect(reason).toMatch(/detected|emerging band/);
   });
 
-  it('returns matured when score 40-60 and >24 months from first detected', () => {
+  it('returns matured when alpha_score 50-70 stable + >18 months from emerging', () => {
     const history = [
-      { period_date: '2022-01-01', alpha_score: 55 },
-      { period_date: '2023-01-01', alpha_score: 58 },
-      { period_date: '2026-01-01', alpha_score: 48 },
+      { period_date: '2024-01-01', alpha_score: 55 },
+      { period_date: '2024-07-01', alpha_score: 58 },
+      { period_date: '2025-01-01', alpha_score: 56 },
+      { period_date: '2025-07-01', alpha_score: 59 },
+      { period_date: '2026-01-01', alpha_score: 57 },
     ];
     expect(deriveState(history, '2026-02-01')).toBe('matured');
+    const { reason } = deriveStateWithReason(history, '2026-02-01');
+    expect(reason).toMatch(/stable/);
   });
 
-  it('returns declining when last_score <40 after peak >60', () => {
+  it('returns declining when alpha_score drops >=25% from peak', () => {
     const history = [
       { period_date: '2024-01-01', alpha_score: 78 },
       { period_date: '2025-01-01', alpha_score: 55 },
       { period_date: '2026-01-01', alpha_score: 32 },
     ];
     expect(deriveState(history, '2026-02-01')).toBe('declining');
+    const { reason } = deriveStateWithReason(history, '2026-02-01');
+    expect(reason).toMatch(/dropped from/);
+  });
+
+  it('degrade graceful: single-point history returns emerging with non-empty reason', () => {
+    const history = [{ period_date: '2026-01-01', alpha_score: 55 }];
+    const derived = deriveStateWithReason(history, '2026-02-01');
+    expect(derived.state).toBe('emerging');
+    expect(derived.reason.length).toBeGreaterThan(0);
+  });
+
+  it('every transition reason returned is a non-empty string', () => {
+    const fixtures: ReadonlyArray<ReadonlyArray<{ period_date: string; alpha_score: number }>> = [
+      [],
+      [{ period_date: '2026-01-01', alpha_score: 55 }],
+      [
+        { period_date: '2025-10-01', alpha_score: 80 },
+        { period_date: '2025-11-01', alpha_score: 82 },
+        { period_date: '2025-12-01', alpha_score: 85 },
+      ],
+      [
+        { period_date: '2024-01-01', alpha_score: 78 },
+        { period_date: '2026-01-01', alpha_score: 30 },
+      ],
+    ];
+    for (const h of fixtures) {
+      const { reason } = deriveStateWithReason(h, '2026-02-01');
+      expect(typeof reason).toBe('string');
+      expect(reason.length).toBeGreaterThan(0);
+    }
   });
 });
 
@@ -104,6 +150,7 @@ describe('buildSankeyTransitionData', () => {
         to_state: 'alpha',
         detected_at: '2026-01-01',
         alpha_score_at_transition: 65,
+        reason: 'score crossed alpha threshold',
       },
       {
         zone_id: 'b',
@@ -112,6 +159,7 @@ describe('buildSankeyTransitionData', () => {
         to_state: 'peaked',
         detected_at: '2026-01-05',
         alpha_score_at_transition: 82,
+        reason: 'peak detected then cooled',
       },
       {
         zone_id: 'c',
@@ -120,6 +168,7 @@ describe('buildSankeyTransitionData', () => {
         to_state: 'alpha',
         detected_at: '2026-01-10',
         alpha_score_at_transition: 68,
+        reason: 'score crossed alpha threshold',
       },
     ];
     const sankey = buildSankeyTransitionData(transitions);
@@ -143,6 +192,7 @@ describe('buildSankeyTransitionData', () => {
         to_state: 'emerging',
         detected_at: '2026-01-01',
         alpha_score_at_transition: 42,
+        reason: 'first detection',
       },
     ];
     const sankey = buildSankeyTransitionData(transitions);
@@ -154,12 +204,12 @@ describe('buildSankeyTransitionData', () => {
 describe('computeAlphaLifecycle', () => {
   it('aggregates counts_by_state from 5 synthetic zones', async () => {
     mockAlerts = [
-      // Zone 1 — alpha (last >=60, within 24m)
+      // Zone 1 — alpha (last >=75 sustained >=65 recent)
       {
         zone_id: 'z1',
         scope_type: 'colonia',
         country_code: 'MX',
-        alpha_score: 65,
+        alpha_score: 70,
         detected_at: '2025-10-01T00:00:00Z',
         is_active: true,
         signals: ['chef'],
@@ -169,19 +219,39 @@ describe('computeAlphaLifecycle', () => {
         zone_id: 'z1',
         scope_type: 'colonia',
         country_code: 'MX',
-        alpha_score: 70,
+        alpha_score: 75,
+        detected_at: '2025-12-01T00:00:00Z',
+        is_active: true,
+        signals: ['chef'],
+        time_to_mainstream_months: 11,
+      },
+      {
+        zone_id: 'z1',
+        scope_type: 'colonia',
+        country_code: 'MX',
+        alpha_score: 80,
         detected_at: '2026-02-01T00:00:00Z',
         is_active: true,
         signals: ['chef'],
         time_to_mainstream_months: 10,
       },
-      // Zone 2 — peaked (scores >80 recent)
+      // Zone 2 — peaked (peaked then dropped >=15 pts)
       {
         zone_id: 'z2',
         scope_type: 'colonia',
         country_code: 'MX',
-        alpha_score: 83,
-        detected_at: '2025-11-01T00:00:00Z',
+        alpha_score: 70,
+        detected_at: '2025-07-01T00:00:00Z',
+        is_active: true,
+        signals: ['gallery'],
+        time_to_mainstream_months: 9,
+      },
+      {
+        zone_id: 'z2',
+        scope_type: 'colonia',
+        country_code: 'MX',
+        alpha_score: 86,
+        detected_at: '2025-10-01T00:00:00Z',
         is_active: true,
         signals: ['gallery'],
         time_to_mainstream_months: 6,
@@ -190,7 +260,17 @@ describe('computeAlphaLifecycle', () => {
         zone_id: 'z2',
         scope_type: 'colonia',
         country_code: 'MX',
-        alpha_score: 86,
+        alpha_score: 78,
+        detected_at: '2025-12-01T00:00:00Z',
+        is_active: true,
+        signals: ['gallery'],
+        time_to_mainstream_months: 5,
+      },
+      {
+        zone_id: 'z2',
+        scope_type: 'colonia',
+        country_code: 'MX',
+        alpha_score: 62,
         detected_at: '2026-02-01T00:00:00Z',
         is_active: true,
         signals: ['gallery'],

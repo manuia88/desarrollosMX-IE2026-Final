@@ -87,6 +87,7 @@ function buildAlpha(): AlphaLifecycleSummary {
         to_state: 'alpha',
         detected_at: '2026-02-15',
         alpha_score_at_transition: 78.4,
+        reason: 'alpha_score sustained >=65 for 3 months',
       },
     ],
     case_studies: [

@@ -136,6 +136,7 @@ export interface AlphaLifecycleTransition {
   readonly to_state: AlphaLifecycleState;
   readonly detected_at: string;
   readonly alpha_score_at_transition: number | null;
+  readonly reason: string; // justificación determinista de la transición
 }
 
 export interface AlphaLifecycleCaseStudy {

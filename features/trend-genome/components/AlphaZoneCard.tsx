@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import { LabelPill, type LabelPillTone } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
@@ -33,6 +34,7 @@ export function AlphaZoneCard({ zone, className }: AlphaZoneCardProps) {
   const tierLabel = t(TIER_KEY[zone.tier]);
   const ttm = zone.time_to_mainstream_months;
   const scoreRounded = Math.round(zone.alpha_score);
+  const zoneLabel = resolveZoneLabelSync({ scopeType: zone.scope_type, scopeId: zone.zone_id });
 
   return (
     <Card3D
@@ -40,7 +42,7 @@ export function AlphaZoneCard({ zone, className }: AlphaZoneCardProps) {
         'relative flex flex-col gap-3 rounded-[var(--radius-lg)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] p-5 shadow-[var(--shadow-card,0_1px_3px_rgba(0,0,0,0.08))]',
         className,
       )}
-      aria-label={t('aria.card', { zoneId: zone.zone_id })}
+      aria-label={t('aria.card', { zoneId: zoneLabel })}
     >
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex flex-col">
@@ -48,7 +50,7 @@ export function AlphaZoneCard({ zone, className }: AlphaZoneCardProps) {
             {zone.scope_type}
           </span>
           <h3 className="text-lg font-semibold text-[color:var(--color-text-primary)]">
-            {zone.zone_id}
+            {zoneLabel}
           </h3>
         </div>
         <div className="flex flex-wrap items-center gap-2">

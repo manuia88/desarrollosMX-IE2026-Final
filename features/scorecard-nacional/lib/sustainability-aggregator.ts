@@ -6,6 +6,7 @@
 // Consumer responsibility: causalHook caller must NOT pass forceRegenerate=true
 // (cost budget).
 
+import { batchResolveZoneLabels } from '@/shared/lib/market/zone-label-resolver';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import type { ScorecardRankingEntry, SustainabilityNationalSection } from '../types';
 
@@ -44,11 +45,23 @@ function coerceScopeType(raw: string): ScorecardRankingEntry['scope_type'] {
   return 'colonia';
 }
 
-function toRankingEntries(rows: readonly IndexRow[]): readonly ScorecardRankingEntry[] {
+async function toRankingEntries(
+  rows: readonly IndexRow[],
+  countryCode: string,
+  supabase: ReturnType<typeof createAdminClient>,
+): Promise<readonly ScorecardRankingEntry[]> {
+  const labels = await batchResolveZoneLabels(
+    rows.map((row) => ({
+      scopeType: coerceScopeType(row.scope_type),
+      scopeId: row.scope_id,
+      countryCode,
+    })),
+    { supabase },
+  );
   return rows.map((row, i) => ({
     rank: i + 1,
     zone_id: row.scope_id,
-    zone_label: row.scope_id,
+    zone_label: labels[i] ?? row.scope_id,
     scope_type: coerceScopeType(row.scope_type),
     value: row.value,
     delta_vs_previous: row.trend_vs_previous,
@@ -152,7 +165,7 @@ async function fetchTopTen(
       ranking_in_scope: r.ranking_in_scope,
     }),
   );
-  return toRankingEntries(rows);
+  return toRankingEntries(rows, countryCode, supabase);
 }
 
 export async function aggregateSustainabilityNational(
