@@ -1086,6 +1086,156 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Industria origen:** GitHub PR/issue hover previews + Linkedin profile hover card
 - **Dependencia data:** `zones` tabla metadata + IndexBadge component reuso
 
+### L103 — Multi-language Instagram handle detection (directo 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 38 International Expansion)
+- **Qué es:** scraping IG Apify expandido a perfiles verificados CO/AR/BR/CL (actualmente H1 solo MX).
+- **Para qué sirve:** habilitar Trend Genome multi-país cuando DMX expanda.
+- **Beneficio concreto:** producto B2B LATAM-wide vs solo MX.
+- **Fase target:** FASE 38 International Expansion
+- **Industria origen:** Apify multi-region scraping patterns
+- **Dependencia data:** APIFY_TOKEN + locale-aware filters
+
+### L104 — Alpha zone lifecycle tracking (directo 11.H diferido)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I — Scorecard Nacional sección lifecycle)
+- **Qué es:** tracking de zonas por estado: `emerging → alpha → peaked → matured → declining`. Transición entre estados con fechas y causal automático.
+- **Para qué sirve:** historias completas de vida de zonas (Condesa: alpha 2011, peak 2016, maturing 2020, stable 2024) — narrativa timeline educativa.
+- **Beneficio concreto:** press-ready content + case studies + brand autoridad historia urbana.
+- **Fase target:** FASE 11 XL BLOQUE 11.I Scorecard Nacional (módulo lifecycle complementa Timeline Narrativo L89)
+- **Industria origen:** product lifecycle Bass model + startup stages framework
+- **Dependencia data:** zone_alpha_alerts histórico + causal_explanations + Timeline Narrativo (11.I.6)
+
+### L105 — Signal anomaly alerts súbitas (directo 11.H diferido)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.T — Alert Radar multi-señal ampliado)
+- **Qué es:** detectar cuando una fuente específica (ej. IG influencer heat) emerge súbitamente en una zona previamente fría. Trigger alerta independiente antes de que alpha_score compuesto cruce threshold.
+- **Para qué sirve:** early-early warning — capta señales débiles individuales antes de que converjan.
+- **Beneficio concreto:** ventaja temporal adicional 1-3 meses vs detector compuesto.
+- **Fase target:** FASE 11 XL BLOQUE 11.T Alert Radar (granularidad single-signal + composite)
+- **Industria origen:** hedge fund single-signal alerts + Splunk anomaly detection
+- **Dependencia data:** influencer_heat_zones + historical baseline por fuente
+
+### L106 — Alpha alert digest semanal opt-in (directo 11.H diferido)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.T — Alert Radar granularidad frequency)
+- **Qué es:** opt-in digest semanal que agrupa alertas alpha en un solo email/WhatsApp curado en lugar de notificación individual por alerta.
+- **Para qué sirve:** usuarios que prefieren resumen batch vs stream. Reduce fatiga + aumenta apertura.
+- **Beneficio concreto:** mejor retención para segmento que odia notificaciones frecuentes.
+- **Fase target:** FASE 11 XL BLOQUE 11.T Alert Radar (user preference frequency: instant|daily|weekly)
+- **Industria origen:** LinkedIn weekly digest + Substack weekly roundup
+- **Dependencia data:** zone_alert_subscriptions + extender `frequency` enum
+
+### L107 — Alpha Academy curso educativo lead magnet (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 23 Monetización — lead magnet B2B)
+- **Qué es:** curso online (4-6 módulos) "Cómo identificar zonas emergentes antes que el mercado". Certificación opcional. Free gate para Pro+ tier upsell.
+- **Para qué sirve:** lead magnet B2B brutal — reduce fricción en el funnel Pro+ enterprise. Posiciona DMX como Bloomberg Education.
+- **Beneficio concreto:** ARR upsell path clara + brand educativo + content marketing evergreen.
+- **Fase target:** FASE 23 Monetización (lead magnet + Pro+ upsell funnel)
+- **Industria origen:** Bloomberg Terminal education + CFA Institute pattern
+- **Dependencia data:** contenido original + platform LMS (Teachable, Podia o custom H2)
+
+### L108 — Alpha Challenge tournament mensual B2B (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing & Communications)
+- **Qué es:** tournament mensual entre clientes B2B — quién identifica más zonas alpha antes que DMX. Leaderboard público. Premio: 1 mes gratis Pro+ + PR mention.
+- **Para qué sirve:** engagement brutal + viralidad orgánica + data enrichment (las predicciones de humanos enriquecen modelo).
+- **Beneficio concreto:** reduce churn Pro+ + content orgánico mensual + mejora modelo con human-in-the-loop.
+- **Fase target:** FASE 22 Marketing (tournaments + community + gamification)
+- **Industria origen:** Kaggle competitions + Numerai tournaments
+- **Dependencia data:** zone_alpha_alerts + user predictions tabla nueva + leaderboard infra
+
+### L109 — Alpha NFT collectibles predicciones acertadas (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 34 Creator Economy)
+- **Qué es:** NFT coleccionables para suscriptores Pro+ por cada alerta alpha que aciertan antes del mercado. Valor comunidad + coleccionismo gamificado.
+- **Para qué sirve:** valor simbólico + fidelización community + potential secondary market (colectores).
+- **Beneficio concreto:** diferenciador emocional B2B + long-term community moat.
+- **Fase target:** FASE 34 Creator Economy (NFT + community assets)
+- **Industria origen:** POAP + NFT collectibles achievement pattern
+- **Dependencia data:** user achievements tabla + wallet integration + IPFS mint
+
+### L110 — Alpha Social club exclusive Pro+ (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 23 Monetización — community value-add Pro tier)
+- **Qué es:** Discord/Slack comunidad exclusive Pro+ donde fondos + developers + investors networking + intercambio insights. Moderado por DMX.
+- **Para qué sirve:** networking value-add justifica Pro+ pricing + crea community moat (switching cost alto).
+- **Beneficio concreto:** churn Pro+ reducido dramáticamente + ecosystem lock-in.
+- **Fase target:** FASE 23 Monetización (Pro+ tier benefits — community)
+- **Industria origen:** Bloomberg Terminal chat + hedge fund slack communities
+- **Dependencia data:** Discord/Slack integration + verification tier + moderation
+
+### L111 — Alpha Podcast mensual análisis top zones (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing & Communications)
+- **Qué es:** podcast mensual 30-45 min: host DMX + expert invitado analizan top alpha zones del mes, contexto histórico, implicaciones.
+- **Para qué sirve:** SEO audio long-form + brand autoridad + multiplicador de scorecard quarterly.
+- **Beneficio concreto:** content evergreen + menciones cross-podcast + top-of-mind B2B.
+- **Fase target:** FASE 22 Marketing (content strategy podcast)
+- **Industria origen:** NPR The Daily + Masters of Scale + FT News Briefing
+- **Dependencia data:** Scorecard Nacional quarterly + audio production pipeline
+
+### L112 — Alpha Leaderboard B2B clientes (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing & Communications — gamification)
+- **Qué es:** leaderboard público ranked de clientes B2B por acierto de predicciones alpha. Opt-in para ser listado.
+- **Para qué sirve:** gamificación + bragging rights + viralidad cuando fondos comparten "ranked #1 en Alpha Leaderboard DMX".
+- **Beneficio concreto:** engagement + PR orgánico + diferenciador B2B competitivo.
+- **Fase target:** FASE 22 Marketing (gamification + public leaderboards)
+- **Industria origen:** Robinhood leaderboard + CFA Challenge + Kaggle rankings
+- **Dependencia data:** L108 Alpha Challenge infra + subscribers tier metadata
+
+### L113 — TG × Timeline Histórico Causal (cross-function 11.H × 11.I)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I Scorecard Nacional)
+- **Qué es:** combinar alpha zones con Timeline Narrativo (11.I.6): narrativa alpha zones evolución 12m — "cómo llegó Portales a fase alpha, qué señales aparecieron primero, quiénes fueron los early movers".
+- **Para qué sirve:** storytelling poderoso para prensa + case studies educativos + validación retrocausal narrativa.
+- **Beneficio concreto:** press content mensual + formato repetible + reduce duda metodológica.
+- **Fase target:** FASE 11 XL BLOQUE 11.I (integración con 11.I.6 Timeline Narrativo + 11.H alpha histórico)
+- **Industria origen:** Bloomberg narrative data journalism + S&P transition stories
+- **Dependencia data:** zone_alpha_alerts histórico + causal_explanations + Timeline Narrativo
+
+### L114 — TG × Causal Engine narrativa alerta (X1 diferido 11.H)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I Scorecard Nacional — sección alpha con causal)
+- **Qué es:** al generar una alerta alpha, llamar Causal Engine (11.E) para incluir narrativa "por qué {colonia} entró fase alpha" en el payload del alert + UI dashboard.
+- **Para qué sirve:** contexto inmediato accionable en la alerta — no solo "alpha score 82" sino "alpha por 3 cafés especialidad nuevos + migración decil 8".
+- **Beneficio concreto:** reduce tiempo-a-decisión del suscriptor B2B + brand "DMX explica, no solo alerta".
+- **Fase target:** FASE 11 XL BLOQUE 11.I (integrar causal narrativa en alpha alerts + Scorecard Nacional)
+- **Industria origen:** Bloomberg Terminal contextual alerts + hedge fund explainable signals
+- **Dependencia data:** Causal Engine (11.E) + zone_alpha_alerts infra
+
+### L115 — Alpha zones map overlay en /indices/flujos (D4 diferido 11.H)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.Z polish final)
+- **Qué es:** nueva capa toggle "Alpha zones" en mapa existente /indices/flujos (11.G) con coropleto según alpha_score. Reusa MapboxChoropleth.
+- **Para qué sirve:** cross-visualización flows migratorios + alpha detection en misma vista = insight combinado "zonas alpha con inflow alto = confirmed opportunity".
+- **Beneficio concreto:** UX unificada + reduce toggle entre páginas + insight compuesto más potente.
+- **Fase target:** FASE 11 XL BLOQUE 11.Z polish final (complementa 11.G)
+- **Industria origen:** Mapbox layer toggling + Kepler.gl multi-layer
+- **Dependencia data:** zone_alpha_alerts + MapboxChoropleth component (ya existe 11.G)
+
+### L116 — Rate limit per-tier API Trend Genome (D5 diferido 11.H)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.L APIs REST + Widget + Time Machine)
+- **Qué es:** implementar rate limiting granular per-tier (free 100/mes, Starter 500/mes, Pro 1K/mes, Enterprise unlimited) en endpoints Trend Genome. Integra con rate limit infra del BLOQUE 11.L (APIs REST).
+- **Para qué sirve:** gating comercial sostenible que previene abuse free tier sin frenar growth.
+- **Beneficio concreto:** funnel upsell claro Pro+ + control costos Apify + telemetría uso por tier.
+- **Fase target:** FASE 11 XL BLOQUE 11.L APIs REST (natural fit con rate limit global)
+- **Industria origen:** Stripe API rate limits + OpenAI API tier structure
+- **Dependencia data:** subscriptions.plan + check_rate_limit + tier enforcement middleware
+
+### L117 — TG × Índices DMX dominantes chips inline (X4 diferido 11.H)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.Z polish final)
+- **Qué es:** en AlphaZoneCard mostrar mini-chips con los top 3 índices DMX dominantes en esa alpha zone (ej. DMX-GNT 87, DMX-YNG 82, DMX-MOM 75). Cross-reference visual inmediato.
+- **Para qué sirve:** contexto inmediato sobre qué dimensiones IE explican la fase alpha — "alpha por gentrificación + momentum + millennial".
+- **Beneficio concreto:** conexión visual con producto principal (índices DMX) + educación metodológica inline.
+- **Fase target:** FASE 11 XL BLOQUE 11.Z polish final (UI enriquecido)
+- **Industria origen:** Morningstar style-box + Bloomberg multi-metric cards
+- **Dependencia data:** dmx_indices (11.A) + AlphaZoneCard component (ya existe 11.H.6)
+
 ### Cross-references FASE 11 XL append
 
 - `docs/CONTEXTO_MAESTRO_DMX_v5.md` Addendum 2026-04-21 FASE 11 XL
@@ -1095,4 +1245,4 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-027_FASE_11_XL_METODOLOGIA_INDICES.md`
 - `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md` §8 TODOs #27-#36
 
-**Última actualización:** 2026-04-21 — L73-L102 (30 laterales FASE 11 XL, +20 nuevos detectados en BLOQUES 11.D/E/F/G) + status updates L1/L8/L22 a in_progress + asignación hogar en bloques 11.G/I/J/L/N/T/Z + 1 diferido FASE 23
+**Última actualización:** 2026-04-21 — L73-L117 (45 laterales FASE 11 XL, +35 nuevos detectados en BLOQUES 11.D/E/F/G/H) + status updates L1/L8/L22 a in_progress + asignación hogar concreto en bloques 11.G/I/J/L/N/T/Z + FASE 22/23/34/38 (0 items sin destino)
