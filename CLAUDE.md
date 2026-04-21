@@ -83,6 +83,14 @@ Manu no es técnico. Reglas estrictas de respuesta:
   - ✅ SÍ paralelizar: archivos independientes (calculators puros distintos, tests aislados, components UI separados, i18n keys en secciones diferentes del mismo JSON).
   - ✅ SÍ unir bloques: cuando dos sub-bloques son lógicamente independientes y caben juntos en contexto disponible.
   - Cada prompt CC debe explicitar "SUB-AGENTS PARALELOS" + "UNIONES DE BLOQUES" sección con groupings y justificación del paralelismo seguro.
+- **Git branch safety cuando hay sesiones CC paralelas (regla obligatoria post-incident 2026-04-20):**
+  - **ANTES de cualquier git checkout/switch/commit**, ejecutar `git branch --show-current` para validar estado.
+  - **CUANDO una sesión CC esté activa en branch X**, cualquier PM paralelo en misma máquina DEBE hacer sus operaciones git en worktree separado o esperar a que CC termine su commit. El filesystem git está compartido — `git checkout` en una sesión afecta HEAD global del repo local.
+  - **Alternativas seguras para PM paralelo mientras CC ejecuta:**
+    - (a) `git worktree add ../main-pm-work main` → working directory separado, no afecta CC
+    - (b) Esperar checkpoint CC (post commit atómico) antes de switch
+    - (c) Hacer edits sin commit en una rama temporal, integrar al final sin afectar CC
+  - **Incident origen de la regla:** 2026-04-20 PM hizo `git checkout main` para Pass 1 docs housekeeping mientras CC ejecutaba FASE 10 sesión 1/3 en branch `fase-10/ie-scores-n2-n3-n4`. CC commit A1 (756d913 N2.0-migration) cayó en main branch accidentalmente. Remedio non-destructive: `git branch -f fase-10 756d913` (mover branch al commit) sin force-push.
 - Respuestas cortas, sin rollos. Una idea por bloque.
 - Zero asumir: si requiere decisión de producto → proponer A/B/C con recomendación explícita.
 - Zero gasto sin validación previa (regla inviolable).

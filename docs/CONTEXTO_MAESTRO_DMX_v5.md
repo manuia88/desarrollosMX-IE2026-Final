@@ -1444,3 +1444,9 @@ Distinción crítica para entender arquitectura DMX (post discusión founder Hai
 
 ### Aclaración founder 2026-04-20
 "Constructor" (CC sesiones) vs "Runtime" (DMX producción) son AI separados. Founder ve Opus en terminal porque está construyendo, pero el sistema construido (DMX) usa Haiku/Sonnet/Opus per feature según costo-beneficio.
+
+### Correcciones menciones previas incorrectas
+- Allegra / Hawah omitidas de ADR-025 — no aparecen como major players MX en web search 2026-04-20 (solo las 6 empresas MX listadas arriba son referencias válidas).
+
+### Upgrades directos propuestos pendientes founder approval (TODO #24 CONTRATO §8)
+D12, D15, D17, D20, D22, D23, D26, D27, D28 — 9 upgrades adicionales derivados de research competitivo. NO integrados a FASE 10 scope actual (session split 2026-04-20). Evaluación pendiente post FASE 11.
