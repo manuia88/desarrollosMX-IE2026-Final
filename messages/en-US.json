@@ -1270,5 +1270,71 @@
       "card": "Alpha zone {zoneId}",
       "list": "Alpha zones list"
     }
+  },
+  "ScorecardNacional": {
+    "breadcrumb": "National Scorecard",
+    "landing": {
+      "title": "DMX National Scorecard",
+      "meta_description": "Quarterly state-of-the-market report for Mexican real estate. PDF + Press Kit + open data.",
+      "subtitle": "The state of LATAM real estate, quarter by quarter.",
+      "hero_cta": "Download the latest report",
+      "archive_title": "Archive",
+      "archive_empty": "No reports published yet.",
+      "download_pdf": "Download PDF",
+      "download_press_kit": "Press Kit",
+      "period_quarterly": "Q{q} {year}",
+      "period_monthly": "{month}/{year}",
+      "period_annual": "Annual {year}"
+    },
+    "detail": {
+      "title": "Scorecard {reportId}",
+      "meta_description": "Report {reportId} — DMX National Scorecard.",
+      "executive_summary": "Executive summary",
+      "pulse_national_label": "National Pulse",
+      "hero_insights_title": "Quarter highlights",
+      "sections_rankings": "Rankings by index",
+      "sections_magnet_exodus": "Magnet vs Exodus",
+      "sections_alpha_lifecycle": "Alpha zone lifecycle",
+      "sections_stories": "Stories of the quarter",
+      "cta_download": "Download full report",
+      "not_found": "Report not found."
+    },
+    "historia": {
+      "title": "Story of {colonia}",
+      "meta_description": "Narrative timeline of {colonia} — DMX.",
+      "pulse_current": "Current Pulse",
+      "ipv_current": "Current IPV",
+      "timeline_title": "Timeline",
+      "narrative_title": "Story",
+      "alpha_journey_title": "Journey to alpha",
+      "not_found": "Not enough history for this zone."
+    },
+    "magnetExodus": {
+      "page": {
+        "title": "Magnet vs Exodus — DesarrollosMX",
+        "meta_description": "Quarterly ranking of magnet colonias (net inflow) vs exodus colonias (net outflow) in Mexico, based on DMX Migration Flow.",
+        "loading": "Loading ranking…"
+      },
+      "breadcrumb": "Indices",
+      "hero": {
+        "title": "Magnet vs Exodus",
+        "subtitle": "Where Mexico is moving: top 10 magnet colonias vs top 10 exodus colonias this quarter.",
+        "period_label": "Period"
+      },
+      "tier_magnet": "Top 10 Magnet (net inflow)",
+      "tier_exodus": "Top 10 Exodus (net outflow)",
+      "net_flow_label": "Net flow",
+      "empty": "Not enough data for this quarter.",
+      "prose_label": "Quarterly narrative",
+      "cta_scorecard": "See full National Scorecard",
+      "table": {
+        "rank": "#",
+        "zone": "Zone",
+        "inflow": "Inflow",
+        "outflow": "Outflow",
+        "net_flow": "Net",
+        "net_flow_pct": "% net"
+      }
+    }
   }
 }

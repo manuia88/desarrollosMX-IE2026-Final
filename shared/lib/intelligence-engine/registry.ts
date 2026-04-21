@@ -1,4 +1,4 @@
-// Registry central del Intelligence Engine: 126 scores + 15 índices DMX (FASE 11 XL).
+// Registry central del Intelligence Engine: 130 scores (incluye 15 índices DMX FASE 11 XL + PULSE + MIGRATION_FLOW + TREND_GENOME + SCORECARD_NACIONAL).
 // Fuente autoritaria: docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md +
 // ADR-010 §D4/§D7 (cascadas formales) + ADR-027 (FASE 11 XL índices DMX).
 // Consumido por:
@@ -49,9 +49,10 @@ export interface ScoreRegistryEntry {
 }
 
 // ============================================================
-// SCORE_REGISTRY — 126 entries
+// SCORE_REGISTRY — 130 entries
 // Orden: N0 (32) → N1 (16) → N2 (14) → N3 (12) → N4 (7) → N5 (25)
-//        → DMX índices (15 — FASE 11 XL) → stubs futuros H2+ (5) = 126.
+//        → DMX índices (15 — FASE 11 XL) → PULSE + MIGRATION_FLOW + TREND_GENOME
+//        + SCORECARD_NACIONAL (11.F/G/H/I) → stubs futuros H2+ (5) = 130.
 // Breakdown índices DMX: IPV, IAB, IDS, IRE, ICO, MOM, LIV (H1 base 7)
 //        + FAM, YNG, GRN, STR, INV, DEV, GNT, STA (FASE 11 XL +8).
 // ============================================================
@@ -1755,6 +1756,33 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
       'google_trends',
     ],
     calculator_path: 'shared/lib/intelligence-engine/calculators/alpha/trend-genome.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Scorecard Nacional — BLOQUE 11.I ---------------
+  // Reporte trimestral agregado nacional "S&P + Banxico del real estate LATAM":
+  // PDF 40-80 pp branded + Press Kit auto (comunicado + quotes + gráficas) +
+  // landing /scorecard-nacional con archivo histórico. Absorbe señales de los
+  // 15 índices DMX + PULSE (11.F) + MIGRATION_FLOW (11.G) + TREND_GENOME (11.H)
+  // + CAUSAL (11.E) en una narrativa coherente press-ready. level 5 agregado,
+  // tier 3 autoridad citeable. Persiste en public.scorecard_national_reports.
+  {
+    score_id: 'SCORECARD_NACIONAL',
+    name: 'Scorecard Nacional',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['PULSE', 'MIGRATION_FLOW', 'TREND_GENOME'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#scorecard-nacional',
+    confidence_sources: [
+      'dmx_indices',
+      'zone_pulse_scores',
+      'zone_migration_flows',
+      'zone_alpha_alerts',
+      'causal_explanations',
+    ],
+    calculator_path: 'features/scorecard-nacional/lib/pdf-generator.ts',
     country_codes: ['MX'],
   },
 

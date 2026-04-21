@@ -22,8 +22,8 @@ async function fileExists(relPath: string): Promise<boolean> {
 }
 
 describe('SCORE_REGISTRY shape', () => {
-  it('contiene exactamente 129 entries (118 pre-FASE 11 XL + 8 nuevos índices DMX + 1 Pulse Score + 1 Migration Flow + 1 Trend Genome)', () => {
-    expect(SCORE_REGISTRY).toHaveLength(129);
+  it('contiene exactamente 130 entries (118 pre-FASE 11 XL + 8 nuevos índices DMX + 1 Pulse Score + 1 Migration Flow + 1 Trend Genome + 1 Scorecard Nacional)', () => {
+    expect(SCORE_REGISTRY).toHaveLength(130);
   });
 
   it('cada score_id es único', () => {
@@ -98,14 +98,14 @@ describe('helpers', () => {
 });
 
 describe('counts por nivel', () => {
-  it('32 N0 + 16 N1 + 14 N2 + 12 N3 + 7 N4 + 25 N5 + 15 índices DMX + 1 Pulse + 1 Migration Flow + 1 Trend Genome + 5 stubs = 129', () => {
+  it('32 N0 + 16 N1 + 14 N2 + 12 N3 + 7 N4 + 25 N5 + 15 índices DMX + 1 Pulse + 1 Migration Flow + 1 Trend Genome + 1 Scorecard Nacional + 5 stubs = 130', () => {
     expect(getScoresByLevel(0)).toHaveLength(32);
     expect(getScoresByLevel(1)).toHaveLength(18); // 16 + 1 stub F15 + 1 stub H17
     expect(getScoresByLevel(2)).toHaveLength(15); // 14 + 1 stub D11
     expect(getScoresByLevel(3)).toHaveLength(12);
     expect(getScoresByLevel(4)).toHaveLength(7);
-    // N5 = 25 (AI content + I01-I06) + 15 DMX índices (7 pre + 8 FASE 11 XL) + 1 Pulse + 1 Migration Flow + 1 Trend Genome + 2 stubs I07/I08 = 45
-    expect(getScoresByLevel(5)).toHaveLength(45);
+    // N5 = 25 (AI content + I01-I06) + 15 DMX índices (7 pre + 8 FASE 11 XL) + 1 Pulse + 1 Migration Flow + 1 Trend Genome + 1 Scorecard Nacional (11.I) + 2 stubs I07/I08 = 46
+    expect(getScoresByLevel(5)).toHaveLength(46);
   });
 });
 

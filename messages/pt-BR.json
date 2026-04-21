@@ -1278,5 +1278,71 @@
       "card": "Zona alpha {zoneId}",
       "list": "Lista de zonas alpha"
     }
+  },
+  "ScorecardNacional": {
+    "breadcrumb": "Scorecard Nacional",
+    "landing": {
+      "title": "Scorecard Nacional DMX",
+      "meta_description": "Relatório trimestral do estado do real estate no México. PDF + Press Kit + dados abertos.",
+      "subtitle": "O estado do real estate LATAM, trimestre a trimestre.",
+      "hero_cta": "Baixar o último relatório",
+      "archive_title": "Arquivo histórico",
+      "archive_empty": "Ainda não há relatórios publicados.",
+      "download_pdf": "Baixar PDF",
+      "download_press_kit": "Press Kit",
+      "period_quarterly": "T{q} {year}",
+      "period_monthly": "{month}/{year}",
+      "period_annual": "Anual {year}"
+    },
+    "detail": {
+      "title": "Scorecard {reportId}",
+      "meta_description": "Relatório {reportId} — Scorecard Nacional DMX.",
+      "executive_summary": "Resumo executivo",
+      "pulse_national_label": "Pulse Nacional",
+      "hero_insights_title": "Destaques do trimestre",
+      "sections_rankings": "Rankings por índice",
+      "sections_magnet_exodus": "Magnet vs Exodus",
+      "sections_alpha_lifecycle": "Ciclo de vida de zonas alpha",
+      "sections_stories": "Histórias do trimestre",
+      "cta_download": "Baixar relatório completo",
+      "not_found": "Relatório não encontrado."
+    },
+    "historia": {
+      "title": "História de {colonia}",
+      "meta_description": "Timeline narrativa de {colonia} — DMX.",
+      "pulse_current": "Pulse atual",
+      "ipv_current": "IPV atual",
+      "timeline_title": "Cronologia",
+      "narrative_title": "Narrativa",
+      "alpha_journey_title": "Caminho para a fase alpha",
+      "not_found": "Sem histórico suficiente para esta zona."
+    },
+    "magnetExodus": {
+      "page": {
+        "title": "Magnet vs Exodus — DesarrollosMX",
+        "meta_description": "Ranking trimestral de bairros ímã (fluxo líquido de entrada) vs êxodo (fluxo líquido de saída), baseado em Migration Flow DMX.",
+        "loading": "Carregando ranking…"
+      },
+      "breadcrumb": "Índices",
+      "hero": {
+        "title": "Magnet vs Exodus",
+        "subtitle": "Para onde as pessoas se mudam: top 10 bairros ímã e top 10 bairros êxodo do trimestre.",
+        "period_label": "Período"
+      },
+      "tier_magnet": "Top 10 Ímã (entrada líquida)",
+      "tier_exodus": "Top 10 Êxodo (saída líquida)",
+      "net_flow_label": "Fluxo líquido",
+      "empty": "Sem dados suficientes para este trimestre.",
+      "prose_label": "Narrativa do trimestre",
+      "cta_scorecard": "Ver Scorecard Nacional completo",
+      "table": {
+        "rank": "#",
+        "zone": "Zona",
+        "inflow": "Entradas",
+        "outflow": "Saídas",
+        "net_flow": "Líquido",
+        "net_flow_pct": "% líquido"
+      }
+    }
   }
 }
