@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`F10 Gentrification 2.0 calculator > snapshot 4 fases gentrificación 1`] = `
+{
+  "inicial": {
+    "confidence": "medium",
+    "coverage_pct": 100,
+    "fase": "inicial",
+    "label": "ie.score.f10.inicial",
+    "value": 22,
+  },
+  "media_escandon": {
+    "confidence": "medium",
+    "coverage_pct": 100,
+    "fase": "media",
+    "label": "ie.score.f10.media",
+    "value": 50,
+  },
+  "post_condesa": {
+    "confidence": "high",
+    "coverage_pct": 100,
+    "fase": "post_gentrificada",
+    "label": "ie.score.f10.post_gentrificada",
+    "value": 80,
+  },
+  "tardia_roma": {
+    "confidence": "high",
+    "coverage_pct": 100,
+    "fase": "tardia",
+    "label": "ie.score.f10.tardia",
+    "value": 65,
+  },
+}
+`;

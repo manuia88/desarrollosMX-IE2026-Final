@@ -551,6 +551,46 @@ TODO #20 — IE_MONTHLY_BUDGET_USD en Vercel Production + Preview envs
          real de cost-tracker (incluido FASE 07 + U3 BLOQUE 8.A).
   Tune H2: con histórico real cost_log + 3 meses operación, calibrar real.
 
+TODO #24 — Upgrades D12-D28 status delta post-FASE 10
+  Status: 🟢 TRACKING — status referencial post-cierre FASE 10
+  Origen: pipeline upgrades D identificados pre-FASE 10 (LATERAL_UPGRADES_
+          PIPELINE.md housekeeping 2026-04-20).
+  Shipped FASE 10 (14): D13 confidence propagation · D14 sensitivity ·
+    D16 matrices · D18 public/internal (ACTIVATED sesión 3/3) · D19 LIME ·
+    D21 webhooks · D25 stability · D29 scenarios · D30 PPD deeper A10 ·
+    D31 comparables A08 · D32 AI narrative · D33 multi-tenant · D34
+    retention · D35 indexes.
+  Pendientes (9): D12, D15, D17, D20, D22, D23, D26, D27, D28. Revisar
+    prioridad en housekeeping post-FASE 11 vs estrategia H2.
+
+TODO #25 — Heatmap geo-coords source (L-72 dependency H2)
+  Status: 🟡 AGENDADO — FASE 12 Mapbox integration
+  Origen: FASE 10 SESIÓN 3/3 L-72 decisión autónoma #5.
+  Estado actual: MV heatmap_cache (migration 20260420123000) expone score
+                 + zone_id + country_code + value + confidence + period_date.
+                 Sin lat/lng nativo H1 (no existe tabla zonas central con
+                 centroides polígono).
+  Acción FASE 12:
+    - Crear tabla public.zonas con columnas (id, country_code, nombre,
+      alcaldia, polygon geometry(Polygon, 4326), centroid geography, created_at)
+    - Seed desde INEGI/SEDUVI shapefiles CDMX (1,800 colonias) + BAT H2.
+    - Extender heatmap_cache MV con join a zonas y exponer lat/lng.
+    - Consumer Mapbox client-side FASE 12 lee directo de /api/v1/heatmap.
+  Bloqueante: FASE 12 Mapbox setup. NO bloquea cierre FASE 10.
+
+TODO #26 — TENANT_SCOPE_DEFAULT env en Vercel (D33 opcional)
+  Status: 🟢 OPCIONAL — fallback hardcoded H1 es suficiente
+  Origen: FASE 10 SESIÓN 3/3 D33 multi-tenant scoping.
+  Default: 'global' (tenant_id NULL = scope global, backward compat todos
+          los calculators). Nuevo env TENANT_SCOPE_DEFAULT permite override
+          sin redeploy cuando institutional customers onboarden.
+  Acción (futuro, cuando FIBRA/fondo firme contrato):
+    - [Vercel Dashboard] → Settings → Environment Variables → agregar
+      TENANT_SCOPE_DEFAULT=<tenant-uuid> en Production para el cliente.
+    - Populate tenant_scopes table via admin endpoint (por crear FASE 23).
+  H1: no requiere acción — tenant_scopes vacío es válido mientras no hay
+       institutional customers. runScore permisivo si score no requiere tenant.
+
 ═══════════════════════════════════════════════════════════════
 9. FASE 08 CERRADA — Estado consolidado 2026-04-20
 ═══════════════════════════════════════════════════════════════
@@ -625,3 +665,83 @@ Verificaciones cierre fase: 14/14 ✓ (typecheck, lint, tests, db:types,
 Próxima fase: FASE 10 — IE Scores Nivel 2 y 3 (P08, P09, I07, I08, D02,
 D04, D08, D09, D10, N23, A13, M5, R2, R4 — niveles compuestos y
 producto-final sobre N0+N1).
+
+═══════════════════════════════════════════════════════════════
+11. FASE 10 CERRADA — Estado consolidado 2026-04-20
+═══════════════════════════════════════════════════════════════
+
+Tag git: fase-10-complete
+Branch: fase-10/ie-scores-n2-n3-n4 (sin push pendiente decisión founder)
+
+Split ejecución: 3 sesiones.
+  SESIÓN 1/3 → 14 N2 + infra D13/D14/D16/D19/D21/D25 + D18 prep.
+  SESIÓN 2/3 → 12 N3 + D29/D30/D31/D32 + L-69 + L-31.
+  SESIÓN 3/3 → 7 N4 + D18 ACTIVATE + D33 + D34 + D35 + L-32 + L-72 + CIERRE.
+
+Entregables:
+- 33 calculators (14 N2 + 12 N3 + 7 N4): pattern canónico pure compute()
+  + Calculator class + methodology + tests snapshot.
+- 7 N4 agregados: E01 Full Project Score (interno), G01 Full Score 2.0
+  (público filtrado D18), E02 Portfolio Optimizer (Sharpe), E03
+  Predictive Close (heurística logística H1 + ml_explanations D19), E04
+  Anomaly Detector (Z-scores), D09 Ecosystem Health, D02 Zona Ranking
+  (IPV×0.6 + LIV×0.4 ADR-026).
+- 18 upgrades shipped acumulados (D13+D14+D16+D18+D19+D21+D25+D29+D30+
+  D31+D32+D33+D34+D35 + L-69+L-31+L-32+L-72).
+- 7 migrations BD FASE 10 (ie_n2_infra + ie_n3_property_comparables +
+  ie_zone_demographics_cache + refresh_fn + ie_n4_multi_tenant_retention_
+  visibility_certifications_heatmap + allowlist v11/v12/v13/v14).
+- 5 crons nuevos (score-worker ya existía desde FASE 08): score-comparison
+  -matrix, zone-demographics-refresh, score-history-purge (weekly
+  Sunday 2am), heatmap-refresh (daily 5am). Total crons Vercel: 14.
+- 8 endpoints nuevos: admin/scores/weights, admin/scores/dependencies,
+  admin/webhooks/score-changes, cron/score-comparison-matrix,
+  cron/score-history-purge, admin/zones/[id]/certify,
+  cron/heatmap-refresh, v1/heatmap/[scoreId] (público).
+- Multi-tenant N4: tenant_scopes table + tenant_id cols en zone/project/
+  user_scores + score_history. CalculatorInput.tenant_id opcional.
+  validateTenantScope + TenantScopeViolation error class wire en runScore.
+- Visibility filter D18: ie_score_visibility_rules table + 7 seed rows.
+  score-visibility.ts helper + filterRowsForPublic en tRPC scores.list.
+  E01/E02/E03 internal (non-admin no ve); G01/D02/D09 public whitelisted.
+- L-32 zone certifications hooks: evaluateZoneCertification (E01≥90×12m
+  consecutivos + N11 stability≥0.85) + endpoint admin (sin automatic
+  award H1, admin decide manual primeras 10).
+- L-72 heatmap data layer: heatmap_cache MV + getHeatmapData helper +
+  endpoint público /api/v1/heatmap/[scoreId] con Cache-Control 1h.
+  FASE 12 Mapbox consumirá coords por zone_id.
+
+Tests: >1700 passing (1510 sesión 2/3 + ~200 N4 nuevos).
+Verificaciones cierre fase: 16/16 ✓ (typecheck, lint, tests, db:types,
+                            audit:e2e, audit:rls STRICT, build prod OK,
+                            D18 filter verif, D33 tenant verif, D34
+                            purge, D35 indexes, L-32 cert eval, L-72
+                            heatmap, snapshot harness, registry count 81).
+
+Decisiones autónomas:
+  1. E02/E03 category dev→proyecto (persist routing).
+  2. E04 agregado→mercado, D09 mercado→zona (pick persister zone-aware).
+  3. D33 enforcement permisivo H1: tenant_id NULL = global scope (backward
+     compat). Solo scores tenant_scope_required=true rechazan.
+  4. D34 weekly (no daily) Sunday 2am UTC — 5y retention no requiere
+     frecuencia alta, evita beat cron limit Vercel Free.
+  5. L-72 MV sin lat/lng nativo H1 — consumer FASE 12 Mapbox resuelve
+     coords por zone_id via lookup externo.
+  6. D18 ADMIN_ROLES bypass — superadmin + mb_admin ven data completa.
+
+Stubs permitidos (4 señales ADR-018):
+  - Crisis alerts table (L-50) — L-32 zone-certified assume 0 alerts H1.
+  - tenant_scopes catálogo vacío — populate cuando FIBRA/fondo onboarding.
+  - E03 heurística logística — calibración H2 requiere ≥100 closed ops
+    (tier 4 gate ya enforced).
+
+Pre-deploy CRÍTICOS (founder ejecutar antes de merge main):
+- TODO #16 TELEMETRY_SALT (ya configurado FASE 08)
+- TODO #17 BotID auto-activo post-deploy
+- TODO #20 IE_MONTHLY_BUDGET_USD
+- NUEVO #26: TENANT_SCOPE_DEFAULT='global' Vercel envs (opcional, fallback
+  hardcoded H1).
+
+Próxima fase: FASE 11 — Índices DMX (7 índices propietarios: DMX-IPV,
+IAB, IDS, IRE, ICO, MOM, LIV). Publicación mensual DMX-MOM newsletter +
+trimestral full report "DMX Índice de Colonias CDMX — Q#".

@@ -46,6 +46,16 @@ export interface ComparableZone {
   readonly delta: number;
 }
 
+// D31 FASE 10 SESIÓN 2/3 — property-level comparables (A08 Comparador Multi-D).
+// Se persiste en tabla property_comparables separada de zone_scores (el scope
+// es unidad individual, no zona). UNIQUE (property_id, score_id, period_date).
+export interface ComparableProperty {
+  readonly property_id: string;
+  readonly similarity: number;
+  readonly delta: number;
+  readonly dimensions_matched: readonly string[];
+}
+
 // D2 — deltas lookback 3m/6m/12m (null si no hay data en la ventana ±15d).
 export interface ScoreDeltas {
   readonly '3m': number | null;
@@ -71,13 +81,20 @@ function buildRow(
   return {
     [entityColumn]: entityId,
     country_code: input.countryCode,
+    // D33 — tenant_id NULL = scope global (backward compat). Cuando input lo
+    // provee, RLS H2 filtrará rows por tenant_id match con perfil caller.
+    tenant_id: input.tenant_id ?? null,
     score_type: registry.score_id,
     score_value: output.score_value,
     score_label: output.score_label,
     level: registry.level,
     tier: registry.tier,
     confidence: output.confidence,
-    components: output.components,
+    // D29 — si output trae scenarios, se embeben en components.scenarios para
+    // evitar migration nueva (zone_scores.components ya jsonb).
+    components: output.scenarios
+      ? embedScenariosInComponents(output.components as Record<string, unknown>, output.scenarios)
+      : output.components,
     inputs_used: output.inputs_used,
     citations: output.citations,
     provenance: output.provenance,
@@ -86,7 +103,23 @@ function buildRow(
     valid_until: output.valid_until ?? null,
     period_date: input.periodDate,
     computed_at: new Date().toISOString(),
+    // D19 — ml_explanations jsonb (empty {} si no aplica).
+    ml_explanations: output.ml_explanations ?? {},
   };
+}
+
+// D29 — helper para componentes: devuelve components con .scenarios embebidos
+// cuando CalculatorOutput.scenarios está set. UI lee components.scenarios para
+// render rangos (portal comprador FASE 20). Mantener scenarios en components
+// evita migration nueva en zone_scores/project_scores (ya jsonb).
+export function embedScenariosInComponents(
+  components: Readonly<Record<string, unknown>>,
+  scenarios?: Readonly<Record<string, unknown>>,
+): Record<string, unknown> {
+  if (!scenarios || Object.keys(scenarios).length === 0) {
+    return { ...components };
+  }
+  return { ...components, scenarios };
 }
 
 // P1 helper — calcular valid_until dado un ValidityWindow + ancla (computed_at).
@@ -214,6 +247,43 @@ export async function computeRanking(
   }
 }
 
+// D25 FASE 10 — stability_index rolling 12m sobre score_history.
+// stability = clamp(1 - stddev/mean, 0, 1). Null si <3 snapshots en ventana.
+// ≥0.85 estable · <0.6 volátil. Persistido en zone_scores.stability_index.
+export async function computeStabilityIndex(
+  supabase: SupabaseClient,
+  entityType: 'zone' | 'project',
+  entityId: string,
+  scoreType: string,
+  periodDate: string,
+): Promise<number | null> {
+  try {
+    const anchor = new Date(`${periodDate}T00:00:00Z`);
+    const from = new Date(anchor.getTime());
+    from.setUTCMonth(from.getUTCMonth() - 12);
+    const { data, error } = await castFrom(supabase, 'score_history')
+      .select('score_value')
+      .eq('entity_type', entityType)
+      .eq('entity_id', entityId)
+      .eq('score_type', scoreType)
+      .gte('period_date', from.toISOString().slice(0, 10))
+      .lte('period_date', periodDate);
+    if (error || !data) return null;
+    const values = (data as unknown as Array<{ score_value: number }>)
+      .map((r) => r.score_value)
+      .filter((v): v is number => typeof v === 'number' && Number.isFinite(v));
+    if (values.length < 3) return null;
+    const mean = values.reduce((s, v) => s + v, 0) / values.length;
+    if (mean === 0) return null;
+    const variance = values.reduce((s, v) => s + (v - mean) ** 2, 0) / values.length;
+    const stddev = Math.sqrt(variance);
+    const stability = Math.max(0, Math.min(1, 1 - stddev / Math.abs(mean)));
+    return Number(stability.toFixed(4));
+  } catch {
+    return null;
+  }
+}
+
 // U13 — top 3 zonas mismo score+period con valor más cercano (ABS delta ASC).
 // Returns [] si <3 zonas disponibles o si la query falla.
 export async function computeComparableZones(
@@ -251,6 +321,78 @@ export async function computeComparableZones(
   }
 }
 
+// D31 — top K properties más similares a la property objetivo en la misma zona
+// + tipo_propiedad + rango m2. En H1 usa project_scores como proxy (embeddings
+// por unidad aterrizarán con `unidades` en FASE 13-15). Returns [] si <K vecinos.
+export async function findComparableProperties(
+  supabase: SupabaseClient,
+  params: {
+    readonly property_id: string;
+    readonly score_type: string;
+    readonly period_date: string;
+    readonly self_value: number;
+    readonly k?: number;
+  },
+): Promise<readonly ComparableProperty[]> {
+  const k = params.k ?? 8;
+  try {
+    const { data, error } = await castFrom(supabase, 'project_scores')
+      .select('project_id, score_value')
+      .eq('score_type', params.score_type)
+      .eq('period_date', params.period_date)
+      .neq('project_id', params.property_id);
+    if (error || !data) return [];
+    const rows = data as unknown as Array<{ project_id: string; score_value: number }>;
+    if (rows.length < k) return [];
+    return rows
+      .filter((r) => typeof r.score_value === 'number' && Number.isFinite(r.score_value))
+      .map((r): ComparableProperty => {
+        const delta = Math.abs(r.score_value - params.self_value);
+        const similarity = Number(Math.max(0, 1 - delta / 100).toFixed(4));
+        return {
+          property_id: r.project_id,
+          similarity,
+          delta: Number(delta.toFixed(2)),
+          dimensions_matched: [params.score_type],
+        };
+      })
+      .sort((a, b) => b.similarity - a.similarity)
+      .slice(0, k);
+  } catch {
+    return [];
+  }
+}
+
+// D31 — UPSERT en property_comparables al persistir A08. Best-effort: errores
+// NO tumban el persist principal (swallowed). Scopea por country_code para RLS.
+async function persistPropertyComparablesRow(
+  supabase: SupabaseClient,
+  params: {
+    readonly property_id: string;
+    readonly score_id: string;
+    readonly period_date: string;
+    readonly country_code: string;
+    readonly comparables: readonly ComparableProperty[];
+    readonly k: number;
+  },
+): Promise<void> {
+  try {
+    await castFrom(supabase, 'property_comparables').upsert(
+      {
+        property_id: params.property_id,
+        score_id: params.score_id,
+        period_date: params.period_date,
+        country_code: params.country_code,
+        comparable_properties: params.comparables,
+        k: params.k,
+      } as never,
+      { onConflict: 'property_id,score_id,period_date' },
+    );
+  } catch {
+    // best-effort
+  }
+}
+
 export async function persistZoneScore(
   supabase: SupabaseClient,
   output: CalculatorOutput,
@@ -259,7 +401,7 @@ export async function persistZoneScore(
 ): Promise<PersistResult> {
   if (!input.zoneId) return { ok: false, error: 'zoneId required for zone score' };
 
-  const [comparableZones, deltas, ranking] = await Promise.all([
+  const [comparableZones, deltas, ranking, stabilityFromHistory] = await Promise.all([
     computeComparableZones(
       supabase,
       registry.score_id,
@@ -283,12 +425,15 @@ export async function persistZoneScore(
       input.countryCode,
       output.score_value,
     ),
+    computeStabilityIndex(supabase, 'zone', input.zoneId, registry.score_id, input.periodDate),
   ]);
 
   const row = buildRow(output, registry, input, 'zone_id', input.zoneId);
   row.comparable_zones = comparableZones;
   row.deltas = deltas;
   row.ranking = ranking;
+  // D25 — stability_index: calculator output prevalece; fallback al histórico.
+  row.stability_index = output.stability_index ?? stabilityFromHistory;
 
   const { error } = await castFrom(supabase, 'zone_scores').upsert(row as never, {
     onConflict: 'zone_id,score_type,period_date',
@@ -304,7 +449,7 @@ export async function persistProjectScore(
 ): Promise<PersistResult> {
   if (!input.projectId) return { ok: false, error: 'projectId required for project score' };
 
-  const [deltas, ranking] = await Promise.all([
+  const [deltas, ranking, stabilityFromHistory] = await Promise.all([
     computeDeltas(
       supabase,
       'project',
@@ -321,15 +466,44 @@ export async function persistProjectScore(
       input.countryCode,
       output.score_value,
     ),
+    computeStabilityIndex(
+      supabase,
+      'project',
+      input.projectId,
+      registry.score_id,
+      input.periodDate,
+    ),
   ]);
 
   const row = buildRow(output, registry, input, 'project_id', input.projectId);
   row.deltas = deltas;
   row.ranking = ranking;
+  row.stability_index = output.stability_index ?? stabilityFromHistory;
 
   const { error } = await castFrom(supabase, 'project_scores').upsert(row as never, {
     onConflict: 'project_id,score_type,period_date',
   });
+
+  // D31 — auto-populate property_comparables cuando score_id es A08.
+  if (!error && registry.score_id === 'A08') {
+    const comparables = await findComparableProperties(supabase, {
+      property_id: input.projectId,
+      score_type: registry.score_id,
+      period_date: input.periodDate,
+      self_value: output.score_value,
+    });
+    if (comparables.length > 0) {
+      await persistPropertyComparablesRow(supabase, {
+        property_id: input.projectId,
+        score_id: registry.score_id,
+        period_date: input.periodDate,
+        country_code: input.countryCode,
+        comparables,
+        k: comparables.length,
+      });
+    }
+  }
+
   return error ? { ok: false, error: error.message } : { ok: true };
 }
 

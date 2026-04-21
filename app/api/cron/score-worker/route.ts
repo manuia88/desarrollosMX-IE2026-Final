@@ -89,6 +89,15 @@ export async function GET(request: Request) {
           p_success: true,
         });
         skipped += 1;
+      } else if (result.kind === 'tenant_violation') {
+        // D33 — tenant scope violation: score requiere tenant_id no provisto
+        // o tenant desconocido. Marcamos como error con detalle para debug.
+        await supabase.rpc('finalize_score_job', {
+          p_id: job.id,
+          p_success: false,
+          p_error: `tenant_violation:${result.violation.reason}`,
+        });
+        errors += 1;
       } else {
         await supabase.rpc('finalize_score_job', {
           p_id: job.id,

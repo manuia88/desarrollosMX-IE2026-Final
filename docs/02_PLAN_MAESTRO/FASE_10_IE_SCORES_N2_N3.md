@@ -1,5 +1,9 @@
-# FASE 10 — Intelligence Engine: Scores Nivel 2 y 3
+# FASE 10 — Intelligence Engine: Scores Nivel 2, 3 y 4
 
+> **Estado:** ✅ COMPLETA (2026-04-20) — 3 sesiones.
+> SESIÓN 1/3 (14 N2 + infra D13/D14/D16/D18-prep/D19/D21/D25) completa.
+> SESIÓN 2/3 (12 N3 + D29/D30/D31/D32 + L-69/L-31 + MV zone_demographics_cache) completa.
+> SESIÓN 3/3 (7 N4 + D18 activate + D33/D34/D35 + L-32/L-72 + tag `fase-10-complete`) completa.
 > **Duración estimada:** 5 sesiones Claude Code (~20 horas con agentes paralelos)
 > **Dependencias:** FASE 08 (N0 framework + AVM), FASE 09 (N1 cards)
 > **Bloqueantes externos:**
@@ -322,9 +326,40 @@ Los scores N2 son composición de N1: Value Score, Gentrification 2.0, Pricing A
 - [ ] Tag git: `fase-10-complete`.
 - [ ] Documentación: `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` actualizado con 26 scores "implementado".
 
+## Implementación real — CIERRE FASE 10 (2026-04-20)
+
+### Entregables totales
+
+- **33 calculators** implementados (14 N2 + 12 N3 + 7 N4)
+- **18 upgrades shipped** aplicados acumulados:
+  - SESIÓN 1/3: D13 confidence propagation, D14 sensitivity analysis, D16 precomputed matrices, D19 LIME, D21 webhooks, D25 stability metric, D18 prep
+  - SESIÓN 2/3: D29 multi-scenario, D30 PPD Capa 3 A10, D31 property_comparables A08, D32 AI narrative Claude Haiku runtime, L-69 zone_demographics profiling, L-31 A08 multiplayer backend
+  - SESIÓN 3/3: D33 multi-tenant scoping, D34 retention 5y purge, D35 composite indexes, D18 ACTIVATE score-visibility filter, L-32 zone certifications hooks, L-72 heatmap data layer
+- **7 migrations BD** (N2 infra + N3 property_comparables + zone_demographics_cache MV + refresh_fn + N4 multi-tenant/retention/indexes/visibility/certifications/heatmap + allowlist v11/v12/v13/v14)
+- **2 crons nuevos SESIÓN 3/3**: `/api/cron/score-history-purge` (weekly Sunday 2am) + `/api/cron/heatmap-refresh` (daily 5am). Total crons FASE 10: 5 (score-worker + comparison-matrix + demographics + purge + heatmap).
+- **8 endpoints admin/v1 nuevos**: weights, dependencies, webhooks, comparison-matrix cron, purge cron, zones certify, heatmap cron, heatmap public API.
+
+### Tests
+- **~1700 passing** (1510 sesión 2/3 + ~200 N4). typecheck/lint/audit:e2e/audit:rls STRICT clean. Build prod OK.
+- Snapshot harness: 16 fixtures CDMX × 33 calcs = 528 snapshots.
+
+### Decisiones autónomas relevantes
+
+1. **E02/E03 category → proyecto** (no `dev`): asegura persist routing correcto a project_scores table.
+2. **E04 category → mercado, D09 → zona**: corrige registry previo para pick persister zone-aware.
+3. **D33 enforcement permisivo H1**: tenant_id NULL = global scope (backward compat todos los calculators existentes). Solo scores con `tenant_scope_required=true` en `ie_score_visibility_rules` rechazan input.tenant_id missing.
+4. **D34 weekly (no daily)**: purge pesado. Weekly Sunday 2am UTC low-carga suficiente para 5y retention sin beat el cron limit Vercel Free.
+5. **L-72 sin lat/lng nativo H1**: MV heatmap_cache no join zonas geo table (no existe en H1). Consumer FASE 12 Mapbox resuelve coords por zone_id.
+6. **D18 bypass via ADMIN_ROLES set**: superadmin + mb_admin ven data completa sin filter. Resto de roles reciben filtered rows.
+
+### Inferencias / gaps no bloqueantes
+1. Crisis alerts table (L-50) es dependency de L-32 zone-certified full; H1 asume 0 alerts (stub). Activar junto con L-50 post-FASE 11.
+2. `tenant_scopes` catálogo vacío H1 (sin institutional customers firmados). Populate via seed cuando primer FIBRA/fondo onboarding (FASE 23+).
+3. E03 Predictive Close H1 es heurística logística; calibración H2 requiere ≥100 closed operations (tier 4 gate ya enforced en registry).
+
 ## Próxima fase
 
 [FASE 11 — Índices DMX (7 índices propietarios)](./FASE_11_IE_INDICES_DMX.md)
 
 ---
-**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17
+**Autor:** Claude Opus 4.7 (rewrite BATCH 1 Agent D) | **Fecha:** 2026-04-17 | **Cierre FASE 10:** 2026-04-20

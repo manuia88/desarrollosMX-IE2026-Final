@@ -7,6 +7,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { recordSpend } from '@/shared/lib/ingest/cost-tracker';
 import { detectAndRecordAnomaly } from '@/shared/lib/intelligence-engine/anomaly/detector';
+import { generateNarrative } from '@/shared/lib/intelligence-engine/narrative/ai-narrative';
 import { hashUserIdForTelemetry } from '@/shared/lib/telemetry/hash-user-id';
 import { posthog } from '@/shared/lib/telemetry/posthog';
 import { SupabaseScoreQueue } from '../queue';
@@ -18,6 +19,7 @@ import {
   persistUserScore,
   persistZoneScore,
 } from './persist';
+import { type TenantScopeResult, validateTenantScope } from './tenant-scope';
 import { type TierGateResult, tierGate } from './tier-gate';
 import { isProvenanceValid } from './types';
 
@@ -48,6 +50,11 @@ export type RunScoreResult =
   | {
       readonly kind: 'gated';
       readonly gate: TierGateResult;
+      readonly registry: ScoreRegistryEntry;
+    }
+  | {
+      readonly kind: 'tenant_violation';
+      readonly violation: NonNullable<TenantScopeResult['violation']>;
       readonly registry: ScoreRegistryEntry;
     }
   | {
@@ -104,6 +111,15 @@ export async function runScore(
     };
   }
 
+  // D33 — multi-tenant scoping para N4 institucional (E01/E02/E03).
+  // Si ie_score_visibility_rules.tenant_scope_required=true y input.tenant_id
+  // missing o desconocido → reject antes de calcular. Resto de scores pasa
+  // permisivo (scope global).
+  const tenantCheck = await validateTenantScope(input, scoreId, supabase);
+  if (!tenantCheck.ok && tenantCheck.violation) {
+    return { kind: 'tenant_violation', violation: tenantCheck.violation, registry };
+  }
+
   const gate = await tierGate(registry.tier, input.countryCode, supabase);
   if (gate.gated) {
     return { kind: 'gated', gate, registry };
@@ -139,6 +155,12 @@ export async function runScore(
       registry,
     };
   }
+
+  // D32 FASE 10 SESIÓN 2/3 — AI narrative runtime pre-N5.
+  // Si el calculator declara methodology.ai_narrative === true, invoca Claude
+  // Haiku para generar narrativa natural. Cache 24h + trackExternalCost.
+  // El calculator expone methodology vía import dinámico (no en output).
+  output = await maybeGenerateNarrative(output, scoreId, input);
 
   let persisted = false;
   if (!options.skipPersist) {
@@ -271,6 +293,52 @@ function emitScoreCalculatedEvent(args: {
   } catch {
     // Telemetría es best-effort — nunca tumba runScore.
   }
+}
+
+// D32 — si el calculator declara methodology.ai_narrative: true, invoca
+// Claude Haiku con el reasoning_template + components. Injecta el resultado
+// en output.components.ai_narrative (preservando el resto). trackExternalCost
+// registra el spend para cost guard (F4). Best-effort: errores no tumban.
+async function maybeGenerateNarrative(
+  output: CalculatorOutput,
+  scoreId: string,
+  input: CalculatorInput,
+): Promise<CalculatorOutput> {
+  const calcMeta = CALCULATOR_META.get(scoreId);
+  if (!calcMeta || !calcMeta.ai_narrative || !calcMeta.reasoning_template) return output;
+  const entityId = input.zoneId ?? input.projectId ?? input.userId ?? 'unknown';
+  try {
+    const res = await generateNarrative({
+      scoreId,
+      entityId,
+      components: output.components as Record<string, unknown>,
+      template: calcMeta.reasoning_template,
+    });
+    if (res.cost_usd > 0) {
+      await recordSpend(`ie_narrative:${scoreId}`, res.cost_usd);
+    }
+    return {
+      ...output,
+      components: {
+        ...(output.components as Record<string, unknown>),
+        ai_narrative: res.text,
+        ai_narrative_cached: res.cached,
+      },
+    };
+  } catch {
+    return output;
+  }
+}
+
+// Registro opt-in para calculators con AI narrative. El calculator llama
+// registerCalculatorMeta(scoreId, { ai_narrative: true, reasoning_template }).
+export interface CalculatorMeta {
+  readonly ai_narrative?: boolean;
+  readonly reasoning_template?: string;
+}
+const CALCULATOR_META = new Map<string, CalculatorMeta>();
+export function registerCalculatorMeta(scoreId: string, meta: CalculatorMeta): void {
+  CALCULATOR_META.set(scoreId, meta);
 }
 
 // U3 — helper exposed para calculators que llaman APIs externas con costo.

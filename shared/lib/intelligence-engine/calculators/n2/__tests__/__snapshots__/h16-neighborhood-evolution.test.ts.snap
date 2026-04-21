@@ -1,0 +1,34 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`H16 Neighborhood Evolution calculator > snapshot 4 narrativas — Roma/Narvarte/Iztacalco/zona_declive 1`] = `
+{
+  "iztacalco_estable": {
+    "confidence": "medium",
+    "fase": "media",
+    "label": "ie.score.h16.estable",
+    "narrativa": "estable",
+    "value": 39,
+  },
+  "narvarte_apreciacion_activa": {
+    "confidence": "medium",
+    "fase": "media",
+    "label": "ie.score.h16.apreciacion_activa",
+    "narrativa": "apreciacion_activa",
+    "value": 57,
+  },
+  "roma_post_gentrificada": {
+    "confidence": "high",
+    "fase": "post_gentrificada",
+    "label": "ie.score.h16.gentrificada_post_2017",
+    "narrativa": "gentrificada_post_2017",
+    "value": 84,
+  },
+  "zona_declive": {
+    "confidence": "low",
+    "fase": "inicial",
+    "label": "ie.score.h16.declive",
+    "narrativa": "declive",
+    "value": 21,
+  },
+}
+`;

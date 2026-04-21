@@ -663,6 +663,233 @@
         "perfil_mixto": "Perfil de comprador misto",
         "perfil_difuso": "Perfil de comprador difuso",
         "insufficient": "Dados insuficientes para perfilar"
+      },
+      "f09": {
+        "excelente": "Oportunidade de valor excelente",
+        "buena": "Boa relação preço-valor",
+        "regular": "Valor regular",
+        "sobreprecio": "Sobrepreço frente ao valor justo",
+        "insufficient": "Dados insuficientes para valorar"
+      },
+      "f10": {
+        "inicial": "Gentrificação em fase inicial",
+        "media": "Gentrificação em fase média",
+        "tardia": "Gentrificação em fase tardia",
+        "post_gentrificada": "Zona pós-gentrificada",
+        "insufficient": "Dados insuficientes de gentrificação"
+      },
+      "b03": {
+        "saludable": "Precificação saudável, sem ajustes",
+        "ajustes_menores": "Ajustes menores recomendados",
+        "requiere_accion": "Requer ação de precificação",
+        "insufficient": "Dados insuficientes de precificação"
+      },
+      "b05": {
+        "expansion": "Fase de expansão do ciclo",
+        "recuperacion": "Fase de recuperação do ciclo",
+        "pico": "Pico do ciclo",
+        "contraccion": "Fase de contração do ciclo",
+        "insufficient": "Dados insuficientes do ciclo"
+      },
+      "b09": {
+        "breakeven_rapido": "Breakeven rápido projetado",
+        "breakeven_moderado": "Breakeven moderado",
+        "breakeven_tardio": "Breakeven tardio",
+        "no_breakeven": "Sem breakeven projetado em 24 meses",
+        "insufficient": "Dados insuficientes de fluxo de caixa"
+      },
+      "b10": {
+        "lift_alto": "Lift de receita alto",
+        "lift_medio": "Lift de receita médio",
+        "lift_bajo": "Lift de receita baixo",
+        "sin_lift": "Sem lift esperado",
+        "insufficient": "Dados insuficientes para otimizar"
+      },
+      "b13": {
+        "amenity_mix_excelente": "Mix de amenidades excelente",
+        "amenity_mix_regular": "Mix de amenidades regular",
+        "amenity_mix_pobre": "Mix de amenidades pobre",
+        "insufficient": "Dados insuficientes para ROI de amenidades"
+      },
+      "b14": {
+        "mix_dominante": "Persona dominante clara",
+        "mix_mixto": "Mix de personas balanceado",
+        "mix_difuso": "Mix de personas difuso",
+        "insufficient": "Dados insuficientes de perfil do projeto"
+      },
+      "b15": {
+        "ventana_optima": "Janela de lançamento ótima",
+        "ventana_aceptable": "Janela aceitável",
+        "ventana_suboptima": "Janela subótima, considere esperar",
+        "insufficient": "Dados insuficientes de timing"
+      },
+      "c01": {
+        "caliente": "Lead quente",
+        "tibio": "Lead morno",
+        "frio": "Lead frio",
+        "insufficient": "Sinais insuficientes do lead"
+      },
+      "c03": {
+        "match_excelente": "Match excelente",
+        "match_bueno": "Bom match",
+        "match_parcial": "Match parcial",
+        "match_pobre": "Match fraco",
+        "insufficient": "Dados insuficientes para match"
+      },
+      "d03": {
+        "undersupply_oportunidad": "Subabastecimento — oportunidade",
+        "equilibrado": "Oferta equilibrada com demanda",
+        "oversupply_moderado": "Superoferta moderada",
+        "oversupply_riesgo": "Risco de superoferta",
+        "insufficient": "Dados insuficientes de pipeline"
+      },
+      "h12": {
+        "oportunidad_alta": "Zona de alta oportunidade",
+        "oportunidad_media": "Zona de oportunidade média",
+        "estable": "Zona estável",
+        "declive": "Zona em declínio",
+        "insufficient": "Dados insuficientes de oportunidade"
+      },
+      "h16": {
+        "gentrificada_post_2017": "Bairro gentrificado pós-2017",
+        "apreciacion_activa": "Apreciação ativa em curso",
+        "estable": "Bairro estável sem mudança",
+        "declive": "Bairro em declínio",
+        "insufficient": "Dados insuficientes de evolução"
+      },
+      "a07": {
+        "buy_now": "Momento ideal para comprar",
+        "wait_3m": "Esperar 3 meses recomendado",
+        "wait_6m": "Esperar 6 meses recomendado",
+        "wait_12m": "Esperar 12 meses recomendado",
+        "insufficient": "Dados insuficientes para timing"
+      },
+      "a08": {
+        "top_claro": "Topo comparativo claro",
+        "competitivo": "Competitivo entre comparáveis",
+        "mid": "Posição intermediária",
+        "rezagado": "Atrasado vs comparáveis",
+        "insufficient": "Dados insuficientes para comparar"
+      },
+      "a09": {
+        "bajo": "Risco comprador baixo",
+        "moderado": "Risco comprador moderado",
+        "alto": "Risco comprador alto",
+        "muy_alto": "Risco comprador muito alto",
+        "insufficient": "Dados insuficientes de risco"
+      },
+      "a10": {
+        "match_excelente": "Match de lifestyle excelente",
+        "match_bueno": "Bom match de lifestyle",
+        "match_regular": "Match de lifestyle regular",
+        "match_pobre": "Match de lifestyle fraco",
+        "insufficient": "Dados insuficientes de lifestyle"
+      },
+      "a11": {
+        "crecimiento_alto": "Crescimento patrimonial alto",
+        "crecimiento_medio": "Crescimento patrimonial médio",
+        "crecimiento_bajo": "Crescimento patrimonial baixo",
+        "sin_crecimiento": "Sem crescimento projetado",
+        "insufficient": "Dados insuficientes de patrimônio"
+      },
+      "b06": {
+        "alta_viabilidad": "Alta viabilidade do projeto",
+        "moderada": "Viabilidade moderada",
+        "marginal": "Viabilidade marginal",
+        "no_viable": "Projeto inviável",
+        "insufficient": "Dados insuficientes de viabilidade"
+      },
+      "b11": {
+        "excelente": "Canal excelente",
+        "bueno": "Canal bom",
+        "regular": "Canal regular",
+        "pobre": "Canal fraco",
+        "insufficient": "Dados insuficientes do canal"
+      },
+      "c04": {
+        "precio": "Objeção de preço detectada",
+        "ubicacion": "Objeção de localização detectada",
+        "seguridad": "Objeção de segurança detectada",
+        "construccion": "Objeção de construção detectada",
+        "condiciones": "Objeção de condições detectada",
+        "otra": "Objeção classificada como outra",
+        "insufficient": "Dados insuficientes para refutar"
+      },
+      "c06": {
+        "forecast_alto": "Forecast comissões alto",
+        "forecast_medio": "Forecast comissões médio",
+        "forecast_bajo": "Forecast comissões baixo",
+        "forecast_nulo": "Forecast comissões nulo",
+        "insufficient": "Pipeline insuficiente para projetar"
+      },
+      "d04": {
+        "fuertemente_correlacionado": "Scores fortemente correlacionados",
+        "parcialmente_correlacionado": "Scores parcialmente correlacionados",
+        "independiente": "Scores independentes entre si",
+        "insufficient": "Dados insuficientes para correlação"
+      },
+      "h13": {
+        "top_site": "Top terreno para desenvolvimento",
+        "candidato": "Candidato viável",
+        "marginal": "Terreno marginal",
+        "descartar": "Terreno a descartar",
+        "insufficient": "Dados insuficientes para seleção de terreno"
+      },
+      "h15": {
+        "excelente": "Due diligence excelente",
+        "aceptable": "Due diligence aceitável",
+        "observaciones": "Due diligence com observações",
+        "bloqueante": "Due diligence com bloqueadores",
+        "insufficient": "Checklist pendente"
+      },
+      "e01": {
+        "excelente": "Projeto excelente",
+        "bueno": "Projeto bom",
+        "regular": "Projeto regular",
+        "pobre": "Projeto abaixo da média",
+        "insufficient": "Dados insuficientes do projeto"
+      },
+      "g01": {
+        "excelente": "DMX Score excelente",
+        "bueno": "DMX Score bom",
+        "regular": "DMX Score regular",
+        "pobre": "DMX Score baixo",
+        "insufficient": "DMX Score disponível em breve"
+      },
+      "e02": {
+        "excelente": "Portfólio excelente risco-retorno",
+        "bueno": "Portfólio bom",
+        "regular": "Portfólio regular",
+        "pobre": "Portfólio requer rebalanceamento",
+        "insufficient": "Portfólio insuficiente para Sharpe"
+      },
+      "e03": {
+        "hot": "Deal muito provável de fechar",
+        "warm": "Deal provável",
+        "cold": "Deal frio",
+        "stalled": "Deal estagnado",
+        "insufficient": "Sinais insuficientes para previsão"
+      },
+      "e04": {
+        "estable": "Mercado estável",
+        "leve": "Anomalia leve",
+        "moderada": "Anomalia moderada",
+        "alta": "Anomalia alta",
+        "insufficient": "Sem baseline suficiente"
+      },
+      "d09": {
+        "excelente": "Ecossistema saudável",
+        "bueno": "Ecossistema bom",
+        "regular": "Ecossistema regular",
+        "pobre": "Ecossistema frágil",
+        "insufficient": "Dados insuficientes do ecossistema"
+      },
+      "d02": {
+        "top_decil": "Top 10% do país",
+        "top_cuartil": "Top 25% do país",
+        "medio": "Ranking médio",
+        "bajo": "Ranking baixo",
+        "insufficient": "Ranking pendente"
       }
     },
     "confidence": {

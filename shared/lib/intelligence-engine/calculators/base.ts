@@ -16,6 +16,10 @@ export interface CalculatorInput {
   readonly periodDate: string; // ISO YYYY-MM-DD
   // Parámetros opcionales on-demand (ej. destino para H09 Commute).
   readonly params?: Readonly<Record<string, unknown>>;
+  // D33 FASE 10 SESIÓN 3/3 — multi-tenant scoping para N4 producto institucional
+  // (E01/E02/E03). NULL = scope global (default H1 backward compat). Validado
+  // contra tenant_scopes table en runScore vía validateTenantScope().
+  readonly tenant_id?: string;
 }
 
 export interface CalculatorCitation {
@@ -43,6 +47,24 @@ export interface CalculatorOutput<TComponents extends object = Record<string, un
   // OPCIONAL P1 — valid_until timestamp explícito. Si se omite, persist.ts lo
   // deriva de methodology.validity (ver ValidityWindow) sumando al computed_at.
   readonly valid_until?: string;
+  // OPCIONAL D19 FASE 10 — explanations LIME-style para ML scores (H14, E03).
+  // Persiste en zone_scores.ml_explanations / project_scores.ml_explanations.
+  readonly ml_explanations?: Readonly<Record<string, unknown>>;
+  // OPCIONAL D25 FASE 10 — stability 0-1 derivado de score_history rolling 12m.
+  // Si el calculator no lo provee, persist.ts lo calcula y escribe directamente.
+  readonly stability_index?: number;
+  // OPCIONAL D29 FASE 10 SESIÓN 2/3 — multi-scenario output.
+  // Calculators como A07/A09/A11 devuelven variantes (optimistic/base/pessimistic
+  // o buy_now/wait_3m/6m/12m). UI (portal comprador) renderiza rangos vs punto.
+  readonly scenarios?: Readonly<Record<string, ScenarioOutput>>;
+}
+
+// D29 — resultado per escenario nombrado. value 0-100, rationale opcional
+// string corto para UI, confidence per escenario (puede bajar si menos data).
+export interface ScenarioOutput {
+  readonly value: number;
+  readonly confidence: Confidence;
+  readonly rationale?: string;
 }
 
 // P1 — Validity window por calculator. Expresado en units discretos. persist.ts

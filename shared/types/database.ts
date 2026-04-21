@@ -1722,6 +1722,30 @@ export type Database = {
           },
         ]
       }
+      enigh_zone_income: {
+        Row: {
+          id: string
+          median_salary_mxn: number | null
+          salary_range_distribution: Json
+          snapshot_date: string
+          zone_id: string
+        }
+        Insert: {
+          id?: string
+          median_salary_mxn?: number | null
+          salary_range_distribution?: Json
+          snapshot_date: string
+          zone_id: string
+        }
+        Update: {
+          id?: string
+          median_salary_mxn?: number | null
+          salary_range_distribution?: Json
+          snapshot_date?: string
+          zone_id?: string
+        }
+        Relationships: []
+      }
       feature_registry: {
         Row: {
           category: string
@@ -2434,6 +2458,60 @@ export type Database = {
           run_id?: string | null
           source?: string
           value?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      ie_score_visibility_rules: {
+        Row: {
+          allowed_fields: Json
+          excluded_fields: Json
+          score_id: string
+          tenant_scope_required: boolean
+          updated_at: string
+          visibility: string
+        }
+        Insert: {
+          allowed_fields?: Json
+          excluded_fields?: Json
+          score_id: string
+          tenant_scope_required?: boolean
+          updated_at?: string
+          visibility: string
+        }
+        Update: {
+          allowed_fields?: Json
+          excluded_fields?: Json
+          score_id?: string
+          tenant_scope_required?: boolean
+          updated_at?: string
+          visibility?: string
+        }
+        Relationships: []
+      }
+      inegi_census_zone_stats: {
+        Row: {
+          age_distribution: Json
+          dominant_profession: string | null
+          id: string
+          profession_distribution: Json
+          snapshot_date: string
+          zone_id: string
+        }
+        Insert: {
+          age_distribution?: Json
+          dominant_profession?: string | null
+          id?: string
+          profession_distribution?: Json
+          snapshot_date: string
+          zone_id: string
+        }
+        Update: {
+          age_distribution?: Json
+          dominant_profession?: string | null
+          id?: string
+          profession_distribution?: Json
+          snapshot_date?: string
           zone_id?: string
         }
         Relationships: []
@@ -5452,6 +5530,7 @@ export type Database = {
           score_type: string
           score_value: number
           stability_index: number | null
+          tenant_id: string | null
           tier: number
           trend_direction: string | null
           trend_vs_previous: number | null
@@ -5477,6 +5556,7 @@ export type Database = {
           score_type: string
           score_value: number
           stability_index?: number | null
+          tenant_id?: string | null
           tier: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -5502,6 +5582,7 @@ export type Database = {
           score_type?: string
           score_value?: number
           stability_index?: number | null
+          tenant_id?: string | null
           tier?: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -5510,6 +5591,57 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "project_scores_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "project_scores_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenant_scopes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      property_comparables: {
+        Row: {
+          comparable_properties: Json
+          computed_at: string
+          country_code: string
+          id: string
+          k: number
+          period_date: string
+          property_id: string
+          score_id: string
+          valid_until: string | null
+        }
+        Insert: {
+          comparable_properties?: Json
+          computed_at?: string
+          country_code: string
+          id?: string
+          k?: number
+          period_date: string
+          property_id: string
+          score_id: string
+          valid_until?: string | null
+        }
+        Update: {
+          comparable_properties?: Json
+          computed_at?: string
+          country_code?: string
+          id?: string
+          k?: number
+          period_date?: string
+          property_id?: string
+          score_id?: string
+          valid_until?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "property_comparables_country_code_fkey"
             columns: ["country_code"]
             isOneToOne: false
             referencedRelation: "countries"
@@ -6059,6 +6191,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6079,6 +6212,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6099,6 +6233,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6110,6 +6245,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "score_history_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenant_scopes"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -6130,6 +6272,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6150,6 +6293,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6170,6 +6314,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6193,6 +6338,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6213,6 +6359,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6233,6 +6380,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6256,6 +6404,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6276,6 +6425,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6296,6 +6446,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6319,6 +6470,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6339,6 +6491,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6359,6 +6512,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6382,6 +6536,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6402,6 +6557,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6422,6 +6578,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6445,6 +6602,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6465,6 +6623,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6485,6 +6644,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6508,6 +6668,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6528,6 +6689,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6548,6 +6710,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6571,6 +6734,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6591,6 +6755,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6611,6 +6776,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6634,6 +6800,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6654,6 +6821,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6674,6 +6842,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6697,6 +6866,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6717,6 +6887,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6737,6 +6908,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6760,6 +6932,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6780,6 +6953,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6800,6 +6974,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6823,6 +6998,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6843,6 +7019,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6863,6 +7040,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6886,6 +7064,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6906,6 +7085,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6926,6 +7106,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -6949,6 +7130,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6969,6 +7151,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -6989,6 +7172,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -7012,6 +7196,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -7032,6 +7217,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -7052,6 +7238,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -7075,6 +7262,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -7095,6 +7283,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -7115,6 +7304,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -7138,6 +7328,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -7158,6 +7349,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -7178,6 +7370,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -7201,6 +7394,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -7221,6 +7415,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           valid_from: string
           valid_until: string
@@ -7241,6 +7436,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           valid_from?: string
           valid_until?: string
@@ -11432,6 +11628,27 @@ export type Database = {
         }
         Relationships: []
       }
+      tenant_scopes: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
       tier_requirements: {
         Row: {
           description: string
@@ -11474,6 +11691,7 @@ export type Database = {
           score_label: string | null
           score_type: string
           score_value: number
+          tenant_id: string | null
           tier: number
           trend_direction: string | null
           trend_vs_previous: number | null
@@ -11494,6 +11712,7 @@ export type Database = {
           score_label?: string | null
           score_type: string
           score_value: number
+          tenant_id?: string | null
           tier: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -11514,6 +11733,7 @@ export type Database = {
           score_label?: string | null
           score_type?: string
           score_value?: number
+          tenant_id?: string | null
           tier?: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -11527,6 +11747,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "user_scores_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenant_scopes"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -11582,6 +11809,70 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "zona_snapshots_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      zone_certifications: {
+        Row: {
+          approved_by: string | null
+          badge_metadata: Json
+          certified_since: string
+          country_code: string
+          created_at: string
+          criteria_met: Json
+          id: string
+          is_active: boolean
+          score_id: string
+          updated_at: string
+          zone_id: string
+        }
+        Insert: {
+          approved_by?: string | null
+          badge_metadata?: Json
+          certified_since: string
+          country_code: string
+          created_at?: string
+          criteria_met?: Json
+          id?: string
+          is_active?: boolean
+          score_id: string
+          updated_at?: string
+          zone_id: string
+        }
+        Update: {
+          approved_by?: string | null
+          badge_metadata?: Json
+          certified_since?: string
+          country_code?: string
+          created_at?: string
+          criteria_met?: Json
+          id?: string
+          is_active?: boolean
+          score_id?: string
+          updated_at?: string
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zone_certifications_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "zone_certifications_approved_by_fkey"
+            columns: ["approved_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "zone_certifications_country_code_fkey"
             columns: ["country_code"]
             isOneToOne: false
             referencedRelation: "countries"
@@ -12252,6 +12543,7 @@ export type Database = {
           score_type: string
           score_value: number
           stability_index: number | null
+          tenant_id: string | null
           tier: number
           trend_direction: string | null
           trend_vs_previous: number | null
@@ -12278,6 +12570,7 @@ export type Database = {
           score_type: string
           score_value: number
           stability_index?: number | null
+          tenant_id?: string | null
           tier: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -12304,6 +12597,7 @@ export type Database = {
           score_type?: string
           score_value?: number
           stability_index?: number | null
+          tenant_id?: string | null
           tier?: number
           trend_direction?: string | null
           trend_vs_previous?: number | null
@@ -12317,6 +12611,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "zone_scores_tenant_id_fkey"
+            columns: ["tenant_id"]
+            isOneToOne: false
+            referencedRelation: "tenant_scopes"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -12404,6 +12705,26 @@ export type Database = {
           type?: string | null
         }
         Relationships: []
+      }
+      heatmap_cache: {
+        Row: {
+          computed_at: string | null
+          confidence: string | null
+          country_code: string | null
+          period_date: string | null
+          score_id: string | null
+          value: number | null
+          zone_id: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zone_scores_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
       }
       public_agencies: {
         Row: {
@@ -12676,6 +12997,18 @@ export type Database = {
             referencedColumns: ["market_id"]
           },
         ]
+      }
+      zone_demographics_cache: {
+        Row: {
+          age_distribution: Json | null
+          dominant_profession: string | null
+          median_salary_mxn: number | null
+          profession_distribution: Json | null
+          salary_range_distribution: Json | null
+          snapshot_date: string | null
+          zone_id: string | null
+        }
+        Relationships: []
       }
     }
     Functions: {
@@ -13149,6 +13482,8 @@ export type Database = {
         Returns: Json
       }
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
+      exec_refresh_heatmap_cache: { Args: never; Returns: undefined }
+      exec_refresh_zone_demographics_cache: { Args: never; Returns: undefined }
       finalize_score_job: {
         Args: { p_error?: string; p_id: string; p_success: boolean }
         Returns: Json
@@ -13444,6 +13779,7 @@ export type Database = {
       }
       postgis_version: { Args: never; Returns: string }
       postgis_wagyu_version: { Args: never; Returns: string }
+      purge_expired_score_history: { Args: never; Returns: number }
       queue_metrics_summary: { Args: never; Returns: Json }
       reapply_privileges: {
         Args: { p_parent_table: string }
