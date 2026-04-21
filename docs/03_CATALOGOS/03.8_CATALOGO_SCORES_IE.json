@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-20T20:11:24.332Z",
+  "generated_at": "2026-04-21T04:17:28.535Z",
   "version": 1,
   "count": 118,
   "by_level": {
@@ -1543,12 +1543,21 @@
       "category": "proyecto",
       "tier": 3,
       "dependencies": [
-        "B08",
+        "B01",
+        "B02",
         "B03",
-        "B09",
-        "A12",
+        "B04",
+        "B05",
+        "B06",
         "B07",
-        "B04"
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B13",
+        "B14",
+        "B15",
+        "A12"
       ],
       "triggers_cascade": [
         "unit_sold",
@@ -1558,7 +1567,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n4/e01-full-project.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n4/e01-full-project-score.ts",
       "country_codes": [
         "MX"
       ]
@@ -1577,7 +1586,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n4/g01-full-score.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n4/g01-full-score-publico.ts",
       "country_codes": [
         "MX"
       ]
@@ -1586,7 +1595,7 @@
       "score_id": "E02",
       "name": "Portfolio Optimizer",
       "level": 4,
-      "category": "dev",
+      "category": "proyecto",
       "tier": 3,
       "dependencies": [
         "E01"
@@ -1596,7 +1605,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n4/e02-portfolio.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n4/e02-portfolio-optimizer.ts",
       "country_codes": [
         "MX"
       ]
@@ -1605,9 +1614,14 @@
       "score_id": "E03",
       "name": "Predictive Close",
       "level": 4,
-      "category": "dev",
+      "category": "proyecto",
       "tier": 4,
-      "dependencies": [],
+      "dependencies": [
+        "C01",
+        "N11",
+        "B04",
+        "B08"
+      ],
       "triggers_cascade": [
         "feedback_registered"
       ],
@@ -1615,7 +1629,7 @@
       "confidence_sources": [
         "operaciones"
       ],
-      "calculator_path": "features/scores/lib/calculators/n4/e03-predictive-close.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n4/e03-predictive-close.ts",
       "country_codes": [
         "MX"
       ]
@@ -1624,15 +1638,18 @@
       "score_id": "E04",
       "name": "Anomaly Detector",
       "level": 4,
-      "category": "agregado",
+      "category": "mercado",
       "tier": 3,
-      "dependencies": [],
+      "dependencies": [
+        "F08",
+        "A12"
+      ],
       "triggers_cascade": [],
       "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#e04-anomaly-detector",
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n4/e04-anomaly.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n4/e04-anomaly-detector.ts",
       "country_codes": [
         "MX"
       ]
@@ -1641,7 +1658,7 @@
       "score_id": "D09",
       "name": "Ecosystem Health",
       "level": 4,
-      "category": "mercado",
+      "category": "zona",
       "tier": 2,
       "dependencies": [
         "N01",
@@ -1654,7 +1671,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n4/d09-ecosystem-health.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n4/d09-ecosystem-health.ts",
       "country_codes": [
         "MX"
       ]
@@ -1665,7 +1682,20 @@
       "level": 4,
       "category": "zona",
       "tier": 3,
-      "dependencies": [],
+      "dependencies": [
+        "F08",
+        "F09",
+        "N11",
+        "A12",
+        "N01",
+        "N08",
+        "N10",
+        "N07",
+        "H01",
+        "H02",
+        "N02",
+        "N04"
+      ],
       "triggers_cascade": [
         "unit_sold"
       ],
@@ -1673,7 +1703,7 @@
       "confidence_sources": [
         "composite"
       ],
-      "calculator_path": "features/scores/lib/calculators/n4/d02-zona-ranking.ts",
+      "calculator_path": "shared/lib/intelligence-engine/calculators/n4/d02-zona-ranking.ts",
       "country_codes": [
         "MX"
       ]
