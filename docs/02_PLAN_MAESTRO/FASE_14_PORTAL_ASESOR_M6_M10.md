@@ -1,7 +1,7 @@
 # FASE 14 — Portal Asesor (M06 Tareas + M07 Operaciones + M08 Marketing + M09 Estadísticas)
 
 > **Duración estimada:** 6 sesiones Claude Code (~24 horas con agentes paralelos)
-> **Dependencias:** FASE 13 (M01-M05 + layout asesor + STATUS_MAP), FASE 08-12 (IE completo), FASE 04 (DS)
+> **Dependencias:** FASE 13 (M01-M05 + layout asesor + STATUS_MAP), FASE 08-10 (IE N0-N3), FASE 11 XL (15 índices DMX + moonshots + seeds implementados — Trend Genome, Scorecard, Pulse), FASE 12 (N5 AI + Mapa 12 capas + LifePath v1), FASE 04 (DS)
 > **Bloqueantes externos:**
 > - Facturapi.io cuenta activa con credenciales (para CFDI 4.0 en M07).
 > - Mifiel cuenta (firma electrónica NOM-151) — trial o prod.
@@ -261,12 +261,14 @@ Crítico:
   - Story (1080x1920) — Stories IG/FB/WA (TTL 24h)
   - VideoStory (1080x1920, ≤15s, mp4) — template slides
   - Video (1920x1080, ≤30s) — YouTube short
-- `[14.C.2.2]` Usa Sharp para imágenes (composite foto proyecto + logo DMX + texto + precio + DMX Score). Templates en `shared/lib/marketing/templates/*`.
-- `[14.C.2.3]` Status `ready` | `generating` | `failed`. Persistidos en `fotos` con tag `marketing_asset`.
+- `[14.C.2.2]` Usa Sharp para imágenes (composite foto proyecto + logo DMX + texto + precio + DMX Score + **badges de los 15 índices DMX licenciables** FASE 11 XL — seeds implementados). El asesor selecciona en el wizard qué índices destacar (e.g., MOM 84/100, YNG 72/100, LIV 88/100). Estos badges son parte del pitch comercial y validan que el asesor tiene acceso a data propietaria DMX.
+- `[14.C.2.3]` Templates en `shared/lib/marketing/templates/*` — cada uno con slots para 2-4 badges índices y logo pequeño "Powered by DMX Indices".
+- `[14.C.2.4]` Status `ready` | `generating` | `failed`. Persistidos en `fotos` con tag `marketing_asset`.
 
 **Criterio de done del módulo:**
 - [ ] 5 piezas generadas en <30s.
 - [ ] Story con DMX Score visible.
+- [ ] Badges índices DMX visibles y legibles en todas las piezas.
 
 #### MÓDULO 14.C.3 — Fotos: upload + clasificación AI
 
@@ -351,6 +353,19 @@ Crítico:
 **Criterio de done del módulo:**
 - [ ] Cambiar rango fechas actualiza KPIs sin full page reload.
 - [ ] Comparativa equipo respeta RLS (solo permissions.stats.view_team).
+
+#### MÓDULO 14.D.4.5 — Dashboard "Zonas trending" (Trend Genome — FASE 11 XL seeds implementados)
+
+**Pasos:**
+- `[14.D.4.5.1]` Sub-tab nueva en M09 Estadísticas: "Zonas trending" alimentada por `zone_alpha_alerts` + `zone_pulse_scores` + Trend Genome (FASE 11 XL SEEDs).
+- `[14.D.4.5.2]` Vista: lista top 20 colonias con mayor momentum/pulse en últimos 30d, con columna delta vs. baseline, tier (alpha/emerging/mainstream/declining), trigger (e.g., "influencer_wave_nightlife_2026-04"), y CTA "Ver detalle Genome".
+- `[14.D.4.5.3]` Filtros: tipo alert (price_alpha/social_alpha/trend_alpha), alcaldía, ventana temporal (7d/30d/90d).
+- `[14.D.4.5.4]` Click en zona → drawer con timeline events + charts pulse + acciones sugeridas para asesor ("captar en esta zona pronto antes que suba 8-12%").
+- `[14.D.4.5.5]` Feature gated `feature.trend_genome_dashboard` (Starter+).
+
+**Criterio de done del módulo:**
+- [ ] Dashboard renderiza top 20 zonas con data real FASE 11 XL.
+- [ ] Drawer detalle completo en <800ms.
 
 #### MÓDULO 14.D.5 — Commission Forecast 3-6 meses (GC-56)
 

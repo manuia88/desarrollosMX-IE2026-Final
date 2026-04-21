@@ -499,6 +499,51 @@ Cross-references:
 - [ ] Cross-reference a ADRs existentes y contexto §20-23.
 - [ ] Tag git `fase-29-complete`.
 
+### BLOQUE 29.X — Pins adicionales post-FASE 11 XL
+
+> **Contexto:** FASE 11 XL estableció seeds para múltiples moonshots (Genoma, LifePath, Climate Twin, Constellations, Living Atlas, Trend Genome, Scorecard). FASE 12 y FASE 20 los extienden a v1. Estos pins H2/H3 registran las evoluciones planeadas post-launch y referencian la visión unificadora.
+> **Dependencias:** FASE 11 XL (seeds implementados) + FASE 12 (v1) + FASE 20 (v2 LifePath + DMX Habitat SEED).
+
+#### MÓDULO 29.X.1 — DMX Urban OS (visión unificadora)
+
+**Pins:**
+- `[29.X.1.1]` **Feature**: "DMX Urban OS" como narrativa unificadora de H1+H2+H3 — sistema operativo de decisiones urbanas que integra: 15 índices DMX, Causal Engine, Trend Genome, Climate Twin, LifePath, DMX Habitat, Living Atlas, Constellations, Digital Twin 4D, Knowledge Graph, Agentic Marketplace.
+- `[29.X.1.2]` **Rationale**: establecer "DMX Urban OS" como marca comercial que engloba todos los productos — permite positioning superior a competidores verticales (Cherre solo grafo; CoStar solo transacciones; Local Logic solo scores).
+- `[29.X.1.3]` **Link a visión**: ver [ADR-011 Moonshot 3 Horizontes](../01_DECISIONES_ARQUITECTONICAS/ADR-011_MOONSHOT_3_HORIZONTES.md) — DMX Urban OS es la culminación H3 de los 3 horizontes.
+- `[29.X.1.4]` **Acciones H2**: landing `/urban-os` con narrativa + videos demos + lista productos integrados + pricing enterprise.
+- `[29.X.1.5]` **ADR requerido**: ADR futuro "DMX Urban OS Brand & Architecture Unification" (post-launch).
+
+**Criterio de done del módulo:**
+- [ ] Pin registrado con link explícito a ADR-011.
+
+#### MÓDULO 29.X.2 — DMX Habitat completo (H2 fase dedicada Colonia OS)
+
+**Pins:**
+- `[29.X.2.1]` **Feature**: extiende SEED DMX Habitat (FASE 20.Y.2) a producto completo H2 — "Colonia OS" con:
+  - Comunidad verificada por colonia (residentes + vecinos + ecosistema servicios).
+  - Signos vitales real-time (utilities status, crime feed, transit delays, air quality).
+  - APIs apps locales (food delivery coverage, gym availability, co-working spots).
+  - Governance layer (propuestas vecinales, decisiones con voto token-gated H3).
+  - Social layer (eventos, intercambio de servicios, recomendaciones).
+- `[29.X.2.2]` **Rationale**: convierte DMX en plataforma post-compra con recurrencia mensual — no solo "ayudé a comprar" sino "soy tu OS diario de colonia".
+- `[29.X.2.3]` **Effort H2**: 8-12 sesiones, fase dedicada nueva "FASE 39 — DMX Habitat Colonia OS".
+- `[29.X.2.4]` **ADR requerido**: ADR futuro "DMX Habitat Architecture + Governance + Token Economy".
+
+**Criterio de done del módulo:**
+- [ ] Pin con roadmap H2 explícito.
+
+#### MÓDULO 29.X.3 — Mercado de predicciones Polymarket-style (SCAFFOLD H3)
+
+**Pins:**
+- `[29.X.3.1]` **Feature**: mercado de predicciones on-chain estilo Polymarket aplicado a real estate — usuarios apuestan (H3 tokens, H4 real USD regulated) sobre outcomes tipo "¿Roma Norte superará momentum 85 en Q3 2027?", "¿nuevo Metro 7 se inaugurará antes de 2028?", "¿precio promedio Condesa >$95K/m² antes de 2026-12-31?".
+- `[29.X.3.2]` **Rationale**: crowd-sourcing de predictions genera señal valiosísima (wisdom of crowds) + engagement brutal + potential moat regulatorio si DMX captura el espacio primero.
+- `[29.X.3.3]` **Status pins**: **founder pausó activamente este feature para roadmap 2026-2027** por complejidad regulatoria (CNBV, SEC-like scrutiny real estate predictions) + no-core al launch.
+- `[29.X.3.4]` **Dejamos documentado como futuro**: pin explícito en scaffold H3 para no perder la idea. Re-evaluar T+12 meses post-launch.
+- `[29.X.3.5]` **ADR requerido si reactiva**: ADR futuro "Prediction Market — Legal + Token Economy + Oracle Design".
+
+**Criterio de done del módulo:**
+- [ ] Pin registrado con status "pausado por founder 2026-04" y trigger "re-evaluar T+12m post-launch".
+
 ## Próxima fase
 
 No hay siguiente fase inmediata. Plan maestro H1 cierra con Fase 28. Las fases post-launch son iterativas: cada ítem H2/H3 abrirá su propia "Fase 30+" cuando se construya, con su ADR propio antes.

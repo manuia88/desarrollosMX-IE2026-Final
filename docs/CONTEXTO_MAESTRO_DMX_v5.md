@@ -1450,3 +1450,142 @@ Distinción crítica para entender arquitectura DMX (post discusión founder Hai
 
 ### Upgrades directos propuestos pendientes founder approval (TODO #24 CONTRATO §8)
 D12, D15, D17, D20, D22, D23, D26, D27, D28 — 9 upgrades adicionales derivados de research competitivo. NO integrados a FASE 10 scope actual (session split 2026-04-20). Evaluación pendiente post FASE 11.
+
+---
+
+## Addendum 2026-04-21 — FASE 11 XL Moonshot Expansion
+
+Tras conversación extensiva con founder 2026-04-21 se aprueba **FASE 11 XL**: expansión de FASE 11 de 7 índices (12h originales) a **15 índices + 10 moonshots core + preview UX 4 personas + 25 bloques + ~90h** con paralelización agresiva. E2E connectedness completo (BD + seguridad + UI + endpoints 100%). Esta expansión redefine posicionamiento DMX de "proptech LATAM" a **"DMX Urban OS — infraestructura de decisión de vida urbana LATAM"**.
+
+### Resumen decisión founder
+
+- **De:** 7 índices propietarios con publicación mensual DMX-MOM + trimestral (~12h, 3 sesiones CC).
+- **A:** 15 índices + 10 moonshots FULL/SEED + preview UX 4 personas + Widget Embebible + Time Machine API + Scorecard Nacional ampliado + Press Kit Auto + Alert Radar WhatsApp + Stickers descargables (~90h, 10-12 sesiones CC con paralelización agresiva).
+- **Rationale:** positioning DMX Urban OS valuation comp Stripe/Shopify/Cloudflare ($20-100B vs proptech comp $1-5B). El diferencial no es "índices inmobiliarios"; es **infraestructura de decisión de vida urbana** que otros portales/fintechs/apps consumen vía API + widget + WhatsApp bot.
+
+### Los 15 índices DMX (expansión de 7)
+
+| Código | Nombre | Status FASE 11 XL |
+|--------|--------|-------------------|
+| DMX-IPV | Índice Precio-Valor | Original (mantiene) |
+| DMX-IAB | Índice Absorción Benchmark | Original (mantiene) |
+| DMX-IDS | Índice Desarrollo Social Integrado | Original (mantiene) |
+| DMX-IRE | Índice Riesgo Estructural | Original (mantiene) |
+| DMX-ICO | Índice Costo Oportunidad | Original (mantiene) |
+| DMX-MOM | Momentum Index | Original (mantiene) |
+| DMX-LIV | Livability Index | Original (mantiene) |
+| **DMX-FAM** | Índice Familia (schools + safety + parks + pediatric) | NUEVO v5.1 XL |
+| **DMX-YNG** | Índice Jóvenes Profesionistas (nightlife + coworking + gym + commute) | NUEVO v5.1 XL |
+| **DMX-GRN** | Índice Green / Sustainability (AQI + green_space + bikeability + solar) | NUEVO v5.1 XL |
+| **DMX-STR** | Índice STR Viability (AirROI yield + regulación + demand) | NUEVO v5.1 XL |
+| **DMX-INV** | Índice Investment Grade (yield + risk + liquidez) | NUEVO v5.1 XL |
+| **DMX-DEV** | Índice Developer Feasibility (land + permits + absorción + TIR) | NUEVO v5.1 XL |
+| **DMX-GNT** | Índice Gentrification Velocity (delta IPV 12m + displacement + new_businesses) | NUEVO v5.1 XL |
+| **DMX-STA** | Índice Stability (volatility scores + tenure + occupancy) | NUEVO v5.1 XL |
+
+**Pesos propuestos FAM/YNG/GRN/STR/INV/DEV/GNT/STA:** [CONFIRMAR FOUNDER POST-FASE 11.A] — pesos preliminares documentados en `FASE_11_IE_INDICES_DMX.md` BLOQUE 11.B expandido.
+
+### Moonshots FULL / SEED / DIFERIDO
+
+**FULL implementados FASE 11 XL:**
+1. **Causal Engine** — base explicativa "por qué Narvarte subió +18%" (movido de FASE 12 → FASE 11).
+2. **Pulse Score** — score compuesto diario de heat de ciudad.
+3. **Migration Flow v1** — flujo migración inter-colonia (origen → destino) con historical_snapshots.
+4. **Trend Genome + Influencer Heat** — pre-mediática radar con Instagram scraping vía Apify (ADR-027).
+5. **Scorecard Nacional Trimestral ampliado** — 15 índices ranking nacional + PDF público branded.
+6. **Widget Embebible** — script JS embeddable para portales inmobiliarios terceros con score zona + link DMX.
+7. **Time Machine API** — `/api/v1/time-machine?zone_id=X&date=2022-03` retorna snapshot histórico.
+8. **Ghost Zones** — detección colonias con caída sostenida >30% demand 6m+ (alerta B2B).
+9. **Alert Radar WhatsApp** — usuarios suscriben colonias, WA notifies en eventos significativos.
+10. **DNA Migration + Historical Forensics + Living Metropolitan Networks + Zone Certification Integration** — suite de moonshots dependientes (detallados en FASE_11_IE_INDICES_DMX.md BLOQUES 11.R-11.Y).
+
+**SEED (estructura + subset funcional, se extiende en fases dedicadas):**
+- Genoma Colonias SEED (pgvector 64-dim — ADR-027)
+- Futures Curve SEED (proyección N11 a 12m)
+- LifePath SEED (destino vital predictivo persona → zona fit)
+- Climate Twin SEED (proyección 15y clima por zona, extensión FASE 32)
+- Zone Constellations SEED (clusters dinámicos colonias)
+- Living Atlas SEED (mapa 4D vivo, base para FASE 32 Digital Twin)
+- Stickers Descargables (seed generación stickers sociales compartibles)
+
+**DIFERIDOS a fases posteriores:**
+- Digital Twin 3D completo → FASE 32
+- Flux Capacitor (simulador what-if multi-dim) → FASE 32
+- Habitat OS completo → FASE 20 + 29
+- Urban OS visión completa → FASE 29
+- API pública cobrable → FASE 23 (monetización + pricing tier)
+- Índices × WhatsApp bot completo → FASE 22
+- Índices × Listings badge en cards → FASE 21
+- Índices × CRM Asesor → FASE 13
+- Metaverso Colonias → FASE 32 + 20
+
+### Quitados por decisión founder (2026-04-21)
+
+- **Mood Index** — demasiado subjetivo, sin input data confiable H1.
+- **Biorítmo** — jerga esotérica, no defiende moat.
+- **Alpha Zone Hunter aislado** — se absorbe en Trend Genome (redundante como moonshot separado).
+- **Zone Soul Profile** — solapa con Genoma Colonias, se reemplaza por pgvector embeddings.
+- **Mercado Predicciones** (marketplace apuestas sobre zonas) — riesgo regulatorio CNBV + poca claridad valor.
+- **ETF/Fondo** (producto financiero estructurado por índices DMX) — diferir H3 + requiere licencia CNBV (mismo perímetro GC-15 Fractional Investing).
+
+### Nuevo posicionamiento: DMX Urban OS
+
+**Narrativa:** "DMX Urban OS — infraestructura de decisión de vida urbana LATAM".
+
+**Valuación comp:**
+- **Sector comparables (infraestructura decisión vida urbana):** Stripe $95B, Shopify $100B, Cloudflare $30B (rango $20-100B TAM multi-sector).
+- **Proptech LATAM comp actual:** Habi $1B, QuintoAndar $5B, Loft $2.4B (rango $1-5B TAM single-sector inmobiliario).
+- **Delta valuation:** 10-20× si se ejecuta posicionamiento Urban OS vs proptech tradicional.
+
+### Nuevas tablas BD creadas FASE 11 XL (16)
+
+1. `dmx_indices` (ya existe FASE 01, CHECK expandido a 15 códigos)
+2. `ie_index_methodology_versions` (ADR-027)
+3. `influencer_heat_zones` (ADR-027 Apify)
+4. `colonia_genome_embeddings` (ADR-027 pgvector)
+5. `causal_engine_explanations` (rationale AI-generated por score change)
+6. `pulse_score_daily` (heat compuesto ciudad)
+7. `migration_flow_edges` (origen → destino colonias)
+8. `time_machine_snapshots` (snapshots históricos particionados pg_partman)
+9. `widget_embed_tokens` (auth tokens widget embebible)
+10. `whatsapp_alert_subscriptions` (opt-in notifs WhatsApp)
+11. `ghost_zones_alerts` (caída demand sostenida)
+12. `dna_migration_journeys` (journeys comprador multi-zona)
+13. `historical_forensics_cases` (PDF educativos ciclos pasados)
+14. `zone_constellations_clusters` (clusters dinámicos semanales)
+15. `lifepath_destiny_predictions` (predicciones vida → zona)
+16. `climate_twin_projections_15y` (proyecciones clima SEED)
+
+### Impacto en roadmap fases 12-38
+
+Los **SEEDs en FASE 11 XL se extienden en fases dedicadas posteriores:**
+
+| SEED FASE 11 XL | Extensión posterior | Fase target |
+|------------------|---------------------|-------------|
+| Genoma Colonias SEED | Full Genoma Multi-País + búsqueda por vibe completa | FASE 20 + 38 |
+| Futures Curve SEED | Forecasting ML gradient boosting | FASE 12 + H2 |
+| LifePath SEED | PPD integration + wizard 4 capas | FASE 20 PPD BLOQUE 20.L |
+| Climate Twin SEED | Digital Twin 4D completo con clima | FASE 32 |
+| Zone Constellations SEED | Clustering dinámico + UI interactiva | FASE 20 + 21 |
+| Living Atlas SEED | Mapa 4D Mapbox + temporal slider | FASE 32 |
+| Widget Embebible (FULL) | Monetización paid tier + pricing | FASE 23 |
+| Alert Radar WhatsApp (FULL) | Pipeline completo WA bot conversacional | FASE 22 |
+| Trend Genome + Influencer (FULL) | Corpus labeled ML feature engineering | FASE 12 |
+| Scorecard Nacional (FULL) | Expansion multi-país LATAM + Latinx US | FASE 38 |
+
+### Commits guideline FASE 11 XL
+
+- **Convención commits:** `fase-11/bloque-XX.Y.Z: descripción` (ej. `fase-11/bloque-11.H.2: Apify ingestor influencer heat`).
+- **Tag al cerrar:** `fase-11-complete` único tag al final de los 25 bloques.
+- **Branch:** `fase-11/ie-indices-dmx-xl` (alineado con git branch safety post-incident 2026-04-20).
+- **Verificación cierre:** 25 bloques + audit:rls STRICT + audit:e2e + Playwright smoke + tests ≥2000 passing + registry count +15 índices.
+
+### Referencias cruzadas
+
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-027_FASE_11_XL_METODOLOGIA_INDICES.md` (3 decisiones arquitectónicas)
+- `docs/02_PLAN_MAESTRO/FASE_11_IE_INDICES_DMX.md` (plan operativo 25 bloques)
+- `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md` §8 TODOs #27-#36
+- `docs/07_GAME_CHANGERS/07.0_INDICE.md` GC-NEW-1 a GC-NEW-10
+- `docs/07_GAME_CHANGERS/07.4_MOAT_STRATEGY.md` §Moats FASE 11 XL
+
+---

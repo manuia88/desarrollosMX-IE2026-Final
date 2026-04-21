@@ -591,6 +591,160 @@ TODO #26 — TENANT_SCOPE_DEFAULT env en Vercel (D33 opcional)
   H1: no requiere acción — tenant_scopes vacío es válido mientras no hay
        institutional customers. runScore permisivo si score no requiere tenant.
 
+TODO #27 — Implementar 15 índices DMX (antes 7) — FASE 11 XL
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUES 11.A-11.B
+  Priority: H1
+  Origen: Founder approval 2026-04-21 expansión FASE 11 XL.
+  Scope: 8 índices nuevos (FAM familia, YNG jóvenes, GRN green, STR STR-viability,
+         INV investment-grade, DEV developer-feasibility, GNT gentrification,
+         STA stability) + 7 originales (IPV/IAB/IDS/IRE/ICO/MOM/LIV).
+  Pesos propuestos [CONFIRMAR FOUNDER POST-FASE 11.A]:
+    - FAM: schools×0.30 + H05 safety×0.25 + N10 parks×0.15 + pediatric×0.15 + commute×0.15
+    - YNG: N09 nightlife×0.25 + coworking_density×0.20 + gym_density×0.15 +
+           N08 walkability×0.20 + commute×0.20
+    - GRN: AQI×0.30 + N10 green_space×0.25 + bikeability×0.20 + solar_potential×0.15 +
+           water_quality×0.10
+    - STR: AirROI_yield×0.35 + str_regulation×0.20 + str_demand×0.25 + occupancy×0.20
+    - INV: yield_net×0.35 + liquidity_score×0.25 + DMX-IRE_inverted×0.25 +
+           N11 momentum×0.15
+    - DEV: land_availability×0.25 + permits_speed×0.20 + B08 absorción×0.25 +
+           TIR_projected×0.30
+    - GNT: delta_IPV_12m×0.40 + displacement_risk×0.30 + new_businesses×0.15 +
+           demographic_turnover×0.15
+    - STA: 100 - volatility_scores×0.40 - tenure_churn×0.30 - occupancy_variance×0.30
+  Criterio done:
+    - [ ] 15 calculators (7 existentes + 8 nuevos) registrados en registry.
+    - [ ] CHECK `dmx_indices.index_code` expandido a 15 códigos via migration.
+    - [ ] Cada índice calcula sin error para CDMX colonia seed con confidence=high o medium.
+
+TODO #28 — Causal Engine base (movido de FASE 12)
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUE 11.F
+  Priority: H1
+  Origen: founder approval 2026-04-21 — mover Causal Engine de FASE 12 a FASE 11 XL.
+  Scope: motor explicativo "por qué Narvarte subió +18% en IPV" con rationale
+         AI-generated (Claude Haiku) + citas a scores fuente + delta breakdown.
+  Tabla nueva: `causal_engine_explanations` (zone_id, index_code, period_date,
+               rationale_md, components_delta_jsonb, citations_jsonb, model_used).
+  Criterio done:
+    - [ ] Endpoint `/api/v1/indices/[code]/causal/[zone_id]` retorna explicación.
+    - [ ] Integración UI ScoreTransparencyPanel (FASE 08) muestra rationale.
+
+TODO #29 — Pulse Score + Migration Flow v1 + Trend Genome — FASE 11 XL moonshots core
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUES 11.G-11.I
+  Priority: H1
+  Origen: founder approval 2026-04-21 moonshots core.
+  Scope:
+    - Pulse Score daily: score compuesto heat CDMX + endpoint público `/api/v1/pulse`
+    - Migration Flow v1: grafo origen→destino colonias con historical snapshots
+    - Trend Genome + Influencer Heat: Apify ingestor Instagram + signal pre-mediática
+  Criterio done:
+    - [ ] `pulse_score_daily` tabla + cron poblando diariamente
+    - [ ] `migration_flow_edges` + endpoint visualización grafo
+    - [ ] `influencer_heat_zones` + ADR-027 compliance
+
+TODO #30 — Scorecard Nacional ampliado + Press Kit Auto mensual
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUES 11.J-11.K
+  Priority: H1
+  Origen: founder approval 2026-04-21 — Scorecard como autoridad S&P-like.
+  Scope:
+    - Scorecard Trimestral 15 índices ranking nacional (todas ciudades H1)
+    - PDF público branded + metodología versionada (ADR-027)
+    - Press Kit Auto mensual con DMX-MOM top movers + talking points periodistas
+  Criterio done:
+    - [ ] PDF generator funcional `/reports/scorecard-Q[N]-[year].pdf`
+    - [ ] Press kit endpoint `/api/v1/press-kit/[period]` con markdown + hero stats
+    - [ ] Newsletter envío mensual a lista periodistas (stub hasta FASE 22)
+
+TODO #31 — Preview UX 4 personas (FASE 11 XL)
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUE 11.L
+  Priority: H1
+  Origen: founder approval 2026-04-21 — preview /indices adaptativo persona.
+  Scope: rutas `/indices?view=familia|inversor|joven|desarrollador` con UI
+         filtrada mostrando solo índices relevantes + narrativa por persona.
+  Criterio done:
+    - [ ] 4 views implementadas con filtro client-side
+    - [ ] Copy narrativa por persona (i18n es-MX mínimo)
+    - [ ] A11y: selector view accesible keyboard + screen reader
+
+TODO #32 — Widget Embebible + Time Machine API (FASE 11 XL)
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUES 11.N-11.O
+  Priority: H1
+  Origen: founder approval 2026-04-21 — infraestructura protocol-level.
+  Scope:
+    - Widget Embebible: script JS `<script src="dmx.mx/widget.js" data-zone="..."/>`
+      con score + link DMX + analytics tracking
+    - Time Machine API: `/api/v1/time-machine?zone=X&date=2022-03` snapshot histórico
+  Criterio done:
+    - [ ] `widget_embed_tokens` tabla + auth per-domain
+    - [ ] Widget UI responsive + dark/light mode
+    - [ ] `time_machine_snapshots` particionado pg_partman 24m retention
+    - [ ] Ratelimit Upstash 100 req/hora per domain
+
+TODO #33 — SEEDs moonshots (Genoma, Futures, LifePath, Climate Twin, Constellations, Living Atlas)
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUES 11.M, 11.P, 11.Q, 11.S, 11.T, 11.U
+  Priority: H1
+  Origen: founder approval 2026-04-21 — SEEDs FASE 11 XL, extensión fases posteriores.
+  Scope:
+    - Genoma Colonias SEED (pgvector 64-dim ADR-027)
+    - Futures Curve SEED (proyección N11 12m heurística)
+    - LifePath SEED (destino vital persona→zona fit)
+    - Climate Twin SEED (proyección 15y clima)
+    - Zone Constellations SEED (clusters dinámicos semanales)
+    - Living Atlas SEED (base mapa 4D)
+  Criterio done:
+    - [ ] 6 tablas BD + 6 endpoints stub funcionales
+    - [ ] Tests unitarios por cada SEED
+    - [ ] UI placeholder consuming real data (no mock)
+
+TODO #34 — Ghost Zones + Alert Radar WhatsApp + Stickers Descargables
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUES 11.V-11.X
+  Priority: H1
+  Origen: founder approval 2026-04-21 — laterales high-virality.
+  Scope:
+    - Ghost Zones: detector caída demand sostenida >30% 6m+
+    - Alert Radar WhatsApp: opt-in por usuario, Twilio WA send on events
+    - Stickers Descargables: generador stickers compartibles (zona + score) PNG/WebP
+  Criterio done:
+    - [ ] `ghost_zones_alerts` tabla + cron detector semanal
+    - [ ] `whatsapp_alert_subscriptions` + endpoint subscribe/unsubscribe
+    - [ ] Endpoint `/api/v1/stickers/[zone]/generate` retorna PNG compartible
+
+TODO #35 — DNA Migration + Historical Forensics + Living Networks + Zone Cert Integration
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUES 11.R, 11.Y
+  Priority: H1
+  Origen: founder approval 2026-04-21 — moonshots dependientes cluster final.
+  Scope:
+    - DNA Migration: journeys comprador multi-zona (wishlist + search_logs + closed ops)
+    - Historical Forensics: PDFs educativos "qué pasó en Cuauhtémoc 2015-2020"
+    - Living Metropolitan Networks: grafo relaciones entre metrópolis LATAM
+    - Zone Certification Integration: FASE 10 L-32 cert integrada a 15 índices
+  Criterio done:
+    - [ ] `dna_migration_journeys` + `historical_forensics_cases` tablas
+    - [ ] 3 PDFs seed forensics case-studies generados
+    - [ ] L-32 zone cert appears como badge en 15 índices UI
+
+TODO #36 — E2E verification BLOQUE 11.Z + tag fase-11-complete
+  Status: 🟡 AGENDADO — FASE 11 XL BLOQUE 11.Z (cierre)
+  Priority: H1
+  Origen: ADR-018 E2E Connectedness + §6.bis CONTRATO enforcement.
+  Scope cierre fase:
+    - tsc --noEmit pasa
+    - npm run lint pasa
+    - npm run build pasa
+    - Tests ≥2000 passing (~1700 FASE 10 + 300 FASE 11 XL)
+    - Migrations aplicadas: 16 nuevas tablas + allowlist v15 STRICT
+    - audit:e2e 0 violations
+    - audit:rls STRICT 0 violations
+    - Playwright smoke FASE 11 verde
+    - 03.13_E2E_CONNECTIONS_MAP actualizado +25 rows
+    - i18n keys nuevas en es-MX + 4 locales restantes (stub OK)
+    - a11y: semantic HTML + aria-labels + keyboard nav + reduced-motion
+    - Tag `fase-11-complete` único al final de 25 bloques
+  Criterio done:
+    - [ ] 16/16 verificaciones cierre pasan
+    - [ ] Git tag pushed
+    - [ ] Reporte §5.B CONTRATO entregado al founder
+
 ═══════════════════════════════════════════════════════════════
 9. FASE 08 CERRADA — Estado consolidado 2026-04-20
 ═══════════════════════════════════════════════════════════════

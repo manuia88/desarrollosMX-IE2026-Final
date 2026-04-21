@@ -1,0 +1,270 @@
+# GTM Channel Map — DMX
+
+> Mapa de canales go-to-market por persona x producto para FASE 11 XL y posterior.
+> Autor: Claude Opus 4.7 | Fecha: 2026-04-21 | Status: Draft H1 — founder review + quarterly recalibration
+
+---
+
+## Filosofía GTM DMX
+
+**DMX se construye como infraestructura LATAM de Spatial Decision Intelligence** — no un portal inmobiliario, no una consultora, no un AVM aislado. La GTM refleja esta ambición de categoría nueva: tres vectores en paralelo que se retroalimentan.
+
+**Vector 1 — Moat authority via publicaciones recurrentes.** Scorecard Nacional anual + Momentum Index mensual + Newsletter mensual + Press Kit Auto posicionan a DMX como **fuente citada oficial** en medios económicos mexicanos (El Economista, El Financiero, Expansión, Obras). Cada cita en prensa = SEO authority + brand trust enterprise + barrera para competidores. Target: 3-5 citas prensa/mes mes 6, 15-20/mes mes 18.
+
+**Vector 2 — Moat viral freemium consumer.** LifePath Match + Stickers & Badges + DMX Wrapped + Top Movers públicos + Widget Embebible gratis convierten DMX en habit social. Playbook inspirado en Strava Segments (badges viralizaron ciclismo), Spotify Wrapped (anual sticky), Robinhood (mobile-first consumer), Yelp (review network effect). Target acquisition: 50K MAU mes 12 via orgánico social + SEO long-tail.
+
+**Vector 3 — Moat enterprise B2B API-first.** Property API + Livability API + Risk Score API + Time Machine API + Climate Twin consumibles por bancos, aseguradoras, fondos, gobierno. Developer Portal + npm SDK + webhooks + OAuth + SLA construyen **protocol play** — cuantos más sistemas dependen de DMX APIs, harder to dislodge (same moat que Stripe, Plaid, Twilio). Target: 10 Enterprise contracts firmados mes 18 ($5M-$10M MXN ARR).
+
+**Regla de oro GTM DMX:** cada producto consumer gratis alimenta data signal enterprise, y cada artefacto enterprise (Scorecard, índices) genera PR consumer. Loop auto-reforzante.
+
+---
+
+## Matriz Persona x Canal (recomendación por celda)
+
+**Leyenda:** ✅ Primario · 🟡 Secundario · ⚪ Complementario · ❌ No aplicable
+
+| Persona | LinkedIn B2B | Google Ads zona | Instagram/TikTok | Prensa económica | AMPI + asociaciones | CNBV + banking | Newsletter | Partnerships estratégicos |
+|---|---|---|---|---|---|---|---|---|
+| **1 Developer** | ✅ | 🟡 | ⚪ | 🟡 | ✅ | ⚪ | ✅ | ✅ (Vinte/ARA/Consorcio) |
+| **2 Asesor Inmobiliario** | 🟡 | ✅ | 🟡 | ⚪ | ✅ | ❌ | ✅ | ✅ (RE/MAX/Coldwell/KW) |
+| **3 Master Broker** | ✅ | 🟡 | ⚪ | 🟡 | ✅ | ⚪ | ✅ | ✅ (franchises inmobiliarias) |
+| **4 Comprador Final** | ⚪ | ✅ | ✅ | 🟡 (referencial) | ⚪ | ❌ | 🟡 | 🟡 (bancos cross-sell) |
+| **5 Inversor Retail** | ✅ | 🟡 | 🟡 | ✅ | ⚪ | ⚪ | ✅ | 🟡 (wealth advisors) |
+| **6 Inversor Institucional (FIBRA/fondos)** | ✅ | ❌ | ❌ | ✅ | 🟡 | ✅ | ✅ | ✅ (CBRE/JLL/Cushman/BBVA Research) |
+| **7 Banco/Aseguradora** | ✅ | ❌ | ❌ | ✅ | ⚪ | ✅ | 🟡 | ✅ (BBVA/Banorte/Santander/GNP/MetLife) |
+| **8 Gobierno/Prensa** | ✅ | ❌ | ⚪ | ✅ | 🟡 | 🟡 | ✅ | ✅ (SEDATU/SEDUVI/ONU-Habitat/IMPLAN) |
+| **9 Academia/Investigador** | ✅ | ❌ | ❌ | 🟡 | ⚪ | ⚪ | ✅ | ✅ (ITAM/Tec/UNAM/El Colegio Mx) |
+
+---
+
+## Canales por producto FASE 11 XL
+
+### Producto 10.1 — DMX Momentum Index
+- **Canal primario:** Prensa económica (El Economista lanzamiento mensual primer martes) + LinkedIn Ads B2B institucional.
+- **Canal secundario:** Newsletter mensual DMX-MOM suscriptores + webinars trimestrales para fondos.
+- **Pricing gating:** free (dashboard público) -> $2,500 USD/mes Pro Data -> $75K-$250K USD/año Enterprise.
+- **KPI adquisición:** 3 citas prensa/mes mes 3; 10 Pro Data clientes mes 6; 2 Enterprise Licenses mes 12.
+- **Pitch:** "Momentum Index de DMX: el único indicador mensual publicado que mide la aceleración real de cada colonia mexicana. Ya citado por El Economista. License para tu equipo research."
+
+### Producto 10.2 — DMX Livability API
+- **Canal primario:** Developer Portal + npm SDK + integraciones Vercel/Algolia marketplace.
+- **Canal secundario:** LinkedIn B2B developer relations + conferencias tech (Platzi Conf, Nerdearla).
+- **Pricing gating:** Free 1K calls/mes -> $0.05-$0.25/call Pro -> $60K-$180K USD/año Enterprise.
+- **KPI:** 500 developers registered mes 6; 50 paying mes 12; 5 Enterprise mes 18.
+- **Pitch:** "WalkScore existe para US. Livability API existe para MX y LATAM — integralo en tu portal en 10 minutos."
+
+### Producto 10.3 — DMX Risk Score API (aseguradoras)
+- **Canal primario:** AMIS (Asociación Mexicana Instituciones Seguros) conferencias + direct sales enterprise.
+- **Canal secundario:** Reaseguradoras (Swiss Re MX, Munich Re) co-marketing.
+- **Pricing gating:** $15K USD/mes pilot -> $0.20-$2/call Pro API -> $500K-$2M MXN/año Enterprise.
+- **KPI:** 2 pilots firmados mes 6; 1 Enterprise contract mes 12.
+- **Pitch:** "Jupiter Intelligence no cubre riesgos MX. DMX Risk Score sí: sísmico Línea 12, crisis hídrica Iztapalapa, inundación. 10x más barato."
+
+### Producto 10.4 — DMX Trend Genome Alerts
+- **Canal primario:** Direct sales B2B premium + content marketing whitepapers detección trends.
+- **Canal secundario:** Eventos inversión alternativa (REIT Mexico Summit, ULI).
+- **Pricing gating:** $2K/$5K/$10K USD/mes tiers.
+- **KPI:** 3 design partners firmados mes 3 (discount); 15 paying mes 9.
+- **Pitch:** "Detectamos shifts demográficos y culturales en colonias MX 6-12 meses antes que el mercado los vea. Feed WhatsApp + webhook."
+
+### Producto 10.5 — DMX Widget Embebible
+- **Canal primario:** Adopción viral via AMPI broker membership + content marketing "embed tu score gratis".
+- **Canal secundario:** Developer Portal + SEO long-tail ("widget score colonia MX").
+- **Pricing gating:** Free branded -> $49 USD/mes Pro sin branding -> $2K USD/mes Enterprise whitelabel.
+- **KPI:** 1,000 embeds activos mes 6; 100 Pro paying mes 12; 5 Enterprise mes 18.
+- **Pitch:** "Ponle score de colonia a tus listings Inmuebles24 en 30 segundos. Gratis."
+
+### Producto 10.6 — DMX Scorecard Nacional
+- **Canal primario:** Conferencia prensa Q1 anual + co-launch El Economista/Financiero/Expansión.
+- **Canal secundario:** Partnerships CBRE/JLL research teams.
+- **Pricing gating:** Free página pública -> $25K USD/año Pro License -> $100K-$300K USD/año Enterprise.
+- **KPI:** 50+ citas prensa Q1 launch; 10 Pro License firmadas Q2; 3 Enterprise Q3.
+- **Pitch:** "El reporte anual que citan bancos y gobierno. Primera edición Q1 2027. Pre-order Enterprise License 20% descuento."
+
+### Producto 10.7 — DMX Time Machine API
+- **Canal primario:** Partnerships académicas ITAM/Tec/UNAM + Developer Portal.
+- **Canal secundario:** Conferencias research (IDEI CIDE, El Colegio Mx).
+- **Pricing gating:** Free 12m 1K calls -> $0.10-$0.50/call Pro -> $120K-$300K MXN/año Enterprise.
+- **KPI:** 10 research partnerships mes 12; 20 Pro paying mes 18.
+- **Pitch:** "36 meses de histórico zona-level MX via API. Backtest tu thesis antes de invertir."
+
+### Producto 10.8 — DMX Genoma Similarity API
+- **Canal primario:** Instagram/TikTok virality ("dame tu Roma Norte versión barata") + LifePath public web.
+- **Canal secundario:** AMPI broker integraciones + Developer Portal.
+- **Pricing gating:** Free 10 queries/mes -> $99 USD/mes Pro -> $50K-$200K MXN/año Enterprise.
+- **KPI:** 10K free queries mes 3; 500 Pro paying mes 12.
+- **Pitch:** "Buscar casa por vibe, no por filtros. Roma Norte pero más barato? Ahora es una query."
+
+### Producto 10.9 — DMX Ghost Zones Report
+- **Canal primario:** LinkedIn Ads inversionistas + content marketing case studies ("encontramos 3 Ghost Zones en 2025").
+- **Canal secundario:** Family office referral program + wealth advisor partnerships.
+- **Pricing gating:** $299/$999 USD/mes Pro/Premium -> $50K USD/año Enterprise.
+- **KPI:** 50 Pro subscribers mes 6; 15 Premium mes 12; 3 Enterprise mes 18.
+- **Pitch:** "Encuentra el próximo Roma Norte 12-24 meses antes que el mercado. Premium te da early access 30 días."
+
+### Producto 10.10 — DMX Pulse Score B2B
+- **Canal primario:** AMPI broker integraciones + partnerships EasyBroker/Tokko CRM.
+- **Canal secundario:** LinkedIn broker outreach + webinars training.
+- **Pricing gating:** $599 MXN/mes Pro -> API volume -> $5K MXN/mes Agency.
+- **KPI:** 200 brokers paying mes 6; 10 Agency contracts mes 12.
+- **Pitch:** "Signos vitales de cada colonia actualizados diario. Alerta cuando tu zona objetivo cambia."
+
+### Producto 10.11 — DMX Migration Flow Dataset
+- **Canal primario:** SEDATU/INEGI partnerships + conferencias ONU-Habitat + academic outreach.
+- **Canal secundario:** Developer Portal academic free tier + research grants.
+- **Pricing gating:** Academic free 1K calls -> $0.10-$0.30/call Pro -> $200K-$500K MXN/año Enterprise -> $1M-$3M MXN/año Gov.
+- **KPI:** 5 academic partnerships mes 12; 3 Enterprise contracts mes 18; 1 Gov contract mes 24.
+- **Pitch:** "Primer dataset continuo migración intra-CDMX anonymized. Input para planeación urbana data-driven."
+
+### Producto 10.12 — DMX Press Kit Auto
+- **Canal primario:** Direct outreach editores medios económicos (El Economista, Financiero, Expansión, Obras, Inmobiliare).
+- **Canal secundario:** SEO /press-kit + AMPI prensa relations.
+- **Pricing gating:** Free básico -> $499 USD/mes Pro Press -> Partner revshare exclusive.
+- **KPI:** 15 Pro Press subscribers mes 6; 3 Partner revshare contracts mes 12.
+- **Pitch:** "Top 10 zonas momentum + gráficas ready-to-publish + quotes DMX. Todo el mes 5 del día 1. Embargo 24h exclusivo Pro."
+
+### Producto 10.13 — DMX Stickers & Badges
+- **Canal primario:** Instagram/TikTok organic virality + share buttons en /atlas pages.
+- **Canal secundario:** AMPI asesores toolkit + colegios valuadores membresía.
+- **Pricing gating:** 100% gratis (viral growth lever).
+- **KPI:** 10K descargas stickers mes 6; 50K MAU /badges mes 12; 500K impressions orgánicas redes mes 18.
+- **Pitch:** "Mi zona top momentum 2026. Descarga gratis + comparte."
+
+### Producto 10.14 — DMX LifePath Match
+- **Canal primario:** Instagram/TikTok virality ("hicimos el test LifeMatch") + Google Ads "casa perfecta CDMX".
+- **Canal secundario:** Partnerships developers onboarding compradores + referral incentives.
+- **Pricing gating:** Free match básico -> $199 MXN/mes Pro -> $499 MXN/mes Premium multiplayer.
+- **KPI:** 50K free users mes 6; 5K Pro paying mes 12; 500 Premium mes 18.
+- **Pitch:** "Respondes 8 preguntas sobre tu vida. Te decimos qué colonia te queda. Gratis."
+
+### Producto 10.15 — DMX Climate Twin Report
+- **Canal primario:** CNBV (banking regulator climate disclosure) + AMIS aseguradoras.
+- **Canal secundario:** Climate finance summits + ESG reporting partners.
+- **Pricing gating:** $499 USD/reporte Pro -> API volume -> $500K-$1.5M MXN/año Enterprise.
+- **KPI:** 50 Pro Reports vendidos mes 6; 2 Enterprise contracts mes 12.
+- **Pitch:** "Jupiter Intelligence 10x precio solo cubre US. Climate Twin MX: zona-level, sísmico + hídrico, para Basilea IV."
+
+---
+
+## Calendario editorial + PR (content marketing H1)
+
+### Ritmo mensual
+- **Día 1-3:** Newsletter mensual DMX-MOM top movers + insights + co-distribución prensa.
+- **Día 5-10:** Blog post 1 deep dive índice del mes (ej. "Por qué Atlampa subió 23 pts DMX-MOM").
+- **Día 15:** Blog post 2 story zona emergente (caso de uso Ghost Zones).
+- **Día 20-25:** Webinar trimestral con analista invitado (CBRE/JLL/BBVA Research).
+- **Día 28-30:** Press Kit Auto distribución + mensual editor outreach.
+
+### Ritmo trimestral
+- **Q1 (Enero-Marzo):** Lanzamiento Scorecard Nacional anual + conferencia prensa CDMX. Pitch "Year in Review MX real estate by DMX".
+- **Q2 (Abril-Junio):** Newsletter trimestral Scorecard updates + webinar deep dive institucional.
+- **Q3 (Julio-Septiembre):** Climate Twin Report release anual + CNBV webinar compliance.
+- **Q4 (Octubre-Diciembre):** DMX Wrapped personal anual + Top Zones 2026 + teaser Scorecard 2027.
+
+### Ritmo anual
+- **Annual Report** formato pixel-perfect co-distribuido partners.
+- **DMX Summit** CDMX (evento propio año 2+) con keynotes institucionales.
+
+---
+
+## Referrals y partnerships estratégicos
+
+### Franchisias asesores inmobiliarios -> Master Broker tier
+- **RE/MAX México** — programa co-branding Widget Embebible + Stickers toolkit onboarding asesores nuevos.
+- **Coldwell Banker México** — partnership Lead Engine + Zone Radar bundle exclusivo franchisees.
+- **Keller Williams México** — training módulo DMX en KW University MX + referral 20% revshare.
+- **Century 21 México** — widget distribución gratuita nationwide (growth hack).
+
+### Developers -> Developer tier
+- **Vinte Viviendas** — pilot Ghost Zones Report para land banking Norte MX.
+- **ARA** — integración Launch Intelligence en 10 proyectos activos pricing autopilot revshare.
+- **Consorcio ARA** — Scorecard Nacional Enterprise License + Climate Twin stress-test portfolio.
+- **Grupo Sadasi, Javer, Ruba** — Developer Bundle Pro + API integration para CRM interno.
+
+### Bancos -> Enterprise tier
+- **BBVA Research** — co-branding Scorecard Nacional anual (authority exchange) + Momentum Index API license.
+- **Banorte** — pilot Livability API + AVM I01 en originación hipotecaria.
+- **Santander México** — Climate Twin stress-test Basilea IV compliance pilot.
+- **Citibanamex** — data lake integration via Property API Enterprise.
+- **Infonavit** — partnership Affordability + Migration Flow Dataset para planeación vivienda.
+
+### Aseguradoras -> Risk Score API vertical
+- **GNP Seguros** — pilot Risk Score API subsegment home insurance CDMX.
+- **MetLife México** — Climate Twin Report integration underwriting.
+- **AXA México** — reaseguradora co-marketing via Swiss Re MX.
+- **Chubb** — API consumption volume tier + co-marketing ESG.
+
+### Institucionales -> Scorecard + Pro Terminal
+- **Fibra Uno** — anchor Enterprise License Scorecard Nacional + Pro Terminal 10 seats.
+- **Fibra Macquarie** — Pro Terminal 5 seats + Time Machine API.
+- **Softec** — co-research partnership (coopetition — compartir authority en Scorecard).
+- **CBRE / JLL México** — joint report trimestral + Pro Terminal institutional seats.
+
+### Gobierno + Academia -> Impact tier
+- **SEDATU** — Migration Flow Dataset Government license + policy simulator pilot.
+- **SEDUVI CDMX** — Urban Impact Analyzer piloto alcaldía Cuauhtémoc.
+- **ONU-Habitat México** — partnership research + ESG reports.
+- **ITAM / Tec de Monterrey / UNAM / El Colegio de México** — Time Machine API academic free + research grants DMX Fellowship.
+
+### Prensa -> Press Kit Auto
+- **El Economista** — Partner Exclusive Scorecard Nacional launch + mensual Momentum.
+- **El Financiero** — Press Kit Pro + Sunday inmobiliario section.
+- **Expansión** — feature ranking trimestral + DMX Wrapped anual spread.
+- **Obras / Inmobiliare** — industry trade Partner Exclusive.
+
+---
+
+## Métricas GTM objetivo H1 (12-24 meses)
+
+### Consumer freemium (Vector 2)
+- **MAU LifePath Match:** 5K mes 3 -> 25K mes 6 -> 100K mes 12 -> 250K mes 24.
+- **MAU /atlas + /explorar-zonas:** 15K mes 6 -> 75K mes 12 -> 200K mes 24.
+- **Stickers descargas:** 10K mes 6 -> 50K mes 12 -> 200K mes 24.
+- **Widget embeds activos:** 500 mes 6 -> 1,500 mes 12 -> 5,000 mes 24.
+- **Newsletter suscriptores:** 2K mes 6 -> 10K mes 12 -> 30K mes 24.
+
+### Pro prosumer (Vector 2-3)
+- **Pro Comprador paying:** 500 mes 12 -> 3K mes 24 ($199 MXN/mes = $600K MXN ARR mes 24).
+- **Pro Broker paying:** 200 mes 12 -> 1K mes 24 ($599-$899 MXN/mes = $10M MXN ARR mes 24).
+- **Pro Inversor paying:** 50 mes 12 -> 300 mes 24 ($299-$999 USD/mes = $3M USD ARR mes 24).
+- **Widget Pro + Momentum Pro Data subscribers:** 100 mes 12 -> 500 mes 24.
+
+### Enterprise B2B (Vector 1+3)
+- **Developer Portal API signups:** 500 mes 12 -> 2K mes 24.
+- **Paying API Pro clients:** 50 mes 12 -> 200 mes 24.
+- **Enterprise contracts firmados:** 3 mes 12 ($3M MXN ARR) -> 10 mes 24 ($10M MXN ARR) -> 25 mes 36 ($30M MXN ARR).
+- **Government contracts:** 0 mes 12 -> 1 mes 24 ($2M MXN ARR).
+
+### Authority + PR (Vector 1)
+- **Citas prensa económica/mes:** 3 mes 6 -> 10 mes 12 -> 25 mes 24.
+- **Scorecard Nacional launch Q1 2027:** 50+ citas iniciales + 10 enterprise licenses Q2 2027.
+- **Conferencias speaking spots:** 5 mes 12 -> 15 mes 24 (AMPI, REIT Summit, AMIS, ULI, CNBV).
+
+### Retention
+- **Consumer retention Pro 6m:** 65% (benchmark SaaS B2C real estate).
+- **Enterprise retention anual:** 90% (benchmark SaaS B2B data/API).
+- **NRR (Net Revenue Retention) Enterprise:** 120% (expansion via upsell tiers).
+
+---
+
+## Multi-país — roadmap expansion H2-H3
+
+**H1 (meses 0-12):** MX primario. Toda la GTM foco CDMX + top-5 ciudades (Monterrey, Guadalajara, Querétaro, Mérida, Puebla).
+
+**H2 (meses 12-24):** Colombia (CO) + Argentina (AR). Replica playbook: Scorecard Nacional adaptado + partnerships bancos locales (Bancolombia CO, Banco Macro AR) + prensa económica local (La República CO, Clarín Eco AR).
+
+**H3 (meses 24-36):** Brasil (BR) + Chile (CL). Brasil es mercado 3x MX, requiere equipo local. Chile es test bed institucional (AFPs, mercado maduro).
+
+**Mantener regla:** product-market-fit MX antes de expand. No lanzar CO/AR hasta 25+ Enterprise MX firmados.
+
+---
+
+## Cross-references
+
+- `docs/08_PRODUCTOS/FEATURE_INVENTORY.md` — capabilities FI-001 a FI-075
+- `docs/08_PRODUCTOS/PRODUCT_CATALOG.md` — 15 productos FASE 11 XL empaquetados
+- `docs/08_PRODUCTOS/PERSONA_MAP.md` — 9 personas + JTBD FASE 11 XL
+- `docs/08_PRODUCTOS/COMPETITIVE_POSITIONING.md` — 6 moats únicos categoría nueva
+- `docs/07_GAME_CHANGERS/07.4_MOAT_STRATEGY.md` — estrategia moat detallada
+
+**Autor:** Claude Opus 4.7 (FASE 11 XL product packaging) | **Fecha:** 2026-04-21 | **Status:** Draft H1 — founder review + quarterly recalibration trimestral

@@ -437,6 +437,84 @@ Mapeo directo contexto §23.1 sub-etapa 7.10: 9 herramientas con datos reales.
 - [ ] Ruta renderiza sin errores.
 - [ ] Fase 16 luego popula full funcionalidad en mismo path.
 
+### BLOQUE 15.X — Dev Moonshots: Simulador + Radar Trend Genome + Reporte Comité + Pipeline Tracker + API Enterprise
+
+> **Contexto:** Extensión del Portal Desarrollador con capacidades B2B enterprise apalancando FASE 11 XL (seeds implementados). Este bloque posiciona DMX como herramienta de feasibility + intel competitivo nivel Cherre/CoStar para devs mexicanos.
+> **Dependencias:** FASE 11 XL (15 índices DMX + Trend Genome + Scorecard + seeds implementados), FASE 12 (N5 + Mapa 12 capas), BLOQUE 15.E Analytics IE (7 tabs).
+
+#### MÓDULO 15.X.1 — Simulador de Proyecto (eje dev)
+
+**Pasos:**
+- `[15.X.1.1]` Ruta `/developer/simulador-proyecto` con wizard 4 pasos:
+  - Step 1: Ubicación (pegar link Catastro, polígono manual en Mapbox o colonia search).
+  - Step 2: Tipología (residencial medio / alto / mixed-use / comercial / oficina) + m2 totales + # unidades + mix prototipos.
+  - Step 3: Pricing target + esquema pago + timeline.
+  - Step 4: Review inputs + botón "Simular".
+- `[15.X.1.2]` Motor `developer.simulateProject` consume los **15 índices DMX** (FASE 11 XL seeds implementados) + scores zona + B01/B03/B04/B08/B12 calculators + comparables zona.
+- `[15.X.1.3]` Output `{ absorcion_esperada_months, revenue_total_mxn, cost_total_mxn, irr_estimate, npv_estimate, break_even_month, sensitivity_analysis (±10% precio, ±20% absorcion), comparable_projects[], risk_flags[], pmf_score }`.
+- `[15.X.1.4]` Export PDF 8-12 páginas con narrativa AI + charts + comparables.
+- `[15.X.1.5]` Feature gated Pro+.
+
+**Criterio de done del módulo:**
+- [ ] Simulación completa en <30s.
+- [ ] Numeros coherentes con B03/B08/B12.
+
+#### MÓDULO 15.X.2 — Radar Trend Genome B2B
+
+**Pasos:**
+- `[15.X.2.1]` Ruta `/developer/radar-trend-genome` con suscripción push por dev a alertas específicas sobre zonas de interés (`zone_alert_subscriptions` FASE 11 XL).
+- `[15.X.2.2]` Tipos de alerta: nuevo proyecto detectado en zona watchlist, price movement competidor, pulse score spike, influencer wave detectada, alpha alert Trend Genome.
+- `[15.X.2.3]` Delivery multi-canal: in-app + email + WhatsApp + webhook (FASE 22).
+- `[15.X.2.4]` Dashboard con feed cronológico de alertas + filtros severity + "Muted zones" para evitar ruido.
+- `[15.X.2.5]` Feature gated Pro+ con límites por tier (Starter 5 suscripciones, Pro 50, Enterprise ilimitadas).
+
+**Criterio de done del módulo:**
+- [ ] Alerta test dispatch en <60s.
+- [ ] Webhook entrega con HMAC válido.
+
+#### MÓDULO 15.X.3 — Reporte para Comité (auto-gen PDF 15-20 pág)
+
+**Pasos:**
+- `[15.X.3.1]` Ruta `/developer/reporte-comite` permite al dev generar un "Investment Committee Memo" auto-generado con thesis completa de un proyecto (nuevo lanzamiento o feasibility evaluación).
+- `[15.X.3.2]` Secciones: Executive Summary, Zone Deep Dive (15 índices DMX detallados), Competitive Landscape (B07 full), Demand Analysis (B01 + PMF B04), Pricing Strategy (B03), Absorption Forecast (B08), Financial Projections (simulador 15.X.1), Risk Matrix, Scenario Analysis, Recommendations.
+- `[15.X.3.3]` AI redacta cada sección con citations cascade FASE 12.B.9. Claude Sonnet orchestrator + Haiku para subsections.
+- `[15.X.3.4]` Template branding dev (logo + colores). Export PDF 15-20 páginas + versión Word editable.
+- `[15.X.3.5]` Cost track $3-8 USD per report (LLM tokens); feature gated Pro+ con quota (Pro 5/mo, Enterprise ilimitado).
+
+**Criterio de done del módulo:**
+- [ ] Reporte completo en <3min.
+- [ ] ≥30 citations verificables.
+
+#### MÓDULO 15.X.4 — Pipeline Tracker (proyectos dev vs mercado)
+
+**Pasos:**
+- `[15.X.4.1]` Ruta `/developer/pipeline-tracker` con tabla de proyectos del dev (propios y pipeline) comparados vs. mercado zona.
+- `[15.X.4.2]` Columnas: Proyecto, Zona, Status (presales/construction/pre-delivery/delivered), Avance obra %, Absorción actual vs benchmark, Precio/m2 vs zona median, Delta sobre forecast, DMX Score, Trust H05.
+- `[15.X.4.3]` Filtros: zona, status, tipología.
+- `[15.X.4.4]` Alertas embebidas: "Tu proyecto X en Del Valle está 2.1x bajo benchmark absorción — revisar pricing". Integra con Dynamic Pricing (15.E.8).
+- `[15.X.4.5]` Export CSV/Excel para reportes internos.
+
+**Criterio de done del módulo:**
+- [ ] Tabla render con 20+ proyectos en <1.5s.
+- [ ] Comparaciones vs mercado actualizadas daily.
+
+#### MÓDULO 15.X.5 — API Enterprise REST consumo externo
+
+**Pasos:**
+- `[15.X.5.1]` Dev Enterprise tiene acceso a API REST propia `api.desarrollosmx.com/v1/developer/*` para integrar scores DMX + índices + alertas en sistemas propios del dev (ERP, BI interno, CRM customizado).
+- `[15.X.5.2]` Endpoints key:
+  - `GET /v1/developer/scores/:zone_id` — 15 índices + scores completos zona.
+  - `GET /v1/developer/pipeline` — pipeline tracker data JSON.
+  - `POST /v1/developer/simulate` — simulador project via API.
+  - `GET /v1/developer/alerts` — alertas activas watchlist.
+- `[15.X.5.3]` API keys gestionadas en `/developer/settings/api-keys` (reusa infra FASE 23 API externa — prefix `dmx_ent_`).
+- `[15.X.5.4]` Rate limits Enterprise: 100K requests/day, bulk support.
+- `[15.X.5.5]` SLA 99.9% + soporte dedicado + OpenAPI spec `api.desarrollosmx.com/v1/developer/openapi.json`.
+
+**Criterio de done del módulo:**
+- [ ] 4 endpoints operativos con auth + rate limit.
+- [ ] OpenAPI spec válido.
+
 ### BLOQUE 15.H — Planes Dev + Feature gating matriz
 
 #### MÓDULO 15.H.1 — Seed planes + features

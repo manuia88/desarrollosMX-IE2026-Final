@@ -1,15 +1,18 @@
 {
   "generated_at": "2026-04-21T04:17:28.535Z",
-  "version": 1,
-  "count": 118,
+  "version": 2,
+  "fase_11_xl_expansion": true,
+  "count": 132,
   "by_level": {
     "0": 32,
     "1": 18,
     "2": 15,
     "3": 12,
     "4": 7,
-    "5": 34
+    "5": 48
   },
+  "indices_total": 15,
+  "signals_derived_total": 6,
   "entries": [
     {
       "score_id": "F01",
@@ -2401,6 +2404,366 @@
       "country_codes": [
         "MX"
       ]
+    },
+    {
+      "score_id": "DMX-FAM",
+      "name": "Family Index",
+      "level": 5,
+      "category": "agregado",
+      "tier": 1,
+      "dependencies": [
+        "H01",
+        "H02",
+        "N05",
+        "N08",
+        "F01",
+        "N06"
+      ],
+      "triggers_cascade": [],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#indices-dmx-nivel-producto-licenciable--15-indices-fase-11-xl",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-fam.ts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "DMX-YNG",
+      "name": "Young Professional Index",
+      "level": 5,
+      "category": "agregado",
+      "tier": 2,
+      "dependencies": [
+        "N09",
+        "F02",
+        "N08",
+        "N01"
+      ],
+      "triggers_cascade": [
+        "influencer_heat_updated",
+        "pulse_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#indices-dmx-nivel-producto-licenciable--15-indices-fase-11-xl",
+      "confidence_sources": [
+        "composite",
+        "influencer_heat",
+        "pulse"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-yng.ts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "DMX-GRN",
+      "name": "Green Index",
+      "level": 5,
+      "category": "agregado",
+      "tier": 2,
+      "dependencies": [
+        "F04",
+        "N07",
+        "N08",
+        "F02"
+      ],
+      "triggers_cascade": [
+        "climate_twin_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#indices-dmx-nivel-producto-licenciable--15-indices-fase-11-xl",
+      "confidence_sources": [
+        "composite",
+        "climate_twin"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-grn.ts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "DMX-STR",
+      "name": "STR Profitability Index",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [
+        "D07"
+      ],
+      "triggers_cascade": [
+        "str_snapshots_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#indices-dmx-nivel-producto-licenciable--15-indices-fase-11-xl",
+      "confidence_sources": [
+        "composite",
+        "str_market_monthly_aggregates"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-str.ts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "DMX-INV",
+      "name": "Investor Index",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [
+        "DMX-ICO",
+        "N11",
+        "DMX-MOM",
+        "F09",
+        "A04"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#indices-dmx-nivel-producto-licenciable--15-indices-fase-11-xl",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-inv.ts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "DMX-DEV",
+      "name": "Developer Index",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [
+        "DMX-IAB",
+        "D03",
+        "B01",
+        "N11",
+        "F06"
+      ],
+      "triggers_cascade": [
+        "permits_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#indices-dmx-nivel-producto-licenciable--15-indices-fase-11-xl",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-dev.ts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "DMX-GNT",
+      "name": "Gentrification Intensity",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [
+        "F10",
+        "N03"
+      ],
+      "triggers_cascade": [
+        "migration_flow_updated",
+        "influencer_heat_updated",
+        "pulse_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#indices-dmx-nivel-producto-licenciable--15-indices-fase-11-xl",
+      "confidence_sources": [
+        "composite",
+        "migration_flow",
+        "influencer_heat"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-gnt.ts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "DMX-STA",
+      "name": "Stability Index",
+      "level": 5,
+      "category": "agregado",
+      "tier": 3,
+      "dependencies": [
+        "N11",
+        "A04",
+        "F10",
+        "F01"
+      ],
+      "triggers_cascade": [
+        "macro_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#indices-dmx-nivel-producto-licenciable--15-indices-fase-11-xl",
+      "confidence_sources": [
+        "composite"
+      ],
+      "calculator_path": "features/scores/lib/calculators/indices/dmx-sta.ts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "causal_v1",
+      "name": "Causal Engine (LLM narrative + citations)",
+      "level": 5,
+      "category": "signal",
+      "tier": 3,
+      "dependencies": [
+        "*"
+      ],
+      "triggers_cascade": [
+        "score_changed"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#causal-engine--causal_v1",
+      "confidence_sources": [
+        "llm",
+        "lineage"
+      ],
+      "calculator_path": "features/causal/lib/generate-causal-explanation.ts",
+      "persist_table": "causal_explanations",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "pulse_v1",
+      "name": "Pulse Score",
+      "level": 5,
+      "category": "signal",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [
+        "denue_updated",
+        "permits_updated",
+        "events_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#pulse-score--pulse_v1",
+      "confidence_sources": [
+        "denue",
+        "permits",
+        "popular_times",
+        "calls_911",
+        "events"
+      ],
+      "calculator_path": "features/pulse/lib/compute-pulse-score.ts",
+      "persist_table": "zone_pulse_scores",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "mig_flow_v1",
+      "name": "Migration Flow Velocity",
+      "level": 5,
+      "category": "signal",
+      "tier": 2,
+      "dependencies": [],
+      "triggers_cascade": [
+        "migration_flow_ingested"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#migration-flow-velocity--mig_flow_v1",
+      "confidence_sources": [
+        "enadid",
+        "rpp",
+        "ine",
+        "linkedin"
+      ],
+      "calculator_path": "features/migration-flow/lib/compute-migration-velocity.ts",
+      "persist_table": "zone_migration_flows",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "trend_genome_v1",
+      "name": "Trend Genome Alpha",
+      "level": 5,
+      "category": "signal",
+      "tier": 3,
+      "dependencies": [
+        "pulse_v1"
+      ],
+      "triggers_cascade": [
+        "pulse_updated",
+        "influencer_heat_updated",
+        "search_trends_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#trend-genome-alpha--trend_genome_v1",
+      "confidence_sources": [
+        "influencer_heat",
+        "pulse",
+        "search_trends",
+        "permits",
+        "press"
+      ],
+      "calculator_path": "features/trend-genome/lib/compute-alpha.ts",
+      "persist_table": "zone_alpha_alerts",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "climate_twin_v1",
+      "name": "Climate Twin Projection",
+      "level": 5,
+      "category": "signal",
+      "tier": 1,
+      "dependencies": [],
+      "triggers_cascade": [
+        "climate_data_ingested"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#climate-twin-projection--climate_twin_v1",
+      "confidence_sources": [
+        "noaa",
+        "conagua",
+        "atlas_riesgos"
+      ],
+      "calculator_path": "features/climate-twin/lib/project-climate.ts",
+      "persist_table": "climate_twin_projections",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
+    },
+    {
+      "score_id": "ghost_v1",
+      "name": "Ghost Score",
+      "level": 5,
+      "category": "signal",
+      "tier": 2,
+      "dependencies": [
+        "G01",
+        "E01"
+      ],
+      "triggers_cascade": [
+        "score_changed",
+        "search_trends_updated"
+      ],
+      "formula_doc": "docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#ghost-score--ghost_v1",
+      "confidence_sources": [
+        "composite",
+        "search_trends",
+        "press"
+      ],
+      "calculator_path": "features/ghost-zones/lib/compute-ghost-score.ts",
+      "persist_table": "ghost_zones_ranking",
+      "country_codes": [
+        "MX"
+      ],
+      "fase": "11_XL"
     }
   ]
 }

@@ -287,3 +287,114 @@ DMX NO compite como "otro portal" (Inmuebles24/ML) ni como "otra consultora" (Br
 - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-026_GLOBAL_PROPTECH_BENCHMARKS.md`
 
 **Autor:** PM Sr Dev | **Fecha:** 2026-04-20 | **Status:** Draft inicial — update cada cierre fase + trimestral review pricing
+
+---
+
+# 🚀 FASE 11 XL — Matriz competitiva expandida (2026-04-21)
+
+> **Contexto:** FASE 11 XL introduce 15 productos nuevos + ~75 capabilities que crean 6+ diferenciadores de **categoría nueva** (no solo "mejor que X", sino "nadie más tiene esto").
+
+## Matriz diferenciadores únicos DMX vs mercado
+
+| Feature FASE 11 XL | DMX | Tinsa | Softec | Datoz | Metric Analysis | HouseCanary (US) | CoStar (US) | Zillow/Redfin |
+|---|---|---|---|---|---|---|---|---|
+| **Trend Genome Alerts** (shift cultural+demográfico zona-level) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Scorecard Nacional publicado anual** | ✅ | ❌ | Parcial | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Causal Engine** explicativo zona | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Genoma Similarity** (búsqueda por vibe) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | Parcial (US) |
+| **Widget Embebible gratis** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | WalkScore (US) |
+| **Migration Flow Dataset** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **LifePath Match** (etapa vida + vibe) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Ghost Zones Report** (pre-emergentes) | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Climate Twin Report** zona-level MX | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | Parcial | ❌ |
+| **Press Kit Auto** medios | ✅ | ❌ | Parcial | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Stickers & Badges** social viral | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Pulse Score B2B signos vitales** | ✅ | ❌ | ❌ | ❌ | Parcial | ❌ | ❌ | ❌ |
+| **Time Machine API 36m histórico zona** | ✅ | Parcial | Parcial | ❌ | ❌ | ✅ (US) | ✅ (US) | Zillow Research (US) |
+| **Top Movers Daily público** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | Parcial (US) |
+| **Atlas colonia + /metodologia transparente** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+
+**Observación:** de los 15 diferenciadores listados, **DMX es único mundial en 8** y **único MX en los 15**. Competidores US (Zillow, HouseCanary) tienen versiones US-only que no cubren LATAM.
+
+---
+
+## 🥇 Moats únicos FASE 11 XL — 6 diferenciadores de categoría nueva
+
+### Moat 1 — **Trend Genome** (category creator)
+**Qué es:** detección algorítmica de shifts culturales/demográficos zona-level en tiempo real — cuando Condesa está "gentrificándose hacia familias jóvenes" antes que los humanos lo noten.
+**Por qué nadie lo tiene:** requiere 118 scores jerárquicos + embeddings + histórico continuo + pipeline DENUE/INEGI/listings integrado. Rebuilding tomaría 3+ años para cualquier competidor.
+**Moat sustentable:** data temporal acumulándose + arquitectura propietaria + primer mover branding "Trend Genome" como nombre de categoría.
+
+### Moat 2 — **Scorecard Nacional anual publicado** (authority moat)
+**Qué es:** reporte anual Q1 con ranking zonas MX por 15 índices DMX, publicado en El Economista + El Financiero + Expansión. Convierte DMX en fuente oficial citada en decks institucionales.
+**Por qué nadie lo tiene:** nadie combina cobertura zona-level + multiplicidad índices + capacidad anual editorial + PR amplification.
+**Moat sustentable:** una vez que medios citan DMX como fuente primaria 3+ años seguidos, imposible desbancar sin replicar 15 índices + 36m histórico.
+
+### Moat 3 — **Causal Engine** explicativo
+**Qué es:** motor que no solo devuelve "Roma Norte tiene score 89", sino explica "porque +23% nuevas cafeterías especialidad Q3 2025, +15% movilidad peatonal vs baseline, -18% crímenes violentos 12m".
+**Por qué nadie lo tiene:** requiere arquitectura de atribución causal sobre cascadas N0→N5 + integración con LIME explainable AI + scoring layers.
+**Moat sustentable:** transparencia y explicabilidad = moat contra regulación (Ley Reforma IA MX H2) + moat de confianza usuarios.
+
+### Moat 4 — **Genoma Similarity API** (búsqueda por vibe — new search paradigm)
+**Qué es:** "dame zonas similares a Roma Norte pero más baratas" via vector embeddings de 118 scores por zona. Nuevo paradigma search vs filtros lógicos tradicionales.
+**Por qué nadie lo tiene:** requiere embeddings de scores + pipeline de vectores actualizado diariamente + UX natural language query.
+**Moat sustentable:** primer search engine vibe-based LATAM = claim categoría antes que Zillow/Idealista expand.
+
+### Moat 5 — **Widget Embebible freemium** (protocol play)
+**Qué es:** widget JavaScript embebible gratis en cualquier portal MX. Cada embed genera backlink SEO + data signal + brand exposure.
+**Por qué nadie lo tiene:** requiere infraestructura embed stable + branding incentive loop + gratuidad estratégica.
+**Moat sustentable:** network effect — cuantos más embeds activos, más data signal + más brand awareness + harder to dislodge. Same moat que Stripe Elements o Disqus comments.
+
+### Moat 6 — **Social virality via Stickers + DMX Wrapped + LifePath** (Spotify Wrapped play)
+**Qué es:** biblioteca stickers/badges gratis + Wrapped anual personalizado + LifePath match compartible. Mecanismo user acquisition gratis via redes sociales.
+**Por qué nadie lo tiene:** real estate MX es B2B tradicional — nadie piensa en viralización consumer orgánica. DMX primero en aplicar playbook Strava Segments + Spotify Wrapped + Robinhood a inmobiliario.
+**Moat sustentable:** una vez que "compartir mi LifeMatch" se vuelve comportamiento social normal (12-18 meses), category-defining behavior attributable a DMX.
+
+---
+
+## Honestidad: qué NO tiene DMX que competidores sí
+
+**Mantenemos rigor:**
+
+| Aspecto | Competidor lo tiene | DMX no (todavía) | Remedio plan |
+|---|---|---|---|
+| **Marca establecida 45+ años** | Tinsa, Softec, CBRE | Startup 2026 | Compensar con superior UX + content authority + Scorecard Nacional PR |
+| **EAA certification AVM** | Tinsa ya certificada | DMX H2 path | Apply H2 con Colegio Valuadores MX |
+| **Knowledge graph CRE completo** | Cherre (US) | DMX H2 CF6 | Build zone-level first, expand property-level H2 |
+| **Commercial segment depth** | Datoz, CoStar, Cushman | DMX residential-first | Commercial tier L-64 H2 |
+| **Institutional brand recognition** | Bloomberg Terminal 45 años | DMX 0 años | Early-adopter NPS + word-of-mouth |
+| **Foot traffic panel propio** | Placer.ai global | DMX no (usa proxies) | Partnership o CF4 H2 custom |
+
+---
+
+## Positioning actualizado maestro FASE 11 XL
+
+**"DMX no es portal, no es consultora, no es AVM — DMX es la infraestructura de Spatial Decision Intelligence para LATAM. Primer y único que combina: 15 índices publicables + Scorecard Nacional anual + Causal Engine explicable + Trend Genome detector + Genoma Similarity search + Widget Embebible viral + LifePath Match consumer. Bloomberg Terminal + Zillow + Strava Segments + Spotify Wrapped — pero para real estate MX y con pricing 10-50x inferior."**
+
+### Elevator pitches FASE 11 XL por persona
+
+- **Developer:** "Ghost Zones + Momentum + Climate Twin = identificas land banking 2 años antes de competencia, con evidencia ESG para tus LP."
+- **Broker:** "Widget DMX + Stickers + Alert Radar = diferenciación vs otros asesores por $49 USD/mes — lo mismo que un café diario."
+- **Comprador:** "LifePath Match: decimos qué colonia te queda según tu vida. Gratis. Compártelo con tu pareja."
+- **Inversor:** "Trend Genome Alerts te dice shifts demográficos ANTES que el mercado. $2K USD/mes vs $15K CoStar."
+- **Institucional:** "Licencia Scorecard Nacional + Momentum Index + Time Machine API. Todo MX. Pricing LATAM-sensible."
+- **Aseguradora:** "Climate Twin Report zona-level MX. 10x más barato que Jupiter Intelligence + más granular."
+- **Banco:** "Livability + Momentum + Climate Twin API combo para Basilea IV climate disclosure. Precio LATAM."
+- **Gobierno:** "Migration Flow Dataset + Scorecard Nacional + Press Kit Auto. Decisiones data-driven + transparencia pública."
+- **Valuador:** "Widget + Time Machine + Climate Twin Report. Cobras más por reporte con data DMX vs competencia tradicional."
+
+---
+
+## Defensa competitiva FASE 11 XL actualizada
+
+| Vector ataque | Riesgo H1 | Defensa |
+|---|---|---|
+| **CoStar/Cherre entran a MX con capital** | Bajo H1 (foco US), medio H2 | Trend Genome + Scorecard Nacional authority + 36m histórico + PR ancla |
+| **Startup MX clone** | Bajo | Stickers viral loop + LifePath + Widget protocol moat compuesto |
+| **Tinsa/Softec lanzan scorecard competidor** | Medio | Primer mover + frecuencia mensual vs anual competencia + transparencia /metodologia |
+| **Zillow Research expand a MX** | Bajo H1 (US-focused), alto H3 | MX cultural context + partnerships inmobiliarios locales + cobertura zona-level vs ZIP code level |
+| **Big 4 broker AI initiative con $100M** | Bajo (consulting vs SaaS) | Pricing 10x diferencial + Widget protocol viral = diferente go-to-market |
+
+---
+
+**Autor FASE 11 XL append:** PM Sr (Opus 4.7) | **Fecha:** 2026-04-21 | **Status:** Planificado H1

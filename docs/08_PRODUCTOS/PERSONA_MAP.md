@@ -565,3 +565,87 @@ Para cada persona documentamos:
 - `docs/08_PRODUCTOS/COMPETITIVE_POSITIONING.md` — matriz vs competencia por persona
 
 **Autor:** PM Sr Dev | **Fecha:** 2026-04-20 | **Status:** Doc vivo — update en cada cierre fase con nuevos insights usuario
+
+---
+
+# 🚀 FASE 11 XL — JTBD nuevos por persona (append 2026-04-21)
+
+> **Contexto:** FASE 11 XL desbloquea ~75 capabilities nuevas. Cada persona gana 2-3 Jobs-to-be-Done incrementales.
+
+## Persona 1 — Developer / Desarrollador — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "Identificar zonas con momentum antes de competencia para land-banking" → **DMX Momentum Index** (Pro Data) + **Ghost Zones Report** (Premium early access 30d).
+- **JTBD nuevo 2:** "Monitorear signos vitales de mis zonas objetivo en tiempo real" → **Pulse Score B2B** (Agency tier) + **Trend Genome Alerts** (Pro).
+- **JTBD nuevo 3:** "Stress-test climate change en proyecto pre-inversión (compliance ESG LP)" → **Climate Twin Report** (Pro + Enterprise).
+- **Producto combo:** Developer Pro + Momentum + Ghost Zones + Climate Twin = $4K-$6K USD/mes top-tier.
+
+## Persona 2 — Asesor / Broker — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "Diferenciarme vs otros asesores embebiendo data DMX en mis listings + stories" → **Widget Embebible** (Pro $49 USD/mes) + **Stickers & Badges** (free viral).
+- **JTBD nuevo 2:** "Recibir alertas WhatsApp cuando mi zona watchlist cambia de momentum" → **Alert Radar WhatsApp** (FI-071) + **Trend Genome Alerts** (Pro).
+- **JTBD nuevo 3:** "Buscar 'zonas similares a Roma Norte más baratas' para proponer al cliente" → **Genoma Similarity API** (Pro) + **LifePath Match** (referir cliente freemium).
+
+## Persona 3 — Comprador residencial — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "Descubrir qué colonia me queda según mi vida actual (soltero → pareja → hijos)" → **LifePath Match** (free → Pro $199 MXN/mes).
+- **JTBD nuevo 2:** "Ver si mi colonia sube o baja antes de decidir comprar" → **Top Movers Daily** (FI-021) + **DMX Wrapped** (FI-072) anual + **Alert Radar WhatsApp**.
+- **JTBD nuevo 3:** "Encontrar 'versión más barata de Condesa' sin sacrificar vibe" → **Genoma Similarity API** (Free 10 queries) + **Explorar zonas**.
+- **JTBD nuevo 4:** "Compartir mi match con amigos/pareja para validar decisión" → **Stickers & Badges** (free) + **LifePath Premium** (multiplayer).
+
+## Persona 4 — Inversor residencial — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "Encontrar el próximo Roma Norte antes que todos" → **Ghost Zones Report** (Premium $999 USD/mes) + **Momentum Index** (Pro).
+- **JTBD nuevo 2:** "Stream real-time de shifts demográficos en mis watchlists" → **Trend Genome Alerts** (Pro $2K USD/mes).
+- **JTBD nuevo 3:** "Backtest mi tesis inversión 5 años histórico zona" → **Time Machine API** (Pro).
+- **JTBD nuevo 4:** "Recibir press kit mensual + newsletter para saber qué pasa sin leer 20 fuentes" → **Newsletter mensual** (free) + **Press Kit Auto** (Pro si quiere timing exclusivo).
+
+## Persona 5 — FIBRA / Fondo institucional — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "License Momentum Index + Scorecard Nacional para research interno + LP decks" → **Momentum Index Enterprise** ($75K-$250K USD/año) + **Scorecard Nacional Enterprise** ($100K-$300K USD/año).
+- **JTBD nuevo 2:** "Integrar Livability API + Risk Score API en data lake via npm SDK + webhooks" → **Livability API Enterprise** + **Risk Score API Enterprise** + **SDK TypeScript**.
+- **JTBD nuevo 3:** "Backtest thesis inversión vs histórico 36m via Time Machine API" → **Time Machine API Enterprise**.
+- **JTBD nuevo 4:** "Climate Twin Report stress-test portfolio ESG reporting LP quarterly" → **Climate Twin Enterprise License**.
+
+## Persona 6 — Aseguradora — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "Risk scoring instant + climate-adjusted en underwriting API-first" → **Risk Score API** (Enterprise) + **Climate Twin Report** (API Volume).
+- **JTBD nuevo 2:** "Catastrophe modeling zona-level con escenarios 10-30 años (vs hoy zonas grandes)" → **Climate Twin Report Enterprise** + **Migration Flow Dataset**.
+- **JTBD nuevo 3:** "Pulse Score zona en tiempo real para renewal pricing dinámico" → **Pulse Score B2B** (Enterprise API).
+
+## Persona 7 — Banco / Fintech — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "AVM + Livability + Momentum en un solo API call para mortgage origination" → **Livability API** + **Momentum API** + **AVM I01** combo Enterprise.
+- **JTBD nuevo 2:** "Climate Twin stress-test para Basilea IV climate disclosure" → **Climate Twin Enterprise License**.
+- **JTBD nuevo 3:** "Migration Flow para predicción demanda crédito por zona" → **Migration Flow Dataset Enterprise**.
+- **JTBD nuevo 4:** "Scorecard Nacional anual como ancla editorial en reporte research banco" → **Scorecard Nacional Enterprise License** co-branding.
+
+## Persona 8 — Gobierno / Policy maker — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "Datos migración intra-ciudad para planeación urbana data-driven" → **Migration Flow Dataset Government** ($1M-$3M MXN/año).
+- **JTBD nuevo 2:** "Scorecard Nacional + Livability ranking para benchmark municipios rutas presupuesto" → **Scorecard Nacional** (free + Enterprise custom).
+- **JTBD nuevo 3:** "Climate Twin zonas vulnerables para políticas adaptación" → **Climate Twin Enterprise** + **Migration Flow** combo.
+- **JTBD nuevo 4:** "Press Kit Auto para comunicar progreso políticas con evidencia ready-to-publish" → **Press Kit Auto Partner** (revshare con medios).
+
+## Persona 9 — Inspector / Valuador profesional — JTBD FASE 11 XL
+
+- **JTBD nuevo 1:** "Embed widget DMX en reportes avalúo firmados para diferenciar vs valuadores tradicionales" → **Widget Embebible Pro** + **Branded PDF** existentes.
+- **JTBD nuevo 2:** "Histórico Time Machine para fundamentar comparables de años previos" → **Time Machine API** (Pro volume).
+- **JTBD nuevo 3:** "Climate Twin Report como servicio premium add-on a clientes bancos" → **Climate Twin Pro Report** ($499 USD/reporte revende al cliente final).
+
+---
+
+## Matriz actualizada 9 personas × productos FASE 11 XL
+
+| Persona | Productos FASE 11 XL primarios | Tier típico | Acquisition channel primario |
+|---|---|---|---|
+| 1 Developer | Momentum + Ghost Zones + Pulse B2B + Climate Twin | $4K-$6K USD/mes | LinkedIn Ads + Expo Real Estate |
+| 2 Broker | Widget + Stickers + Alert Radar + Genoma | $49-$899 USD/mes | AMPI + Facebook Groups + WhatsApp |
+| 3 Comprador | LifePath + Top Movers + Stickers + Genoma Free | Free-$199 MXN/mes | Instagram/TikTok + Google Ads |
+| 4 Inversor | Ghost Zones + Trend Genome + Time Machine | $299-$2K USD/mes | LinkedIn + family office referrals |
+| 5 Institucional | Momentum + Scorecard + Livability + Time Machine + Climate Twin | $75K-$500K USD/año | Direct sales + REIT summits |
+| 6 Aseguradora | Risk Score API + Climate Twin + Pulse | $500K-$2M MXN/año | AMIS + reaseguradoras |
+| 7 Banco | Livability + Momentum + Climate Twin + Migration Flow | $500K-$5M MXN/año | CNBV + Fintech summits |
+| 8 Gobierno | Migration Flow + Scorecard + Climate Twin + Press Kit | $1M-$10M MXN/año | Gov procurement + ONU-Habitat |
+| 9 Valuador | Widget + Time Machine + Climate Twin Report | $1-2K USD/mes | Colegio Valuadores + cursos |
+
+**Autor FASE 11 XL append:** PM Sr (Opus 4.7) | **Fecha:** 2026-04-21 | **Status:** Planificado H1

@@ -1,7 +1,7 @@
 # FASE 12 — IE AI Scores Nivel 5 + Intelligence Cards + Mapa 7 Capas
 
-> **Duración estimada:** 6 sesiones Claude Code (~24 horas con agentes paralelos)
-> **Dependencias:** FASE 08 (AVM MVP), FASE 09 (N1), FASE 10 (N2/N3), FASE 11 (índices DMX), FASE 03 (AI shell + Copilot), FASE 04 (Design System)
+> **Duración estimada:** 7 sesiones Claude Code (~28 horas con agentes paralelos)
+> **Dependencias:** FASE 08 (AVM MVP), FASE 09 (N1), FASE 10 (N2/N3), FASE 11 XL (15 índices DMX + Causal Engine base + seeds Genoma/LifePath/Climate Twin/Constellations/Living Atlas), FASE 03 (AI shell + Copilot), FASE 04 (Design System)
 > **Bloqueantes externos:**
 > - `ANTHROPIC_API_KEY` + `OPENAI_API_KEY` activas con créditos.
 > - Vercel AI Gateway configurado (FASE 03).
@@ -16,10 +16,13 @@
 
 El Nivel 5 es la capa AI del IE: scores que usan LLM para generar contenido narrativo con fundamento cuantitativo. A diferencia de los niveles 0-3 que son deterministas, los N5 generan texto/imágenes/reportes pero SIEMPRE con citations verificables de fuentes y scores cuantitativos del propio IE (no alucinan valores).
 
+**Relación con FASE 11 XL (seeds implementados):** El Causal Engine base (porqué cambió Momentum, atribución componentes `causal_explanations`) ya existe desde FASE 11.E. FASE 12 lo EXTIENDE con narrativas N5 más profundas (dossiers C08, argumentarios C02, due diligence G03, reportes ejecutivos) que consumen las explicaciones causales ya persistidas y las enriquecen con tone editorial + citations cascade + personalización por audiencia. Análogamente, LifePath SEED (11.O), Climate Twin SEED (11.P), Genoma SEED (11.M) y Living Atlas SEED (11.R) ya existen como esqueletos; FASE 12 los extiende a v1 completo con matching ML + proyecciones económicas.
+
 Esta fase cubre tres componentes críticos:
 1. **26 N5 scores AI**: ASESOR (C02/C05/C08), AGREGADOS (E05/E06/E07/E08), FULL SCORE (G02/G03/G04/G05), MERCADO (D01/D08/D10), ZONA (F11/F13/F14/F16/F17), PRODUCTOS (I01-I06). Más 7 N4 complementarios.
 2. **Intelligence Cards** (UPG 7.7): UI en 4 niveles jerárquicos (predio/manzana/colonia/alcaldía) + 3 tipos especializados (Comparador, Risk, Investment).
-3. **Mapa Inteligente 7 capas** (UPG 7.8): Mapbox GL con Catastro + DENUE + FGJ + GTFS + zone_scores + desarrollos + demanda.
+3. **Mapa Inteligente 12 capas** (UPG 7.8 ampliado): las 7 originales Mapbox GL (Catastro + DENUE + FGJ + GTFS + zone_scores + desarrollos + demanda) más 5 capas nuevas que extienden FASE 11 XL: Migration Flow, Influencer Heat, Pulse Score, Trend Genome alpha, Climate Twin.
+4. **Extensiones FASE 11 XL SEED → v1**: LifePath v1 completo + Climate Twin v1 completo.
 
 ## Bloques
 
@@ -236,14 +239,17 @@ Framework: cada N5 tiene (a) prompt versionado en `ai_prompt_versions`, (b) inpu
 **Criterio de done del módulo:**
 - [ ] Drawer abre en <200ms con data ya cargada.
 
-### BLOQUE 12.D — Mapa Inteligente 7 capas Mapbox (UPG 7.8)
+### BLOQUE 12.D — Mapa Inteligente 12 capas Mapbox (UPG 7.8 ampliado)
+
+> **Nota:** Este bloque amplía el Mapa 7 capas original con 5 capas adicionales que consumen los datos sembrados en FASE 11 XL (`zone_migration_flows`, `influencer_heat_zones`, `zone_pulse_scores`, `zone_alpha_alerts`, `colonia_dna_vectors`). Las 7 originales se mantienen sin cambios — las 5 nuevas se entregan como overlays adicionales en la misma ruta `/mapa`.
+> **Dependencias:** FASE 11 XL (seeds implementados).
 
 #### MÓDULO 12.D.1 — Ruta `/mapa` (asesor/dev/admin)
 
 **Pasos:**
 - `[12.D.1.1]` Crear `app/(asesor)/mapa/page.tsx` (client component con Mapbox GL JS).
-- `[12.D.1.2]` Layout: mapa full-screen + sidebar 320px control capas + footer 40px stats período.
-- `[12.D.1.3]` 7 capas toggleables (checkbox + opacity slider):
+- `[12.D.1.2]` Layout: mapa full-screen + sidebar 320px control capas (2 secciones: "Core 7" y "Extendido 11 XL") + footer 40px stats período.
+- `[12.D.1.3]` 12 capas toggleables (checkbox + opacity slider). **Originales 7**:
   1. **Catastro CDMX**: polígonos coloreados por valor catastral (H2 para render; H1 stub capa vacía con label "Próximamente").
   2. **DENUE heatmap**: densidad ecosistema + tier ratios (layer `heatmap-layer` Mapbox).
   3. **FGJ criminalidad**: heatmap delitos + filtro categorías.
@@ -251,13 +257,23 @@ Framework: cada N5 tiene (a) prompt versionado en `ai_prompt_versions`, (b) inpu
   5. **zone_scores composite**: coropleto DMX Score por colonia (verde→rojo).
   6. **Desarrollos pines**: cluster Mapbox; al zoom ≥14 desagrupan; tap → ficha proyecto.
   7. **Demanda heatmap**: wishlist + search_logs + project_views últimos 30d.
-- `[12.D.1.4]` Filtros: rango precios, recámaras, scores mín, fecha delitos, tipo de transporte.
-- `[12.D.1.5]` Click en colonia → IntelligenceDrawer con scores colonia.
+
+  **Nuevas 5 (extienden FASE 11 XL seeds):**
+
+  8. **Migration Flow**: flechas/líneas curvas entre colonias mostrando flujo inter-zonal (`zone_migration_flows.origin_zone_id` → `destination_zone_id`, grosor = intensidad, color = signo neto). Toggle período 30d/90d/1y.
+  9. **Influencer Heat**: círculos de calor centrados en colonias con densidad de influencers/early adopters (`influencer_heat_zones`). Radio proporcional a `influencer_density_index`, color por segmento (nightlife/remote_worker/family/senior).
+  10. **Pulse Score**: coropleto con latido visual (animación pulse 2s) donde intensidad = `zone_pulse_scores.pulse_value` (composite momentum + social + alpha alerts recientes).
+  11. **Trend Genome alpha**: overlay con iconografía (🔥/📈/⚠️) en colonias marcadas como alpha zones (`zone_alpha_alerts.alert_type='trend_genome'` con severity ≥ medium). Click → alert detail drawer.
+  12. **Climate Twin**: coropleto con proyección climática 2030 (temperatura/inundación/sequía). Consume SEED FASE 11.P; en FASE 12 se amplía con projections v1 (ver BLOQUE 12.Z).
+- `[12.D.1.4]` Filtros: rango precios, recámaras, scores mín, fecha delitos, tipo de transporte + nuevos: tipo alpha alert, segmento influencer, horizonte Climate Twin (2030/2040).
+- `[12.D.1.5]` Click en colonia → IntelligenceDrawer con scores colonia + tabs nuevas (Migration, Pulse, Climate) si activas.
 
 **Criterio de done del módulo:**
-- [ ] Mapa carga en <2s con 6 capas (capa 1 Catastro stub).
+- [ ] Mapa carga en <2s con 11 capas activas (capa 1 Catastro stub).
 - [ ] Performance: 10K puntos DENUE render a 60fps con clustering.
-- [ ] Comparable con Pulppo mapa — superior (Pulppo no tiene DENUE/FGJ).
+- [ ] Migration Flow renderiza top 50 flows sin jank.
+- [ ] Pulse Score latido respeta `prefers-reduced-motion`.
+- [ ] Comparable con Pulppo mapa — superior (Pulppo no tiene DENUE/FGJ/Migration/Pulse/Climate).
 
 #### MÓDULO 12.D.2 — Ruta `/explorar` (público simplificado)
 
@@ -277,6 +293,55 @@ Framework: cada N5 tiene (a) prompt versionado en `ai_prompt_versions`, (b) inpu
 
 **Criterio de done del módulo:**
 - [ ] 100 usuarios concurrentes no exceden Mapbox quota free tier.
+
+### BLOQUE 12.Y — LifePath v1 completo (extiende SEED FASE 11.O)
+
+> **Contexto:** FASE 11.O sembró el SEED de LifePath — vector `colonia_dna_vectors` + matching heurístico básico + UI prototype. FASE 12 entrega **v1 completo**: matching ML supervisado + re-ranking con Claude + preferencias profundas (PPD 20+ micro-questions) + explicación personalizada.
+> **Dependencias:** FASE 11 XL (seeds implementados) — tabla `colonia_dna_vectors` pgvector 64-dim poblada.
+
+#### MÓDULO 12.Y.1 — Matching ML + preferencias profundas
+
+**Pasos:**
+- `[12.Y.1.1]` Extender `shared/lib/intelligence-engine/lifepath/matcher-v1.ts`: sustituir heurística SEED por modelo supervisado (logistic regression calibrado H1 → gradient boosting H2) sobre features: DNA vector cosine similarity, budget fit, lifestyle_tags overlap, commute viability, climate preference match, safety threshold, ecosystem richness.
+- `[12.Y.1.2]` Preferencias profundas: consumir respuestas PPD (Progressive Preference Discovery FASE 20 BLOQUE 20.L) de `user_micro_question_answers` — pesos dinámicos por `buyer_persona`.
+- `[12.Y.1.3]` Output top-N colonias match con `{ colonia_id, match_score 0-100, confidence, reasons[], missing_data[] }`.
+- `[12.Y.1.4]` Persistir en `buyer_property_matches` con `version='lifepath_v1'`.
+
+#### MÓDULO 12.Y.2 — Re-ranking Claude + narrativa personalizada
+
+**Pasos:**
+- `[12.Y.2.1]` `n5/lifepath-v1-narrative.ts`: tras matching ML, re-rank top-10 con Claude Sonnet function-calling que recibe user profile completo + candidate DNA + scores → ajusta orden + genera narrativa 2-3 párrafos por match.
+- `[12.Y.2.2]` Narrative estructura: "Por qué esta colonia encaja contigo" + "Qué debes saber antes" + "Comparada con tus otras opciones". Citations obligatorias (cascade FASE 12.B.9).
+- `[12.Y.2.3]` Cache 30 días por `(user_id, version)`; invalidar si user cambia PPD answers o budget.
+
+**Criterio de done del BLOQUE 12.Y:**
+- [ ] LifePath v1 retorna top-10 colonias en <8s p95.
+- [ ] Narrative incluye ≥5 citations verificables.
+- [ ] Acceptance rate (user click/wishlist) >35% vs SEED baseline.
+
+### BLOQUE 12.Z — Climate Twin v1 completo (extiende SEED FASE 11.P)
+
+> **Contexto:** FASE 11.P sembró el SEED Climate Twin — skeleton tablas + overlay mapa placeholder + advertencia "proyecciones en desarrollo". FASE 12 entrega **v1 completo**: proyecciones climáticas por colonia (2030/2040) + impacto económico (valor inmobiliario, costo seguros, habitabilidad) + narrative AI.
+> **Dependencias:** FASE 11 XL (seeds implementados) — overlays Climate Twin SEED en mapa ya reservan la capa.
+
+#### MÓDULO 12.Z.1 — Proyecciones climáticas por colonia
+
+**Pasos:**
+- `[12.Z.1.1]` Ingesta adicional (reusa FASE 07 patterns): CENAPRED escenarios climáticos RCP4.5/RCP8.5, SEMARNAT vulnerabilidad hídrica, SACMEX stress hídrico proyectado.
+- `[12.Z.1.2]` `shared/lib/intelligence-engine/climate-twin/projector-v1.ts`: por cada colonia calcula `{ temp_delta_2030, flood_risk_2030, drought_risk_2030, heat_island_index_2030, projection_confidence }`. H1 lineal sobre trends; H2 ensemble con modelos CENAPRED.
+- `[12.Z.1.3]` Tabla `zone_climate_projections` (colonia_id, horizon_year, scenario, metric_name, value, confidence_low, confidence_high, model_version).
+
+#### MÓDULO 12.Z.2 — Impacto económico + narrative
+
+**Pasos:**
+- `[12.Z.2.1]` Módulo `economic-impact.ts` deriva de projections: `{ property_value_delta_pct, insurance_premium_delta_pct, habitability_score_2030, adaptation_cost_usd_m2 }` usando coeficientes empíricos zona-nivel + calibración con aseguradoras H2.
+- `[12.Z.2.2]` `n5/climate-twin-v1-narrative.ts`: AI genera narrativa "Cómo se verá tu colonia en 2030" con impactos + acciones sugeridas (ej: "evita planta baja si elegirás esta colonia").
+- `[12.Z.2.3]` UI en IntelligenceDrawer colonia (tab Climate Twin): 3 charts (temp, flood, drought) + KPIs económicos + narrative + CTA "Ver proyección completa" → reporte PDF.
+
+**Criterio de done del BLOQUE 12.Z:**
+- [ ] Projections pobladas para top 200 colonias CDMX.
+- [ ] Impact económico dentro de ±15% vs. benchmarks aseguradoras (validación post-lanzamiento H2).
+- [ ] UI tab Climate Twin renderiza en <1s.
 
 ### BLOQUE 12.E — Coste AI tracking + PostHog
 

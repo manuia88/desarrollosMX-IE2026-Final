@@ -1,7 +1,7 @@
 # FASE 13 — Portal Asesor (M01 Dashboard + M02 Desarrollos + M03 Contactos + M04 Búsquedas + M05 Captaciones)
 
 > **Duración estimada:** 7 sesiones Claude Code (~28 horas con agentes paralelos)
-> **Dependencias:** FASE 00-06 (bootstrap, BD, auth, AI shell, DS Dopamine, i18n, seguridad), FASE 07 (ingesta), FASE 08-12 (IE completo para intelligence cards inline)
+> **Dependencias:** FASE 00-06 (bootstrap, BD, auth, AI shell, DS Dopamine, i18n, seguridad), FASE 07 (ingesta), FASE 08-10 (IE N0-N3), FASE 11 XL (15 índices DMX + moonshots core + seeds: Migration/Pulse/Trend Genome/Scorecard Nacional/Genoma/LifePath/Climate Twin/Constellations/Living Atlas — seeds implementados), FASE 12 (N5 AI scores + LifePath v1 + Climate Twin v1 + Mapa 12 capas)
 > **Bloqueantes externos:**
 > - Tokens Dopamine publicados en `styles/tokens.css` (FASE 04).
 > - Supabase Auth flows con magic link + password (FASE 02).
@@ -185,6 +185,23 @@ Crítico:
 - [ ] Captura en extensión aparece en dashboard <30s.
 - [ ] Flow convertir→captación pre-llena 6/6 campos mínimos.
 
+#### MÓDULO 13.B.9 — Índices DMX sidebar widget (FASE 11 XL — seeds implementados)
+
+**Pasos:**
+- `[13.B.9.1]` Widget `<IndicesDMXSidebar>` en Dashboard M01 (columna lateral, colapsable) consume `intelligence.getTopIndicesForAsesor({ userId })` que cruza cartera del asesor (contactos activos + búsquedas + captaciones) con los 15 índices DMX (`dmx_indices`) para devolver top 3 índices más relevantes con scoring personalizado.
+- `[13.B.9.2]` Ejemplos de personalización:
+  - Asesor con cartera mayoritaria de familias → top índices MOM (familia-friendly), safety zone, school quality.
+  - Asesor con cartera inversores → YNG (rentabilidad), Momentum, alpha alerts Trend Genome.
+  - Asesor con cartera senior → safety + walkability + healthcare access.
+- `[13.B.9.3]` Cada índice card: nombre + valor actual + delta 30d + sparkline mini 12 semanas + CTA "Ver detalle" → drawer completo (reusa IntelligenceDrawer FASE 12).
+- `[13.B.9.4]` Refresh cron diario 6am por asesor + realtime actualización al cambiar cartera (new contacto, busqueda creada).
+- `[13.B.9.5]` Feature gated `feature.indices_dmx_sidebar` (default ON todos planes — índices son parte del valor core).
+
+**Criterio de done del módulo:**
+- [ ] Widget render con 3 índices personalizados.
+- [ ] Scoring personalizado respeta perfil cartera.
+- [ ] Drawer detalle abre en <300ms.
+
 ### BLOQUE 13.C — M02 Desarrollos
 
 #### MÓDULO 13.C.1 — Ruta y tabs
@@ -256,10 +273,12 @@ Crítico:
 - `[13.D.3.2]` CTA "Argumentario AI" (C02): botón genera argumentario personalizado con citations — muestra en modal con opción copiar/enviar WhatsApp.
 - `[13.D.3.3]` Lead Priority badge (C01 score + siguiente_accion recommendation).
 - `[13.D.3.4]` Detección duplicados side-panel: si `similar_contacts[]` devuelto desde BD (fuzzy match por email/teléfono similar) → sugerir merge.
+- `[13.D.3.5]` **Tile "Zonas que le interesan al cliente"** (FASE 11 XL — seeds implementados): agrega tile en ficha contacto que lista las top 3-5 zonas inferidas del interés del cliente (derivadas de `busquedas` asociadas + wishlist + PPD answers FASE 20.L si disponible) y muestra por cada zona los scores de los 15 índices DMX (radar mini + top 3 índices relevantes). Cálculo via `intelligence.getContactZonesWithIndices({ contactId })`. Útil para asesor: "Roma Norte le encaja por MOM 84 + safety 78 + walkability 91". Click en zona → drawer completo colonia.
 
 **Criterio de done del módulo:**
 - [ ] Argumentario AI genera en <12s con ≥3 citations.
 - [ ] Merge flow funcional.
+- [ ] Tile zonas renderiza con scores 15 índices en <500ms.
 
 #### MÓDULO 13.D.4 — WhatsApp auto-draft (GC-33)
 
@@ -343,10 +362,12 @@ Crítico:
 - `[13.E.3.1]` `/busquedas/[id]/suggested` route con 10 proyectos match (usa `intelligence.match({ busquedaId })` de FASE 10).
 - `[13.E.3.2]` Sort: operación > tipo_propiedad > colonia preferida > precio cercano > recámaras.
 - `[13.E.3.3]` Por match: rationale, missing_filters, botón "Proponer a cliente" (enqueue WhatsApp template).
+- `[13.E.3.4]` **Filtro "Ordenar por índice DMX"** (FASE 11 XL — seeds implementados): dropdown adicional en UI que permite re-ordenar los 10 matches por cualquiera de los 15 índices DMX. Valores típicos: MOM (familia), FAM (afinidad familia joven), YNG (rentabilidad/inversor), LIV (calidad vida), MOM-trend. El sistema sugiere automáticamente el índice más pertinente según perfil cliente (e.g., busqueda marcada "inversor" → sugerir YNG default). Chip "Recomendado: YNG (por perfil cliente)" con swap rápido.
 
 **Criterio de done del módulo:**
 - [ ] 10 matches renderizan en <1s.
 - [ ] Proponer abre template WhatsApp con link + scores.
+- [ ] Filtro índices DMX re-ordena sin reload.
 
 #### MÓDULO 13.E.4 — Wizard Ofertar 6 pasos
 

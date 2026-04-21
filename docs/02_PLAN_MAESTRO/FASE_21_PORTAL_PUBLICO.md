@@ -575,6 +575,57 @@ Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR
 - [ ] Sentry captures errors (validación runtime)
 - [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
 
+## BLOQUE 21.X — Widget embebible ampliado + Stickers marketing + Cross-listings
+
+> **Contexto:** Extiende la base FASE 11.L.1 (widget embebible SEED) a producto completo con tiers, stickers para portales terceros, y sincronización cross-listings con Inmuebles24/Vivanuncios.
+> **Dependencias:** FASE 11 XL (widget embebible SEED implementado), FASE 23 (billing + API keys).
+
+### MÓDULO 21.X.1 — Widget embebible ampliado con tiers
+
+**Pasos:**
+- `[21.X.1.1]` Extiende `widget.desarrollosmx.com/v1/score-widget.js` base (FASE 11.L.1) con tiers de producto:
+  - **Free**: widget con branding DMX visible + link hover + rate limit 1K scans/día.
+  - **Pro** ($99/mo): sin branding DMX (white-label ligero) + customización colores + 50K scans/día + embed en landing pages dev.
+  - **Enterprise** ($999+/mo): API key dedicada + custom templates + 1M+ scans/día + SLA 99.9% + integración webhooks para eventos scan.
+- `[21.X.1.2]` Widget variants: `score-badge` (existente), `zone-mini-card` (nuevo — 300x200 con radar 3 índices), `price-estimate-inline` (nuevo — AVM integration), `match-quiz-embed` (nuevo — 3 preguntas → match score).
+- `[21.X.1.3]` Config via `data-dmx-*` attributes + config panel en `/developer/widgets` (portal dev).
+- `[21.X.1.4]` Analytics tracking por widget embed: scans, clicks, referrers. Dashboard en `/developer/widget-analytics`.
+
+**Criterio de done del módulo:**
+- [ ] 4 widget variants operativos.
+- [ ] Tiers billing integrados con Stripe.
+
+### MÓDULO 21.X.2 — Stickers + Badges marketing oficiales DMX
+
+**Pasos:**
+- `[21.X.2.1]` Catálogo "Stickers DMX" con badges oficiales que listings DMX (propios + cross-listings) muestran en portal público:
+  - "DMX Verified" (proyecto con trust H05 ≥80).
+  - "Alpha Zone" (colonia con alpha alert activa FASE 11 XL).
+  - "Trend Genome Rising" (top 10% momentum).
+  - "Climate Resilient" (Climate Twin risk bajo).
+  - "Family-Friendly" (MOM + safety + schools top 20%).
+  - "Young Professional Hotspot" (YNG + nightlife + walkability top 20%).
+- `[21.X.2.2]` Stickers render automáticamente en ficha pública `/proyectos/[id]` según scores en tiempo real. Rule engine en `shared/lib/marketing/sticker-rules.ts`.
+- `[21.X.2.3]` Stickers descargables como PNG/SVG para uso en ads externos (dev puede poner "DMX Verified" en su ad FB si cumple criterios).
+- `[21.X.2.4]` Audit: tabla `stickers_assigned` log de qué stickers recibe cada proyecto y cuándo (revocables si score cae).
+
+**Criterio de done del módulo:**
+- [ ] 6 stickers operativos con rules claras.
+- [ ] Render dinámico en ficha.
+
+### MÓDULO 21.X.3 — Integración cross-listings (Inmuebles24 / Vivanuncios)
+
+**Pasos:**
+- `[21.X.3.1]` Partnership deals con Inmuebles24 + Vivanuncios (H2 formal; H1 stub con data scraped via Chrome Ext + API licenciada): los listings en esos portales muestran badge "DMX Score 87" + link CTA "Ver análisis completo en DMX".
+- `[21.X.3.2]` Integration via widget 21.X.1 embebido en cada listing (Enterprise tier — pagado por el portal o DMX como estrategia de acquisition).
+- `[21.X.3.3]` Al click en badge → landing en DMX con datos zona + 15 índices + CTA "Únete a DMX para ver más".
+- `[21.X.3.4]` Tracking funnel: impresión badge → click → landing → signup. Optimizar CVR target >2%.
+- `[21.X.3.5]` H1: mostrar badges solo en listings propios DMX; H2: outreach commercial para cross-listings reales.
+
+**Criterio de done del módulo:**
+- [ ] Widget integrado en test environment con mock Inmuebles24 listing.
+- [ ] Funnel tracking operativo.
+
 ## Próxima fase
 
 FASE 22 — Marketing + Comms (Notifs multi-canal + WA Business + Webhooks consumers + Auto-gen piezas + Academia)
