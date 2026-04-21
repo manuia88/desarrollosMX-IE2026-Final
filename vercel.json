@@ -12,6 +12,7 @@
     { "path": "/api/cron/autofetch/shf", "schedule": "0 18 20 1,4,7,10 *" },
     { "path": "/api/cron/score-worker", "schedule": "0 8 * * *" },
     { "path": "/api/cron/score-comparison-matrix", "schedule": "0 3 * * *" },
-    { "path": "/api/cron/zone-demographics-refresh", "schedule": "0 4 * * *" }
+    { "path": "/api/cron/zone-demographics-refresh", "schedule": "0 4 * * *" },
+    { "path": "/api/cron/score-history-purge", "schedule": "0 2 * * 0" }
   ]
 }
