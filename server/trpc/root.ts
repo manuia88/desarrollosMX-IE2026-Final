@@ -5,6 +5,7 @@ import { fxRouter } from '@/features/fx/routes/fx';
 import { aiRouter } from '@/features/ia-generativa/routes/ai';
 import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { ieScoresRouter } from '@/features/ie/routes/scores';
+import { indicesPublicRouter } from '@/features/indices-publicos/routes/indices-public';
 import { marketRouter } from '@/features/market/routes/market';
 import { scianRouter } from '@/features/scian/routes/scian';
 import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
@@ -43,6 +44,7 @@ export const appRouter = router({
   strHosts: strHostsRouter,
   env: envRouter,
   ieScores: ieScoresRouter,
+  indicesPublic: indicesPublicRouter,
   invisibleHotels: invisibleHotelsRouter,
   nomad: nomadRouter,
   photoCv: photoCvRouter,

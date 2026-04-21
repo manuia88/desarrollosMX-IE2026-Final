@@ -947,5 +947,210 @@
       "error_desc": "Tente novamente em alguns segundos",
       "retry": "Tentar novamente"
     }
+  },
+  "IndicesPublic": {
+    "page": {
+      "title": "Índices DMX",
+      "subtitle": "Rankings abertos de 15 índices imobiliários por bairro, distrito e cidade",
+      "meta_description": "Índices imobiliários DMX — rankings S&P-style por bairro, distrito e cidade. Metodologia aberta.",
+      "tab_all": "Todos",
+      "empty": "Sem dados disponíveis para este período",
+      "loading": "Carregando ranking…",
+      "last_update": "Última atualização: {date}",
+      "as_of": "Dados em {date}",
+      "period_label": "Período",
+      "scope_label": "Âmbito",
+      "country_label": "País"
+    },
+    "detail": {
+      "title": "{code} — {scope}",
+      "meta_description": "Detalhe do índice {code} para {scope} em {country}",
+      "ranking_in_scope": "Posição #{rank} de {scope_type_plural}",
+      "percentile": "Percentil {percentile}",
+      "trend": "Tendência: {arrow} {delta}",
+      "methodology_link": "Ver metodologia",
+      "value_label": "Valor",
+      "confidence_label": "Confiança",
+      "components_title": "Componentes",
+      "inputs_title": "Insumos",
+      "calculated_at": "Calculado: {date}",
+      "valid_until": "Válido até: {date}"
+    },
+    "movers": {
+      "title": "Top Movers — Ranking diário",
+      "subtitle": "Bairros com maior variação frente ao período anterior",
+      "meta_description": "Top movers diários dos índices DMX — bairros com maior mudança percentual",
+      "up": "Sobem",
+      "down": "Caem",
+      "direction_toggle": "Mudar direção"
+    },
+    "ranking": {
+      "col_rank": "#",
+      "col_scope": "Zona",
+      "col_value": "Valor",
+      "col_band": "Faixa",
+      "col_confidence": "Confiança",
+      "col_trend": "Δ vs anterior",
+      "col_percentile": "Percentil",
+      "col_actions": "Ações",
+      "sort_asc": "Ordem ascendente",
+      "sort_desc": "Ordem descendente",
+      "search_placeholder": "Buscar zona…",
+      "no_results": "Sem resultados"
+    },
+    "confidence": {
+      "high": "Alta",
+      "medium": "Média",
+      "low": "Baixa",
+      "insufficient_data": "Sem dados"
+    },
+    "band": {
+      "excelente": "Excelente",
+      "bueno": "Bom",
+      "regular": "Regular",
+      "bajo": "Baixo"
+    },
+    "trend": {
+      "mejorando": "Melhorando",
+      "estable": "Estável",
+      "empeorando": "Piorando"
+    },
+    "scope": {
+      "colonia": "Bairro",
+      "alcaldia": "Distrito",
+      "city": "Cidade",
+      "estado": "Estado",
+      "colonia_plural": "bairros",
+      "alcaldia_plural": "distritos",
+      "city_plural": "cidades",
+      "estado_plural": "estados"
+    },
+    "share": {
+      "heading": "Compartilhar",
+      "whatsapp": "Compartilhar no WhatsApp",
+      "twitter": "Compartilhar no X",
+      "linkedin": "Compartilhar no LinkedIn",
+      "copy_link": "Copiar link",
+      "copied": "Link copiado",
+      "share_text": "Veja o ranking DMX do índice {code}"
+    },
+    "methodology": {
+      "title": "Metodologia DMX",
+      "subtitle": "Fórmulas, pesos e mudanças dos 15 índices",
+      "meta_description": "Metodologia aberta DMX — fórmulas, pesos e changelog S&P-style",
+      "detail_title": "Metodologia — {code}",
+      "detail_meta_description": "Fórmula, pesos e changelog do índice {code}",
+      "version_label": "Versão {version}",
+      "effective_from": "Vigente desde {date}",
+      "effective_to": "Vigente até {date}",
+      "active": "Ativa",
+      "weights_title": "Pesos",
+      "formula_title": "Fórmula",
+      "changelog_title": "Changelog",
+      "download_pdf": "Baixar PDF",
+      "pdf_unavailable": "PDF indisponível",
+      "no_methodology": "Sem metodologia publicada"
+    },
+    "pro": {
+      "title": "DMX Pro Terminal",
+      "subtitle": "Visão densa filtrável — 15 índices × zonas",
+      "meta_description": "Terminal profissional DMX — matriz densa filtrável",
+      "filter_index": "Filtrar índice",
+      "filter_scope": "Filtrar âmbito",
+      "filter_country": "Filtrar país",
+      "export_csv": "Exportar CSV",
+      "reset_filters": "Limpar filtros"
+    },
+    "backtest": {
+      "title": "Backtest DMX",
+      "subtitle": "Simulação histórica de índices por zona",
+      "meta_description": "Backtest de índices DMX — evolução histórica simulada",
+      "from_label": "De",
+      "to_label": "Até",
+      "add_scope": "Adicionar zona",
+      "remove_scope": "Remover zona",
+      "run": "Calcular",
+      "disclaimer": "Simulação baseada em séries históricas fechadas. Não constitui garantia de resultados futuros.",
+      "compare_heading": "Comparar zonas",
+      "return_label": "Retorno %",
+      "volatility_label": "Volatilidade"
+    },
+    "indices": {
+      "IPV": {
+        "name": "Índice de Valorização",
+        "short": "Valorização",
+        "tagline": "Revalorização imobiliária sustentada"
+      },
+      "IAB": {
+        "name": "Índice de Amenidades do Bairro",
+        "short": "Amenidades",
+        "tagline": "Serviços e comércio local"
+      },
+      "IDS": {
+        "name": "Índice de Densidade Saudável",
+        "short": "Densidade",
+        "tagline": "Equilíbrio densidade e qualidade de vida"
+      },
+      "IRE": {
+        "name": "Índice de Aluguel Efetivo",
+        "short": "Aluguel",
+        "tagline": "Rendimento real do aluguel"
+      },
+      "ICO": {
+        "name": "Índice de Conectividade",
+        "short": "Conectividade",
+        "tagline": "Transporte e mobilidade"
+      },
+      "MOM": {
+        "name": "Índice de Momentum",
+        "short": "Momentum",
+        "tagline": "Dinâmica de mercado em tempo real"
+      },
+      "LIV": {
+        "name": "Índice de Livability",
+        "short": "Livability",
+        "tagline": "Qualidade de vida integral"
+      },
+      "FAM": {
+        "name": "Índice Familiar",
+        "short": "Famílias",
+        "tagline": "Adequação para famílias"
+      },
+      "YNG": {
+        "name": "Índice Jovem",
+        "short": "Jovens",
+        "tagline": "Atratividade para jovens adultos"
+      },
+      "GRN": {
+        "name": "Índice Verde",
+        "short": "Verde",
+        "tagline": "Espaços verdes e sustentabilidade"
+      },
+      "STR": {
+        "name": "Índice STR",
+        "short": "Curta Duração",
+        "tagline": "Rentabilidade Airbnb-style"
+      },
+      "INV": {
+        "name": "Índice de Investimento",
+        "short": "Investimento",
+        "tagline": "Atratividade para investidores"
+      },
+      "DEV": {
+        "name": "Índice de Desenvolvimento",
+        "short": "Desenvolvimento",
+        "tagline": "Atividade construtiva"
+      },
+      "GNT": {
+        "name": "Índice de Gentrificação",
+        "short": "Gentrificação",
+        "tagline": "Pressão de deslocamento"
+      },
+      "STA": {
+        "name": "Índice de Estabilidade",
+        "short": "Estabilidade",
+        "tagline": "Resiliência e consistência"
+      }
+    }
   }
 }
