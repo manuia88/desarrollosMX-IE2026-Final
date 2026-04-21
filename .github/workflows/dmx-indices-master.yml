@@ -1,0 +1,82 @@
+# FASE 11 XL — BLOQUE 11.C cron maestro DMX indices.
+# Dispara POST /api/cron/dmx-indices-master; el endpoint resuelve monthly|quarterly|annual
+# por fecha UTC (día 5 = monthly; día 5 ene/abr/jul/oct = quarterly; 1 enero = annual).
+# Secrets requeridos en GitHub repo settings:
+#   - VERCEL_URL    Base URL del deployment prod (ej. https://demx.app). Sin scheme asume https.
+#   - CRON_SECRET   Shared secret validado por route.ts via header X-Cron-Secret.
+
+name: DMX Indices Master Cron
+
+on:
+  schedule:
+    # Día 5 de cada mes 12:00 UTC. El endpoint discrimina monthly vs quarterly por fecha.
+    - cron: '0 12 5 * *'
+    # 1 enero 12:00 UTC — annual Wrapped trigger.
+    - cron: '0 12 1 1 *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Force dispatch mode (deja vacío para auto-resolver por fecha UTC)'
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - monthly
+          - quarterly
+          - annual
+
+concurrency:
+  group: dmx-indices-master
+  cancel-in-progress: false
+
+jobs:
+  trigger-master-cron:
+    name: Trigger DMX indices master endpoint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Resolve endpoint
+        id: endpoint
+        env:
+          VERCEL_URL: ${{ secrets.VERCEL_URL }}
+          INPUT_MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${VERCEL_URL:-}" ]]; then
+            echo "::error::VERCEL_URL secret missing"
+            exit 1
+          fi
+          BASE="${VERCEL_URL%/}"
+          if [[ "$BASE" != http* ]]; then
+            BASE="https://$BASE"
+          fi
+          URL="$BASE/api/cron/dmx-indices-master"
+          if [[ -n "${INPUT_MODE:-}" ]]; then
+            URL="$URL?mode=$INPUT_MODE"
+          fi
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: POST to dmx-indices-master
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          ENDPOINT_URL: ${{ steps.endpoint.outputs.url }}
+        run: |
+          set -euo pipefail
+          if [[ -z "${CRON_SECRET:-}" ]]; then
+            echo "::error::CRON_SECRET secret missing"
+            exit 1
+          fi
+          RESPONSE=$(curl -sS -w "\nHTTP_STATUS:%{http_code}" \
+            -X POST "$ENDPOINT_URL" \
+            -H "X-Cron-Secret: $CRON_SECRET" \
+            -H "Content-Type: application/json" \
+            --max-time 600)
+          STATUS=$(echo "$RESPONSE" | tail -n1 | sed 's/HTTP_STATUS://')
+          BODY=$(echo "$RESPONSE" | sed '$d')
+          echo "HTTP $STATUS"
+          echo "$BODY"
+          if [[ "$STATUS" != "200" ]]; then
+            echo "::error::cron endpoint returned $STATUS"
+            exit 1
+          fi

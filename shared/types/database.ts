@@ -14374,6 +14374,14 @@ export type Database = {
         }
         Returns: number
       }
+      fn_enqueue_indices_for_zone: {
+        Args: {
+          p_changed_score_type: string
+          p_country_code: string
+          p_zone_id: string
+        }
+        Returns: number
+      }
       geometry: { Args: { "": string }; Returns: unknown }
       geometry_above: {
         Args: { geom1: unknown; geom2: unknown }
