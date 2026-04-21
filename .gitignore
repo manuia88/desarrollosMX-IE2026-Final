@@ -18,8 +18,9 @@ playwright-report/
 *\ 2
 *\ 2.*
 
-# Docs internos de diseño (referencia, no versionar)
-docs/biblia-v5/
+# Docs internos de diseño (referencia — biblia-v5 versionada desde 2026-04-20 Opción B)
+# biblia-v5 source original preservada en tag biblia-v5-source (pre-versionado)
+# referencias-ui sigue sin versionar (1MB JSX experimentos)
 docs/referencias-ui/
 
 # Claude Code
