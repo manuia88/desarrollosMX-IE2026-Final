@@ -107,7 +107,7 @@ export function FlowTopTable({ rows, className }: FlowTopTableProps) {
                   {pct.toFixed(1)}%
                 </td>
                 <td className="px-4 py-2 text-right tabular-nums text-[color:var(--color-text-secondary)]">
-                  {decile ?? '—'}
+                  {decile ?? t('table_decile_unclassified')}
                 </td>
               </tr>
             );

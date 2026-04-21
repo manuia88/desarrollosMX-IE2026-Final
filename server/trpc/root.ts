@@ -7,6 +7,7 @@ import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { ieScoresRouter } from '@/features/ie/routes/scores';
 import { indicesPublicRouter } from '@/features/indices-publicos/routes/indices-public';
 import { marketRouter } from '@/features/market/routes/market';
+import { newsletterPublicRouter } from '@/features/newsletter/routes/newsletter-public';
 import { scianRouter } from '@/features/scian/routes/scian';
 import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
 import { envRouter } from '@/features/str-intelligence/routes/env';
@@ -42,6 +43,7 @@ export const appRouter = router({
   memory: memoryRouter,
   mfa: mfaRouter,
   migrationFlow: migrationFlowRouter,
+  newsletter: newsletterPublicRouter,
   roleRequest: roleRequestRouter,
   scian: scianRouter,
   ltrStrConnection: ltrStrConnectionRouter,

@@ -13,6 +13,12 @@
 
 import { NextResponse } from 'next/server';
 import {
+  sendMonthlyNewsletters,
+  sendWrappedAnnualNewsletters,
+} from '@/features/newsletter/lib/send-orchestrator';
+import { computeZoneStreaks } from '@/features/newsletter/lib/streaks-calculator';
+import { buildAnonWrapped } from '@/features/newsletter/lib/wrapped-builder';
+import {
   type CalculateMigrationFlowsBatchSummary,
   type CalculatePulseBatchSummary,
   type CalculateTrendGenomeBatchSummary,
@@ -91,6 +97,12 @@ export async function POST(request: Request): Promise<NextResponse> {
   let alphaFailures = 0;
   let alphaSourcesReal: readonly string[] = [];
   let alphaSourcesStub: readonly string[] = [];
+  let newsletterSent = 0;
+  let newsletterFailed = 0;
+  let newsletterSkipped = 0;
+  let wrappedSnapshotsGenerated = 0;
+  let streaksComputed = 0;
+  let streaksFailed = 0;
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -190,6 +202,77 @@ export async function POST(request: Request): Promise<NextResponse> {
     });
   }
 
+  // BLOQUE 11.J.4 — Strava Segments streaks (monthly dispatch).
+  // Corre ANTES del newsletter para que streaks_section lea el upsert fresh.
+  // Falla NO tumba dispatch (mismo patrón que pulse/migration/trend).
+  if (dispatched === 'monthly' || dispatched === 'quarterly' || dispatched === 'annual') {
+    try {
+      const streaksRows = await computeZoneStreaks({
+        countryCode: 'MX',
+        periodDate,
+        supabase,
+      });
+      streaksComputed = streaksRows.length;
+    } catch (err) {
+      streaksFailed += 1;
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:streaks`, message });
+      console.error('[dmx-indices-master] streaks dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+  }
+
+  // BLOQUE 11.J — Newsletter mensual (monthly dispatch only).
+  // Falla de newsletter NO tumba dispatch (try/catch aislado, mismo patrón).
+  if (dispatched === 'monthly') {
+    try {
+      const newsletterResult = await sendMonthlyNewsletters({
+        periodDate,
+        countryCode: 'MX',
+        supabase,
+      });
+      newsletterSent = newsletterResult.sent;
+      newsletterFailed = newsletterResult.failed;
+      newsletterSkipped = newsletterResult.skipped;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:newsletter`, message });
+      console.error('[dmx-indices-master] newsletter dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+  }
+
+  // BLOQUE 11.J.2 — DMX Wrapped anual (annual dispatch, 1 enero).
+  // Genera snapshot anon nacional + envía notificación a subscribers.
+  if (dispatched === 'annual') {
+    try {
+      const year = now.getUTCFullYear() - 1; // Wrapped del año anterior (se envía 1 enero).
+      await buildAnonWrapped({ year, countryCode: 'MX', supabase });
+      wrappedSnapshotsGenerated += 1;
+      const wrappedResult = await sendWrappedAnnualNewsletters({
+        year,
+        countryCode: 'MX',
+        supabase,
+      });
+      newsletterSent += wrappedResult.sent;
+      newsletterFailed += wrappedResult.failed;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:wrapped`, message });
+      console.error('[dmx-indices-master] wrapped dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+  }
+
   return NextResponse.json({
     dispatched,
     scopes_processed: scopesProcessed,
@@ -209,6 +292,12 @@ export async function POST(request: Request): Promise<NextResponse> {
     alpha_failures: alphaFailures,
     alpha_sources_real: alphaSourcesReal,
     alpha_sources_stub: alphaSourcesStub,
+    newsletter_sent: newsletterSent,
+    newsletter_failed: newsletterFailed,
+    newsletter_skipped: newsletterSkipped,
+    wrapped_snapshots_generated: wrappedSnapshotsGenerated,
+    streaks_computed: streaksComputed,
+    streaks_failed: streaksFailed,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

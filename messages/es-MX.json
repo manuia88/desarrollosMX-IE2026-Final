@@ -1228,6 +1228,7 @@
     "table_volume": "Volumen",
     "table_pct": "% del total",
     "table_decile": "Decil",
+    "table_decile_unclassified": "Sin clasificar",
     "aria_map": "Mapa de flujos migratorios entre zonas",
     "aria_table": "Tabla de top flujos migratorios",
     "breadcrumb": "Flujos migratorios"
@@ -1342,6 +1343,204 @@
         "outflow": "Salientes",
         "net_flow": "Neto",
         "net_flow_pct": "% neto"
+      }
+    }
+  },
+  "Newsletter": {
+    "zone": {
+      "aria_card": "Suscribirse al newsletter mensual de esta zona",
+      "card_title": "Suscríbete al newsletter de {zoneLabel}",
+      "card_body": "Recibe cada mes pulse, flujos migratorios y zonas en racha.",
+      "email_label": "Correo",
+      "email_placeholder": "tu@correo.com",
+      "consent_label": "Acepto recibir correos de DesarrollosMX conforme a la LFPDPPP.",
+      "consent_required": "Debes aceptar el aviso de privacidad.",
+      "submit_label": "Suscribirme",
+      "submitting": "Enviando…",
+      "success_message": "Listo. Te enviamos un correo para confirmar.",
+      "error_generic": "No pudimos procesar tu suscripción."
+    },
+    "preferences": {
+      "page": {
+        "title": "Preferencias de newsletter",
+        "meta_description": "Ajusta tus zonas, frecuencia y secciones favoritas.",
+        "subtitle": "Cambia tus preferencias para {email}."
+      },
+      "frequency_label": "Frecuencia",
+      "frequency_monthly": "Mensual",
+      "frequency_quarterly": "Trimestral",
+      "frequency_annual": "Anual",
+      "zones_label": "Zonas que te interesan",
+      "zones_search_placeholder": "Buscar colonia…",
+      "zones_search_aria": "Buscar colonia por nombre",
+      "sections_label": "Secciones",
+      "section_pulse": "Pulse",
+      "section_migration": "Flujos migratorios",
+      "section_causal": "Causales",
+      "section_alpha": "Alpha signals",
+      "section_scorecard": "Scorecard",
+      "section_streaks": "Rachas",
+      "submit_label": "Guardar",
+      "submitting": "Guardando…",
+      "success_message": "Guardado. Recibirás la próxima edición con estos ajustes.",
+      "error_generic": "No pudimos guardar tus preferencias.",
+      "token_missing": "No encontramos tu token de acceso.",
+      "token_invalid": "Este enlace ya no es válido.",
+      "back_home": "Volver al inicio",
+      "unsubscribe_link": "Darte de baja"
+    },
+    "streaks": {
+      "page": {
+        "title": "Zonas más vivas de México",
+        "meta_description": "Top 10 zonas con más meses consecutivos de pulse alto."
+      },
+      "breadcrumb": "Índices",
+      "hero": {
+        "title": "Las zonas más vivas de México",
+        "subtitle": "Top 10 colonias con más meses consecutivos de pulse mayor a 80.",
+        "period_label": "Período"
+      },
+      "empty": "Aún no hay rachas para este período.",
+      "aria_table": "Tabla de zonas con racha de pulse alto",
+      "table": {
+        "rank": "#",
+        "zone": "Zona",
+        "streak_length": "Racha",
+        "current_pulse": "Pulse actual",
+        "months": "meses"
+      }
+    },
+    "migration": {
+      "section_title": "Flujos migratorios — {zoneLabel}",
+      "top_origins": "Vienen desde",
+      "top_destinations": "Se mueven hacia",
+      "empty": "Aún no tenemos datos suficientes de flujos.",
+      "see_detail": "Ver mapa completo"
+    },
+    "scorecard": {
+      "preview_header_lead": "En 2 meses publicamos",
+      "preview_header_trail": "el Scorecard Nacional {period}",
+      "preview_cta": "Pre-regístrate para acceso early",
+      "preview_subject": "🔜 {period} Scorecard llega en 2 meses",
+      "preview_label": "Vista previa del resumen ejecutivo",
+      "post_header_lead": "Publicamos {title}",
+      "post_cta": "Lee el reporte completo",
+      "post_share": "Compartir en LinkedIn",
+      "post_subject": "📊 {period} Scorecard ya está listo",
+      "post_recap_label": "Recap del trimestre",
+      "post_findings_label": "Lo más importante",
+      "footer_legal": "Recibiste este correo porque te suscribiste al newsletter de DesarrollosMX."
+    },
+    "pulse": {
+      "section_title": "Pulse de tu zona",
+      "current_label": "Pulse actual",
+      "delta_label": "Cambio 4 meses",
+      "sparkline_alt": "Tendencia Pulse últimos 4 meses",
+      "detail_cta": "Ver detalle vital signs",
+      "no_data": "Aún no tenemos señales Pulse suficientes para esta zona."
+    },
+    "causal": {
+      "section_title": "¿Por qué pasó esto?",
+      "citations_label": "Fuentes",
+      "no_data": "Sin explicación causal disponible para este período.",
+      "citations_fallback_page": "Página de fuentes en construcción.",
+      "regenerate_cta": "Ver análisis completo"
+    },
+    "monthly": {
+      "subject_default": "{periodLabel} — Los 5 movimientos del mes en bienes raíces MX",
+      "hero_title": "Top 5 del mes",
+      "hero_col_rank": "#",
+      "hero_col_zone": "Zona",
+      "hero_col_value": "Valor",
+      "hero_col_delta": "Δ",
+      "causal_title": "¿Por qué pasó esto?",
+      "cta_indices": "Ver los 15 índices",
+      "footer_lfpdppp": "DesarrollosMX respeta tu privacidad bajo LFPDPPP (MX) + CAN-SPAM (US).",
+      "footer_prefs": "Gestionar preferencias",
+      "footer_unsubscribe": "Darme de baja"
+    },
+    "wrapped": {
+      "breadcrumb": "Wrapped",
+      "page": {
+        "title": "DMX Wrapped {year}",
+        "meta_description": "Los números que definieron el año {year} en bienes raíces en México."
+      },
+      "hero": {
+        "title": "DMX Wrapped {year}",
+        "subtitle": "Los números que definieron el año en bienes raíces en México."
+      },
+      "aria": {
+        "landing": "Página de DMX Wrapped {year}",
+        "cards_list": "Lista de tarjetas del año"
+      },
+      "cta": {
+        "explore_indices": "Explora los índices",
+        "share": "Compartir",
+        "subscribe": "Suscríbete al newsletter"
+      },
+      "footer": {
+        "generated_at": "Generado el {date}"
+      },
+      "cards": {
+        "top_zone_explored": "Tu zona más explorada",
+        "zone_visited_count": "Movimientos registrados",
+        "top_pulse_zone": "Zona con mayor pulso",
+        "top_migration_origin": "Ruta migratoria #1",
+        "top_migration_destination": "Top destino nacional",
+        "top_alpha_zone": "Zona alpha top",
+        "index_watched_most": "Índice más consultado",
+        "streak_personal_best": "Mejor racha nacional",
+        "national_pulse": "Pulso nacional top",
+        "national_top_migration": "Top destino nacional",
+        "scorecard_reports_read": "Scorecards publicados"
+      },
+      "email": {
+        "subject": "DMX Wrapped {year} — Tu año en bienes raíces MX",
+        "cta": "Ver mi Wrapped {year}"
+      }
+    },
+    "unsubscribe": {
+      "page": {
+        "title": "Baja del newsletter — DesarrollosMX",
+        "meta_description": "Confirma la baja de tu suscripción al newsletter de DesarrollosMX."
+      },
+      "title": "¿Quieres darte de baja?",
+      "body": "Estás a punto de darte de baja del newsletter para {email}. No recibirás más correos nuestros.",
+      "reason_label": "¿Nos dejas saber por qué? (opcional)",
+      "reason_placeholder": "Un motivo breve nos ayuda a mejorar…",
+      "confirm_cta": "Confirmar baja",
+      "compliance_note": "Conforme a LFPDPPP (MX) y CAN-SPAM (US), tu baja es inmediata y gratuita.",
+      "success_title": "Baja confirmada",
+      "success_body": "Tu baja fue procesada. Puedes volver a suscribirte cuando gustes.",
+      "invalid": {
+        "title": "Enlace no válido",
+        "body": "El enlace expiró o ya fue usado. Puedes suscribirte de nuevo desde la página principal.",
+        "back_home": "Volver al inicio"
+      }
+    },
+    "confirm": {
+      "email_subject": "Confirma tu suscripción — DesarrollosMX",
+      "email_title": "¡Confirma tu suscripción!",
+      "email_cta": "Confirmar suscripción",
+      "email_body_intro": "Recibimos una solicitud para suscribir {email} al newsletter mensual.",
+      "email_body_action": "Haz clic en el siguiente botón para confirmar:",
+      "email_footer_ignore": "Si no solicitaste esta suscripción, ignora este correo."
+    },
+    "ab": {
+      "admin": {
+        "title": "Newsletter A/B Tests",
+        "subtitle": "Subject line experiments 50/50 con winner auto-computed.",
+        "empty": "Aún no hay experiments registrados.",
+        "col_template": "Template",
+        "col_period": "Período",
+        "col_subject_a": "Subject A",
+        "col_subject_b": "Subject B",
+        "col_sample": "Sample",
+        "col_rate_a": "% Open A",
+        "col_rate_b": "% Open B",
+        "col_winner": "Winner",
+        "col_action": "Acción",
+        "cta_compute_winner": "Calcular winner"
       }
     }
   }

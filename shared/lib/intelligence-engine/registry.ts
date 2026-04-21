@@ -1786,6 +1786,33 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     country_codes: ['MX'],
   },
 
+  // --------------- Newsletter — BLOQUE 11.J ---------------
+  // Newsletter mensual (día 5 09:00 CDMX) + DMX Wrapped anual (1 enero) +
+  // Migration Wrapped + Strava Segments streaks + secciones cross-function
+  // Causal/Pulse/Migration/Scorecard. Double opt-in LFPDPPP compliant,
+  // unsubscribe 1-click JWT, A/B testing subjects. Persiste en
+  // public.newsletter_subscribers + newsletter_deliveries + zone_streaks +
+  // newsletter_ab_tests + dmx_wrapped_snapshots.
+  {
+    score_id: 'NEWSLETTER',
+    name: 'Newsletter',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['PULSE', 'MIGRATION_FLOW', 'SCORECARD_NACIONAL'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#newsletter',
+    confidence_sources: [
+      'newsletter_subscribers',
+      'zone_pulse_scores',
+      'zone_migration_flows',
+      'causal_explanations',
+      'scorecard_national_reports',
+    ],
+    calculator_path: 'features/newsletter/lib/monthly-builder.ts',
+    country_codes: ['MX'],
+  },
+
   // --------------- Stubs futuros H2+ (5) ---------------
   // Placeholder entries que llegarán post-H1. Marcados [STUB — FASE 29+].
   {

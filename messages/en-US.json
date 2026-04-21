@@ -1220,6 +1220,7 @@
     "table_volume": "Volume",
     "table_pct": "% of total",
     "table_decile": "Decile",
+    "table_decile_unclassified": "Unclassified",
     "aria_map": "Migration flows map between zones",
     "aria_table": "Top migration flows table",
     "breadcrumb": "Migration flows"
@@ -1334,6 +1335,204 @@
         "outflow": "Outflow",
         "net_flow": "Net",
         "net_flow_pct": "% net"
+      }
+    }
+  },
+  "Newsletter": {
+    "zone": {
+      "aria_card": "Subscribe to the monthly newsletter for this zone",
+      "card_title": "Subscribe to the {zoneLabel} newsletter",
+      "card_body": "Get monthly pulse, migration flows and top streak zones.",
+      "email_label": "Email",
+      "email_placeholder": "you@example.com",
+      "consent_label": "I agree to receive emails from DesarrollosMX.",
+      "consent_required": "You must accept the privacy notice.",
+      "submit_label": "Subscribe",
+      "submitting": "Sending…",
+      "success_message": "Done. We sent you a confirmation email.",
+      "error_generic": "We couldn't process your subscription."
+    },
+    "preferences": {
+      "page": {
+        "title": "Newsletter preferences",
+        "meta_description": "Adjust your zones, frequency and favorite sections.",
+        "subtitle": "Update your preferences for {email}."
+      },
+      "frequency_label": "Frequency",
+      "frequency_monthly": "Monthly",
+      "frequency_quarterly": "Quarterly",
+      "frequency_annual": "Annual",
+      "zones_label": "Zones you care about",
+      "zones_search_placeholder": "Search neighborhood…",
+      "zones_search_aria": "Search neighborhood by name",
+      "sections_label": "Sections",
+      "section_pulse": "Pulse",
+      "section_migration": "Migration flows",
+      "section_causal": "Causal",
+      "section_alpha": "Alpha signals",
+      "section_scorecard": "Scorecard",
+      "section_streaks": "Streaks",
+      "submit_label": "Save",
+      "submitting": "Saving…",
+      "success_message": "Saved. You'll get the next edition with these settings.",
+      "error_generic": "We couldn't save your preferences.",
+      "token_missing": "We couldn't find your access token.",
+      "token_invalid": "This link is no longer valid.",
+      "back_home": "Back home",
+      "unsubscribe_link": "Unsubscribe"
+    },
+    "streaks": {
+      "page": {
+        "title": "Liveliest zones in Mexico",
+        "meta_description": "Top 10 zones with the longest pulse streak above 80."
+      },
+      "breadcrumb": "Indices",
+      "hero": {
+        "title": "The liveliest zones in Mexico",
+        "subtitle": "Top 10 neighborhoods with the longest consecutive months of pulse above 80.",
+        "period_label": "Period"
+      },
+      "empty": "No streaks yet for this period.",
+      "aria_table": "Table of zones with high pulse streak",
+      "table": {
+        "rank": "#",
+        "zone": "Zone",
+        "streak_length": "Streak",
+        "current_pulse": "Current pulse",
+        "months": "months"
+      }
+    },
+    "migration": {
+      "section_title": "Migration flows — {zoneLabel}",
+      "top_origins": "Coming from",
+      "top_destinations": "Moving to",
+      "empty": "Not enough flow data yet.",
+      "see_detail": "See full map"
+    },
+    "scorecard": {
+      "preview_header_lead": "In 2 months we publish",
+      "preview_header_trail": "the {period} National Scorecard",
+      "preview_cta": "Pre-register for early access",
+      "preview_subject": "🔜 {period} Scorecard drops in 2 months",
+      "preview_label": "Executive summary preview",
+      "post_header_lead": "We just published {title}",
+      "post_cta": "Read the full report",
+      "post_share": "Share on LinkedIn",
+      "post_subject": "📊 {period} Scorecard is live",
+      "post_recap_label": "Quarter recap",
+      "post_findings_label": "Top findings",
+      "footer_legal": "You received this email because you subscribed to the DesarrollosMX newsletter."
+    },
+    "pulse": {
+      "section_title": "Your zone pulse",
+      "current_label": "Current pulse",
+      "delta_label": "4-month change",
+      "sparkline_alt": "Pulse trend last 4 months",
+      "detail_cta": "See vital signs detail",
+      "no_data": "Not enough Pulse signals yet for this zone."
+    },
+    "causal": {
+      "section_title": "Why did this happen?",
+      "citations_label": "Sources",
+      "no_data": "No causal explanation available for this period.",
+      "citations_fallback_page": "Sources page under construction.",
+      "regenerate_cta": "See full analysis"
+    },
+    "monthly": {
+      "subject_default": "{periodLabel} — The 5 moves of the month in MX real estate",
+      "hero_title": "Top 5 of the month",
+      "hero_col_rank": "#",
+      "hero_col_zone": "Zone",
+      "hero_col_value": "Value",
+      "hero_col_delta": "Δ",
+      "causal_title": "Why did this happen?",
+      "cta_indices": "See all 15 indices",
+      "footer_lfpdppp": "DesarrollosMX respects your privacy under LFPDPPP (MX) + CAN-SPAM (US).",
+      "footer_prefs": "Manage preferences",
+      "footer_unsubscribe": "Unsubscribe"
+    },
+    "wrapped": {
+      "breadcrumb": "Wrapped",
+      "page": {
+        "title": "DMX Wrapped {year}",
+        "meta_description": "The numbers that defined {year} in Mexican real estate."
+      },
+      "hero": {
+        "title": "DMX Wrapped {year}",
+        "subtitle": "The numbers that defined the year in Mexican real estate."
+      },
+      "aria": {
+        "landing": "DMX Wrapped {year} page",
+        "cards_list": "Year's card list"
+      },
+      "cta": {
+        "explore_indices": "Explore the indices",
+        "share": "Share",
+        "subscribe": "Subscribe to the newsletter"
+      },
+      "footer": {
+        "generated_at": "Generated on {date}"
+      },
+      "cards": {
+        "top_zone_explored": "Your most-explored zone",
+        "zone_visited_count": "Registered movements",
+        "top_pulse_zone": "Highest-pulse zone",
+        "top_migration_origin": "Top migration route",
+        "top_migration_destination": "Top national destination",
+        "top_alpha_zone": "Top alpha zone",
+        "index_watched_most": "Most-watched index",
+        "streak_personal_best": "Best national streak",
+        "national_pulse": "Top national pulse",
+        "national_top_migration": "Top national destination",
+        "scorecard_reports_read": "Scorecards published"
+      },
+      "email": {
+        "subject": "DMX Wrapped {year} — Your year in MX real estate",
+        "cta": "See my Wrapped {year}"
+      }
+    },
+    "unsubscribe": {
+      "page": {
+        "title": "Newsletter unsubscribe — DesarrollosMX",
+        "meta_description": "Confirm unsubscription from the DesarrollosMX newsletter."
+      },
+      "title": "Unsubscribe?",
+      "body": "You are about to unsubscribe from the newsletter for {email}. You will no longer receive emails from us.",
+      "reason_label": "Care to tell us why? (optional)",
+      "reason_placeholder": "A brief reason helps us improve…",
+      "confirm_cta": "Confirm unsubscribe",
+      "compliance_note": "Per LFPDPPP (MX) and CAN-SPAM (US), your unsubscription is immediate and free.",
+      "success_title": "Unsubscribed",
+      "success_body": "Your unsubscription was processed. You can re-subscribe any time.",
+      "invalid": {
+        "title": "Invalid link",
+        "body": "The link expired or was already used. You can subscribe again from the home page.",
+        "back_home": "Back to home"
+      }
+    },
+    "confirm": {
+      "email_subject": "Confirm your subscription — DesarrollosMX",
+      "email_title": "Confirm your subscription!",
+      "email_cta": "Confirm subscription",
+      "email_body_intro": "We received a request to subscribe {email} to the monthly newsletter.",
+      "email_body_action": "Click the button below to confirm:",
+      "email_footer_ignore": "If you didn't request this, ignore this email."
+    },
+    "ab": {
+      "admin": {
+        "title": "Newsletter A/B Tests",
+        "subtitle": "Subject line experiments, 50/50 split with auto-computed winner.",
+        "empty": "No experiments yet.",
+        "col_template": "Template",
+        "col_period": "Period",
+        "col_subject_a": "Subject A",
+        "col_subject_b": "Subject B",
+        "col_sample": "Sample",
+        "col_rate_a": "% Open A",
+        "col_rate_b": "% Open B",
+        "col_winner": "Winner",
+        "col_action": "Action",
+        "cta_compute_winner": "Compute winner"
       }
     }
   }
