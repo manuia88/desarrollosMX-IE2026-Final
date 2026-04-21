@@ -24,6 +24,7 @@ import { strViabilityRouter } from '@/features/str-intelligence/routes/viability
 import { strWatchdogRouter } from '@/features/str-intelligence/routes/watchdog';
 import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
 import { publicProcedure, router } from './init';
+import { causalRouter } from './routers/causal';
 
 export const appRouter = router({
   health: publicProcedure.query(() => ({
@@ -31,6 +32,7 @@ export const appRouter = router({
     timestamp: Date.now(),
   })),
   ai: aiRouter,
+  causal: causalRouter,
   fx: fxRouter,
   market: marketRouter,
   me: meRouter,

@@ -1147,5 +1147,25 @@
         "tagline": "Resilience and consistency"
       }
     }
+  },
+  "Causal": {
+    "title": "Why {scopeLabel}",
+    "loading": "Generating explanation…",
+    "error": "We couldn't generate the explanation right now. Please try again.",
+    "locale_fallback": "Explanation currently available in Spanish only.",
+    "generated_by": "DMX Intelligence",
+    "sources_button": "View sources",
+    "sources_hide": "Hide sources",
+    "copy_button": "Copy",
+    "copy_success": "Copied",
+    "sources_empty": "No additional sources",
+    "example_calc_header": "Real calculation example",
+    "cached_badge": "from cache",
+    "citation_type": {
+      "score": "Score",
+      "macro": "Macro",
+      "geo": "Geo",
+      "news": "News"
+    }
   }
 }

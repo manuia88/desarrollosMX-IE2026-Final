@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Suspense } from 'react';
+import { CausalExplanation } from '@/features/causal-engine/components/CausalExplanation';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
@@ -140,6 +141,17 @@ export function IndexDetailClient({
             </div>
           </dl>
         </Card3D>
+      ) : null}
+
+      {detailRow && scopeId ? (
+        <CausalExplanation
+          scoreId={`${indexCode}:${scopeType}:${scopeId}:${detailRow.period_date}`}
+          indexCode={indexCode}
+          scopeType={scopeType}
+          scopeId={scopeId}
+          periodDate={detailRow.period_date}
+          scopeLabel={scopeId}
+        />
       ) : null}
 
       <section

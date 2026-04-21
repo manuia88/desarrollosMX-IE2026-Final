@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { CausalExplanation } from '@/features/causal-engine/components/CausalExplanation';
 import { trpc } from '@/shared/lib/trpc/client';
 import type { IndexCode } from '../lib/index-registry-helpers';
 import {
@@ -21,6 +22,7 @@ const STALE_TIME_1H = 60 * 60 * 1000;
 
 export function MethodologyDetailClient({ indexCode, today }: MethodologyDetailClientProps) {
   const t = useTranslations('IndicesPublic');
+  const tc = useTranslations('Causal');
   const query = trpc.indicesPublic.getMethodology.useQuery(
     { indexCode },
     { staleTime: STALE_TIME_1H },
@@ -264,6 +266,26 @@ export function MethodologyDetailClient({ indexCode, today }: MethodologyDetailC
           </ol>
         </section>
       ) : null}
+
+      <section aria-label={tc('example_calc_header')} style={{ marginTop: 'var(--space-8, 2rem)' }}>
+        <h2
+          style={{
+            fontSize: 'var(--text-xl)',
+            fontWeight: 'var(--font-weight-semibold, 600)',
+            margin: '0 0 var(--space-4, 1rem)',
+          }}
+        >
+          {tc('example_calc_header')}
+        </h2>
+        <CausalExplanation
+          scoreId={`${indexCode}:colonia:roma-norte:${resolvedToday}`}
+          indexCode={indexCode}
+          scopeType="colonia"
+          scopeId="roma-norte"
+          periodDate={resolvedToday}
+          scopeLabel="Roma Norte"
+        />
+      </section>
     </div>
   );
 }
