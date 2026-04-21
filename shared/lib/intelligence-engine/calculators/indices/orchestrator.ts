@@ -20,7 +20,11 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 
+import type { AlphaScopeType } from '@/features/trend-genome/types';
+import { detectNewAlphaZones } from '../alpha/alerts-engine';
 import type { Calculator, CalculatorInput, Confidence } from '../base';
+import { aggregateFlowsForCDMXColonias } from '../migration';
+import { runPulseScoreForScope } from '../pulse';
 import dmxDevCalculator from './dev';
 import dmxFamCalculator from './fam';
 import dmxGntCalculator from './gnt';
@@ -377,7 +381,7 @@ export async function calculateAllIndicesForScope(
 // pre-cargada via params.zoneIds. Query primaria: zone_price_index (scope MX)
 // para obtener zone_ids distintos. Segunda: zona_snapshots. Si ambos fallan,
 // retornar lista vacía.
-async function discoverCDMXColoniaZones(
+export async function discoverCDMXColoniaZones(
   supabase: SupabaseClient,
   periodDate: string,
 ): Promise<readonly string[]> {
@@ -513,6 +517,214 @@ export async function calculateAllIndicesForCDMXColonias(
     zones_processed: zoneIds.length,
     indices_computed,
     failures,
+    duration_ms: Date.now() - start,
+  };
+}
+
+// FASE 11 XL — BLOQUE 11.F Pulse Score batch orchestrator.
+// Pulse Score es un índice compuesto agregado (vive en `../pulse`) que corre
+// POR scope como los 14 zone-indices. A diferencia del orchestrator de los
+// 15, pulse se persiste en su propia tabla (scope sub-agent A) y NO pasa por
+// dmx_indices — por eso tiene summary separado.
+
+export interface CalculatePulseBatchSummary {
+  readonly zones_processed: number;
+  readonly pulse_computed: number;
+  readonly failures: number;
+  readonly duration_ms: number;
+}
+
+export interface CalculateAllPulseForCDMXColoniasParams {
+  readonly periodDate: string;
+  readonly supabase: SupabaseClient;
+  readonly zoneIds?: readonly string[];
+  readonly chunkSize?: number;
+  readonly scopeType?: 'colonia' | 'alcaldia' | 'city' | 'estado';
+}
+
+export async function calculateAllPulseForCDMXColonias(
+  params: CalculateAllPulseForCDMXColoniasParams,
+): Promise<CalculatePulseBatchSummary> {
+  const start = Date.now();
+  const chunkSize = params.chunkSize ?? CDMX_CHUNK_SIZE;
+  const scopeType = params.scopeType ?? 'colonia';
+  const zoneIds =
+    params.zoneIds ?? (await discoverCDMXColoniaZones(params.supabase, params.periodDate));
+
+  if (zoneIds.length === 0) {
+    return {
+      zones_processed: 0,
+      pulse_computed: 0,
+      failures: 0,
+      duration_ms: Date.now() - start,
+    };
+  }
+
+  let pulse_computed = 0;
+  let failures = 0;
+
+  for (let i = 0; i < zoneIds.length; i += chunkSize) {
+    const chunk = zoneIds.slice(i, i + chunkSize);
+    const chunkResults = await Promise.all(
+      chunk.map((zoneId) =>
+        runPulseScoreForScope({
+          scopeType,
+          scopeId: zoneId,
+          countryCode: 'MX',
+          periodDate: params.periodDate,
+          supabase: params.supabase,
+        }),
+      ),
+    );
+    for (const r of chunkResults) {
+      if (r.ok) pulse_computed++;
+      else failures++;
+    }
+  }
+
+  return {
+    zones_processed: zoneIds.length,
+    pulse_computed,
+    failures,
+    duration_ms: Date.now() - start,
+  };
+}
+
+// BLOQUE 11.G — Migration Flow batch orchestrator.
+// Thin wrapper sobre aggregateFlowsForCDMXColonias (vive en ../migration).
+// Se invoca desde el dispatcher trimestral (cron). Paridad de shape con
+// CDMXBatchSummary para que el cron consuma uniforme.
+
+export interface CalculateMigrationFlowsBatchSummary {
+  readonly scopes_processed: number;
+  readonly flows_upserted: number;
+  readonly failures: number;
+  readonly duration_ms: number;
+  readonly sources_real: readonly string[];
+  readonly sources_stub: readonly string[];
+}
+
+export interface CalculateAllMigrationFlowsParams {
+  readonly periodDate: string;
+  readonly supabase: SupabaseClient;
+  readonly zoneIds?: readonly string[];
+  readonly scopeType?: 'colonia' | 'alcaldia' | 'city' | 'estado';
+  readonly chunkSize?: number;
+}
+
+export async function calculateAllMigrationFlowsForCDMXColonias(
+  params: CalculateAllMigrationFlowsParams,
+): Promise<CalculateMigrationFlowsBatchSummary> {
+  const summary = await aggregateFlowsForCDMXColonias({
+    periodDate: params.periodDate,
+    supabase: params.supabase,
+    ...(params.zoneIds ? { zoneIds: params.zoneIds } : {}),
+    ...(params.scopeType ? { scopeType: params.scopeType } : {}),
+    ...(params.chunkSize !== undefined ? { chunkSize: params.chunkSize } : {}),
+  });
+
+  return {
+    scopes_processed: summary.scopes_processed,
+    flows_upserted: summary.flows_upserted,
+    failures: summary.failures,
+    duration_ms: summary.duration_ms,
+    sources_real: summary.sources_real as readonly string[],
+    sources_stub: summary.sources_stub as readonly string[],
+  };
+}
+
+// BLOQUE 11.H — Trend Genome batch orchestrator.
+// Descubre zonas CDMX, corre calculateTrendGenome() vía detectNewAlphaZones()
+// en chunks de 10. detectNewAlphaZones() persiste alerts en zone_alpha_alerts
+// para zonas con alpha_score ≥70 (UPGRADE #1 drift detection incluido). Falla
+// individual no tumba el batch — errors loggeados al caller (cron route).
+
+export interface CalculateTrendGenomeBatchSummary {
+  readonly zones_processed: number;
+  readonly alphas_detected: number;
+  readonly alerts_triggered: number;
+  readonly failures: number;
+  readonly sources_real: readonly string[];
+  readonly sources_stub: readonly string[];
+  readonly duration_ms: number;
+}
+
+export interface CalculateAllTrendGenomeForCDMXColoniasParams {
+  readonly periodDate: string;
+  readonly supabase: SupabaseClient;
+  readonly zoneIds?: readonly string[];
+  readonly scopeType?: AlphaScopeType;
+  readonly chunkSize?: number;
+  readonly fetchImpl?: typeof fetch;
+  readonly apifyToken?: string;
+}
+
+// Sources classification: Instagram + DENUE son reales (adapters implementados
+// sub-agent A). Migration es real (zone_migration_flows poblado por 11.G).
+// Price_velocity es data interna. Search_volume (Google Trends) es STUB H1.
+const TREND_GENOME_SOURCES_REAL: readonly string[] = [
+  'apify_instagram',
+  'denue_alpha_classifier',
+  'zone_migration_flows',
+  'zona_snapshots',
+] as const;
+const TREND_GENOME_SOURCES_STUB: readonly string[] = ['google_trends_stub'] as const;
+
+export async function calculateAllTrendGenomeForCDMXColonias(
+  params: CalculateAllTrendGenomeForCDMXColoniasParams,
+): Promise<CalculateTrendGenomeBatchSummary> {
+  const start = Date.now();
+  const chunkSize = params.chunkSize ?? CDMX_CHUNK_SIZE;
+  const scopeType: AlphaScopeType = params.scopeType ?? 'colonia';
+  const zoneIds =
+    params.zoneIds ?? (await discoverCDMXColoniaZones(params.supabase, params.periodDate));
+
+  if (zoneIds.length === 0) {
+    return {
+      zones_processed: 0,
+      alphas_detected: 0,
+      alerts_triggered: 0,
+      failures: 0,
+      sources_real: TREND_GENOME_SOURCES_REAL,
+      sources_stub: TREND_GENOME_SOURCES_STUB,
+      duration_ms: Date.now() - start,
+    };
+  }
+
+  let alphasDetected = 0;
+  let alertsTriggered = 0;
+  let failures = 0;
+
+  for (let i = 0; i < zoneIds.length; i += chunkSize) {
+    const chunk = zoneIds.slice(i, i + chunkSize);
+    // detectNewAlphaZones acepta una lista zoneIds; corremos un call por chunk
+    // (internamente itera secuencial por zona — preserva orden para fetchImpl
+    // rate limits). Promise.all paraleliza chunks con solo 1 call cada uno.
+    try {
+      const result = await detectNewAlphaZones({
+        periodDate: params.periodDate,
+        supabase: params.supabase,
+        zoneIds: chunk,
+        scopeType,
+        ...(params.fetchImpl ? { fetchImpl: params.fetchImpl } : {}),
+        ...(params.apifyToken ? { apifyToken: params.apifyToken } : {}),
+      });
+      for (const d of result.detections) {
+        if (d.alpha_score >= 70) alphasDetected += 1;
+      }
+      alertsTriggered += result.alerts_triggered;
+    } catch {
+      failures += chunk.length;
+    }
+  }
+
+  return {
+    zones_processed: zoneIds.length,
+    alphas_detected: alphasDetected,
+    alerts_triggered: alertsTriggered,
+    failures,
+    sources_real: TREND_GENOME_SOURCES_REAL,
+    sources_stub: TREND_GENOME_SOURCES_STUB,
     duration_ms: Date.now() - start,
   };
 }

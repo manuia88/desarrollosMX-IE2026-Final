@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
+import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
 import {
@@ -76,19 +77,33 @@ export function RankingTable({
   const [search, setSearch] = useState('');
   const [visibleCount, setVisibleCount] = useState<number>(LAZY_PAGE_SIZE);
 
+  const labelByScopeId = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const r of rows) {
+      map.set(r.scope_id, resolveZoneLabelSync({ scopeType: r.scope_type, scopeId: r.scope_id }));
+    }
+    return map;
+  }, [rows]);
+
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
     if (!q) return rows;
-    return rows.filter((r) => r.scope_id.toLowerCase().includes(q));
-  }, [rows, search]);
+    return rows.filter((r) => {
+      const label = labelByScopeId.get(r.scope_id) ?? r.scope_id;
+      return label.toLowerCase().includes(q);
+    });
+  }, [rows, search, labelByScopeId]);
 
   const sorted = useMemo(() => {
     const arr = [...filtered];
     const dir = sortDir === 'asc' ? 1 : -1;
     arr.sort((a, b) => {
       switch (sortKey) {
-        case 'scope':
-          return a.scope_id.localeCompare(b.scope_id) * dir;
+        case 'scope': {
+          const la = labelByScopeId.get(a.scope_id) ?? a.scope_id;
+          const lb = labelByScopeId.get(b.scope_id) ?? b.scope_id;
+          return la.localeCompare(lb) * dir;
+        }
         case 'value':
           return (a.value - b.value) * dir;
         case 'trend': {
@@ -109,7 +124,7 @@ export function RankingTable({
       }
     });
     return arr;
-  }, [filtered, sortKey, sortDir]);
+  }, [filtered, sortKey, sortDir, labelByScopeId]);
 
   const isLarge = sorted.length > LAZY_THRESHOLD;
   const visible = isLarge ? sorted.slice(0, visibleCount) : sorted;
@@ -237,7 +252,7 @@ export function RankingTable({
                     {row.ranking_in_scope ?? '—'}
                   </td>
                   <td className="px-3 py-2 text-[color:var(--color-text-primary)]">
-                    {row.scope_id}
+                    {labelByScopeId.get(row.scope_id) ?? row.scope_id}
                   </td>
                   <td className="px-3 py-2 text-[color:var(--color-text-primary)] tabular-nums">
                     {formatValue(row.value)}

@@ -29,8 +29,6 @@ export function trackCausalGeneration(args: TrackGenerationArgs, distinctId?: st
     cached: args.cached,
     duration_ms: args.durationMs,
   };
-  // eslint-disable-next-line no-console
-  console.info('[causal.generated]', JSON.stringify(props));
   posthog.capture({
     distinctId: distinctId ?? 'server',
     event: 'causal.generated',
@@ -64,10 +62,4 @@ export function reportCausalFailure(args: ReportCausalFailureArgs): void {
     tags,
     extra: { score_id: args.scoreId },
   });
-  // eslint-disable-next-line no-console
-  console.error(
-    '[causal.failed]',
-    args.reason,
-    args.error instanceof Error ? args.error.message : args.error,
-  );
 }

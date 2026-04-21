@@ -1175,5 +1175,373 @@
       "geo": "Geo",
       "news": "Noticia"
     }
+  },
+  "Pulse": {
+    "title": "Signos Vitales",
+    "subtitle": "Pulso de la zona en tiempo real",
+    "loading": "Midiendo signos vitales…",
+    "error": "No pudimos leer los signos vitales.",
+    "empty_state": "Todavía no hay datos de pulso para esta zona.",
+    "score_label": "Pulso general",
+    "pulse_economic": "Pulso económico",
+    "pulse_economic_tooltip": "Altas menos bajas de comercios en 30 días",
+    "breath_commercial": "Respiración comercial",
+    "breath_commercial_tooltip": "Tránsito peatonal día vs noche",
+    "temp_social": "Temperatura social",
+    "temp_social_tooltip": "Inversa de llamadas al 911",
+    "confidence_label": "Confianza",
+    "confidence": {
+      "high": "Alta",
+      "medium": "Media",
+      "low": "Baja",
+      "insufficient_data": "Datos insuficientes"
+    },
+    "history_title": "Últimos 12 meses",
+    "units_bpm": "bpm",
+    "units_people": "personas",
+    "units_calls": "llamadas",
+    "aria_pulse_chart": "Gráfica de pulso últimos 12 meses"
+  },
+  "MigrationFlow": {
+    "page": {
+      "title": "Flujos migratorios",
+      "meta_description": "Mapa de flujos migratorios entre zonas: de dónde a dónde se mudan las personas.",
+      "subtitle": "De dónde a dónde se mudan las personas entre zonas",
+      "loading": "Cargando flujos migratorios…",
+      "error": "No pudimos cargar los flujos migratorios.",
+      "empty": "Todavía no hay flujos migratorios para mostrar."
+    },
+    "heroTitle": "Flujos migratorios",
+    "heroSubtitle": "Visualizá de dónde a dónde se mudan las personas entre barrios, municipios y ciudades, combinando fuentes públicas y perfiles.",
+    "mapTitle": "Mapa de flujos",
+    "empty": "Todavía no hay flujos migratorios para mostrar.",
+    "filter_period": "Período",
+    "filter_decile_min": "Decil mínimo",
+    "filter_decile_max": "Decil máximo",
+    "filter_direction": "Dirección",
+    "filter_direction_inflow": "Entrada",
+    "filter_direction_outflow": "Salida",
+    "table_title": "Top flujos migratorios",
+    "table_rank": "#",
+    "table_origin": "Origen",
+    "table_destination": "Destino",
+    "table_volume": "Volumen",
+    "table_pct": "% del total",
+    "table_decile": "Decil",
+    "table_decile_unclassified": "Sin clasificar",
+    "aria_map": "Mapa de flujos migratorios entre zonas",
+    "aria_table": "Tabla de top flujos migratorios",
+    "breadcrumb": "Flujos migratorios"
+  },
+  "TrendGenome": {
+    "page": {
+      "title": "Trend Genome — zonas alpha",
+      "meta_description": "Radar de zonas alpha: barrios con señales tempranas de gentrificación 12-18 meses antes del mainstream.",
+      "subtitle": "Señales tempranas, antes de que suban los precios.",
+      "loading": "Cargando zonas alpha…",
+      "error": "No pudimos cargar las zonas alpha.",
+      "empty": "Todavía no hay zonas alpha activas."
+    },
+    "breadcrumb": "Índices",
+    "hero": {
+      "title": "Trend Genome",
+      "subtitle": "Descubrí barrios con señales de gentrificación temprana 12-18 meses antes del mainstream."
+    },
+    "cta": {
+      "upgrade_pro": "Pasá a Pro+ para desbloquear {count} zonas alpha detectadas este trimestre."
+    },
+    "card": {
+      "alpha_score_label": "Alpha score",
+      "time_to_mainstream_label": "Tiempo al mainstream",
+      "months": "meses"
+    },
+    "tier": {
+      "confirmed": "Confirmada",
+      "speculative": "Especulativa",
+      "golden_opportunity": "Oportunidad dorada",
+      "watchlist": "Watchlist"
+    },
+    "needs_review": "Revisión humana",
+    "signals": {
+      "chef": "Chefs",
+      "gallery": "Galerías",
+      "creator": "Creators",
+      "specialty_cafe": "Cafés de especialidad",
+      "alpha_openings": "Aperturas alpha 6m",
+      "migration_decile": "Decil migración",
+      "pulse_score": "Pulse",
+      "contribution_label": "Contribución al score"
+    },
+    "teaser": {
+      "count": "{count} zonas alpha detectadas este trimestre"
+    },
+    "aria": {
+      "card": "Zona alpha {zoneId}",
+      "list": "Lista de zonas alpha"
+    }
+  },
+  "ScorecardNacional": {
+    "breadcrumb": "Scorecard Nacional",
+    "landing": {
+      "title": "DMX Scorecard Nacional",
+      "meta_description": "Reporte trimestral del estado del real estate en México. PDF + Press Kit + datos abiertos.",
+      "subtitle": "El estado del real estate LATAM, trimestre a trimestre.",
+      "hero_cta": "Descarga el último reporte",
+      "archive_title": "Archivo histórico",
+      "archive_empty": "Aún no hay reportes publicados.",
+      "download_pdf": "Descargar PDF",
+      "download_press_kit": "Press Kit",
+      "period_quarterly": "Q{q} {year}",
+      "period_monthly": "{month}/{year}",
+      "period_annual": "Anual {year}"
+    },
+    "detail": {
+      "title": "Scorecard {reportId}",
+      "meta_description": "Reporte {reportId} — DMX Scorecard Nacional.",
+      "executive_summary": "Resumen ejecutivo",
+      "pulse_national_label": "Pulse Nacional",
+      "hero_insights_title": "Highlights del trimestre",
+      "sections_rankings": "Rankings por índice",
+      "sections_magnet_exodus": "Magnet vs Exodus",
+      "sections_alpha_lifecycle": "Ciclo de vida de zonas alpha",
+      "sections_stories": "Historias del trimestre",
+      "cta_download": "Descargar reporte completo",
+      "not_found": "Reporte no encontrado."
+    },
+    "historia": {
+      "title": "Historia de {colonia}",
+      "meta_description": "Timeline narrativo de {colonia} — DMX.",
+      "pulse_current": "Pulse actual",
+      "ipv_current": "IPV actual",
+      "timeline_title": "Cronología",
+      "narrative_title": "Relato",
+      "alpha_journey_title": "Camino a fase alpha",
+      "not_found": "Sin historial suficiente para esta colonia."
+    },
+    "magnetExodus": {
+      "page": {
+        "title": "Magnet vs Exodus — DesarrollosMX",
+        "meta_description": "Ranking trimestral de barrios imán (inflow neto) vs éxodo (outflow neto), basado en Migration Flow DMX.",
+        "loading": "Cargando ranking…"
+      },
+      "breadcrumb": "Índices",
+      "hero": {
+        "title": "Magnet vs Exodus",
+        "subtitle": "Hacia dónde se mueve la gente: top 10 barrios imán y top 10 barrios éxodo del trimestre.",
+        "period_label": "Período"
+      },
+      "tier_magnet": "Top 10 Imán (inflow neto)",
+      "tier_exodus": "Top 10 Éxodo (outflow neto)",
+      "net_flow_label": "Flujo neto",
+      "empty": "Sin datos suficientes para este trimestre.",
+      "prose_label": "Narrativa del trimestre",
+      "cta_scorecard": "Ver Scorecard Nacional completo",
+      "table": {
+        "rank": "#",
+        "zone": "Zona",
+        "inflow": "Entrantes",
+        "outflow": "Salientes",
+        "net_flow": "Neto",
+        "net_flow_pct": "% neto"
+      }
+    }
+  },
+  "Newsletter": {
+    "zone": {
+      "aria_card": "Suscribirse al newsletter mensual de esta zona",
+      "card_title": "Suscribite al newsletter de {zoneLabel}",
+      "card_body": "Recibí cada mes pulse, flujos migratorios y zonas en racha.",
+      "email_label": "Email",
+      "email_placeholder": "tu@email.com",
+      "consent_label": "Acepto recibir correos de DesarrollosMX.",
+      "consent_required": "Tenés que aceptar el aviso de privacidad.",
+      "submit_label": "Suscribirme",
+      "submitting": "Enviando…",
+      "success_message": "Listo. Te enviamos un mail para confirmar.",
+      "error_generic": "No pudimos procesar tu suscripción."
+    },
+    "preferences": {
+      "page": {
+        "title": "Preferencias del newsletter",
+        "meta_description": "Ajustá tus zonas, frecuencia y secciones favoritas.",
+        "subtitle": "Cambiá tus preferencias para {email}."
+      },
+      "frequency_label": "Frecuencia",
+      "frequency_monthly": "Mensual",
+      "frequency_quarterly": "Trimestral",
+      "frequency_annual": "Anual",
+      "zones_label": "Zonas que te interesan",
+      "zones_search_placeholder": "Buscar barrio…",
+      "zones_search_aria": "Buscar barrio por nombre",
+      "sections_label": "Secciones",
+      "section_pulse": "Pulse",
+      "section_migration": "Flujos migratorios",
+      "section_causal": "Causales",
+      "section_alpha": "Alpha signals",
+      "section_scorecard": "Scorecard",
+      "section_streaks": "Rachas",
+      "submit_label": "Guardar",
+      "submitting": "Guardando…",
+      "success_message": "Guardado. Recibirás la próxima edición con estos ajustes.",
+      "error_generic": "No pudimos guardar tus preferencias.",
+      "token_missing": "No encontramos tu token de acceso.",
+      "token_invalid": "Este enlace ya no es válido.",
+      "back_home": "Volver al inicio",
+      "unsubscribe_link": "Darte de baja"
+    },
+    "streaks": {
+      "page": {
+        "title": "Zonas más vivas",
+        "meta_description": "Top 10 zonas con más meses consecutivos de pulse alto."
+      },
+      "breadcrumb": "Índices",
+      "hero": {
+        "title": "Las zonas más vivas",
+        "subtitle": "Top 10 barrios con más meses consecutivos de pulse mayor a 80.",
+        "period_label": "Período"
+      },
+      "empty": "Aún no hay rachas para este período.",
+      "aria_table": "Tabla de zonas con racha de pulse alto",
+      "table": {
+        "rank": "#",
+        "zone": "Zona",
+        "streak_length": "Racha",
+        "current_pulse": "Pulse actual",
+        "months": "meses"
+      }
+    },
+    "migration": {
+      "section_title": "Flujos migratorios — {zoneLabel}",
+      "top_origins": "Vienen desde",
+      "top_destinations": "Se mueven hacia",
+      "empty": "Aún no tenemos datos suficientes de flujos.",
+      "see_detail": "Ver mapa completo"
+    },
+    "scorecard": {
+      "preview_header_lead": "En 2 meses publicamos",
+      "preview_header_trail": "el Scorecard Nacional {period}",
+      "preview_cta": "Pre-regístrate para acceso anticipado",
+      "preview_subject": "🔜 {period} Scorecard llega en 2 meses",
+      "preview_label": "Vista previa del resumen ejecutivo",
+      "post_header_lead": "Publicamos {title}",
+      "post_cta": "Leé el reporte completo",
+      "post_share": "Compartir en LinkedIn",
+      "post_subject": "📊 {period} Scorecard ya está disponible",
+      "post_recap_label": "Resumen del trimestre",
+      "post_findings_label": "Lo más importante",
+      "footer_legal": "Recibiste este correo porque te suscribiste al newsletter de DesarrollosMX."
+    },
+    "pulse": {
+      "section_title": "Pulse de tu zona",
+      "current_label": "Pulse actual",
+      "delta_label": "Cambio 4 meses",
+      "sparkline_alt": "Tendencia Pulse últimos 4 meses",
+      "detail_cta": "Ver detalle vital signs",
+      "no_data": "Aún no tenemos señales Pulse suficientes para esta zona."
+    },
+    "causal": {
+      "section_title": "¿Por qué pasó esto?",
+      "citations_label": "Fuentes",
+      "no_data": "Sin explicación causal disponible para este período.",
+      "citations_fallback_page": "Página de fuentes en construcción.",
+      "regenerate_cta": "Ver análisis completo"
+    },
+    "monthly": {
+      "subject_default": "{periodLabel} — Los 5 movimientos del mes en bienes raíces",
+      "hero_title": "Top 5 del mes",
+      "hero_col_rank": "#",
+      "hero_col_zone": "Zona",
+      "hero_col_value": "Valor",
+      "hero_col_delta": "Δ",
+      "causal_title": "¿Por qué pasó esto?",
+      "cta_indices": "Ver los 15 índices",
+      "footer_lfpdppp": "DesarrollosMX respeta tu privacidad conforme a la normativa de datos personales.",
+      "footer_prefs": "Gestionar preferencias",
+      "footer_unsubscribe": "Darme de baja"
+    },
+    "wrapped": {
+      "breadcrumb": "Wrapped",
+      "page": {
+        "title": "DMX Wrapped {year}",
+        "meta_description": "Los números que marcaron el año {year} en bienes raíces."
+      },
+      "hero": {
+        "title": "DMX Wrapped {year}",
+        "subtitle": "Los números que marcaron el año en bienes raíces."
+      },
+      "aria": {
+        "landing": "Página de DMX Wrapped {year}",
+        "cards_list": "Lista de tarjetas del año"
+      },
+      "cta": {
+        "explore_indices": "Explorá los índices",
+        "share": "Compartir",
+        "subscribe": "Suscribite al newsletter"
+      },
+      "footer": {
+        "generated_at": "Generado el {date}"
+      },
+      "cards": {
+        "top_zone_explored": "Tu zona más explorada",
+        "zone_visited_count": "Movimientos registrados",
+        "top_pulse_zone": "Zona con mayor pulso",
+        "top_migration_origin": "Ruta migratoria #1",
+        "top_migration_destination": "Top destino nacional",
+        "top_alpha_zone": "Zona alpha top",
+        "index_watched_most": "Índice más consultado",
+        "streak_personal_best": "Mejor racha nacional",
+        "national_pulse": "Pulso nacional top",
+        "national_top_migration": "Top destino nacional",
+        "scorecard_reports_read": "Scorecards publicados"
+      },
+      "email": {
+        "subject": "DMX Wrapped {year} — Tu año en bienes raíces",
+        "cta": "Ver mi Wrapped {year}"
+      }
+    },
+    "unsubscribe": {
+      "page": {
+        "title": "Baja del newsletter — DesarrollosMX",
+        "meta_description": "Confirmá la baja de tu suscripción al newsletter de DesarrollosMX."
+      },
+      "title": "¿Querés darte de baja?",
+      "body": "Estás por darte de baja del newsletter para {email}. Ya no vas a recibir nuestros correos.",
+      "reason_label": "¿Nos contás por qué? (opcional)",
+      "reason_placeholder": "Un motivo breve nos ayuda a mejorar…",
+      "confirm_cta": "Confirmar baja",
+      "compliance_note": "Conforme a la normativa de datos personales aplicable, tu baja es inmediata y gratuita.",
+      "success_title": "Baja confirmada",
+      "success_body": "Tu baja fue procesada. Podés volver a suscribirte cuando quieras.",
+      "invalid": {
+        "title": "Enlace no válido",
+        "body": "El enlace expiró o ya fue usado. Podés suscribirte de nuevo desde la página principal.",
+        "back_home": "Volver al inicio"
+      }
+    },
+    "confirm": {
+      "email_subject": "Confirmá tu suscripción — DesarrollosMX",
+      "email_title": "¡Confirmá tu suscripción!",
+      "email_cta": "Confirmar suscripción",
+      "email_body_intro": "Recibimos una solicitud para suscribir {email} al newsletter mensual.",
+      "email_body_action": "Hacé clic en el siguiente botón para confirmar:",
+      "email_footer_ignore": "Si no solicitaste esto, ignorá este correo."
+    },
+    "ab": {
+      "admin": {
+        "title": "Newsletter A/B Tests",
+        "subtitle": "Experimentos de subject line 50/50 con winner auto-computado.",
+        "empty": "Aún no hay experiments registrados.",
+        "col_template": "Template",
+        "col_period": "Período",
+        "col_subject_a": "Subject A",
+        "col_subject_b": "Subject B",
+        "col_sample": "Sample",
+        "col_rate_a": "% Open A",
+        "col_rate_b": "% Open B",
+        "col_winner": "Winner",
+        "col_action": "Acción",
+        "cta_compute_winner": "Calcular winner"
+      }
+    }
   }
 }

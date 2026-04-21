@@ -886,6 +886,486 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Industria origen:** Spotify Discover Weekly embeddings pattern
 - **Dependencia data:** pgvector 64-dim (ADR-027) + 15+ scores feature vector + vibe_tags (ADR-022)
 
+### L83 — LTTB downsample series temporales >250 puntos (upgrade directo 11.D)
+
+- **Status:** ✅ implemented (FASE 11 XL BLOQUE 11.D.6.3.5 — BacktestChart recharts)
+- **Qué es:** algoritmo Largest Triangle Three Buckets para reducir puntos sin perder shape visual de la serie.
+- **Para qué sirve:** performance smooth en gráficas largas (backtest 3-5 años histórico) sin degradar UX.
+- **Beneficio concreto:** first paint <300ms vs renderizado raw >2s con 1200+ puntos.
+- **Fase target:** IMPLEMENTED 11.D.6 (BacktestChart)
+- **Industria origen:** Grafana + TradingView pattern (time-series visualization at scale)
+- **Dependencia data:** data points jsonb con timestamp+value
+
+### L84 — Hash-based URL sharing backtests (upgrade directo 11.D → 11.L)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.L — APIs REST + Widget + sharing)
+- **Qué es:** URL con hash que captura filtros backtest (índice + topN + periodo + colonias) → share deep link compartible por WhatsApp/Twitter que regenera vista exacta.
+- **Para qué sirve:** viralidad + reproducibilidad de análisis. "Compartir esta simulación" en 1 click.
+- **Beneficio concreto:** UGC sharing + inbound SEO para /indices/backtest páginas generadas.
+- **Fase target:** FASE 11 XL BLOQUE 11.L (APIs públicas + Widget + Time Machine sharing)
+- **Industria origen:** TradingView + CodePen URL-as-state pattern
+- **Dependencia data:** encoder hash compact + cache server-side (optional)
+
+### L85 — DMX Portfolio Builder Morningstar X-Ray (lateral → FASE 20)
+
+- **Status:** ⚪ backlog (diferido FASE 20 Portal Comprador)
+- **Qué es:** combinar 3-4 colonias con allocation weights y backtestear como índice virtual (portfolio simulado). UX estilo Morningstar X-Ray.
+- **Para qué sirve:** inversionistas boutique que quieren diversificar entre colonias pueden simular antes de comprar. "Si compro 40% Narvarte + 30% Roma Sur + 30% Portales, histórico 3y = 18.3% ROI."
+- **Beneficio concreto:** producto diferenciador para inversor retail sofisticado + upsell Pro tier.
+- **Fase target:** FASE 20 Portal Comprador (módulo inversor pro)
+- **Industria origen:** Morningstar Portfolio X-Ray
+- **Dependencia data:** time series 15 índices × colonias + backtest engine existente (11.D.4)
+
+### L86 — DMX Methodology Lab diff visual v1→v2 (lateral → FASE 12)
+
+- **Status:** ⚪ backlog (diferido FASE 12 N5 AI + framework prompt versioning)
+- **Qué es:** visualización diff bars superpuestas entre pesos v1 vs v2 de cualquier índice DMX. "Methodology Lab" posiciona DMX como "S&P + GitHub Blame" — transparencia radical del cambio de modelo.
+- **Para qué sirve:** bancos + aseguradoras + regulatorios quieren auditar cambios metodológicos. Diff visual reduce barrera a entender evolución.
+- **Beneficio concreto:** trust institucional + moat transparencia (nadie más lo hace en real estate LATAM).
+- **Fase target:** FASE 12 (framework prompt versioning + UI methodology compare)
+- **Industria origen:** S&P Global Methodology pages + GitHub blame/diff
+- **Dependencia data:** `dmx_indices_methodology_versions` (ya existe) + componente diff UI
+
+### L87 — Columna cost_usd + tokens en causal_explanations (directo → 11.Z)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.Z verificación final — migration 1 línea)
+- **Qué es:** agregar `cost_usd numeric(10,6)` + `tokens_in int` + `tokens_out int` a tabla `causal_explanations`. Reemplaza proxy row-count × $0.01 avg con tracking exacto.
+- **Para qué sirve:** cost-guard preciso + dashboard de gasto LLM real + telemetría observabilidad.
+- **Beneficio concreto:** control presupuesto AI H1 + telemetría limpia para FASE 12 framework completo.
+- **Fase target:** FASE 11 XL BLOQUE 11.Z (migration pre-tag fase-11-complete)
+- **Industria origen:** OpenAI usage dashboard + Anthropic console
+- **Dependencia data:** causal-engine persist extender + migration allowlist
+
+### L88 — Prompt v2 drivers estructurados (directo → FASE 12)
+
+- **Status:** ⚪ backlog (diferido FASE 12 — framework AI prompt versioning + structured drivers)
+- **Qué es:** prompt v2 Causal Engine forza modelo a devolver top-3 drivers como array separado además del markdown. Permite visualizaciones (sparkline por driver) sin parsing NL.
+- **Para qué sirve:** UI puede mostrar bars/sparkline por driver en lugar de solo texto. Maximiza data-driven visualization vs prose.
+- **Beneficio concreto:** UX más escaneable + analytics del driver más frecuente cross-colonias.
+- **Fase target:** FASE 12 N5 AI framework + ai_prompt_versions table mature
+- **Industria origen:** structured output LLM patterns (function calling / tool use)
+- **Dependencia data:** ai_prompt_versions + Zod schema drivers array
+
+### L89 — DMX Timeline Narrativo causal histórico (lateral → 11.I)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I ampliado — Scorecard Nacional)
+- **Qué es:** serie histórica de explicaciones causales por colonia leída como relato continuo. "Roma Norte subió IPV en marzo por movilidad → bajó en abril por seguridad → recuperó en mayo por nuevos cafés."
+- **Para qué sirve:** convierte datos temporales en storytelling lineal citable por prensa + inversionistas. Nadie lo hace.
+- **Beneficio concreto:** press-ready content + brand autoridad narrativa + SEO long-form.
+- **Fase target:** FASE 11 XL BLOQUE 11.I (Scorecard Nacional — integrar narrative timeline)
+- **Industria origen:** Bloomberg Businessweek narrative data journalism + Wikipedia timeline articles
+- **Dependencia data:** causal_explanations acumulados 12m+ + causal-engine generator con timeline prompt
+
+### L90 — Why-alerts push notificaciones causales (lateral → 11.T)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.T Alert Radar ampliado)
+- **Qué es:** usuario sigue colonia X, recibe notificación push con explicación causal cada vez que índice cambia significativamente. "Narvarte DMX-IPV +4pts hoy — razón: 3 nuevos permisos construcción + metro línea 12 confirmado."
+- **Para qué sirve:** convierte Causal Engine en canal de retención diario sin saturar (solo cambios significativos).
+- **Beneficio concreto:** engagement D1/D7 altísimo + viralidad vía share de notifications + upsell Pro tier (causal detailed).
+- **Fase target:** FASE 11 XL BLOQUE 11.T Alert Radar WhatsApp (ampliar scope: índice + causal + pulse)
+- **Industria origen:** Robinhood Alerts (price change + reason) + Strava kudos push
+- **Dependencia data:** Causal Engine (11.E) + Alert Radar infra (11.T) + push/WhatsApp channel
+
+### L91 — Pulse Alertas anomalías >15pts delta (directo → 11.T)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.T Alert Radar multi-señal)
+- **Qué es:** cuando Pulse Score cae >15pts mes-sobre-mes, notificación automática al usuario suscrito a esa zona.
+- **Para qué sirve:** avisar cuando una zona "se enferma" antes de comprar o antes que vecinos se enteren. Early warning system.
+- **Beneficio concreto:** dueños proactivos + vendedores pueden ajustar precio + compradores evitan timing malo.
+- **Fase target:** FASE 11 XL BLOQUE 11.T Alert Radar (ampliar: índice + causal + pulse alertas)
+- **Industria origen:** Fitbit/Apple Watch anomaly detection + seguros health proactive alerts
+- **Dependencia data:** zone_pulse_scores histórico + Alert Radar infra (11.T)
+
+### L92 — Pulse Comparador lado-a-lado 2 colonias (directo → 11.L)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.L Widget + Vital Signs)
+- **Qué es:** mostrar Pulse Score de 2 colonias superpuestas en misma sparkline con colores distintos + leyenda. "Comparar Narvarte vs Roma Sur" en 1 vista.
+- **Para qué sirve:** decisión informada entre opciones reemplaza "corazonada" con evidencia visual directa. Pattern Morningstar side-by-side.
+- **Beneficio concreto:** reduce tiempo-a-decisión comprador + diferenciador vs portales que no tienen comparador nativo.
+- **Fase target:** FASE 11 XL BLOQUE 11.L (Widget Vital Signs ampliado con modo comparador)
+- **Industria origen:** Morningstar side-by-side fund compare + Kayak flights compare
+- **Dependencia data:** zone_pulse_scores time series + Vital Signs component (11.F)
+
+### L93 — Pulse Pronóstico 30 días forward (directo → 11.N)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.N Futures Curve ampliado)
+- **Qué es:** mini-forecast del Pulse usando tendencia histórica + eventos próximos conocidos (permisos aprobados, metro inaugurándose, etc.). Pronóstico 30d con banda de confianza.
+- **Para qué sirve:** anticipar hacia dónde va la zona los próximos 30 días — decisión de timing compra/venta.
+- **Beneficio concreto:** convierte datos pasados en decisiones futuras accionables + diferenciador "tiempo real" vs competidores mensuales.
+- **Fase target:** FASE 11 XL BLOQUE 11.N (Futures Curve extender a Pulse además de índices)
+- **Industria origen:** yield curve forecast Bloomberg + weather 30d Accuweather
+- **Dependencia data:** zone_pulse_scores 12m+ + futures_curve_projections infra (11.N)
+
+### L94 — Strava Segments colonias streaks (lateral → 11.J)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.J DMX Wrapped ampliado)
+- **Qué es:** "streaks" de zonas que llevan N meses con Pulse >80. Ranking social "las más vivas de CDMX este trimestre" — gamifica descubrimiento de barrios + crea comunidad.
+- **Para qué sirve:** convertir datos fríos en competencia viral. Colonias quieren aparecer en top streaks. Vecinos comparten "mi zona lleva 6 meses top-5".
+- **Beneficio concreto:** viralidad orgánica + SEO + inbound consultation "¿por qué mi colonia bajó de top?"
+- **Fase target:** FASE 11 XL BLOQUE 11.J (DMX Wrapped annual + streaks mensuales)
+- **Industria origen:** Strava Segments leaderboards + Duolingo streaks
+- **Dependencia data:** zone_pulse_scores + dmx_indices histórico + tabla streaks computada mensual
+
+### L95 — Zillow Zestimate "valor médico" press citeable (lateral → 11.I)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I Scorecard Nacional ampliado)
+- **Qué es:** el Pulse Score evolucionando como serie temporal pública citeable. Press releases, notarios, periodistas mencionan "el Pulse de Roma Norte subió a 87". Posiciona DMX como fuente autoritaria de "salud urbana".
+- **Para qué sirve:** ocupar el espacio mental que Zestimate tiene para precio → DMX para "salud" de zona. Marca linguística y data oficial.
+- **Beneficio concreto:** brand autoridad + menciones prensa orgánicas + moat marca "Pulse DMX" como sustantivo genérico eventual.
+- **Fase target:** FASE 11 XL BLOQUE 11.I (Scorecard Nacional — Pulse Score como métrica hero oficial)
+- **Industria origen:** Zillow Zestimate brand colonization + S&P Index ticker brand
+- **Dependencia data:** zone_pulse_scores + Scorecard Nacional quarterly PDF branded
+
+### L96 — Lookup centroides FlowMapbox (directo 11.G upgrade)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.G post-merge polish)
+- **Qué es:** agregar query a `zona_snapshots.centroid` (o `zones.centroid`) en aggregator FlowMapbox → activa líneas curvas reales en el mapa en lugar de SVG fallback.
+- **Para qué sirve:** UX mapa de flujos real vs grid ranked; base para visualización spectacular tipo deck.gl.
+- **Beneficio concreto:** primera impresión del producto dramática — bowl de flows animados entre colonias.
+- **Fase target:** FASE 11 XL BLOQUE 11.G (polish inmediato post-merge)
+- **Industria origen:** Mapbox flow viz + deck.gl ArcLayer pattern
+- **Dependencia data:** `zona_snapshots.centroid` o lookup geográfico en `zones` table
+
+### L97 — Cache tags por period Migration Flow (directo 11.G performance)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.G performance tune)
+- **Qué es:** implementar Vercel runtime-cache con tag `flows:${period}` → evita que cada visita haga query directo. Invalidar al correr aggregator mensual/trimestral.
+- **Para qué sirve:** performance SEO + reducir load DB en rutas públicas `/indices/flujos` cuando tengamos tráfico real.
+- **Beneficio concreto:** First Contentful Paint <200ms + ahorra queries a `zone_migration_flows` (~90% cache hit esperado).
+- **Fase target:** FASE 11 XL BLOQUE 11.G performance o 11.Z polish final
+- **Industria origen:** Next.js + Vercel runtime-cache tag-based invalidation
+- **Dependencia data:** Vercel cache API + aggregator post-run invalidation hook
+
+### L98 — Migration Wrapped anual (lateral → 11.J)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.J DMX Wrapped ampliado)
+- **Qué es:** resumen anual personalizado por usuario estilo Spotify Wrapped: "Tu colonia recibió 5,234 nuevos vecinos del decil 7, top 3% CDMX este año". Shareable cards SEO-friendly.
+- **Para qué sirve:** convierte data migration flows en contenido viral personalizado al cierre del año. Convierte DMX en ritual anual cultural.
+- **Beneficio concreto:** viralidad orgánica masiva enero (comparable a Spotify Wrapped) + brand awareness + UGC sharing.
+- **Fase target:** FASE 11 XL BLOQUE 11.J (DMX Wrapped annual + migration section)
+- **Industria origen:** Spotify Wrapped annual personalization pattern
+- **Dependencia data:** `zone_migration_flows` acumulados 12m + user's zona suscrita + shareable card generator (11.U stickers infra)
+
+### L99 — Gentrification Alert suscripción por zona (lateral → 11.T)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.T Alert Radar ampliado)
+- **Qué es:** suscripción push/email por zona: alerta cuando flows entrantes superan threshold de decil alto (>+2 vs baseline). Posiciona DMX como "Zillow con alma de urbanista".
+- **Para qué sirve:** dueños actuales pueden anticipar gentrificación antes que suban precios/impuestos. Inversionistas detectan zonas en transición temprana.
+- **Beneficio concreto:** producto premium diferenciado + brand "DMX defensor del urbanismo responsable" + engagement high-intent.
+- **Fase target:** FASE 11 XL BLOQUE 11.T Alert Radar (ampliar: índice + causal + pulse + migration)
+- **Industria origen:** Zillow home value tracker + urbanist watchdog pattern
+- **Dependencia data:** `zone_migration_flows` time series + Alert Radar infra (11.T)
+
+### L100 — Magnet vs Exodus Index ranking público (lateral → 11.I)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I Scorecard Nacional sección migration)
+- **Qué es:** ranking trimestral público top 10 zonas "magnet" (más inflow neto) vs top 10 "exodus" (más outflow neto) CDMX. Estilo Forbes lists.
+- **Para qué sirve:** viralidad orgánica en medios — Forbes-style lists generan citas prensa + tráfico SEO. Pregunta fácil que prensa adora: "¿A qué colonia se muda toda la gente?"
+- **Beneficio concreto:** press mentions trimestrales + SEO long-form + posiciona DMX como autoridad demografía urbana.
+- **Fase target:** FASE 11 XL BLOQUE 11.I (Scorecard Nacional — sección Movilidad Urbana)
+- **Industria origen:** Forbes best-of ranking lists + U-Haul Growth Index
+- **Dependencia data:** `zone_migration_flows` quarterly aggregation + Scorecard Nacional PDF generator
+
+### L101 — Flow Arbitrage alerta inversionistas (lateral → FASE 23)
+
+- **Status:** ⚪ backlog (diferido FASE 23 Monetización — producto B2B premium)
+- **Qué es:** alerta cuando zona B recibe flujos de decil mayor que zona A adyacente, PERO precios de A son mayores. Señal temprana de reajuste de precios.
+- **Para qué sirve:** inversionistas tenen edge informacional para arbitrar — compran B barato antes que el mercado se dé cuenta. Producto exclusivo B2B.
+- **Beneficio concreto:** ticket alto ($5-15K/mes B2B) + moat data arbitraje alpha-seeking + diferenciador vs todos competidores.
+- **Fase target:** FASE 23 Monetización (producto B2B premium) con base en 11.G Migration Flow
+- **Industria origen:** hedge fund arbitrage signals + real estate quant arbitrage
+- **Dependencia data:** `zone_migration_flows` + `dmx_indices` price index + adjacency graph colonias
+
+### L102 — Hover tooltips FlowTopTable preview (directo 11.G UX polish)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.G UX polish)
+- **Qué es:** hover en rows de FlowTopTable muestra preview (zona name real, foto hero, mini-stats scores) en tooltip/popover.
+- **Para qué sirve:** discovery accidental — user que miraba flows descubre que Narvarte le interesa + click profundo. Reduce paso intermedio.
+- **Beneficio concreto:** +15-25% CTR estimado del flows table hacia detail page.
+- **Fase target:** FASE 11 XL BLOQUE 11.G (UX polish o 11.Z polish final)
+- **Industria origen:** GitHub PR/issue hover previews + Linkedin profile hover card
+- **Dependencia data:** `zones` tabla metadata + IndexBadge component reuso
+
+### L103 — Multi-language Instagram handle detection (directo 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 38 International Expansion)
+- **Qué es:** scraping IG Apify expandido a perfiles verificados CO/AR/BR/CL (actualmente H1 solo MX).
+- **Para qué sirve:** habilitar Trend Genome multi-país cuando DMX expanda.
+- **Beneficio concreto:** producto B2B LATAM-wide vs solo MX.
+- **Fase target:** FASE 38 International Expansion
+- **Industria origen:** Apify multi-region scraping patterns
+- **Dependencia data:** APIFY_TOKEN + locale-aware filters
+
+### L104 — Alpha zone lifecycle tracking (directo 11.H diferido)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I — Scorecard Nacional sección lifecycle)
+- **Qué es:** tracking de zonas por estado: `emerging → alpha → peaked → matured → declining`. Transición entre estados con fechas y causal automático.
+- **Para qué sirve:** historias completas de vida de zonas (Condesa: alpha 2011, peak 2016, maturing 2020, stable 2024) — narrativa timeline educativa.
+- **Beneficio concreto:** press-ready content + case studies + brand autoridad historia urbana.
+- **Fase target:** FASE 11 XL BLOQUE 11.I Scorecard Nacional (módulo lifecycle complementa Timeline Narrativo L89)
+- **Industria origen:** product lifecycle Bass model + startup stages framework
+- **Dependencia data:** zone_alpha_alerts histórico + causal_explanations + Timeline Narrativo (11.I.6)
+
+### L105 — Signal anomaly alerts súbitas (directo 11.H diferido)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.T — Alert Radar multi-señal ampliado)
+- **Qué es:** detectar cuando una fuente específica (ej. IG influencer heat) emerge súbitamente en una zona previamente fría. Trigger alerta independiente antes de que alpha_score compuesto cruce threshold.
+- **Para qué sirve:** early-early warning — capta señales débiles individuales antes de que converjan.
+- **Beneficio concreto:** ventaja temporal adicional 1-3 meses vs detector compuesto.
+- **Fase target:** FASE 11 XL BLOQUE 11.T Alert Radar (granularidad single-signal + composite)
+- **Industria origen:** hedge fund single-signal alerts + Splunk anomaly detection
+- **Dependencia data:** influencer_heat_zones + historical baseline por fuente
+
+### L106 — Alpha alert digest semanal opt-in (directo 11.H diferido)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.T — Alert Radar granularidad frequency)
+- **Qué es:** opt-in digest semanal que agrupa alertas alpha en un solo email/WhatsApp curado en lugar de notificación individual por alerta.
+- **Para qué sirve:** usuarios que prefieren resumen batch vs stream. Reduce fatiga + aumenta apertura.
+- **Beneficio concreto:** mejor retención para segmento que odia notificaciones frecuentes.
+- **Fase target:** FASE 11 XL BLOQUE 11.T Alert Radar (user preference frequency: instant|daily|weekly)
+- **Industria origen:** LinkedIn weekly digest + Substack weekly roundup
+- **Dependencia data:** zone_alert_subscriptions + extender `frequency` enum
+
+### L107 — Alpha Academy curso educativo lead magnet (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 23 Monetización — lead magnet B2B)
+- **Qué es:** curso online (4-6 módulos) "Cómo identificar zonas emergentes antes que el mercado". Certificación opcional. Free gate para Pro+ tier upsell.
+- **Para qué sirve:** lead magnet B2B brutal — reduce fricción en el funnel Pro+ enterprise. Posiciona DMX como Bloomberg Education.
+- **Beneficio concreto:** ARR upsell path clara + brand educativo + content marketing evergreen.
+- **Fase target:** FASE 23 Monetización (lead magnet + Pro+ upsell funnel)
+- **Industria origen:** Bloomberg Terminal education + CFA Institute pattern
+- **Dependencia data:** contenido original + platform LMS (Teachable, Podia o custom H2)
+
+### L108 — Alpha Challenge tournament mensual B2B (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing & Communications)
+- **Qué es:** tournament mensual entre clientes B2B — quién identifica más zonas alpha antes que DMX. Leaderboard público. Premio: 1 mes gratis Pro+ + PR mention.
+- **Para qué sirve:** engagement brutal + viralidad orgánica + data enrichment (las predicciones de humanos enriquecen modelo).
+- **Beneficio concreto:** reduce churn Pro+ + content orgánico mensual + mejora modelo con human-in-the-loop.
+- **Fase target:** FASE 22 Marketing (tournaments + community + gamification)
+- **Industria origen:** Kaggle competitions + Numerai tournaments
+- **Dependencia data:** zone_alpha_alerts + user predictions tabla nueva + leaderboard infra
+
+### L109 — Alpha NFT collectibles predicciones acertadas (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 34 Creator Economy)
+- **Qué es:** NFT coleccionables para suscriptores Pro+ por cada alerta alpha que aciertan antes del mercado. Valor comunidad + coleccionismo gamificado.
+- **Para qué sirve:** valor simbólico + fidelización community + potential secondary market (colectores).
+- **Beneficio concreto:** diferenciador emocional B2B + long-term community moat.
+- **Fase target:** FASE 34 Creator Economy (NFT + community assets)
+- **Industria origen:** POAP + NFT collectibles achievement pattern
+- **Dependencia data:** user achievements tabla + wallet integration + IPFS mint
+
+### L110 — Alpha Social club exclusive Pro+ (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 23 Monetización — community value-add Pro tier)
+- **Qué es:** Discord/Slack comunidad exclusive Pro+ donde fondos + developers + investors networking + intercambio insights. Moderado por DMX.
+- **Para qué sirve:** networking value-add justifica Pro+ pricing + crea community moat (switching cost alto).
+- **Beneficio concreto:** churn Pro+ reducido dramáticamente + ecosystem lock-in.
+- **Fase target:** FASE 23 Monetización (Pro+ tier benefits — community)
+- **Industria origen:** Bloomberg Terminal chat + hedge fund slack communities
+- **Dependencia data:** Discord/Slack integration + verification tier + moderation
+
+### L111 — Alpha Podcast mensual análisis top zones (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing & Communications)
+- **Qué es:** podcast mensual 30-45 min: host DMX + expert invitado analizan top alpha zones del mes, contexto histórico, implicaciones.
+- **Para qué sirve:** SEO audio long-form + brand autoridad + multiplicador de scorecard quarterly.
+- **Beneficio concreto:** content evergreen + menciones cross-podcast + top-of-mind B2B.
+- **Fase target:** FASE 22 Marketing (content strategy podcast)
+- **Industria origen:** NPR The Daily + Masters of Scale + FT News Briefing
+- **Dependencia data:** Scorecard Nacional quarterly + audio production pipeline
+
+### L112 — Alpha Leaderboard B2B clientes (lateral 11.H diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing & Communications — gamification)
+- **Qué es:** leaderboard público ranked de clientes B2B por acierto de predicciones alpha. Opt-in para ser listado.
+- **Para qué sirve:** gamificación + bragging rights + viralidad cuando fondos comparten "ranked #1 en Alpha Leaderboard DMX".
+- **Beneficio concreto:** engagement + PR orgánico + diferenciador B2B competitivo.
+- **Fase target:** FASE 22 Marketing (gamification + public leaderboards)
+- **Industria origen:** Robinhood leaderboard + CFA Challenge + Kaggle rankings
+- **Dependencia data:** L108 Alpha Challenge infra + subscribers tier metadata
+
+### L113 — TG × Timeline Histórico Causal (cross-function 11.H × 11.I)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I Scorecard Nacional)
+- **Qué es:** combinar alpha zones con Timeline Narrativo (11.I.6): narrativa alpha zones evolución 12m — "cómo llegó Portales a fase alpha, qué señales aparecieron primero, quiénes fueron los early movers".
+- **Para qué sirve:** storytelling poderoso para prensa + case studies educativos + validación retrocausal narrativa.
+- **Beneficio concreto:** press content mensual + formato repetible + reduce duda metodológica.
+- **Fase target:** FASE 11 XL BLOQUE 11.I (integración con 11.I.6 Timeline Narrativo + 11.H alpha histórico)
+- **Industria origen:** Bloomberg narrative data journalism + S&P transition stories
+- **Dependencia data:** zone_alpha_alerts histórico + causal_explanations + Timeline Narrativo
+
+### L114 — TG × Causal Engine narrativa alerta (X1 diferido 11.H)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.I Scorecard Nacional — sección alpha con causal)
+- **Qué es:** al generar una alerta alpha, llamar Causal Engine (11.E) para incluir narrativa "por qué {colonia} entró fase alpha" en el payload del alert + UI dashboard.
+- **Para qué sirve:** contexto inmediato accionable en la alerta — no solo "alpha score 82" sino "alpha por 3 cafés especialidad nuevos + migración decil 8".
+- **Beneficio concreto:** reduce tiempo-a-decisión del suscriptor B2B + brand "DMX explica, no solo alerta".
+- **Fase target:** FASE 11 XL BLOQUE 11.I (integrar causal narrativa en alpha alerts + Scorecard Nacional)
+- **Industria origen:** Bloomberg Terminal contextual alerts + hedge fund explainable signals
+- **Dependencia data:** Causal Engine (11.E) + zone_alpha_alerts infra
+
+### L115 — Alpha zones map overlay en /indices/flujos (D4 diferido 11.H)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.Z polish final)
+- **Qué es:** nueva capa toggle "Alpha zones" en mapa existente /indices/flujos (11.G) con coropleto según alpha_score. Reusa MapboxChoropleth.
+- **Para qué sirve:** cross-visualización flows migratorios + alpha detection en misma vista = insight combinado "zonas alpha con inflow alto = confirmed opportunity".
+- **Beneficio concreto:** UX unificada + reduce toggle entre páginas + insight compuesto más potente.
+- **Fase target:** FASE 11 XL BLOQUE 11.Z polish final (complementa 11.G)
+- **Industria origen:** Mapbox layer toggling + Kepler.gl multi-layer
+- **Dependencia data:** zone_alpha_alerts + MapboxChoropleth component (ya existe 11.G)
+
+### L116 — Rate limit per-tier API Trend Genome (D5 diferido 11.H)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.L APIs REST + Widget + Time Machine)
+- **Qué es:** implementar rate limiting granular per-tier (free 100/mes, Starter 500/mes, Pro 1K/mes, Enterprise unlimited) en endpoints Trend Genome. Integra con rate limit infra del BLOQUE 11.L (APIs REST).
+- **Para qué sirve:** gating comercial sostenible que previene abuse free tier sin frenar growth.
+- **Beneficio concreto:** funnel upsell claro Pro+ + control costos Apify + telemetría uso por tier.
+- **Fase target:** FASE 11 XL BLOQUE 11.L APIs REST (natural fit con rate limit global)
+- **Industria origen:** Stripe API rate limits + OpenAI API tier structure
+- **Dependencia data:** subscriptions.plan + check_rate_limit + tier enforcement middleware
+
+### L117 — TG × Índices DMX dominantes chips inline (X4 diferido 11.H)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.Z polish final)
+- **Qué es:** en AlphaZoneCard mostrar mini-chips con los top 3 índices DMX dominantes en esa alpha zone (ej. DMX-GNT 87, DMX-YNG 82, DMX-MOM 75). Cross-reference visual inmediato.
+- **Para qué sirve:** contexto inmediato sobre qué dimensiones IE explican la fase alpha — "alpha por gentrificación + momentum + millennial".
+- **Beneficio concreto:** conexión visual con producto principal (índices DMX) + educación metodológica inline.
+- **Fase target:** FASE 11 XL BLOQUE 11.Z polish final (UI enriquecido)
+- **Industria origen:** Morningstar style-box + Bloomberg multi-metric cards
+- **Dependencia data:** dmx_indices (11.A) + AlphaZoneCard component (ya existe 11.H.6)
+
+### L118 — Scorecard executive 1-pager dense summary (lateral 11.I diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing & Communications — press asset)
+- **Qué es:** versión 1-pager del Scorecard Nacional con data densa visual estilo Bloomberg one-pager. Complementa el PDF 40-80 páginas completo.
+- **Para qué sirve:** medios + fondos quieren skim rápido sin leer 40 páginas. One-pager = primer asset que share en Twitter/LinkedIn.
+- **Beneficio concreto:** viralidad PR + clic-through al PDF completo desde one-pager.
+- **Fase target:** FASE 22 Marketing (press asset kit ampliado)
+- **Industria origen:** Bloomberg one-pager briefings + McKinsey exec summary format
+- **Dependencia data:** Scorecard Nacional data quarterly ya existente + diseño Figma template
+
+### L119 — Scorecard infografía redes sociales descargable (lateral 11.I diferido)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.U Stickers — generator infra reutilizable)
+- **Qué es:** PNG shareable optimizados Twitter (1200×675) + LinkedIn (1200×627) + Instagram (1080×1080) con top 3 insights Scorecard. Reusa generator Sharp/SVG de 11.U.
+- **Para qué sirve:** amplificación social orgánica masiva cuando se publica Scorecard trimestral.
+- **Beneficio concreto:** shares redes sociales 10x vs solo PDF link.
+- **Fase target:** FASE 11 XL BLOQUE 11.U Stickers (generator infra reusable)
+- **Industria origen:** Axios Infographics + Visual Capitalist shareable cards
+- **Dependencia data:** Scorecard quarterly + 11.U sticker generator + SVG templates brand
+
+### L120 — Scorecard audio summary podcast auto-TTS (lateral 11.I diferido)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing — podcast strategy)
+- **Qué es:** audio 5-7 min TTS auto-generado del executive summary del Scorecard trimestral. Publicado en Spotify/Apple Podcasts "DMX Pulse Trimestral".
+- **Para qué sirve:** audiencia podcast durante commute + amplificación asincrónica del Scorecard.
+- **Beneficio concreto:** content evergreen cross-platform + top-of-mind B2B commuters.
+- **Fase target:** FASE 22 Marketing (podcast strategy integrada con Alpha Podcast L111)
+- **Industria origen:** Bloomberg Surveillance podcast + FT News Briefing
+- **Dependencia data:** executive narrative (11.I.3) + TTS pipeline (ElevenLabs/Lovo)
+
+### L121 — Scorecard citation format academic crossref BibTeX (lateral 11.I diferido)
+
+- **Status:** ⚪ backlog (FASE 23 Monetización — academia partnerships + citation system)
+- **Qué es:** cada Scorecard quarterly tiene DOI + formato citation BibTeX/APA/MLA listo para academia. "DesarrollosMX (2026). Scorecard Nacional Q1 2026. https://doi.org/10.xxxxx"
+- **Para qué sirve:** universidades (ITAM, Tec, UNAM economía urbana) pueden citar DMX como fuente académica formal. Amplifica autoridad.
+- **Beneficio concreto:** referencias académicas orgánicas + partnerships universidades H2.
+- **Fase target:** FASE 23 Monetización (academia partnerships + citation infra)
+- **Industria origen:** S&P Global + NBER working papers citation format
+- **Dependencia data:** CrossRef DOI registration + metadata formal + bibliography generator
+
+### L122 — Scorecard × Living Atlas link colonia wiki (cross-function 11.I × 11.S)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.S Living Atlas)
+- **Qué es:** en el PDF Scorecard y landing, cada colonia mencionada linkea a su página wiki `/atlas/[colonia]` (11.S). Navegación cruzada producto completo.
+- **Para qué sirve:** discovery orgánico — lector Scorecard descubre contenido wiki profundo de cada colonia + reduce bounce.
+- **Beneficio concreto:** time-on-site +30% + producto coherente brand.
+- **Fase target:** FASE 11 XL BLOQUE 11.S Living Atlas (integración bidireccional)
+- **Industria origen:** Wikipedia internal linking + Financial Times related articles
+- **Dependencia data:** Living Atlas pages (11.S) + Scorecard generator (11.I) + URL resolver
+
+### L123 — Scorecard × Widget embed sections (cross-function 11.I × 11.L)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.L APIs REST + Widget)
+- **Qué es:** sections del Scorecard (ej. "Top 5 Magnet", "Executive Summary") embebibles como iframe en medios. Medios pueden integrar Scorecard sin republicar.
+- **Para qué sirve:** El Economista puede embed "Scorecard DMX Q1 — sección Magnet/Exodus" directo en su artículo. Amplificación + backlinks masivos.
+- **Beneficio concreto:** SEO backlinks + distribución nativa en medios + brand amplification.
+- **Fase target:** FASE 11 XL BLOQUE 11.L APIs REST + Widget (nuevo widget type: Scorecard section)
+- **Industria origen:** Bloomberg Embed + Twitter/X tweet embeds
+- **Dependencia data:** Widget embed infra (11.L.1) + Scorecard sections modular (11.I.1)
+
+### L124 — Scorecard × Newsletter mensual digest (cross-function 11.I × 11.J)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.J Newsletter)
+- **Qué es:** newsletter mensual incluye preview del Scorecard quarterly (2 meses antes publish) + after-publish digest resumido con link al PDF completo.
+- **Para qué sirve:** nurture audience newsletter antes + durante el push trimestral. Aumenta conversion a PDF download.
+- **Beneficio concreto:** open rate newsletter +20% estimado + audience building pre-publish.
+- **Fase target:** FASE 11 XL BLOQUE 11.J Newsletter (integración Scorecard hooks)
+- **Industria origen:** Morning Brew pre-issue hooks + Axios AM preview cards
+- **Dependencia data:** Newsletter infra (11.J) + Scorecard calendar publish + MJML template section
+
+### L125 — Pulse signals limitation_code stubs H1 (post 11.I.bis audit)
+
+- **Status:** ⚪ backlog (FASE 12 N5 AI framework — cuando entren sources reales)
+- **Qué es:** stubs fetchFootTraffic/fetchEvents/fetchConstructionPermits de 11.F retornan actualmente limitation string clara. Reemplazar con API real Google Popular Times + Ticketmaster + SEDUVI permits cuando se firmen partnerships.
+- **Para qué sirve:** Pulse Score con 5/5 sources = confidence high. H1 funciona 3/5 (graceful) pero no captura full signal.
+- **Beneficio concreto:** pulse_score más preciso + confidence label correcto.
+- **Fase target:** FASE 12 (framework AI maduro + partnerships firmadas)
+- **Industria origen:** Foursquare + TicketMaster data partnerships
+- **Dependencia data:** Google Places API key + Ticketmaster API + SEDUVI portal
+
+### L126 — Flow table decile "unclassified" i18n (post 11.I.bis audit)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.J polish)
+- **Qué es:** cuando zona_snapshots.payload no incluye decil_ingreso (data gap H1), FlowTopTable muestra "Sin clasificar" fallback. Keys i18n hardcoded en ES, pendiente locales CO/AR/BR/EN.
+- **Para qué sirve:** 5-locale i18n completo en toda UI pública.
+- **Beneficio concreto:** compliance audit:i18n STRICT (requisito tag fase-11-complete).
+- **Fase target:** FASE 11 XL BLOQUE 11.J (polish i18n junto con newsletter locales)
+- **Industria origen:** i18n best practices fallback states
+- **Dependencia data:** messages/*.json keys migrationFlow.table.decile_unclassified
+
+### L127 — Causal Engine fallback stale cache si LLM down (post 11.I.bis audit)
+
+- **Status:** ⚪ backlog (FASE 12 N5 AI framework)
+- **Qué es:** si Anthropic LLM no responde (timeout/quota/500), retornar último causal_explanations cached aunque esté stale (>30d) con badge "cached date" en UI. Mejor stale que error.
+- **Para qué sirve:** uptime producto ante outage LLM provider. Experience graceful en lugar de "error al generar".
+- **Beneficio concreto:** 99.9% uptime UI + trust B2B.
+- **Fase target:** FASE 12 N5 AI framework (circuit breaker + cache fallback maduro)
+- **Industria origen:** Netflix Hystrix circuit breaker + service mesh fallback patterns
+- **Dependencia data:** Causal Engine extensión runtime error handling
+
+### L128 — trackCausalGeneration wire desde causal-engine (post 11.I.bis audit)
+
+- **Status:** ⚪ backlog (FASE 12 N5 AI framework — observability)
+- **Qué es:** función observability `trackCausalGeneration` existe pero no invocada desde causal-engine core. Requiere wire post-generation para telemetría completa tokens/cost/cache_hit.
+- **Para qué sirve:** dashboard cost real LLM + analytics hit rate cache.
+- **Beneficio concreto:** control costos AI preciso + decisiones optimización prompt.
+- **Fase target:** FASE 12 N5 AI (observability framework completo)
+- **Industria origen:** OpenAI usage dashboard + Anthropic console
+- **Dependencia data:** PostHog + Sentry + ai_usage_tracking tabla (FASE 12)
+
+### L129 — PNG rasterize @napi-rs/canvas approval (post 11.I.bis audit)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing — press asset production)
+- **Qué es:** PNG chart generator actualmente usa SVG nativo (Twitter/LinkedIn/Instagram aceptan SVG y native). Para rasterización PNG real (algunos feeds embed no aceptan SVG) requiere @napi-rs/canvas o similar. Founder approval pendiente install.
+- **Para qué sirve:** compatibility máxima redes sociales + embeds terceros.
+- **Beneficio concreto:** 100% compatibility sharing (SVG es ~95%).
+- **Fase target:** FASE 22 Marketing (press asset production avanzado)
+- **Industria origen:** Sharp + node-canvas server-side rendering
+- **Dependencia data:** @napi-rs/canvas install (~5MB bundle)
+
+### L130 — Backtest console scope_id render (post 11.I.bis follow-up)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.L polish)
+- **Qué es:** backtest-console.tsx:334 tiene un caso edge donde scope_id se renderiza sin resolve (contexto async callback). Zone label resolver integration pendiente en ese scope.
+- **Para qué sirve:** consistencia UI — 0 UUIDs renderizados en ninguna parte de la app.
+- **Beneficio concreto:** audit grep final zero UUIDs en UI.
+- **Fase target:** FASE 11 XL BLOQUE 11.L (Hash URL backtests + polish UI)
+- **Industria origen:** React async resolver patterns + Suspense fallback
+- **Dependencia data:** resolveZoneLabel + async Context propagation backtest
+
 ### Cross-references FASE 11 XL append
 
 - `docs/CONTEXTO_MAESTRO_DMX_v5.md` Addendum 2026-04-21 FASE 11 XL
@@ -895,4 +1375,4 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-027_FASE_11_XL_METODOLOGIA_INDICES.md`
 - `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md` §8 TODOs #27-#36
 
-**Última actualización:** 2026-04-21 — L73-L82 (10 laterales FASE 11 XL) + status updates L1/L8/L22 a in_progress
+**Última actualización:** 2026-04-21 — L73-L130 (58 laterales FASE 11 XL, +48 nuevos detectados en BLOQUES 11.D/E/F/G/H/I + post 11.I.bis audit) + 0 items sin destino concreto + BUGS CRÍTICOS detectados y fijados en 11.I.bis (cost-guard wire + causal regenerate rate-limit wire)

@@ -1,4 +1,4 @@
-// Registry central del Intelligence Engine: 126 scores + 15 índices DMX (FASE 11 XL).
+// Registry central del Intelligence Engine: 130 scores (incluye 15 índices DMX FASE 11 XL + PULSE + MIGRATION_FLOW + TREND_GENOME + SCORECARD_NACIONAL).
 // Fuente autoritaria: docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md +
 // ADR-010 §D4/§D7 (cascadas formales) + ADR-027 (FASE 11 XL índices DMX).
 // Consumido por:
@@ -49,9 +49,10 @@ export interface ScoreRegistryEntry {
 }
 
 // ============================================================
-// SCORE_REGISTRY — 126 entries
+// SCORE_REGISTRY — 130 entries
 // Orden: N0 (32) → N1 (16) → N2 (14) → N3 (12) → N4 (7) → N5 (25)
-//        → DMX índices (15 — FASE 11 XL) → stubs futuros H2+ (5) = 126.
+//        → DMX índices (15 — FASE 11 XL) → PULSE + MIGRATION_FLOW + TREND_GENOME
+//        + SCORECARD_NACIONAL (11.F/G/H/I) → stubs futuros H2+ (5) = 130.
 // Breakdown índices DMX: IPV, IAB, IDS, IRE, ICO, MOM, LIV (H1 base 7)
 //        + FAM, YNG, GRN, STR, INV, DEV, GNT, STA (FASE 11 XL +8).
 // ============================================================
@@ -1690,6 +1691,125 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-sta',
     confidence_sources: ['composite'],
     calculator_path: 'shared/lib/intelligence-engine/calculators/indices/sta.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Pulse Score — BLOQUE 11.F ---------------
+  // Métrica "signos vitales" paralela a los 15 índices DMX. level 5 agregado,
+  // tier 2 público, combina DENUE (altas/bajas) + 911 CDMX API + stubs H1 para
+  // foot_traffic/events/construction. Persiste en public.zone_pulse_scores.
+  {
+    score_id: 'PULSE',
+    name: 'Pulse Score',
+    level: 5,
+    category: 'agregado',
+    tier: 2,
+    dependencies: ['N04', 'N09'],
+    triggers_cascade: ['geo_data_updated:denue'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#pulse',
+    confidence_sources: ['denue', 'datos_abiertos_cdmx', 'zone_scores'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/pulse/pulse-score.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Migration Flow — BLOQUE 11.G ---------------
+  // Mapa "de dónde a dónde se mueven los mexicanos" entre zonas. level 5
+  // agregado, tier 2 público, combina RPP escrituras (primaria) + 3 stubs H1
+  // (INEGI ENADID, INE credencial, LinkedIn). Persiste en
+  // public.zone_migration_flows con granularidad trimestral.
+  {
+    score_id: 'MIGRATION_FLOW',
+    name: 'Migration Flow',
+    level: 5,
+    category: 'agregado',
+    tier: 2,
+    dependencies: [],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#migration-flow',
+    confidence_sources: ['rpp_escrituras', 'inegi_enadid', 'ine_credencial', 'linkedin'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/migration/flow-aggregator.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Trend Genome — BLOQUE 11.H ---------------
+  // "Alpha-seeking radar" B2B premium: detecta zonas emergentes 12-18 meses
+  // antes que suban precios mainstream combinando Instagram geo-tags públicos
+  // (Apify, ADR-027 compliance) + DENUE aperturas alpha (cafés especialidad,
+  // galerías, fine dining) + Migration inflow high-income (11.G) + price
+  // velocity invertido + search volume. level 5 agregado, tier 3 Pro+ gated.
+  // Persiste en public.zone_alpha_alerts + public.influencer_heat_zones
+  // (granularidad trimestral).
+  {
+    score_id: 'TREND_GENOME',
+    name: 'Trend Genome',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['MIGRATION_FLOW', 'PULSE'],
+    triggers_cascade: ['geo_data_updated:denue'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#trend-genome',
+    confidence_sources: [
+      'instagram_apify',
+      'denue_alpha_classifier',
+      'zone_migration_flows',
+      'zona_snapshots',
+      'google_trends',
+    ],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/alpha/trend-genome.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Scorecard Nacional — BLOQUE 11.I ---------------
+  // Reporte trimestral agregado nacional "S&P + Banxico del real estate LATAM":
+  // PDF 40-80 pp branded + Press Kit auto (comunicado + quotes + gráficas) +
+  // landing /scorecard-nacional con archivo histórico. Absorbe señales de los
+  // 15 índices DMX + PULSE (11.F) + MIGRATION_FLOW (11.G) + TREND_GENOME (11.H)
+  // + CAUSAL (11.E) en una narrativa coherente press-ready. level 5 agregado,
+  // tier 3 autoridad citeable. Persiste en public.scorecard_national_reports.
+  {
+    score_id: 'SCORECARD_NACIONAL',
+    name: 'Scorecard Nacional',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['PULSE', 'MIGRATION_FLOW', 'TREND_GENOME'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#scorecard-nacional',
+    confidence_sources: [
+      'dmx_indices',
+      'zone_pulse_scores',
+      'zone_migration_flows',
+      'zone_alpha_alerts',
+      'causal_explanations',
+    ],
+    calculator_path: 'features/scorecard-nacional/lib/pdf-generator.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Newsletter — BLOQUE 11.J ---------------
+  // Newsletter mensual (día 5 09:00 CDMX) + DMX Wrapped anual (1 enero) +
+  // Migration Wrapped + Strava Segments streaks + secciones cross-function
+  // Causal/Pulse/Migration/Scorecard. Double opt-in LFPDPPP compliant,
+  // unsubscribe 1-click JWT, A/B testing subjects. Persiste en
+  // public.newsletter_subscribers + newsletter_deliveries + zone_streaks +
+  // newsletter_ab_tests + dmx_wrapped_snapshots.
+  {
+    score_id: 'NEWSLETTER',
+    name: 'Newsletter',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['PULSE', 'MIGRATION_FLOW', 'SCORECARD_NACIONAL'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#newsletter',
+    confidence_sources: [
+      'newsletter_subscribers',
+      'zone_pulse_scores',
+      'zone_migration_flows',
+      'causal_explanations',
+      'scorecard_national_reports',
+    ],
+    calculator_path: 'features/newsletter/lib/monthly-builder.ts',
     country_codes: ['MX'],
   },
 

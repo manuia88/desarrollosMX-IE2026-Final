@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl';
 import { Suspense } from 'react';
 import { CausalExplanation } from '@/features/causal-engine/components/CausalExplanation';
+import { VitalSigns } from '@/features/pulse-score/components';
+import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
@@ -150,9 +152,11 @@ export function IndexDetailClient({
           scopeType={scopeType}
           scopeId={scopeId}
           periodDate={detailRow.period_date}
-          scopeLabel={scopeId}
+          scopeLabel={resolveZoneLabelSync({ scopeType, scopeId })}
         />
       ) : null}
+
+      {detailRow && scopeId ? <VitalSigns scopeType={scopeType} scopeId={scopeId} /> : null}
 
       <section
         aria-label={t('detail.ranking_in_scope', {

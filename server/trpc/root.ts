@@ -7,6 +7,7 @@ import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { ieScoresRouter } from '@/features/ie/routes/scores';
 import { indicesPublicRouter } from '@/features/indices-publicos/routes/indices-public';
 import { marketRouter } from '@/features/market/routes/market';
+import { newsletterPublicRouter } from '@/features/newsletter/routes/newsletter-public';
 import { scianRouter } from '@/features/scian/routes/scian';
 import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
 import { envRouter } from '@/features/str-intelligence/routes/env';
@@ -25,6 +26,9 @@ import { strWatchdogRouter } from '@/features/str-intelligence/routes/watchdog';
 import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
 import { publicProcedure, router } from './init';
 import { causalRouter } from './routers/causal';
+import { migrationFlowRouter } from './routers/migration-flow';
+import { pulseRouter } from './routers/pulse';
+import { trendGenomeRouter } from './routers/trend-genome';
 
 export const appRouter = router({
   health: publicProcedure.query(() => ({
@@ -38,6 +42,8 @@ export const appRouter = router({
   me: meRouter,
   memory: memoryRouter,
   mfa: mfaRouter,
+  migrationFlow: migrationFlowRouter,
+  newsletter: newsletterPublicRouter,
   roleRequest: roleRequestRouter,
   scian: scianRouter,
   ltrStrConnection: ltrStrConnectionRouter,
@@ -50,12 +56,14 @@ export const appRouter = router({
   invisibleHotels: invisibleHotelsRouter,
   nomad: nomadRouter,
   photoCv: photoCvRouter,
+  pulse: pulseRouter,
   strPortfolio: strPortfolioRouter,
   strPricing: strPricingRouter,
   strReports: strReportsRouter,
   strWatchdog: strWatchdogRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
+  trendGenome: trendGenomeRouter,
   zoneInvestment: zoneInvestmentRouter,
 });
 
