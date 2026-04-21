@@ -747,6 +747,79 @@ Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR
 - [ ] Sentry captures errors (validación runtime)
 - [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
 
+## BLOQUE 20.Y — LifePath v2 + DMX Habitat SEED + Tu Match v1 + Página colonia Spotify + Simulador "compro ahora o espero"
+
+> **Contexto:** Extensiones nuevas del Portal Comprador que amplían capacidades sembradas en FASE 11 XL (seeds implementados) + FASE 12 (v1). Este bloque entrega experiencias únicas que diferencian DMX categóricamente de cualquier portal/CRM existente.
+> **Dependencias:** FASE 11 XL (seeds implementados — Genoma, LifePath, Climate Twin, Living Atlas, Constellations), FASE 12 (LifePath v1 + Climate Twin v1 + Causal Engine + Mapa 12 capas).
+
+### MÓDULO 20.Y.1 — LifePath v2 completo (extiende SEED 11.O + v1 FASE 12)
+
+**Pasos:**
+- `[20.Y.1.1]` v2 agrega personalización profunda: `collaborative filtering` cruzando clusters de compradores similares + feedback implícito (wishlist, visit, pass) + explícito (reactions L18).
+- `[20.Y.1.2]` "LifePath Journey" UI tipo roadmap: 5 etapas visuales (Explorando → Refinando → Evaluando → Decidiendo → Celebrando) con artefactos por etapa.
+- `[20.Y.1.3]` Re-matching automático: cuando user responde nuevas PPD questions, revisita shortlist y propone swaps con rationale ("Ahora que sabemos que valoras quiet hours, cambiamos Condesa por San Miguel Chapultepec").
+- `[20.Y.1.4]` Cross-signal: tools LifePath consumen eventos portal público (time spent zonas, searches, views) para affinamento.
+
+**Criterio de done del módulo:**
+- [ ] LifePath v2 mejora acceptance rate +10pp vs v1.
+
+### MÓDULO 20.Y.2 — DMX Habitat SEED (comunidad por colonia, H2)
+
+**Pasos:**
+- `[20.Y.2.1]` SEED H1 de DMX Habitat: feature de comunidad por colonia con "signos vitales" (healthcare, utilities, safety, transit uptime), residentes verificados + reviews, APIs apps locales.
+- `[20.Y.2.2]` Tablas BD SEED: `dmx_habitat_residents` (colonia_id, user_id, verified_at, role 'resident'|'visitor'|'expert'), `dmx_habitat_signals` (colonia_id, signal_type, value, timestamp), `dmx_habitat_local_apis` (colonia_id, api_name, provider, data_url).
+- `[20.Y.2.3]` UI mínima: sección en página colonia "DMX Habitat" con stub + CTA "Suscríbete — H2" + botón "Verificarte como residente" (captura para priority access H2).
+- `[20.Y.2.4]` Cross-reference: DMX Habitat es H2 producto full, aquí solo SEED similar a Living Atlas/Constellations FASE 11 XL.
+- `[20.Y.2.5]` Feature flag `habitat.seed_enabled` ON, `habitat.full_enabled` OFF.
+
+**Criterio de done del módulo:**
+- [ ] SEED tablas creadas + UI stub visible.
+
+### MÓDULO 20.Y.3 — Onboarding "Tu Match" v1 (8 preguntas → 3 colonias)
+
+**Pasos:**
+- `[20.Y.3.1]` Base ya existe como preview en FASE 11.K (seed); FASE 20 entrega implementación completa: wizard onboarding `/compradores/tu-match` con 8 preguntas diseñadas para maximizar signal en minimum time.
+- `[20.Y.3.2]` Preguntas (secuencia PPD light): (1) ¿Dónde vives ahora? (2) ¿Con quién vivirás? (3) Budget range, (4) Commute a (input trabajo), (5) ¿Qué valoras más? (chips: silencio/vida nocturna/familia/cafes/naturaleza), (6) Tu vida social en 6 meses (casual/intensa/minima), (7) Climate preference (calor/frio/template), (8) Deal-breakers (inseguridad/ruido/inundación/lejanía).
+- `[20.Y.3.3]` Output: 3 colonias match con match score + narrative "Por qué encaja" + CTA "Explorar esta colonia" (→ página colonia estilo Spotify 20.Y.4).
+- `[20.Y.3.4]` Tracking: complete rate target >60%, click-through top match >40%.
+- `[20.Y.3.5]` A/B test variantes preguntas para optimizar completion.
+
+**Criterio de done del módulo:**
+- [ ] Wizard full functional con 3 colonias output + narrative.
+- [ ] Completion rate >60% en cohort beta.
+
+### MÓDULO 20.Y.4 — Página colonia estilo Spotify (timeline + causal + comparables)
+
+**Pasos:**
+- `[20.Y.4.1]` Ruta `/compradores/colonia/[slug]` con experiencia inmersiva estilo Spotify Wrapped / artist page: hero foto + título colonia + badges índices DMX top 3 + CTA hero "¿Te encaja?".
+- `[20.Y.4.2]` Secciones:
+  - **Pulse Hoy** (pulse score + causal "Por qué está así"): consume `zone_pulse_scores` + `causal_explanations` FASE 11 XL.
+  - **Timeline Narrativo** últimos 12 meses: eventos clave (apertura restaurante X, drop crimen Y, nuevo metrobús) timeline tipo Instagram Stories.
+  - **Tu Match con esta colonia**: scoring personalizado + radar + breakdown (solo si user logueado con PPD answers).
+  - **Comparables**: 4 colonias similares en DNA vector + tabla comparison.
+  - **Climate Twin Preview**: mini widget "Así se verá en 2030" (consume FASE 12 BLOQUE 12.Z).
+  - **Voces**: reviews + señales sociales (Instagram tags, Twitter mentions agregados).
+  - **Explorar más**: properties destacadas en esta colonia.
+- `[20.Y.4.3]` Animaciones Dopamine (respeta reduced-motion). Card3D depth + fade transitions.
+- `[20.Y.4.4]` Compartir: botón share genera card tipo Spotify Wrapped (1080x1920) con top 3 highlights colonia. Viral loop.
+
+**Criterio de done del módulo:**
+- [ ] Página render con 7 secciones en <2s.
+- [ ] Share card genera en <3s.
+
+### MÓDULO 20.Y.5 — Simulador "¿compro ahora o espero?" (Causal Engine + forecast MOM)
+
+**Pasos:**
+- `[20.Y.5.1]` Ruta `/compradores/simulador-timing` con calculadora interactiva: user ingresa zona + budget + timeline (próximos 3/6/12/24 meses).
+- `[20.Y.5.2]` Motor `intelligence.simulateTiming` consume Causal Engine FASE 11.E (ya existe) + forecast MOM zona (B08 + N11) + macro signals (TIIE, inflación, inventario) para proyectar rangos precio futuro.
+- `[20.Y.5.3]` Output 3 escenarios (pesimista/base/optimista) + recomendación explícita + confidence + "Qué variables vigilar" (lista top 3 factores que moverán decisión).
+- `[20.Y.5.4]` UI con slider temporal interactivo + narrativa AI ("Tu colonia Roma Norte tiene alta probabilidad de +8-12% en 12 meses por X, Y, Z — comprar ahora es razonable si..."; "Espera 6 meses si priorizas A, B, C").
+- `[20.Y.5.5]` Feature gated para todos (es feature hero del portal comprador).
+
+**Criterio de done del módulo:**
+- [ ] Simulador render recomendación en <4s.
+- [ ] Causal explanations incluyen ≥3 citations.
+
 ## Próxima fase
 
 FASE 21 — Portal Público (landing SPA + /explorar + /proyectos/[id] + /indices + /metodologia + /asesores/[slug] + SEO + A11y)

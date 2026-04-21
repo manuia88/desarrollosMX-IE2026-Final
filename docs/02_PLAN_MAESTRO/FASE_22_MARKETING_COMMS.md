@@ -705,6 +705,52 @@ Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR
 - [ ] Sentry captures errors (validación runtime)
 - [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
 
+## BLOQUE 22.X — WhatsApp Bot consulta índices + Alert Radar segmentado + Press Kit mensual
+
+> **Contexto:** Extensiones comunicacionales que apalancan FASE 11 XL (seeds implementados — 15 índices + Alert Radar WhatsApp base en 11.T + Press Kit trimestral en 11.I). Este bloque amplía hacia consulta conversacional + segmentación fina + frecuencia mayor.
+> **Dependencias:** FASE 11 XL (seeds implementados), FASE 22 WA Business base + templates.
+
+### MÓDULO 22.X.1 — WhatsApp Bot consulta índices
+
+**Pasos:**
+- `[22.X.1.1]` Extender webhook inbound WA (22.E.1) con NLP para detectar queries tipo "¿cómo va Roma Norte?", "score Condesa", "momentum Del Valle", "¿cuál colonia me conviene para familia budget 5M?".
+- `[22.X.1.2]` Claude Haiku parsea intent + entities (zona/índice/budget/perfil) → llama `intelligence.getZoneIndicesSummary({zoneSlug})` o `intelligence.recommendZonesByProfile({budget, profile})`.
+- `[22.X.1.3]` Response template WA (pre-aprobado Meta) con los 15 índices DMX formateados + link a página colonia (FASE 20.Y.4).
+- `[22.X.1.4]` Rate limit: 10 queries/hora por número WA para evitar abuse.
+- `[22.X.1.5]` Feature gated `feature.wa_bot_indices_consultation` (free limited 3/día, Starter 20, Pro ilimitado).
+
+**Criterio de done del módulo:**
+- [ ] Query "¿cómo va Roma Norte?" responde en <5s con 15 índices.
+- [ ] Query recomendación retorna top 3 zonas con rationale.
+
+### MÓDULO 22.X.2 — Alert Radar WhatsApp ampliado (segmentación fina)
+
+**Pasos:**
+- `[22.X.2.1]` Extiende Alert Radar WhatsApp base (FASE 11.T) con segmentación por persona (family/investor/young/senior/nomad), horarios preferidos (quiet hours per user), frecuencia (realtime/daily/weekly), filtros zona.
+- `[22.X.2.2]` UI `/settings/alerts` permite al user configurar: (a) alert types subscribe (alpha alert, price drop, new listing, pulse spike, climate warning), (b) zonas watchlist, (c) persona fit, (d) horarios.
+- `[22.X.2.3]` Cron `alert_radar_wa_dispatcher` cada 15 min evalúa `zone_alpha_alerts` + user subscriptions + respeta quiet hours + dispatch via orchestrator (22.D.1).
+- `[22.X.2.4]` Templates WA específicos por alert type (5 templates Meta a aprobar adicionales).
+
+**Criterio de done del módulo:**
+- [ ] User configura alerts, recibe WA al trigger correcto.
+- [ ] Quiet hours respetadas.
+
+### MÓDULO 22.X.3 — Press Kit Auto mensual
+
+**Pasos:**
+- `[22.X.3.1]` Complementa Press Kit trimestral de FASE 11.I con versión mensual más ágil: el día 3 de cada mes, cron `press_kit_monthly_generate` auto-produce PDF 6-8 páginas con:
+  - "Movers del mes" (top 10 colonias con mayor Δ Momentum/Pulse).
+  - 1 narrative editorial AI (2 páginas).
+  - 3 datos sorprendentes con citations.
+  - Infografías ready para prensa.
+- `[22.X.3.2]` Distribución: emails a lista `press_subscribers` (journalists, reporters, fondos, researchers) + publicación automática `/prensa/mensual/YYYY-MM`.
+- `[22.X.3.3]` Tracking: abre, clicks, menciones (Google Alerts integration H2).
+- `[22.X.3.4]` PR loop: cada mención en prensa alimenta authority + SEO + social proof.
+
+**Criterio de done del módulo:**
+- [ ] Día 3 mes → Press Kit generado + enviado.
+- [ ] Página pública accesible.
+
 ## Próxima fase
 
 FASE 23 — Monetización (Stripe full + feature gating + 7 productos B2B infraestructura H1 + API externa).

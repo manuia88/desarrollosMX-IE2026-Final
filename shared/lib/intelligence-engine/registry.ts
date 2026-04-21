@@ -1,6 +1,7 @@
-// Registry central del Intelligence Engine: 118 scores + 7 índices DMX.
+// Registry central del Intelligence Engine: 126 scores + 15 índices DMX (FASE 11 XL).
 // Fuente autoritaria: docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md +
-// ADR-010 §D4/§D7 (cascadas formales). Consumido por:
+// ADR-010 §D4/§D7 (cascadas formales) + ADR-027 (FASE 11 XL índices DMX).
+// Consumido por:
 //   - shared/lib/intelligence-engine/calculators/run-score.ts (lookup + dispatch)
 //   - UI /metodologia (FASE 21) (publica fórmulas + fuentes)
 //   - scripts/registry-snapshot.mjs (genera snapshot JSON para CI diff)
@@ -48,9 +49,11 @@ export interface ScoreRegistryEntry {
 }
 
 // ============================================================
-// SCORE_REGISTRY — 118 entries
+// SCORE_REGISTRY — 126 entries
 // Orden: N0 (32) → N1 (16) → N2 (14) → N3 (12) → N4 (7) → N5 (25)
-//        → DMX índices (7) → stubs futuros H2+ (5) = 118.
+//        → DMX índices (15 — FASE 11 XL) → stubs futuros H2+ (5) = 126.
+// Breakdown índices DMX: IPV, IAB, IDS, IRE, ICO, MOM, LIV (H1 base 7)
+//        + FAM, YNG, GRN, STR, INV, DEV, GNT, STA (FASE 11 XL +8).
 // ============================================================
 export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
   // --------------- Nivel 0 — Originales (21) ---------------
@@ -1496,7 +1499,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-ipv-indice-precio-valor',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/indices/dmx-ipv.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/ipv.ts',
     country_codes: ['MX'],
   },
   {
@@ -1509,7 +1512,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-iab-indice-absorcion-benchmark',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/indices/dmx-iab.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/iab.ts',
     country_codes: ['MX'],
   },
   {
@@ -1523,7 +1526,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     formula_doc:
       'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-ids-indice-desarrollo-social-integrado',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/indices/dmx-ids.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/ids.ts',
     country_codes: ['MX'],
   },
   {
@@ -1536,7 +1539,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-ire-indice-riesgo-estructural',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/indices/dmx-ire.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/ire.ts',
     country_codes: ['MX'],
   },
   {
@@ -1549,7 +1552,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: ['macro_updated'],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-ico-indice-costo-oportunidad',
     confidence_sources: ['macro_series'],
-    calculator_path: 'features/scores/lib/calculators/indices/dmx-ico.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/ico.ts',
     country_codes: ['MX'],
   },
   {
@@ -1562,7 +1565,7 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-mom-momentum-index-nuevo-v4',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/indices/dmx-mom.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/mom.ts',
     country_codes: ['MX'],
   },
   {
@@ -1575,7 +1578,118 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     triggers_cascade: [],
     formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-liv-livability-index-nuevo-v4',
     confidence_sources: ['composite'],
-    calculator_path: 'features/scores/lib/calculators/indices/dmx-liv.ts',
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/liv.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Índices DMX — FASE 11 XL (8 nuevos) ---------------
+  // Consistencia con los 7 existentes: level=5 (no existe 'index' en ScoreLevel;
+  // los índices DMX viven en level=5 category='agregado'). ADR-027.
+  {
+    score_id: 'DMX-FAM',
+    name: 'Zona Familiar',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['N02', 'F01', 'N08', 'N03', 'N10', 'N07'],
+    triggers_cascade: ['geo_data_updated:denue', 'geo_data_updated:fgj'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-fam',
+    confidence_sources: ['zone_scores', 'denue', 'siged'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/fam.ts',
+    country_codes: ['MX'],
+  },
+  {
+    score_id: 'DMX-YNG',
+    name: 'Zona Millennial',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['F08', 'F02', 'N04', 'N08', 'N09', 'F03'],
+    triggers_cascade: ['geo_data_updated:denue'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-yng',
+    confidence_sources: ['zone_scores', 'denue'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/yng.ts',
+    country_codes: ['MX'],
+  },
+  {
+    score_id: 'DMX-GRN',
+    name: 'Zona Verde',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['N10', 'N05', 'N08', 'F06', 'H01', 'F04'],
+    triggers_cascade: ['geo_data_updated:atlas_riesgos'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-grn',
+    confidence_sources: ['zone_scores', 'atlas_riesgos'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/grn.ts',
+    country_codes: ['MX'],
+  },
+  {
+    score_id: 'DMX-STR',
+    name: 'Airbnb-Ready',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['N09', 'F01'],
+    triggers_cascade: ['geo_data_updated:airroi'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-str',
+    confidence_sources: ['zone_scores', 'airroi'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/str.ts',
+    country_codes: ['MX'],
+  },
+  {
+    score_id: 'DMX-INV',
+    name: 'Proyecto Inversión',
+    level: 5,
+    category: 'agregado',
+    tier: 2,
+    dependencies: ['DMX-ICO', 'DMX-MOM', 'F09', 'A12', 'H05', 'B08'],
+    triggers_cascade: ['macro_updated', 'price_changed'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-inv',
+    confidence_sources: ['composite'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/inv.ts',
+    country_codes: ['MX'],
+  },
+  {
+    score_id: 'DMX-DEV',
+    name: 'Salud Desarrolladora',
+    level: 5,
+    category: 'dev',
+    tier: 2,
+    dependencies: ['H05', 'H06', 'H07', 'H15', 'H08', 'H09'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-dev',
+    confidence_sources: ['composite'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/dev.ts',
+    country_codes: ['MX'],
+  },
+  {
+    score_id: 'DMX-GNT',
+    name: 'Gentrificación Tracker',
+    level: 5,
+    category: 'agregado',
+    tier: 2,
+    // Depends on scores DMX-MOM + N09. También consume signal tables
+    // influencer_heat_zones + zone_migration_flows (no son scores del
+    // registry — se inyectan como signals raw en el calculator).
+    dependencies: ['DMX-MOM', 'N09'],
+    triggers_cascade: ['price_changed', 'geo_data_updated:denue'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-gnt',
+    confidence_sources: ['composite', 'influencer_heat_zones', 'zone_migration_flows'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/gnt.ts',
+    country_codes: ['MX'],
+  },
+  {
+    score_id: 'DMX-STA',
+    name: 'Estabilidad',
+    level: 5,
+    category: 'agregado',
+    tier: 2,
+    dependencies: ['DMX-IRE', 'F08'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#dmx-sta',
+    confidence_sources: ['composite'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/indices/sta.ts',
     country_codes: ['MX'],
   },
 

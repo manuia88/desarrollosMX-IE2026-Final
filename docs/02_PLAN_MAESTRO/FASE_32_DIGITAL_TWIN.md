@@ -1,7 +1,7 @@
 # FASE 32 — Digital Twin 4D
 
 > **Duración estimada:** 6 sesiones Claude Code (~24 horas)
-> **Dependencias:** [FASE 11 — IE Índices DMX](./FASE_11_IE_INDICES_DMX.md), [FASE 21 — Portal Público](./FASE_21_PORTAL_PUBLICO.md), [FASE 28 — Launch Soft](./FASE_28_LAUNCH_SOFT.md)
+> **Dependencias:** [FASE 11 XL — IE Índices DMX + moonshots core + seeds (Time Machine API, Constellations, Living Atlas, Climate Twin, LifePath, Genoma — seeds implementados)](./FASE_11_IE_INDICES_DMX.md), [FASE 21 — Portal Público](./FASE_21_PORTAL_PUBLICO.md), [FASE 28 — Launch Soft](./FASE_28_LAUNCH_SOFT.md)
 > **Bloqueantes externos:**
 > - `MAPBOX_ACCESS_TOKEN` con plan que incluye Mapbox Standard + 3D Buildings
 > - OpenStreetMap Buildings dataset access (free) + tiles hosting
@@ -399,6 +399,43 @@ features/atlas-4d/
 18. **F-32-18** AR companion app STUB + `/ar-app` waitlist
 19. **F-32-19** Remotion export video MP4/GIF/WebM con watermark
 20. **F-32-20** Pattern-referenced GC-10/GC-39/GC-87 integrations
+
+## BLOQUE 32.X — DMX Flux Capacitor + Metaverso de Colonias
+
+> **Contexto:** Extensiones H2/H3 del Digital Twin que convierten la capacidad 4D (3D + tiempo) en productos diferenciados categóricamente. Consumen seeds FASE 11 XL (Time Machine API SEED, Constellations SEED, Living Atlas SEED).
+> **Dependencias:** FASE 11 XL (seeds implementados), FASE 32 BLOQUES A-H (Digital Twin 4D core).
+
+### MÓDULO 32.X.1 — DMX Flux Capacitor (Time Machine + Predictive Twin + Historical Forensics)
+
+**Pasos:**
+- `[32.X.1.1]` "DMX Flux Capacitor" es la extensión del Digital Twin 4D con 3 capacidades integradas:
+  - **Time Machine** (extiende Time Machine API SEED FASE 11.Q): navegación temporal fluida 2010→2030 con rendering histórico fotorrealista (street view imagery histórica + reconstrucciones 3D colonias).
+  - **Predictive Twin**: proyecciones tridimensionales de cómo se verá una zona en 2030 si se aprueba proyecto X (nuevo metrobús, torre 40 pisos, parque, CETRAM) — usa motor GAN + rendering Mapbox + causal modeling.
+  - **Historical Forensics**: análisis retrospectivo "¿qué pasó aquí?" de una colonia específica — timeline eventos clave con evidence (permisos SEDUVI, noticias, eventos sociales) overlaid sobre 3D.
+- `[32.X.1.2]` UI unificado `/flux-capacitor/[slug]` con scrubber temporal + mode switch (Past/Present/Future) + split-screen compare.
+- `[32.X.1.3]` Audience: devs para due diligence (forensics) + compradores curiosos (time machine) + fondos para scenario planning (predictive).
+- `[32.X.1.4]` Monetización: incluido en tier Enterprise DMX Urban OS; standalone $999/mo para devs.
+
+**Criterio de done del módulo:**
+- [ ] 3 capacidades operativas en 2 colonias demo (Roma Norte + Polanco).
+
+### MÓDULO 32.X.2 — Metaverso de Colonias (Living Atlas + Digital Twin = XF-11)
+
+**Pasos:**
+- `[32.X.2.1]` "XF-11 Metaverso de Colonias" es la fusión completa de Living Atlas SEED (FASE 11.R) + Digital Twin 4D (FASE 32) + Constellations SEED (FASE 11.N): experiencia inmersiva 3D navegable donde usuarios caminan virtualmente por colonias y ven:
+  - Edificios 3D con overlays de IE scores flotando.
+  - Constellations edges entre colonias similares como "líneas de universo" visualizables.
+  - Eventos en tiempo real (nuevos listings, alpha alerts, comunidad activa).
+  - Avatares de residentes verificados (DMX Habitat H2).
+  - NPCs guía AI que responden preguntas.
+- `[32.X.2.2]` Modos navegación: walk mode (first-person), drone mode (aerial), scale mode (zoom out hasta vista ciudad completa).
+- `[32.X.2.3]` Multiplayer: hasta 20 usuarios simultáneos por colonia room (Liveblocks FASE 32.F).
+- `[32.X.2.4]` Casos de uso: tours virtuales con asesores, reuniones de due diligence con fondos, marketing experiencias para compradores (visit without visit), eventos comunitarios H2.
+- `[32.X.2.5]` H3 roadmap: integración Apple Vision Pro / Meta Quest para full VR/AR experience.
+
+**Criterio de done del módulo:**
+- [ ] XF-11 demo funcional en 1 colonia.
+- [ ] Multiplayer 5+ users simultáneos.
 
 ## Próxima fase
 

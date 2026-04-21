@@ -657,6 +657,64 @@ Enforcement per [ADR-018 E2E Connectedness](../01_DECISIONES_ARQUITECTONICAS/ADR
 - [ ] Sentry captures errors (validación runtime)
 - [ ] STUBs marcados explícitamente con // STUB — activar FASE XX
 
+## BLOQUE 23.X — API Pública Índices DMX + Trend Genome Subscription + Scorecard Nacional licenciable
+
+> **Contexto:** Tres productos B2B nuevos monetizables que apalancan FASE 11 XL (seeds implementados: 15 índices, Trend Genome, Scorecard Nacional). Estos productos son diferenciación comercial clave vs competidores.
+> **Dependencias:** FASE 11 XL (seeds implementados), FASE 23 BLOQUE 23.G (API v1 infraestructura), FASE 23 BLOQUE 23.H (dashboards).
+
+### MÓDULO 23.X.1 — API Pública Cobrable Índices DMX (4 tiers)
+
+**Pasos:**
+- `[23.X.1.1]` Endpoint dedicado `GET /api/v1/indices/:indexCode?zone_id=X&period=30d` que expone los **15 índices DMX** (FASE 11 XL seeds implementados): MOM, LIV, YNG, FAM, SAF, ECO, CLI, WALK, EDU, HEAL, SEN, NIGHT, CULT, INV, PULSE.
+- `[23.X.1.2]` 4 tiers de monetización (reflejar en `plans` + `plan_features` FASE 23.A):
+  - **Free**: 100 requests/mo, solo score + label (no components).
+  - **Starter** ($99 USD/mo): 10,000 requests/mo + components + historical 3m.
+  - **Pro** ($499 USD/mo): 100,000 requests/mo + components + historical 24m + bulk endpoint + webhooks on change.
+  - **Enterprise** (custom, $5K+/mo): unlimited + SLA 99.9% + custom endpoints + dedicated support + on-premise option.
+- `[23.X.1.3]` Target audience: portales terceros (Inmuebles24/Vivanuncios), fintechs (Creditas, Coru), aseguradoras (GNP, Qualitas), retailers (para site selection), fondos inmobiliarios.
+- `[23.X.1.4]` Sales enablement: landing `/products/indices-api` con pricing, calculator ROI, case studies, Sandbox playground.
+- `[23.X.1.5]` Usage tracking granular por indexCode para pricing insights.
+
+**Criterio de done del módulo:**
+- [ ] Endpoint operativo con 4 tiers rate-limited correctamente.
+- [ ] Landing `/products/indices-api` live.
+
+### MÓDULO 23.X.2 — Trend Genome Subscription B2B ($2K-10K USD/mes)
+
+**Pasos:**
+- `[23.X.2.1]` Producto B2B premium dirigido a **fondos inmobiliarios + desarrolladores institucionales + family offices**: suscripción mensual que entrega acceso real-time a alertas Trend Genome (FASE 11 XL seeds implementados — `zone_alpha_alerts` + `zone_alert_subscriptions`).
+- `[23.X.2.2]` 2 tiers:
+  - **Trend Genome Pro** ($2K USD/mo): alertas real-time + dashboard B2B + PDF weekly brief + 5 usuarios.
+  - **Trend Genome Institutional** ($10K USD/mo): todo Pro + API access dedicated + scenario planning + custom research sessions + 25 usuarios.
+- `[23.X.2.3]` Delivery: dashboard `/products/trend-genome` (locked tras auth Enterprise) + email daily digest + webhooks a sistema del cliente + Slack/MS Teams integration via webhooks.
+- `[23.X.2.4]` Differentiation: esto es lo más parecido a "Bloomberg Terminal para real estate mexicano" — zero competencia directa en LATAM.
+- `[23.X.2.5]` Sales motion: enterprise outbound + demo 30-min + POC 14 días → close.
+
+**Criterio de done del módulo:**
+- [ ] Dashboard B2B operativo.
+- [ ] 1 POC firmado con fondo pre-launch.
+
+### MÓDULO 23.X.3 — Scorecard Nacional licenciable (anual)
+
+**Pasos:**
+- `[23.X.3.1]` Producto de licencia anual dirigido a **bancos, fondos, academia, gobierno**: el "Scorecard Nacional DMX" (FASE 11 XL seed) con rankings oficiales de todas las colonias mexicanas por los 15 índices + análisis comparativo + metodología auditable.
+- `[23.X.3.2]` Precios sugeridos:
+  - Academia / research institutions: $5K USD/año (descuento educativo).
+  - Bancos / aseguradoras: $25K USD/año.
+  - Fondos inmobiliarios: $50K USD/año.
+  - Gobierno (SEDUVI, CENAPRED, institutos estatales): $75K USD/año con acuerdo multi-anual.
+- `[23.X.3.3]` Deliverables licencia:
+  - Acceso dashboard web con todos los rankings.
+  - API read-only para incorporar en sistemas internos.
+  - Reporte PDF trimestral "State of the Nation" (80+ páginas).
+  - Workshop anual onsite con equipo DMX.
+- `[23.X.3.4]` Legal: contrato anual con NDA, DPA, SLA, auditoría externa de metodología (annual refresh).
+- `[23.X.3.5]` Positioning: "El índice S&P Case-Shiller para México, pero al nivel de colonia y con datos propietarios DMX".
+
+**Criterio de done del módulo:**
+- [ ] Dashboard licensed operativo con 3 tiers de acceso.
+- [ ] Contrato template legal listo para firma.
+
 ## Próxima fase
 
 FASE 24 — Observabilidad + SRE (Sentry + PostHog + logs + SLO/SLI + runbooks + DR).

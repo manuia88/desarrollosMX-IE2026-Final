@@ -772,3 +772,127 @@ Combinaciones con benchmarks globales (CoStar + Big 4 brokers) y features DMX �
 
 **Autor:** PM Sr Dev (sesión BLOQUE 8.C lateral upgrades) | **Fecha inicio:** 2026-04-19
 **Última actualización:** 2026-04-20 — L59-L72 + CF-L1-8 + CF-G1-8 pos análisis competitivo MX+global (6 empresas MX + CoStar + Big 4)
+
+---
+
+## Append 2026-04-21 — Laterales FASE 11 XL
+
+Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se agregan 10 laterales nuevos al pipeline. Entradas existentes (L1 Wrapped, L8 Top Movers, L22 Time Travel/Time Machine) se actualizan a status "implementando en FASE 11 XL".
+
+### Status updates en entradas existentes
+
+- **L1 — Zona Wrapped anual (Spotify Wrapped pattern)** → status cambia de 🟡 approved a 🔵 **in_progress** (FASE 11 XL BLOQUE 11.V Stickers + Shareables seed).
+- **L8 — "Today's Top Movers" público (Robinhood market dashboard pattern)** → status cambia de 🟡 approved a 🔵 **in_progress** (FASE 11 XL BLOQUE 11.G Pulse Score daily).
+- **L22 Time Travel / Time Machine** (si existe en pipeline previo) → status cambia a 🔵 **in_progress** (FASE 11 XL BLOQUE 11.O Time Machine API).
+
+### L73 — Top Movers Daily público (Robinhood pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.G)
+- **Qué es:** dashboard público daily con top 10 colonias que más subieron/bajaron en Pulse Score CDMX las últimas 24h.
+- **Para qué sirve:** FOMO diario + press coverage recurring (periodistas pueden citar DMX daily) + SEO orgánico zonas.
+- **Beneficio concreto:** tráfico orgánico recurrente + posicionamiento "Bloomberg del real estate MX" daily cadence.
+- **Fase target:** FASE 11 XL BLOQUE 11.G (Pulse Score + Top Movers endpoint)
+- **Industria origen:** Robinhood Top Movers + Yahoo Finance Trending
+- **Dependencia data:** Pulse Score daily + delta tracking 24h
+
+### L74 — DMX Wrapped viral extendido (Spotify Wrapped pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.V-11.X)
+- **Qué es:** extensión de L1 — wrapped anual + shareables visuales + stickers descargables WhatsApp/IG compartibles con brand DMX.
+- **Para qué sirve:** Spotify Wrapped convierte a usuario en evangelista. DMX Wrapped hace lo mismo con colonia residencial.
+- **Beneficio concreto:** explosión de shares diciembre/enero + brand awareness organic sin ads.
+- **Fase target:** FASE 11 XL BLOQUES 11.V (Stickers), 11.W (Wrapped generator), 11.X (shareables social)
+- **Industria origen:** Spotify Wrapped 2016+
+- **Dependencia data:** ≥12 meses score history (cumplido post-FASE 10) + stickers PNG generator
+
+### L75 — Widget Embebible DMX Score (WalkScore pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.N)
+- **Qué es:** script JS `<script src="dmx.mx/widget.js" data-zone="roma-norte">` que cualquier portal/blog/medio inserta. Muestra score DMX zona + link DMX + branded.
+- **Para qué sirve:** WalkScore dominó US con este pattern. DMX puede ser "el WalkScore de LATAM" con alcance multi-dimensión (15 índices).
+- **Beneficio concreto:** distribución viral vía terceros + SEO backlinks + monetización paid tier (remove watermark + custom branding) en FASE 23.
+- **Fase target:** FASE 11 XL BLOQUE 11.N (widget + auth) + FASE 23 (monetización)
+- **Industria origen:** WalkScore widget pattern (saturó US antes que Zillow adquirió)
+- **Dependencia data:** `widget_embed_tokens` + Upstash rate limit + 15 índices operativos
+
+### L76 — Alert Radar WhatsApp opt-in (Waze pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.W)
+- **Qué es:** usuarios suscriben colonias que siguen + reciben WhatsApp notif cuando score cambia >10% o evento significativo (nueva ghost zone, top mover, alerta crisis).
+- **Para qué sirve:** Waze convirtió a drivers en sensores + notificadores. DMX convierte a interesados en colonias en network activo alertas.
+- **Beneficio concreto:** retention diaria + email/WA list valiosa monetizable B2B + engagement metric alto.
+- **Fase target:** FASE 11 XL BLOQUE 11.W (subscriptions + Twilio WA)
+- **Industria origen:** Waze alerts community-driven pattern
+- **Dependencia data:** `whatsapp_alert_subscriptions` + Twilio WA + event stream from scores
+
+### L77 — Stickers Descargables zona (Yelp pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.V)
+- **Qué es:** generador stickers PNG/WebP compartibles "Mi colonia DMX Score: 92 — Roma Norte" con brand DMX. Users comparten en WhatsApp status + Instagram stories.
+- **Para qué sirve:** Yelp stickers físicos en restaurantes fueron viral pre-redes. DMX digitales en stories = viral growth marketing.
+- **Beneficio concreto:** marketing orgánico gratis + brand awareness en circulos sociales + SEO menciones.
+- **Fase target:** FASE 11 XL BLOQUE 11.V (sticker generator)
+- **Industria origen:** Yelp stickers pattern
+- **Dependencia data:** scores por zona + Puppeteer/Sharp PNG generator
+
+### L78 — Press Kit Auto mensual (PR Newswire pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.K)
+- **Qué es:** endpoint `/api/v1/press-kit/[period]` genera markdown + hero stats + top movers + quotes ready-to-publish para periodistas. Distribución mensual lista.
+- **Para qué sirve:** PR Newswire facilitó distribución press releases. DMX lo automatiza con IA + data live = volume press coverage sin PR agency.
+- **Beneficio concreto:** mentions prensa recurrentes + zero CAC press marketing + cita DMX como source autoritativa.
+- **Fase target:** FASE 11 XL BLOQUE 11.K (press kit generator)
+- **Industria origen:** PR Newswire distribution pattern
+- **Dependencia data:** scores + deltas + Claude Haiku narrative generator
+
+### L79 — Historical Forensics PDF educativo (True Crime podcast pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.Y)
+- **Qué es:** PDFs narrativos case-study sobre ciclos pasados colonias ("Qué pasó en Cuauhtémoc 2015-2020: del auge al ghost"). Formato True Crime podcast pero educativo real estate.
+- **Para qué sirve:** True Crime podcasts son #1 categoria streaming. Formato aplicado a real estate education = contenido viral + moat autoridad.
+- **Beneficio concreto:** SEO orgánico long-form + brand autoridad educativa + potencial docuserie H2.
+- **Fase target:** FASE 11 XL BLOQUE 11.Y (3-5 case studies seed) + H2 docuserie
+- **Industria origen:** True Crime podcast format (Serial, Crime Junkie)
+- **Dependencia data:** `historical_forensics_cases` + Time Machine API + Claude Opus narrative generator
+
+### L80 — Trend Genome B2B (alpha-seeking hedge fund pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUES 11.H-11.I)
+- **Qué es:** producto B2B suscripción mensual $2-5K/mes para hedge funds + fondos inmobiliarios + developers boutique con señales pre-mediáticas colonias en explosión.
+- **Para qué sirve:** hedge funds pagan miles por data alpha-seeking. Real estate LATAM tiene 0 equivalente. DMX primer pre-mediática radar vertical.
+- **Beneficio concreto:** ARR alto ticket con churn bajo (una vez integrado en workflow fund = sticky) + moat pre-mediática data.
+- **Fase target:** FASE 11 XL BLOQUES 11.H (Apify ingest) + 11.I (Trend Genome UI)
+- **Industria origen:** alpha-seeking hedge fund data providers pattern (Quandl, YipitData)
+- **Dependencia data:** `influencer_heat_zones` + ADR-027 Apify compliance + Instagram public data
+- **Compliance:** ADR-027 — datos públicos agregados, no PII, base legal interés legítimo
+
+### L81 — Scorecard Nacional autoritative (S&P + Banxico pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.J)
+- **Qué es:** ranking trimestral público 15 índices DMX + PDF branded + metodología versionada (ADR-027). Se convierte en "S&P del real estate LATAM".
+- **Para qué sirve:** S&P Ratings y Banxico reportes trimestrales son autoridad incuestionable. DMX puede posicionarse como autoridad sector real estate LATAM.
+- **Beneficio concreto:** brand autoridad citable + moat referenciabilidad prensa + regulatorios + analistas.
+- **Fase target:** FASE 11 XL BLOQUE 11.J (Scorecard generator + PDF public) + FASE 38 multi-país
+- **Industria origen:** S&P Global Ratings + Banxico reportes quarterly
+- **Dependencia data:** 15 índices + metodología versionada (ADR-027) + PDF generator branded
+
+### L82 — Genoma Colonias búsqueda por vibe (Spotify Discover Weekly pattern)
+
+- **Status:** 🔵 in_progress (founder approval 2026-04-21, FASE 11 XL BLOQUE 11.M — SEED)
+- **Qué es:** búsqueda vectorial "Encuéntrame el Roma Norte de Bogotá/Buenos Aires/CDMX sur". Respuesta: top 5 colonias similares via pgvector cosine similarity (ADR-027).
+- **Para qué sirve:** Spotify Discover Weekly cambió discovery music. DMX puede cambiar discovery real estate. Critical para compradores relocating + nómadas digitales.
+- **Beneficio concreto:** diferenciador UX brutal vs filtros "precio/m² + recámaras" tradicionales + moat vector embeddings data acumulada.
+- **Fase target:** FASE 11 XL BLOQUE 11.M (SEED CDMX) + FASE 20 (UI consumer) + FASE 38 (multi-país expansion)
+- **Industria origen:** Spotify Discover Weekly embeddings pattern
+- **Dependencia data:** pgvector 64-dim (ADR-027) + 15+ scores feature vector + vibe_tags (ADR-022)
+
+### Cross-references FASE 11 XL append
+
+- `docs/CONTEXTO_MAESTRO_DMX_v5.md` Addendum 2026-04-21 FASE 11 XL
+- `docs/07_GAME_CHANGERS/07.0_INDICE.md` §Addendum 2026-04-21 (GC-NEW-1..10)
+- `docs/07_GAME_CHANGERS/07.3_PRIORIZACION_H1_H2_H3.md` §Addendum 2026-04-21
+- `docs/07_GAME_CHANGERS/07.4_MOAT_STRATEGY.md` §Moats FASE 11 XL
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-027_FASE_11_XL_METODOLOGIA_INDICES.md`
+- `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md` §8 TODOs #27-#36
+
+**Última actualización:** 2026-04-21 — L73-L82 (10 laterales FASE 11 XL) + status updates L1/L8/L22 a in_progress

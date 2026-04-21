@@ -532,3 +532,273 @@
 - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-025_SOCIAL_LISTING_INTELLIGENCE.md`
 
 **Autor:** PM Sr Dev | **Fecha:** 2026-04-20 | **Status:** Draft inicial — founder review + naming final requerido
+
+---
+
+# 🚀 FASE 11 XL — 15 productos nuevos/expansión (2026-04-21)
+
+> **Contexto:** FASE 11 XL agrega 15 productos empaquetados adicionales. Algunos expanden entries pre-existentes (Momentum, Pro Terminal, Property API), otros son categorías nuevas (LifePath, Climate Twin, Scorecard Nacional, Press Kit Auto, Stickers).
+
+## Producto 10.1 — "DMX Momentum Index" (mensual licenciable)
+
+**Descripción:** índice DMX-MOM calculado mensualmente por zona CDMX + top-10 ciudades MX, publicable como artefacto prensa + licenciable a fondos, bancos, medios económicos. Equivalente S&P CoreLogic Case-Shiller para MX pero zona-level y multi-segmento.
+**Audiencia:** Inversor Institucional · Banco/Aseguradora · Gobierno/Prensa · Academia/Investigador.
+**Tiers pricing:**
+- **Free**: dashboard público mensual (top movers + ranking general)
+- **Pro Data**: $2,500 USD/mes (API v1 + histórico 36 meses + alertas)
+- **Enterprise License**: $75K-$250K USD/año (whitelabel + uso comercial + SLA)
+**Canal primario:** prensa económica (El Economista/Financiero/Expansión) + LinkedIn B2B + newsletter mensual.
+**Features:** FI-001, FI-021, FI-041, FI-050, FI-073.
+**Competidores:** Tinsa Price Index (limitado), Softec SIIVRA, BBVA Research inmobiliario.
+**Diferenciador moat:** único índice MX zona-level publicado mensual con metodología abierta (/metodologia).
+**Status:** H1 Full — trigger PR automático cada primer martes mes.
+
+---
+
+## Producto 10.2 — "DMX Livability API"
+
+**Descripción:** API v1 que expone índice DMX-LIV (Livability compuesto: educación + salud + transporte + cultura + seguridad) por colonia. Integrable en portales inmobiliarios, apps relocación, HR tools multinacionales (mapeo ciudades expat).
+**Audiencia:** Developer · Asesor Inmobiliario · Banco/Aseguradora · portales third-party.
+**Tiers pricing:**
+- **Developer Free**: 1,000 calls/mes
+- **Pro**: $0.05-$0.25/call (volume)
+- **Enterprise**: $60K-$180K USD/año unlimited + SLA 99.9%
+**Canal primario:** Developer Portal + npm SDK + integraciones marketplaces (Vercel, Algolia).
+**Features:** FI-007, FI-042, FI-054, FI-055.
+**Competidores:** Niche/AreaVibes (US only), Livability.com (US only), WalkScore API (US/CA).
+**Diferenciador moat:** primer Livability API LATAM + multi-país roadmap + metodología transparente.
+**Status:** H1 Full.
+
+---
+
+## Producto 10.3 — "DMX Risk Score API" (aseguradoras)
+
+**Descripción:** API v1 Risk Score integra DMX-RISK + DMX-CLIM + DMX-IRE + sísmico + hídrico + violencia + inundación. Consumible en underwriting automático de pólizas home insurance MX.
+**Audiencia:** Banco/Aseguradora (GNP, MetLife, AXA, Chubb).
+**Tiers pricing:**
+- **Pilot**: $15K USD/mes (50K calls)
+- **Pro API**: $0.20-$2.00/call
+- **Enterprise**: $500K-$2M MXN/año unlimited + SLA dedicado
+**Canal primario:** AMIS conferences · direct B2B sales · reaseguradoras relationships.
+**Features:** FI-008, FI-043, FI-067.
+**Competidores:** Verisk (US), CoreLogic Climate Risk (US), RMS Moody's (global).
+**Diferenciador moat:** único con riesgos MX específicos zona-level (crisis hídrica CDMX, sismo Línea 12, inundación Iztapalapa).
+**Status:** H1 MVP, ramp H2.
+
+---
+
+## Producto 10.4 — "DMX Trend Genome Alerts" (premium B2B)
+
+**Descripción:** stream real-time de alertas cuando Genome de zona X cambia (nuevo cluster cultural emergente, migración demográfica detectada, vibe shift). Dashboard + WhatsApp + email + webhook.
+**Audiencia:** Inversor Institucional · Developer · Master Broker · Gobierno/Prensa.
+**Tiers pricing:**
+- **Pro Alerts**: $2,000 USD/mes (hasta 20 zonas watchlist)
+- **Premium**: $5,000 USD/mes (unlimited + custom cohorts)
+- **Enterprise**: $10,000 USD/mes + API + webhook + dedicated analyst
+**Canal primario:** direct sales + content marketing (whitepapers trend discovery).
+**Features:** FI-052, FI-069, FI-070, FI-071.
+**Competidores:** nadie directo. Foursquare/Placer.ai tienen POI/foot-traffic pero no shift detection zona completa.
+**Diferenciador moat:** Trend Genome propietario — detecta shifts culturales/demográficos que ningún competidor captura.
+**Status:** H1 MVP, pricing calibrar con 3 design partners Q2.
+
+---
+
+## Producto 10.5 — "DMX Widget Embebible" (freemium viral)
+
+**Descripción:** widget JavaScript embebible en cualquier portal inmobiliario MX, blog, nota prensa. Muestra score DMX + índices zona + link /atlas/[colonia]. Protocol-play para convertir DMX en infra layer de todo listing MX.
+**Audiencia:** Asesor Inmobiliario · Master Broker · Developer · medios · bloggers.
+**Tiers pricing:**
+- **Free**: widget con branding DMX (backlinks + attribution)
+- **Pro**: $49 USD/mes (sin branding + custom colors)
+- **Enterprise**: $2K USD/mes (whitelabel + API + analytics impresiones)
+**Canal primario:** adopción viral via AMPI + asesores individuales · content "embed score tuyo gratis".
+**Features:** FI-056, FI-057, FI-058.
+**Competidores:** WalkScore widget (US), Niche widget (US). Ninguno en MX.
+**Diferenciador moat:** primer widget IE MX + protocol-play (cuantos más embeds, más data signal + más backlinks SEO).
+**Status:** H1 Full — KPI: 1,000 embeds activos mes 6.
+
+---
+
+## Producto 10.6 — "DMX Scorecard Nacional" (licencia anual)
+
+**Descripción:** reporte anual publicado Q1 con ranking zonas MX por 15 índices DMX. Artefacto prensa + asset ventas enterprise + ancla autoridad. Licencia anual institucional para uso interno/comercial.
+**Audiencia:** Banco/Aseguradora · Inversor Institucional · Gobierno/Prensa · Academia.
+**Tiers pricing:**
+- **Free**: página pública /scorecard-nacional + summary PDF
+- **Pro License**: $25K USD/año (uso comercial interno + datos crudos Excel/CSV)
+- **Enterprise License**: $100K-$300K USD/año (whitelabel + quotes exclusivas + presentación anual)
+**Canal primario:** conferencia prensa Q1 + El Economista/Financiero launch + CBRE/JLL co-marketing.
+**Features:** FI-025, FI-050, FI-074.
+**Competidores:** Softec anual report (limitado), BBVA Research (macro, no zona-level).
+**Diferenciador moat:** primer scorecard anual público MX zona-level con 15 índices + trigger PR masivo.
+**Status:** H1 Full — launch Q1 2027 target.
+
+---
+
+## Producto 10.7 — "DMX Time Machine API" (histórico)
+
+**Descripción:** API v1 acceso histórico 36+ meses de scores + índices + métricas por zona. Útil para backtest modelos, investigación académica, due diligence institucional.
+**Audiencia:** Inversor Institucional · Academia · Banco · Developer (backtest pricing).
+**Tiers pricing:**
+- **Free tier**: últimos 12 meses 1K calls/mes
+- **Pro**: $0.10-$0.50/call (unlimited histórico)
+- **Enterprise Research**: $120K MXN/año académico · $300K MXN/año comercial
+**Canal primario:** partnerships ITAM/Tec/UNAM · developer portal · research grants.
+**Features:** FI-017, FI-027, FI-044.
+**Competidores:** CoreLogic Historical (US), Zillow Research (US).
+**Diferenciador moat:** único histórico zona-level MX disponible via API + backtest engine.
+**Status:** H1 MVP.
+
+---
+
+## Producto 10.8 — "DMX Genoma Similarity API" (búsqueda por vibe)
+
+**Descripción:** API v1 búsqueda vector-based "dame zonas similares a Roma Norte pero más baratas". Embeddings de 118 scores por zona + query por ejemplo o descripción natural.
+**Audiencia:** Comprador Final (via LifePath) · Inversor Retail · Asesor · Master Broker.
+**Tiers pricing:**
+- **Free**: 10 queries/mes (via LifePath público)
+- **Pro**: $99 USD/mes (unlimited + API access)
+- **Enterprise API**: $50K-$200K MXN/año
+**Canal primario:** Instagram/TikTok virality ("encuentra tu Roma Norte a mitad precio") · LifePath web · AMPI.
+**Features:** FI-045, FI-069.
+**Competidores:** nadie directo. Sugerencias zillow/realtor.com son reglas simples, no embeddings.
+**Diferenciador moat:** embeddings 118 scores + query natural language = categoría nueva "búsqueda por vibe".
+**Status:** H1 MVP.
+
+---
+
+## Producto 10.9 — "DMX Ghost Zones Report" (inversionistas)
+
+**Descripción:** reporte trimestral + dashboard zonas pre-emergentes (momentum naciente + cultural shift + infra pipeline) antes que sean mainstream. "Encuentra el próximo Roma Norte antes que todos."
+**Audiencia:** Inversor Retail · Inversor Institucional · Developer.
+**Tiers pricing:**
+- **Pro**: $299 USD/mes (5 ghost zones alertas)
+- **Premium**: $999 USD/mes (ilimitado + early access 30 días antes público)
+- **Enterprise**: $50K USD/año family offices + fondos
+**Canal primario:** LinkedIn Ads · referidos family offices · content marketing case studies.
+**Features:** FI-010, FI-031, FI-046.
+**Competidores:** ninguno. Rumor/gut-feeling es el método incumbent.
+**Diferenciador moat:** detección algorítmica data-backed + timing 30d early access Premium tier.
+**Status:** H1 MVP.
+
+---
+
+## Producto 10.10 — "DMX Pulse Score B2B" (signos vitales zona)
+
+**Descripción:** score B2B signos vitales zona — análogo a HR Slack status pero para colonia. Integra inversión pública, nuevos negocios DENUE, permisos construcción, delitos SESNSP, listings volumen. Consumible en CRM broker, dashboards developer.
+**Audiencia:** Master Broker · Developer · Asesor · Banco.
+**Tiers pricing:**
+- **Pro**: $599 MXN/mes (10 zonas)
+- **Enterprise API**: $0.05-$0.20/call
+- **Agency**: $5K MXN/mes (unlimited zonas + integración CRM)
+**Canal primario:** AMPI partnerships · integración EasyBroker/Tokko · LinkedIn brokers.
+**Features:** FI-012, FI-047.
+**Competidores:** Metric Analysis GeoMetric (parcial).
+**Diferenciador moat:** primer B2B pulse integrador oficial + DENUE + catastro + crime data.
+**Status:** H1 MVP.
+
+---
+
+## Producto 10.11 — "DMX Migration Flow Dataset" (datos movilidad)
+
+**Descripción:** dataset + API migración intra-CDMX y inter-ciudades MX (anonymized aggregations). Input para políticas urbanas + planning desarrollo + targeting comercial.
+**Audiencia:** Gobierno/Prensa · Academia · Inversor Institucional · Developer.
+**Tiers pricing:**
+- **Academic Free**: 1K calls/mes con attribution
+- **Pro**: $0.10-$0.30/call
+- **Enterprise**: $200K-$500K MXN/año uso comercial
+- **Government**: $1M-$3M MXN/año custom slicing
+**Canal primario:** SEDATU/INEGI partnerships · conferencias ONU-Habitat · academic outreach.
+**Features:** FI-011, FI-029, FI-048.
+**Competidores:** INEGI ENCOVID (limitado), universidades (estudios puntuales).
+**Diferenciador moat:** primer dataset continuo + granular + anonymized rigurosamente + API-first.
+**Status:** H1 MVP.
+
+---
+
+## Producto 10.12 — "DMX Press Kit Auto" (suscripción medios)
+
+**Descripción:** press kit automático mensual con: top 10 zonas momentum, gráficas ready-to-publish, cuotas experto DMX, story angles. Suscripción medios económicos + arquitectura + real estate.
+**Audiencia:** Gobierno/Prensa (El Economista, Financiero, Expansión, Obras, Inmobiliare).
+**Tiers pricing:**
+- **Free**: acceso básico (top 5 zonas + 3 gráficas)
+- **Pro Press**: $499 USD/mes (contenido completo + embargo exclusivo 24h)
+- **Partner Exclusive**: 2-3 medios con rights co-branding anuales (revenue share)
+**Canal primario:** direct outreach editores · partnerships medios económicos · SEO /press-kit.
+**Features:** FI-073, FI-074, FI-075.
+**Competidores:** nadie directo. Tinsa/Softec envían reportes pero no press-kit ready-to-publish.
+**Diferenciador moat:** artefacto ready-to-publish + exclusive embargo = media loop viral.
+**Status:** H1 MVP.
+
+---
+
+## Producto 10.13 — "DMX Stickers & Badges" (gratis, marketing viral)
+
+**Descripción:** biblioteca gratuita stickers + badges "Mi zona top momentum 2026", "Colonia 95 Livability", "LifeMatch 92%" — descargables para Instagram stories, LinkedIn posts, signature email, slides ventas asesor. Viralización orgánica DMX brand.
+**Audiencia:** Asesor · Master Broker · Comprador Final · Developer · Prensa.
+**Tiers pricing:**
+- **100% gratis** (viral growth lever)
+- Monetización indirecta: backlinks SEO + brand awareness + lead magnets
+**Canal primario:** Instagram/TikTok · /badges página pública · share buttons en /atlas.
+**Features:** FI-059, FI-060, FI-061, FI-062, FI-063.
+**Competidores:** nadie en MX real estate. Referente: Strava Segments badges, Spotify Wrapped stickers.
+**Diferenciador moat:** primer moat social-virality real estate MX — cada sticker compartido = user acquisition gratis.
+**Status:** H1 Full.
+
+---
+
+## Producto 10.14 — "DMX LifePath Match" (comprador final freemium)
+
+**Descripción:** wizard vida del comprador (etapa vida + presupuesto + valores + trabajo + familia) que devuelve match zonas + propiedades con "vibe" similar. Hook consumer gratis para conversion a Pro Comprador.
+**Audiencia:** Comprador Final (soltero, pareja, familia, retiree) · Inversor Retail.
+**Tiers pricing:**
+- **Free**: match básico 1 resultado + 5 zonas sugeridas
+- **Pro Comprador**: $199 MXN/mes (match completo + shortlist + multiplayer familia)
+- **Premium**: $499 MXN/mes (concierge + priority matching + re-calibración mensual)
+**Canal primario:** Instagram/TikTok virality · Google Ads "casa perfecta CDMX" · referral incentives.
+**Features:** FI-036, FI-064, FI-065, FI-066, FI-069.
+**Competidores:** portales genéricos sin matching · 16Personalities (no-real estate).
+**Diferenciador moat:** primer LifePath real estate MX + vector embeddings + multi-etapa vida + multiplayer pareja.
+**Status:** H1 Full.
+
+---
+
+## Producto 10.15 — "DMX Climate Twin Report" (aseguradoras + bancos)
+
+**Descripción:** reporte individual por propiedad/colonia proyectando riesgo climático 10-30 años (temperatura, precipitación, sequía, inundación, aire). Consumible en underwriting + mortgage stress-testing + ESG compliance.
+**Audiencia:** Banco/Aseguradora · Inversor Institucional · Gobierno/Prensa · Developer (ESG).
+**Tiers pricing:**
+- **Pro Report**: $499 USD/reporte individual
+- **API Volume**: $0.50-$3.00/call
+- **Enterprise License**: $500K-$1.5M MXN/año unlimited + scenarios custom
+**Canal primario:** AMIS · CNBV (banking regulator) · Climate finance summits · ESG reporting partners.
+**Features:** FI-009, FI-049, FI-067.
+**Competidores:** Jupiter Intelligence (US, caro), First Street (US), Moody's Climate (global no MX zona-level).
+**Diferenciador moat:** único climate risk zona-level MX + integra hydric/seismic locales + precio 10x menor vs Jupiter.
+**Status:** H2 Seed (requiere dataset climate historical H1).
+
+---
+
+## Matriz FASE 11 XL consolidada
+
+| # | Producto | Persona primaria | Free | Pro/Starter | Enterprise |
+|---|---|---|---|---|---|
+| 10.1 | Momentum Index | Institucional + Prensa | Dashboard | $2,500 USD/mes | $75K-$250K USD/año |
+| 10.2 | Livability API | Developer + B2B | 1K calls/mes | $0.05-$0.25/call | $60K-$180K USD/año |
+| 10.3 | Risk Score API | Aseguradora | — | $0.20-$2/call | $500K-$2M MXN/año |
+| 10.4 | Trend Genome Alerts | Institucional | — | $2K USD/mes | $10K USD/mes |
+| 10.5 | Widget Embebible | Asesor + Medios | Branded | $49 USD/mes | $2K USD/mes |
+| 10.6 | Scorecard Nacional | Institucional + Prensa | Público | $25K USD/año | $100K-$300K USD/año |
+| 10.7 | Time Machine API | Academia + Inst | 12m 1K calls | $0.10-$0.50/call | $120K-$300K MXN/año |
+| 10.8 | Genoma Similarity | Comprador + Inv | 10 queries/mes | $99 USD/mes | $50K-$200K MXN/año |
+| 10.9 | Ghost Zones Report | Inversor | — | $299 USD/mes | $50K USD/año |
+| 10.10 | Pulse Score B2B | Broker + Dev | — | $599 MXN/mes | $5K MXN/mes agency |
+| 10.11 | Migration Flow Dataset | Gobierno + Acad | 1K calls acad | $0.10-$0.30/call | $1M-$3M MXN/año gov |
+| 10.12 | Press Kit Auto | Prensa | Básico | $499 USD/mes | Partner revshare |
+| 10.13 | Stickers & Badges | Todos | 100% gratis | — | — |
+| 10.14 | LifePath Match | Comprador Final | Match básico | $199 MXN/mes | $499 MXN/mes |
+| 10.15 | Climate Twin Report | Aseguradora + Banco | — | $499 USD/reporte | $500K-$1.5M MXN/año |
+
+**Total actualizado: 37 productos empaquetados (22 pre + 15 FASE 11 XL).**
+
+**Autor FASE 11 XL:** PM Sr (Opus 4.7) | **Fecha:** 2026-04-21 | **Status:** Draft — founder review + GTM alignment

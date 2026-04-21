@@ -1433,6 +1433,159 @@ export type Database = {
         }
         Relationships: []
       }
+      causal_explanations: {
+        Row: {
+          cache_hit_count: number
+          citations: Json
+          explanation_md: string
+          generated_at: string
+          id: string
+          model: string
+          period_date: string
+          prompt_version: string
+          scope_id: string
+          scope_type: string
+          score_id: string
+          ttl_days: number
+        }
+        Insert: {
+          cache_hit_count?: number
+          citations?: Json
+          explanation_md: string
+          generated_at?: string
+          id?: string
+          model: string
+          period_date: string
+          prompt_version: string
+          scope_id: string
+          scope_type: string
+          score_id: string
+          ttl_days?: number
+        }
+        Update: {
+          cache_hit_count?: number
+          citations?: Json
+          explanation_md?: string
+          generated_at?: string
+          id?: string
+          model?: string
+          period_date?: string
+          prompt_version?: string
+          scope_id?: string
+          scope_type?: string
+          score_id?: string
+          ttl_days?: number
+        }
+        Relationships: []
+      }
+      climate_twin_projections: {
+        Row: {
+          air_quality_index: number | null
+          calculated_at: string
+          colonia_id: string
+          confidence: number | null
+          id: string
+          methodology_version: string
+          projection_year: number
+          sources: Json
+          temp_celsius: number | null
+          water_availability_pct: number | null
+        }
+        Insert: {
+          air_quality_index?: number | null
+          calculated_at?: string
+          colonia_id: string
+          confidence?: number | null
+          id?: string
+          methodology_version?: string
+          projection_year: number
+          sources?: Json
+          temp_celsius?: number | null
+          water_availability_pct?: number | null
+        }
+        Update: {
+          air_quality_index?: number | null
+          calculated_at?: string
+          colonia_id?: string
+          confidence?: number | null
+          id?: string
+          methodology_version?: string
+          projection_year?: number
+          sources?: Json
+          temp_celsius?: number | null
+          water_availability_pct?: number | null
+        }
+        Relationships: []
+      }
+      colonia_dna_vectors: {
+        Row: {
+          colonia_id: string
+          components: Json
+          computed_at: string
+          country_code: string
+          methodology_version: string
+          vector: string
+        }
+        Insert: {
+          colonia_id: string
+          components: Json
+          computed_at?: string
+          country_code?: string
+          methodology_version?: string
+          vector: string
+        }
+        Update: {
+          colonia_id?: string
+          components?: Json
+          computed_at?: string
+          country_code?: string
+          methodology_version?: string
+          vector?: string
+        }
+        Relationships: []
+      }
+      colonia_wiki_entries: {
+        Row: {
+          colonia_id: string
+          content_md: string
+          created_at: string
+          edited_at: string
+          edited_by: string | null
+          id: string
+          published: boolean
+          reviewed: boolean
+          reviewed_by: string | null
+          sections: Json
+          version: number
+        }
+        Insert: {
+          colonia_id: string
+          content_md: string
+          created_at?: string
+          edited_at?: string
+          edited_by?: string | null
+          id?: string
+          published?: boolean
+          reviewed?: boolean
+          reviewed_by?: string | null
+          sections?: Json
+          version?: number
+        }
+        Update: {
+          colonia_id?: string
+          content_md?: string
+          created_at?: string
+          edited_at?: string
+          edited_by?: string | null
+          id?: string
+          published?: boolean
+          reviewed?: boolean
+          reviewed_by?: string | null
+          sections?: Json
+          version?: number
+        }
+        Relationships: []
+      }
       confidence_thresholds: {
         Row: {
           metric: string
@@ -1678,6 +1831,206 @@ export type Database = {
           },
         ]
       }
+      dmx_indices: {
+        Row: {
+          calculated_at: string
+          circuit_breaker_triggered: boolean
+          components: Json
+          confidence: string
+          confidence_breakdown: Json | null
+          confidence_score: number | null
+          country_code: string
+          created_at: string
+          id: string
+          index_code: string
+          inputs_used: Json
+          is_shadow: boolean
+          methodology_version: string
+          percentile: number | null
+          period_date: string
+          period_type: string
+          ranking_in_scope: number | null
+          scope_id: string
+          scope_type: string
+          score_band: string | null
+          trend_direction: string | null
+          trend_vs_previous: number | null
+          valid_until: string | null
+          value: number
+        }
+        Insert: {
+          calculated_at?: string
+          circuit_breaker_triggered?: boolean
+          components: Json
+          confidence: string
+          confidence_breakdown?: Json | null
+          confidence_score?: number | null
+          country_code?: string
+          created_at?: string
+          id?: string
+          index_code: string
+          inputs_used: Json
+          is_shadow?: boolean
+          methodology_version?: string
+          percentile?: number | null
+          period_date: string
+          period_type: string
+          ranking_in_scope?: number | null
+          scope_id: string
+          scope_type: string
+          score_band?: string | null
+          trend_direction?: string | null
+          trend_vs_previous?: number | null
+          valid_until?: string | null
+          value: number
+        }
+        Update: {
+          calculated_at?: string
+          circuit_breaker_triggered?: boolean
+          components?: Json
+          confidence?: string
+          confidence_breakdown?: Json | null
+          confidence_score?: number | null
+          country_code?: string
+          created_at?: string
+          id?: string
+          index_code?: string
+          inputs_used?: Json
+          is_shadow?: boolean
+          methodology_version?: string
+          percentile?: number | null
+          period_date?: string
+          period_type?: string
+          ranking_in_scope?: number | null
+          scope_id?: string
+          scope_type?: string
+          score_band?: string | null
+          trend_direction?: string | null
+          trend_vs_previous?: number | null
+          valid_until?: string | null
+          value?: number
+        }
+        Relationships: []
+      }
+      dmx_indices_audit_log: {
+        Row: {
+          calculator_version: string
+          id: string
+          index_id: string
+          input_snapshot: Json
+          model: string | null
+          output_snapshot: Json
+          run_id: string
+          triggered_at: string
+          triggered_by: string
+        }
+        Insert: {
+          calculator_version: string
+          id?: string
+          index_id: string
+          input_snapshot: Json
+          model?: string | null
+          output_snapshot: Json
+          run_id: string
+          triggered_at?: string
+          triggered_by: string
+        }
+        Update: {
+          calculator_version?: string
+          id?: string
+          index_id?: string
+          input_snapshot?: Json
+          model?: string | null
+          output_snapshot?: Json
+          run_id?: string
+          triggered_at?: string
+          triggered_by?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dmx_indices_audit_log_index_id_fkey"
+            columns: ["index_id"]
+            isOneToOne: false
+            referencedRelation: "dmx_indices"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dmx_indices_methodology_versions: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          changelog_notes: string | null
+          created_at: string
+          effective_from: string
+          effective_to: string | null
+          formula_md: string
+          id: string
+          index_code: string
+          version: string
+          weights_jsonb: Json
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          changelog_notes?: string | null
+          created_at?: string
+          effective_from: string
+          effective_to?: string | null
+          formula_md: string
+          id?: string
+          index_code: string
+          version: string
+          weights_jsonb: Json
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          changelog_notes?: string | null
+          created_at?: string
+          effective_from?: string
+          effective_to?: string | null
+          formula_md?: string
+          id?: string
+          index_code?: string
+          version?: string
+          weights_jsonb?: Json
+        }
+        Relationships: []
+      }
+      dna_migration_matches: {
+        Row: {
+          calculated_at: string
+          combined_score: number
+          dest_colonia_id: string
+          id: string
+          migration_volume: number
+          origin_colonia_id: string
+          period_date: string
+          similarity_score: number
+        }
+        Insert: {
+          calculated_at?: string
+          combined_score: number
+          dest_colonia_id: string
+          id?: string
+          migration_volume?: number
+          origin_colonia_id: string
+          period_date: string
+          similarity_score: number
+        }
+        Update: {
+          calculated_at?: string
+          combined_score?: number
+          dest_colonia_id?: string
+          id?: string
+          migration_volume?: number
+          origin_colonia_id?: string
+          period_date?: string
+          similarity_score?: number
+        }
+        Relationships: []
+      }
       embeddings: {
         Row: {
           chunk_index: number
@@ -1890,6 +2243,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      futures_curve_projections: {
+        Row: {
+          base_period_date: string
+          calculated_at: string
+          confidence: number | null
+          country_code: string
+          forward_12m: number | null
+          forward_24m: number | null
+          forward_3m: number | null
+          forward_6m: number | null
+          id: string
+          index_code: string
+          methodology: string
+          scope_id: string
+          scope_type: string
+        }
+        Insert: {
+          base_period_date: string
+          calculated_at?: string
+          confidence?: number | null
+          country_code?: string
+          forward_12m?: number | null
+          forward_24m?: number | null
+          forward_3m?: number | null
+          forward_6m?: number | null
+          id?: string
+          index_code: string
+          methodology?: string
+          scope_id: string
+          scope_type: string
+        }
+        Update: {
+          base_period_date?: string
+          calculated_at?: string
+          confidence?: number | null
+          country_code?: string
+          forward_12m?: number | null
+          forward_24m?: number | null
+          forward_3m?: number | null
+          forward_6m?: number | null
+          id?: string
+          index_code?: string
+          methodology?: string
+          scope_id?: string
+          scope_type?: string
+        }
+        Relationships: []
       }
       fx_rates: {
         Row: {
@@ -2462,6 +2863,81 @@ export type Database = {
         }
         Relationships: []
       }
+      ghost_zones_ranking: {
+        Row: {
+          calculated_at: string
+          colonia_id: string
+          country_code: string
+          ghost_score: number
+          id: string
+          period_date: string
+          press_mentions: number
+          rank: number | null
+          score_total: number | null
+          search_volume: number
+        }
+        Insert: {
+          calculated_at?: string
+          colonia_id: string
+          country_code?: string
+          ghost_score: number
+          id?: string
+          period_date: string
+          press_mentions?: number
+          rank?: number | null
+          score_total?: number | null
+          search_volume?: number
+        }
+        Update: {
+          calculated_at?: string
+          colonia_id?: string
+          country_code?: string
+          ghost_score?: number
+          id?: string
+          period_date?: string
+          press_mentions?: number
+          rank?: number | null
+          score_total?: number | null
+          search_volume?: number
+        }
+        Relationships: []
+      }
+      historical_forensics_reports: {
+        Row: {
+          causal_chain: Json
+          colonia_id: string
+          events_detected: Json
+          generated_at: string
+          id: string
+          narrative_md: string | null
+          pdf_url: string | null
+          period_end: string
+          period_start: string
+        }
+        Insert: {
+          causal_chain?: Json
+          colonia_id: string
+          events_detected?: Json
+          generated_at?: string
+          id?: string
+          narrative_md?: string | null
+          pdf_url?: string | null
+          period_end: string
+          period_start: string
+        }
+        Update: {
+          causal_chain?: Json
+          colonia_id?: string
+          events_detected?: Json
+          generated_at?: string
+          id?: string
+          narrative_md?: string | null
+          pdf_url?: string | null
+          period_end?: string
+          period_start?: string
+        }
+        Relationships: []
+      }
       ie_score_visibility_rules: {
         Row: {
           allowed_fields: Json
@@ -2512,6 +2988,51 @@ export type Database = {
           id?: string
           profession_distribution?: Json
           snapshot_date?: string
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      influencer_heat_zones: {
+        Row: {
+          calculated_at: string
+          chef_count: number
+          country_code: string
+          creator_count: number
+          gallery_count: number
+          heat_score: number | null
+          id: string
+          period_date: string
+          scope_type: string
+          sources: Json
+          specialty_cafe_count: number
+          zone_id: string
+        }
+        Insert: {
+          calculated_at?: string
+          chef_count?: number
+          country_code?: string
+          creator_count?: number
+          gallery_count?: number
+          heat_score?: number | null
+          id?: string
+          period_date: string
+          scope_type?: string
+          sources?: Json
+          specialty_cafe_count?: number
+          zone_id: string
+        }
+        Update: {
+          calculated_at?: string
+          chef_count?: number
+          country_code?: string
+          creator_count?: number
+          gallery_count?: number
+          heat_score?: number | null
+          id?: string
+          period_date?: string
+          scope_type?: string
+          sources?: Json
+          specialty_cafe_count?: number
           zone_id?: string
         }
         Relationships: []
@@ -2773,6 +3294,39 @@ export type Database = {
             referencedColumns: ["code"]
           },
         ]
+      }
+      lifepath_user_profiles: {
+        Row: {
+          created_at: string
+          family_state: string | null
+          income_range: string | null
+          preferences: Json
+          top_3_matches: Json
+          updated_at: string
+          user_id: string
+          work_mode: string | null
+        }
+        Insert: {
+          created_at?: string
+          family_state?: string | null
+          income_range?: string | null
+          preferences?: Json
+          top_3_matches?: Json
+          updated_at?: string
+          user_id: string
+          work_mode?: string | null
+        }
+        Update: {
+          created_at?: string
+          family_state?: string | null
+          income_range?: string | null
+          preferences?: Json
+          top_3_matches?: Json
+          updated_at?: string
+          user_id?: string
+          work_mode?: string | null
+        }
+        Relationships: []
       }
       locales: {
         Row: {
@@ -7549,6 +8103,51 @@ export type Database = {
           },
         ]
       }
+      scorecard_national_reports: {
+        Row: {
+          country_code: string
+          created_at: string
+          data_snapshot: Json
+          hero_insights: Json
+          id: string
+          narrative_md: string | null
+          pdf_url: string | null
+          period_date: string
+          period_type: string
+          press_kit_url: string | null
+          published_at: string | null
+          report_id: string
+        }
+        Insert: {
+          country_code?: string
+          created_at?: string
+          data_snapshot?: Json
+          hero_insights?: Json
+          id?: string
+          narrative_md?: string | null
+          pdf_url?: string | null
+          period_date: string
+          period_type: string
+          press_kit_url?: string | null
+          published_at?: string | null
+          report_id: string
+        }
+        Update: {
+          country_code?: string
+          created_at?: string
+          data_snapshot?: Json
+          hero_insights?: Json
+          id?: string
+          narrative_md?: string | null
+          pdf_url?: string | null
+          period_date?: string
+          period_type?: string
+          press_kit_url?: string | null
+          published_at?: string | null
+          report_id?: string
+        }
+        Relationships: []
+      }
       search_trends: {
         Row: {
           country_code: string
@@ -8007,6 +8606,36 @@ export type Database = {
           proj4text?: string | null
           srid?: number
           srtext?: string | null
+        }
+        Relationships: []
+      }
+      sticker_templates: {
+        Row: {
+          created_at: string
+          customizable_fields: Json
+          downloads_count: number
+          id: string
+          svg_template: string
+          template_id: string
+          template_type: string
+        }
+        Insert: {
+          created_at?: string
+          customizable_fields?: Json
+          downloads_count?: number
+          id?: string
+          svg_template: string
+          template_id: string
+          template_type: string
+        }
+        Update: {
+          created_at?: string
+          customizable_fields?: Json
+          downloads_count?: number
+          id?: string
+          svg_template?: string
+          template_id?: string
+          template_type?: string
         }
         Relationships: []
       }
@@ -11778,6 +12407,42 @@ export type Database = {
         }
         Relationships: []
       }
+      widget_embed_registry: {
+        Row: {
+          active: boolean
+          created_at: string
+          customization: Json
+          embed_id: string
+          id: string
+          owner_user_id: string | null
+          scope_id: string
+          scope_type: string
+          views_count: number
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          customization?: Json
+          embed_id: string
+          id?: string
+          owner_user_id?: string | null
+          scope_id: string
+          scope_type: string
+          views_count?: number
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          customization?: Json
+          embed_id?: string
+          id?: string
+          owner_user_id?: string | null
+          scope_id?: string
+          scope_type?: string
+          views_count?: number
+        }
+        Relationships: []
+      }
       zona_snapshots: {
         Row: {
           computed_at: string
@@ -11815,6 +12480,81 @@ export type Database = {
             referencedColumns: ["code"]
           },
         ]
+      }
+      zone_alert_subscriptions: {
+        Row: {
+          active: boolean
+          channel: string
+          country_code: string
+          created_at: string
+          id: string
+          last_triggered_at: string | null
+          threshold_pct: number
+          user_id: string
+          zone_id: string
+        }
+        Insert: {
+          active?: boolean
+          channel: string
+          country_code?: string
+          created_at?: string
+          id?: string
+          last_triggered_at?: string | null
+          threshold_pct: number
+          user_id: string
+          zone_id: string
+        }
+        Update: {
+          active?: boolean
+          channel?: string
+          country_code?: string
+          created_at?: string
+          id?: string
+          last_triggered_at?: string | null
+          threshold_pct?: number
+          user_id?: string
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_alpha_alerts: {
+        Row: {
+          alpha_score: number
+          country_code: string
+          detected_at: string
+          id: string
+          is_active: boolean
+          scope_type: string
+          signals: Json
+          subscribers_notified: number
+          time_to_mainstream_months: number | null
+          zone_id: string
+        }
+        Insert: {
+          alpha_score: number
+          country_code?: string
+          detected_at?: string
+          id?: string
+          is_active?: boolean
+          scope_type?: string
+          signals?: Json
+          subscribers_notified?: number
+          time_to_mainstream_months?: number | null
+          zone_id: string
+        }
+        Update: {
+          alpha_score?: number
+          country_code?: string
+          detected_at?: string
+          id?: string
+          is_active?: boolean
+          scope_type?: string
+          signals?: Json
+          subscribers_notified?: number
+          time_to_mainstream_months?: number | null
+          zone_id?: string
+        }
+        Relationships: []
       }
       zone_certifications: {
         Row: {
@@ -11879,6 +12619,84 @@ export type Database = {
             referencedColumns: ["code"]
           },
         ]
+      }
+      zone_constellations_edges: {
+        Row: {
+          calculated_at: string
+          edge_types: Json
+          edge_weight: number
+          id: string
+          period_date: string
+          source_colonia_id: string
+          target_colonia_id: string
+        }
+        Insert: {
+          calculated_at?: string
+          edge_types?: Json
+          edge_weight: number
+          id?: string
+          period_date: string
+          source_colonia_id: string
+          target_colonia_id: string
+        }
+        Update: {
+          calculated_at?: string
+          edge_types?: Json
+          edge_weight?: number
+          id?: string
+          period_date?: string
+          source_colonia_id?: string
+          target_colonia_id?: string
+        }
+        Relationships: []
+      }
+      zone_migration_flows: {
+        Row: {
+          calculated_at: string
+          confidence: number | null
+          country_code: string
+          dest_scope_id: string
+          dest_scope_type: string
+          id: string
+          income_decile_dest: number | null
+          income_decile_origin: number | null
+          origin_scope_id: string
+          origin_scope_type: string
+          period_date: string
+          source_mix: Json
+          volume: number
+        }
+        Insert: {
+          calculated_at?: string
+          confidence?: number | null
+          country_code?: string
+          dest_scope_id: string
+          dest_scope_type: string
+          id?: string
+          income_decile_dest?: number | null
+          income_decile_origin?: number | null
+          origin_scope_id: string
+          origin_scope_type: string
+          period_date: string
+          source_mix: Json
+          volume: number
+        }
+        Update: {
+          calculated_at?: string
+          confidence?: number | null
+          country_code?: string
+          dest_scope_id?: string
+          dest_scope_type?: string
+          id?: string
+          income_decile_dest?: number | null
+          income_decile_origin?: number | null
+          origin_scope_id?: string
+          origin_scope_type?: string
+          period_date?: string
+          source_mix?: Json
+          volume?: number
+        }
+        Relationships: []
       }
       zone_price_index: {
         Row: {
@@ -12519,6 +13337,60 @@ export type Database = {
           sample_size?: number
           yoy_pct?: number | null
           zone_id?: string
+        }
+        Relationships: []
+      }
+      zone_pulse_scores: {
+        Row: {
+          business_births: number
+          business_deaths: number
+          calculated_at: string
+          calls_911_count: number | null
+          components: Json
+          confidence: string | null
+          country_code: string
+          events_count: number | null
+          foot_traffic_day: number | null
+          foot_traffic_night: number | null
+          id: string
+          period_date: string
+          pulse_score: number | null
+          scope_id: string
+          scope_type: string
+        }
+        Insert: {
+          business_births?: number
+          business_deaths?: number
+          calculated_at?: string
+          calls_911_count?: number | null
+          components?: Json
+          confidence?: string | null
+          country_code?: string
+          events_count?: number | null
+          foot_traffic_day?: number | null
+          foot_traffic_night?: number | null
+          id?: string
+          period_date: string
+          pulse_score?: number | null
+          scope_id: string
+          scope_type: string
+        }
+        Update: {
+          business_births?: number
+          business_deaths?: number
+          calculated_at?: string
+          calls_911_count?: number | null
+          components?: Json
+          confidence?: string | null
+          country_code?: string
+          events_count?: number | null
+          foot_traffic_day?: number | null
+          foot_traffic_night?: number | null
+          id?: string
+          period_date?: string
+          pulse_score?: number | null
+          scope_id?: string
+          scope_type?: string
         }
         Relationships: []
       }

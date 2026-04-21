@@ -226,3 +226,147 @@ Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-026_GLOBAL_PROPTECH_BENCHMARKS.md`. 
 - `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` — detalle técnico 118 scores
 
 **Autor:** PM Sr Dev (sesión product packaging 2026-04-20) | **Status:** Doc vivo, actualizar en cada cierre fase
+
+---
+
+## 9. FASE 11 XL — 75 nuevas capabilities (expansion 2026-04-21)
+
+> **Contexto:** FASE 11 XL agrega 15 índices DMX propietarios + atlas + causal engine + genoma + pulse + flow + ghost zones + stickers + lifepath + climate twin + press kit auto. Arquitectura: `/features/indices/*`, `/features/atlas/*`, `/features/causal/*`, `/features/embed/*`, `/features/lifepath/*`, `/server/api/v1/*`.
+
+### 9.1 Índices DMX (FI-001 a FI-015)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-001 | Índice DMX-MOM (Momentum mensual publicable) | IE-Index | H1 | Full | /indices/dmx-mom, /api/v1/indices/momentum, /api/v1/indices/momentum/monthly |
+| FI-002 | Índice DMX-FAM (Zona Familiar) | IE-Index | H1 | Full | /indices/dmx-fam, /api/v1/indices/fam |
+| FI-003 | Índice DMX-YUP (Young Urban Professional) | IE-Index | H1 | Full | /indices/dmx-yup, /api/v1/indices/yup |
+| FI-004 | Índice DMX-RET (Retirement Fit) | IE-Index | H1 | Full | /indices/dmx-ret, /api/v1/indices/ret |
+| FI-005 | Índice DMX-INV (Inversor Retail) | IE-Index | H1 | Full | /indices/dmx-inv, /api/v1/indices/inv |
+| FI-006 | Índice DMX-STR (Short-Term Rental fit) | IE-Index | H1 | Full | /indices/dmx-str, /api/v1/indices/str |
+| FI-007 | Índice DMX-LIV (Livability compuesto) | IE-Index | H1 | Full | /indices/dmx-liv, /api/v1/indices/livability |
+| FI-008 | Índice DMX-RISK (Riesgo Integral) | IE-Index | H1 | Full | /indices/dmx-risk, /api/v1/indices/risk |
+| FI-009 | Índice DMX-CLIM (Climate Twin) | IE-Index | H1 | MVP | /indices/dmx-clim, /api/v1/indices/climate-twin |
+| FI-010 | Índice DMX-GHOST (Ghost Zones emergentes) | IE-Index | H1 | MVP | /indices/dmx-ghost, /indices/ghost |
+| FI-011 | Índice DMX-FLOW (Migration Flow zonal) | IE-Flow | H1 | MVP | /indices/dmx-flow, /indices/flujos, /api/v1/flows |
+| FI-012 | Índice DMX-PULSE (Signos Vitales B2B) | IE-Pulse | H1 | MVP | /indices/dmx-pulse, /api/v1/pulse |
+| FI-013 | Índice DMX-CULT (Cultural Density) | IE-Index | H2 | Seed | /indices/dmx-cult |
+| FI-014 | Índice DMX-EDU (Education Premium) | IE-Index | H2 | Seed | /indices/dmx-edu |
+| FI-015 | Índice DMX-ACC (Accesibilidad Universal) | IE-Index | H2 | Seed | /indices/dmx-acc |
+
+### 9.2 Atlas + Explorador + Metodología (FI-016 a FI-025)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-016 | Atlas colonia página pública | Atlas | H1 | Full | /atlas/[colonia] |
+| FI-017 | Atlas timeline histórico zona | Atlas | H1 | Full | /atlas/[colonia]/timeline |
+| FI-018 | Página /metodologia transparente | Methodology | H1 | Full | /metodologia, /metodologia/[indice] |
+| FI-019 | Hub /indices landing | Discovery | H1 | Full | /indices |
+| FI-020 | Explorador zonas interactivo | Discovery | H1 | Full | /explorar-zonas |
+| FI-021 | Top Movers Daily tabla | Discovery | H1 | Full | /indices/movers, /api/v1/movers/daily |
+| FI-022 | Explorar redes conexiones zonas | Discovery | H2 | MVP | /explorar-redes |
+| FI-023 | Constelaciones zonas similares | Discovery | H2 | MVP | /indices/constelaciones |
+| FI-024 | Historia colonia narrativa | Atlas | H1 | Full | /historia/[colonia] |
+| FI-025 | Scorecard Nacional página anual | Report | H1 | Full | /scorecard-nacional, /scorecard-nacional/[year] |
+
+### 9.3 Pro Terminal + Backtest + Alpha + Flujos (FI-026 a FI-035)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-026 | Terminal Pro Bloomberg-style UI | Pro | H1 | MVP | /indices/pro |
+| FI-027 | Backtest engine índices | Pro | H1 | MVP | /indices/backtest, /api/v1/backtest |
+| FI-028 | Alpha signal detector | Pro | H1 | MVP | /indices/alpha, /api/v1/alpha |
+| FI-029 | Flujos migración dashboard | Flow | H1 | MVP | /indices/flujos |
+| FI-030 | Constelaciones mapa vector | Pro | H2 | Seed | /indices/constelaciones |
+| FI-031 | Ghost zones report inversor | Pro | H1 | MVP | /indices/ghost, /api/v1/ghost-zones |
+| FI-032 | Pro Terminal charts 50+ tipos | Pro | H1 | MVP | /indices/pro/charts |
+| FI-033 | Pro Terminal custom alerts engine | Pro | H1 | MVP | /indices/pro/alerts |
+| FI-034 | Pro Terminal watchlist multi-zona | Pro | H1 | Full | /indices/pro/watchlist |
+| FI-035 | Pro Terminal export Excel/PDF | Pro | H1 | Full | /indices/pro/export |
+
+### 9.4 Preview Previews por Persona (FI-036 a FI-040)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-036 | Preview Comprador lead-magnet | Preview | H1 | Full | /preview/comprador |
+| FI-037 | Preview Asesor lead-magnet | Preview | H1 | Full | /preview/asesor |
+| FI-038 | Preview Developer lead-magnet | Preview | H1 | Full | /preview/developer |
+| FI-039 | Preview Master Broker lead-magnet | Preview | H1 | Full | /preview/masterbroker |
+| FI-040 | Preview Inversor Institucional | Preview | H1 | MVP | /preview/inversor-institucional |
+
+### 9.5 API v1 Productos Licenciables (FI-041 a FI-055)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-041 | API v1 Momentum Index licensable | API | H1 | Full | /api/v1/indices/momentum |
+| FI-042 | API v1 Livability endpoint | API | H1 | Full | /api/v1/indices/livability |
+| FI-043 | API v1 Risk Score (aseguradoras) | API | H1 | MVP | /api/v1/risk/score |
+| FI-044 | API v1 Time Machine histórico | API | H1 | MVP | /api/v1/time-machine |
+| FI-045 | API v1 Genome Similarity búsqueda vibe | API | H1 | MVP | /api/v1/genome/similar |
+| FI-046 | API v1 Ghost Zones detection | API | H1 | MVP | /api/v1/ghost-zones |
+| FI-047 | API v1 Pulse Score B2B | API | H1 | MVP | /api/v1/pulse |
+| FI-048 | API v1 Migration Flow dataset | API | H1 | MVP | /api/v1/flows |
+| FI-049 | API v1 Climate Twin Report | API | H2 | Seed | /api/v1/climate-twin |
+| FI-050 | API v1 Scorecard Nacional data | API | H1 | Full | /api/v1/scorecard |
+| FI-051 | API v1 Causal Explanation endpoint | API | H1 | MVP | /api/v1/causal/explain |
+| FI-052 | API v1 Trend Genome Alerts stream | API | H1 | MVP | /api/v1/alerts/trend-genome |
+| FI-053 | API v1 webhooks score change | API | H1 | Full | /api/v1/webhooks |
+| FI-054 | API v1 OAuth + rate limits + SLA | API | H1 | Full | /api/v1/auth, /api/v1/limits |
+| FI-055 | API v1 SDK TypeScript npm | API | H2 | Seed | npm @dmx/sdk |
+
+### 9.6 Widget Embebible + Badges + Stickers (FI-056 a FI-063)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-056 | Widget embebible score por colonia | Widget | H1 | Full | /embed/score/[colonia] |
+| FI-057 | Widget config generator | Widget | H1 | Full | /embed/generator |
+| FI-058 | Widget Pro sin branding (paid) | Widget | H1 | MVP | /embed/pro/[colonia] |
+| FI-059 | Badges galería pública | Marketing | H1 | Full | /badges |
+| FI-060 | Sticker DMX-MOM descargable | Marketing | H1 | Full | /badges/momentum |
+| FI-061 | Sticker LifeMatch | Marketing | H1 | Full | /badges/lifematch |
+| FI-062 | Badge colonia certificada | Marketing | H1 | Full | /badges/certified/[colonia] |
+| FI-063 | Sticker API embed code copy-paste | Marketing | H1 | Full | /badges/embed |
+
+### 9.7 LifePath + Climate Twin + Causal Engine (FI-064 a FI-070)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-064 | LifePath Match comprador freemium | LifePath | H1 | Full | /lifepath, /lifepath/match |
+| FI-065 | LifePath wizard onboarding vida | LifePath | H1 | Full | /lifepath/wizard |
+| FI-066 | LifePath etapas vida transiciones | LifePath | H2 | MVP | /lifepath/stages |
+| FI-067 | Climate Twin report aseguradoras | Causal | H1 | MVP | /reports/climate-twin/[colonia] |
+| FI-068 | Causal engine explicativo por zona | Causal | H1 | MVP | /indices/[id]/causal, /api/v1/causal |
+| FI-069 | Genoma búsqueda vector por vibe | Genome | H1 | MVP | /explorar-zonas/genome, /api/v1/genome |
+| FI-070 | Trend Genome Alerts premium B2B | Genome | H1 | MVP | /alertas/trend-genome, /api/v1/alerts |
+
+### 9.8 Alert Radar + Wrapped + Newsletter + Press Kit (FI-071 a FI-075)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-071 | Alert Radar WhatsApp push alerts | Alert | H1 | Full | /alertas, integración WhatsApp Business |
+| FI-072 | DMX Wrapped anual personalizado | Marketing | H1 | Full | /wrapped/[year], /wrapped/[user] |
+| FI-073 | Newsletter mensual DMX-MOM auto | Content | H1 | Full | /newsletter/mensual, suscripción |
+| FI-074 | Newsletter trimestral Scorecard | Content | H1 | Full | /newsletter/trimestral |
+| FI-075 | Press Kit Auto suscripción medios | Content | H1 | MVP | /press-kit, /press-kit/subscribe, /api/v1/press-kit |
+
+---
+
+## 10. Totales actualizados post FASE 11 XL
+
+| Categoría | Shipped | Planificado | Propuesto | Reference | **Total** |
+|---|---|---|---|---|---|
+| Scores IE | 48 | 66 | 0 | 0 | 114 |
+| Productos IE | 1 | 5 | 0 | 0 | 6 |
+| Índices DMX | 0 | 15 | 0 | 0 | 15 |
+| Upgrades U-* | 16 | 0 | 0 | 0 | 16 |
+| Upgrades D-* | 11 | 7 | 10 | 0 | 28 |
+| UI Components | 5 | 0 | 0 | 0 | 5 |
+| Infra Features | 16 | 0 | 0 | 0 | 16 |
+| Laterales L-* | 0 | 0 | 72 | 0 | 72 |
+| Cross-Functions | 0 | 0 | 16 | 0 | 16 |
+| Global Benchmarks | 0 | 0 | 0 | 65 | 65 |
+| **FASE 11 XL (FI-*)** | 0 | 75 | 0 | 0 | **75** |
+| **TOTAL** | **97** | **168** | **98** | **65** | **428** |
+
+**DMX universo total catalogado: 428 capabilities/features únicos (+83 vs cierre 2026-04-20).**
+
+**Autor FASE 11 XL append:** PM Sr (Opus 4.7) | **Fecha:** 2026-04-21 | **Status:** Planificado H1
