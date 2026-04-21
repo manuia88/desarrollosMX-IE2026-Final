@@ -21,6 +21,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
 import type { Calculator, CalculatorInput, Confidence } from '../base';
+import { runPulseScoreForScope } from '../pulse';
 import dmxDevCalculator from './dev';
 import dmxFamCalculator from './fam';
 import dmxGntCalculator from './gnt';
@@ -377,7 +378,7 @@ export async function calculateAllIndicesForScope(
 // pre-cargada via params.zoneIds. Query primaria: zone_price_index (scope MX)
 // para obtener zone_ids distintos. Segunda: zona_snapshots. Si ambos fallan,
 // retornar lista vacía.
-async function discoverCDMXColoniaZones(
+export async function discoverCDMXColoniaZones(
   supabase: SupabaseClient,
   periodDate: string,
 ): Promise<readonly string[]> {
@@ -512,6 +513,75 @@ export async function calculateAllIndicesForCDMXColonias(
   return {
     zones_processed: zoneIds.length,
     indices_computed,
+    failures,
+    duration_ms: Date.now() - start,
+  };
+}
+
+// FASE 11 XL — BLOQUE 11.F Pulse Score batch orchestrator.
+// Pulse Score es un índice compuesto agregado (vive en `../pulse`) que corre
+// POR scope como los 14 zone-indices. A diferencia del orchestrator de los
+// 15, pulse se persiste en su propia tabla (scope sub-agent A) y NO pasa por
+// dmx_indices — por eso tiene summary separado.
+
+export interface CalculatePulseBatchSummary {
+  readonly zones_processed: number;
+  readonly pulse_computed: number;
+  readonly failures: number;
+  readonly duration_ms: number;
+}
+
+export interface CalculateAllPulseForCDMXColoniasParams {
+  readonly periodDate: string;
+  readonly supabase: SupabaseClient;
+  readonly zoneIds?: readonly string[];
+  readonly chunkSize?: number;
+  readonly scopeType?: 'colonia' | 'alcaldia' | 'city' | 'estado';
+}
+
+export async function calculateAllPulseForCDMXColonias(
+  params: CalculateAllPulseForCDMXColoniasParams,
+): Promise<CalculatePulseBatchSummary> {
+  const start = Date.now();
+  const chunkSize = params.chunkSize ?? CDMX_CHUNK_SIZE;
+  const scopeType = params.scopeType ?? 'colonia';
+  const zoneIds =
+    params.zoneIds ?? (await discoverCDMXColoniaZones(params.supabase, params.periodDate));
+
+  if (zoneIds.length === 0) {
+    return {
+      zones_processed: 0,
+      pulse_computed: 0,
+      failures: 0,
+      duration_ms: Date.now() - start,
+    };
+  }
+
+  let pulse_computed = 0;
+  let failures = 0;
+
+  for (let i = 0; i < zoneIds.length; i += chunkSize) {
+    const chunk = zoneIds.slice(i, i + chunkSize);
+    const chunkResults = await Promise.all(
+      chunk.map((zoneId) =>
+        runPulseScoreForScope({
+          scopeType,
+          scopeId: zoneId,
+          countryCode: 'MX',
+          periodDate: params.periodDate,
+          supabase: params.supabase,
+        }),
+      ),
+    );
+    for (const r of chunkResults) {
+      if (r.ok) pulse_computed++;
+      else failures++;
+    }
+  }
+
+  return {
+    zones_processed: zoneIds.length,
+    pulse_computed,
     failures,
     duration_ms: Date.now() - start,
   };

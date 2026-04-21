@@ -13,8 +13,10 @@
 
 import { NextResponse } from 'next/server';
 import {
+  type CalculatePulseBatchSummary,
   type CDMXBatchSummary,
   calculateAllIndicesForCDMXColonias,
+  calculateAllPulseForCDMXColonias,
 } from '@/shared/lib/intelligence-engine/calculators/indices';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 
@@ -71,6 +73,9 @@ export async function POST(request: Request): Promise<NextResponse> {
   let scopesProcessed = 0;
   let indicesComputed = 0;
   let failures = 0;
+  let pulseScopesProcessed = 0;
+  let pulseComputed = 0;
+  let pulseFailures = 0;
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -84,6 +89,28 @@ export async function POST(request: Request): Promise<NextResponse> {
     scopesProcessed = result.zones_processed;
     indicesComputed = result.indices_computed;
     failures = result.failures;
+
+    // BLOQUE 11.F — Pulse Score también corre en el dispatcher mensual.
+    // Usa el mismo batch CDMX colonias. Falla de pulse NO tumba dispatch.
+    if (dispatched === 'monthly' || dispatched === 'quarterly' || dispatched === 'annual') {
+      try {
+        const pulseResult: CalculatePulseBatchSummary = await calculateAllPulseForCDMXColonias({
+          periodDate,
+          supabase,
+        });
+        pulseScopesProcessed = pulseResult.zones_processed;
+        pulseComputed = pulseResult.pulse_computed;
+        pulseFailures = pulseResult.failures;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errors.push({ stage: `${dispatched}:pulse`, message });
+        console.error('[dmx-indices-master] pulse dispatch failed', {
+          dispatched,
+          message,
+          error: err,
+        });
+      }
+    }
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     errors.push({ stage: dispatched, message });
@@ -100,6 +127,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     scopes_processed: scopesProcessed,
     indices_computed: indicesComputed,
     failures,
+    pulse_scopes_processed: pulseScopesProcessed,
+    pulse_computed: pulseComputed,
+    pulse_failures: pulseFailures,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

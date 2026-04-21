@@ -1175,5 +1175,31 @@
       "geo": "Geo",
       "news": "Noticia"
     }
+  },
+  "Pulse": {
+    "title": "Signos Vitales",
+    "subtitle": "Pulso de la zona en vivo",
+    "loading": "Midiendo signos vitales…",
+    "error": "No pudimos leer los signos vitales.",
+    "empty_state": "Aún no hay datos de pulso para esta zona.",
+    "score_label": "Pulso general",
+    "pulse_economic": "Pulso económico",
+    "pulse_economic_tooltip": "Altas menos bajas de negocios en 30 días",
+    "breath_commercial": "Respiración comercial",
+    "breath_commercial_tooltip": "Tráfico peatonal día vs noche",
+    "temp_social": "Temperatura social",
+    "temp_social_tooltip": "Inversa de llamadas 911",
+    "confidence_label": "Confianza",
+    "confidence": {
+      "high": "Alta",
+      "medium": "Media",
+      "low": "Baja",
+      "insufficient_data": "Datos insuficientes"
+    },
+    "history_title": "Últimos 12 meses",
+    "units_bpm": "bpm",
+    "units_people": "personas",
+    "units_calls": "llamadas",
+    "aria_pulse_chart": "Gráfica de pulso últimos 12 meses"
   }
 }

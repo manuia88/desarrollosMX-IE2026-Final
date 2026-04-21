@@ -1167,5 +1167,31 @@
       "geo": "Geo",
       "news": "News"
     }
+  },
+  "Pulse": {
+    "title": "Vital Signs",
+    "subtitle": "Live neighborhood pulse",
+    "loading": "Measuring vital signs…",
+    "error": "We couldn't read the vital signs right now.",
+    "empty_state": "No pulse data for this area yet.",
+    "score_label": "Overall pulse",
+    "pulse_economic": "Economic pulse",
+    "pulse_economic_tooltip": "Business openings minus closures over 30 days",
+    "breath_commercial": "Commercial breathing",
+    "breath_commercial_tooltip": "Foot traffic day vs night",
+    "temp_social": "Social temperature",
+    "temp_social_tooltip": "Inverse of 911 calls",
+    "confidence_label": "Confidence",
+    "confidence": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low",
+      "insufficient_data": "Insufficient data"
+    },
+    "history_title": "Last 12 months",
+    "units_bpm": "bpm",
+    "units_people": "people",
+    "units_calls": "calls",
+    "aria_pulse_chart": "Pulse chart last 12 months"
   }
 }

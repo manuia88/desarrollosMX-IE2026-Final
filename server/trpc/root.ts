@@ -25,6 +25,7 @@ import { strWatchdogRouter } from '@/features/str-intelligence/routes/watchdog';
 import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
 import { publicProcedure, router } from './init';
 import { causalRouter } from './routers/causal';
+import { pulseRouter } from './routers/pulse';
 
 export const appRouter = router({
   health: publicProcedure.query(() => ({
@@ -50,6 +51,7 @@ export const appRouter = router({
   invisibleHotels: invisibleHotelsRouter,
   nomad: nomadRouter,
   photoCv: photoCvRouter,
+  pulse: pulseRouter,
   strPortfolio: strPortfolioRouter,
   strPricing: strPricingRouter,
   strReports: strReportsRouter,

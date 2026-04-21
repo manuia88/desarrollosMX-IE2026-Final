@@ -1693,6 +1693,24 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     country_codes: ['MX'],
   },
 
+  // --------------- Pulse Score — BLOQUE 11.F ---------------
+  // Métrica "signos vitales" paralela a los 15 índices DMX. level 5 agregado,
+  // tier 2 público, combina DENUE (altas/bajas) + 911 CDMX API + stubs H1 para
+  // foot_traffic/events/construction. Persiste en public.zone_pulse_scores.
+  {
+    score_id: 'PULSE',
+    name: 'Pulse Score',
+    level: 5,
+    category: 'agregado',
+    tier: 2,
+    dependencies: ['N04', 'N09'],
+    triggers_cascade: ['geo_data_updated:denue'],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#pulse',
+    confidence_sources: ['denue', 'datos_abiertos_cdmx', 'zone_scores'],
+    calculator_path: 'shared/lib/intelligence-engine/calculators/pulse/pulse-score.ts',
+    country_codes: ['MX'],
+  },
+
   // --------------- Stubs futuros H2+ (5) ---------------
   // Placeholder entries que llegarán post-H1. Marcados [STUB — FASE 29+].
   {
