@@ -1094,7 +1094,11 @@
         "short": "Density",
         "tagline": "Density vs. quality of life balance"
       },
-      "IRE": { "name": "Effective Rent Index", "short": "Rent", "tagline": "Real rental yield" },
+      "IRE": {
+        "name": "Effective Rent Index",
+        "short": "Rent",
+        "tagline": "Real rental yield"
+      },
       "ICO": {
         "name": "Connectivity Index",
         "short": "Connectivity",
@@ -1110,7 +1114,11 @@
         "short": "Livability",
         "tagline": "Integral quality of life"
       },
-      "FAM": { "name": "Family Index", "short": "Families", "tagline": "Family suitability" },
+      "FAM": {
+        "name": "Family Index",
+        "short": "Families",
+        "tagline": "Family suitability"
+      },
       "YNG": {
         "name": "Young Adults Index",
         "short": "Young",
@@ -1534,6 +1542,362 @@
         "col_action": "Action",
         "cta_compute_winner": "Compute winner"
       }
+    }
+  },
+  "PreviewHub": {
+    "meta_title": "DMX Preview · Meet the platform by persona",
+    "meta_description": "Four interactive experiences for buyer, advisor, developer and master broker. Mock data, real components.",
+    "eyebrow": "Interactive demo",
+    "title": "Meet DMX by your role",
+    "subtitle": "Pick the experience that best describes you and walk through a full version with consistent demo data.",
+    "cta_open_preview": "Open preview →",
+    "personas": {
+      "comprador": {
+        "title": "I'm a buyer",
+        "description": "Find your ideal neighborhood in 3 minutes with personalized recommendations."
+      },
+      "asesor": {
+        "title": "I'm an advisor",
+        "description": "Present the area to your client with real data and quantitative arguments."
+      },
+      "developer": {
+        "title": "I'm a developer",
+        "description": "Decide where to build with real-time market intelligence."
+      },
+      "masterbroker": {
+        "title": "I'm a master broker",
+        "description": "Run your team and territories from a unified dashboard."
+      }
+    }
+  },
+  "PreviewShared": {
+    "nav": {
+      "aria_label": "Preview navigation",
+      "breadcrumb_preview": "Preview",
+      "go_to_platform": "Go to live platform →",
+      "persona": {
+        "comprador": "Buyer",
+        "asesor": "Advisor",
+        "developer": "Developer",
+        "masterbroker": "Master Broker"
+      }
+    },
+    "demo_banner": {
+      "label": "Demo",
+      "body": "Consistent sample data. The components are the same as in the live platform."
+    },
+    "common": {
+      "section_insights": "Key insights",
+      "section_scores": "DMX scores",
+      "section_pulse": "Zone Pulse",
+      "section_causal": "Why is it rising?",
+      "section_timeline": "Timeline",
+      "section_matches": "Top matches",
+      "trend_up": "Up {pct}%",
+      "trend_down": "Down {pct}%",
+      "trend_flat": "Stable",
+      "percentile": "Percentile {n}",
+      "based_on_mock": "Demo data"
+    },
+    "narvarte": {
+      "summary": "Narvarte combines accessible price, rising lifestyle and migration of young profiles from Condesa and Roma. It is an alpha-zone with score 78 and a 12-month horizon to mainstream.",
+      "pulse": {
+        "headline": "Narvarte is in strong momentum: demand 86, appreciation 81."
+      },
+      "causal": {
+        "driver_metro": "Metro line 12 expansion",
+        "driver_gastro": "Gastronomy boom",
+        "driver_migration": "Migration from Condesa and Roma",
+        "driver_supply": "Limited new-build supply",
+        "evidence_metro": "2 new stations within 400 m in 2025 boosted foot traffic 22%.",
+        "evidence_gastro": "34 new restaurants in 12 months, 88th percentile in density.",
+        "evidence_migration": "1,050 households moved from Condesa/Roma with 12% higher average income.",
+        "evidence_supply": "New-build pipeline dropped 8%, pushing prices up.",
+        "conclusion": "The three positive forces clearly outweigh the supply-side negative; the zone should keep appreciating 6-8% over 12 months."
+      },
+      "timeline": {
+        "milestone_gallery": "Narvarte Cultural Gallery opened",
+        "milestone_metro": "Metro L12 expansion completed",
+        "milestone_cafe": "Eje 8 gastronomy corridor consolidated"
+      }
+    }
+  },
+  "PreviewComprador": {
+    "meta_title": "DMX Preview · Find your ideal neighborhood",
+    "meta_description": "See how DMX helps you pick the neighborhood that best fits you in minutes, with real per-neighborhood data.",
+    "hero": {
+      "eyebrow": "Buyer experience",
+      "title": "Find your ideal neighborhood in 3 minutes",
+      "subtitle": "Answer three lifestyle questions and we rank the neighborhoods that really fit you — with evidence, not luck.",
+      "cta_primary": "See my personalized match"
+    },
+    "flow": {
+      "lifestyle": {
+        "title": "1. Your lifestyle",
+        "description": "Three simple questions define your profile. Here is a simulation.",
+        "profile_summary": "Young couple · $5M MXN budget · Lifestyle priority",
+        "chip_stage": "Stage: young couple",
+        "chip_budget": "Budget $5M MXN",
+        "chip_priority": "Priority: lifestyle"
+      },
+      "matches": {
+        "title": "2. Your personalized match",
+        "description": "Top 5 neighborhoods ranked by fit with your profile."
+      },
+      "highlight": {
+        "title": "3. Your featured neighborhood: Narvarte",
+        "description": "A neighborhood with all 15 DMX indices in one place.",
+        "scores_heading": "15 DMX Scores",
+        "percentile_label": "Percentile {n}"
+      },
+      "pulse": {
+        "title": "4. Buy now or wait?",
+        "description": "The neighborhood pulse tells you if it is a good time to jump in.",
+        "heartbeat_label": "Neighborhood heartbeat",
+        "vital_appreciation": "Appreciation",
+        "vital_liquidity": "Liquidity",
+        "vital_demand": "Demand",
+        "vital_momentum": "Momentum",
+        "drivers_heading": "Why is it rising?",
+        "impact_label": "Impact {pct}%",
+        "evidence_label": "Evidence",
+        "conclusion_heading": "Takeaway"
+      },
+      "timeline": {
+        "title": "5. How Narvarte has evolved (12 months)",
+        "description": "Monthly trend of four key indices with highlighted milestones.",
+        "axis_period": "Month",
+        "axis_score": "Score (0-100)",
+        "series_ipv": "IPV · Price",
+        "series_liv": "LIV · Lifestyle",
+        "series_fam": "FAM · Family",
+        "series_yng": "YNG · Young",
+        "milestone_label": "Milestone"
+      }
+    },
+    "cta_final": {
+      "eyebrow": "Ready to start?",
+      "title": "Start your search with DMX",
+      "subtitle": "Create your free account and receive your real match with neighborhoods in your city.",
+      "label": "Start search"
+    }
+  },
+  "PreviewAsesor": {
+    "meta_title": "DMX Preview · Present the area to your client with data",
+    "meta_description": "Turn every pitch into a quantitative argument. Pitch builder, client profiles and data-backed answers.",
+    "hero": {
+      "eyebrow": "Advisor experience",
+      "title": "Present the area to your client with real data",
+      "subtitle": "Build your pitch in minutes: pick the client profile, see zones with quantitative fit and answer objections with evidence.",
+      "cta_primary": "See sample proposal"
+    },
+    "flow": {
+      "profiles": {
+        "title": "1. Your fictional clients",
+        "description": "Three representative profiles. Pick one to see a generated proposal.",
+        "tab_label": "Profile {index}",
+        "age_label": "Age",
+        "family_label": "Family",
+        "budget_label": "Budget",
+        "priority_label": "Priority",
+        "priority_schools": "Schools",
+        "priority_commute": "Commute",
+        "priority_lifestyle": "Lifestyle"
+      },
+      "proposal": {
+        "title": "2. Generated proposal",
+        "description": "Three neighborhoods with quantitative arguments, ready to share.",
+        "fit_label": "Fit {pct}%",
+        "rationale_label": "Why"
+      },
+      "pitch": {
+        "title": "3. Pitch builder",
+        "description": "Build three visual cards with zone, scores and quantitative metrics.",
+        "card_hero_placeholder": "Neighborhood image",
+        "card_scores_heading": "Top 3 scores",
+        "card_bullet_1": "Appreciation 12m",
+        "card_bullet_2": "FAM percentile"
+      },
+      "pdf": {
+        "title": "4. PDF preview",
+        "description": "Report ready to send via WhatsApp or email.",
+        "mock_label": "Preview",
+        "toc_heading": "Report content",
+        "toc_1": "Cover with client data",
+        "toc_2": "3 recommended neighborhoods",
+        "toc_3": "DMX scores per neighborhood",
+        "toc_4": "Objections and answers",
+        "toc_5": "Advisor contact"
+      },
+      "objections": {
+        "title": "5. Objections + data-backed answers",
+        "description": "Four common objections and how to answer them with evidence.",
+        "q1": "Isn't the area too expensive?",
+        "a1": "Narvarte appreciated 6.4% in 12 months and is in the 82nd percentile on price. The average ticket is still below Condesa.",
+        "q2": "What if there is no listing in my budget?",
+        "a2": "The zone has liquidity 74 and STR 74: monthly rotation is steady; average wait is under 60 days.",
+        "q3": "How do I know it will keep rising?",
+        "a3": "Momentum 81, investment 79 and YNG 88. The combo signals sustained demand from young high-capacity profiles.",
+        "q4": "How safe is it to live there?",
+        "a4": "IDS (social development) 84, 91st percentile. The zone is among the top-ranked on perceived safety and services."
+      },
+      "methodology": {
+        "title": "Supporting methodology",
+        "description": "The FAM score is built on transparent data from public sources."
+      }
+    },
+    "profiles": {
+      "laura": {
+        "name": "Laura García",
+        "family": "Couple + 2 school-age kids",
+        "rationale_narvarte": "Narvarte combines FAM 76 and IDS 84: schools within 1 km and direct transit downtown.",
+        "rationale_del_valle": "Del Valle Centro with FAM 73 and LIV 79: budget reaches 90 m² and access to six bilingual schools.",
+        "rationale_iztaccihuatl": "Iztaccíhuatl is a rising alpha-zone: price 20% below average and two new schools in 2025.",
+        "objections": "Worried about actual bilingual school supply and safety around school drop-off."
+      },
+      "diego": {
+        "name": "Diego Martínez",
+        "family": "Single, digital creative, 1 dog",
+        "rationale_roma_norte": "Roma Norte with YNG 92 and LIV 88: bars, coworkings and transit under 5 minutes away.",
+        "rationale_condesa": "Condesa YNG 90 and GRN 78: parks and terraces 3 min on foot, young pet-friendly community.",
+        "rationale_narvarte": "Narvarte YNG 88 and MOM 81 at 30% lower price per m²: alpha-zone with a better ticket.",
+        "objections": "Wants to ensure the zone keeps authenticity and does not go generic in 5 years."
+      },
+      "sofia": {
+        "name": "Sofía Ramírez",
+        "family": "Executive, no kids, demanding schedule",
+        "rationale_polanco": "Polanco ICO 89 and STA 86: 12 minutes to the business corridor and 24/7 services.",
+        "rationale_lomas": "Lomas de Chapultepec STA 90 and GRN 82: calm, green and close to corporate clients.",
+        "rationale_santa_fe": "Santa Fe ICO 84 for executives in the corporate zone: less commute if she works there.",
+        "objections": "Concerned about rush-hour traffic and valet parking availability."
+      }
+    },
+    "cta_final": {
+      "eyebrow": "Professional access",
+      "title": "Power your closings with DMX",
+      "subtitle": "Add DMX to your advisor stack and close with stronger arguments.",
+      "label": "Professional access"
+    }
+  },
+  "PreviewDeveloper": {
+    "meta_title": "DMX Preview for Developers · Decide where to build with real data",
+    "meta_description": "City heatmap with 15 indexes, feasibility simulator, alpha zones and competitive pipeline. Market intelligence for investment decisions.",
+    "hero": {
+      "eyebrow": "Developer Preview",
+      "title": "Decide where to build with real intelligence",
+      "subtitle": "15-index heatmap, feasibility simulator, detected alpha zones and competitive pipeline — all in a single view.",
+      "cta_primary": "Explore market intelligence"
+    },
+    "flow": {
+      "map": {
+        "title": "City map · 15 toggleable indexes",
+        "active_index": "Active index",
+        "legend": {
+          "low": "Low",
+          "mid": "Fair",
+          "high": "Good",
+          "top": "Excellent"
+        }
+      },
+      "filters": {
+        "title": "Investment filters",
+        "price_range": "Price per m²",
+        "typology": "Typology",
+        "units": "Units",
+        "price_range_value": "$60,000 – $80,000 MXN/m²",
+        "typology_value": "Vertical towers",
+        "units_value": "80 – 150"
+      },
+      "feasibility": {
+        "title": "Feasibility simulator",
+        "roi": "Projected ROI",
+        "absorption": "Absorption (months)",
+        "competitors": "Competing units",
+        "price_m2": "Avg price per m²"
+      },
+      "alpha": {
+        "title": "Detected alpha zones",
+        "subscribe_cta": "Subscribe to alpha alerts"
+      },
+      "migration": {
+        "title": "Incoming migration flows",
+        "origin": "Origin",
+        "dest": "Destination"
+      },
+      "pipeline": {
+        "title": "Nearby project pipeline",
+        "columns": {
+          "name": "Project",
+          "units": "Units",
+          "status": "Status"
+        },
+        "status": {
+          "announced": "Announced",
+          "in_progress": "In construction",
+          "presale": "Presale"
+        },
+        "projects": {
+          "project_vertex": "Vertex Narvarte",
+          "project_meridiano": "Meridiano 75",
+          "project_allure": "Allure Vertiz",
+          "project_parque": "Centenario Park",
+          "project_arboleda": "Arboleda Lofts"
+        }
+      }
+    },
+    "cta_final": {
+      "label": "Request Enterprise access",
+      "helper": "Full access to 15 indexes, live alpha zones and competitive pipeline."
+    }
+  },
+  "PreviewMasterBroker": {
+    "meta_title": "DMX Preview for Master Brokers · Command center for your team and territories",
+    "meta_description": "Unified dashboard with 10 agents, territory map, aggregate KPIs, alpha alerts and weekly leaderboard with gamification.",
+    "hero": {
+      "eyebrow": "Master Broker Preview",
+      "title": "Command center for your team and territories",
+      "subtitle": "Visualize pipeline, conversion, YTD revenue and momentum per agent and territory in a single dashboard.",
+      "cta_primary": "View team dashboard"
+    },
+    "flow": {
+      "agents": {
+        "title": "Team · 10 active agents",
+        "columns": {
+          "name": "Agent",
+          "zone": "Assigned zone",
+          "pipeline": "Pipeline",
+          "conversion": "Conversion",
+          "ytd": "YTD revenue",
+          "weekly_deals": "Weekly deals",
+          "trend": "Trend"
+        },
+        "badges": {
+          "top_closer": "Top closer",
+          "streak_week": "Weekly streak",
+          "alpha_hunter": "Alpha hunter",
+          "rising_star": "Rising star"
+        }
+      },
+      "territory": {
+        "title": "Territory map"
+      },
+      "kpis": {
+        "title": "Aggregate team KPIs",
+        "total_pipeline": "Total pipeline",
+        "total_ytd": "YTD revenue",
+        "avg_conversion": "Avg conversion",
+        "top_agent": "Top agent"
+      },
+      "alerts": {
+        "title": "Alerts: zones with opportunity"
+      },
+      "leaderboard": {
+        "title": "Weekly leaderboard · Top 5"
+      }
+    },
+    "cta_final": {
+      "label": "Request Enterprise access + broker dashboard",
+      "helper": "Full team dashboard, territory assignment and live alerts."
     }
   }
 }
