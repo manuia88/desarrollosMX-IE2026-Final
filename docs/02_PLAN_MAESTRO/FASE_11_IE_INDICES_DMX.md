@@ -489,6 +489,25 @@ Para cada calculator el stack E2E es idéntico:
 
 **Criterio de done:** Landing carga, PDFs descargables, archivo Q1-Q4 navegable.
 
+#### MÓDULO 11.I.6 — Timeline Narrativo Causal histórico (L89)
+
+**Pasos:**
+- `[11.I.6.1]` Generador `shared/lib/reports/causal-timeline.ts` que consulta `causal_explanations` 12m+ por colonia, ordena cronológicamente y genera relato continuo vía Causal Engine (prompt timeline especial).
+- `[11.I.6.2]` Output: párrafo markdown "Roma Norte subió IPV en marzo por movilidad → bajó en abril por seguridad → recuperó en mayo por nuevos cafés" con citations verificables.
+- `[11.I.6.3]` Sección del Scorecard Nacional "Historias del Trimestre" top 5 colonias con timeline narrative.
+- `[11.I.6.4]` Export público `/historia/[colonia]` individual para deep-linking prensa.
+
+**Criterio de done:** 5 timelines narrativos Q1 2026 en PDF + páginas individuales SEO-indexables.
+
+#### MÓDULO 11.I.7 — "Pulse DMX" como métrica hero (L95)
+
+**Pasos:**
+- `[11.I.7.1]` Elevar Pulse Score como sección hero del Scorecard ("Pulse Nacional 73/100 — salud urbana MX Q1 2026").
+- `[11.I.7.2]` Serie temporal pública citeable "Pulse de Roma Norte: 87 (+4 vs Q4)".
+- `[11.I.7.3]` Brand guidelines uso oficial "Pulse DMX" en press releases.
+
+**Criterio de done:** Sección hero Scorecard + brand guidelines + citeable en press releases Q1.
+
 ### BLOQUE 11.J — Newsletter + Wrapped (~4h)
 
 #### MÓDULO 11.J.1 — Newsletter mensual Resend MJML
@@ -514,6 +533,17 @@ Para cada calculator el stack E2E es idéntico:
 - `[11.J.3.1]` Opt-in por colonia; email mensual customizado con updates de esa colonia (scores, alertas, Pulse).
 
 **Criterio de done:** User suscrito a Roma Norte recibe email con data Roma Norte.
+
+#### MÓDULO 11.J.4 — Strava Segments colonias (L94) — streaks mensuales
+
+**Pasos:**
+- `[11.J.4.1]` Job mensual `shared/lib/reports/streaks-calculator.ts` calcula "streaks" de colonias con Pulse >80 N meses consecutivos.
+- `[11.J.4.2]` Tabla `zone_streaks` (scope_id, streak_length_months, current_pulse, rank_in_country).
+- `[11.J.4.3]` Sección Newsletter mensual "🔥 Las más vivas este trimestre" top 10.
+- `[11.J.4.4]` Endpoint público `/indices/streaks` leaderboard gamificado.
+- `[11.J.4.5]` Integración DMX Wrapped anual: "Tu colonia estuvo top-10 durante 7 meses este año".
+
+**Criterio de done:** Leaderboard mensual con top 10 streaks + sección newsletter + integración Wrapped anual.
 
 ### BLOQUE 11.K — Preview UX 4 Personas (~8h)
 
@@ -591,6 +621,25 @@ Para cada calculator el stack E2E es idéntico:
 
 **Criterio de done:** 4 endpoints funcionales; Postman collection published.
 
+#### MÓDULO 11.L.5 — Hash-based URL sharing backtests (L84)
+
+**Pasos:**
+- `[11.L.5.1]` Encoder `features/indices-publicos/lib/backtest-hash.ts`: hash compact de `{ indexCode, topN, fromDate, toDate, coloniaIds[] }` → base64url URL-safe string <200 chars.
+- `[11.L.5.2]` Route `/indices/backtest?h={hash}` decodifica y pre-rellena form.
+- `[11.L.5.3]` Share button en `/indices/backtest` genera URL hash + copy-to-clipboard + previews OpenGraph auto.
+
+**Criterio de done:** Crear backtest "Top-5 DMX-MOM CDMX 2023-2026" → compartir URL → abrir en otro browser → reproduce vista idéntica.
+
+#### MÓDULO 11.L.6 — Pulse Comparador lado-a-lado (L92)
+
+**Pasos:**
+- `[11.L.6.1]` Ampliar `features/pulse-score/components/VitalSigns.tsx` con prop `compareWith?: coloniaId` que superpone 2 sparklines.
+- `[11.L.6.2]` Embed `/embed/pulse/[colonia]/vs/[coloniaCompare]` iframe compare mode.
+- `[11.L.6.3]` UI colonia detail: toggle "Comparar con otra colonia" + autocomplete selector.
+- `[11.L.6.4]` Leyenda + colores distintos oklch por serie + hover sincronizado cross-series.
+
+**Criterio de done:** Usuario compara Pulse Narvarte vs Roma Sur lado-a-lado con animaciones sincronizadas.
+
 ### BLOQUE 11.M — Genoma de Colonias SEED (~4h)
 
 #### MÓDULO 11.M.1 — Vectores 64-dim pgvector
@@ -633,6 +682,17 @@ Para cada calculator el stack E2E es idéntico:
 - `[11.N.2.1]` Recharts chart forward curve; comparar múltiples colonias.
 
 **Criterio de done:** UI renderiza 3 colonias superpuestas forward curve.
+
+#### MÓDULO 11.N.3 — Pulse Pronóstico 30 días forward (L93)
+
+**Pasos:**
+- `[11.N.3.1]` Extender `shared/lib/intelligence-engine/futures/curve-calculator.ts` con `calculatePulseForecast(zoneId, days=30)`.
+- `[11.N.3.2]` Inputs: zone_pulse_scores 12m + eventos próximos conocidos (permisos aprobados futuro, metro inaugurándose) vía calendar ingestion stub.
+- `[11.N.3.3]` Tabla `futures_curve_projections` extendida con kind='pulse' además de 'index'.
+- `[11.N.3.4]` UI mini-forecast embebido en VitalSigns component (11.F) con banda de confianza sombreada.
+- `[11.N.3.5]` Disclaimer "proyección heurística 30d, no garantía".
+
+**Criterio de done:** VitalSigns muestra pronóstico 30d con banda sombreada + disclaimer visible.
 
 ### BLOQUE 11.O — LifePath SEED (~3h)
 
@@ -767,6 +827,35 @@ Para cada calculator el stack E2E es idéntico:
 - `[11.T.3.2]` Send via WhatsApp Cloud API (env `WHATSAPP_BUSINESS_TOKEN`).
 
 **Criterio de done:** Template aprobado Meta; test send funcional a Manu.
+
+#### MÓDULO 11.T.4 — Why-alerts causal push notifications (L90)
+
+**Pasos:**
+- `[11.T.4.1]` Extender `notify_zone_alerts` BD function: antes de enviar alerta, llamar Causal Engine (11.E) con forceRegenerate=false para obtener explicación cacheada.
+- `[11.T.4.2]` Template WhatsApp `zone_alert_causal_v1`: "Narvarte DMX-IPV {{1}}pts hoy — razón: {{2}}. Ver más: {{3}}" con 3 variables dinámicas.
+- `[11.T.4.3]` Feature flag `alert_with_causal`: Pro+ tier activa por default; free tier sin causal (solo número).
+- `[11.T.4.4]` Rate limit independiente: max 1 causal push / colonia / 24h (evita spam).
+
+**Criterio de done:** User Pro+ suscrito recibe WhatsApp con delta + explicación causal + link.
+
+#### MÓDULO 11.T.5 — Pulse Alertas anomalías >15pts delta (L91)
+
+**Pasos:**
+- `[11.T.5.1]` Extender `notify_zone_alerts` para trigger también desde `zone_pulse_scores` (no solo `dmx_indices`).
+- `[11.T.5.2]` Filtro: si Δ pulse_score mes-sobre-mes abs() > 15 → trigger alerta "salud urbana" con tono distinto al de índices.
+- `[11.T.5.3]` Template `zone_pulse_anomaly_v1`: "🚨 Pulse {{colonia}}: {{direction}} {{delta}}pts ({{before}}→{{after}}). Causas detectadas: {{brief}}".
+- `[11.T.5.4]` Integración con Causal Engine para campo brief (si aplica).
+
+**Criterio de done:** Test manual inyecta pulse drop Nápoles -18 → 3 subscribers reciben alerta con explicación causal.
+
+#### MÓDULO 11.T.6 — Multi-señal Alert Radar (índice + pulse + causal)
+
+**Pasos:**
+- `[11.T.6.1]` UI `/alerts` dashboard: user ve sus suscripciones activas + historial últimos 30 alertas recibidos.
+- `[11.T.6.2]` Granularidad: suscribir a colonia para { indices: true, pulse: true, causal: false } por ejemplo.
+- `[11.T.6.3]` Settings `frequency_cap`: max 3 alertas/día default (evita fatiga).
+
+**Criterio de done:** Dashboard `/alerts` funciona; user configura granularidad + cap; historial 30d visible.
 
 ### BLOQUE 11.U — Stickers Descargables (~2h)
 
@@ -934,6 +1023,17 @@ Para cada calculator el stack E2E es idéntico:
 - `[11.Z.9.2]` Tag final `fase-11-complete` post merge squash PR.
 
 **Criterio de done:** Tag pushed; PR `fase-11-xl` merged main.
+
+#### MÓDULO 11.Z.10 — Migration causal_explanations cost_usd columns (L87)
+
+**Pasos:**
+- `[11.Z.10.1]` Migration `20260421_fase11_causal_cost_tracking.sql`: ALTER TABLE `causal_explanations` ADD COLUMN `cost_usd numeric(10,6)` + `tokens_in integer` + `tokens_out integer` (NULL para rows existentes).
+- `[11.Z.10.2]` Actualizar `causal-engine.ts` para persistir cost/tokens exactos en vez de proxy row-count × $0.01.
+- `[11.Z.10.3]` Actualizar `cost-guard.ts` para sum real de `cost_usd` día actual.
+- `[11.Z.10.4]` Backfill script: para rows pre-existing, estimar cost por model + len(explanation_md) heurístico.
+- `[11.Z.10.5]` audit_rls_allowlist bump version si hay cambios SECDEF (no esperados).
+
+**Criterio de done:** Migration aplicada prod; cost-guard usa columna real; backfill ejecutado; 0 violations audit_rls.
 
 ## Criterio de done de la FASE
 
