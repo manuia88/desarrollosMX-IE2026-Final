@@ -520,6 +520,46 @@ TODO #20 — IE_MONTHLY_BUDGET_USD en Vercel Production + Preview envs
          real de cost-tracker (incluido FASE 07 + U3 BLOQUE 8.A).
   Tune H2: con histórico real cost_log + 3 meses operación, calibrar real.
 
+TODO #24 — Upgrades D12-D28 status delta post-FASE 10
+  Status: 🟢 TRACKING — status referencial post-cierre FASE 10
+  Origen: pipeline upgrades D identificados pre-FASE 10 (LATERAL_UPGRADES_
+          PIPELINE.md housekeeping 2026-04-20).
+  Shipped FASE 10 (14): D13 confidence propagation · D14 sensitivity ·
+    D16 matrices · D18 public/internal (ACTIVATED sesión 3/3) · D19 LIME ·
+    D21 webhooks · D25 stability · D29 scenarios · D30 PPD deeper A10 ·
+    D31 comparables A08 · D32 AI narrative · D33 multi-tenant · D34
+    retention · D35 indexes.
+  Pendientes (9): D12, D15, D17, D20, D22, D23, D26, D27, D28. Revisar
+    prioridad en housekeeping post-FASE 11 vs estrategia H2.
+
+TODO #25 — Heatmap geo-coords source (L-72 dependency H2)
+  Status: 🟡 AGENDADO — FASE 12 Mapbox integration
+  Origen: FASE 10 SESIÓN 3/3 L-72 decisión autónoma #5.
+  Estado actual: MV heatmap_cache (migration 20260420123000) expone score
+                 + zone_id + country_code + value + confidence + period_date.
+                 Sin lat/lng nativo H1 (no existe tabla zonas central con
+                 centroides polígono).
+  Acción FASE 12:
+    - Crear tabla public.zonas con columnas (id, country_code, nombre,
+      alcaldia, polygon geometry(Polygon, 4326), centroid geography, created_at)
+    - Seed desde INEGI/SEDUVI shapefiles CDMX (1,800 colonias) + BAT H2.
+    - Extender heatmap_cache MV con join a zonas y exponer lat/lng.
+    - Consumer Mapbox client-side FASE 12 lee directo de /api/v1/heatmap.
+  Bloqueante: FASE 12 Mapbox setup. NO bloquea cierre FASE 10.
+
+TODO #26 — TENANT_SCOPE_DEFAULT env en Vercel (D33 opcional)
+  Status: 🟢 OPCIONAL — fallback hardcoded H1 es suficiente
+  Origen: FASE 10 SESIÓN 3/3 D33 multi-tenant scoping.
+  Default: 'global' (tenant_id NULL = scope global, backward compat todos
+          los calculators). Nuevo env TENANT_SCOPE_DEFAULT permite override
+          sin redeploy cuando institutional customers onboarden.
+  Acción (futuro, cuando FIBRA/fondo firme contrato):
+    - [Vercel Dashboard] → Settings → Environment Variables → agregar
+      TENANT_SCOPE_DEFAULT=<tenant-uuid> en Production para el cliente.
+    - Populate tenant_scopes table via admin endpoint (por crear FASE 23).
+  H1: no requiere acción — tenant_scopes vacío es válido mientras no hay
+       institutional customers. runScore permisivo si score no requiere tenant.
+
 ═══════════════════════════════════════════════════════════════
 9. FASE 08 CERRADA — Estado consolidado 2026-04-20
 ═══════════════════════════════════════════════════════════════
