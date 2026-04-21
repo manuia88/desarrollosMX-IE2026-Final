@@ -1355,3 +1355,92 @@ Queda pendiente:
 ---
 
 **Fin del documento maestro.** 26 secciones, ~28 fuentes primarias consolidadas, sin inventar nada que no estuviera en biblia/docx/jsx/repo. Todo gap señalado explícitamente. BD real manda sobre cualquier mención en este doc.
+
+---
+
+## Addendum 2026-04-20 — Estado consolidado FASES 08+09+10 cerradas
+
+**Tags creados:** `fase-08-complete` · `fase-09-complete` (mergeada main commit 6671aca) · `fase-10-complete` (branch fase-10/ie-scores-n2-n3-n4 sin push aún)
+
+**Acumulado IE post FASE 10:**
+- **81 calculators N0→N4** operativos (32+16+14+12+7) — cubre tier 1+2+3+4
+- **AVM I01 MVP** "DMX Estimate" + endpoint /api/v1/estimate funcional con BotID
+- **5 componentes UI Dopamine** (ConfidenceBadge, ScoreTransparencyPanel, ScoreRecommendationsCard, ScorePlaceholder, IntelligenceCard)
+- **9+ migrations IE** acumuladas
+- **14 crons** Vercel registrados (monitor Free plan limit al deploy)
+- **18 endpoints nuevos** (admin + cron + v1 público)
+- **Tests:** 1595 passing (vs 0 pre-FASE 08)
+- **Cascadas formales:** 2 wire operativas (geo_data_updated × 9 sources + macro_updated)
+- **D11+D33 wiring:** auto-recalc N1↔N0, N2↔N1, multi-tenant scoping enforcement
+
+**ADRs nuevos post v5:**
+- **ADR-019** STR Module Complete (FASE 07b)
+- **ADR-020** MCP-First Integrations
+- **ADR-021** Progressive Preference Discovery (PPD) + score_reactions L-18 dual purpose
+- **ADR-022** Vibe Tags Híbrido AI+Data
+- **ADR-023** Design System Refinement
+- **ADR-025** Social + Listing Intelligence Layer (29 laterales L30-L58 + FASE 26 stub)
+- **ADR-026** Global PropTech Benchmarks (65 items reference-only research)
+
+**Pipeline laterales extendido:**
+`docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` — 72 laterales L1-L72 + 16 cross-functions (CF-L1-8 local MX, CF-G1-8 global benchmarks).
+
+**Empresas MX analizadas (web search 2026-04-20):**
+- Metric Analysis (ValueChat WhatsApp IA — 2.7M appraisal records)
+- Brandata (vocación predio + mapa interactivo demo gratis)
+- DatAlpine (pricing tiered público $899-$1,199 USD/mes + econometría hedonic/Monte Carlo)
+- Phiqus (multi-sector + visión artificial)
+- Datoz (commercial RE 44 mercados + FIBRAs Barclays/Prologis/Vesta clientes)
+- Tinsa México (25 años, Stima AVM EAA-endorsed, Pulso Inmobiliario trimestral)
+
+**Empresas globales referenciadas (ADR-026):**
+Reonomy · HouseCanary · Placer.ai · ATTOM · CoStar/LoopNet · Cherre · CompStak · Opendoor 2026 · Zillow AI Mode · Redfin · CBRE · JLL · Colliers · Newmark · Cushman & Wakefield
+
+**Productos empaquetados** (`docs/08_PRODUCTOS/`):
+- 22 productos catalogados por 9 personas (Developer, Broker, Comprador, Inversor, FIBRA/Fondo, Aseguradora, Banco, Gobierno, Valuador)
+- 5 bundle strategies cross-product
+- Pricing tiered: Free → Pro → Enterprise (positioning vs competidores documentado)
+
+**Reglas operacionales nuevas (CLAUDE.md):**
+- Lenguaje natural founder (no jerga técnica en upgrades)
+- Upgrades directos + laterales pattern obligatorio
+- Paralelización agresiva por defecto sin riesgo
+- Hard stop contexto 92% único
+- Git branch safety con worktree para PM paralelo (post-incident 2026-04-20)
+
+---
+
+## Addendum 2026-04-20 — AI Strategy (Constructor vs Runtime)
+
+Distinción crítica para entender arquitectura DMX (post discusión founder Haiku vs Opus 2026-04-20):
+
+### AI Constructor (quien escribe el código DMX)
+- **Claude Opus 4.7 1M context** via Claude Code agent (sesiones founder Manu)
+- Build-time: análisis arquitectónico, generación calculators, tests, migrations, docs
+- Costo: incluido en suscripción Claude Max founder
+
+### AI Runtime (DMX en producción para features end-user)
+- **Claude Haiku 4.5** (default narrativas cortas)
+  - Use cases: D32 score explanations (C04 Objection Killer), N5 short-form (FASE 12), tooltips, micro-content
+  - Costo: ~$0.001 por narrativa (500 tokens output)
+  - Ejemplo escala: 10,000 narrativas/mes ≈ $20/mes
+- **Claude Sonnet 4.6** (medium complexity)
+  - Use cases: futuro reportes B2B trimestrales (CF-G4 DMX Quarterly Market Intelligence), dossier inversión personalizado (S-C08), market narratives medium-form (S-E05)
+  - Costo: ~$0.01 por document (3K tokens output)
+- **Claude Opus 4.7** (high complexity)
+  - Use cases: solo high-stakes con costo justificado — análisis estratégico institucional, due diligence reports complejos
+  - Costo: ~$0.04 por document (3K tokens output)
+- **Modelo selection per feature** vía methodology.ai_model field cuando methodology.ai_narrative=true
+
+### Tooling AI runtime
+- Anthropic SDK directo (no Vercel AI Gateway H1 — evaluación AI Gateway diferida H2 si justifica multi-provider fallback)
+- Cost tracking via shared/lib/ingest/cost-tracker.ts integrado en runScore (D32 wire)
+- Cache 24h por (score_id, entity_id, components_hash) — solo regen si inputs cambian >10%
+
+### Política costos AI runtime
+- Budget mensual default `IE_MONTHLY_BUDGET_USD=$100` (TODO #20 CONTRATO §8)
+- Hard cap pre-cascade: F4 cost guard rails (FASE 08) bloquea cascadas que excedan 10% budget remaining
+- Alert PostHog: `ie.cascade.budget_exceeded` cuando >80% consumido
+
+### Aclaración founder 2026-04-20
+"Constructor" (CC sesiones) vs "Runtime" (DMX producción) son AI separados. Founder ve Opus en terminal porque está construyendo, pero el sistema construido (DMX) usa Haiku/Sonnet/Opus per feature según costo-beneficio.
