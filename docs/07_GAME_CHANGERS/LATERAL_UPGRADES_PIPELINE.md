@@ -1306,6 +1306,66 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Industria origen:** Morning Brew pre-issue hooks + Axios AM preview cards
 - **Dependencia data:** Newsletter infra (11.J) + Scorecard calendar publish + MJML template section
 
+### L125 — Pulse signals limitation_code stubs H1 (post 11.I.bis audit)
+
+- **Status:** ⚪ backlog (FASE 12 N5 AI framework — cuando entren sources reales)
+- **Qué es:** stubs fetchFootTraffic/fetchEvents/fetchConstructionPermits de 11.F retornan actualmente limitation string clara. Reemplazar con API real Google Popular Times + Ticketmaster + SEDUVI permits cuando se firmen partnerships.
+- **Para qué sirve:** Pulse Score con 5/5 sources = confidence high. H1 funciona 3/5 (graceful) pero no captura full signal.
+- **Beneficio concreto:** pulse_score más preciso + confidence label correcto.
+- **Fase target:** FASE 12 (framework AI maduro + partnerships firmadas)
+- **Industria origen:** Foursquare + TicketMaster data partnerships
+- **Dependencia data:** Google Places API key + Ticketmaster API + SEDUVI portal
+
+### L126 — Flow table decile "unclassified" i18n (post 11.I.bis audit)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.J polish)
+- **Qué es:** cuando zona_snapshots.payload no incluye decil_ingreso (data gap H1), FlowTopTable muestra "Sin clasificar" fallback. Keys i18n hardcoded en ES, pendiente locales CO/AR/BR/EN.
+- **Para qué sirve:** 5-locale i18n completo en toda UI pública.
+- **Beneficio concreto:** compliance audit:i18n STRICT (requisito tag fase-11-complete).
+- **Fase target:** FASE 11 XL BLOQUE 11.J (polish i18n junto con newsletter locales)
+- **Industria origen:** i18n best practices fallback states
+- **Dependencia data:** messages/*.json keys migrationFlow.table.decile_unclassified
+
+### L127 — Causal Engine fallback stale cache si LLM down (post 11.I.bis audit)
+
+- **Status:** ⚪ backlog (FASE 12 N5 AI framework)
+- **Qué es:** si Anthropic LLM no responde (timeout/quota/500), retornar último causal_explanations cached aunque esté stale (>30d) con badge "cached date" en UI. Mejor stale que error.
+- **Para qué sirve:** uptime producto ante outage LLM provider. Experience graceful en lugar de "error al generar".
+- **Beneficio concreto:** 99.9% uptime UI + trust B2B.
+- **Fase target:** FASE 12 N5 AI framework (circuit breaker + cache fallback maduro)
+- **Industria origen:** Netflix Hystrix circuit breaker + service mesh fallback patterns
+- **Dependencia data:** Causal Engine extensión runtime error handling
+
+### L128 — trackCausalGeneration wire desde causal-engine (post 11.I.bis audit)
+
+- **Status:** ⚪ backlog (FASE 12 N5 AI framework — observability)
+- **Qué es:** función observability `trackCausalGeneration` existe pero no invocada desde causal-engine core. Requiere wire post-generation para telemetría completa tokens/cost/cache_hit.
+- **Para qué sirve:** dashboard cost real LLM + analytics hit rate cache.
+- **Beneficio concreto:** control costos AI preciso + decisiones optimización prompt.
+- **Fase target:** FASE 12 N5 AI (observability framework completo)
+- **Industria origen:** OpenAI usage dashboard + Anthropic console
+- **Dependencia data:** PostHog + Sentry + ai_usage_tracking tabla (FASE 12)
+
+### L129 — PNG rasterize @napi-rs/canvas approval (post 11.I.bis audit)
+
+- **Status:** ⚪ backlog (FASE 22 Marketing — press asset production)
+- **Qué es:** PNG chart generator actualmente usa SVG nativo (Twitter/LinkedIn/Instagram aceptan SVG y native). Para rasterización PNG real (algunos feeds embed no aceptan SVG) requiere @napi-rs/canvas o similar. Founder approval pendiente install.
+- **Para qué sirve:** compatibility máxima redes sociales + embeds terceros.
+- **Beneficio concreto:** 100% compatibility sharing (SVG es ~95%).
+- **Fase target:** FASE 22 Marketing (press asset production avanzado)
+- **Industria origen:** Sharp + node-canvas server-side rendering
+- **Dependencia data:** @napi-rs/canvas install (~5MB bundle)
+
+### L130 — Backtest console scope_id render (post 11.I.bis follow-up)
+
+- **Status:** 🟡 queued (FASE 11 XL BLOQUE 11.L polish)
+- **Qué es:** backtest-console.tsx:334 tiene un caso edge donde scope_id se renderiza sin resolve (contexto async callback). Zone label resolver integration pendiente en ese scope.
+- **Para qué sirve:** consistencia UI — 0 UUIDs renderizados en ninguna parte de la app.
+- **Beneficio concreto:** audit grep final zero UUIDs en UI.
+- **Fase target:** FASE 11 XL BLOQUE 11.L (Hash URL backtests + polish UI)
+- **Industria origen:** React async resolver patterns + Suspense fallback
+- **Dependencia data:** resolveZoneLabel + async Context propagation backtest
+
 ### Cross-references FASE 11 XL append
 
 - `docs/CONTEXTO_MAESTRO_DMX_v5.md` Addendum 2026-04-21 FASE 11 XL
@@ -1315,4 +1375,4 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-027_FASE_11_XL_METODOLOGIA_INDICES.md`
 - `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md` §8 TODOs #27-#36
 
-**Última actualización:** 2026-04-21 — L73-L124 (52 laterales FASE 11 XL, +42 nuevos detectados en BLOQUES 11.D/E/F/G/H/I) + status updates L1/L8/L22 a in_progress + asignación hogar concreto en bloques 11.G/I/J/L/N/S/T/U/Z + FASE 22/23/34/38 (0 items sin destino)
+**Última actualización:** 2026-04-21 — L73-L130 (58 laterales FASE 11 XL, +48 nuevos detectados en BLOQUES 11.D/E/F/G/H/I + post 11.I.bis audit) + 0 items sin destino concreto + BUGS CRÍTICOS detectados y fijados en 11.I.bis (cost-guard wire + causal regenerate rate-limit wire)
