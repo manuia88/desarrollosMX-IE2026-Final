@@ -33,6 +33,19 @@ interface RankingRow {
   readonly methodology_version: string;
 }
 
+// Detail adds jsonb columns + audit fields. Cast explícito evita TS2589
+// (type instantiation excessively deep) que dispara tRPC+supabase al expandir
+// jsonb en client hooks — mismo patrón que RankingRow en getMovers.
+interface IndexDetailRow extends RankingRow {
+  readonly components: Record<string, unknown>;
+  readonly inputs_used: Record<string, unknown>;
+  readonly confidence_breakdown: Record<string, unknown> | null;
+  readonly valid_until: string | null;
+  readonly calculated_at: string;
+  readonly period_type: string;
+  readonly country_code: string;
+}
+
 const RANKING_COLUMNS =
   'scope_id,scope_type,index_code,value,score_band,confidence,confidence_score,ranking_in_scope,percentile,trend_direction,trend_vs_previous,period_date,methodology_version';
 
@@ -104,7 +117,7 @@ export const indicesPublicRouter = router({
     if (error && error.code !== 'PGRST116') {
       throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: 'indices_detail_error' });
     }
-    return data ?? null;
+    return (data ?? null) as IndexDetailRow | null;
   }),
 
   getMovers: publicProcedure.input(getMoversInput).query(async ({ input, ctx }) => {
