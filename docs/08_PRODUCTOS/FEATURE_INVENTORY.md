@@ -370,3 +370,35 @@ Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-026_GLOBAL_PROPTECH_BENCHMARKS.md`. 
 **DMX universo total catalogado: 428 capabilities/features únicos (+83 vs cierre 2026-04-20).**
 
 **Autor FASE 11 XL append:** PM Sr (Opus 4.7) | **Fecha:** 2026-04-21 | **Status:** Planificado H1
+
+---
+
+## 11. Append BLOQUES 11.M + 11.N (2026-04-23)
+
+### 11.1 Genoma Colonias SEED (FI-076 a FI-079)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-076 | Genoma embedding builder 64-dim (H1 determinístico) | Genome | H1 | Full | shared/lib/intelligence-engine/genome/embedding-builder.ts |
+| FI-077 | Similarity engine pgvector cosine (reuso colonia_dna_vectors) | Genome | H1 | Full | shared/lib/intelligence-engine/genome/similarity-engine.ts |
+| FI-078 | Vibe tags H1 heurística (10 canónicos, reemplazable LLM v1 ADR-022) | Genome | H1 | Full | shared/lib/intelligence-engine/genome/vibe-tags-heuristic.ts |
+| FI-079 | UI /indices/[code]/similares + chips DMX + vibe compartidos | Genome | H1 | Full | /indices/[indexCode]/similares |
+
+### 11.2 Futures Curve + Pulse Pronóstico 30d (FI-080 a FI-084)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-080 | Forward curve calculator 3/6/12/24m con banda CI 95% | Futures | H1 | Full | shared/lib/intelligence-engine/futures/curve-calculator.ts |
+| FI-081 | Pulse Pronóstico 30d daily (L93) + banda sombreada | Futures | H1 | Full | pulse_forecasts + projectPulseForecast30d |
+| FI-082 | UI /indices/[code]/futuros Recharts + export CSV (Blob nativo) | Futures | H1 | Full | /indices/[indexCode]/futuros |
+| FI-083 | VitalSigns forecast prop (mini-sparkline SVG + banda, 11.F cross) | Futures | H1 | Full | features/pulse-score/components/VitalSigns.tsx |
+| FI-084 | Newsletter futures_section (11.J cross) | Futures | H1 | Full | features/newsletter/lib/futures-section-builder.ts |
+
+### 11.3 Totales actualizados post BLOQUES 11.M + 11.N
+
+| Categoría | Cambio |
+|---|---|
+| **FASE 11 XL (FI-*)** | 75 → **84** (+9) |
+| **TOTAL** | 428 → **437** (+9) |
+
+**Autor BLOQUES 11.M+11.N append:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 | **Status:** Shipped H1 (migrations aplicadas remote + 2 commits atómicos locales)

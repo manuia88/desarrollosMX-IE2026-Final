@@ -268,3 +268,36 @@
 - `docs/07_GAME_CHANGERS/07.4_MOAT_STRATEGY.md` — estrategia moat detallada
 
 **Autor:** Claude Opus 4.7 (FASE 11 XL product packaging) | **Fecha:** 2026-04-21 | **Status:** Draft H1 — founder review + quarterly recalibration trimestral
+
+---
+
+## Append BLOQUES 11.M + 11.N — canales shipped 2026-04-23
+
+### Canal Genoma Colonias (Producto 10.16)
+
+- **Landing primario:** `/[locale]/indices/[indexCode]/similares?scope_id=<uuid>` — SSR con filtro opcional `?min_liv=70`.
+- **Entry point cross-function:** botón "Ver similares" en `IndexDetailClient` (features/indices-publicos) — aparece cuando scope_id está seleccionado.
+- **API pública:** `GET /api/v1/similar/[coloniaId]` — real (no stub), rate limit per-tier ya inherited desde 11.L.2.3.
+- **Embed widget future (L-NN H2):** expansión del widget `/embed/score/[colonia]` para incluir botón "find similar" con deeplink.
+- **Amplificación:** shares sociales desde UI similares (reuso SocialShareButtons 11.D existente).
+
+### Canal Futures Curve (Producto 10.17)
+
+- **Landing primario:** `/[locale]/indices/[indexCode]/futuros?scope_ids=<uuid1>,<uuid2>` — hasta 4 colonias superpuestas.
+- **Amplificación data:** export CSV nativo (Blob API) para analistas.
+- **Newsletter monthly section (11.J cross):** `futures_section` opt-in en `NewsletterPreferences.sections.futures` (default true). Cada subscriber recibe proyección 3/6/12m de su zona focal + detail URL.
+- **Publicidad premium (L136 H2):** terminal-style UI para tier enterprise ($10K+/mes) agendado FASE 22.
+
+### Canal Pulse Pronóstico 30d (Producto 10.18)
+
+- **Embed primario:** `VitalSigns` component (features/pulse-score) acepta prop opcional `forecast` → renderiza mini-sparkline SVG con banda sombreada. Backward-compatible.
+- **Combo 11.L cross-function:** Pulse Comparador (11.L) puede incluir forecast overlay por zona para side-by-side predicción.
+- **API futuro (agendado L-NN):** JSON endpoint `/api/v1/pulse-forecast/[zoneId]` para dashboards externos.
+
+### Cross-references append
+
+- `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` — L131-L137 agendados post-commit
+- `docs/03_CATALOGOS/03.1_CATALOGO_BD_TABLAS.md` — 3 tablas nuevas + ALTER futures
+- `docs/03_CATALOGOS/03.13_E2E_CONNECTIONS_MAP.md` — conexiones Genoma/Futures cross-function
+
+**Autor BLOQUES 11.M+11.N:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 | **Status:** Shipped H1 (product + channels live post-push)
