@@ -1076,7 +1076,15 @@
       "disclaimer": "Simulation based on closed historical series. Not a guarantee of future results.",
       "compare_heading": "Compare areas",
       "return_label": "Return %",
-      "volatility_label": "Volatility"
+      "volatility_label": "Volatility",
+      "share": {
+        "button": "Share",
+        "button_aria": "Copy URL with current backtest config",
+        "copied": "Link copied",
+        "error": "Could not copy"
+      },
+      "og_title": "DMX Backtest {indexCode} — {count} areas",
+      "og_description": "Shared historical simulation of {indexCode} index across {count} area(s)"
     },
     "indices": {
       "IPV": {
@@ -1154,6 +1162,19 @@
         "short": "Stability",
         "tagline": "Resilience and consistency"
       }
+    },
+    "compare": {
+      "toggle_label": "Compare with another neighborhood",
+      "hide": "Hide comparison",
+      "input_label": "Slug of the neighborhood to compare",
+      "input_placeholder": "e.g. narvarte",
+      "invalid_slug": "Invalid slug (use letters, numbers and hyphens)",
+      "aria_label": "Pulse comparison: {zoneA} vs {zoneB}",
+      "panel_a_label": "Pulse panel for {zone}",
+      "panel_b_label": "Pulse panel for {zone}",
+      "chart_title": "Overlaid historical series",
+      "chart_subtitle": "Pulse Score last 12 months for both neighborhoods",
+      "chart_aria": "Pulse comparison chart: {zoneA} vs {zoneB}"
     }
   },
   "Causal": {
@@ -1899,5 +1920,79 @@
       "label": "Request Enterprise access + broker dashboard",
       "helper": "Full team dashboard, territory assignment and live alerts."
     }
+  },
+  "WidgetEmbed": {
+    "common": {
+      "powered_by": "Powered by DesarrollosMX",
+      "cta_view_full": "View more →"
+    },
+    "score": {
+      "heading": "DMX Indices",
+      "list_label": "List of 15 indices for the neighborhood",
+      "aria_label": "DMX score widget for {zone}"
+    },
+    "pulse": {
+      "aria_label": "Pulse Vital Signs widget for {zone}"
+    },
+    "pulse_compare": {
+      "aria_label": "Pulse comparator widget: {zoneA} vs {zoneB}"
+    },
+    "docs": {
+      "title": "DMX Embeddable Widgets",
+      "subtitle": "Copy and paste an iframe on your site to display DMX indices in real time",
+      "meta_description": "DesarrollosMX iframe-friendly widgets — score, pulse and comparator. Customize with theme and locale.",
+      "section_variants_label": "Widget variants",
+      "section_customization_label": "Customization",
+      "snippet_aria": "HTML snippet of the {variant} widget",
+      "variants": {
+        "score": {
+          "title": "Score Card — 15 indices",
+          "description": "Bloomberg-style card with the ranking of the 15 DMX indices for a neighborhood."
+        },
+        "pulse": {
+          "title": "Pulse Vital Signs",
+          "description": "Medical-grade dashboard with economic pulse, commercial breath, and social temperature."
+        },
+        "pulse_vs": {
+          "title": "Pulse Comparator",
+          "description": "Compare two neighborhoods side by side with overlapping sparklines."
+        }
+      },
+      "customization": {
+        "title": "URL parameters",
+        "description": "You can customize widgets via query string.",
+        "theme_description": "Light, dark or auto depending on the container site.",
+        "locale_description": "Widget language (5 locales supported)."
+      }
+    }
+  },
+  "ApiKeys": {
+    "pageTitle": "API Keys",
+    "pageBody": "Manage your access keys for the public API v1. The key is shown only once at creation.",
+    "createTitle": "Create new key",
+    "createBody": "Name the key after the project it belongs to. The tier controls the daily quota.",
+    "nameLabel": "Name",
+    "namePlaceholder": "e.g. Internal dashboard",
+    "tierLabel": "Tier",
+    "tierFree": "Free (100/day)",
+    "tierStarter": "Starter (500/day)",
+    "tierPro": "Pro (10K/day)",
+    "createButton": "Create key",
+    "creating": "Creating…",
+    "rawKeyOnceTitle": "Key generated — visible only once",
+    "rawKeyOnceBody": "Copy the key now. If you lose it, generate a new one.",
+    "copyRawKey": "Copy key",
+    "copied": "Copied",
+    "close": "Close",
+    "listTitle": "Active keys",
+    "listEmpty": "You have no keys created.",
+    "createdAt": "Created {date}",
+    "lastUsedAt": "Last used {date}",
+    "revokedAt": "Revoked {date}",
+    "revokedBadge": "Revoked",
+    "revokeButton": "Revoke",
+    "revokeButtonAria": "Revoke key {name}",
+    "confirmRevoke": "Revoke this key? Apps using it will stop working.",
+    "error": "Error: {code}"
   }
 }

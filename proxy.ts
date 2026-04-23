@@ -3,7 +3,11 @@ import { type NextRequest, NextResponse } from 'next/server';
 import createIntlMiddleware from 'next-intl/middleware';
 import { defaultLocale, isLocale } from '@/shared/lib/i18n/config';
 import { routing } from '@/shared/lib/i18n/routing';
-import { applySecurityHeaders, generateNonce } from '@/shared/lib/security/headers';
+import {
+  applyEmbedHeaders,
+  applySecurityHeaders,
+  generateNonce,
+} from '@/shared/lib/security/headers';
 import { requireEnv } from '@/shared/lib/supabase/env';
 import type { Database } from '@/shared/types/database';
 
@@ -55,6 +59,11 @@ export async function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const isDev = process.env.NODE_ENV !== 'production';
   const nonce = generateNonce();
+
+  if (pathname.startsWith('/embed')) {
+    const pass = NextResponse.next({ request: req });
+    return applyEmbedHeaders(pass, nonce, isDev);
+  }
 
   if (
     pathname.startsWith('/api') ||
