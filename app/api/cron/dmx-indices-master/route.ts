@@ -28,6 +28,11 @@ import {
   calculateAllPulseForCDMXColonias,
   calculateAllTrendGenomeForCDMXColonias,
 } from '@/shared/lib/intelligence-engine/calculators/indices';
+import { batchIngestMonthlyCDMX } from '@/shared/lib/intelligence-engine/climate/noaa-ingestion';
+import {
+  buildAndPersistSignatures,
+  refreshTwinsForZone,
+} from '@/shared/lib/intelligence-engine/climate/twin-engine';
 import {
   batchCalculateForwardCurvesCDMX,
   batchCalculatePulseForecastsCDMX,
@@ -117,6 +122,11 @@ export async function POST(request: Request): Promise<NextResponse> {
   let forwardCurvesFailed = 0;
   let pulseForecastsComputed = 0;
   let pulseForecastsFailed = 0;
+  let climateZonesIngested = 0;
+  let climateRowsUpserted = 0;
+  let climateSignaturesBuilt = 0;
+  let climateTwinsPersisted = 0;
+  let climateFailed = 0;
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -282,6 +292,44 @@ export async function POST(request: Request): Promise<NextResponse> {
         error: err,
       });
     }
+
+    // BLOQUE 11.P — Climate Twin ingestion + signature + twin refresh.
+    // Corre monthly/quarterly/annual. Falla NO tumba dispatch.
+    try {
+      const ingest = await batchIngestMonthlyCDMX({ supabase, historyYears: 15, maxZones: 200 });
+      climateZonesIngested = ingest.total_zones;
+      climateRowsUpserted = ingest.total_rows_upserted;
+
+      const { data: zonesWithClimate } = await supabase
+        .from('climate_monthly_aggregates')
+        .select('zone_id')
+        .limit(5000);
+      const climateZoneIds = Array.from(
+        new Set(
+          (zonesWithClimate ?? [])
+            .map((r) => r.zone_id)
+            .filter((x): x is string => typeof x === 'string'),
+        ),
+      );
+      for (const zid of climateZoneIds) {
+        try {
+          const sig = await buildAndPersistSignatures({ zoneId: zid, supabase });
+          if (sig.years_processed > 0) climateSignaturesBuilt += 1;
+          const twins = await refreshTwinsForZone({ zoneId: zid, supabase });
+          climateTwinsPersisted += twins.twins_persisted;
+        } catch {
+          climateFailed += 1;
+        }
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:climate_twin`, message });
+      console.error('[dmx-indices-master] climate twin dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
   }
 
   // BLOQUE 11.J.4 — Strava Segments streaks (monthly dispatch).
@@ -388,6 +436,11 @@ export async function POST(request: Request): Promise<NextResponse> {
     forward_curves_failed: forwardCurvesFailed,
     pulse_forecasts_computed: pulseForecastsComputed,
     pulse_forecasts_failed: pulseForecastsFailed,
+    climate_zones_ingested: climateZonesIngested,
+    climate_rows_upserted: climateRowsUpserted,
+    climate_signatures_built: climateSignaturesBuilt,
+    climate_twins_persisted: climateTwinsPersisted,
+    climate_failed: climateFailed,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

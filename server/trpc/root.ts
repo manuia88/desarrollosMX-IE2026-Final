@@ -6,6 +6,7 @@ import { aiRouter } from '@/features/ia-generativa/routes/ai';
 import { memoryRouter } from '@/features/ia-generativa/routes/memory';
 import { ieScoresRouter } from '@/features/ie/routes/scores';
 import { indicesPublicRouter } from '@/features/indices-publicos/routes/indices-public';
+import { lifepathRouter } from '@/features/lifepath/routes/lifepath';
 import { marketRouter } from '@/features/market/routes/market';
 import { newsletterPublicRouter } from '@/features/newsletter/routes/newsletter-public';
 import { scianRouter } from '@/features/scian/routes/scian';
@@ -53,6 +54,7 @@ export const appRouter = router({
   env: envRouter,
   ieScores: ieScoresRouter,
   indicesPublic: indicesPublicRouter,
+  lifepath: lifepathRouter,
   invisibleHotels: invisibleHotelsRouter,
   nomad: nomadRouter,
   photoCv: photoCvRouter,

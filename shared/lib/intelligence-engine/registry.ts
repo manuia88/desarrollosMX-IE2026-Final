@@ -1857,6 +1857,50 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     country_codes: ['MX'],
   },
 
+  // --------------- LifePath Matching — BLOQUE 11.O ---------------
+  // "Stitch Fix de real estate": cuestionario 15 preguntas → top-20
+  // colonias con afinidad personalizada (7 componentes ponderados).
+  // H1 heurístico determinístico reutiliza Genoma vibe_tags + índices DMX
+  // (LIV / SEC / FAM). methodology='heuristic_v1' → 'llm_v1' FASE 12 N5
+  // (L137) sin cambio de schema (ADR-022). level 5 agregado, tier 3.
+  {
+    score_id: 'LIFEPATH_MATCH',
+    name: 'LifePath Matching (user → colonia)',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['DMX-LIV', 'DMX-FAM', 'DMX-GRN', 'F01', 'GENOME_SIMILARITY'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#lifepath-match',
+    confidence_sources: ['lifepath_user_profiles', 'colonia_vibe_tags', 'dmx_indices'],
+    calculator_path: 'shared/lib/intelligence-engine/lifepath/matching-engine.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Climate Twin Histórico — BLOQUE 11.P ---------------
+  // "Zillow Zestimate del clima": signature vector(12) derivada de 15y
+  // aggregates mensuales NOAA+CONAGUA → cosine similarity entre colonias.
+  // Separado conceptualmente de climate_future_projections (H2 Clima
+  // Futuro). H1 heuristic_v1 reemplazable FASE 12 N5 (L140). level 5
+  // agregado, tier 3.
+  {
+    score_id: 'CLIMATE_TWIN',
+    name: 'Climate Twin (histórico 15y)',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: [],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#climate-twin',
+    confidence_sources: [
+      'climate_monthly_aggregates',
+      'climate_annual_summaries',
+      'climate_twin_matches',
+    ],
+    calculator_path: 'shared/lib/intelligence-engine/climate/twin-engine.ts',
+    country_codes: ['MX'],
+  },
+
   // --------------- Stubs futuros H2+ (5) ---------------
   // Placeholder entries que llegarán post-H1. Marcados [STUB — FASE 29+].
   {
