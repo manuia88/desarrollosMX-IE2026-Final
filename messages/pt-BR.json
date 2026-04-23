@@ -1543,5 +1543,361 @@
         "cta_compute_winner": "Calcular winner"
       }
     }
+  },
+  "PreviewHub": {
+    "meta_title": "Preview DMX · Conheça a plataforma pelo seu perfil",
+    "meta_description": "Quatro experiências interativas para comprador, corretor, incorporador e master broker. Dados de demonstração, componentes reais.",
+    "eyebrow": "Demo interativa",
+    "title": "Conheça a DMX pelo seu papel",
+    "subtitle": "Escolha a experiência que melhor te descreve e percorra uma versão completa com dados de demonstração.",
+    "cta_open_preview": "Abrir preview →",
+    "personas": {
+      "comprador": {
+        "title": "Sou comprador",
+        "description": "Encontre o bairro ideal em 3 minutos com recomendações personalizadas."
+      },
+      "asesor": {
+        "title": "Sou corretor",
+        "description": "Apresente a região ao seu cliente com dados reais e argumentos quantitativos."
+      },
+      "developer": {
+        "title": "Sou incorporador",
+        "description": "Decida onde construir com inteligência de mercado em tempo real."
+      },
+      "masterbroker": {
+        "title": "Sou master broker",
+        "description": "Comande sua equipe e territórios em um painel unificado."
+      }
+    }
+  },
+  "PreviewShared": {
+    "nav": {
+      "aria_label": "Navegação entre previews",
+      "breadcrumb_preview": "Preview",
+      "go_to_platform": "Ver plataforma real →",
+      "persona": {
+        "comprador": "Comprador",
+        "asesor": "Corretor",
+        "developer": "Incorporador",
+        "masterbroker": "Master Broker"
+      }
+    },
+    "demo_banner": {
+      "label": "Demonstração",
+      "body": "Dados de exemplo consistentes. Os componentes são os mesmos da plataforma real."
+    },
+    "common": {
+      "section_insights": "Insights-chave",
+      "section_scores": "Scores DMX",
+      "section_pulse": "Pulse da região",
+      "section_causal": "Por que sobe?",
+      "section_timeline": "Linha do tempo",
+      "section_matches": "Principais correspondências",
+      "trend_up": "Sobe {pct}%",
+      "trend_down": "Cai {pct}%",
+      "trend_flat": "Estável",
+      "percentile": "Percentil {n}",
+      "based_on_mock": "Dados de demonstração"
+    },
+    "narvarte": {
+      "summary": "Narvarte combina preço acessível, lifestyle em ascensão e migração de perfis jovens de Condesa e Roma. É uma alpha-zone com score 78 e 12 meses de horizonte até mainstream.",
+      "pulse": {
+        "headline": "Narvarte está em momentum forte: demanda 86, valorização 81."
+      },
+      "causal": {
+        "driver_metro": "Ampliação do metrô linha 12",
+        "driver_gastro": "Explosão gastronômica",
+        "driver_migration": "Migração de Condesa e Roma",
+        "driver_supply": "Oferta limitada de m² novos",
+        "evidence_metro": "2 estações novas a 400 m em 2025 aumentaram o fluxo em 22%.",
+        "evidence_gastro": "34 novos restaurantes em 12 meses, percentil 88 de densidade.",
+        "evidence_migration": "1.050 domicílios migraram de Condesa/Roma com renda média 12% superior.",
+        "evidence_supply": "Pipeline de obra nova caiu 8%, pressionando preços para cima.",
+        "conclusion": "As três forças positivas superam amplamente a pressão negativa de oferta; a região continuará valorizando 6-8% em 12 meses."
+      },
+      "timeline": {
+        "milestone_gallery": "Abriu Galeria Cultural Narvarte",
+        "milestone_metro": "Ampliação metrô L12 concluída",
+        "milestone_cafe": "Corredor gastronômico Eje 8 consolidado"
+      }
+    }
+  },
+  "PreviewComprador": {
+    "meta_title": "Preview DMX · Encontre seu bairro ideal",
+    "meta_description": "Descubra como a DMX te ajuda a escolher o bairro que melhor combina com você em minutos, com dados reais por bairro.",
+    "hero": {
+      "eyebrow": "Experiência comprador",
+      "title": "Encontre seu bairro ideal em 3 minutos",
+      "subtitle": "Responda três perguntas de estilo de vida e mostramos o ranking de bairros que realmente combinam com você — com evidência, não com sorte.",
+      "cta_primary": "Ver meu match personalizado"
+    },
+    "flow": {
+      "lifestyle": {
+        "title": "1. Seu estilo de vida",
+        "description": "Três perguntas simples definem seu perfil. Aqui está uma simulação.",
+        "profile_summary": "Casal jovem · Orçamento $5M MXN · Prioridade estilo de vida",
+        "chip_stage": "Fase: casal jovem",
+        "chip_budget": "Orçamento $5M MXN",
+        "chip_priority": "Prioridade: estilo de vida"
+      },
+      "matches": {
+        "title": "2. Seu match personalizado",
+        "description": "Top 5 bairros ordenados por afinidade com seu perfil."
+      },
+      "highlight": {
+        "title": "3. Seu bairro destacado: Narvarte",
+        "description": "Assim é um bairro com os 15 índices DMX em um só lugar.",
+        "scores_heading": "15 Scores DMX",
+        "percentile_label": "Percentil {n}"
+      },
+      "pulse": {
+        "title": "4. Compro agora ou espero?",
+        "description": "O pulse do bairro diz se é bom momento de entrar.",
+        "heartbeat_label": "Heartbeat do bairro",
+        "vital_appreciation": "Valorização",
+        "vital_liquidity": "Liquidez",
+        "vital_demand": "Demanda",
+        "vital_momentum": "Momentum",
+        "drivers_heading": "Por que sobe?",
+        "impact_label": "Impacto {pct}%",
+        "evidence_label": "Evidência",
+        "conclusion_heading": "Conclusão"
+      },
+      "timeline": {
+        "title": "5. Como Narvarte evoluiu (12 meses)",
+        "description": "Tendência mensal de quatro índices-chave com marcos destacados.",
+        "axis_period": "Mês",
+        "axis_score": "Score (0-100)",
+        "series_ipv": "IPV · Preço",
+        "series_liv": "LIV · Lifestyle",
+        "series_fam": "FAM · Família",
+        "series_yng": "YNG · Jovem",
+        "milestone_label": "Marco"
+      }
+    },
+    "cta_final": {
+      "eyebrow": "Pronto para começar?",
+      "title": "Comece sua busca com DMX",
+      "subtitle": "Crie sua conta grátis e receba seu match real com os bairros da sua cidade.",
+      "label": "Começar busca"
+    }
+  },
+  "PreviewAsesor": {
+    "meta_title": "Preview DMX · Apresente a região ao cliente com dados",
+    "meta_description": "Converta cada proposta em um argumento quantitativo. Pitch builder, perfis de cliente e respostas com dados reais.",
+    "hero": {
+      "eyebrow": "Experiência corretor",
+      "title": "Apresente a região ao seu cliente com dados reais",
+      "subtitle": "Monte sua proposta em minutos: selecione o perfil do cliente, veja zonas com fit quantitativo e responda objeções com evidência.",
+      "cta_primary": "Ver proposta de exemplo"
+    },
+    "flow": {
+      "profiles": {
+        "title": "1. Seus clientes fictícios",
+        "description": "Três perfis representativos. Escolha um para ver uma proposta gerada.",
+        "tab_label": "Perfil {index}",
+        "age_label": "Idade",
+        "family_label": "Família",
+        "budget_label": "Orçamento",
+        "priority_label": "Prioridade",
+        "priority_schools": "Escolas",
+        "priority_commute": "Proximidade do trabalho",
+        "priority_lifestyle": "Estilo de vida"
+      },
+      "proposal": {
+        "title": "2. Proposta gerada",
+        "description": "Três bairros com argumentos quantitativos prontos para compartilhar.",
+        "fit_label": "Fit {pct}%",
+        "rationale_label": "Por quê"
+      },
+      "pitch": {
+        "title": "3. Pitch builder",
+        "description": "Monte três cards visuais com zona, scores e métricas quantitativas.",
+        "card_hero_placeholder": "Imagem do bairro",
+        "card_scores_heading": "Top 3 scores",
+        "card_bullet_1": "Valorização 12m",
+        "card_bullet_2": "Percentil FAM"
+      },
+      "pdf": {
+        "title": "4. Prévia do PDF",
+        "description": "Relatório pronto para enviar por WhatsApp ou email.",
+        "mock_label": "Prévia",
+        "toc_heading": "Conteúdo do relatório",
+        "toc_1": "Capa com dados do cliente",
+        "toc_2": "3 bairros recomendados",
+        "toc_3": "Scores DMX por bairro",
+        "toc_4": "Objeções e respostas",
+        "toc_5": "Contato do corretor"
+      },
+      "objections": {
+        "title": "5. Objeções + respostas com dados",
+        "description": "Quatro objeções frequentes e como respondê-las com evidência.",
+        "q1": "Não está cara demais essa região?",
+        "a1": "Narvarte valorizou 6,4% em 12 meses e está no percentil 82 de preço. O ticket médio segue abaixo de Condesa.",
+        "q2": "E se não houver oferta no meu orçamento?",
+        "a2": "A região tem liquidez 74 e STR 74: há rotatividade mensal constante; espera média menor que 60 dias.",
+        "q3": "Como sei que vai continuar subindo?",
+        "a3": "Momentum 81, investimento 79 e YNG 88. A combinação indica demanda sustentada de perfil jovem com capacidade.",
+        "q4": "Quão seguro é morar lá?",
+        "a4": "IDS (desenvolvimento social) 84, percentil 91. A região está entre as melhor posicionadas em segurança e serviços."
+      },
+      "methodology": {
+        "title": "Metodologia de apoio",
+        "description": "O score FAM é calculado com dados transparentes e fontes públicas."
+      }
+    },
+    "profiles": {
+      "laura": {
+        "name": "Laura García",
+        "family": "Casal + 2 filhos em idade escolar",
+        "rationale_narvarte": "Narvarte combina FAM 76 e IDS 84: escolas dentro de 1 km e transporte direto ao centro.",
+        "rationale_del_valle": "Del Valle Centro com FAM 73 e LIV 79: orçamento alcança 90 m² e acesso a seis escolas bilíngues.",
+        "rationale_iztaccihuatl": "Iztaccíhuatl é alpha-zone em ascensão: preço 20% abaixo da média e duas novas escolas em 2025.",
+        "objections": "Preocupa oferta real de escolas bilíngues e segurança do perímetro escolar."
+      },
+      "diego": {
+        "name": "Diego Martínez",
+        "family": "Solteiro, criativo digital, 1 cachorro",
+        "rationale_roma_norte": "Roma Norte com YNG 92 e LIV 88: bares, coworkings e transporte a menos de 5 minutos.",
+        "rationale_condesa": "Condesa YNG 90 e GRN 78: parques e terraços a 3 min a pé, comunidade jovem e pet-friendly.",
+        "rationale_narvarte": "Narvarte YNG 88 e MOM 81 com 30% menos de preço por m²: alpha-zone com melhor ticket.",
+        "objections": "Quer garantir que a região preserve autenticidade e não fique genérica em 5 anos."
+      },
+      "sofia": {
+        "name": "Sofía Ramírez",
+        "family": "Executiva, sem filhos, agenda exigente",
+        "rationale_polanco": "Polanco ICO 89 e STA 86: 12 minutos ao corredor empresarial e serviços 24/7.",
+        "rationale_lomas": "Lomas de Chapultepec STA 90 e GRN 82: tranquilidade, áreas verdes e proximidade a clientes corporativos.",
+        "rationale_santa_fe": "Santa Fe ICO 84 para executivos da zona corporativa: menos deslocamento se trabalha lá.",
+        "objections": "Preocupa trânsito em hora de pico e disponibilidade de valet parking."
+      }
+    },
+    "cta_final": {
+      "eyebrow": "Acesso profissional",
+      "title": "Impulsione seus fechamentos com DMX",
+      "subtitle": "Adicione DMX ao seu stack de corretor e feche com mais argumentos.",
+      "label": "Acesso profissional"
+    }
+  },
+  "PreviewDeveloper": {
+    "meta_title": "Preview DMX para Incorporadoras · Decida onde construir com dados reais",
+    "meta_description": "Mapa da cidade com 15 índices, simulador de viabilidade, alpha zones e pipeline de projetos próximos.",
+    "hero": {
+      "eyebrow": "Preview Incorporadora",
+      "title": "Decida onde construir com inteligência real",
+      "subtitle": "Heatmap de 15 índices, simulador de viabilidade, alpha zones detectadas e pipeline competitivo em uma única visão.",
+      "cta_primary": "Explorar inteligência de mercado"
+    },
+    "flow": {
+      "map": {
+        "title": "Mapa · 15 índices alternáveis",
+        "active_index": "Índice ativo",
+        "legend": {
+          "low": "Baixo",
+          "mid": "Regular",
+          "high": "Bom",
+          "top": "Excelente"
+        }
+      },
+      "filters": {
+        "title": "Filtros de investimento",
+        "price_range": "Preço m²",
+        "typology": "Tipologia",
+        "units": "Unidades",
+        "price_range_value": "60.000 – 80.000 MXN/m²",
+        "typology_value": "Torres verticais",
+        "units_value": "80 – 150"
+      },
+      "feasibility": {
+        "title": "Simulador de viabilidade",
+        "roi": "ROI projetado",
+        "absorption": "Absorção (meses)",
+        "competitors": "Unidades em competição",
+        "price_m2": "Preço médio m²"
+      },
+      "alpha": {
+        "title": "Alpha zones detectadas",
+        "subscribe_cta": "Inscrever-me em alertas alpha"
+      },
+      "migration": {
+        "title": "Fluxos de migração entrante",
+        "origin": "Origem",
+        "dest": "Destino"
+      },
+      "pipeline": {
+        "title": "Pipeline de projetos próximos",
+        "columns": {
+          "name": "Projeto",
+          "units": "Unidades",
+          "status": "Status"
+        },
+        "status": {
+          "announced": "Anunciado",
+          "in_progress": "Em obra",
+          "presale": "Pré-venda"
+        },
+        "projects": {
+          "project_vertex": "Vertex Vila Mariana",
+          "project_meridiano": "Meridiano 75",
+          "project_allure": "Allure Pinheiros",
+          "project_parque": "Parque Centenário",
+          "project_arboleda": "Arboleda Lofts"
+        }
+      }
+    },
+    "cta_final": {
+      "label": "Solicitar acesso Enterprise",
+      "helper": "Acesso completo a 15 índices, alpha zones em tempo real e pipeline competitivo."
+    }
+  },
+  "PreviewMasterBroker": {
+    "meta_title": "Preview DMX para Master Brokers · Comando central de equipe e territórios",
+    "meta_description": "Painel unificado com 10 corretores, mapa de territórios, KPIs agregados, alertas alpha e leaderboard semanal.",
+    "hero": {
+      "eyebrow": "Preview Master Broker",
+      "title": "Comando central da sua equipe e territórios",
+      "subtitle": "Visualize pipeline, conversão, receita YTD e momentum por corretor e território em um único painel.",
+      "cta_primary": "Ver painel da equipe"
+    },
+    "flow": {
+      "agents": {
+        "title": "Equipe · 10 corretores ativos",
+        "columns": {
+          "name": "Corretor",
+          "zone": "Região atribuída",
+          "pipeline": "Pipeline",
+          "conversion": "Conversão",
+          "ytd": "Receita YTD",
+          "weekly_deals": "Deals semana",
+          "trend": "Tendência"
+        },
+        "badges": {
+          "top_closer": "Top closer",
+          "streak_week": "Sequência semanal",
+          "alpha_hunter": "Alpha hunter",
+          "rising_star": "Estrela emergente"
+        }
+      },
+      "territory": {
+        "title": "Mapa de territórios"
+      },
+      "kpis": {
+        "title": "KPIs agregados da equipe",
+        "total_pipeline": "Pipeline total",
+        "total_ytd": "Receita YTD",
+        "avg_conversion": "Conversão média",
+        "top_agent": "Corretor top"
+      },
+      "alerts": {
+        "title": "Alertas: regiões com oportunidade"
+      },
+      "leaderboard": {
+        "title": "Leaderboard semanal · Top 5"
+      }
+    },
+    "cta_final": {
+      "label": "Solicitar acesso Enterprise + painel broker",
+      "helper": "Painel completo de equipe, atribuição de territórios e alertas em tempo real."
+    }
   }
 }
