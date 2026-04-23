@@ -2135,7 +2135,37 @@
       "component_vibe": "Vibe",
       "shared_tags_label": "Shared tags",
       "dmx_label": "Top DMX indices",
-      "see_similar_cta": "See similar neighborhoods (Genome)"
+      "see_similar_cta": "See similar neighborhoods (Genome)",
+      "unlabeled_zone": "Unnamed neighborhood"
+    },
+    "vibe_tags": {
+      "walkability": "Walkable",
+      "quiet": "Quiet",
+      "nightlife": "Nightlife",
+      "family": "Family-friendly",
+      "foodie": "Foodie",
+      "green": "Green",
+      "bohemian": "Bohemian",
+      "corporate": "Corporate",
+      "safety_perceived": "Safe",
+      "gentrifying": "Gentrifying"
+    },
+    "dmx_codes": {
+      "IPV": "Appreciation",
+      "IAB": "Amenities",
+      "IDS": "Density",
+      "IRE": "Effective rent",
+      "ICO": "Connectivity",
+      "MOM": "Momentum",
+      "LIV": "Livability",
+      "FAM": "Family",
+      "YNG": "Young",
+      "GRN": "Green",
+      "STR": "Short-term rental",
+      "INV": "Investment",
+      "DEV": "Development",
+      "GNT": "Gentrification",
+      "STA": "Stability"
     }
   },
   "ClimateTwin": {
@@ -2149,12 +2179,29 @@
       "chart_temp_avg": "Avg. temp (°C)",
       "chart_rainfall_mm": "Rainfall (mm)",
       "empty_state": "Not enough climate data for this zone.",
+      "empty_state_pick_zone": "Pick a neighborhood to see its climate twins:",
       "loading": "Loading climate data…",
       "load_error": "We couldn't load the data.",
       "methodology_line": "Methodology {methodology}",
       "source_noaa": "NOAA GHCND",
       "source_conagua": "CONAGUA",
-      "source_hybrid": "NOAA + CONAGUA"
+      "source_hybrid": "NOAA + CONAGUA",
+      "breadcrumb_indices": "Indexes",
+      "unlabeled_zone": "Unnamed neighborhood"
+    },
+    "features": {
+      "temp_avg": "Avg. temp",
+      "temp_range": "Temp range",
+      "rainfall_total_y": "Annual rainfall",
+      "rainfall_variability": "Rainfall variability",
+      "humidity_avg": "Avg. humidity",
+      "humidity_range": "Humidity range",
+      "extreme_heat_days": "Extreme heat",
+      "extreme_cold_days": "Extreme cold",
+      "flood_risk_score": "Flood risk",
+      "drought_risk_score": "Drought risk",
+      "seasonality_index": "Seasonality",
+      "climate_change_delta": "Climate change"
     }
   }
 }

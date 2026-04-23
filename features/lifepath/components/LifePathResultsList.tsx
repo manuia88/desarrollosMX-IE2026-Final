@@ -24,9 +24,25 @@ const COMPONENT_KEYS = [
 
 export function LifePathResultsList({ locale }: LifePathResultsListProps) {
   const t = useTranslations('LifePath.results');
+  const tVibe = useTranslations('LifePath.vibe_tags');
+  const tDmx = useTranslations('LifePath.dmx_codes');
   const query = trpc.lifepath.getMyProfile.useQuery(undefined, {
     staleTime: 5 * 60 * 1000,
   });
+
+  // Fallback helper: si la key no existe, devuelve el raw. next-intl lanza si
+  // falta — envolvemos en try para defensive fallback a code raw.
+  function safeTranslate(
+    namespace: typeof tVibe | typeof tDmx,
+    key: string,
+    fallback: string,
+  ): string {
+    try {
+      return namespace(key);
+    } catch {
+      return fallback;
+    }
+  }
 
   if (query.isLoading) {
     return (
@@ -90,9 +106,7 @@ export function LifePathResultsList({ locale }: LifePathResultsListProps) {
             <header className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-xs text-[color:var(--color-text-secondary)]">#{idx + 1}</p>
-                <h3 className="text-lg font-semibold">
-                  {m.colonia_label ?? m.colonia_id.slice(0, 8)}
-                </h3>
+                <h3 className="text-lg font-semibold">{m.colonia_label ?? t('unlabeled_zone')}</h3>
               </div>
               <div className="text-right">
                 <p className="text-xs text-[color:var(--color-text-secondary)]">
@@ -122,7 +136,7 @@ export function LifePathResultsList({ locale }: LifePathResultsListProps) {
                     key={tag}
                     className="rounded-full bg-[color:var(--color-accent-muted)] px-2 py-0.5 text-xs"
                   >
-                    {tag}
+                    {safeTranslate(tVibe, tag, tag)}
                   </li>
                 ))}
               </ul>
@@ -133,17 +147,20 @@ export function LifePathResultsList({ locale }: LifePathResultsListProps) {
                 aria-label={t('dmx_label')}
                 className="mt-2 flex flex-wrap gap-1.5 text-xs text-[color:var(--color-text-secondary)]"
               >
-                {m.top_dmx_indices.map((d) => (
-                  <li key={d.code}>
-                    {d.code}: {d.value.toFixed(0)}
-                  </li>
-                ))}
+                {m.top_dmx_indices.map((d) => {
+                  const bareCode = d.code.replace(/^DMX-/, '');
+                  return (
+                    <li key={d.code}>
+                      {safeTranslate(tDmx, bareCode, d.code)}: {d.value.toFixed(0)}
+                    </li>
+                  );
+                })}
               </ul>
             ) : null}
 
             <div className="mt-3 flex flex-wrap gap-3 text-xs">
               <Link
-                href={`/${locale}/indices/similares/${m.colonia_id}`}
+                href={`/${locale}/indices/DMX-LIV/similares?scope_id=${m.colonia_id}`}
                 className="text-[color:var(--color-accent)] hover:underline"
               >
                 {t('see_similar_cta')}

@@ -6,8 +6,9 @@
 export const CLIMATE_METHODOLOGY = 'heuristic_v1' as const;
 export const CLIMATE_SIGNATURE_DIM = 12 as const;
 export const DEFAULT_HISTORY_YEARS = 15 as const;
+export const DEFAULT_HISTORY_MONTHS = 240 as const; // 20 años margen visual (cap UI chart).
 
-export const CLIMATE_SOURCES = ['noaa', 'conagua', 'hybrid'] as const;
+export const CLIMATE_SOURCES = ['heuristic_v1', 'noaa', 'conagua', 'hybrid'] as const;
 export type ClimateSource = (typeof CLIMATE_SOURCES)[number];
 
 export const CLIMATE_TYPES = [

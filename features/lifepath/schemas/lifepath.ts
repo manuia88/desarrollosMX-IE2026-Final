@@ -52,6 +52,8 @@ export const lifepathMatchSchema = z.object({
   shared_vibe_tags: z.array(z.string()),
 });
 
+export const lifepathMatchesArraySchema = z.array(lifepathMatchSchema);
+
 export const saveProfileInputSchema = z.object({
   answers: lifepathAnswersSchema,
 });

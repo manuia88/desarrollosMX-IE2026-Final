@@ -7,7 +7,11 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import type { ClimateChartPoint } from '@/features/climate-twin/components/ClimateComparisonChart';
 import { ClimateTwinPanel } from '@/features/climate-twin/components/ClimateTwinPanel';
-import { CLIMATE_METHODOLOGY, type ClimateTwinResult } from '@/features/climate-twin/types';
+import {
+  CLIMATE_METHODOLOGY,
+  type ClimateTwinResult,
+  DEFAULT_HISTORY_MONTHS,
+} from '@/features/climate-twin/types';
 import { INDEX_CODES, isIndexCode } from '@/features/indices-publicos/lib/index-registry-helpers';
 import { defaultLocale, locales } from '@/shared/lib/i18n/config';
 import { resolveZoneLabel } from '@/shared/lib/market/zone-label-resolver';
@@ -49,15 +53,66 @@ export default async function ClimateTwinPage({ params, searchParams }: PageProp
 
   const t = await getTranslations({ locale, namespace: 'ClimateTwin' });
 
+  const supabase = createAdminClient();
+
   if (!scopeId) {
+    // Empty state: listar top 10 zonas con cobertura climática ingestada.
+    const { data: pickZonesRaw } = await supabase
+      .from('climate_monthly_aggregates')
+      .select('zone_id')
+      .limit(500);
+    const uniqueZoneIds = Array.from(
+      new Set(
+        (pickZonesRaw ?? [])
+          .map((r) => r.zone_id)
+          .filter((x): x is string => typeof x === 'string'),
+      ),
+    ).slice(0, 10);
+    const pickZoneLabels = await Promise.all(
+      uniqueZoneIds.map((zid) =>
+        resolveZoneLabel({
+          scopeType: 'colonia',
+          scopeId: zid,
+          countryCode: 'MX',
+          supabase,
+        })
+          .catch(() => null)
+          .then((label) => ({ zone_id: zid, label })),
+      ),
+    );
+
     return (
       <main className="mx-auto max-w-4xl space-y-6 px-6 py-10">
-        <p className="text-sm text-[color:var(--color-text-secondary)]">{t('page.empty_state')}</p>
+        <header className="space-y-2">
+          <h1 className="text-2xl font-bold">{t('page.title')}</h1>
+          <p className="text-sm text-[color:var(--color-text-secondary)]">{t('page.intro')}</p>
+        </header>
+        {uniqueZoneIds.length === 0 ? (
+          <p className="rounded-lg border border-[color:var(--color-border)] p-4 text-sm text-[color:var(--color-text-secondary)]">
+            {t('page.empty_state')}
+          </p>
+        ) : (
+          <section className="space-y-3">
+            <p className="text-sm text-[color:var(--color-text-secondary)]">
+              {t('page.empty_state_pick_zone')}
+            </p>
+            <ul className="grid gap-2 sm:grid-cols-2">
+              {pickZoneLabels.map((z) => (
+                <li key={z.zone_id}>
+                  <Link
+                    href={`/${locale}/indices/${indexCode}/clima-gemelo?scope_id=${z.zone_id}`}
+                    className="block rounded-md border border-[color:var(--color-border)] px-3 py-2 text-sm hover:bg-[color:var(--color-accent-muted)]"
+                  >
+                    {z.label ?? t('page.unlabeled_zone')}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
       </main>
     );
   }
-
-  const supabase = createAdminClient();
 
   const [monthlyRes, twinsRes, labelP] = await Promise.all([
     supabase
@@ -65,7 +120,7 @@ export default async function ClimateTwinPage({ params, searchParams }: PageProp
       .select('year_month, temp_avg, rainfall_mm')
       .eq('zone_id', scopeId)
       .order('year_month', { ascending: true })
-      .limit(240),
+      .limit(DEFAULT_HISTORY_MONTHS),
     supabase
       .from('climate_twin_matches')
       .select('zone_id, twin_zone_id, similarity, shared_patterns')
@@ -118,7 +173,7 @@ export default async function ClimateTwinPage({ params, searchParams }: PageProp
         <ol className="flex items-center gap-2">
           <li>
             <Link href={`/${locale}/indices`} className="hover:underline">
-              Índices
+              {t('page.breadcrumb_indices')}
             </Link>
           </li>
           <li aria-hidden="true">/</li>

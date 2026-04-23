@@ -2,6 +2,7 @@ import { TRPCError } from '@trpc/server';
 import {
   getMatchesInputSchema,
   lifepathAnswersSchema,
+  lifepathMatchesArraySchema,
   saveProfileInputSchema,
 } from '@/features/lifepath/schemas/lifepath';
 import type {
@@ -44,8 +45,8 @@ function asWorkMode(value: unknown): WorkMode | null {
 }
 
 function coerceMatches(raw: unknown): readonly LifePathMatch[] {
-  if (!Array.isArray(raw)) return [];
-  return raw as readonly LifePathMatch[];
+  const parsed = lifepathMatchesArraySchema.safeParse(raw);
+  return parsed.success ? parsed.data : [];
 }
 
 export const lifepathRouter = router({
@@ -56,9 +57,7 @@ export const lifepathRouter = router({
       const answers = input.answers;
 
       // Compute matches server-side (admin client para bypass RLS sobre colonias públicas).
-      const admin = createAdminClient() as unknown as Parameters<
-        typeof computeLifePathMatches
-      >[0]['supabase'];
+      const admin = createAdminClient();
       const matches = await computeLifePathMatches({
         answers,
         supabase: admin,
@@ -135,9 +134,7 @@ export const lifepathRouter = router({
   computeMatchesOnly: authenticatedProcedure
     .input(getMatchesInputSchema.extend({ answers: lifepathAnswersSchema }))
     .mutation(async ({ input }) => {
-      const admin = createAdminClient() as unknown as Parameters<
-        typeof computeLifePathMatches
-      >[0]['supabase'];
+      const admin = createAdminClient();
       const matches = await computeLifePathMatches({
         answers: input.answers,
         supabase: admin,

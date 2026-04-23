@@ -1481,7 +1481,7 @@ export type Database = {
       climate_annual_summaries: {
         Row: {
           climate_type: string | null
-          composite_climate_signature: number[]
+          composite_climate_signature: string
           computed_at: string
           summary: Json
           year: number
@@ -1489,7 +1489,7 @@ export type Database = {
         }
         Insert: {
           climate_type?: string | null
-          composite_climate_signature?: number[]
+          composite_climate_signature: string
           computed_at?: string
           summary?: Json
           year: number
@@ -1497,7 +1497,7 @@ export type Database = {
         }
         Update: {
           climate_type?: string | null
-          composite_climate_signature?: number[]
+          composite_climate_signature?: string
           computed_at?: string
           summary?: Json
           year?: number
@@ -1606,6 +1606,30 @@ export type Database = {
           shared_patterns?: Json
           similarity?: number
           twin_zone_id?: string
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      climate_zone_signatures: {
+        Row: {
+          computed_at: string
+          methodology: string
+          signature: string
+          years_observed: number
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          methodology?: string
+          signature: string
+          years_observed?: number
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          methodology?: string
+          signature?: string
+          years_observed?: number
           zone_id?: string
         }
         Relationships: []
@@ -14809,6 +14833,13 @@ export type Database = {
       finalize_score_job: {
         Args: { p_error?: string; p_id: string; p_success: boolean }
         Returns: Json
+      }
+      find_climate_twins: {
+        Args: { p_min_sim?: number; p_top_n?: number; p_zone_id: string }
+        Returns: {
+          similarity: number
+          twin_zone_id: string
+        }[]
       }
       fn_cascade_geo_data_updated: {
         Args: { p_country: string; p_source: string; p_zone_id: string }

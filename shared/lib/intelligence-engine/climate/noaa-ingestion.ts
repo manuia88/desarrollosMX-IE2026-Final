@@ -1,18 +1,19 @@
-// BLOQUE 11.P.1 — NOAA GHCND ingestion (H1 heuristic fallback).
+// BLOQUE 11.P.1 — NOAA GHCND ingestion (H1 heuristic SEED).
 //
 // H1 SEED: ingestor heurístico determinístico basado en patrones CDMX
 // conocidos (temperate_subtropical_highland) con variación por zona via
 // hash estable del zone_id. NO llama API externa (NOAA GHCND requiere
 // NOAA_API_TOKEN + station mapping por lat/lng — upgrade L140).
 //
-// H2 (L140 FASE 12 N5): reemplazar heuristicFetchMonthlyCDMX por fetchNoaaGhcnd
-// que usa https://www.ncei.noaa.gov/cdo-web/api/v2/data. Rate limit 5 req/sec,
-// 10K req/día free. Station lookup cache una-vez.
+// source='heuristic_v1' (SEED sintético). Cuando L140 FASE 12 N5 implemente
+// NOAA real, source cambia a 'noaa'. Merge NOAA+CONAGUA → source='hybrid'.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { MonthlyAggregate } from '@/features/climate-twin/types';
 import { DEFAULT_HISTORY_YEARS } from '@/features/climate-twin/types';
 import type { Database } from '@/shared/types/database';
+
+export const HEURISTIC_SOURCE = 'heuristic_v1' as const;
 
 const CDMX_BASE_TEMP_C = 17.5; // anual promedio histórico CDMX.
 const CDMX_BASE_RAINFALL_MM_MONTH = 70;
@@ -83,7 +84,7 @@ export function heuristicMonthlyAggregate(zoneId: string, yearMonth: string): Mo
     rainfall_mm: Math.round(rainfall * 10) / 10,
     humidity_avg: Math.round(humidity * 10) / 10,
     extreme_events_count: extreme,
-    source: 'hybrid',
+    source: HEURISTIC_SOURCE,
   };
 }
 
@@ -197,7 +198,7 @@ export async function batchIngestMonthlyCDMX(params: {
       });
       totalRows += r.rows_upserted;
     } catch (err) {
-      console.error('[climate-ingestion] zone failed', zid, err);
+      console.error('[BLOQUE 11.P] climate-ingestion zone failed', zid, err);
     }
   }
 

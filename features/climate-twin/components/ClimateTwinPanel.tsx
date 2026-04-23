@@ -21,6 +21,15 @@ export async function ClimateTwinPanel({
   methodology,
 }: ClimateTwinPanelProps) {
   const t = await getTranslations({ locale, namespace: 'ClimateTwin.page' });
+  const tFeat = await getTranslations({ locale, namespace: 'ClimateTwin.features' });
+
+  function translateFeature(key: string): string {
+    try {
+      return tFeat(key);
+    } catch {
+      return key;
+    }
+  }
 
   if (history.length === 0) {
     return (
@@ -60,7 +69,7 @@ export async function ClimateTwinPanel({
                 className="rounded-lg border border-[color:var(--color-border)] p-3"
               >
                 <div className="flex items-center justify-between">
-                  <p className="font-medium">{tw.twin_label ?? tw.twin_zone_id.slice(0, 8)}</p>
+                  <p className="font-medium">{tw.twin_label ?? t('unlabeled_zone')}</p>
                   <span className="text-sm font-semibold text-[color:var(--color-accent)]">
                     {t('twin_card_similarity', { value: tw.similarity.toFixed(1) })}
                   </span>
@@ -74,7 +83,7 @@ export async function ClimateTwinPanel({
                           key={k}
                           className="rounded-full bg-[color:var(--color-accent-muted)] px-2 py-0.5"
                         >
-                          {k}: {v}
+                          {translateFeature(k)}: {Math.round(v * 100)}%
                         </li>
                       ))}
                   </ul>

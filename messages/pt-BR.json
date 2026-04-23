@@ -2135,7 +2135,37 @@
       "component_vibe": "Vibe",
       "shared_tags_label": "Tags compartilhadas",
       "dmx_label": "Top índices DMX",
-      "see_similar_cta": "Ver bairros similares (Genoma)"
+      "see_similar_cta": "Ver bairros similares (Genoma)",
+      "unlabeled_zone": "Bairro sem nome"
+    },
+    "vibe_tags": {
+      "walkability": "Caminhável",
+      "quiet": "Tranquilo",
+      "nightlife": "Vida noturna",
+      "family": "Familiar",
+      "foodie": "Gastronômico",
+      "green": "Verde",
+      "bohemian": "Boêmio",
+      "corporate": "Corporativo",
+      "safety_perceived": "Seguro",
+      "gentrifying": "Em gentrificação"
+    },
+    "dmx_codes": {
+      "IPV": "Valorização",
+      "IAB": "Amenidades",
+      "IDS": "Densidade",
+      "IRE": "Renda efetiva",
+      "ICO": "Conectividade",
+      "MOM": "Momentum",
+      "LIV": "Habitabilidade",
+      "FAM": "Familiar",
+      "YNG": "Jovem",
+      "GRN": "Verde",
+      "STR": "Aluguel curto",
+      "INV": "Investimento",
+      "DEV": "Desenvolvimento",
+      "GNT": "Gentrificação",
+      "STA": "Estabilidade"
     }
   },
   "ClimateTwin": {
@@ -2149,12 +2179,29 @@
       "chart_temp_avg": "Temp. média (°C)",
       "chart_rainfall_mm": "Chuva (mm)",
       "empty_state": "Sem dados climáticos suficientes para esta zona.",
+      "empty_state_pick_zone": "Escolha um bairro para ver seus gêmeos climáticos:",
       "loading": "Carregando dados climáticos…",
       "load_error": "Não conseguimos carregar os dados.",
       "methodology_line": "Metodologia {methodology}",
       "source_noaa": "NOAA GHCND",
       "source_conagua": "CONAGUA",
-      "source_hybrid": "NOAA + CONAGUA"
+      "source_hybrid": "NOAA + CONAGUA",
+      "breadcrumb_indices": "Índices",
+      "unlabeled_zone": "Bairro sem nome"
+    },
+    "features": {
+      "temp_avg": "Temp. média",
+      "temp_range": "Amplitude térmica",
+      "rainfall_total_y": "Chuva anual",
+      "rainfall_variability": "Variabilidade chuva",
+      "humidity_avg": "Umidade média",
+      "humidity_range": "Amplitude umidade",
+      "extreme_heat_days": "Calor extremo",
+      "extreme_cold_days": "Frio extremo",
+      "flood_risk_score": "Risco enchente",
+      "drought_risk_score": "Risco seca",
+      "seasonality_index": "Sazonalidade",
+      "climate_change_delta": "Mudança climática"
     }
   }
 }

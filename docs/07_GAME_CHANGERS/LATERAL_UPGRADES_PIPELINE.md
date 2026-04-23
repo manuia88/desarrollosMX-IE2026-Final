@@ -1438,4 +1438,31 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-027_FASE_11_XL_METODOLOGIA_INDICES.md`
 - `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md` §8 TODOs #27-#36
 
-**Última actualización:** 2026-04-23 — L73-L137 (65 laterales FASE 11 XL, +4 en BLOQUE 11.M Genoma, +3 en BLOQUE 11.N Futures) + 0 items sin destino concreto.
+### L-NEW1 — Climate pgvector nacional scale (FASE 11 FIX 11.O+P implementado)
+
+- **Status:** 🟢 implementado (monitor cuando crezca scope)
+- **Qué es:** refactor `climate_annual_summaries` de `numeric[]` → `vector(12)` + HNSW cosine index + nueva `climate_zone_signatures` (aggregate per-zone) + RPC `find_climate_twins` DB-side O(log N).
+- **Para qué sirve:** twin matching escalable a nivel nacional (10K+ zonas) sin degradar performance — queries pgvector con HNSW son sub-lineales.
+- **Beneficio concreto:** pasar de matching Node-side (O(N²) + memory pressure) a DB-side (O(log N) con índice). En H1 CDMX (200 zonas) apenas notable; en H2 nacional (10K+ zonas) diferencial de 100×.
+- **Fase target:** FASE 13 (evaluación + tuning HNSW `m`/`ef_construction` a escala)
+- **Dependencia data:** HNSW index ya creado; reindex si hace falta
+
+### L-NEW2 — createAdminClient typed generic sweep (deuda parcial conocida)
+
+- **Status:** 🟡 deuda parcial
+- **Qué es:** `createAdminClient()` retorna `SupabaseClient<Database>` correctamente, pero algunos callers antiguos aún tienen casts `as unknown as ...` innecesarios. Refactor trivial pero disperso (LifePath routes ya limpios en FIX 11.O+P).
+- **Para qué sirve:** type safety consistente; menos ruido en reviews de casts.
+- **Beneficio concreto:** hallazgo temprano de errores de typing; lector menos confundido por patterns mixtos.
+- **Fase target:** FASE 12 N5 — sweep limpieza types
+- **Dependencia data:** ninguna
+
+### L-NEW3 — Sentry wiring reemplaza console.error (tombstones actuales)
+
+- **Status:** 🟡 deuda conocida
+- **Qué es:** hoy `console.error('[BLOQUE 11.P] …', err)` es el tombstone que deja breadcrumbs en logs Vercel para debugging prod; cuando Sentry entre, reemplazar por `Sentry.captureException(err, { tags: { block: '11.P' } })` recupera contexto estructurado.
+- **Para qué sirve:** observabilidad real en prod (agrupación errores + alertas + reproducción).
+- **Beneficio concreto:** fix time incidents bajando de horas (grep logs Vercel) a minutos (Sentry dashboard).
+- **Fase target:** FASE 24 Observabilidad
+- **Dependencia data:** `@sentry/nextjs` integration
+
+**Última actualización:** 2026-04-23 — L73-L137 + L-NEW1/L-NEW2/L-NEW3 (FIX 11.O+P) = 68 laterales FASE 11 XL + 0 items sin destino concreto.
