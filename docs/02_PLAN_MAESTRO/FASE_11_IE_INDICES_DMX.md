@@ -13,6 +13,43 @@ La expansión de 7 a 15 índices responde a una decisión estratégica post-FASE
 
 El criterio de done de FASE 11 XL es **E2E connectedness end-to-end** (ADR-018): cada feature debe tener BD + RLS + audit allowlist + tRPC + Zod + frontend + tests + telemetría + i18n + permissions mapeados. Nada queda "half-wired". El tag `fase-11-complete` solo se emite cuando `audit-dead-ui.mjs` y `audit-rls.mjs` pasan en modo STRICT, Playwright ≥50 nuevos specs verdes, y Lighthouse SEO ≥95 en rutas públicas.
 
+## Progreso de ejecución
+
+**Status actualizado 2026-04-23 post-merge PR #26:** 14/27 bloques FASE 11 XL completados (52%).
+
+| Bloque | Status | Merge SHA | PR |
+|---|---|---|---|
+| 11.A Cimientos ampliados | ✅ shipped | aee8a0a | #23 |
+| 11.B 15 Calculators | ✅ shipped | aee8a0a | #23 |
+| 11.C Orquestador + crons | ✅ shipped | aee8a0a | #23 |
+| 11.D Rutas públicas + Terminal Pro | ✅ shipped | 8f23efe | #21 |
+| 11.E Causal Engine | ✅ shipped | 7b6ab6e | #22 |
+| 11.F Pulse Score | ✅ shipped | aee8a0a | #23 |
+| 11.G Migration Flow v1 | ✅ shipped | aee8a0a | #23 |
+| 11.H Trend Genome + Influencer Heat | ✅ shipped | aee8a0a | #23 |
+| 11.I Scorecard Nacional Trimestral + 11.I.bis audit | ✅ shipped | aee8a0a | #23 |
+| 11.J Newsletter + Wrapped | ✅ shipped | aee8a0a | #23 |
+| 11.K Preview UX 4 Personas | ✅ shipped | e690842 | #24 |
+| 11.L APIs públicas + Widget + Time Machine | ✅ shipped | ba913a1 | #25 |
+| **11.M Genoma de Colonias SEED** | ✅ **shipped** | **aa0334b** | **#26** |
+| **11.N Futures Curve SEED + Pulse Pronóstico 30d (L93)** | ✅ **shipped** | **aa0334b** | **#26** |
+| 11.O LifePath SEED | ⏳ pending | — | — |
+| 11.P Climate Twin SEED | ⏳ pending | — | — |
+| 11.Q Ghost Zones Detector | ⏳ pending | — | — |
+| 11.R Zone Constellations SEED | ⏳ pending | — | — |
+| 11.S Living Atlas SEED | ⏳ pending | — | — |
+| 11.T Alert Radar WhatsApp | ⏳ pending | — | — |
+| 11.U Stickers Descargables | ⏳ pending | — | — |
+| 11.V DNA Migration (XF-01) | ⏳ pending | — | — |
+| 11.W Historical Forensics (XF-08) | ⏳ pending | — | — |
+| 11.X Living Metropolitan Networks (XF-09) | ⏳ pending | — | — |
+| 11.Y Zone Certification Integration | ⏳ pending | — | — |
+| 11.Z E2E Verification + Tests + Tag | ⏳ pending | — | — |
+
+### Notas de incidents resueltos
+
+- **Incident 2026-04-23 — migrations 11.J no aplicadas en Supabase cloud.** PR #23 (FASE 11 bloques F-J) mergeó código + migration files al repo pero GitHub Actions NO ejecutó `supabase db push`. Las tablas `newsletter_subscribers`, `newsletter_deliveries`, `zone_streaks`, `newsletter_ab_tests`, `dmx_wrapped_snapshots` quedaron declaradas en migrations locales sin existir en prod durante ~2 semanas. **Resuelto en PR #26** (mismo merge que 11.M+N) aplicando 9 migrations pendientes vía `supabase db push --linked` manual + reconcile history (6 timestamps duplicados repair) + regen types. Regla canonizada: tras cada merge que incluya migrations, ejecutar `supabase db push --linked` manual desde terminal (ver feedback memory `feedback_supabase_migrations_manual_push`).
+
 ## Bloques
 
 ### BLOQUE 11.A — Cimientos ampliados (~3h)
@@ -640,7 +677,7 @@ Para cada calculator el stack E2E es idéntico:
 
 **Criterio de done:** Usuario compara Pulse Narvarte vs Roma Sur lado-a-lado con animaciones sincronizadas.
 
-### BLOQUE 11.M — Genoma de Colonias SEED (~4h)
+### BLOQUE 11.M — Genoma de Colonias SEED (~4h) ✅ shipped SHA aa0334b (PR #26)
 
 #### MÓDULO 11.M.1 — Vectores 64-dim pgvector
 
@@ -665,7 +702,7 @@ Para cada calculator el stack E2E es idéntico:
 
 **Criterio de done:** Curl retorna top-10 similares con similarity score.
 
-### BLOQUE 11.N — Futures Curve SEED (~3h)
+### BLOQUE 11.N — Futures Curve SEED (~3h) ✅ shipped SHA aa0334b (PR #26)
 
 #### MÓDULO 11.N.1 — Forward 6m MOM heurística H1
 
