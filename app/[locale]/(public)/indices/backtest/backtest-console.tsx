@@ -1,9 +1,13 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { useMemo, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { useEffect, useMemo, useState } from 'react';
 import { BacktestChart } from '@/features/indices-publicos/components/BacktestChart';
 import { IndexBadge } from '@/features/indices-publicos/components/IndexBadge';
+import {
+  type BacktestHashInput,
+  encodeBacktestHash,
+} from '@/features/indices-publicos/lib/backtest-hash';
 import {
   computeBacktestReturns,
   type RawSeriesPoint,
@@ -16,28 +20,80 @@ import {
   SCOPE_TYPES,
   type ScopeType,
 } from '@/features/indices-publicos/lib/index-registry-helpers';
+import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
 import { trpc } from '@/shared/lib/trpc/client';
 
 const MAX_SCOPES = 4;
 
 const ISO_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
-export function BacktestConsole() {
+interface SubmittedInput {
+  readonly indexCode: IndexCode;
+  readonly scopeType: ScopeType;
+  readonly countryCode: CountryCode;
+  readonly from: string;
+  readonly to: string;
+  readonly scopeIds: readonly string[];
+}
+
+interface BacktestConsoleProps {
+  readonly initial?: BacktestHashInput | null;
+}
+
+export function BacktestConsole({ initial = null }: BacktestConsoleProps) {
   const t = useTranslations('IndicesPublic');
-  const [indexCode, setIndexCode] = useState<IndexCode>('IPV');
-  const [scopeType, setScopeType] = useState<ScopeType>('colonia');
-  const [countryCode, setCountryCode] = useState<CountryCode>('MX');
-  const [from, setFrom] = useState('2024-01-01');
-  const [to, setTo] = useState('2026-01-01');
-  const [scopeIds, setScopeIds] = useState<string[]>(['']);
-  const [submittedInput, setSubmittedInput] = useState<{
-    indexCode: IndexCode;
-    scopeType: ScopeType;
-    countryCode: CountryCode;
-    from: string;
-    to: string;
-    scopeIds: string[];
-  } | null>(null);
+  const locale = useLocale();
+  const [indexCode, setIndexCode] = useState<IndexCode>(initial?.indexCode ?? 'IPV');
+  const [scopeType, setScopeType] = useState<ScopeType>(initial?.scopeType ?? 'colonia');
+  const [countryCode, setCountryCode] = useState<CountryCode>(initial?.countryCode ?? 'MX');
+  const [from, setFrom] = useState(initial?.from ?? '2024-01-01');
+  const [to, setTo] = useState(initial?.to ?? '2026-01-01');
+  const [scopeIds, setScopeIds] = useState<string[]>(
+    initial && initial.scopeIds.length > 0 ? [...initial.scopeIds] : [''],
+  );
+  const [submittedInput, setSubmittedInput] = useState<SubmittedInput | null>(
+    initial && initial.scopeIds.length > 0
+      ? {
+          indexCode: initial.indexCode,
+          scopeType: initial.scopeType,
+          countryCode: initial.countryCode,
+          from: initial.from,
+          to: initial.to,
+          scopeIds: [...initial.scopeIds],
+        }
+      : null,
+  );
+  const [shareCopied, setShareCopied] = useState(false);
+  const [shareError, setShareError] = useState(false);
+
+  // Hidrata desde hash únicamente en el primer render cliente si el server
+  // prop no llegó (edge case de client-side navigation hacia la ruta).
+  useEffect(() => {
+    if (initial !== null || typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const hash = params.get('h');
+    if (!hash) return;
+    // Import dinámico evita acoplar el bundle del servidor al del cliente
+    // cuando no hay hash presente.
+    import('@/features/indices-publicos/lib/backtest-hash').then((mod) => {
+      const decoded = mod.decodeBacktestHash(hash);
+      if (!decoded || decoded.scopeIds.length === 0) return;
+      setIndexCode(decoded.indexCode);
+      setScopeType(decoded.scopeType);
+      setCountryCode(decoded.countryCode);
+      setFrom(decoded.from);
+      setTo(decoded.to);
+      setScopeIds([...decoded.scopeIds]);
+      setSubmittedInput({
+        indexCode: decoded.indexCode,
+        scopeType: decoded.scopeType,
+        countryCode: decoded.countryCode,
+        from: decoded.from,
+        to: decoded.to,
+        scopeIds: [...decoded.scopeIds],
+      });
+    });
+  }, [initial]);
 
   const canSubmit = useMemo(() => {
     if (!ISO_REGEX.test(from) || !ISO_REGEX.test(to)) return false;
@@ -54,7 +110,7 @@ export function BacktestConsole() {
           countryCode: submittedInput.countryCode,
           from: submittedInput.from,
           to: submittedInput.to,
-          scopeIds: submittedInput.scopeIds,
+          scopeIds: [...submittedInput.scopeIds],
         }
       : {
           indexCode: 'IPV',
@@ -101,6 +157,35 @@ export function BacktestConsole() {
       to,
       scopeIds: clean.slice(0, MAX_SCOPES),
     });
+  };
+
+  const handleShare = async () => {
+    const clean = scopeIds.map((s) => s.trim()).filter((s) => s.length > 0);
+    if (clean.length === 0) {
+      setShareError(true);
+      setTimeout(() => setShareError(false), 2000);
+      return;
+    }
+    try {
+      const hash = encodeBacktestHash({
+        indexCode,
+        scopeType,
+        countryCode,
+        from,
+        to,
+        scopeIds: clean.slice(0, MAX_SCOPES),
+      });
+      const origin = typeof window !== 'undefined' ? window.location.origin : '';
+      const url = `${origin}/${locale}/indices/backtest?h=${hash}`;
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+      }
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2000);
+    } catch {
+      setShareError(true);
+      setTimeout(() => setShareError(false), 2000);
+    }
   };
 
   const selectStyle: React.CSSProperties = {
@@ -242,7 +327,7 @@ export function BacktestConsole() {
           </div>
         </div>
 
-        <div className="md:col-span-2 lg:col-span-3">
+        <div className="flex flex-wrap items-center gap-2 md:col-span-2 lg:col-span-3">
           <button
             type="submit"
             disabled={!canSubmit || backtestQuery.isLoading}
@@ -254,6 +339,25 @@ export function BacktestConsole() {
           >
             {t('backtest.run')}
           </button>
+          <button
+            type="button"
+            onClick={handleShare}
+            disabled={!canSubmit}
+            aria-label={t('backtest.share.button_aria')}
+            data-testid="backtest-share-button"
+            className="rounded-[var(--radius-sm)] border px-4 py-2 text-sm font-semibold disabled:opacity-50"
+            style={selectStyle}
+          >
+            {t('backtest.share.button')}
+          </button>
+          <output
+            aria-live="polite"
+            className="text-xs"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
+            {shareCopied ? t('backtest.share.copied') : null}
+            {shareError ? t('backtest.share.error') : null}
+          </output>
         </div>
       </form>
 
@@ -331,7 +435,12 @@ export function BacktestConsole() {
                   className="border-b"
                   style={{ borderColor: 'var(--color-border-subtle)' }}
                 >
-                  <td className="px-3 py-1.5">{scope.scope_id}</td>
+                  <td className="px-3 py-1.5">
+                    {resolveZoneLabelSync({
+                      scopeType: submittedInput?.scopeType ?? scopeType,
+                      scopeId: scope.scope_id,
+                    })}
+                  </td>
                   <td className="px-3 py-1.5 text-right tabular-nums">
                     {scope.total_return_pct.toFixed(2)}%
                   </td>

@@ -1,14 +1,17 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Suspense } from 'react';
+import { Suspense, useId, useState } from 'react';
 import { CausalExplanation } from '@/features/causal-engine/components/CausalExplanation';
-import { VitalSigns } from '@/features/pulse-score/components';
+import { VitalSigns, VitalSignsComparison } from '@/features/pulse-score/components';
 import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
 import { useIndexDetail, useIndexRanking } from '../hooks/useIndexRanking';
+
+const COMPARE_SLUG_REGEX = /^[a-z0-9][a-z0-9-]{0,120}$/i;
+
 import {
   bandToLabelPillTone,
   type IndexCode,
@@ -49,6 +52,12 @@ export function IndexDetailClient({
 }: IndexDetailClientProps) {
   void locale;
   const t = useTranslations('IndicesPublic');
+  const compareInputId = useId();
+  const [compareOpen, setCompareOpen] = useState<boolean>(false);
+  const [compareRaw, setCompareRaw] = useState<string>('');
+  const compareScopeId =
+    compareRaw && COMPARE_SLUG_REGEX.test(compareRaw) && compareRaw !== scopeId ? compareRaw : null;
+
   const ranking = useIndexRanking({ indexCode, scopeType });
   const detail = useIndexDetail({
     indexCode,
@@ -60,6 +69,7 @@ export function IndexDetailClient({
   const rows = ranking.data ?? [];
   const detailRow = detail.data ?? null;
   const shareText = t('share.share_text', { code: indexCode });
+  const datalistId = `${compareInputId}-suggestions`;
 
   return (
     <div className={cn('space-y-6', className)}>
@@ -157,6 +167,65 @@ export function IndexDetailClient({
       ) : null}
 
       {detailRow && scopeId ? <VitalSigns scopeType={scopeType} scopeId={scopeId} /> : null}
+
+      {detailRow && scopeId ? (
+        <section
+          aria-label={t('compare.toggle_label')}
+          className="rounded-[var(--radius-lg)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] p-6"
+        >
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setCompareOpen((v) => !v)}
+              aria-expanded={compareOpen}
+              aria-controls={compareInputId}
+              className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-[color:var(--color-border-subtle)] px-3 py-1.5 text-sm font-medium text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-sunken)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent-primary)]"
+            >
+              {compareOpen ? t('compare.hide') : t('compare.toggle_label')}
+            </button>
+            {compareOpen ? (
+              <div className="flex flex-1 min-w-[240px] flex-col gap-1">
+                <label
+                  htmlFor={compareInputId}
+                  className="text-xs text-[color:var(--color-text-secondary)]"
+                >
+                  {t('compare.input_label')}
+                </label>
+                <input
+                  id={compareInputId}
+                  type="text"
+                  list={datalistId}
+                  inputMode="text"
+                  autoComplete="off"
+                  value={compareRaw}
+                  onChange={(e) => setCompareRaw(e.target.value.trim())}
+                  placeholder={t('compare.input_placeholder')}
+                  aria-label={t('compare.input_label')}
+                  className="rounded-[var(--radius-md)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] px-3 py-1.5 text-sm text-[color:var(--color-text-primary)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent-primary)]"
+                />
+                <datalist id={datalistId}>
+                  {rows.slice(0, 20).map((r) => (
+                    <option key={r.scope_id} value={r.scope_id} />
+                  ))}
+                </datalist>
+                {compareRaw && !compareScopeId ? (
+                  <p role="alert" className="text-xs text-[color:var(--color-warning,#f59e0b)]">
+                    {t('compare.invalid_slug')}
+                  </p>
+                ) : null}
+              </div>
+            ) : null}
+          </div>
+          {compareOpen && compareScopeId ? (
+            <div className="mt-4">
+              <VitalSignsComparison
+                scopeA={{ scopeType, scopeId }}
+                scopeB={{ scopeType, scopeId: compareScopeId }}
+              />
+            </div>
+          ) : null}
+        </section>
+      ) : null}
 
       <section
         aria-label={t('detail.ranking_in_scope', {

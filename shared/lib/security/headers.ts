@@ -81,3 +81,49 @@ export function applySecurityHeaders(
   }
   return response;
 }
+
+export function buildEmbedCsp(nonce: string, isDev: boolean): string {
+  const supabaseHttps = SUPABASE_HOST ? `https://${SUPABASE_HOST}` : '';
+  const supabaseWss = SUPABASE_HOST ? `wss://${SUPABASE_HOST}` : '';
+
+  const scriptSrc = isDev
+    ? `'self' 'nonce-${nonce}' 'unsafe-eval' 'unsafe-inline' https://*.posthog.com`
+    : `'self' 'nonce-${nonce}' 'strict-dynamic' https://*.posthog.com`;
+
+  const imgSrc = ["'self'", 'data:', 'blob:', supabaseHttps].filter(Boolean).join(' ');
+  const connectSrc = ["'self'", supabaseHttps, supabaseWss, 'https://*.posthog.com']
+    .filter(Boolean)
+    .join(' ');
+
+  return [
+    "default-src 'self'",
+    `script-src ${scriptSrc}`,
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com data:",
+    `img-src ${imgSrc}`,
+    `connect-src ${connectSrc}`,
+    'frame-ancestors *',
+    "base-uri 'self'",
+    "form-action 'self'",
+  ].join('; ');
+}
+
+export function applyEmbedHeaders(
+  response: NextResponse,
+  nonce: string,
+  isDev: boolean,
+): NextResponse {
+  response.headers.set('Content-Security-Policy', buildEmbedCsp(nonce, isDev));
+  response.headers.set('X-Content-Type-Options', 'nosniff');
+  response.headers.delete('X-Frame-Options');
+  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('x-nonce', nonce);
+  if (!isDev) {
+    response.headers.set(
+      'Strict-Transport-Security',
+      'max-age=63072000; includeSubDomains; preload',
+    );
+  }
+  return response;
+}

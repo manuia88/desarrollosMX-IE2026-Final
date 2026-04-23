@@ -1076,7 +1076,15 @@
       "disclaimer": "Simulación basada en series históricas cerradas. No constituye garantía de resultados futuros.",
       "compare_heading": "Comparar zonas",
       "return_label": "Retorno %",
-      "volatility_label": "Volatilidad"
+      "volatility_label": "Volatilidad",
+      "share": {
+        "button": "Compartir",
+        "button_aria": "Copiar URL con configuración actual del backtest",
+        "copied": "Enlace copiado",
+        "error": "No se pudo copiar"
+      },
+      "og_title": "Backtest DMX {indexCode} — {count} zonas",
+      "og_description": "Simulación histórica compartida del índice {indexCode} en {count} zona(s)"
     },
     "indices": {
       "IPV": {
@@ -1154,6 +1162,19 @@
         "short": "Estabilidad",
         "tagline": "Resiliencia y consistencia"
       }
+    },
+    "compare": {
+      "toggle_label": "Comparar con otra colonia",
+      "hide": "Ocultar comparación",
+      "input_label": "Slug de la colonia a comparar",
+      "input_placeholder": "Ej. narvarte",
+      "invalid_slug": "Slug inválido (usa letras, números y guiones)",
+      "aria_label": "Comparación Pulse: {zoneA} vs {zoneB}",
+      "panel_a_label": "Panel Pulse de {zone}",
+      "panel_b_label": "Panel Pulse de {zone}",
+      "chart_title": "Serie histórica superpuesta",
+      "chart_subtitle": "Pulse Score últimos 12 meses para ambas colonias",
+      "chart_aria": "Gráfica comparativa Pulse: {zoneA} vs {zoneB}"
     }
   },
   "Causal": {
@@ -1899,5 +1920,79 @@
       "label": "Solicitá acceso Enterprise + dashboard broker",
       "helper": "Tablero completo de equipo, asignación de territorios y alertas en vivo."
     }
+  },
+  "WidgetEmbed": {
+    "common": {
+      "powered_by": "Powered by DesarrollosMX",
+      "cta_view_full": "Ver más →"
+    },
+    "score": {
+      "heading": "Índices DMX",
+      "list_label": "Lista de 15 índices para la colonia",
+      "aria_label": "Widget score DMX para {zone}"
+    },
+    "pulse": {
+      "aria_label": "Widget Pulse Vital Signs para {zone}"
+    },
+    "pulse_compare": {
+      "aria_label": "Widget Pulse comparador: {zoneA} vs {zoneB}"
+    },
+    "docs": {
+      "title": "Widgets embebibles DMX",
+      "subtitle": "Copia y pega un iframe en tu sitio para mostrar índices DMX en tiempo real",
+      "meta_description": "Widgets iframe-friendly de DesarrollosMX — score, pulse y comparador. Personaliza con theme y locale.",
+      "section_variants_label": "Variantes de widget",
+      "section_customization_label": "Personalización",
+      "snippet_aria": "Snippet HTML del widget {variant}",
+      "variants": {
+        "score": {
+          "title": "Score Card — 15 índices",
+          "description": "Card Bloomberg-style con ranking de los 15 índices DMX para una colonia."
+        },
+        "pulse": {
+          "title": "Pulse Vital Signs",
+          "description": "Dashboard medical-grade con pulse económico, respiración comercial y temperatura social."
+        },
+        "pulse_vs": {
+          "title": "Pulse Comparador",
+          "description": "Compara dos colonias lado a lado con sparklines superpuestas."
+        }
+      },
+      "customization": {
+        "title": "Parámetros de URL",
+        "description": "Puedes personalizar los widgets vía query string.",
+        "theme_description": "Claro, oscuro o automático según el sitio contenedor.",
+        "locale_description": "Idioma del widget (5 locales soportados)."
+      }
+    }
+  },
+  "ApiKeys": {
+    "pageTitle": "Llaves API",
+    "pageBody": "Gestiona tus llaves de acceso a la API pública v1. La llave se muestra una sola vez al crearla.",
+    "createTitle": "Crear nueva llave",
+    "createBody": "Nombra la llave con el proyecto al que pertenece. El tier controla la cuota diaria.",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Ej. Dashboard interno",
+    "tierLabel": "Tier",
+    "tierFree": "Free (100/día)",
+    "tierStarter": "Starter (500/día)",
+    "tierPro": "Pro (10K/día)",
+    "createButton": "Crear llave",
+    "creating": "Creando…",
+    "rawKeyOnceTitle": "Llave generada — visible solo una vez",
+    "rawKeyOnceBody": "Copia la llave ahora. Si la pierdes, genera una nueva.",
+    "copyRawKey": "Copiar llave",
+    "copied": "Copiada",
+    "close": "Cerrar",
+    "listTitle": "Llaves activas",
+    "listEmpty": "No tienes llaves creadas.",
+    "createdAt": "Creada {date}",
+    "lastUsedAt": "Último uso {date}",
+    "revokedAt": "Revocada {date}",
+    "revokedBadge": "Revocada",
+    "revokeButton": "Revocar",
+    "revokeButtonAria": "Revocar llave {name}",
+    "confirmRevoke": "¿Revocar esta llave? Aplicaciones que la usan dejarán de funcionar.",
+    "error": "Error: {code}"
   }
 }
