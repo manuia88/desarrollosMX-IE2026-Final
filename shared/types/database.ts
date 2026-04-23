@@ -1478,7 +1478,34 @@ export type Database = {
         }
         Relationships: []
       }
-      climate_twin_projections: {
+      climate_annual_summaries: {
+        Row: {
+          climate_type: string | null
+          composite_climate_signature: number[]
+          computed_at: string
+          summary: Json
+          year: number
+          zone_id: string
+        }
+        Insert: {
+          climate_type?: string | null
+          composite_climate_signature?: number[]
+          computed_at?: string
+          summary?: Json
+          year: number
+          zone_id: string
+        }
+        Update: {
+          climate_type?: string | null
+          composite_climate_signature?: number[]
+          computed_at?: string
+          summary?: Json
+          year?: number
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      climate_future_projections: {
         Row: {
           air_quality_index: number | null
           calculated_at: string
@@ -1514,6 +1541,72 @@ export type Database = {
           sources?: Json
           temp_celsius?: number | null
           water_availability_pct?: number | null
+        }
+        Relationships: []
+      }
+      climate_monthly_aggregates: {
+        Row: {
+          computed_at: string
+          extreme_events_count: Json
+          humidity_avg: number | null
+          rainfall_mm: number | null
+          source: string
+          temp_avg: number | null
+          temp_max: number | null
+          temp_min: number | null
+          year_month: string
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          extreme_events_count?: Json
+          humidity_avg?: number | null
+          rainfall_mm?: number | null
+          source?: string
+          temp_avg?: number | null
+          temp_max?: number | null
+          temp_min?: number | null
+          year_month: string
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          extreme_events_count?: Json
+          humidity_avg?: number | null
+          rainfall_mm?: number | null
+          source?: string
+          temp_avg?: number | null
+          temp_max?: number | null
+          temp_min?: number | null
+          year_month?: string
+          zone_id?: string
+        }
+        Relationships: []
+      }
+      climate_twin_matches: {
+        Row: {
+          computed_at: string
+          methodology: string
+          shared_patterns: Json
+          similarity: number
+          twin_zone_id: string
+          zone_id: string
+        }
+        Insert: {
+          computed_at?: string
+          methodology?: string
+          shared_patterns?: Json
+          similarity: number
+          twin_zone_id: string
+          zone_id: string
+        }
+        Update: {
+          computed_at?: string
+          methodology?: string
+          shared_patterns?: Json
+          similarity?: number
+          twin_zone_id?: string
+          zone_id?: string
         }
         Relationships: []
       }
@@ -3383,31 +3476,37 @@ export type Database = {
       }
       lifepath_user_profiles: {
         Row: {
+          answers_version: string
           created_at: string
           family_state: string | null
           income_range: string | null
+          matches: Json
+          methodology: string
           preferences: Json
-          top_3_matches: Json
           updated_at: string
           user_id: string
           work_mode: string | null
         }
         Insert: {
+          answers_version?: string
           created_at?: string
           family_state?: string | null
           income_range?: string | null
+          matches?: Json
+          methodology?: string
           preferences?: Json
-          top_3_matches?: Json
           updated_at?: string
           user_id: string
           work_mode?: string | null
         }
         Update: {
+          answers_version?: string
           created_at?: string
           family_state?: string | null
           income_range?: string | null
+          matches?: Json
+          methodology?: string
           preferences?: Json
-          top_3_matches?: Json
           updated_at?: string
           user_id?: string
           work_mode?: string | null
