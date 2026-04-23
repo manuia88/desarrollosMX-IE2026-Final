@@ -150,6 +150,55 @@
     "dark": "Escuro",
     "system": "Sistema"
   },
+  "FuturesCurve": {
+    "meta_title": "Curva de futuros · {code}",
+    "meta_description": "Curva forward 3/6/12/24m com banda de confiança para {code}",
+    "title": "Curva de futuros · {code}",
+    "subtitle": "Projeção forward 3/6/12/24 meses com banda de confiança 95%.",
+    "breadcrumb_indices": "Índices",
+    "breadcrumb_futuros": "Futuros",
+    "pick_scopes_hint": "Adicione bairros na URL (?scope_ids=uuid1,uuid2) para plotar até 4 curvas.",
+    "empty": "Nenhuma projeção disponível para os bairros selecionados.",
+    "chart_heading": "Curva forward ({count} bairros)",
+    "chart_a11y": "Curva forward do índice {code} com banda de confiança 95%.",
+    "horizon_label": "{months} meses",
+    "ci_range": "IC 95%: {lower} – {upper}",
+    "export_csv": "Exportar CSV",
+    "disclaimer_heuristic": "Projeção heurística determinística H1. Não é recomendação de investimento.",
+    "pulse_forecast_heading": "Previsão Pulse 30 dias",
+    "pulse_forecast_a11y": "Previsão diária do Pulse Score com banda de confiança 95%.",
+    "pulse_disclaimer": "Projeção de 30 dias. Não garante resultados."
+  },
+  "Genome": {
+    "similares": {
+      "meta_title": "Bairros similares · {code}",
+      "meta_description": "Descubra bairros com DNA similar ao índice {code}",
+      "title": "Bairros com genoma similar",
+      "subtitle": "Encontramos bairros com perfil parecido baseados em 64 dimensões (índices DMX + vibe tags + geo).",
+      "breadcrumb_indices": "Índices",
+      "breadcrumb_similares": "Similares",
+      "pick_scope_hint": "Selecione um bairro primeiro para ver similares.",
+      "empty": "Nenhum bairro similar acima do limite de 70%.",
+      "results_heading": "{count} bairros mais parecidos",
+      "similarity_pct": "Similaridade {pct}%",
+      "filter_liv_on": "Somente DMX-LIV ≥ 70",
+      "filter_liv_off": "Remover filtro DMX-LIV",
+      "source_note": "Baseado no DNA (bairro {sourceId}…).",
+      "methodology_note": "Heurística determinística v1. Em breve refinamento AI (ADR-022)."
+    },
+    "vibe_tags": {
+      "walkability": "Caminhável",
+      "quiet": "Tranquilo",
+      "nightlife": "Vida noturna",
+      "family": "Familiar",
+      "foodie": "Foodie",
+      "green": "Verde",
+      "bohemian": "Boêmio",
+      "corporate": "Corporativo",
+      "safety_perceived": "Seguro",
+      "gentrifying": "Gentrificando"
+    }
+  },
   "Home": {
     "title": "DesarrollosMX",
     "tagline": "Inteligência imobiliária AI-native para a América Latina"
@@ -974,7 +1023,8 @@
       "components_title": "Componentes",
       "inputs_title": "Insumos",
       "calculated_at": "Calculado: {date}",
-      "valid_until": "Válido até: {date}"
+      "valid_until": "Válido até: {date}",
+      "view_similar_link": "Ver bairros similares →"
     },
     "movers": {
       "title": "Top Movers — Ranking diário",

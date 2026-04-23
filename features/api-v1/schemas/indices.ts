@@ -86,9 +86,25 @@ export const coloniaProfileDataSchema = z.object({
 });
 export type ColoniaProfileData = z.infer<typeof coloniaProfileDataSchema>;
 
+export const similarSharedVibeTagSchema = z.object({
+  vibe_tag_id: z.string(),
+  weight_self: z.number().min(0).max(100),
+  weight_other: z.number().min(0).max(100),
+});
+
+export const similarTopDmxSchema = z.object({
+  code: z.string(),
+  value: z.number(),
+});
+
 export const similarColoniaItemSchema = z.object({
   colonia_id: z.string(),
   similarity: z.number(),
+  // Campos enriquecidos (BLOQUE 11.M). Todos opcionales → backward-compatible.
+  colonia_label: z.string().nullable().optional(),
+  distance: z.number().optional(),
+  top_shared_vibe_tags: z.array(similarSharedVibeTagSchema).optional(),
+  top_dmx_indices: z.array(similarTopDmxSchema).optional(),
 });
 export type SimilarColoniaItem = z.infer<typeof similarColoniaItemSchema>;
 

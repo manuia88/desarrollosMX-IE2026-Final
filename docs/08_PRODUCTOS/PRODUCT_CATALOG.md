@@ -802,3 +802,57 @@
 **Total actualizado: 37 productos empaquetados (22 pre + 15 FASE 11 XL).**
 
 **Autor FASE 11 XL:** PM Sr (Opus 4.7) | **Fecha:** 2026-04-21 | **Status:** Draft — founder review + GTM alignment
+
+---
+
+## Append BLOQUES 11.M + 11.N (2026-04-23)
+
+### Producto 10.16 — "Genoma de Colonias" (similarity search 64-dim)
+
+**Descripción:** búsqueda vectorial pgvector que devuelve colonias con ADN similar (64 features: 32 scores N0 + 15 índices DMX + 10 vibe tags + 7 geo). UI /indices/[code]/similares muestra chips DMX dominantes + vibe compartidos + label humano. API pública `/api/v1/similar/[coloniaId]` ya real (stub 11.L.4.4 reemplazado).
+**Audiencia:** Comprador · Asesor · MasterBroker · Inversor Individual.
+**Tiers pricing:**
+- **Free**: 10 queries/mes (alineado 10.8 existente)
+- **Pro**: unlimited UI pública + rate limit per-tier API
+- **Enterprise**: SLA + bulk endpoint
+**Canal primario:** landing /similares + embed widget (L-NN H2) + API REST v1.
+**Features:** FI-076, FI-077, FI-078, FI-079.
+**Diferenciador moat:** único cross-function con vibe tags H1 reemplazables por LLM v1 sin migración schema (ADR-022).
+**Status:** H1 Shipped (commit 0035640, migrations aplicadas remote 2026-04-23).
+
+### Producto 10.17 — "Futures Curve DMX" (forward 3/6/12/24m + banda CI 95%)
+
+**Descripción:** curva forward Bloomberg-style por índice DMX y colonia con banda de confianza 95% explícita (columnas `_lower`/`_upper`). Hasta 4 colonias superpuestas en chart Recharts + export CSV nativo. Heurística H1 regression lineal shrunk + ±1.96σ residuos; reemplazable LSTM/ARIMA FASE 12 N5.
+**Audiencia:** Inversionista Institucional · MasterBroker · Analista.
+**Tiers pricing:**
+- **Free**: read público /futuros + banda CI
+- **Pro**: export CSV + compare 4 scopes
+- **Enterprise** (L136 H2): terminal-style real-time + alertas
+**Canal primario:** landing /indices/[code]/futuros + Newsletter monthly `futures_section`.
+**Features:** FI-080, FI-082, FI-084.
+**Diferenciador moat:** único con banda CI explícita en columnas (vs escalar derivado) + CSV export nativo Blob (zero deps externas).
+**Status:** H1 Shipped (commit 904d798).
+
+### Producto 10.18 — "Pulse Pronóstico 30d" (signal L93)
+
+**Descripción:** forecast daily del Pulse Score a 30 días por zona con banda CI 95% sombreada. Persiste en `pulse_forecasts` (zone_id × forecast_date × methodology). Integrado en VitalSigns component como mini-sparkline SVG inline (cross-function 11.F).
+**Audiencia:** todas las personas activas con VitalSigns embebido.
+**Tiers pricing:**
+- **Free**: visible inline en VitalSigns (cualquier colonia pública)
+- **Pro**: JSON endpoint para dashboards externos (agendado L-NN)
+**Canal primario:** VitalSigns component (11.F) + Pulse Comparador (11.L).
+**Features:** FI-081, FI-083.
+**Diferenciador moat:** único forecast signal de signos vitales urbanos a 30d con banda explícita — "futuros signos vitales" narrativa press-friendly.
+**Status:** H1 Shipped (commit 904d798).
+
+### Matriz actualizada 11.M + 11.N
+
+| # | Producto | Persona primaria | Free | Pro/Starter | Enterprise |
+|---|---|---|---|---|---|
+| 10.16 | Genoma de Colonias | Comprador + Inv + MB | 10 q/mes UI pública | $99 USD/mes | $50K-$200K MXN/año |
+| 10.17 | Futures Curve DMX | Inv + MB + Analista | Read público | Pro tier Futures API | L136 H2 terminal premium |
+| 10.18 | Pulse Pronóstico 30d | Todas personas activas | VitalSigns inline | JSON endpoint (agendado) | Partner revshare |
+
+**Total actualizado: 40 productos empaquetados (37 pre + 3 BLOQUES 11.M+11.N).**
+
+**Autor BLOQUES 11.M+11.N:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 | **Status:** Shipped H1

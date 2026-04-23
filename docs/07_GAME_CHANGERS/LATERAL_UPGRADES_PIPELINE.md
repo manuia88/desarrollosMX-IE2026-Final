@@ -1366,6 +1366,69 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Industria origen:** React async resolver patterns + Suspense fallback
 - **Dependencia data:** resolveZoneLabel + async Context propagation backtest
 
+### L131 — Genoma Multi-país cross-country similarity (FASE 11 BLOQUE 11.M agendado)
+
+- **Status:** 🟢 queued (post-H1)
+- **Qué es:** embeddings 64-dim actualmente bloqueados a un solo country_code en la búsqueda. Cross-country (MX ↔ CO ↔ AR) abriría "tu colonia parecida en otros países".
+- **Para qué sirve:** descubrimiento LATAM — "tu Roma Norte en Medellín" o "tu Palermo Soho en Ciudad de México".
+- **Beneficio concreto:** diferenciador único para perfiles nómada digital + inversión cross-border.
+- **Fase target:** FASE 38 International Expansion
+- **Dependencia data:** data MX+CO+AR con features_version compatibles
+
+### L132 — Vibe Tags AI refinement híbrido ADR-022 (FASE 11 BLOQUE 11.M agendado)
+
+- **Status:** 🟢 queued (ADR-022 approved)
+- **Qué es:** reemplaza heuristic_v1 (10 reglas determinísticas) por llm_v1 (LLM + señales DENUE/Instagram/Google Maps reviews).
+- **Para qué sirve:** precisión mayor en vibe tags subjetivos (foodie, bohemian) usando texto real.
+- **Beneficio concreto:** calidad search "colonias foodie" pasa de correlación score a comprensión semántica.
+- **Fase target:** FASE 12 N5 (LLM scores)
+- **Dependencia data:** Apify Instagram ingestor + Google Maps reviews scraper
+
+### L133 — Genoma para proyectos no solo colonias (FASE 11 BLOQUE 11.M agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** extiende colonia_dna_vectors a proyecto_dna_vectors — buscar proyectos con perfil similar (amenidades + ubicación + precio-calidad).
+- **Para qué sirve:** comprador enamorado de un proyecto ya vendido encuentra los parecidos.
+- **Beneficio concreto:** conversión portal developer — "te gustó Proyecto X, mira estos 5 similares".
+- **Fase target:** FASE 15 Portal Developer
+- **Dependencia data:** proyectos table con amenidades + embeddings propios
+
+### L134 — Derivatives-like futures contracts real estate (FASE 11 BLOQUE 11.N agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** evolución de la curva forward hacia contratos derivados (CFDs/futures) sobre índices DMX. Producto financiero real.
+- **Para qué sirve:** investors sofisticados pueden hedgear exposure a mercado inmobiliario sin tocar propiedad física.
+- **Beneficio concreto:** nuevo vertical fintech high-revenue.
+- **Fase target:** FASE 36 Fractional Investing
+- **Dependencia data:** regulación CNBV + partners broker
+
+### L135 — ML regression refinement LSTM/ARIMA vs heurística H1 (FASE 11 BLOQUE 11.N agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** reemplaza regression lineal H1 por modelo ARIMA o LSTM con seasonality multi-periodica + external features (macro, eventos).
+- **Para qué sirve:** precisión forecast mayor + banda CI más realista (no simétrica).
+- **Beneficio concreto:** accuracy mejora 20-40% según benchmark (Box-Jenkins vs naive trend).
+- **Fase target:** FASE 12 N5 (LLM + ML scores)
+- **Dependencia data:** feature store + training pipeline
+
+### L136 — Bloomberg-style forward curve terminal UI premium (FASE 11 BLOQUE 11.N agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** dashboard profesional tipo Bloomberg terminal con curva + comparables + deltas + alertas en real-time.
+- **Para qué sirve:** justificar tier enterprise pricing ($10K+/mes) con UX premium.
+- **Beneficio concreto:** conversión enterprise +3x vs tier pro.
+- **Fase target:** FASE 22 Marketing & Premium UX
+- **Dependencia data:** WebSocket real-time + diseño UX terminal
+
+### L137 — Tabla zones canónica con columnas lat/lng/area (H2 followup post 11.M)
+
+- **Status:** 🟡 deuda técnica conocida
+- **Qué es:** actualmente zone_id es UUID sin tabla formal con columnas standard. Geo features en embedding leen desde zona_snapshots.payload (JSON heterogéneo). H2 introducir tabla zones con columnas canónicas.
+- **Para qué sirve:** consistencia geo queries + type safety + dedup zone_type/country_code.
+- **Beneficio concreto:** geo features embedding dejan de ser neutros (0.5) cuando payload falta; search performance sube.
+- **Fase target:** FASE 13 (consolidación E2E MX post FASE 12 N5)
+- **Dependencia data:** migración zona_snapshots.payload → columnas canónicas zones
+
 ### Cross-references FASE 11 XL append
 
 - `docs/CONTEXTO_MAESTRO_DMX_v5.md` Addendum 2026-04-21 FASE 11 XL
@@ -1375,4 +1438,4 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-027_FASE_11_XL_METODOLOGIA_INDICES.md`
 - `docs/05_OPERACIONAL/CONTRATO_EJECUCION.md` §8 TODOs #27-#36
 
-**Última actualización:** 2026-04-21 — L73-L130 (58 laterales FASE 11 XL, +48 nuevos detectados en BLOQUES 11.D/E/F/G/H/I + post 11.I.bis audit) + 0 items sin destino concreto + BUGS CRÍTICOS detectados y fijados en 11.I.bis (cost-guard wire + causal regenerate rate-limit wire)
+**Última actualización:** 2026-04-23 — L73-L137 (65 laterales FASE 11 XL, +4 en BLOQUE 11.M Genoma, +3 en BLOQUE 11.N Futures) + 0 items sin destino concreto.

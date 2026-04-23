@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { Suspense, useId, useState } from 'react';
 import { CausalExplanation } from '@/features/causal-engine/components/CausalExplanation';
@@ -167,6 +168,17 @@ export function IndexDetailClient({
       ) : null}
 
       {detailRow && scopeId ? <VitalSigns scopeType={scopeType} scopeId={scopeId} /> : null}
+
+      {detailRow && scopeId ? (
+        <div className="flex justify-start">
+          <Link
+            href={`/${locale}/indices/${indexCode}/similares?scope_id=${encodeURIComponent(scopeId)}`}
+            className="inline-flex items-center gap-2 rounded-[var(--radius-md)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] px-4 py-2 text-sm font-medium text-[color:var(--color-text-primary)] hover:bg-[color:var(--color-surface-sunken)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent-primary)]"
+          >
+            {t('detail.view_similar_link')}
+          </Link>
+        </div>
+      ) : null}
 
       {detailRow && scopeId ? (
         <section

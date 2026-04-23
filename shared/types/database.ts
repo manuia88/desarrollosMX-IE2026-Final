@@ -1544,6 +1544,38 @@ export type Database = {
         }
         Relationships: []
       }
+      colonia_vibe_tags: {
+        Row: {
+          colonia_id: string
+          computed_at: string
+          source: string
+          vibe_tag_id: string
+          weight: number
+        }
+        Insert: {
+          colonia_id: string
+          computed_at?: string
+          source?: string
+          vibe_tag_id: string
+          weight: number
+        }
+        Update: {
+          colonia_id?: string
+          computed_at?: string
+          source?: string
+          vibe_tag_id?: string
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "colonia_vibe_tags_vibe_tag_id_fkey"
+            columns: ["vibe_tag_id"]
+            isOneToOne: false
+            referencedRelation: "vibe_tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       colonia_wiki_entries: {
         Row: {
           colonia_id: string
@@ -1998,6 +2030,36 @@ export type Database = {
         }
         Relationships: []
       }
+      dmx_wrapped_snapshots: {
+        Row: {
+          cards: Json
+          country_code: string
+          generated_at: string
+          id: string
+          share_url: string | null
+          user_id: string | null
+          year: number
+        }
+        Insert: {
+          cards?: Json
+          country_code?: string
+          generated_at?: string
+          id?: string
+          share_url?: string | null
+          user_id?: string | null
+          year: number
+        }
+        Update: {
+          cards?: Json
+          country_code?: string
+          generated_at?: string
+          id?: string
+          share_url?: string | null
+          user_id?: string | null
+          year?: number
+        }
+        Relationships: []
+      }
       dna_migration_matches: {
         Row: {
           calculated_at: string
@@ -2251,9 +2313,17 @@ export type Database = {
           confidence: number | null
           country_code: string
           forward_12m: number | null
+          forward_12m_lower: number | null
+          forward_12m_upper: number | null
           forward_24m: number | null
+          forward_24m_lower: number | null
+          forward_24m_upper: number | null
           forward_3m: number | null
+          forward_3m_lower: number | null
+          forward_3m_upper: number | null
           forward_6m: number | null
+          forward_6m_lower: number | null
+          forward_6m_upper: number | null
           id: string
           index_code: string
           methodology: string
@@ -2266,9 +2336,17 @@ export type Database = {
           confidence?: number | null
           country_code?: string
           forward_12m?: number | null
+          forward_12m_lower?: number | null
+          forward_12m_upper?: number | null
           forward_24m?: number | null
+          forward_24m_lower?: number | null
+          forward_24m_upper?: number | null
           forward_3m?: number | null
+          forward_3m_lower?: number | null
+          forward_3m_upper?: number | null
           forward_6m?: number | null
+          forward_6m_lower?: number | null
+          forward_6m_upper?: number | null
           id?: string
           index_code: string
           methodology?: string
@@ -2281,9 +2359,17 @@ export type Database = {
           confidence?: number | null
           country_code?: string
           forward_12m?: number | null
+          forward_12m_lower?: number | null
+          forward_12m_upper?: number | null
           forward_24m?: number | null
+          forward_24m_lower?: number | null
+          forward_24m_upper?: number | null
           forward_3m?: number | null
+          forward_3m_lower?: number | null
+          forward_3m_upper?: number | null
           forward_6m?: number | null
+          forward_6m_lower?: number | null
+          forward_6m_upper?: number | null
           id?: string
           index_code?: string
           methodology?: string
@@ -5526,6 +5612,164 @@ export type Database = {
           },
         ]
       }
+      newsletter_ab_tests: {
+        Row: {
+          computed_at: string | null
+          created_at: string
+          id: string
+          period_date: string
+          sample_size: number
+          template: string
+          variant_a_open_rate: number | null
+          variant_a_subject: string
+          variant_b_open_rate: number | null
+          variant_b_subject: string
+          winner_variant: string | null
+        }
+        Insert: {
+          computed_at?: string | null
+          created_at?: string
+          id?: string
+          period_date: string
+          sample_size?: number
+          template: string
+          variant_a_open_rate?: number | null
+          variant_a_subject: string
+          variant_b_open_rate?: number | null
+          variant_b_subject: string
+          winner_variant?: string | null
+        }
+        Update: {
+          computed_at?: string | null
+          created_at?: string
+          id?: string
+          period_date?: string
+          sample_size?: number
+          template?: string
+          variant_a_open_rate?: number | null
+          variant_a_subject?: string
+          variant_b_open_rate?: number | null
+          variant_b_subject?: string
+          winner_variant?: string | null
+        }
+        Relationships: []
+      }
+      newsletter_deliveries: {
+        Row: {
+          ab_test_id: string | null
+          bounced_reason: string | null
+          clicked_at: string | null
+          created_at: string
+          id: string
+          opened_at: string | null
+          payload_summary: Json
+          provider_message_id: string | null
+          sent_at: string
+          status: string
+          subject: string
+          subject_variant: string | null
+          subscriber_id: string
+          template: string
+        }
+        Insert: {
+          ab_test_id?: string | null
+          bounced_reason?: string | null
+          clicked_at?: string | null
+          created_at?: string
+          id?: string
+          opened_at?: string | null
+          payload_summary?: Json
+          provider_message_id?: string | null
+          sent_at?: string
+          status?: string
+          subject: string
+          subject_variant?: string | null
+          subscriber_id: string
+          template: string
+        }
+        Update: {
+          ab_test_id?: string | null
+          bounced_reason?: string | null
+          clicked_at?: string | null
+          created_at?: string
+          id?: string
+          opened_at?: string | null
+          payload_summary?: Json
+          provider_message_id?: string | null
+          sent_at?: string
+          status?: string
+          subject?: string
+          subject_variant?: string | null
+          subscriber_id?: string
+          template?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "newsletter_deliveries_subscriber_id_fkey"
+            columns: ["subscriber_id"]
+            isOneToOne: false
+            referencedRelation: "newsletter_subscribers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      newsletter_subscribers: {
+        Row: {
+          confirm_token_hash: string | null
+          confirmed_at: string | null
+          consent_ip: unknown
+          consent_lfpdppp_at: string
+          created_at: string
+          email: string
+          id: string
+          locale: string
+          preferences: Json
+          status: string
+          subscribed_at: string
+          tags: string[]
+          unsubscribe_token_hash: string | null
+          unsubscribed_at: string | null
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          confirm_token_hash?: string | null
+          confirmed_at?: string | null
+          consent_ip?: unknown
+          consent_lfpdppp_at?: string
+          created_at?: string
+          email: string
+          id?: string
+          locale: string
+          preferences?: Json
+          status?: string
+          subscribed_at?: string
+          tags?: string[]
+          unsubscribe_token_hash?: string | null
+          unsubscribed_at?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          confirm_token_hash?: string | null
+          confirmed_at?: string | null
+          consent_ip?: unknown
+          consent_lfpdppp_at?: string
+          created_at?: string
+          email?: string
+          id?: string
+          locale?: string
+          preferences?: Json
+          status?: string
+          subscribed_at?: string
+          tags?: string[]
+          unsubscribe_token_hash?: string | null
+          unsubscribed_at?: string | null
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       part_config: {
         Row: {
           async_partitioning_in_progress: string | null
@@ -6202,6 +6446,42 @@ export type Database = {
             referencedColumns: ["code"]
           },
         ]
+      }
+      pulse_forecasts: {
+        Row: {
+          country_code: string
+          forecast_date: string
+          generated_at: string
+          id: string
+          methodology: string
+          value: number
+          value_lower: number | null
+          value_upper: number | null
+          zone_id: string
+        }
+        Insert: {
+          country_code?: string
+          forecast_date: string
+          generated_at?: string
+          id?: string
+          methodology?: string
+          value: number
+          value_lower?: number | null
+          value_upper?: number | null
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          forecast_date?: string
+          generated_at?: string
+          id?: string
+          methodology?: string
+          value?: number
+          value_lower?: number | null
+          value_upper?: number | null
+          zone_id?: string
+        }
+        Relationships: []
       }
       rate_limit_log: {
         Row: {
@@ -12386,6 +12666,33 @@ export type Database = {
           },
         ]
       }
+      vibe_tags: {
+        Row: {
+          created_at: string
+          id: string
+          label_en: string
+          label_es: string
+          label_pt: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          label_en: string
+          label_es: string
+          label_pt: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label_en?: string
+          label_es?: string
+          label_pt?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
       view_dedup: {
         Row: {
           dedup_key: string
@@ -13490,6 +13797,50 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "tenant_scopes"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      zone_streaks: {
+        Row: {
+          computed_at: string
+          country_code: string
+          current_pulse: number
+          id: string
+          period_date: string
+          rank_in_country: number
+          scope_id: string
+          scope_type: string
+          streak_length_months: number
+        }
+        Insert: {
+          computed_at?: string
+          country_code: string
+          current_pulse: number
+          id?: string
+          period_date: string
+          rank_in_country: number
+          scope_id: string
+          scope_type: string
+          streak_length_months: number
+        }
+        Update: {
+          computed_at?: string
+          country_code?: string
+          current_pulse?: number
+          id?: string
+          period_date?: string
+          rank_in_country?: number
+          scope_id?: string
+          scope_type?: string
+          streak_length_months?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zone_streaks_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
           },
         ]
       }

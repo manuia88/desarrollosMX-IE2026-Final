@@ -1813,6 +1813,50 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
     country_codes: ['MX'],
   },
 
+  // --------------- Genoma Colonias — BLOQUE 11.M ---------------
+  // Búsqueda vectorial 64-dim (pgvector cosine) + vibe tags canónicos.
+  // Reutiliza public.colonia_dna_vectors ya creada en XL 11.A. 10 vibe tags
+  // H1 determinísticos alimentan 10 de las 64 dimensiones (features_version
+  // = v1_h1, reemplazable FASE 12 N5 por source='llm_v1' ADR-022). level 5
+  // agregado, tier 3 (convención consistente con PULSE/SCORECARD_NACIONAL).
+  {
+    score_id: 'GENOME_SIMILARITY',
+    name: 'Genoma Colonias (pgvector)',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['PULSE', 'DMX-LIV', 'DMX-INV', 'DMX-GNT'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#genome-similarity',
+    confidence_sources: ['colonia_dna_vectors', 'colonia_vibe_tags', 'dmx_indices'],
+    calculator_path: 'shared/lib/intelligence-engine/genome/embedding-builder.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Futures Curve + Pulse Pronóstico — BLOQUE 11.N ---------------
+  // Forward curve 3/6/12/24m con banda CI 95% explícita (columnas _lower/_upper
+  // en futures_curve_projections) + Pulse Pronóstico 30d daily (L93, persiste
+  // en pulse_forecasts). Heurística H1 determinística: regression lineal shrunk
+  // + ±1.96σ residuos. Reemplazable ARIMA/LSTM FASE 12 N5 sin migración.
+  {
+    score_id: 'FUTURES_CURVE',
+    name: 'Futures Curve + Pulse Pronóstico',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['PULSE', 'DMX-LIV', 'DMX-MOM'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#futures-curve',
+    confidence_sources: [
+      'dmx_indices',
+      'zone_pulse_scores',
+      'futures_curve_projections',
+      'pulse_forecasts',
+    ],
+    calculator_path: 'shared/lib/intelligence-engine/futures/curve-calculator.ts',
+    country_codes: ['MX'],
+  },
+
   // --------------- Stubs futuros H2+ (5) ---------------
   // Placeholder entries que llegarán post-H1. Marcados [STUB — FASE 29+].
   {
