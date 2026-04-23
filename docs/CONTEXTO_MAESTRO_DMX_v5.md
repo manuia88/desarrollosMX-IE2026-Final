@@ -1589,3 +1589,20 @@ Los **SEEDs en FASE 11 XL se extienden en fases dedicadas posteriores:**
 - `docs/07_GAME_CHANGERS/07.4_MOAT_STRATEGY.md` §Moats FASE 11 XL
 
 ---
+
+## Addendum 2026-04-23 — BLOQUES 11.M+11.N shipped + fix incident migrations 11.J
+
+**Shipped (main SHA aa0334b, PR #26):**
+
+- **BLOQUE 11.M — Genoma de Colonias SEED.** Búsqueda vectorial pgvector 64-dim + 10 vibe tags H1 canónicos (reemplazables LLM v1 vía ADR-022). UI `/indices/[code]/similares` + API pública `/api/v1/similar/[coloniaId]` real (stub 11.L.4.4 reemplazado). REUSO `colonia_dna_vectors` (XL 11.A) — no se creó `colonia_embeddings` nueva (zero dual source of truth). 2 tablas nuevas: `vibe_tags` + `colonia_vibe_tags`.
+- **BLOQUE 11.N — Futures Curve SEED + Pulse Pronóstico 30d (L93).** Forward curve 3/6/12/24m con banda CI 95% explícita (ALTER `futures_curve_projections` +8 columnas `_lower`/`_upper`). Nueva tabla `pulse_forecasts` con forecast daily 30d. UI `/indices/[code]/futuros` Recharts + export CSV nativo Blob. Cross-function: VitalSigns forecast prop (11.F) + Newsletter `futures_section` (11.J).
+
+**Incident resuelto 2026-04-23 — migrations 11.J ausentes en Supabase cloud.** PR #23 (FASE 11 bloques F-J, mergeado ~2 semanas antes) incluyó migration files en repo pero GitHub Actions nunca ejecutó `supabase db push`. Las tablas `newsletter_subscribers`, `newsletter_deliveries`, `zone_streaks`, `newsletter_ab_tests`, `dmx_wrapped_snapshots` quedaron declaradas sin existir físicamente en prod. Resuelto en mismo PR #26 aplicando 9 migrations pendientes vía `supabase db push --linked` manual + reconcile history (repair 6 timestamps duplicados pre-existentes) + regen types. Regla canonizada: **tras cada merge con migrations, ejecutar `supabase db push --linked` manual desde terminal — GHA no lo hace.**
+
+**Progreso FASE 11 XL:** 14/27 bloques completados (52%). Restantes: 11.O LifePath, 11.P Climate Twin, 11.Q Ghost Zones, 11.R Constellations, 11.S Living Atlas, 11.T Alert Radar WhatsApp, 11.U Stickers, 11.V DNA Migration, 11.W Historical Forensics, 11.X Living Metropolitan Networks, 11.Y Zone Certification, 11.Z E2E Verification + tag.
+
+**Catálogos actualizados:** 03.1 §18 (3 tablas nuevas + ALTER) · 03.8 append (3 scores agregados: GENOME_SIMILARITY, FUTURES_CURVE, PULSE_FORECAST_30D) · 03.13 append (8 cross-functions CF-11.M/N) · 03.15 lineage diagrams · 08.1 FI-076..FI-084 (437 total) · 08.3 productos 10.16/10.17/10.18 (40 total).
+
+**Laterales agendados (L131-L137):** Genoma multi-país → FASE 38 · Vibe tags LLM v1 → FASE 12 N5 · Genoma proyectos → FASE 15 · Derivatives-like futures → FASE 36 · ML regression LSTM/ARIMA → FASE 12 N5 · Bloomberg terminal UI premium → FASE 22 · Tabla zones canónica → FASE 13.
+
+---
