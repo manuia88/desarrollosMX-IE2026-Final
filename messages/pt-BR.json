@@ -150,6 +150,36 @@
     "dark": "Escuro",
     "system": "Sistema"
   },
+  "Genome": {
+    "similares": {
+      "meta_title": "Bairros similares · {code}",
+      "meta_description": "Descubra bairros com DNA similar ao índice {code}",
+      "title": "Bairros com genoma similar",
+      "subtitle": "Encontramos bairros com perfil parecido baseados em 64 dimensões (índices DMX + vibe tags + geo).",
+      "breadcrumb_indices": "Índices",
+      "breadcrumb_similares": "Similares",
+      "pick_scope_hint": "Selecione um bairro primeiro para ver similares.",
+      "empty": "Nenhum bairro similar acima do limite de 70%.",
+      "results_heading": "{count} bairros mais parecidos",
+      "similarity_pct": "Similaridade {pct}%",
+      "filter_liv_on": "Somente DMX-LIV ≥ 70",
+      "filter_liv_off": "Remover filtro DMX-LIV",
+      "source_note": "Baseado no DNA (bairro {sourceId}…).",
+      "methodology_note": "Heurística determinística v1. Em breve refinamento AI (ADR-022)."
+    },
+    "vibe_tags": {
+      "walkability": "Caminhável",
+      "quiet": "Tranquilo",
+      "nightlife": "Vida noturna",
+      "family": "Familiar",
+      "foodie": "Foodie",
+      "green": "Verde",
+      "bohemian": "Boêmio",
+      "corporate": "Corporativo",
+      "safety_perceived": "Seguro",
+      "gentrifying": "Gentrificando"
+    }
+  },
   "Home": {
     "title": "DesarrollosMX",
     "tagline": "Inteligência imobiliária AI-native para a América Latina"
@@ -974,7 +1004,8 @@
       "components_title": "Componentes",
       "inputs_title": "Insumos",
       "calculated_at": "Calculado: {date}",
-      "valid_until": "Válido até: {date}"
+      "valid_until": "Válido até: {date}",
+      "view_similar_link": "Ver bairros similares →"
     },
     "movers": {
       "title": "Top Movers — Ranking diário",

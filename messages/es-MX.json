@@ -150,6 +150,36 @@
     "dark": "Oscuro",
     "system": "Sistema"
   },
+  "Genome": {
+    "similares": {
+      "meta_title": "Colonias similares · {code}",
+      "meta_description": "Descubre colonias con ADN similar al índice {code}",
+      "title": "Colonias con genoma similar",
+      "subtitle": "Encontramos colonias con perfil parecido basadas en 64 dimensiones (índices DMX + vibe tags + geo).",
+      "breadcrumb_indices": "Índices",
+      "breadcrumb_similares": "Similares",
+      "pick_scope_hint": "Selecciona una colonia primero para ver similares.",
+      "empty": "No hay colonias similares por arriba del umbral de 70%.",
+      "results_heading": "{count} colonias más parecidas",
+      "similarity_pct": "Similitud {pct}%",
+      "filter_liv_on": "Solo DMX-LIV ≥ 70",
+      "filter_liv_off": "Quitar filtro DMX-LIV",
+      "source_note": "Basado en el ADN (colonia {sourceId}…).",
+      "methodology_note": "Heurística determinística v1. Próximamente refinamiento AI (ADR-022)."
+    },
+    "vibe_tags": {
+      "walkability": "Caminable",
+      "quiet": "Tranquila",
+      "nightlife": "Vida nocturna",
+      "family": "Familiar",
+      "foodie": "Foodie",
+      "green": "Verde",
+      "bohemian": "Bohemia",
+      "corporate": "Corporativa",
+      "safety_perceived": "Segura",
+      "gentrifying": "Gentrificando"
+    }
+  },
   "Home": {
     "title": "DesarrollosMX",
     "tagline": "Inteligencia inmobiliaria AI-native para LATAM"
@@ -974,7 +1004,8 @@
       "components_title": "Componentes",
       "inputs_title": "Insumos",
       "calculated_at": "Calculado: {date}",
-      "valid_until": "Vigente hasta: {date}"
+      "valid_until": "Vigente hasta: {date}",
+      "view_similar_link": "Ver colonias similares →"
     },
     "movers": {
       "title": "Top Movers — Ranking Diario",

@@ -150,6 +150,36 @@
     "dark": "Dark",
     "system": "System"
   },
+  "Genome": {
+    "similares": {
+      "meta_title": "Similar neighborhoods · {code}",
+      "meta_description": "Discover neighborhoods with DNA similar to index {code}",
+      "title": "Neighborhoods with similar genome",
+      "subtitle": "We found neighborhoods with matching profiles across 64 dimensions (DMX indices + vibe tags + geo).",
+      "breadcrumb_indices": "Indices",
+      "breadcrumb_similares": "Similar",
+      "pick_scope_hint": "Select a neighborhood first to see similar ones.",
+      "empty": "No similar neighborhoods above the 70% threshold.",
+      "results_heading": "{count} most similar neighborhoods",
+      "similarity_pct": "Similarity {pct}%",
+      "filter_liv_on": "Only DMX-LIV ≥ 70",
+      "filter_liv_off": "Remove DMX-LIV filter",
+      "source_note": "Based on DNA (neighborhood {sourceId}…).",
+      "methodology_note": "Deterministic heuristic v1. AI refinement coming (ADR-022)."
+    },
+    "vibe_tags": {
+      "walkability": "Walkable",
+      "quiet": "Quiet",
+      "nightlife": "Nightlife",
+      "family": "Family-friendly",
+      "foodie": "Foodie",
+      "green": "Green",
+      "bohemian": "Bohemian",
+      "corporate": "Corporate",
+      "safety_perceived": "Safe",
+      "gentrifying": "Gentrifying"
+    }
+  },
   "Home": {
     "title": "DesarrollosMX",
     "tagline": "AI-native real estate intelligence for LATAM"
@@ -974,7 +1004,8 @@
       "components_title": "Components",
       "inputs_title": "Inputs",
       "calculated_at": "Calculated: {date}",
-      "valid_until": "Valid until: {date}"
+      "valid_until": "Valid until: {date}",
+      "view_similar_link": "View similar neighborhoods →"
     },
     "movers": {
       "title": "Top Movers — Daily Ranking",

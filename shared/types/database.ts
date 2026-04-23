@@ -1544,6 +1544,38 @@ export type Database = {
         }
         Relationships: []
       }
+      colonia_vibe_tags: {
+        Row: {
+          colonia_id: string
+          computed_at: string
+          source: string
+          vibe_tag_id: string
+          weight: number
+        }
+        Insert: {
+          colonia_id: string
+          computed_at?: string
+          source?: string
+          vibe_tag_id: string
+          weight: number
+        }
+        Update: {
+          colonia_id?: string
+          computed_at?: string
+          source?: string
+          vibe_tag_id?: string
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "colonia_vibe_tags_vibe_tag_id_fkey"
+            columns: ["vibe_tag_id"]
+            isOneToOne: false
+            referencedRelation: "vibe_tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       colonia_wiki_entries: {
         Row: {
           colonia_id: string
@@ -12385,6 +12417,33 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      vibe_tags: {
+        Row: {
+          created_at: string
+          id: string
+          label_en: string
+          label_es: string
+          label_pt: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          id: string
+          label_en: string
+          label_es: string
+          label_pt: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          label_en?: string
+          label_es?: string
+          label_pt?: string
+          sort_order?: number
+        }
+        Relationships: []
       }
       view_dedup: {
         Row: {
