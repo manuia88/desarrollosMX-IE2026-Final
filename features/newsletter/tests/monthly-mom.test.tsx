@@ -44,6 +44,7 @@ function sampleBundle(): NewsletterMonthlyBundle {
       detail_url: 'https://app.desarrollosmx.com/es-MX/indices/migration-flow/roma-norte',
     },
     streaks_section: null,
+    futures_section: null,
     cta: {
       label: 'Ver los 15 índices',
       url: 'https://app.desarrollosmx.com/es-MX/indices',

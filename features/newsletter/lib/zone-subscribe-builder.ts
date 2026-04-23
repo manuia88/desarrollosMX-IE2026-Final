@@ -191,6 +191,7 @@ export async function buildZonePersonalizedBundle(
     pulse_section: pulseSection,
     migration_section: migrationSection,
     streaks_section: streaksSection,
+    futures_section: null,
     cta: buildCta(locale),
   };
 }

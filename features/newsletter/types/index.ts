@@ -77,6 +77,7 @@ export interface NewsletterPreferences {
     readonly alpha: boolean;
     readonly scorecard: boolean;
     readonly streaks: boolean;
+    readonly futures?: boolean;
   };
 }
 
@@ -164,6 +165,7 @@ export interface NewsletterMonthlyBundle {
   readonly pulse_section: PulseSectionBundle | null;
   readonly migration_section: MigrationSectionBundle | null;
   readonly streaks_section: StreaksSectionBundle | null;
+  readonly futures_section: FuturesSectionBundle | null;
   readonly cta: NewsletterCta;
 }
 
@@ -182,6 +184,21 @@ export interface PulseSectionBundle {
   readonly current_pulse: number;
   readonly delta_4w: number | null;
   readonly sparkline_svg: string;
+  readonly detail_url: string;
+}
+
+export interface FuturesSectionForwardPoint {
+  readonly horizon_m: 3 | 6 | 12;
+  readonly value: number | null;
+  readonly lower: number | null;
+  readonly upper: number | null;
+}
+
+export interface FuturesSectionBundle {
+  readonly scope_id: string;
+  readonly zone_label: string;
+  readonly index_code: string;
+  readonly points: readonly FuturesSectionForwardPoint[];
   readonly detail_url: string;
 }
 

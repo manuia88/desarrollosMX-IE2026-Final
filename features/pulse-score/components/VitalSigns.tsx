@@ -8,12 +8,20 @@ import { cn } from '@/shared/ui/primitives/cn';
 import { usePulseScore } from '../hooks/usePulseScore';
 import type { PulseConfidence, PulseScopeType } from '../types';
 
+export interface VitalSignsForecastPoint {
+  readonly forecast_date: string;
+  readonly value: number;
+  readonly value_lower: number | null;
+  readonly value_upper: number | null;
+}
+
 export interface VitalSignsProps {
   readonly scopeType: PulseScopeType;
   readonly scopeId: string;
   readonly country?: string;
   readonly className?: string;
   readonly defaultOpen?: boolean;
+  readonly forecast?: readonly VitalSignsForecastPoint[];
 }
 
 const PULSE_KEYFRAMES = `
@@ -89,6 +97,7 @@ export function VitalSigns({
   country,
   className,
   defaultOpen,
+  forecast,
 }: VitalSignsProps) {
   void defaultOpen;
   const t = useTranslations('Pulse');
@@ -504,6 +513,51 @@ export function VitalSigns({
           </div>
         </section>
       </div>
+      {forecast && forecast.length > 0 ? <VitalSignsForecast points={forecast} /> : null}
     </Card3D>
+  );
+}
+
+function VitalSignsForecast({ points }: { points: ReadonlyArray<VitalSignsForecastPoint> }) {
+  // Lazy-load Recharts only if the forecast is requested to keep the base
+  // VitalSigns bundle small. Uses inline SVG polyline instead to avoid the
+  // bundle cost for a simple sparkline + band.
+  const width = 320;
+  const height = 80;
+  const padding = 4;
+  const domain = { min: 0, max: 100 };
+  const xStep = (width - padding * 2) / Math.max(points.length - 1, 1);
+  const mapY = (v: number) =>
+    height - padding - ((v - domain.min) / (domain.max - domain.min)) * (height - padding * 2);
+  const linePoints = points.map((p, i) => `${padding + i * xStep},${mapY(p.value)}`).join(' ');
+  const bandUpper = points
+    .map((p, i) => `${padding + i * xStep},${mapY(p.value_upper ?? p.value)}`)
+    .join(' ');
+  const bandLower = points
+    .map((p, i) => `${padding + i * xStep},${mapY(p.value_lower ?? p.value)}`)
+    .reverse()
+    .join(' ');
+
+  return (
+    <div
+      role="img"
+      aria-label="Pulse forecast 30 días"
+      className="mx-4 mb-4 rounded-[var(--radius-md)] border border-[color:var(--color-border-subtle)] bg-[color:var(--color-surface-raised)] p-3"
+    >
+      <svg
+        viewBox={`0 0 ${width} ${height}`}
+        width="100%"
+        height={height}
+        role="presentation"
+        focusable="false"
+      >
+        <polygon
+          points={`${bandUpper} ${bandLower}`}
+          fill="oklch(0.67 0.19 285)"
+          fillOpacity={0.12}
+        />
+        <polyline points={linePoints} fill="none" stroke="oklch(0.67 0.19 285)" strokeWidth={1.8} />
+      </svg>
+    </div>
   );
 }

@@ -2283,9 +2283,17 @@ export type Database = {
           confidence: number | null
           country_code: string
           forward_12m: number | null
+          forward_12m_lower: number | null
+          forward_12m_upper: number | null
           forward_24m: number | null
+          forward_24m_lower: number | null
+          forward_24m_upper: number | null
           forward_3m: number | null
+          forward_3m_lower: number | null
+          forward_3m_upper: number | null
           forward_6m: number | null
+          forward_6m_lower: number | null
+          forward_6m_upper: number | null
           id: string
           index_code: string
           methodology: string
@@ -2298,9 +2306,17 @@ export type Database = {
           confidence?: number | null
           country_code?: string
           forward_12m?: number | null
+          forward_12m_lower?: number | null
+          forward_12m_upper?: number | null
           forward_24m?: number | null
+          forward_24m_lower?: number | null
+          forward_24m_upper?: number | null
           forward_3m?: number | null
+          forward_3m_lower?: number | null
+          forward_3m_upper?: number | null
           forward_6m?: number | null
+          forward_6m_lower?: number | null
+          forward_6m_upper?: number | null
           id?: string
           index_code: string
           methodology?: string
@@ -2313,9 +2329,17 @@ export type Database = {
           confidence?: number | null
           country_code?: string
           forward_12m?: number | null
+          forward_12m_lower?: number | null
+          forward_12m_upper?: number | null
           forward_24m?: number | null
+          forward_24m_lower?: number | null
+          forward_24m_upper?: number | null
           forward_3m?: number | null
+          forward_3m_lower?: number | null
+          forward_3m_upper?: number | null
           forward_6m?: number | null
+          forward_6m_lower?: number | null
+          forward_6m_upper?: number | null
           id?: string
           index_code?: string
           methodology?: string
@@ -6190,6 +6214,42 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      pulse_forecasts: {
+        Row: {
+          country_code: string
+          forecast_date: string
+          generated_at: string
+          id: string
+          methodology: string
+          value: number
+          value_lower: number | null
+          value_upper: number | null
+          zone_id: string
+        }
+        Insert: {
+          country_code?: string
+          forecast_date: string
+          generated_at?: string
+          id?: string
+          methodology?: string
+          value: number
+          value_lower?: number | null
+          value_upper?: number | null
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          forecast_date?: string
+          generated_at?: string
+          id?: string
+          methodology?: string
+          value?: number
+          value_lower?: number | null
+          value_upper?: number | null
+          zone_id?: string
+        }
+        Relationships: []
       }
       property_comparables: {
         Row: {

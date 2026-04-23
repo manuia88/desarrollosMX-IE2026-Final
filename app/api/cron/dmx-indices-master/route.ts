@@ -28,6 +28,10 @@ import {
   calculateAllPulseForCDMXColonias,
   calculateAllTrendGenomeForCDMXColonias,
 } from '@/shared/lib/intelligence-engine/calculators/indices';
+import {
+  batchCalculateForwardCurvesCDMX,
+  batchCalculatePulseForecastsCDMX,
+} from '@/shared/lib/intelligence-engine/futures/curve-calculator';
 import { batchBuildAllCDMXEmbeddings } from '@/shared/lib/intelligence-engine/genome/embedding-builder';
 import { batchComputeVibeTagsCDMX } from '@/shared/lib/intelligence-engine/genome/vibe-tags-heuristic';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
@@ -109,6 +113,10 @@ export async function POST(request: Request): Promise<NextResponse> {
   let genomeEmbeddingsProcessed = 0;
   let genomeEmbeddingsSkipped = 0;
   let genomeFailures = 0;
+  let forwardCurvesComputed = 0;
+  let forwardCurvesFailed = 0;
+  let pulseForecastsComputed = 0;
+  let pulseForecastsFailed = 0;
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -243,6 +251,39 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
   }
 
+  // BLOQUE 11.N — Futures Curve refresh (monthly) + Pulse Pronóstico 30d (monthly).
+  // Forward curve 3/6/12/24m con banda CI 95% sobre los 15 índices DMX × 200
+  // colonias CDMX. Pulse forecast daily 30d por zona. Falla NO tumba dispatch.
+  if (dispatched === 'monthly' || dispatched === 'quarterly' || dispatched === 'annual') {
+    try {
+      const curves = await batchCalculateForwardCurvesCDMX(supabase);
+      forwardCurvesComputed = curves.curves_computed;
+      forwardCurvesFailed = curves.failed;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:forward_curves`, message });
+      console.error('[dmx-indices-master] forward curves dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+
+    try {
+      const forecasts = await batchCalculatePulseForecastsCDMX(supabase);
+      pulseForecastsComputed = forecasts.forecasts_computed;
+      pulseForecastsFailed = forecasts.failed;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:pulse_forecasts`, message });
+      console.error('[dmx-indices-master] pulse forecasts dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+  }
+
   // BLOQUE 11.J.4 — Strava Segments streaks (monthly dispatch).
   // Corre ANTES del newsletter para que streaks_section lea el upsert fresh.
   // Falla NO tumba dispatch (mismo patrón que pulse/migration/trend).
@@ -343,6 +384,10 @@ export async function POST(request: Request): Promise<NextResponse> {
     genome_embeddings_processed: genomeEmbeddingsProcessed,
     genome_embeddings_skipped: genomeEmbeddingsSkipped,
     genome_failures: genomeFailures,
+    forward_curves_computed: forwardCurvesComputed,
+    forward_curves_failed: forwardCurvesFailed,
+    pulse_forecasts_computed: pulseForecastsComputed,
+    pulse_forecasts_failed: pulseForecastsFailed,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

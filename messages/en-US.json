@@ -150,6 +150,25 @@
     "dark": "Dark",
     "system": "System"
   },
+  "FuturesCurve": {
+    "meta_title": "Forward curve · {code}",
+    "meta_description": "Forward curve 3/6/12/24m with confidence band for {code}",
+    "title": "Forward curve · {code}",
+    "subtitle": "Forward projection 3/6/12/24 months with 95% confidence band.",
+    "breadcrumb_indices": "Indices",
+    "breadcrumb_futuros": "Futures",
+    "pick_scopes_hint": "Add neighborhoods to the URL (?scope_ids=uuid1,uuid2) to plot up to 4 curves.",
+    "empty": "No projections available for the selected neighborhoods.",
+    "chart_heading": "Forward curve ({count} neighborhoods)",
+    "chart_a11y": "Forward curve for index {code} with 95% confidence band.",
+    "horizon_label": "{months} months",
+    "ci_range": "95% CI: {lower} – {upper}",
+    "export_csv": "Export CSV",
+    "disclaimer_heuristic": "Deterministic heuristic projection v1. Not investment advice.",
+    "pulse_forecast_heading": "Pulse forecast 30 days",
+    "pulse_forecast_a11y": "Daily Pulse Score forecast with 95% confidence band.",
+    "pulse_disclaimer": "30-day projection. No guarantees."
+  },
   "Genome": {
     "similares": {
       "meta_title": "Similar neighborhoods · {code}",

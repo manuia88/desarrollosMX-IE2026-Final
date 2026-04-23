@@ -150,6 +150,25 @@
     "dark": "Oscuro",
     "system": "Sistema"
   },
+  "FuturesCurve": {
+    "meta_title": "Curva de futuros · {code}",
+    "meta_description": "Curva forward 3/6/12/24m con banda de confianza para {code}",
+    "title": "Curva de futuros · {code}",
+    "subtitle": "Proyección forward 3/6/12/24 meses con banda de confianza al 95%.",
+    "breadcrumb_indices": "Índices",
+    "breadcrumb_futuros": "Futuros",
+    "pick_scopes_hint": "Agrega barrios en la URL (?scope_ids=uuid1,uuid2) para graficar hasta 4 curvas.",
+    "empty": "No hay proyecciones disponibles para los barrios seleccionados.",
+    "chart_heading": "Curva forward ({count} barrios)",
+    "chart_a11y": "Curva forward del índice {code} con banda de confianza 95%.",
+    "horizon_label": "{months} meses",
+    "ci_range": "IC 95%: {lower} – {upper}",
+    "export_csv": "Exportar CSV",
+    "disclaimer_heuristic": "Proyección heurística determinística H1. No es recomendación de inversión.",
+    "pulse_forecast_heading": "Pronóstico Pulse 30 días",
+    "pulse_forecast_a11y": "Pronóstico diario del Pulse Score con banda de confianza 95%.",
+    "pulse_disclaimer": "Proyección a 30 días. No garantiza resultados."
+  },
   "Genome": {
     "similares": {
       "meta_title": "Barrios similares · {code}",

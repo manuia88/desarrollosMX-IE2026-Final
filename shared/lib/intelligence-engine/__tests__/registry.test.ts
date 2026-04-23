@@ -22,8 +22,8 @@ async function fileExists(relPath: string): Promise<boolean> {
 }
 
 describe('SCORE_REGISTRY shape', () => {
-  it('contiene exactamente 132 entries (131 pre-11.M + 1 Genome Similarity)', () => {
-    expect(SCORE_REGISTRY).toHaveLength(132);
+  it('contiene exactamente 133 entries (132 pre-11.N + 1 Futures Curve)', () => {
+    expect(SCORE_REGISTRY).toHaveLength(133);
   });
 
   it('cada score_id es único', () => {
@@ -98,7 +98,7 @@ describe('helpers', () => {
 });
 
 describe('counts por nivel', () => {
-  it('32 N0 + 18 N1 + 15 N2 + 12 N3 + 7 N4 + 48 N5 = 132 (+Genome Similarity 11.M)', () => {
+  it('32 N0 + 18 N1 + 15 N2 + 12 N3 + 7 N4 + 49 N5 = 133 (+Futures Curve 11.N)', () => {
     expect(getScoresByLevel(0)).toHaveLength(32);
     expect(getScoresByLevel(1)).toHaveLength(18); // 16 + 1 stub F15 + 1 stub H17
     expect(getScoresByLevel(2)).toHaveLength(15); // 14 + 1 stub D11
@@ -106,8 +106,9 @@ describe('counts por nivel', () => {
     expect(getScoresByLevel(4)).toHaveLength(7);
     // N5 = 25 (AI content + I01-I06) + 15 DMX índices (7 pre + 8 FASE 11 XL) +
     // 1 Pulse + 1 Migration Flow + 1 Trend Genome + 1 Scorecard Nacional (11.I) +
-    // 1 Newsletter (11.J) + 1 Genome Similarity (11.M) + 2 stubs I07/I08 = 48
-    expect(getScoresByLevel(5)).toHaveLength(48);
+    // 1 Newsletter (11.J) + 1 Genome Similarity (11.M) + 1 Futures Curve (11.N)
+    // + 2 stubs I07/I08 = 49
+    expect(getScoresByLevel(5)).toHaveLength(49);
   });
 });
 

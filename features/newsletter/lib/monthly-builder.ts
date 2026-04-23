@@ -24,6 +24,7 @@ import type {
   PulseSectionBundle,
   StreaksSectionBundle,
 } from '../types';
+import { buildFuturesSection } from './futures-section-builder';
 
 type Supabase = SupabaseClient<Database>;
 
@@ -35,6 +36,7 @@ const DEFAULT_SECTIONS: NewsletterPreferences['sections'] = {
   alpha: false,
   scorecard: true,
   streaks: true,
+  futures: true,
 };
 
 export interface BuildMonthlyBundleOpts {
@@ -288,6 +290,16 @@ export async function buildMonthlyBundle(
     ? buildStreaksSection(opts.periodDate, opts.locale)
     : null;
 
+  const futuresSection =
+    sections.futures !== false && focalIds[0]
+      ? await buildFuturesSection({
+          scopeId: focalIds[0],
+          countryCode: opts.countryCode,
+          locale: opts.locale,
+          supabase,
+        }).catch(() => null)
+      : null;
+
   return {
     period_date: opts.periodDate,
     country_code: opts.countryCode,
@@ -297,6 +309,7 @@ export async function buildMonthlyBundle(
     pulse_section: pulseSection,
     migration_section: migrationSection,
     streaks_section: streaksSection,
+    futures_section: futuresSection,
     cta: buildCta(opts.locale),
   };
 }
