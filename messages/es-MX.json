@@ -2329,5 +2329,35 @@
       "weight_label": "Peso",
       "unlabeled_zone": "Colonia sin nombre"
     }
+  },
+  "Atlas": {
+    "landing": {
+      "meta_title": "Atlas de Colonias — DesarrollosMX",
+      "meta_description": "Guía editorial de colonias mexicanas: historia, carácter, gastronomía, vida cultural y mercado inmobiliario.",
+      "breadcrumb_label": "Migas de pan",
+      "breadcrumb_atlas": "Atlas",
+      "title": "Atlas de Colonias",
+      "subtitle": "Explora guías editoriales de las colonias con mejor perfil de vida en CDMX.",
+      "empty": "Todavía no hay colonias publicadas. Vuelve pronto.",
+      "section_label": "Listado de colonias",
+      "count": "{count} colonias disponibles",
+      "methodology_note": "Contenido seed generado con asistencia de LLM y revisión editorial continua."
+    },
+    "detail": {
+      "meta_fallback_title": "Colonia no encontrada — DesarrollosMX",
+      "meta_title": "{label} — Atlas de Colonias",
+      "meta_description": "Guía editorial de {label}: historia, carácter, gastronomía, transporte y mercado inmobiliario.",
+      "breadcrumb_label": "Migas de pan",
+      "breadcrumb_atlas": "Atlas",
+      "subtitle": "Guía editorial de la colonia con contexto histórico, cultural y de mercado.",
+      "toc_label": "Secciones",
+      "aside_label": "Herramientas relacionadas",
+      "cross_links_heading": "Explora también",
+      "cross_similares": "Colonias similares (Genoma)",
+      "cross_clima_gemelo": "Clima gemelo",
+      "edition_meta": "Versión {version}",
+      "empty_sections": "Esta entrada todavía no tiene secciones publicadas.",
+      "methodology_note": "Entradas seed generadas con asistencia de LLM — contenido revisable."
+    }
   }
 }
