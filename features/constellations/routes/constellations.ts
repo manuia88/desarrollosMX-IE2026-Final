@@ -12,7 +12,6 @@
 //
 // Rate limit per-endpoint vía checkRateLimit (reuso 11.L).
 
-import type { SupabaseClient } from '@supabase/supabase-js';
 import { TRPCError } from '@trpc/server';
 import {
   findPathInputSchema,
@@ -39,7 +38,7 @@ import {
   type RateLimitKey,
 } from '@/shared/lib/security/rate-limit';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
-import type { Database, Json } from '@/shared/types/database';
+import type { Json } from '@/shared/types/database';
 
 const READ_WINDOW_SEC = 3600;
 const READ_MAX_CALLS = 60; // público
@@ -52,12 +51,6 @@ function resolveIpKey(headers: Headers | undefined, endpoint: string): RateLimit
   const ip = getClientIp(pseudoRequest);
   if (ip === 'unknown') return globalKey(endpoint);
   return ipKey(pseudoRequest);
-}
-
-type LooseClient = SupabaseClient<Record<string, unknown>>;
-
-function looseFrom(supabase: SupabaseClient<Database>, table: string) {
-  return (supabase as unknown as LooseClient).from(table as never);
 }
 
 export const constellationsRouter = router({
@@ -131,7 +124,8 @@ export const constellationsRouter = router({
       }
 
       const supabase = createAdminClient();
-      let query = looseFrom(supabase, 'zone_constellation_clusters')
+      let query = supabase
+        .from('zone_constellation_clusters')
         .select('zone_id, cluster_id, period_date')
         .order('period_date', { ascending: false });
       if (input.periodDate) query = query.eq('period_date', input.periodDate);
@@ -140,11 +134,7 @@ export const constellationsRouter = router({
       if (error) {
         throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
       }
-      const rows = (data ?? []) as ReadonlyArray<{
-        zone_id: string;
-        cluster_id: number;
-        period_date: string;
-      }>;
+      const rows = data ?? [];
       if (rows.length === 0) return [];
 
       let maxPeriod = '';

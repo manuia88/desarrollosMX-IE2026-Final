@@ -31,16 +31,6 @@ const MAX_TARGETS_PER_SOURCE = 50;
 const BATCH_CHUNK_SIZE = 20;
 
 // -----------------------------------------------------------
-// Helpers para tablas tipadas aún-no (zone_constellation_clusters).
-// -----------------------------------------------------------
-
-type LooseClient = SupabaseClient<Record<string, unknown>>;
-
-function looseFrom(supabase: SupabaseClient<Database>, table: string) {
-  return (supabase as unknown as LooseClient).from(table as never);
-}
-
-// -----------------------------------------------------------
 // Fetch layer: 4 data sources.
 // -----------------------------------------------------------
 
@@ -132,19 +122,20 @@ export async function fetchGenomaSimilarityNeighbors(
   // Usa match_embeddings RPC si existe (Genome 11.M standard).
   // Si falla, fallback a cosine manual sobre vector text literal (costoso).
   try {
-    const { data } = await looseFrom(supabase, 'colonia_dna_vectors')
+    const { data } = await supabase
+      .from('colonia_dna_vectors')
       .select('colonia_id, vector')
       .eq('country_code', countryCode);
-    if (!Array.isArray(data) || data.length === 0) return out;
+    if (!data || data.length === 0) return out;
 
-    const rows = data as ReadonlyArray<{ colonia_id: string; vector: string }>;
-    const sourceRow = rows.find((r) => r.colonia_id === sourceColoniaId);
-    if (!sourceRow) return out;
+    const sourceRow = data.find((r) => r.colonia_id === sourceColoniaId);
+    if (!sourceRow || typeof sourceRow.vector !== 'string') return out;
     const sourceVec = parsePgVector(sourceRow.vector);
     if (!sourceVec) return out;
 
-    for (const row of rows) {
+    for (const row of data) {
       if (row.colonia_id === sourceColoniaId) continue;
+      if (typeof row.vector !== 'string') continue;
       const vec = parsePgVector(row.vector);
       if (!vec) continue;
       const sim = cosineSimilarity(sourceVec, vec);

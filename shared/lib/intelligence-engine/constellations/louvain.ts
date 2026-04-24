@@ -12,12 +12,6 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/shared/types/database';
 
-type LooseClient = SupabaseClient<Record<string, unknown>>;
-
-function looseFrom(supabase: SupabaseClient<Database>, table: string) {
-  return (supabase as unknown as LooseClient).from(table as never);
-}
-
 export interface LouvainEdge {
   readonly source: string;
   readonly target: string;
@@ -227,10 +221,9 @@ export async function buildClusters(params: BuildClustersParams): Promise<BuildC
   }
 
   if (rows.length > 0) {
-    const { error } = await looseFrom(supabase, 'zone_constellation_clusters').upsert(
-      rows as unknown as never,
-      { onConflict: 'zone_id,period_date' },
-    );
+    const { error } = await supabase
+      .from('zone_constellation_clusters')
+      .upsert(rows, { onConflict: 'zone_id,period_date' });
     if (error) {
       throw new Error(`zone_constellation_clusters upsert failed: ${error.message}`);
     }
