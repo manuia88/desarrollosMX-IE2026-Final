@@ -1,4 +1,4 @@
-// Registry central del Intelligence Engine: 130 scores (incluye 15 índices DMX FASE 11 XL + PULSE + MIGRATION_FLOW + TREND_GENOME + SCORECARD_NACIONAL).
+// Registry central del Intelligence Engine: 136 scores (incluye 15 índices DMX FASE 11 XL + PULSE + MIGRATION_FLOW + TREND_GENOME + SCORECARD_NACIONAL + LIFEPATH + CLIMATE_TWIN + GHOST_ZONES_RANKING 11.Q).
 // Fuente autoritaria: docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md +
 // ADR-010 §D4/§D7 (cascadas formales) + ADR-027 (FASE 11 XL índices DMX).
 // Consumido por:
@@ -49,7 +49,7 @@ export interface ScoreRegistryEntry {
 }
 
 // ============================================================
-// SCORE_REGISTRY — 130 entries
+// SCORE_REGISTRY — 136 entries
 // Orden: N0 (32) → N1 (16) → N2 (14) → N3 (12) → N4 (7) → N5 (25)
 //        → DMX índices (15 — FASE 11 XL) → PULSE + MIGRATION_FLOW + TREND_GENOME
 //        + SCORECARD_NACIONAL (11.F/G/H/I) → stubs futuros H2+ (5) = 130.
@@ -1898,6 +1898,27 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
       'climate_twin_matches',
     ],
     calculator_path: 'shared/lib/intelligence-engine/climate/twin-engine.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Ghost Zones Ranking — BLOQUE 11.Q ---------------
+  // "Rotten Tomatoes del real estate" — detecta zonas sobre-hypeadas
+  // (high buzz · low DMX fundamentals) o sub-valoradas. H1 heuristic_v1
+  // determinístico: stubs hash-based FNV-1a para search_volume +
+  // press_mentions, reemplazable FASE 13 (L-NN) por ingestion real
+  // (Google Trends + press APIs). level 5 agregado, tier 3 Pro+ gated.
+  // Persiste en public.ghost_zones_ranking (granularidad mensual).
+  {
+    score_id: 'GHOST_ZONES_RANKING',
+    name: 'Ghost Zones Ranking',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: ['DMX-LIV', 'DMX-INV', 'DMX-IAB'],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#ghost-zones-ranking',
+    confidence_sources: ['ghost_zones_ranking', 'dmx_indices'],
+    calculator_path: 'shared/lib/intelligence-engine/ghost-zones/ghost-engine.ts',
     country_codes: ['MX'],
   },
 

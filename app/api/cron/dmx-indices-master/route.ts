@@ -39,6 +39,7 @@ import {
 } from '@/shared/lib/intelligence-engine/futures/curve-calculator';
 import { batchBuildAllCDMXEmbeddings } from '@/shared/lib/intelligence-engine/genome/embedding-builder';
 import { batchComputeVibeTagsCDMX } from '@/shared/lib/intelligence-engine/genome/vibe-tags-heuristic';
+import { buildAllCDMXGhostZones } from '@/shared/lib/intelligence-engine/ghost-zones/ghost-engine';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 
 export const maxDuration = 300;
@@ -127,6 +128,9 @@ export async function POST(request: Request): Promise<NextResponse> {
   let climateSignaturesBuilt = 0;
   let climateTwinsPersisted = 0;
   let climateFailed = 0;
+  let ghostZonesProcessed = 0;
+  let ghostZonesUpserted = 0;
+  let ghostZonesFailed = 0;
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -293,6 +297,24 @@ export async function POST(request: Request): Promise<NextResponse> {
       });
     }
 
+    // BLOQUE 11.Q — Ghost Zones refresh (monthly/quarterly/annual).
+    // Stub H1 hash-based (FNV-1a) idempotente sobre colonias CDMX con
+    // DMX-LIV/INV/IAB disponibles. Falla NO tumba dispatch.
+    try {
+      const ghost = await buildAllCDMXGhostZones({ supabase, periodDate });
+      ghostZonesProcessed = ghost.zones_processed;
+      ghostZonesUpserted = ghost.rows_upserted;
+      ghostZonesFailed = ghost.failures;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:ghost_zones`, message });
+      console.error('[dmx-indices-master] ghost zones dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+
     // BLOQUE 11.P — Climate Twin ingestion + signature + twin refresh.
     // Corre monthly/quarterly/annual. Falla NO tumba dispatch.
     try {
@@ -441,6 +463,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     climate_signatures_built: climateSignaturesBuilt,
     climate_twins_persisted: climateTwinsPersisted,
     climate_failed: climateFailed,
+    ghost_zones_processed: ghostZonesProcessed,
+    ghost_zones_upserted: ghostZonesUpserted,
+    ghost_zones_failed: ghostZonesFailed,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

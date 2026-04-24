@@ -29,6 +29,14 @@ export function LifePathResultsList({ locale }: LifePathResultsListProps) {
   const query = trpc.lifepath.getMyProfile.useQuery(undefined, {
     staleTime: 5 * 60 * 1000,
   });
+  // BLOQUE 11.Q.4 (U14) — Ghost×LifePath badge: flag colonias que aparecen en
+  // top 20 ghost_zones_ranking del período actual. Query separado (helper)
+  // para no inflar getMyProfile.
+  const ghostQuery = trpc.ghostZones.topOverHypedIds.useQuery(
+    { topN: 20, countryCode: 'MX' },
+    { staleTime: 5 * 60 * 1000 },
+  );
+  const ghostIds = new Set(ghostQuery.data ?? []);
 
   // Fallback helper: si la key no existe, devuelve el raw. next-intl lanza si
   // falta — envolvemos en try para defensive fallback a code raw.
@@ -107,6 +115,14 @@ export function LifePathResultsList({ locale }: LifePathResultsListProps) {
               <div>
                 <p className="text-xs text-[color:var(--color-text-secondary)]">#{idx + 1}</p>
                 <h3 className="text-lg font-semibold">{m.colonia_label ?? t('unlabeled_zone')}</h3>
+                {ghostIds.has(m.colonia_id) ? (
+                  <span
+                    className="mt-1 inline-flex items-center rounded-full bg-[color:var(--color-warning-muted,rgba(245,158,11,0.15))] px-2 py-0.5 text-[11px] text-[color:var(--color-warning)]"
+                    title={t('ghost_warning_tooltip')}
+                  >
+                    {t('ghost_warning_badge')}
+                  </span>
+                ) : null}
               </div>
               <div className="text-right">
                 <p className="text-xs text-[color:var(--color-text-secondary)]">

@@ -2136,7 +2136,9 @@
       "shared_tags_label": "Tags compartidos",
       "dmx_label": "Top índices DMX",
       "see_similar_cta": "Ver barrios similares (Genoma)",
-      "unlabeled_zone": "Barrio sin nombre"
+      "unlabeled_zone": "Barrio sin nombre",
+      "ghost_warning_badge": "⚠ Zona sobre-hypeada",
+      "ghost_warning_tooltip": "Este barrio aparece en el top Ghost Zones — el buzz en redes y prensa supera a los fundamentals DMX. Revisa precios vs comparables antes de decidir."
     },
     "vibe_tags": {
       "walkability": "Caminable",
@@ -2202,6 +2204,60 @@
       "drought_risk_score": "Riesgo sequía",
       "seasonality_index": "Estacionalidad",
       "climate_change_delta": "Cambio climático"
+    }
+  },
+  "GhostZones": {
+    "landing": {
+      "kicker": "Rotten Tomatoes del real estate",
+      "title": "Ghost Zones — detecta zonas sobre-hypeadas",
+      "subtitle": "Identifica barrios donde el hype en redes y prensa no está respaldado por los fundamentals DMX. Evita trampas y detecta oportunidades sub-valoradas.",
+      "meta_description": "Detector de zonas sobre-hypeadas vs sub-valoradas con DMX fundamentals + buzz de búsquedas y prensa.",
+      "feature_1_title": "Breakdown transparente",
+      "feature_1_body": "Ves exactamente cuánto peso tiene el hype de búsquedas, la prensa y el gap vs fundamentals DMX.",
+      "feature_2_title": "Alerta hype halving",
+      "feature_2_body": "Cuando el ruido supera en 3× a los fundamentals, marcamos la zona con advertencia.",
+      "feature_3_title": "Timeline 12 meses",
+      "feature_3_body": "Sigue cómo cambió el ghost score en el último año para detectar transiciones y burbujas tempranas.",
+      "cta_title": "Acceso Pro+",
+      "cta_body": "El ranking completo y la historia por barrio están disponibles para cuentas Pro+. Regístrate o inicia sesión para ver los datos.",
+      "cta_primary": "Ver ranking",
+      "cta_secondary": "Ver metodología"
+    },
+    "ranking": {
+      "title": "Ranking Ghost Zones",
+      "meta_description": "Ranking de barrios más sobre-hypeados y sub-valorados con breakdown transparente y timeline 12m.",
+      "intro": "Ordenados por ghost score descendente. Haz clic en cualquier barrio para ver su historia.",
+      "loading": "Cargando ranking…",
+      "load_error": "No pudimos cargar el ranking.",
+      "empty_state": "Aún no hay datos en este período. Vuelve en unos días.",
+      "unlabeled_zone": "Barrio sin nombre",
+      "ghost_score_label": "Ghost score",
+      "dmx_avg_label": "DMX promedio",
+      "hype_halving_badge": "Hype halving",
+      "show_timeline": "Ver timeline 12m",
+      "hide_timeline": "Ocultar timeline",
+      "buzz_summary": "Búsquedas: {search} · prensa: {press}",
+      "auth_required_title": "Acceso Pro+ requerido",
+      "auth_required_body": "Crea tu cuenta para acceder al ranking Ghost Zones completo con breakdown e historia.",
+      "auth_required_cta": "Crear cuenta"
+    },
+    "timeline": {
+      "chart_aria": "Evolución del ghost score últimos 12 meses",
+      "empty": "Sin datos suficientes para timeline.",
+      "empty_aria": "Timeline vacío",
+      "loading": "Cargando timeline…",
+      "error": "Error cargando timeline."
+    },
+    "breakdown": {
+      "search": "Búsquedas",
+      "press": "Prensa",
+      "dmx_gap": "Gap fundamentals"
+    },
+    "hype_levels": {
+      "sub_valued": "Sub-valorado",
+      "aligned": "Alineado",
+      "over_hyped": "Sobre-hypeado",
+      "extreme_hype": "Hype extremo"
     }
   }
 }
