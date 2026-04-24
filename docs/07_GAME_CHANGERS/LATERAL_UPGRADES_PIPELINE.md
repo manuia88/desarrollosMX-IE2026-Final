@@ -1519,4 +1519,56 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Fase target:** FASE 24 Observabilidad
 - **Dependencia data:** `@sentry/nextjs` integration
 
-**Última actualización:** 2026-04-23 (tarde) — L73-L143 + L-NEW1/L-NEW2/L-NEW3 (11.M/N/O/P + FIX) = **74 laterales FASE 11 XL** + 0 items sin destino concreto.
+### L-NEW4 — U4 Alert Ghost transition (11.Q agendado)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** notificación WhatsApp/email cuando una colonia cruza threshold de `hype_level` (aligned → over_hyped → extreme_hype) — señal temprana de burbuja inflándose o corrigiéndose.
+- **Para qué sirve:** inversionista ve alert antes de que prensa/redes saturen el hype; puede comprar antes del pico o vender en la transición extreme→over.
+- **Beneficio concreto:** decisión accionable por evento, no por dashboard sweep. Competidores MX/LATAM solo ofrecen rankings estáticos.
+- **Fase target:** FASE 11.T Alert Radar WhatsApp (integrar con `zone_alpha_alerts` de 11.H como canal compartido).
+- **Dependencia data:** `ghost_zones_ranking` histórico ≥3 períodos para detectar transiciones reales.
+
+### L-NEW5 — U9 Overrated/Underrated blog autogen (11.Q agendado)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** pipeline mensual que toma top-5 extreme_hype + top-5 sub_valued y genera artículos LLM-assisted con data real (DMX fundamentals + buzz metrics + top-3 DMX indices por colonia) + autor manual validation.
+- **Para qué sirve:** SEO content engine + categoría nueva "overrated/underrated real estate MX" — narrativa citeable que posiciona DMX como fuente de verdad vs portales de listings.
+- **Beneficio concreto:** orgánico compound recurring mensual (60 artículos/año sin burnout editorial) + backlinks medios + social shares "zona sobre-hypeada" viralidad.
+- **Fase target:** FASE 22 Marketing (content gen pipeline + SEO optimizer).
+- **Dependencia data:** Ghost Zones 3+ períodos históricos + LLM integration (Anthropic SDK) + editorial workflow.
+
+### L-NEW6 — U10 Six Degrees viral game (11.R agendado)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** gamification pública del path finder BFS — "encuentra la ruta más corta entre Coyoacán y Polanco" — leaderboard + sharing social + "Six Degrees of Gentrification" meme.
+- **Para qué sirve:** engagement hook categoría nueva + SEO zona-a-zona long-tail + brand awareness sin acquisition cost.
+- **Beneficio concreto:** cada search genera share potencial (path compartido en WhatsApp/Twitter). Viral loop tipo Spotify Wrapped/Six Degrees of Bacon.
+- **Fase target:** FASE 22 Marketing gamification (integrar con Wrapped anual + Streaks 11.J.4).
+- **Dependencia data:** `zone_constellation_clusters` + path finder stable >=2 períodos.
+
+### L-NEW7 — U11 Discover Weekly email (11.R agendado)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** newsletter semanal tipo Spotify Discover Weekly — "5 colonias nuevas que deberías conocer según tu LifePath + tus constellation neighbors". Personalizado por user profile existente + edge weights sliders guardados.
+- **Para qué sirve:** retention semanal vs mensual (11.J newsletter actual), loop recomendación → click → perfil profundizado.
+- **Beneficio concreto:** frequency engagement 4× (semanal vs mensual) sin tocar UI — email es canal pull existente. Cada email trae traffic a /constellations focalizado.
+- **Fase target:** FASE 12 + extensión 11.J Newsletter (nuevo template + cron weekly + personalización LifePath profiles).
+- **Dependencia data:** `lifepath_user_profiles` + `zone_constellations_edges` + plantilla email render server.
+
+### Upgrades 11.Q+11.R shipped (PR #30 SHA acb7d16)
+
+| # | Upgrade | Bloque | Status |
+|---|---------|--------|--------|
+| U1 | Breakdown transparente Ghost (search/press/dmx_gap bars) | 11.Q | ✅ shipped acb7d16 |
+| U2 | Hype halving warning badge | 11.Q | ✅ shipped acb7d16 |
+| U3 | Timeline 12m ghost_score Recharts | 11.Q | ✅ shipped acb7d16 |
+| U14 | Ghost×LifePath badge cross-function | 11.Q | ✅ shipped acb7d16 |
+| U5 | Edge weight sliders customizables (client-side) | 11.R | ✅ shipped acb7d16 |
+| U6 | Louvain cluster detection + coloring | 11.R | ✅ shipped acb7d16 |
+| U7 | Path finder BFS widget | 11.R | ✅ shipped acb7d16 |
+| U13 | Ghost × Constellations contagion paths | 11.R | ✅ shipped acb7d16 |
+| U15 | Constellations × Futures correlation boost ±5% | 11.R | ✅ shipped acb7d16 |
+
+9 upgrades shipped en main. 4 agendados L-NN (L-NEW4..L-NEW7). Zero items pendientes sin destino concreto.
+
+**Última actualización:** 2026-04-24 — L73-L143 + L-NEW1..L-NEW7 + 9 upgrades shipped 11.Q+R = **85 laterales FASE 11 XL** + 0 items sin destino.

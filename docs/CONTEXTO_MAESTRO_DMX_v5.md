@@ -1627,3 +1627,36 @@ Los **SEEDs en FASE 11 XL se extienden en fases dedicadas posteriores:**
 **Laterales agendados (L138-L143 + L-NEW1/2/3, 9 nuevos = 74 total):** LifePath LLM v1 → FASE 12 · LifePath inversionistas → FASE 15 · LifePath AI copilot → FASE 20 · NOAA GHCND real → FASE 12 · Climate × Insurance → FASE 25 · Daily climate S3 → H2 Data Lake · Climate pgvector scale → FASE 13 (implementado monitor) · createAdminClient typed sweep → FASE 12 · Sentry wiring → FASE 24.
 
 ---
+
+## Addendum 2026-04-24 — BLOQUES 11.Q + 11.R shipped + filosofía escalable consolidada
+
+**Shipped (main SHA acb7d16, PR #30):**
+
+- **BLOQUE 11.Q — Ghost Zones Detector Pro+ ("Rotten Tomatoes del real estate").** Detector de colonias sobre-hypeadas (high buzz · low DMX fundamentals) vs sub-valoradas. Stubs determinísticos FNV-1a hash-based (zero dep externa, zero gasto) para `search_volume` (0..10000) + `press_mentions` (0..500). `ghost_score = search × 0.40 + press × 0.30 + dmx_gap × 0.30` con `dmx_gap = max(0, 50 - dmxAvg/2) × 2` sobre DMX-LIV/INV/IAB. Hype halving warning cuando `(search + press) / max(dmx_avg, 10) >= 3`. UI `/{locale}/indices/ghost-zones` landing público + `/ranking` auth-gated Pro+ con GhostScoreBreakdown transparente (U1), hype halving badge (U2), timeline 12m Recharts expand-on-click (U3). Cross-function U14 Ghost×LifePath badge (top-20 flaggeadas en matches).
+- **BLOQUE 11.R — Zone Constellations grafo multi-edge ("LinkedIn Network de zonas").** Grafo 4 edge types (migration 0.30 + climate_twin 0.15 + genoma_similarity 0.30 + pulse_correlation 0.25) con re-balancing si falta fuente. Louvain community detection JS puro (Blondel 2008 fase 1, ~150 LOC) + modularity optimization sobre 10k edges CDMX. BFS path finder bidireccional in-memory (max 5 hops). UI `/{locale}/indices/constellations` landing + `[coloniaId]` graph focalizado SVG force-directed Verlet vanilla (sin D3 dep — constraint "no instalar libs nuevas") + EdgeWeightSliders customizables client-side (U5) + PathFinderWidget (U7) + cluster coloring (U6). Cross-functions U13 Ghost×Constellations contagion paths on-demand y U15 Constellations×Futures correlation boost ±5% on-demand (NO persiste, summary inline).
+
+**Filosofía escalable consolidada (memoria `feedback_arquitectura_escalable_desacoplada.md` canonizada):**
+
+- **GIN `jsonb_path_ops`** sobre `zone_constellations_edges.edge_types` → filtrado por tipo O(log N) vs seq scan O(N) a escala nacional 10k+ edges.
+- **BTree compuesto** `(source_colonia_id, edge_weight DESC)` → "top-N neighbors per zone" O(log N) directo, hot path UI graph viewport.
+- **Louvain JS puro** sin dep externa (modularity Blondel simplificado ~150 LOC) — alternativa a `cytoscape`/`graphology` que pesaban 50KB+ cada uno.
+- **Force-directed Verlet vanilla** (~80 LOC simulate + O(n²) repulsion cap 60 nodes documentado) — alternativa a `d3-force` 40KB+ dep que no estaba en package.json.
+- **Tabla nueva `zone_constellation_clusters`** (migration 20260424100100) vs jsonb summary inline — normalizada escalable consultable (top clusters por size, queries "colonias del mismo cluster que X").
+
+**Zero deuda técnica post-merge + zero rework wall-clock — dividendo memorias canonizadas:**
+
+El ciclo 11.Q+R reforzó el ROI del ritual operacional acumulado:
+1. **Pre-prompt schema audit (PM 5 min)** → decisiones D1-D5 cerradas antes del primer prompt CC (datasource stub H1, UX auth-gated, edge types 4, UI force-directed simple, GIN index).
+2. **Guardrails CC exhaustivos (❌ PROHIBIDO + ✅ AUDIT + ✅ REPORTAR)** → CC no interpretó permisos en ninguna zona gris (no push, no install libs, no migrations nuevas sin autorización).
+3. **Audit PM post-CC + pre-push** → verificación independiente: migrations limpias, Louvain estándar, force-directed compliant, i18n paridad, cero UUIDs en UI.
+4. **Ritual incident v24 supabase db push manual** → migrations aplicadas sincrónicamente con merge (no GHA), types regenerados, 3 casts `as unknown as LooseClient` limpiados en cleanup commit atómico.
+
+Resultado: 2 PRs (11.Q inline dentro de branch 11.Q+R) → 1 squash merge → CI 11/11 verde primer intento → zero fix commits → zero rework wall-clock.
+
+**Progreso FASE 11 XL:** 18/27 bloques completados (67%). Restantes: 11.S Living Atlas, 11.T Alert Radar WhatsApp, 11.U Stickers, 11.V DNA Migration, 11.W Historical Forensics, 11.X Living Metropolitan Networks, 11.Y Zone Certification, 11.Z E2E Verification + tag. 2531 tests passing + 2 skipped (+54 vs pre-11.Q).
+
+**Catálogos actualizados (10 docs):** FASE_11 plan (11.Q/R shipped, progress 18/27 67%) · 03.8 scores GHOST_ZONES_RANKING + ZONE_CONSTELLATIONS · 03.15 lineage (Ghost pipeline + Constellations pipeline) · LATERAL_UPGRADES L-NEW4/5/6/7 + 9 upgrades shipped · CONTEXTO_MAESTRO addendum · FEATURE_INVENTORY FI-089..FI-099 (+11 = 448 total) · PRODUCT_CATALOG 10.21 Ghost Zones Pro+ + 10.22 Zone Constellations (+2 = 44 total) · GTM_CHANNEL_MAP (canales /ghost-zones + /constellations) · 03.1 §20 (zone_constellation_clusters + 2 indexes + allowlist v24 + ghost_zones_ranking) · 03.13 (8 cross-functions CF-11.Q-1/2 + CF-11.R-1..6).
+
+**Laterales agendados (L-NEW4..L-NEW7 + 9 upgrades shipped = 11 nuevos + 11.Q/R = 85 total):** U4 Alert Ghost transition → FASE 11.T · U9 Overrated/Underrated blog autogen → FASE 22 Marketing · U10 Six Degrees viral game → FASE 22 Marketing gamification · U11 Discover Weekly email → FASE 12 + Newsletter extension.
+
+---

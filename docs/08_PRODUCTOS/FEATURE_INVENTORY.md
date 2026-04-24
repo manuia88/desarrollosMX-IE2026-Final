@@ -425,3 +425,33 @@ Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-026_GLOBAL_PROPTECH_BENCHMARKS.md`. 
 | **TOTAL** | 437 → **441** (+4) |
 
 **Autor BLOQUES 11.O+11.P append:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 tarde | **Status:** Shipped H1 (main SHA 9f6442f, PR #28)
+
+### 11.7 Ghost Zones Detector Pro+ (FI-089 a FI-093)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-089 | Ghost Zone Ranking Pro+ (auth-gated list + hype level + rank) | Ghost Zones | H1 | Full | /indices/ghost-zones/ranking · trpc.ghostZones.ranking |
+| FI-090 | Ghost Score Breakdown transparente (search/press/dmx_gap bars 0..100) | Ghost Zones | H1 | Full | features/ghost-zones/components/GhostScoreBreakdown.tsx |
+| FI-091 | Hype Halving Warning badge (ratio ≥3 → extreme_hype forced) | Ghost Zones | H1 | Full | computeGhostScorePure · hype_halving_warning field |
+| FI-092 | Ghost Timeline 12m (Recharts LineChart expand-on-click) | Ghost Zones | H1 | Full | features/ghost-zones/components/GhostTimelineChart.tsx · trpc.ghostZones.timeline12m |
+| FI-093 | Ghost × LifePath Badge cross-function (top-20 flagged en matches) | Cross-fn (Ghost × LifePath) | H1 | Full | trpc.ghostZones.topOverHypedIds · LifePathResultsList badge |
+
+### 11.8 Zone Constellations grafo multi-edge (FI-094 a FI-099)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-094 | Constellation Graph D3 force-directed (SVG Verlet vanilla sin D3 dep, cap 60 nodes) | Constellations | H1 | Full | features/constellations/components/ConstellationGraph.tsx · /indices/constellations/[coloniaId] |
+| FI-095 | Edge Weight Sliders customizables (4 tipos client-side sin re-query) | Constellations | H1 | Full | features/constellations/components/EdgeWeightSliders.tsx |
+| FI-096 | Louvain Cluster Coloring (nodes por cluster_id modularity Blondel fase 1) | Constellations | H1 | Full | shared/lib/intelligence-engine/constellations/louvain.ts · zone_constellation_clusters |
+| FI-097 | Path Finder Widget (BFS bidireccional max 5 hops + total_weight) | Constellations | H1 | Full | features/constellations/components/PathFinderWidget.tsx · trpc.constellations.findPath |
+| FI-098 | Contagion Paths Detector (Ghost × Constellations on-demand, ghost→real pairs) | Cross-fn (Ghost × Constellations) | H1 | Full | shared/lib/intelligence-engine/constellations/contagion-paths.ts · findContagionPaths |
+| FI-099 | Constellations × Futures Boost (correlation boost ±5% on-demand, NO persiste) | Cross-fn (Constellations × Futures) | H1 | Full | shared/lib/intelligence-engine/futures/curve-calculator.ts · computeCorrelationBoost |
+
+### 11.9 Totales actualizados post BLOQUES 11.Q + 11.R
+
+| Categoría | Cambio |
+|---|---|
+| **FASE 11 XL (FI-*)** | 88 → **99** (+11) |
+| **TOTAL** | 441 → **452** (+11) |
+
+**Autor BLOQUES 11.Q+11.R append:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 | **Status:** Shipped H1 (main SHA acb7d16, PR #30)
