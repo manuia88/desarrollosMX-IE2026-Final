@@ -1503,7 +1503,15 @@ export type Database = {
           year?: number
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "climate_annual_summaries_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       climate_future_projections: {
         Row: {
@@ -1542,7 +1550,15 @@ export type Database = {
           temp_celsius?: number | null
           water_availability_pct?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "climate_future_projections_colonia_id_fkey"
+            columns: ["colonia_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       climate_monthly_aggregates: {
         Row: {
@@ -1581,7 +1597,15 @@ export type Database = {
           year_month?: string
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "climate_monthly_aggregates_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       climate_twin_matches: {
         Row: {
@@ -1608,7 +1632,15 @@ export type Database = {
           twin_zone_id?: string
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "climate_twin_matches_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       climate_zone_signatures: {
         Row: {
@@ -1632,7 +1664,15 @@ export type Database = {
           years_observed?: number
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "climate_zone_signatures_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: true
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       colonia_dna_vectors: {
         Row: {
@@ -1659,7 +1699,15 @@ export type Database = {
           methodology_version?: string
           vector?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "colonia_dna_vectors_colonia_id_fkey"
+            columns: ["colonia_id"]
+            isOneToOne: true
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       colonia_vibe_tags: {
         Row: {
@@ -1684,6 +1732,13 @@ export type Database = {
           weight?: number
         }
         Relationships: [
+          {
+            foreignKeyName: "colonia_vibe_tags_colonia_id_fkey"
+            columns: ["colonia_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "colonia_vibe_tags_vibe_tag_id_fkey"
             columns: ["vibe_tag_id"]
@@ -1733,7 +1788,15 @@ export type Database = {
           sections?: Json
           version?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "colonia_wiki_entries_colonia_id_fkey"
+            columns: ["colonia_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       confidence_thresholds: {
         Row: {
@@ -2276,7 +2339,15 @@ export type Database = {
           snapshot_date?: string
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "enigh_zone_income_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       fiscal_docs: {
         Row: {
@@ -2541,6 +2612,13 @@ export type Database = {
             referencedRelation: "countries"
             referencedColumns: ["code"]
           },
+          {
+            foreignKeyName: "geo_data_points_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       geo_snapshots: {
@@ -2590,6 +2668,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "geo_snapshots_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -3053,7 +3138,15 @@ export type Database = {
           search_volume?: number
           transition_probability?: number | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "ghost_zones_ranking_colonia_id_fkey"
+            columns: ["colonia_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       historical_forensics_reports: {
         Row: {
@@ -3089,7 +3182,15 @@ export type Database = {
           period_end?: string
           period_start?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "historical_forensics_reports_colonia_id_fkey"
+            columns: ["colonia_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       ie_score_visibility_rules: {
         Row: {
@@ -3143,7 +3244,15 @@ export type Database = {
           snapshot_date?: string
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "inegi_census_zone_stats_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       influencer_heat_zones: {
         Row: {
@@ -3188,7 +3297,15 @@ export type Database = {
           specialty_cafe_count?: number
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "influencer_heat_zones_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       ingest_allowed_sources: {
         Row: {
@@ -4240,6 +4357,13 @@ export type Database = {
             referencedRelation: "currencies"
             referencedColumns: ["code"]
           },
+          {
+            foreignKeyName: "market_prices_secondary_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       market_prices_secondary_default: {
@@ -5189,6 +5313,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "market_pulse_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -6554,7 +6685,15 @@ export type Database = {
           value_upper?: number | null
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "pulse_forecasts_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       rate_limit_log: {
         Row: {
@@ -8546,6 +8685,13 @@ export type Database = {
             referencedRelation: "countries"
             referencedColumns: ["code"]
           },
+          {
+            foreignKeyName: "search_trends_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       search_trends_default: {
@@ -9117,6 +9263,13 @@ export type Database = {
             referencedRelation: "v_str_market_monthly"
             referencedColumns: ["market_id"]
           },
+          {
+            foreignKeyName: "str_events_calendar_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       str_host_migrations: {
@@ -9185,6 +9338,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "v_str_market_monthly"
             referencedColumns: ["market_id"]
+          },
+          {
+            foreignKeyName: "str_host_migrations_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -9344,6 +9504,13 @@ export type Database = {
             referencedRelation: "v_str_market_monthly"
             referencedColumns: ["market_id"]
           },
+          {
+            foreignKeyName: "str_invisible_hotels_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       str_listings: {
@@ -9443,6 +9610,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "v_str_market_monthly"
             referencedColumns: ["market_id"]
+          },
+          {
+            foreignKeyName: "str_listings_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -10195,6 +10369,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "str_markets_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -11832,6 +12013,13 @@ export type Database = {
             referencedRelation: "v_str_market_monthly"
             referencedColumns: ["market_id"]
           },
+          {
+            foreignKeyName: "str_zone_regulations_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       subscriptions: {
@@ -12068,7 +12256,15 @@ export type Database = {
           value?: number
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "template_public_geo_snapshots_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       template_public_macro_series: {
         Row: {
@@ -12206,7 +12402,15 @@ export type Database = {
           source?: string
           zone_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "template_public_market_prices_secondary_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       template_public_market_pulse: {
         Row: {
@@ -12248,7 +12452,15 @@ export type Database = {
           value?: number
           zone_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "template_public_market_pulse_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       template_public_rate_limit_log: {
         Row: {
@@ -12371,7 +12583,15 @@ export type Database = {
           run_id?: string | null
           zone_id?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "template_public_search_trends_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       template_public_str_market_monthly_aggregates: {
         Row: {
@@ -12608,7 +12828,15 @@ export type Database = {
           yoy_pct?: number | null
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "template_public_zone_price_index_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       tenant_scopes: {
         Row: {
@@ -12912,6 +13140,13 @@ export type Database = {
             referencedRelation: "countries"
             referencedColumns: ["code"]
           },
+          {
+            foreignKeyName: "zona_snapshots_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       zone_alert_subscriptions: {
@@ -12948,7 +13183,15 @@ export type Database = {
           user_id?: string
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "zone_alert_subscriptions_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       zone_alpha_alerts: {
         Row: {
@@ -12987,7 +13230,15 @@ export type Database = {
           time_to_mainstream_months?: number | null
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "zone_alpha_alerts_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       zone_certifications: {
         Row: {
@@ -13051,6 +13302,13 @@ export type Database = {
             referencedRelation: "countries"
             referencedColumns: ["code"]
           },
+          {
+            foreignKeyName: "zone_certifications_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       zone_constellation_clusters: {
@@ -13075,7 +13333,15 @@ export type Database = {
           period_date?: string
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "zone_constellation_clusters_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       zone_constellations_edges: {
         Row: {
@@ -13224,6 +13490,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "zone_price_index_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -13948,6 +14221,13 @@ export type Database = {
             referencedRelation: "tenant_scopes"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "zone_scores_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       zone_slugs: {
@@ -13988,6 +14268,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "zone_slugs_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: true
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -14074,6 +14361,13 @@ export type Database = {
             referencedRelation: "countries"
             referencedColumns: ["code"]
           },
+          {
+            foreignKeyName: "zone_tiers_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: true
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
         ]
       }
       zone_topology_metrics: {
@@ -14107,7 +14401,15 @@ export type Database = {
           snapshot_date?: string
           zone_id?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "zone_topology_metrics_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       zones: {
         Row: {
@@ -14230,6 +14532,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "zone_scores_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -16041,6 +16350,7 @@ export type Database = {
         | "mb_coordinator"
         | "comprador"
         | "vendedor_publico"
+        | "system"
     }
     CompositeTypes: {
       check_default_table: {
@@ -16195,6 +16505,7 @@ export const Constants = {
         "mb_coordinator",
         "comprador",
         "vendedor_publico",
+        "system",
       ],
     },
   },

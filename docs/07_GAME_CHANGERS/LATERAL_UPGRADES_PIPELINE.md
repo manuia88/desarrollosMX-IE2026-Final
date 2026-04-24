@@ -1641,17 +1641,14 @@ Agendados durante auditoría integral 2026-04-24 + ritual pre-prompt Opción D +
 - **Estimado:** 1 h (upgrade + redeploy + monitor).
 - **Filosofía aplicada:** `feedback_verify_before_spend.md` amplificada 2026-04-24 — "opción más grande NO aplica a gastos recurrentes cuyo ROI es deferido hasta milestone futuro". $240/año sin users reales = zero ROI inmediato.
 
-### L-NEW13 — FK enforcement zones master (post-Opción D)
+### L-NEW13 — [SHIPPED 2026-04-24] FK enforcement zones master (post-Opción D)
 
-- **Status:** 🟢 agendado con destino concreto
-- **Qué es:** `ALTER TABLE ADD FOREIGN KEY` en 18+ tablas existentes con `zone_id` / `colonia_id` / `scope_id` → `public.zones(id)`. Validar consistency post-seed complete Opción D antes de aplicar constraint.
-- **Para qué sirve:** integridad referencial real + zero `zone_id` huérfano. Durante H1 la consistency está enforced a nivel app (UUIDs v5 determinísticos), pero DB-level FK cierra el loop definitivamente.
-- **Beneficio concreto:** imposibilita corrupt writes que apunten a zones inexistentes; migra deuda diferida ADR-030 a shipped.
-- **Fase target:** FASE 08 post-Opción D merge completo.
-- **Dependencia data:** seed zones canonical MX (mínimo CDMX H1) completo + audit `zone_id` huérfanos previo para remediar antes de ADD CONSTRAINT.
-- **Estimado:** 2-3 h (migration cascade + data validation).
-- **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
-- **Filosofía aplicada:** "zero cascade breakage" — diferido de Opción D porque aplicar FK simultáneamente con ingesta masiva agrega cascade risk mid-pipeline.
+- **Status:** ✅ SHIPPED pre-07.6.B — zero deuda pre-arranque crosswalk matrix.
+- **Qué fue:** `ALTER TABLE ADD FOREIGN KEY` en 40 columnas existentes con `zone_id` / `colonia_id` → `public.zones(id)`. Descartado `tax_rules.scope_id` por polimorfismo (scope IN 'global','desarrolladora','item', nunca apunta a zones). View `v_ltr_str_connection` excluida. Particiones propagan del parent.
+- **Resultado:** Migration v34 (`20260502000000_fk_enforcement_zones_v34.sql`) aplicada vía `supabase db push --linked`. 40 FK constraints únicos creados (30 tablas regulares + 5 partitioned parents + 5 templates); 90 rows `pg_constraint` (expansión partition-level). Pre-flight 0 orphans sobre los 40 targets; post-apply 0 orphans residuales. ON DELETE CASCADE para tablas derivativas (scores/indices/pulse/dna/climate/ghost/wiki/demographics/STR) + SET NULL para `geo_data_points` (soft reference).
+- **Beneficio concreto:** integridad DB-level imposibilita corrupt writes a zones inexistentes; cierra ADR-030 deuda diferida.
+- **Ref:** PR fix/zero-deuda-pre-07.6.B, tag `fix-zero-deuda-pre-07.6.B`, migration `supabase/migrations/20260502000000_fk_enforcement_zones_v34.sql`.
+- **Filosofía aplicada:** "zero cascade breakage" — aplicado post-Opción D con seed canonical estable y zero orphans pre-flight.
 
 ### L-NEW14 — Seed expansión nacional MX (31 estados restantes)
 
@@ -2083,5 +2080,13 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 - **Resultado:** Roma Norte by canonical retorna 14 dmx indices (antes 0). 100% filas migradas. Zero regresiones tests (3064 pass + 2 skip).
 - **Fase shipped:** pre-FASE 07.6 cleanup.
 - **Ref:** PR #48, commit `bf2d9ef`, tag `fix-dmx-canonical-scope`, migration `20260501000000_dmx_indices_canonical_scope_id_backfill`.
+
+### L-NEW51 — [SHIPPED 2026-04-24] Crons zombie fix (mfa_reminders + scheduled_delete) + user_role 'system' enum
+
+- **Status:** ✅ SHIPPED pre-07.6.B — observability crons restored
+- **Qué fue:** 2 de 3 pg_cron jobs (`mfa_reminders_weekly` + `scheduled_delete_daily`) fallando silenciosamente detectado en inventario 07.6.A. Root cause: `public.mfa_reminders_tick()` y `public.run_scheduled_deletions()` insertan en `public.audit_log` con `actor_role='system'`, pero el enum `public.user_role` no contenía ese valor. Evidencia: 1 fallo `mfa_reminders_weekly` (2026-04-20 14:00 UTC) + 6 fallos `scheduled_delete_daily` (2026-04-19..2026-04-24 03:15 UTC) con error `invalid input value for enum public.user_role: "system"`.
+- **Resultado:** Migration v34 (`20260502000000_fk_enforcement_zones_v34.sql` Parte A) añadió `'system'` al enum `user_role` de forma idempotente. Smoke test post-fix: ambas funciones ejecutan sin error y escriben `audit_log` con `actor_role='system'` (MFA_REMINDER_BATCH + SCHEDULED_DELETE entries registrados 2026-04-24 22:32 UTC).
+- **Beneficio concreto:** observability crons restored — MFA reminder tracking + account deletion lifecycle reanudados sin intervención manual. Regla `feedback_cron_observability_obligatorio` honrada.
+- **Ref:** PR fix/zero-deuda-pre-07.6.B, tag `fix-zero-deuda-pre-07.6.B`, migration `supabase/migrations/20260502000000_fk_enforcement_zones_v34.sql` (Parte A).
 
 ---
