@@ -856,3 +856,44 @@
 **Total actualizado: 40 productos empaquetados (37 pre + 3 BLOQUES 11.M+11.N).**
 
 **Autor BLOQUES 11.M+11.N:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 | **Status:** Shipped H1
+
+---
+
+## Productos nuevos BLOQUES 11.O + 11.P
+
+### Producto 10.19 — "LifePath Match" (Stitch Fix de real estate)
+
+**Pitch:** no te mostramos listings — te mostramos las 20 colonias que encajan con tu vida. Contesta 15 preguntas, algoritmo matching 7 componentes (familia · budget · movilidad · amenidades · seguridad · verde · vibe) y ves tu top afinidad personalizada.
+**Audiencia:** comprador + rentero + nómada + inversor fase exploración.
+**Tiers pricing:**
+- **Free**: quiz completo + top 20 resultados (authenticated user, 1 perfil guardado)
+- **Pro** (agendado L139): quiz inversor investment-grade (ROI target · cap rate · STR/LTR) + multiples perfiles guardados
+- **AI tier** (agendado L138/L140): quiz conversacional AI copilot vs heurística rígida
+**Canal primario:** `/{locale}/lifepath` (público landing + quiz + resultados) con cross-link Genoma similarity.
+**Features:** FI-085, FI-086.
+**Diferenciador moat:** único matching user→colonia con breakdown transparente (7 componentes 0-100 explicables) + cruce con 15 DMX + Genoma vibe_tags — competidores muestran listings con filtros básicos sin matching personalizado.
+**Status:** H1 Shipped (commit c9f2f6f → PR #28).
+
+### Producto 10.20 — "Clima Gemelo Histórico" (Zillow Zestimate del clima)
+
+**Pitch:** ¿qué colonia tiene el clima más parecido a la mía en los últimos 15 años? Signature vectorial de 12 features climáticos (temperatura, lluvia, humedad, eventos extremos, sequía, cambio climático delta) + cosine similarity HNSW DB-side → top 10 gemelos climáticos + chart dual-axis 15y.
+**Audiencia:** comprador + inversionista (long-term resilience) + futuro aseguradoras (L142 Insurance vertical).
+**Tiers pricing:**
+- **Free**: visualización pública de twin matches + chart histórico 15y (200 colonias CDMX SEED)
+- **Pro** (agendado L142): cross-function Climate × Pulse alerts + Climate × Insurance risk score
+- **Enterprise** (H2): API JSON bulk para aseguradoras/bancos con climate risk embedding
+**Canal primario:** `/{locale}/indices/[code]/clima-gemelo?scope_id=<uuid>` + cross-function `checkClimateAnomalyImpactOnPulse` afecta Pulse Score mes actual.
+**Features:** FI-087, FI-088.
+**Diferenciador moat:** único portal real estate MX con histórico climático 15y + twin similarity vectorial — categoría nueva "Climate Risk Score para vivienda". Competidores no tienen data climática integrada.
+**Status:** H1 Shipped (commit 772ab25 → PR #28). Ingestion heurística SEED (source='heuristic_v1'); swap a NOAA GHCND real en L141 FASE 12.
+
+### Matriz actualizada 11.O + 11.P
+
+| # | Producto | Persona primaria | Free | Pro/Starter | Enterprise |
+|---|---|---|---|---|---|
+| 10.19 | LifePath Match | Comprador + Rentero + Nómada | Quiz + top 20 (1 perfil) | Quiz inversor + multi-perfil (L139) | AI copilot conversacional (L140) |
+| 10.20 | Clima Gemelo Histórico | Comprador + Inversor | 15y chart + 10 twins CDMX | Climate × Pulse alerts (L142) | API bulk aseguradoras (H2) |
+
+**Total actualizado: 42 productos empaquetados (40 pre + 2 BLOQUES 11.O+11.P).**
+
+**Autor BLOQUES 11.O+11.P:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 tarde | **Status:** Shipped H1 (main SHA 9f6442f, PR #28)

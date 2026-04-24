@@ -402,3 +402,26 @@ Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-026_GLOBAL_PROPTECH_BENCHMARKS.md`. 
 | **TOTAL** | 428 → **437** (+9) |
 
 **Autor BLOQUES 11.M+11.N append:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 | **Status:** Shipped H1 (migrations aplicadas remote + 2 commits atómicos locales)
+
+### 11.4 LifePath SEED (FI-085 a FI-086)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-085 | LifePath quiz multi-step 15 preguntas v1 + matching engine heuristic_v1 | LifePath | H1 | Full | shared/lib/intelligence-engine/lifepath/matching-engine.ts · /lifepath/quiz |
+| FI-086 | UI /lifepath landing + resultados top-20 con breakdown 7 componentes + cross-link Genoma | LifePath | H1 | Full | /lifepath · /lifepath/resultados |
+
+### 11.5 Climate Twin Histórico SEED (FI-087 a FI-088)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-087 | Climate signature vector(12) pgvector + HNSW + RPC find_climate_twins DB-side O(log N) | Climate | H1 | Full | shared/lib/intelligence-engine/climate/twin-engine.ts · find_climate_twins RPC |
+| FI-088 | UI /indices/[code]/clima-gemelo Recharts dual-axis 15y + twin list + cross-function Pulse | Climate | H1 | Full | /indices/[indexCode]/clima-gemelo · checkClimateAnomalyImpactOnPulse |
+
+### 11.6 Totales actualizados post BLOQUES 11.O + 11.P
+
+| Categoría | Cambio |
+|---|---|
+| **FASE 11 XL (FI-*)** | 84 → **88** (+4) |
+| **TOTAL** | 437 → **441** (+4) |
+
+**Autor BLOQUES 11.O+11.P append:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 tarde | **Status:** Shipped H1 (main SHA 9f6442f, PR #28)

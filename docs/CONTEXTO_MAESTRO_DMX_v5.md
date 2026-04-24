@@ -1606,3 +1606,24 @@ Los **SEEDs en FASE 11 XL se extienden en fases dedicadas posteriores:**
 **Laterales agendados (L131-L137):** Genoma multi-país → FASE 38 · Vibe tags LLM v1 → FASE 12 N5 · Genoma proyectos → FASE 15 · Derivatives-like futures → FASE 36 · ML regression LSTM/ARIMA → FASE 12 N5 · Bloomberg terminal UI premium → FASE 22 · Tabla zones canónica → FASE 13.
 
 ---
+
+## Addendum 2026-04-23 (tarde) — BLOQUES 11.O + 11.P shipped + fix pgvector escalable
+
+**Shipped (main SHA 9f6442f, PR #28):**
+
+- **BLOQUE 11.O — LifePath SEED ("Stitch Fix de real estate").** Cuestionario 15 preguntas multi-step (3 pasos × 5) → matching heuristic_v1 con 7 componentes ponderados (familia 15 · budget 20 · movilidad 15 · amenidades 15 · seguridad 10 · verde 10 · vibe 15). REUSO 100% `lifepath_user_profiles` existente (XL 11.A) con ALTER mínimo (+answers_version, +methodology, rename top_3_matches → matches). Reuso vibe_tags Genoma (11.M) + DMX-LIV/FAM/GRN/IPV/IAB/ICO + F01 Safety. UI `/{locale}/lifepath` (landing + quiz + resultados) con cross-link Genoma. tRPC authenticated (saveProfile/getMyProfile/computeMatchesOnly).
+- **BLOQUE 11.P — Climate Twin histórico 15y ("Zillow del clima histórico").** Ingestion heurística SEED (source='heuristic_v1', patrones CDMX determinísticos). Signature vector(12) canónico normalizado + **pgvector + HNSW cosine + RPC find_climate_twins DB-side O(log N)** (filosofía escalable). Rename `climate_twin_projections` → `climate_future_projections` (separar Clima Futuro H2 de Clima Gemelo Histórico H1). 3 tablas nuevas: `climate_monthly_aggregates` + `climate_annual_summaries` (refactor pgvector) + `climate_zone_signatures` (aggregate per-zone) + `climate_twin_matches`. UI `/indices/[code]/clima-gemelo` con Recharts dual-axis 15y. Cross-function Climate × Pulse (eventos extremos -5%). Master cron fan-out (sin cron nuevo).
+
+**Fix commit adicional (mismo PR #28):** 5 blockers UI resueltos + refactor escalable pgvector + deudas menores. i18n paridad 5 locales (LifePath.vibe_tags 10 · LifePath.dmx_codes 15 · ClimateTwin.features 12 · ClimateTwin.page + LifePath.results unlabeled_zone). coerceMatches con Zod. DEFAULT_HISTORY_MONTHS constante. console.error prefix [BLOQUE 11.P] (tombstones pre-Sentry L-NEW3). Link LifePath → Genoma corregido a ruta real `/indices/DMX-LIV/similares?scope_id=`.
+
+**Schema audit PRE-0 aprendizaje canonizado:** antes de cualquier migration nueva, validar si las tablas/RPCs ya existen en schema XL maestro. Lesson: `lifepath_user_profiles` + `climate_twin_projections` estaban YA declaradas (XL 11.A) pero sin features — founder decidió Opción B refinada (reuso + refactor + rename) vs crear paralelo.
+
+**Migrations 11.O+P aplicadas remote (v23 tip):** 6 migrations totales aplicadas vía `supabase db push --linked` manual (3 en commit inicial + 3 en fix). 2 correcciones iterativas pgvector: (1) `search_path` quoted-string 'public, extensions' se interpretaba como identifier único → fix a `search_path = ''` + OPERATOR qualified; (2) pgvector extension vive en schema `public` (no `extensions`) → `OPERATOR(public.<=>)` en RPC find_climate_twins.
+
+**Progreso FASE 11 XL:** 16/27 bloques completados (59%). Restantes: 11.Q Ghost Zones, 11.R Constellations, 11.S Living Atlas, 11.T Alert Radar WhatsApp, 11.U Stickers, 11.V DNA Migration, 11.W Historical Forensics, 11.X Living Metropolitan Networks, 11.Y Zone Certification, 11.Z E2E Verification + tag. 2477 tests passing + 2 skipped (baseline intacta, +22 vs pre-11.M+N).
+
+**Catálogos actualizados (10 docs):** FASE_11 plan (11.O/P shipped) · 03.8 scores LIFEPATH_MATCH + CLIMATE_TWIN · 03.15 lineage · LATERAL_UPGRADES L138-L143 + L-NEW1/2/3 · CONTEXTO_MAESTRO addendum · FEATURE_INVENTORY (+4 features) · PRODUCT_CATALOG (+2 productos, total 42) · GTM_CHANNEL_MAP (canales /lifepath + /clima-gemelo) · 03.1 §19 (5 tablas nuevas + ALTER + rename) · 03.13 (6 cross-functions CF-11.O-1..4 + CF-11.P-1..2).
+
+**Laterales agendados (L138-L143 + L-NEW1/2/3, 9 nuevos = 74 total):** LifePath LLM v1 → FASE 12 · LifePath inversionistas → FASE 15 · LifePath AI copilot → FASE 20 · NOAA GHCND real → FASE 12 · Climate × Insurance → FASE 25 · Daily climate S3 → H2 Data Lake · Climate pgvector scale → FASE 13 (implementado monitor) · createAdminClient typed sweep → FASE 12 · Sentry wiring → FASE 24.
+
+---
