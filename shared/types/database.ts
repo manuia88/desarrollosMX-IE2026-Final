@@ -3025,6 +3025,7 @@ export type Database = {
           rank: number | null
           score_total: number | null
           search_volume: number
+          transition_probability: number | null
         }
         Insert: {
           calculated_at?: string
@@ -3037,6 +3038,7 @@ export type Database = {
           rank?: number | null
           score_total?: number | null
           search_volume?: number
+          transition_probability?: number | null
         }
         Update: {
           calculated_at?: string
@@ -3049,6 +3051,7 @@ export type Database = {
           rank?: number | null
           score_total?: number | null
           search_volume?: number
+          transition_probability?: number | null
         }
         Relationships: []
       }
@@ -14072,6 +14075,39 @@ export type Database = {
             referencedColumns: ["code"]
           },
         ]
+      }
+      zone_topology_metrics: {
+        Row: {
+          approximate_pagerank: number
+          closeness_centrality: number
+          components: Json
+          computed_at: string
+          degree_centrality: number
+          id: string
+          snapshot_date: string
+          zone_id: string
+        }
+        Insert: {
+          approximate_pagerank?: number
+          closeness_centrality?: number
+          components?: Json
+          computed_at?: string
+          degree_centrality?: number
+          id?: string
+          snapshot_date: string
+          zone_id: string
+        }
+        Update: {
+          approximate_pagerank?: number
+          closeness_centrality?: number
+          components?: Json
+          computed_at?: string
+          degree_centrality?: number
+          id?: string
+          snapshot_date?: string
+          zone_id?: string
+        }
+        Relationships: []
       }
       zones: {
         Row: {
