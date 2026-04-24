@@ -1,13 +1,10 @@
-// Worker IE — consume score_recalculation_queue cada 1 min (vercel.json crons).
+// Worker IE — consume score_recalculation_queue (vercel.json crons).
 // FASE 08 / BLOQUE 8.A / MÓDULO 8.A.4
 //
-// Auth (U1 v2 upgrade):
-//   Vercel Cron inyecta automáticamente el header `x-vercel-cron-secret`
-//   cuando invoca esta ruta desde su plataforma. Verificamos su presencia
-//   como señal de que el request viene de Vercel. En dev local usamos el
-//   header `x-dev-cron-secret` comparado contra process.env.DEV_CRON_SECRET.
-//   NO usamos CRON_SECRET custom — Vercel firma nativamente.
-//   Ref: https://vercel.com/docs/cron-jobs/manage-cron-jobs#securing-cron-jobs
+// Auth: Authorization: Bearer ${CRON_SECRET} — patrón actual Vercel crons.
+// Vercel inyecta este header automáticamente cuando CRON_SECRET está
+// configurado como env var. Dev local: mismo header con valor local.
+// Ref: https://vercel.com/docs/cron-jobs/manage-cron-jobs#securing-cron-jobs
 
 import { NextResponse } from 'next/server';
 import { runScore } from '@/shared/lib/intelligence-engine/calculators/run-score';
@@ -29,16 +26,10 @@ interface ClaimedJob {
 }
 
 function authorize(request: Request): boolean {
-  // Production: Vercel Cron inyecta este header nativamente. Presencia = trust.
-  const vercelCron = request.headers.get('x-vercel-cron-secret');
-  if (vercelCron) return true;
-
-  // Dev local: fallback comparando header custom contra env.
-  const devHeader = request.headers.get('x-dev-cron-secret');
-  const devSecret = process.env.DEV_CRON_SECRET;
-  if (devHeader && devSecret && devHeader === devSecret) return true;
-
-  return false;
+  const expected = process.env.CRON_SECRET;
+  if (!expected) return false;
+  const received = request.headers.get('authorization');
+  return received === `Bearer ${expected}`;
 }
 
 export async function GET(request: Request) {

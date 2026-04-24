@@ -1,9 +1,9 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // ============================================================
 // Tests del worker /api/cron/score-worker.
-// Valida: (a) auth nativa Vercel Cron (U1), (b) SKIP LOCKED concurrency,
-// (c) backoff exponencial 1/5/15min por attempts.
+// Valida: (a) auth Authorization: Bearer CRON_SECRET, (b) SKIP LOCKED
+// concurrency, (c) backoff exponencial 1/5/15min por attempts.
 // ============================================================
 
 vi.mock('@/shared/lib/supabase/admin', () => ({
@@ -51,45 +51,48 @@ async function callGET(headers: Record<string, string> = {}) {
   return mod.GET(req);
 }
 
-describe('score-worker — auth (U1 Vercel Cron nativo)', () => {
+beforeEach(() => {
+  process.env.CRON_SECRET = 'test-cron-secret';
+});
+afterEach(() => {
+  delete process.env.CRON_SECRET;
+});
+
+describe('score-worker — auth (Authorization: Bearer CRON_SECRET)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('request sin header x-vercel-cron-secret ni dev → 401', async () => {
+  it('request sin header Authorization → 401', async () => {
     const admin = makeAdmin([]);
     (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValue(admin.client);
     const resp = await callGET({});
     expect(resp.status).toBe(401);
     const body = await resp.json();
     expect(body.error).toBe('unauthorized');
-    // No debe llamar a claim si 401
     expect(admin.rpcCalls).toHaveLength(0);
   });
 
-  it('request con header x-vercel-cron-secret (Vercel nativo) → 200', async () => {
+  it('request con Authorization: Bearer <CRON_SECRET> → 200', async () => {
     const admin = makeAdmin([]);
     (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValue(admin.client);
-    const resp = await callGET({ 'x-vercel-cron-secret': 'vercel-signed-value' });
+    const resp = await callGET({ authorization: 'Bearer test-cron-secret' });
     expect(resp.status).toBe(200);
   });
 
-  it('request con x-dev-cron-secret matching DEV_CRON_SECRET → 200', async () => {
-    process.env.DEV_CRON_SECRET = 'test-dev-secret';
+  it('request con Bearer incorrecto → 401', async () => {
     const admin = makeAdmin([]);
     (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValue(admin.client);
-    const resp = await callGET({ 'x-dev-cron-secret': 'test-dev-secret' });
-    expect(resp.status).toBe(200);
-    delete process.env.DEV_CRON_SECRET;
-  });
-
-  it('request con x-dev-cron-secret incorrecto → 401', async () => {
-    process.env.DEV_CRON_SECRET = 'test-dev-secret';
-    const admin = makeAdmin([]);
-    (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValue(admin.client);
-    const resp = await callGET({ 'x-dev-cron-secret': 'wrong-value' });
+    const resp = await callGET({ authorization: 'Bearer wrong-value' });
     expect(resp.status).toBe(401);
-    delete process.env.DEV_CRON_SECRET;
+  });
+
+  it('request sin CRON_SECRET env set → 401 aunque header llegue', async () => {
+    delete process.env.CRON_SECRET;
+    const admin = makeAdmin([]);
+    (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValue(admin.client);
+    const resp = await callGET({ authorization: 'Bearer anything' });
+    expect(resp.status).toBe(401);
   });
 });
 
@@ -101,7 +104,7 @@ describe('score-worker — SKIP LOCKED concurrency (delegado al RPC)', () => {
   it('el worker siempre invoca claim_pending_score_jobs (que usa FOR UPDATE SKIP LOCKED)', async () => {
     const admin = makeAdmin([]);
     (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValue(admin.client);
-    await callGET({ 'x-vercel-cron-secret': 'signed' });
+    await callGET({ authorization: 'Bearer test-cron-secret' });
     expect(admin.rpcCalls.some((c) => c.fn === 'claim_pending_score_jobs')).toBe(true);
     expect(admin.rpcCalls[0]?.args.p_limit).toBe(50);
   });
@@ -161,13 +164,13 @@ describe('score-worker — SKIP LOCKED concurrency (delegado al RPC)', () => {
     const adminA = makeAdmin(jobsA);
     const adminB = makeAdmin(jobsB);
     (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValueOnce(adminA.client);
-    const respA = await callGET({ 'x-vercel-cron-secret': 'signed' });
+    const respA = await callGET({ authorization: 'Bearer test-cron-secret' });
     expect(respA.status).toBe(200);
     const bodyA = await respA.json();
     expect(bodyA.processed).toBe(1);
 
     (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValueOnce(adminB.client);
-    const respB = await callGET({ 'x-vercel-cron-secret': 'signed' });
+    const respB = await callGET({ authorization: 'Bearer test-cron-secret' });
     const bodyB = await respB.json();
     expect(bodyB.processed).toBe(1);
 
@@ -205,7 +208,7 @@ describe('score-worker — backoff (delegado al RPC finalize_score_job)', () => 
     });
     const admin = makeAdmin(jobs);
     (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValue(admin.client);
-    const resp = await callGET({ 'x-vercel-cron-secret': 'signed' });
+    const resp = await callGET({ authorization: 'Bearer test-cron-secret' });
     expect(resp.status).toBe(200);
     const body = await resp.json();
     expect(body.errors).toBe(1);
@@ -236,7 +239,7 @@ describe('score-worker — backoff (delegado al RPC finalize_score_job)', () => 
     });
     const admin = makeAdmin(jobs);
     (createAdminClient as unknown as ReturnType<typeof vi.fn>).mockReturnValue(admin.client);
-    const resp = await callGET({ 'x-vercel-cron-secret': 'signed' });
+    const resp = await callGET({ authorization: 'Bearer test-cron-secret' });
     const body = await resp.json();
     expect(body.skipped).toBe(1);
     expect(body.errors).toBe(0);

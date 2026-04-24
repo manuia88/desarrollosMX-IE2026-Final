@@ -61,8 +61,10 @@ export async function runIngest<T>(
     startedAt,
   };
 
-  // Insert ingest_runs row con id = correlation_id.
-  await supabase.from('ingest_runs').insert({
+  // Insert ingest_runs row con id = correlation_id. Fail-fast si el INSERT
+  // falla (RLS mis-config, network error, schema drift). Sin este row no hay
+  // telemetría del run y los .update() posteriores serían no-ops silentes.
+  const { error: insertError } = await supabase.from('ingest_runs').insert({
     id: runId,
     source: job.source,
     country_code: job.countryCode,
@@ -72,6 +74,13 @@ export async function runIngest<T>(
     started_at: startedAt.toISOString(),
     meta: { estimated_cost_usd: job.estimatedCostUsd ?? 0 },
   });
+  if (insertError) {
+    sentry.captureException(new Error(`ingest_runs_insert_failed:${job.source}`), {
+      tags: { source: job.source, run_id: runId },
+      extra: { supabase_error: insertError.message, supabase_code: insertError.code },
+    });
+    throw new Error(`ingest_runs_insert_failed: ${insertError.message}`);
+  }
 
   const span = startIngestSpan(`ingest.${job.source}`, {
     'ingest.run_id': runId,
