@@ -334,3 +334,37 @@
 - `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` — scores LIFEPATH_MATCH + CLIMATE_TWIN
 
 **Autor BLOQUES 11.O+11.P:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 tarde | **Status:** Shipped H1 (main SHA 9f6442f, PR #28)
+
+### Canal Ghost Zones Pro+ (Producto 10.21)
+
+- **Landing público (teaser):** `/{locale}/indices/ghost-zones` — marketing sin data real con kicker "Rotten Tomatoes del real estate" + 3 cards (breakdown transparente · alerta hype halving · timeline 12m) + dual CTA (Ver ranking [Pro+] · Ver metodología).
+- **Ranking auth-gated Pro+:** `/{locale}/indices/ghost-zones/ranking` — robots noindex, gating schema-native vía `authenticatedProcedure` tRPC. Fallback UNAUTHORIZED → CTA signup (`/auth/signup`). Lista top 50 colonias del período current con hype level label coloreado + hype_halving_warning badge + breakdown (search/press/dmx_gap) + expand-on-click → GhostTimelineChart 12m Recharts.
+- **UI elements key:** `GhostZoneRankingList` (container con query staleTime 5min) · `GhostScoreBreakdownView` (bars inline por fila, tokens Dopamine) · `GhostTimelineChart` (Recharts LineChart height 140px) · hype_level CSS tokens `--color-success/warning/danger` según level.
+- **Amplificación content:** blog posts autogen "10 zonas sobre-hypeadas este mes" + "5 oportunidades sub-valoradas" (U9 agendado FASE 22 Marketing L-NEW5). Meme social "⚠ Zona sobre-hypeada" en LifePath badge.
+- **Cross-function U14 LifePath:** `trpc.ghostZones.topOverHypedIds` (top-20 del período actual) → `LifePathResultsList` flags matches con badge "⚠ Zona sobre-hypeada" + tooltip i18n. Integración sin inflar `getMyProfile` query (helper separado).
+- **Master cron fan-out:** `dmx-indices-master` rama `ghost_zones` monthly/quarterly/annual — NO cron nuevo. Batch CDMX 200 colonias · idempotente `(colonia_id, period_date)`.
+- **Alert WhatsApp futuro (L-NEW4):** transiciones `hype_level` (aligned → over_hyped → extreme_hype) notificadas a watchers via 11.T Alert Radar WhatsApp integration.
+- **Categoría nueva:** "red flag detector" vs "ranking tradicional" — methodology transparente (pesos 0.40/0.30/0.30 inmutables + timeline evolutivo). Competidores MX no tienen paradigma equivalente.
+- **API bulk futuro (L-NN FASE 13):** JSON endpoint Enterprise para fondos + consultoras con ghost_score histórico por colonia.
+
+### Canal Zone Constellations (Producto 10.22)
+
+- **Landing público:** `/{locale}/indices/constellations` — marketing + explicación 4 edge types (migración · clima gemelo · ADN genoma · pulse) en grid 4 cards + sección contagion paths top 5 (componente cliente `ContagionPathsList` via `trpc.constellations.getContagionPaths`) + CTA methodology.
+- **Graph focalizado público:** `/{locale}/indices/constellations/[coloniaId]` — grafo SVG force-directed Verlet vanilla (cap 60 nodes por O(n²) repulsion documented) + nodes coloreados por cluster Louvain + edge thickness por weight combinado + sliders de customización client-side (sin re-query) + path finder widget. Breadcrumb con zone-label-resolver (fallback "Colonia sin nombre", nunca UUID).
+- **UI elements key:** `ConstellationGraph` (Verlet simulation 80 iters memo-cached) · `EdgeWeightSliders` (4 sliders % con validación suma 1.0) · `PathFinderWidget` (UUID→UUID mutation + resultado lista hops + total_weight) · `ContagionPathsList` (top 5 ghost→real pairs con warning color).
+- **Rate limit per-tier (11.L reuso):** getEdges 60/hr · getClusters 60/hr · findPath 20/hr (más pesado) · getContagionPaths 30/hr. Rate limits IP-based (fallback globalKey si headers sin IP).
+- **Amplificación content:** "Six Degrees of Gentrification" gamification viral (U10 agendado FASE 22 Marketing L-NEW6) — leaderboard de paths cortos entre colonias icónicas.
+- **Cross-function U13 Ghost contagion:** ghost_zones + constellations convergen on-demand → landing muestra cómo el hype se propaga de ghost zones (top ghost_score ≥60) a real zones vecinas (ghost_score <30). Revelador sin acquisition cost.
+- **Cross-function U15 Futures boost:** `computeCorrelationBoost` consumido desde `/indices/[code]/futuros` → indicator "Neighbors boost: +2.3%" sobre forward_Xm proyectado. NO persiste (summary inline, zero migration cost).
+- **Master cron fan-out:** `dmx-indices-master` rama `constellations` monthly/quarterly/annual — edges + Louvain clusters juntos. Batch 200 colonias × top 50 targets = 10k edges max.
+- **Discover Weekly email futuro (L-NEW7):** newsletter semanal "5 colonias nuevas según tu LifePath + tus constellation neighbors" (agendado FASE 12 + 11.J extension).
+- **Categoría nueva:** primer grafo relacional multi-capa de colonias en portal real estate/fintech LATAM — combina 4 dimensiones imposibles de replicar sin pipeline DMX completo. "LinkedIn Network de zonas" como narrative handle.
+
+### Cross-references append 11.Q+11.R
+
+- `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` — L-NEW4/5/6/7 agendados + 9 upgrades shipped
+- `docs/03_CATALOGOS/03.1_CATALOGO_BD_TABLAS.md` §20 — zone_constellation_clusters + 2 indexes GIN/BTree + allowlist v24
+- `docs/03_CATALOGOS/03.13_E2E_CONNECTIONS_MAP.md` — 8 cross-functions CF-11.Q-1/2 + CF-11.R-1..6
+- `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` — scores GHOST_ZONES_RANKING + ZONE_CONSTELLATIONS
+
+**Autor BLOQUES 11.Q+11.R:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 | **Status:** Shipped H1 (main SHA acb7d16, PR #30)

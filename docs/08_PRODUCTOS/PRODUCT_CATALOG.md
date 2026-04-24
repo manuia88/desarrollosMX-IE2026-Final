@@ -897,3 +897,40 @@
 **Total actualizado: 42 productos empaquetados (40 pre + 2 BLOQUES 11.O+11.P).**
 
 **Autor BLOQUES 11.O+11.P:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 tarde | **Status:** Shipped H1 (main SHA 9f6442f, PR #28)
+
+### Producto 10.21 — "Ghost Zones Pro+" (Rotten Tomatoes del real estate)
+
+**Pitch:** ¿qué colonias están sobre-hypeadas vs sub-valoradas por el mercado? Detector transparente que combina buzz de búsquedas + menciones de prensa contra los fundamentals DMX reales (LIV/INV/IAB). Hype halving warning cuando el ruido supera ×3 los fundamentals — señal temprana de burbuja.
+**Audiencia:** Inversionista + MasterBroker (tier Pro+ gated). Compradores free ven el landing con teaser pero no ranking completo (categoría nueva "red flag detector" vs rankings tradicionales).
+**Tiers pricing:**
+- **Free (teaser)**: landing pública `/indices/ghost-zones` con explicación metodología + 3 features cards + CTA Pro+
+- **Pro+ (auth-gated)**: ranking completo top 50 + breakdown transparente (search/press/dmx_gap bars) + timeline 12m por colonia + hype halving warning badges + Ghost×LifePath cross-function
+- **Enterprise** (agendado L-NN FASE 13): alertas WhatsApp transición hype_level (U4 → 11.T Alert Radar) + API JSON bulk + autogen blog posts (U9 → FASE 22 Marketing)
+**Canal primario:** `/{locale}/indices/ghost-zones` landing (teaser) + `/indices/ghost-zones/ranking` auth-gated Pro+. Cross-function U14 exhibe badge en `/lifepath/resultados` para compradores que ya hicieron quiz.
+**Features:** FI-089, FI-090, FI-091, FI-092, FI-093.
+**Diferenciador moat:** primer portal MX con detector transparente de hype vs fundamentals — no es "recomendación de compra" es "red flag detector" con methodology explicable (pesos 0.40/0.30/0.30 inmutables) + timeline evolutivo. Competidores ofrecen rankings estáticos sin transparencia.
+**Status:** H1 Shipped (main SHA acb7d16 → PR #30). Stubs `heuristic_v1` FNV-1a hash-based (zero dep externa); swap a `real_v1` en L137 FASE 13 (NewsAPI + Apify press + Google Trends) sin schema change.
+
+### Producto 10.22 — "Zone Constellations" (LinkedIn Network de zonas)
+
+**Pitch:** ¿cómo se conectan las colonias entre sí más allá de la geografía? Grafo multi-capa con 4 edge types (migración real + clima gemelo + ADN genoma + proximidad pulse), Louvain clusters automáticos, path finder BFS "Six Degrees of Gentrification", sliders para customizar pesos. Contagion paths revelan cómo el hype se propaga ghost→real.
+**Audiencia:** Comprador (entender tejido urbano) + Inversionista (diversificación por cluster) + MasterBroker (mapas relacionales para pitches). Público general con rate limit per-tier (11.L).
+**Tiers pricing:**
+- **Free (público)**: landing `/indices/constellations` con 4 edge types explicación + contagion paths top 5 + methodology
+- **Pro (agendado L-NN)**: graph focalizado con sliders customizables + path finder personal + email Discover Weekly (U11 → FASE 12 Newsletter extension)
+- **Enterprise** (H2): API bulk consultoras + gamification viral Six Degrees (U10 → FASE 22 Marketing) + export cluster maps PDF
+**Canal primario:** `/{locale}/indices/constellations` landing público + `/indices/constellations/[coloniaId]` graph focalizado SVG force-directed interactivo. Cross-function U15 boost ±5% en `/indices/[code]/futuros` curve projections on-demand.
+**Features:** FI-094, FI-095, FI-096, FI-097, FI-098, FI-099.
+**Diferenciador moat:** primer grafo relacional multi-capa de colonias MX en cualquier portal real estate o fintech LATAM — combina 4 dimensiones (migración real/clima/genoma/pulse) imposibles de reproducir sin pipeline completo DMX. Louvain clusters + path finder habilitan narrativas virales "tu colonia está a 3 hops de Polanco vía migración+genoma". Competidores (Habi/La Haus/Inmuebles24) son portales de listings sin capa relacional.
+**Status:** H1 Shipped (main SHA acb7d16 → PR #30). Engine `heuristic_v1` Louvain fase 1 + Verlet vanilla sin D3 dep; upgrades L-NN agendados (fase 2 multi-level + Barnes-Hut si scope nacional + pulse temporal real).
+
+### Matriz actualizada 11.Q + 11.R
+
+| # | Producto | Persona primaria | Free | Pro/Starter | Enterprise |
+|---|---|---|---|---|---|
+| 10.21 | Ghost Zones Pro+ | Inversionista + MasterBroker | Landing teaser | Ranking + breakdown + timeline + LifePath badge | Alerts WhatsApp + API + autogen blog |
+| 10.22 | Zone Constellations | Comprador + Inversionista + MasterBroker | Landing + contagion top 5 | Graph sliders + Discover Weekly email | API bulk + Six Degrees viral game |
+
+**Total actualizado: 44 productos empaquetados (42 pre + 2 BLOQUES 11.Q+11.R).**
+
+**Autor BLOQUES 11.Q+11.R:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 | **Status:** Shipped H1 (main SHA acb7d16, PR #30)
