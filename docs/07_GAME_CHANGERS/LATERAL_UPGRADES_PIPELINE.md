@@ -1841,3 +1841,97 @@ Deudas detectadas post-07.5.B + upgrades laterales/cross-functions 07.5.C agenda
 - **Ref:** SESIÓN 07.5.B DEUDA D-B-2.
 
 ---
+
+## Sesión 07.5.D laterales + cross-functions (L-NEW30 - L-NEW37)
+
+Upgrades laterales cross-industry + cross-function DMX modules agendados durante scope sesión 07.5.D (climate + constellations + ghost zones). 8 entradas con destino concreto y formato founder-friendly.
+
+### L-NEW30 — Zone Transit Map interactive (Google Maps transit layer style)
+
+- **Status:** 🟢 lateral upgrade agendado
+- **Qué es:** UI interactive graph render usando zone_constellations_edges + clusters como layer sobre Mapbox GL. Nodes = zones, edges = weighted lines per tipo. Click node → panel detail zone. Tipo metro map Tokyo / NYC subway.
+- **Para qué sirve:** visualización flujos inter-colonia intuitiva (económicos, demográficos, culturales, adyacencia). User entiende "cómo se conectan las zonas" sin leer data table.
+- **Beneficio concreto:** diferenciador UX vs portales tradicionales que solo muestran listings aislados. Moat visual + SEO (mapa indexable).
+- **Fase target:** FASE 12 Atlas UX.
+- **Dependencia:** zone_constellations_edges populated (ship 07.5.D) + Mapbox GL ya integrado.
+- **Estimado:** 6-8 h (component Mapbox layer + interactions + panel + tests).
+- **Ref:** SESIÓN 07.5.D U-D-lateral-1.
+
+### L-NEW31 — Ghost Zones Revival Engine (Detroit Renewal / Medellín Escalators style)
+
+- **Status:** 🟢 lateral upgrade agendado — moonshot moat
+- **Qué es:** engine que identifica ghost_zones con potential revival (score decreciente pero features latentes positivas) + propone "action playbook" per zona (infra, retail, cultural, fiscal incentives). Playbook basado en case studies reales: Detroit Midtown, Medellín Comuna 13 escalators, Barcelona Raval, Buenos Aires Palermo.
+- **Para qué sirve:** proposition única LATAM proptech — DMX no solo reporta ghost zones, propone revivals con evidencia histórica.
+- **Beneficio concreto:** unlock enterprise sales municipal/government (SEDATU MX, DNP Colombia) + narrativa PR "we turn ghost zones into opportunity". Moat categoría nueva.
+- **Fase target:** FASE 11 R-type game-changer (research heavy).
+- **Dependencia:** ghost_zones_ranking + pulse forecasts (07.5.C+D) + case studies research doc.
+- **Estimado:** 10-15 h (case studies research + engine + UI module).
+- **Ref:** SESIÓN 07.5.D U-D-lateral-2.
+
+### L-NEW32 — Climate Twin Cities global cross-country
+
+- **Status:** 🟢 lateral upgrade agendado — H2 expansion enabler
+- **Qué es:** extender climate_twin_matches para cross-country: Roma Norte CDMX ↔ Palermo BA ↔ Chapinero Bogotá basado en climate signatures multidimensionales (temp, humidity, precipitation, seasonality pattern). Requiere climate_zone_signatures populated para colonias CO/AR/BR (H2).
+- **Para qué sirve:** expansion story + cross-cultural comparisons para user internacional. "Looking for Palermo vibes but in Mexico? → Roma Norte is your climate twin."
+- **Beneficio concreto:** hook marketing expansion H2 + differentiation vs competencia local cada país. Unique story LATAM.
+- **Fase target:** FASE 38+ International Expansion H2 (post climate signatures CO/AR/BR).
+- **Dependencia:** L-NEW15/16 (seed CO/AR/BR canonical zones) + climate ingest real NOAA/CLIMAT cross-country.
+- **Estimado:** 4-6 h (cross-country matching algorithm + UI badge + storytelling).
+- **Ref:** SESIÓN 07.5.D U-D-lateral-3.
+
+### L-NEW33 — Constellation Sentiment Alerts (Bloomberg real estate style)
+
+- **Status:** 🟢 lateral upgrade agendado
+- **Qué es:** system que monitorea zone_constellations_edges diariamente. Cuando edge pattern cambia >threshold (ej. Roma Norte ↔ Condesa demographic_flow drops 15% semana vs semana), alerta push + email subscribers. Tipo Bloomberg Terminal market events.
+- **Para qué sirve:** engagement premium users (brokers, inversionistas) quieren señales tempranas market shifts. Retention driver.
+- **Beneficio concreto:** pricing tier justification ($49/mes alerts premium) + daily active usage.
+- **Fase target:** FASE 22 marketing automation + FASE 11 alerts engine.
+- **Dependencia:** zone_constellations_edges ship 07.5.D + alert infra (WhatsApp L-NEW pendiente/email Resend FASE 22).
+- **Estimado:** 5-7 h (monitor job + threshold tuning + alerts delivery).
+- **Ref:** SESIÓN 07.5.D U-D-lateral-4.
+
+### L-NEW34 — Ghost Zone Index per alcaldía (policy-maker level)
+
+- **Status:** 🟢 lateral upgrade agendado — B2G enabler
+- **Qué es:** agregación ghost_zones_ranking a nivel alcaldía (weighted avg colonias child). Publicación quarterly report "State of Alcaldías CDMX 2026" — Cuauhtémoc 15% ghost, Álvaro Obregón 8%, etc. Tipo SEDATU urban indicators.
+- **Para qué sirve:** unlock government/policy sales — alcaldes, SEDATU, INEGI quieren data agregada nivel macro para planning. B2G revenue stream.
+- **Beneficio concreto:** contract ticket $50K-200K per alcaldía/año vs $50/mes consumer. Tier enterprise.
+- **Fase target:** FASE 22+ enterprise.
+- **Dependencia:** ghost_zones_ranking colonia-level ship 07.5.D + reporting template.
+- **Estimado:** 3-4 h (aggregation SQL + report template + quarterly cron).
+- **Ref:** SESIÓN 07.5.D U-D-lateral-5.
+
+### L-NEW35 — Climate signatures feed IE N1 weather calculator
+
+- **Status:** 🟢 cross-function upgrade agendado
+- **Qué es:** IE N1 causal-engine incorporar climate_anomalies como weight adjustment. Ej: colonia en ola de calor (temp >2σ promedio) reduce demand_score proxy 5-10%; ola de frío afecta mobility. Reutiliza cascade_triggers infra existente.
+- **Para qué sirve:** IE scoring weather-aware. User ve "Roma Norte score bajó 3pp esta semana por ola de calor" — transparencia causal.
+- **Beneficio concreto:** IE más confiable + storytelling explicable + feature distintivo vs portales que ignoran clima.
+- **Fase target:** FASE 11 IE N1 enhancement (post L-NEW23 registry gap fix).
+- **Dependencia:** climate signatures ship 07.5.D + L-NEW23 registry gap resolved.
+- **Estimado:** 3-4 h (calculator logic + cascade wire + tests).
+- **Ref:** SESIÓN 07.5.D U-D-cross-1.
+
+### L-NEW36 — Constellations edges power IE N3 zone comparables
+
+- **Status:** 🟢 cross-function upgrade agendado
+- **Qué es:** IE N3 property comparables algorithm usar zone_constellations_edges para expand comparable pool. Property en zone A comparable a props en zones conectadas vía cultural_affinity edge weight ≥0.6 (no solo spatial_adjacency). Enriquece pool comparables especialmente en zones recién seeded con pocas transacciones.
+- **Para qué sirve:** comparables más robustos + coverage zones low-data. Mejora confiabilidad AVM estimates.
+- **Beneficio concreto:** AVM accuracy +5-10% en zones con <50 transacciones histórico. Core IE quality.
+- **Fase target:** FASE 11 IE N3 enhancement.
+- **Dependencia:** zone_constellations_edges ship 07.5.D + N3 calculator fixed L-NEW23.
+- **Estimado:** 4-5 h (algorithm update + A/B tests accuracy + rollout).
+- **Ref:** SESIÓN 07.5.D U-D-cross-2.
+
+### L-NEW37 — Ghost zones + climate feed Living Atlas narrative
+
+- **Status:** 🟢 cross-function upgrade agendado
+- **Qué es:** Living Atlas markdown stack (ADR-028) consume ghost_zones_ranking + climate_anomalies + transition_probability para narrative stories per zona. Auto-update daily. Formato: "Roma Norte: climate twin Palermo BA · ghost risk 3% · +2°C vs 2010 · constelación con Condesa/Narvarte · transition prob 4% próximos 12m".
+- **Para qué sirve:** Living Atlas auto-updated (no manual editing) + SEO content 210 páginas per colonia.
+- **Beneficio concreto:** organic traffic driver + 0 content ops cost. SEO moat.
+- **Fase target:** FASE 11 Living Atlas dynamic content.
+- **Dependencia:** ghost_zones_ranking + climate_signatures ship 07.5.D + Living Atlas UI ready (fase-11.S).
+- **Estimado:** 3-4 h (template + markdown generator + scheduled updates).
+- **Ref:** SESIÓN 07.5.D U-D-cross-3.
+
+---
