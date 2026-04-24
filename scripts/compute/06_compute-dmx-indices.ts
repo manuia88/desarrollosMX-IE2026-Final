@@ -221,7 +221,7 @@ async function main(): Promise<number> {
         try {
           const br = await calculateAllIndicesForScope({
             scopeType: SCOPE_TYPE_ZONE,
-            scopeId: zone.id,
+            scopeId: zone.scope_id,
             periodDate,
             countryCode: args.country,
             supabase,
