@@ -966,8 +966,9 @@ SUB-SESIONES (7 total):
     zones ranking compute
   07.5.E — Seed LLM atlas wiki (script 12 Haiku 4.5 cost-cap $3)
     + orchestrator universal
-  07.5.F — E2E validation + tag `fase-07.5-ingesta-canonical-
-    complete` + sumarize consistency
+  07.5.F — E2E validation + audit FK zones + tag
+    `fase-07.5-ingesta-canonical-complete` + docs sync
+    comprehensive (shipped 2026-04-24)
 
 DEPENDENCIAS: 07b shipped + BATCHES 1-5 shipped + tag
   `pre-optionD-complete@3efcc1d`
@@ -976,6 +977,42 @@ FK ENFORCEMENT diferido: `L-NEW13 FASE 08 post-Opción D` agrega
   `ALTER TABLE ADD FOREIGN KEY` en 18+ tablas con zone_id →
   zones(id) + 6 con colonia_id (scope_type='colonia' invariante).
   Evita cascade breakage mid-ejecución Opción D.
+
+═══════════════════════════════════════════════════════════════
+15.5. FASE 07.6 PRODUCT AUDIT COMPREHENSIVE (ADR-032)
+═══════════════════════════════════════════════════════════════
+
+Fase PM-heavy insertada entre 07.5 y 11.T-Z post-auditoría
+2026-04-24. Razón: founder introdujo inputs estructurales
+(arquitectura 6 capas × 27 productos × 160+ features prototype
++ design system refreshed) que requieren audit comprehensivo
++ mapping fase-by-fase antes de ejecutar los 7 bloques
+restantes de FASE 11.T-Z. Sin audit = riesgo rework +50h.
+
+SUB-SESIONES (6 total, ~40h PM wall-clock + 3h founder):
+
+  07.6.A — Auditoría exhaustiva estado actual (~6h)
+    → docs/08_PRODUCT_AUDIT/00_INVENTARIO_ACTUAL.md
+  07.6.B — Crosswalk Matrix 160+ features × 15 columnas (~14h)
+    → 01_CROSSWALK_MATRIX.md
+  07.6.C — Design Migration Plan + ADR-031 formal (~5h)
+    → 02_DESIGN_MIGRATION.md + ADR-031
+  07.6.D — RICE Priorities + Critical Path Graph (~4h)
+    → 03_RICE_PRIORITIES.md
+  07.6.E — Roadmap Integration fases 07.5.F→29 (~8h)
+    → 04_ROADMAP_INTEGRATION.md
+  07.6.F — Founder Decision Gates + canonización (~3h)
+    → 05_FOUNDER_DECISION_GATES.md + tag fase-07.6-complete
+
+DEPENDENCIAS: tag `fase-07.5-ingesta-canonical-complete` shipped
+  (FASE 07.5.F) como trigger inicio.
+
+SCOPE OUT: NO cambios de código funcionales, NO LLM calls
+  (zero cost), NO shipping features nuevas, NO refactor UI
+  components pre-ADR-031 merge.
+
+REFS: ADR-032, docs/02_PLAN_MAESTRO/FASE_07.6_PRODUCT_AUDIT.md,
+  L-NEW47 pipeline entry.
 
 ═══════════════════════════════════════════════════════════════
 16. MEMORIAS CANONIZADAS ACTIVAS (snapshot 2026-04-24 muy tarde)
