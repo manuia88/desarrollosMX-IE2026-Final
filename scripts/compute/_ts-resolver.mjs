@@ -27,7 +27,9 @@ export async function resolve(specifier, context, nextResolve) {
     const rel = specifier.slice(2);
     const absNoExt = path.resolve(PROJECT_ROOT, rel);
     const hit = HAS_EXT.test(rel)
-      ? (existsSync(absNoExt) ? absNoExt : null)
+      ? existsSync(absNoExt)
+        ? absNoExt
+        : null
       : tryResolveTsFile(absNoExt);
     if (hit) {
       return nextResolve(pathToFileURL(hit).href, context);
