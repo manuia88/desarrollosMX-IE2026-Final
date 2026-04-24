@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { INDEX_CODES } from '@/features/indices-publicos/lib/index-registry-helpers';
+import { INDEX_CODES } from '@/shared/types/scores';
 import { getNarvarteMock, getPreviewMockData } from '../lib/mock-data-provider';
 import { PERSONA_TYPES } from '../types';
 

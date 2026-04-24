@@ -11,13 +11,10 @@ import { exportToCSV } from '@/features/indices-publicos/lib/csv-export';
 import {
   COUNTRY_CODES,
   type CountryCode,
-  INDEX_CODES,
-  type IndexCode,
-  SCOPE_TYPES,
-  type ScopeType,
   type ScoreBand,
 } from '@/features/indices-publicos/lib/index-registry-helpers';
 import { trpc } from '@/shared/lib/trpc/client';
+import { INDEX_CODES, type IndexCode, SCOPE_TYPES, type ScopeType } from '@/shared/types/scores';
 
 interface RankingRow {
   readonly scope_id: string;

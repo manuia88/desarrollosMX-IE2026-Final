@@ -5,22 +5,7 @@ vi.mock('@/shared/lib/trpc/client', () => ({
     causal: {
       getExplanation: {
         useQuery: vi.fn(() => ({
-          data: {
-            explanation_md: 'Roma Norte muestra **alta** demanda [[score:x]] y transporte fuerte.',
-            citations: [
-              {
-                ref_id: 'score:x',
-                type: 'score',
-                label: 'IPV',
-                value: 88.2,
-                source: 'DMX Indices',
-              },
-            ],
-            model: 'claude-sonnet-4-5',
-            prompt_version: 'v1',
-            generated_at: '2026-04-21T00:00:00Z',
-            cached: false,
-          },
+          data: null,
           isLoading: false,
           error: null,
         })),
@@ -29,45 +14,22 @@ vi.mock('@/shared/lib/trpc/client', () => ({
   },
 }));
 
-vi.mock('next-intl', () => ({
-  useTranslations: () => (k: string, vars?: Record<string, unknown>) =>
-    vars ? `${k}:${JSON.stringify(vars)}` : k,
-  useLocale: () => 'es-MX',
-}));
-
-vi.mock('framer-motion', () => ({
-  useReducedMotion: () => false,
-}));
-
-describe('CausalExplanation — module export smoke', () => {
-  it('exporta CausalExplanation como función', async () => {
-    const mod = await import('../components/CausalExplanation');
-    expect(typeof mod.CausalExplanation).toBe('function');
-    expect(mod.CausalExplanation.name).toBe('CausalExplanation');
-  });
-
-  it('acepta props mínimas del contrato (type check)', async () => {
-    const mod = await import('../components/CausalExplanation');
-    const props = {
-      scoreId: 'IPV:colonia:roma-norte:2026-04-01',
-      indexCode: 'IPV' as const,
-      scopeType: 'colonia' as const,
-      scopeId: 'roma-norte',
-    };
-    expect(props.indexCode).toBe('IPV');
-    expect(typeof mod.CausalExplanation).toBe('function');
-  });
-});
-
 describe('useCausalExplanation — hook export smoke', () => {
   it('exporta hook como función', async () => {
-    const mod = await import('../hooks/useCausalExplanation');
+    const mod = await import('../useCausalExplanation');
     expect(typeof mod.useCausalExplanation).toBe('function');
+  });
+
+  it('expone CAUSAL_SUPPORTED_LOCALES + isCausalLocaleSupported', async () => {
+    const mod = await import('../useCausalExplanation');
+    expect(mod.CAUSAL_SUPPORTED_LOCALES).toEqual(['es-MX', 'es-CO', 'es-AR']);
+    expect(mod.isCausalLocaleSupported('es-MX')).toBe(true);
+    expect(mod.isCausalLocaleSupported('en-US')).toBe(false);
   });
 
   it('llama trpc.causal.getExplanation con el input esperado', async () => {
     const clientMod = await import('@/shared/lib/trpc/client');
-    const { useCausalExplanation } = await import('../hooks/useCausalExplanation');
+    const { useCausalExplanation } = await import('../useCausalExplanation');
     useCausalExplanation({
       scoreId: 's1',
       indexCode: 'IPV',
@@ -92,7 +54,7 @@ describe('useCausalExplanation — hook export smoke', () => {
 
   it('omite periodDate cuando no se provee', async () => {
     const clientMod = await import('@/shared/lib/trpc/client');
-    const { useCausalExplanation } = await import('../hooks/useCausalExplanation');
+    const { useCausalExplanation } = await import('../useCausalExplanation');
     const spy = clientMod.trpc.causal.getExplanation.useQuery as ReturnType<typeof vi.fn>;
     spy.mockClear();
     useCausalExplanation({
@@ -109,7 +71,7 @@ describe('useCausalExplanation — hook export smoke', () => {
 
   it('respeta enabled=false', async () => {
     const clientMod = await import('@/shared/lib/trpc/client');
-    const { useCausalExplanation } = await import('../hooks/useCausalExplanation');
+    const { useCausalExplanation } = await import('../useCausalExplanation');
     const spy = clientMod.trpc.causal.getExplanation.useQuery as ReturnType<typeof vi.fn>;
     spy.mockClear();
     useCausalExplanation({

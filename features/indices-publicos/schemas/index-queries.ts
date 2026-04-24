@@ -1,10 +1,6 @@
 import { z } from 'zod';
-import {
-  COUNTRY_CODES,
-  INDEX_CODES,
-  PERIOD_TYPES,
-  SCOPE_TYPES,
-} from '../lib/index-registry-helpers';
+import { INDEX_CODES, SCOPE_TYPES } from '@/shared/types/scores';
+import { COUNTRY_CODES, PERIOD_TYPES } from '../lib/index-registry-helpers';
 
 export const indexCodeSchema = z.enum(INDEX_CODES);
 export const scopeTypeSchema = z.enum(SCOPE_TYPES);

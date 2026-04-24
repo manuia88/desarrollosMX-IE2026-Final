@@ -12,10 +12,11 @@ import {
   type ClimateTwinResult,
   DEFAULT_HISTORY_MONTHS,
 } from '@/features/climate-twin/types';
-import { INDEX_CODES, isIndexCode } from '@/features/indices-publicos/lib/index-registry-helpers';
+import { isIndexCode } from '@/features/indices-publicos/lib/index-registry-helpers';
 import { defaultLocale, locales } from '@/shared/lib/i18n/config';
 import { resolveZoneLabel } from '@/shared/lib/market/zone-label-resolver';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
+import { INDEX_CODES } from '@/shared/types/scores';
 
 interface PageProps {
   params: Promise<{ locale: string; indexCode: string }>;

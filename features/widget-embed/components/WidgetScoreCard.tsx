@@ -4,12 +4,9 @@ import { useTranslations } from 'next-intl';
 import { useMemo } from 'react';
 import { IndexBadge } from '@/features/indices-publicos/components/IndexBadge';
 import { useIndexDetail } from '@/features/indices-publicos/hooks/useIndexRanking';
-import {
-  INDEX_CODES,
-  type IndexCode,
-  resolveScoreBand,
-} from '@/features/indices-publicos/lib/index-registry-helpers';
+import { resolveScoreBand } from '@/features/indices-publicos/lib/index-registry-helpers';
 import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
+import { INDEX_CODES, type IndexCode } from '@/shared/types/scores';
 import { cn } from '@/shared/ui/primitives/cn';
 import type { WidgetCustomization, WidgetScopeType } from '../types';
 import { WidgetShell } from './WidgetShell';

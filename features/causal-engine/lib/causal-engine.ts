@@ -1,8 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import type { Database } from '@/shared/types/database';
+import type { CausalExplanation, Citation, IndexCode, ScopeType } from '@/shared/types/scores';
 import { llmOutputSchema } from '../schemas/causal';
-import type { CausalExplanation, CausalInput, Citation, IndexCode, ScopeType } from '../types';
+import type { CausalInput } from '../types';
 import { parseCitations, validateCitations } from './citations-validator';
 import { estimateCost } from './cost-calculator';
 import {

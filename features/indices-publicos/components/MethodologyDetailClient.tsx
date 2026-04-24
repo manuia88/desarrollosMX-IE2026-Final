@@ -1,9 +1,10 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
-import { CausalExplanation } from '@/features/causal-engine/components/CausalExplanation';
+import { useLocale, useTranslations } from 'next-intl';
+import { isCausalLocaleSupported, useCausalExplanation } from '@/shared/hooks/useCausalExplanation';
 import { trpc } from '@/shared/lib/trpc/client';
-import type { IndexCode } from '../lib/index-registry-helpers';
+import type { IndexCode } from '@/shared/types/scores';
+import { CausalExplanation } from '@/shared/ui/molecules/CausalExplanation';
 import {
   isActiveMethodology,
   type MethodologyRow,
@@ -23,12 +24,23 @@ const STALE_TIME_1H = 60 * 60 * 1000;
 export function MethodologyDetailClient({ indexCode, today }: MethodologyDetailClientProps) {
   const t = useTranslations('IndicesPublic');
   const tc = useTranslations('Causal');
+  const activeLocale = useLocale();
   const query = trpc.indicesPublic.getMethodology.useQuery(
     { indexCode },
     { staleTime: STALE_TIME_1H },
   );
 
   const resolvedToday = today ?? new Date().toISOString().slice(0, 10);
+
+  const causalLocaleSupported = isCausalLocaleSupported(activeLocale);
+  const causalQuery = useCausalExplanation({
+    scoreId: `${indexCode}:colonia:roma-norte:${resolvedToday}`,
+    indexCode,
+    scopeType: 'colonia',
+    scopeId: 'roma-norte',
+    periodDate: resolvedToday,
+    enabled: causalLocaleSupported,
+  });
 
   if (query.isLoading) {
     return (
@@ -278,11 +290,11 @@ export function MethodologyDetailClient({ indexCode, today }: MethodologyDetailC
           {tc('example_calc_header')}
         </h2>
         <CausalExplanation
-          scoreId={`${indexCode}:colonia:roma-norte:${resolvedToday}`}
-          indexCode={indexCode}
-          scopeType="colonia"
+          data={causalQuery.data}
+          isLoading={causalQuery.isLoading}
+          error={causalQuery.error}
+          localeSupported={causalLocaleSupported}
           scopeId="roma-norte"
-          periodDate={resolvedToday}
           scopeLabel="Roma Norte"
         />
       </section>

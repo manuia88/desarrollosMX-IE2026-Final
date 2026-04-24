@@ -1,8 +1,8 @@
 import { renderToBuffer } from '@react-pdf/renderer';
 import type { ReactElement } from 'react';
 import { createElement } from 'react';
+import type { IndexCode } from '@/shared/types/scores';
 import { MethodologyPDF, type MethodologyPDFStrings } from '../components/MethodologyPDF';
-import type { IndexCode } from './index-registry-helpers';
 import {
   type MethodologyRow,
   parseWeightsJsonb,

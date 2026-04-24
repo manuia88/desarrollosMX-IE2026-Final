@@ -1,27 +1,8 @@
-// Shared contracts for the Causal Engine feature.
-// Used by backend (engine, tRPC), UI (components, hooks), and observability.
+// Tipos internos del Causal Engine. Los contratos cruzados con otros features
+// (Citation, CausalExplanation, IndexCode, ScopeType, CitationType, etc.)
+// viven en `@/shared/types/scores` desde BATCH 3 pre-Opción D (REFACTOR-001).
 
-import type { INDEX_CODES } from '@/features/indices-publicos/lib/index-registry-helpers';
-
-export type ScopeType = 'colonia' | 'alcaldia' | 'city' | 'estado';
-
-export type IndexCode = (typeof INDEX_CODES)[number];
-
-// Citation types shown in the CitationsList UI with distinct visual tones.
-export const CITATION_TYPES = ['score', 'macro', 'geo', 'news'] as const;
-export type CitationType = (typeof CITATION_TYPES)[number];
-
-// Canonical reference shape. `ref_id` is the stable string id used inside the
-// markdown (e.g. `[[score:IPV-roma-norte-2026-03]]`). `href` optional deep link.
-export interface Citation {
-  readonly ref_id: string;
-  readonly type: CitationType;
-  readonly label: string;
-  readonly value: string | number | null;
-  readonly source: string;
-  readonly href?: string | null;
-  readonly as_of?: string | null;
-}
+import type { Citation, IndexCode, ScopeType } from '@/shared/types/scores';
 
 // Input data pulled from Postgres for the LLM prompt.
 // Passed as structured JSON so the model cannot hallucinate numbers.
@@ -45,18 +26,6 @@ export interface CausalInput {
     readonly weight: number | null;
   }>;
   readonly allowed_citations: ReadonlyArray<Citation>;
-}
-
-// Output persisted in causal_explanations + returned from tRPC.
-export interface CausalExplanation {
-  readonly explanation_md: string;
-  readonly citations: ReadonlyArray<Citation>;
-  readonly model: string;
-  readonly prompt_version: string;
-  readonly generated_at: string;
-  readonly cached: boolean;
-  readonly tokens_used?: number;
-  readonly cost_usd?: number;
 }
 
 // Raw JSON the LLM must produce. Validated by Zod before persisting.

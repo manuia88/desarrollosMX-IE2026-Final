@@ -1,12 +1,6 @@
 import { z } from 'zod';
-import {
-  COUNTRY_CODES,
-  type CountryCode,
-  INDEX_CODES,
-  type IndexCode,
-  SCOPE_TYPES,
-  type ScopeType,
-} from './index-registry-helpers';
+import { INDEX_CODES, type IndexCode, SCOPE_TYPES, type ScopeType } from '@/shared/types/scores';
+import { COUNTRY_CODES, type CountryCode } from './index-registry-helpers';
 
 // SSOT para payload hash-sharing del backtest. El schema valida tanto antes
 // de encodificar como después de decodificar — los extras son rechazados via

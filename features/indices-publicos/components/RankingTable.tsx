@@ -3,12 +3,12 @@
 import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
+import type { ScopeType } from '@/shared/types/scores';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
 import {
   bandToLabelPillTone,
   resolveScoreBand,
-  type ScopeType,
   type ScoreBand,
   type TrendDirection,
   trendToArrow,

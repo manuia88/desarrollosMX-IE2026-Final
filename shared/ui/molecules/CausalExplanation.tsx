@@ -1,26 +1,24 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { type ReactNode, useId, useMemo, useState } from 'react';
+import type { CausalExplanation as CausalExplanationData, Citation } from '@/shared/types/scores';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
+import { CitationsList } from '@/shared/ui/molecules/CitationsList';
 import { cn } from '@/shared/ui/primitives/cn';
-import { useCausalExplanation } from '../hooks/useCausalExplanation';
-import type { Citation, IndexCode, ScopeType } from '../types';
-import { CitationsList } from './CitationsList';
 
 export interface CausalExplanationProps {
-  readonly scoreId: string;
-  readonly indexCode: IndexCode;
-  readonly scopeType: ScopeType;
-  readonly scopeId: string;
-  readonly periodDate?: string;
+  readonly data: CausalExplanationData | null | undefined;
+  readonly isLoading: boolean;
+  readonly error?: unknown;
+  readonly localeSupported?: boolean;
   readonly scopeLabel?: string;
+  readonly scopeId?: string;
   readonly className?: string;
   readonly defaultOpen?: boolean;
 }
 
-const SUPPORTED_LOCALES: ReadonlyArray<string> = ['es-MX', 'es-CO', 'es-AR'];
 const REF_REGEX = /\[\[([a-z]+):([^\]]+)\]\]/g;
 const BOLD_REGEX = /\*\*([^*]+)\*\*/g;
 
@@ -114,39 +112,26 @@ function formatGeneratedAt(iso: string): string {
 }
 
 export function CausalExplanation({
-  scoreId,
-  indexCode,
-  scopeType,
-  scopeId,
-  periodDate,
+  data,
+  isLoading,
+  error,
+  localeSupported = true,
   scopeLabel,
+  scopeId,
   className,
   defaultOpen = false,
 }: CausalExplanationProps) {
   const t = useTranslations('Causal');
-  const locale = useLocale();
   const [sourcesOpen, setSourcesOpen] = useState(defaultOpen);
   const [copied, setCopied] = useState(false);
   const sourcesId = useId();
 
-  const localeSupported = SUPPORTED_LOCALES.includes(locale);
-
-  const query = useCausalExplanation({
-    scoreId,
-    indexCode,
-    scopeType,
-    scopeId,
-    ...(periodDate !== undefined ? { periodDate } : {}),
-    enabled: localeSupported,
-  });
-
-  const data = query.data;
   const segments = useMemo(
     () => (data ? renderExplanationWithRefs(data.explanation_md, data.citations) : []),
     [data],
   );
 
-  const title = t('title', { scopeLabel: scopeLabel ?? scopeId });
+  const title = t('title', { scopeLabel: scopeLabel ?? scopeId ?? '' });
 
   const handleCopy = (): void => {
     if (typeof navigator === 'undefined' || !data) return;
@@ -187,7 +172,7 @@ export function CausalExplanation({
     );
   }
 
-  if (query.isLoading) {
+  if (isLoading) {
     return (
       <Card3D className={cardClass} aria-busy="true" aria-label={t('loading')}>
         <header style={{ marginBottom: 'var(--space-3, 0.75rem)' }}>
@@ -219,7 +204,7 @@ export function CausalExplanation({
     );
   }
 
-  if (query.error || !data) {
+  if (error || !data) {
     return (
       <Card3D className={cardClass} role="alert" aria-label={t('error')}>
         <header style={{ marginBottom: 'var(--space-3, 0.75rem)' }}>

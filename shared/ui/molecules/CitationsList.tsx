@@ -1,9 +1,9 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import type { Citation, CitationType } from '@/shared/types/scores';
 import { LabelPill, type LabelPillTone } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
-import type { Citation, CitationType } from '../types';
 
 export interface CitationsListProps {
   readonly citations: ReadonlyArray<Citation>;

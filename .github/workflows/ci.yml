@@ -40,6 +40,18 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
 
+  cross-feature-audit:
+    name: Cross-feature imports audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run audit:cross-feature
+
   test:
     name: Test (Vitest)
     runs-on: ubuntu-latest

@@ -1,7 +1,13 @@
 'use client';
 
 import { trpc } from '@/shared/lib/trpc/client';
-import type { IndexCode, ScopeType } from '../types';
+import type { IndexCode, ScopeType } from '@/shared/types/scores';
+
+export const CAUSAL_SUPPORTED_LOCALES: ReadonlyArray<string> = ['es-MX', 'es-CO', 'es-AR'];
+
+export function isCausalLocaleSupported(locale: string): boolean {
+  return CAUSAL_SUPPORTED_LOCALES.includes(locale);
+}
 
 export interface UseCausalExplanationOptions {
   readonly scoreId: string;

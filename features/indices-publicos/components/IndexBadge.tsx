@@ -1,7 +1,8 @@
 import { useTranslations } from 'next-intl';
+import type { IndexCode } from '@/shared/types/scores';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
-import { INDEX_REGISTRY, type IndexCode } from '../lib/index-registry-helpers';
+import { INDEX_REGISTRY } from '../lib/index-registry-helpers';
 
 export interface IndexBadgeProps {
   readonly code: IndexCode;
