@@ -1660,3 +1660,28 @@ Resultado: 2 PRs (11.Q inline dentro de branch 11.Q+R) → 1 squash merge → CI
 **Laterales agendados (L-NEW4..L-NEW7 + 9 upgrades shipped = 11 nuevos + 11.Q/R = 85 total):** U4 Alert Ghost transition → FASE 11.T · U9 Overrated/Underrated blog autogen → FASE 22 Marketing · U10 Six Degrees viral game → FASE 22 Marketing gamification · U11 Discover Weekly email → FASE 12 + Newsletter extension.
 
 ---
+
+## Addendum 2026-04-24 tarde — BLOQUE 11.S Living Atlas shipped + lección ritual pre-prompt
+
+**Merge commit:** 2071e9f (PR #32 squash). Branch `fase-11/bloque-11-s-living-atlas` + cleanup branch `chore/docs-sync-11-s-post-merge`.
+
+- **BLOQUE 11.S — Living Atlas SEED ("Wikipedia de colonias" wiki colectiva).** 200 colonias CDMX objetivo con contenido narrativo generado por Claude Haiku 4.5 (`claude-haiku-4-5-20251001`). Cost-capped `$3.00 USD` hard (guard pre-batch proyección + running cost post-cada-call → abort automático). Proyección 200 colonias ~`$1.73 USD` ≈ ~`$0.0086 USD` por colonia (900 input tokens × $0.80/M + 2200 output × $4.00/M). 8 secciones por entrada validadas runtime Zod (80..1800 chars cada): intro · historia · carácter · transporte · gastronomía · vida_cultural · seguridad_vida · mercado_inmobiliario. UI `/{locale}/atlas` landing con lista colonias publicadas agrupadas + `/{locale}/atlas/[coloniaSlug]` detail con TOC smooth-scroll + markdown renderer seguro (react-markdown + remark-gfm + rehype-sanitize, **ADR-028**) + JSON-LD Article structured data + alternates 5 locales canonical. Cross-functions: CF-11.S-1 Atlas × Genoma (sidebar link `/indices/DMX-LIV/similares?scope_id=<coloniaId>` — reuso 11.M) + CF-11.S-2 Atlas × Climate Twin (sidebar link `/indices/DMX-LIV/clima-gemelo?scope_id=<coloniaId>` — reuso 11.P).
+- **Desviación arquitectónica resuelta escalable.** Founder pidió "ALTER TABLE zones ADD COLUMN slug UNIQUE" pero NO existe tabla master `zones` H1 — la arquitectura DMX usa `zone_id UUID` referenced libremente desde `zona_snapshots` / `colonia_dna_vectors` / `colonia_wiki_entries` / `ghost_zones_ranking` / etc. sin tabla central. Decisión cerrada en el audit pre-prompt: nueva tabla normalizada `zone_slugs (id uuid PK, zone_id uuid UNIQUE, scope_type text, slug text UNIQUE, country_code char(2), source_label text)` multi-country + multi-scope desacoplada + CHECK `slug ~ '^[a-z0-9]+(-[a-z0-9]+)*$'` + length 1..80 + FK `country_code → countries.code`. Filosofía `arquitectura_escalable_desacoplada` reafirmada (memoria canonizada Fase 11.O).
+- **RLS relax `colonia_wiki_public_read` con workflow editorial diferido.** Policy original requería `reviewed=true AND published=true` simultáneamente. H1 seed genera content con `published=true + reviewed=false` (visibilidad inmediata post-seed, gate humano `reviewed=true` reactivado en L-NEW8 FASE 12 N5 con editor rico Tiptap/Lexical). Drop+recreate policy con `using (published = true)` + comment `RATIONALE intentional_public` actualizado.
+- **Zero deuda técnica post-cleanup (L-NEW10 shipped mismo PR).** Transitional `shared/lib/supabase/admin-ext.ts` con UN SOLO `as unknown as` encapsulado (por timing: migration creada pero `db:types` pendiente) fue eliminado post-push + `db:types` regen en commit `36ea5ea` mismo squash. Retarget 5 callers (atlas router + slug-resolver + seed script + landing page + detail page) a `createAdminClient()` + `Database` nativo. Resultado final: 0 `as unknown as` en código productivo (solo 2 restantes en test mocks — patrón existente `constellations.router.test.ts`).
+
+### Lección operacional canonizada — ritual pre-prompt PM
+
+El ciclo 11.S añadió un elemento al **ritual pre-prompt PM** antes de lanzar cualquier prompt Claude Code con migrations o columns nuevas:
+
+- **Validar tabla master existe**, no solo columnas. El audit previo revisó columnas, constraints, RLS — pero asumió que `zones` existía porque el founder la mencionó. En realidad no existe. Detectar eso DURANTE el audit CC (vs. después) ahorró ~30 min rework y resultó en decisión arquitectónica MEJOR (tabla desacoplada multi-scope) que el request original.
+- Ritual ampliado: MCP query lista tablas `public` ANTES de proponer ALTERs; si tabla asumida no existe, pausar y proponer Opción A (crear master) vs Opción B (dedupe downstream) vs Opción C (decoupled normalized — escogida aquí).
+- Dividendo acumulado: ritual pre-prompt + guardrails CC + audit PM → CI 11/11 verde primer intento · zero fix commits productivos (L-NEW10 cleanup fue planned same-day) · zero rework wall-clock.
+
+**Progreso FASE 11 XL:** 19/27 bloques completados (70%). Restantes: 11.T Alert Radar WhatsApp, 11.U Stickers, 11.V DNA Migration, 11.W Historical Forensics, 11.X Living Metropolitan Networks, 11.Y Zone Certification, 11.Z E2E Verification + tag. 2574 tests passing + 2 skipped (+43 vs pre-11.S).
+
+**Catálogos actualizados (10 docs):** FASE_11 plan (11.S shipped, progress 19/27 70%) · 03.8 scores LIVING_ATLAS · 03.15 lineage (Living Atlas pipeline) · LATERAL_UPGRADES L-NEW8/9/10 + 5 upgrades shipped (U16..U20) + L-NEW10 cleanup ✅ · CONTEXTO_MAESTRO addendum (este) · FEATURE_INVENTORY FI-100..FI-106 (+7 = 459 total) · PRODUCT_CATALOG 10.23 Living Atlas (+1 = 45 total) · GTM_CHANNEL_MAP (canales /atlas landing + /atlas/[coloniaSlug] SEO-first) · 03.1 §21 (zone_slugs + wiki RLS relax + allowlist v25) · 03.13 (2 cross-functions CF-11.S-1/2 Atlas×Genoma + Atlas×Climate).
+
+**Laterales agendados (L-NEW8..L-NEW10 + 5 upgrades shipped = 8 nuevos + L-NEW10 cleanup ✅ = 94 total FASE 11 XL):** L-NEW8 Editor Tiptap/Lexical wiki → FASE 12 N5 · L-NEW9 Sections normalizadas `colonia_wiki_sections` → FASE 13 si escala nacional >5k colonias · L-NEW10 admin-ext cleanup ✅ SHIPPED same-day same-PR.
+
+---
