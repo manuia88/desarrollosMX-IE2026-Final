@@ -1685,3 +1685,118 @@ El ciclo 11.S añadió un elemento al **ritual pre-prompt PM** antes de lanzar c
 **Laterales agendados (L-NEW8..L-NEW10 + 5 upgrades shipped = 8 nuevos + L-NEW10 cleanup ✅ = 94 total FASE 11 XL):** L-NEW8 Editor Tiptap/Lexical wiki → FASE 12 N5 · L-NEW9 Sections normalizadas `colonia_wiki_sections` → FASE 13 si escala nacional >5k colonias · L-NEW10 admin-ext cleanup ✅ SHIPPED same-day same-PR.
 
 ---
+
+## Addendum 2026-04-24 (muy tarde) — Auditoría integral + BATCHES 1-5 pre-Opción D + arranque FASE 07.5
+
+**Trigger**: post-shipping 19/27 bloques FASE 11 XL (hasta 11.S), founder y PM decidieron PAUSAR avance hacia 11.T-Z para ejecutar **auditoría integral FASE 0 → 11.S** y consolidar base arquitectónica antes de continuar. Razón: 3 fallos consecutivos de PM pre-planning (11.M+N, 11.O+P, Opción D inicial) por rituales pre-prompt incompletos causaron pivoteo y rework.
+
+### Auditoría integral shipped (PR #34 audit branch, merge commit base)
+
+**Scope**: 11 dimensiones (BD inventory/data flow per feature/seguridad RLS/cables incompletos/acoplamiento+escalabilidad/docs vs realidad/servicios externos+tokens/crons Vercel/estética+UX/refactor candidates/protección runtime) + 6 upgrades (U1 severity+impact-if-broken · U2 checklist escalabilidad 10x/100x · U3 one-way vs two-way door · U4 grid visual matrix features × dimensiones · U5 auto-canonize findings pattern 3+ · U6 auto-queue refactors a pipeline).
+
+**Output**: `docs/06_AUDITORIAS/AUDIT_FASE_0_A_11S_2026-04-24.md` (526 líneas, estado global 🟡 GO CONDICIONADO). Hallazgos: **9 🔴 critical + 11 🟡 medium + 7 REFACTOR candidates**.
+
+**Top 9 hallazgos críticos** detectados:
+- CRITICAL-001 Circular dep `causal-engine ⟷ indices-publicos` (REFACTOR-001 one-way door agrava con tiempo)
+- CRITICAL-002 14 crons zombie, `ingest_runs` vacío (0 rows), sin evidencia ejecución histórica
+- CRITICAL-003 3 links UI rotos (`/legal/terminos`, `/legal/privacidad`, `/faq`) → signup roto + compliance GDPR/ARCO risk
+- CRITICAL-004 9 cross-feature imports violan Regla #5 CLAUDE.md (zero imports cross-feature)
+- CRITICAL-005 3 SECURITY DEFINER views sin intencionalidad documentada (`v_ltr_str_connection`, `v_str_zone_monthly`, `v_str_market_monthly`)
+- CRITICAL-006 50 policies `qual=true` sin comment `intentional_public` (audit trail DB-level gap)
+- CRITICAL-007 6 funciones mutable search_path (`validate_postal_code`, `match_ai_memory`, `jsonb_diff`, `ml_deterministic_split`, `set_updated_at`, `match_embeddings`)
+- CRITICAL-008 2 materialized views expuestas vía API (`zone_demographics_cache`, `heatmap_cache`) → bypass RLS
+- CRITICAL-009 2 public storage buckets permiten listing enumeration (`profile-avatars`, `project-photos`) → GDPR/ARCO risk
+
+**Memorias canonizadas durante auditoría**: 3 nuevas + 2 amplificaciones existentes:
+- `feedback_pm_schema_audit_pre_prompt.md` — ritual ~5 min PM antes de cada prompt CC (MCP queries + grep local + resolver decisiones producto con founder)
+- `feedback_cc_guardrails_exhaustivos.md` — prompts CC con 3 secciones fijas (PROHIBIDO + AUDIT EXHAUSTIVO + REPORTAR EXACTO)
+- `feedback_pm_audit_exhaustivo_post_cc.md` — "CC audit clean" NO autoriza push. PM hace audit independiente
+- `feedback_arquitectura_escalable_desacoplada.md` amplificada 2x (regla ambigüedad "opción más grande" + lint rule cross-feature imports)
+
+### BATCHES 1-5 pre-Opción D shipped (5 PRs consecutivos surgical)
+
+Plan quirúrgico de 5 batches para resolver blockers pre-arranque Opción D FASE 07.5 ingesta canonical. Cada batch atómico, scope delimitado, audit PM independiente pre-push, merge individual.
+
+| BATCH | PR # | SHA main | Tema | Wall-clock real |
+|---|---|---|---|---|
+| 1 | #35 | `7e55043` | CRITICAL-007 + CRITICAL-009 (search_path 6 functions ALTER hardening + DROP 2 bucket listing policies) | ~12 min |
+| 2 | #36 | `76bea52` | CRITICAL-003 (páginas legales MVP + FAQ en 5 locales + ADR-028 renderer markdown seguro) | ~30-35 min |
+| 3 | #37 | `728222e` | CRITICAL-001 + REFACTOR-001 (romper circular dep causal-engine ⟷ indices-publicos + ESLint/custom audit script + CI job enforcement) | ~1h 45m |
+| 4 | #38 | `1140b2c` | CRITICAL-002 (score-worker auth Bearer CRON_SECRET + orchestrator INSERT fail-fast hardening + memoria canonizada nueva) | ~70 min |
+| 5 | #39 | `3efcc1d` | Canonical catalog naming (ADR-029): rename `registry.ts` → `score-registry.ts` + tabla `feature_registry` → `ui_feature_flags`. Resuelve false positive ambigüedad naming (audit §13 punto 5) | ~55 min |
+
+**Nueva memoria canonizada BATCH 4**: `feedback_cron_observability_obligatorio.md` — todo cron nuevo requiere INSERT a `ingest_runs` con try/finally + auth Bearer CRON_SECRET + smoke test post-deploy manual + alert zombie >24h. Patrón detectado en 4+ dominios (ingest/scores/heatmap/newsletter-digest). Previene regresión incident "14 crons shipped sin ejecución histórica" detectado en BATCH 4.
+
+**ADRs nuevos post-auditoría**:
+- **ADR-028 Living Atlas Markdown Stack** (BLOQUE 11.S shipped previo auditoría) — react-markdown + remark-gfm + rehype-sanitize. Alternativas rechazadas: regex manual (XSS risk), MDX nativo (setup Webpack complejo).
+- **ADR-029 Canonical Catalog Naming** (BATCH 5 post-auditoría) — 3 fronteras semantic explícitas: `score-registry.ts` (score calculators IE) · `ui_feature_flags` (feature flags UI tier-gating) · `FEATURE_INVENTORY.md` (catálogo docs humano). Rename resuelve ambigüedad raíz que causó false positive auditor durante §13.
+
+**Tag `pre-optionD-complete`** → `main@3efcc1d` (2026-04-24). Checkpoint firme para rollback si Opción D falla.
+
+### Vercel plan Hobby status + L-NEW12 diferido
+
+**Situación detectada post-BATCH 4**: plan Vercel = Hobby (limita 2 crons max + daily max frequency según [docs vercel.com/cron-jobs hobby-scheduling-limits]). Repo tiene 14 crons configurados en `vercel.json` → 12 crons ignorados silent por plan limit. Plus: env var `CRON_SECRET` NO configurada en Environment Variables Production. Root cause triple confirmado CRITICAL-002 (plan limit + auth missing + score-worker auth deprecado).
+
+**Decisión founder 2026-04-24 post-análisis**: upgrade Vercel Pro ($20/mes) **NO AHORA**. Agendado **L-NEW12 FASE pre-launch público**. Razón canonizada en `feedback_verify_before_spend.md` amplificación 2026-04-24: "'opción más grande' NO aplica a gastos recurrentes cuyo ROI es deferido hasta milestone futuro". Scripts CLI manuales Opción D FASE 07.5 son 100% suficientes pre-launch sin users reales. Upgrade Pro + activación crons + smoke test se activan desde checklist pre-launch público.
+
+**Acciones manuales founder completadas 2026-04-24**:
+- `CRON_SECRET` agregada en Vercel Production + Preview environments con Sensitive toggle ON
+- 2 valores independientes generados con `openssl rand -hex 32` (zero cross-environment leak)
+- Prerequisite listo para cuando se active Pro
+
+### Opción D FASE 07.5 arrancada (sesión 07.5.0 foundational WIP)
+
+**Contexto justificando creación**: auditoría detectó que ~85+/105 tablas públicas están vacías en prod (excepto seed migrations inline como `countries`, `feature_registry` renamed ui_feature_flags, `role_features`, `score_weights`, `ingest_allowed_sources`, `vibe_tags` H1). 19 bloques FASE 11 XL shipped son lógica + UI + schemas sin data real = **demo-ware** si se shippea así. Conclusión founder: NO continuar 11.T-Z con empty states en prod. Ejecutar ingesta canonical foundational antes de seguir.
+
+**Plan Opción D FASE 07.5** (7 sesiones CC, ~3 días wall-clock con paralelización sub-agents):
+
+- **07.5.0 foundational** (WIP 2026-04-24 muy tarde) — Tabla `zones` master polimórfica multi-país + seed CDMX H1 (~219 entries: 1 país + 1 estado + 1 city + 16 alcaldías + 200 colonias representativas) + estructura escalable `content/zones/{country}/` preparada para mundo + **ADR-030 CANONICAL_ZONES_POLYMORPHIC** + 6 upgrades directos canonizados (CHECK constraints robustos · nombres localizados es/en/pt · PostGIS MultiPolygon boundary · H3 r8 hexagonal index · OSM admin_level abstracto en metadata · UUIDs v5 determinísticos con namespace DMX estable) + 7 L-NEW agendados (L-NEW13 FK enforcement FASE 08 post-Opción D · L-NEW14 expansión nacional MX 31 estados FASE 13 · L-NEW15 Colombia Bogotá/Medellín/Cali FASE 38 · L-NEW16 Argentina/Brasil/USA FASE 38+ · L-NEW17 OSM bulk H2 Data Lake · L-NEW18 APIs oficiales conectores H2+ · L-NEW19 aliases+Stripe/Google research FASE 12+22)
+- **07.5.A** — Scripts ingest foundational (01 inegi-colonias + 02 geo-boundaries + 03 macro-banxico-inegi + 04 demographics)
+- **07.5.B** — Calculators N0-N4 + DMX índices compute batch sobre seed zones
+- **07.5.C** — Pulse 12m + genoma embeddings 64-dim sobre colonias seed
+- **07.5.D** — Climate 15y heurístico + constellations edges + ghost zones ranking compute
+- **07.5.E** — Seed LLM atlas wiki (script 12 con cost cap $3 USD Haiku 4.5) + orchestrator universal
+- **07.5.F** — E2E validation + tag `fase-07.5-ingesta-canonical-complete`
+
+**Decisión arquitectónica fundacional resuelta**: 3 patrones coexistentes en schema (`zone_id uuid NOT NULL` en 18 tablas · `colonia_id uuid NOT NULL` en 6 · `scope_type+scope_id text` polimórfico en 9) NO tenían tabla master parent. Causa raíz de los 3 fallos PM recurrentes (asumir tabla master existía, descubrir mid-ejecución que no). Solución **ADR-030**: tabla `zones` polimórfica que unifica los 3 patrones vía scope_type + scope_id natural key + UUIDs v5 determinísticos para consistency seed cross-repo. FK enforcement formal en 18+ tablas diferido **L-NEW13 FASE 08 post-Opción D** (evita cascade breakage mid-ejecución).
+
+### Memorias canonizadas activas post-audit (actualización completa snapshot)
+
+24 entries en `/Users/manuelacosta/.claude/projects/.../memory/` (20 feedback + 2 reference + 1 project + 1 user):
+
+1. `user_founder_profile.md`
+2. `project_phase_workflow.md`
+3. `feedback_build_cacheComponents.md`
+4. `feedback_audit_rls_allowlist.md`
+5. `reference_key_paths.md`
+6. `reference_credentials_status.md`
+7. `feedback_verify_before_spend.md` **amplificada 2026-04-24** ("opción más grande NO aplica gastos recurrentes ROI deferido — incident Vercel Pro propuesta prematura")
+8. `feedback_airroi_cost_empirical.md`
+9. `feedback_next_public_literal_only.md`
+10. `feedback_card3d_no_tilt.md`
+11. `feedback_subagents_over_revert.md`
+12. `feedback_instruction_format.md`
+13. `feedback_upgrades_destino.md`
+14. `feedback_zero_deuda_tecnica.md`
+15. `feedback_supabase_migrations_manual_push.md`
+16. `feedback_arquitectura_escalable_desacoplada.md` **amplificada 2x 2026-04-24** (regla ambigüedad "opción más grande" + lint rule cross-feature imports post-audit 9 edges detectados)
+17. `feedback_pm_schema_audit_pre_prompt.md` (nueva auditoría 2026-04-24)
+18. `feedback_cc_guardrails_exhaustivos.md` (nueva auditoría 2026-04-24)
+19. `feedback_pm_audit_exhaustivo_post_cc.md` (nueva auditoría 2026-04-24)
+20. `feedback_formato_prompts_founder.md`
+21. `feedback_cron_observability_obligatorio.md` **nueva BATCH 4 2026-04-24**
+
+### Estado consolidado repo 2026-04-24 muy tarde
+
+- **Main tip**: `3efcc1d` (post-BATCH 5 canonical naming ADR-029) + WIP en branch `fase-07.5-foundational-zones-master` (CC activo sesión 07.5.0)
+- **Tags activos**: `pre-optionD-complete` (base rollback), `fase-11-xl-pre-reset`, `biblia-v5-source`, `biblia-v2` (cleanup opcional post-`fase-11-complete` → SUGGESTED out-of-scope #6 auditoría)
+- **FASE 11 XL**: 19/27 bloques shipped (70%). Restan 8 (11.T Alert Radar WhatsApp · 11.U Stickers · 11.V DNA Migration · 11.W Historical Forensics · 11.X Living Metropolitan Networks · 11.Y Zone Certification · 11.Z E2E Verification + tag `fase-11-complete`).
+- **Tests**: 2589 passing + 2 skipped (baseline intacta post-BATCHES).
+- **Supabase project**: `qxfuqwlktmhokwwlvggy` (Pro $25/mo, 8GB DB, 250GB egress, 7d backups, SIN PITR).
+- **Allowlist audit RLS**: v26 post-BATCH 5 → v27 WIP sesión 07.5.0 (cubre nueva tabla `zones`).
+- **CI GitHub Actions**: 12/12 verde BATCH 5 (incluye nuevo `Cross-feature imports audit` job BATCH 3 activo).
+- **ADRs**: 28 totales (001-029 menos 024 skipped intencional) + **ADR-030 CANONICAL_ZONES_POLYMORPHIC** WIP sesión 07.5.0.
+- **Vercel plan**: Hobby (pre-launch). Upgrade Pro agendado **L-NEW12** pre-launch público.
+- **Opción D progress**: 1/7 sesiones en ejecución (07.5.0 foundational).
+
+---
