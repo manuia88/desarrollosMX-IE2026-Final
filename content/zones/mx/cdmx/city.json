@@ -1,0 +1,18 @@
+{
+  "scope_type": "city",
+  "scope_id": "MX-CDMX-city",
+  "country_code": "MX",
+  "name_es": "Ciudad de México",
+  "name_en": "Mexico City",
+  "name_pt": "Cidade do México",
+  "parent_scope_id": "MX-CDMX",
+  "lat": 19.4326,
+  "lng": -99.1332,
+  "area_km2": 1485,
+  "population": 9209944,
+  "metadata": {
+    "admin_level": 6,
+    "data_source": "inegi",
+    "seed_version": "v1_h1_cdmx"
+  }
+}

@@ -1,0 +1,310 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-CY",
+    "country_code": "MX",
+    "name_es": "Coyoacán",
+    "name_en": "Coyoacan",
+    "name_pt": "Coyoacán",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.3467,
+    "lng": -99.1618,
+    "area_km2": 54.4,
+    "population": 614447,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-coyoacan-centro",
+      "country_code": "MX",
+      "name_es": "Coyoacán Centro (Villa Coyoacán)",
+      "name_en": "Coyoacan Centro (Villa Coyoacan)",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3508,
+      "lng": -99.1618,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-del-carmen",
+      "country_code": "MX",
+      "name_es": "Del Carmen",
+      "name_en": "Del Carmen",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3467,
+      "lng": -99.1659,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-la-concepcion",
+      "country_code": "MX",
+      "name_es": "La Concepción",
+      "name_en": "La Concepcion",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3542,
+      "lng": -99.1667,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-los-reyes",
+      "country_code": "MX",
+      "name_es": "Los Reyes",
+      "name_en": "Los Reyes",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3578,
+      "lng": -99.1543,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-santa-catarina",
+      "country_code": "MX",
+      "name_es": "Santa Catarina",
+      "name_en": "Santa Catarina",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3487,
+      "lng": -99.1598,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-churubusco",
+      "country_code": "MX",
+      "name_es": "Churubusco",
+      "name_en": "Churubusco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3573,
+      "lng": -99.1436,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-churubusco-country-club",
+      "country_code": "MX",
+      "name_es": "Churubusco Country Club",
+      "name_en": "Churubusco Country Club",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3601,
+      "lng": -99.1412,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-ciudad-universitaria",
+      "country_code": "MX",
+      "name_es": "Ciudad Universitaria",
+      "name_en": "Ciudad Universitaria",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3321,
+      "lng": -99.1869,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-copilco-universidad",
+      "country_code": "MX",
+      "name_es": "Copilco Universidad",
+      "name_en": "Copilco Universidad",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3407,
+      "lng": -99.1793,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-romero-de-terreros",
+      "country_code": "MX",
+      "name_es": "Romero de Terreros",
+      "name_en": "Romero de Terreros",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3398,
+      "lng": -99.1747,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-copilco-el-alto",
+      "country_code": "MX",
+      "name_es": "Copilco el Alto",
+      "name_en": "Copilco el Alto",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.335,
+      "lng": -99.1752,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-prado-churubusco",
+      "country_code": "MX",
+      "name_es": "Prado Churubusco",
+      "name_en": "Prado Churubusco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3446,
+      "lng": -99.1388,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-xotepingo",
+      "country_code": "MX",
+      "name_es": "Xotepingo",
+      "name_en": "Xotepingo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3336,
+      "lng": -99.1506,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-pedregal-de-santo-domingo",
+      "country_code": "MX",
+      "name_es": "Pedregal de Santo Domingo",
+      "name_en": "Pedregal de Santo Domingo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3251,
+      "lng": -99.1711,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-ajusco-huayamilpas",
+      "country_code": "MX",
+      "name_es": "Ajusco Huayamilpas",
+      "name_en": "Ajusco Huayamilpas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3246,
+      "lng": -99.1624,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-campestre-churubusco",
+      "country_code": "MX",
+      "name_es": "Campestre Churubusco",
+      "name_en": "Campestre Churubusco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3524,
+      "lng": -99.1296,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-educacion",
+      "country_code": "MX",
+      "name_es": "Educación",
+      "name_en": "Educacion",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3271,
+      "lng": -99.1457,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CY-ex-hacienda-coapa",
+      "country_code": "MX",
+      "name_es": "Ex Hacienda Coapa",
+      "name_en": "Ex Hacienda Coapa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CY",
+      "lat": 19.3138,
+      "lng": -99.1501,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

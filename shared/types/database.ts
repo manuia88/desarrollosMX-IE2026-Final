@@ -14073,6 +14073,66 @@ export type Database = {
           },
         ]
       }
+      zones: {
+        Row: {
+          area_km2: number | null
+          boundary: unknown
+          country_code: string
+          created_at: string
+          h3_r8: string | null
+          id: string
+          lat: number | null
+          lng: number | null
+          metadata: Json
+          name_en: string
+          name_es: string
+          name_pt: string | null
+          parent_scope_id: string | null
+          population: number | null
+          scope_id: string
+          scope_type: string
+          updated_at: string
+        }
+        Insert: {
+          area_km2?: number | null
+          boundary?: unknown
+          country_code: string
+          created_at?: string
+          h3_r8?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          metadata?: Json
+          name_en: string
+          name_es: string
+          name_pt?: string | null
+          parent_scope_id?: string | null
+          population?: number | null
+          scope_id: string
+          scope_type: string
+          updated_at?: string
+        }
+        Update: {
+          area_km2?: number | null
+          boundary?: unknown
+          country_code?: string
+          created_at?: string
+          h3_r8?: string | null
+          id?: string
+          lat?: number | null
+          lng?: number | null
+          metadata?: Json
+          name_en?: string
+          name_es?: string
+          name_pt?: string | null
+          parent_scope_id?: string | null
+          population?: number | null
+          scope_id?: string
+          scope_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       geography_columns: {

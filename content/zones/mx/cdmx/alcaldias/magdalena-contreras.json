@@ -1,0 +1,150 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-MC",
+    "country_code": "MX",
+    "name_es": "La Magdalena Contreras",
+    "name_en": "La Magdalena Contreras",
+    "name_pt": "La Magdalena Contreras",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.3333,
+    "lng": -99.25,
+    "area_km2": 74.58,
+    "population": 247622,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MC-magdalena-contreras-pueblo",
+      "country_code": "MX",
+      "name_es": "La Magdalena Contreras Pueblo",
+      "name_en": "La Magdalena Contreras Pueblo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MC",
+      "lat": 19.3329,
+      "lng": -99.2395,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MC-san-jeronimo-lidice",
+      "country_code": "MX",
+      "name_es": "San Jerónimo Lídice",
+      "name_en": "San Jeronimo Lidice",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MC",
+      "lat": 19.3256,
+      "lng": -99.2235,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MC-san-bernabe-ocotepec",
+      "country_code": "MX",
+      "name_es": "San Bernabé Ocotepec",
+      "name_en": "San Bernabe Ocotepec",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MC",
+      "lat": 19.3373,
+      "lng": -99.2569,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MC-tierra-unida",
+      "country_code": "MX",
+      "name_es": "Tierra Unida",
+      "name_en": "Tierra Unida",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MC",
+      "lat": 19.3284,
+      "lng": -99.2448,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MC-san-nicolas-totolapan",
+      "country_code": "MX",
+      "name_es": "San Nicolás Totolapan",
+      "name_en": "San Nicolas Totolapan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MC",
+      "lat": 19.3162,
+      "lng": -99.2641,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MC-lomas-quebradas",
+      "country_code": "MX",
+      "name_es": "Lomas Quebradas",
+      "name_en": "Lomas Quebradas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MC",
+      "lat": 19.3198,
+      "lng": -99.2384,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MC-el-ocotal",
+      "country_code": "MX",
+      "name_es": "El Ocotal",
+      "name_en": "El Ocotal",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MC",
+      "lat": 19.3096,
+      "lng": -99.2702,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MC-las-cruces",
+      "country_code": "MX",
+      "name_es": "Las Cruces",
+      "name_en": "Las Cruces",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MC",
+      "lat": 19.3367,
+      "lng": -99.2307,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

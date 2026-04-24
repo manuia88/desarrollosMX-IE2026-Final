@@ -1,0 +1,182 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-VC",
+    "country_code": "MX",
+    "name_es": "Venustiano Carranza",
+    "name_en": "Venustiano Carranza",
+    "name_pt": "Venustiano Carranza",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.433,
+    "lng": -99.1037,
+    "area_km2": 33.42,
+    "population": 443704,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-jardin-balbuena",
+      "country_code": "MX",
+      "name_es": "Jardín Balbuena",
+      "name_en": "Jardin Balbuena",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4214,
+      "lng": -99.101,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-moctezuma-1a",
+      "country_code": "MX",
+      "name_es": "Moctezuma 1a Sección",
+      "name_en": "Moctezuma 1a Seccion",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4298,
+      "lng": -99.0985,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-moctezuma-2a",
+      "country_code": "MX",
+      "name_es": "Moctezuma 2a Sección",
+      "name_en": "Moctezuma 2a Seccion",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4371,
+      "lng": -99.0936,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-aeronautica-militar",
+      "country_code": "MX",
+      "name_es": "Aeronáutica Militar",
+      "name_en": "Aeronautica Militar",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4412,
+      "lng": -99.081,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-penon-de-los-banos",
+      "country_code": "MX",
+      "name_es": "Peñón de los Baños",
+      "name_en": "Penon de los Banos",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4381,
+      "lng": -99.0876,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-romero-rubio",
+      "country_code": "MX",
+      "name_es": "Romero Rubio",
+      "name_en": "Romero Rubio",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4469,
+      "lng": -99.0951,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-pensador-mexicano",
+      "country_code": "MX",
+      "name_es": "Pensador Mexicano",
+      "name_en": "Pensador Mexicano",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4422,
+      "lng": -99.1133,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-20-de-noviembre",
+      "country_code": "MX",
+      "name_es": "20 de Noviembre",
+      "name_en": "20 de Noviembre",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4281,
+      "lng": -99.1193,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-ignacio-zaragoza",
+      "country_code": "MX",
+      "name_es": "Ignacio Zaragoza",
+      "name_en": "Ignacio Zaragoza",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4161,
+      "lng": -99.0762,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-VC-merced-balbuena",
+      "country_code": "MX",
+      "name_es": "Merced Balbuena",
+      "name_en": "Merced Balbuena",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-VC",
+      "lat": 19.4221,
+      "lng": -99.1147,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

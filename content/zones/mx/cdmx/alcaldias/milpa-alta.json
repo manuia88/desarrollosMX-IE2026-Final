@@ -1,0 +1,102 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-MA",
+    "country_code": "MX",
+    "name_es": "Milpa Alta",
+    "name_en": "Milpa Alta",
+    "name_pt": "Milpa Alta",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.1925,
+    "lng": -98.9758,
+    "area_km2": 228.41,
+    "population": 152685,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MA-villa-milpa-alta",
+      "country_code": "MX",
+      "name_es": "Villa Milpa Alta",
+      "name_en": "Villa Milpa Alta",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MA",
+      "lat": 19.1925,
+      "lng": -99.0231,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MA-san-pedro-atocpan",
+      "country_code": "MX",
+      "name_es": "San Pedro Atocpan",
+      "name_en": "San Pedro Atocpan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MA",
+      "lat": 19.2011,
+      "lng": -99.0347,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MA-san-pablo-oztotepec",
+      "country_code": "MX",
+      "name_es": "San Pablo Oztotepec",
+      "name_en": "San Pablo Oztotepec",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MA",
+      "lat": 19.1807,
+      "lng": -99.064,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MA-san-antonio-tecomitl",
+      "country_code": "MX",
+      "name_es": "San Antonio Tecómitl",
+      "name_en": "San Antonio Tecomitl",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MA",
+      "lat": 19.2153,
+      "lng": -98.9847,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MA-san-salvador-cuauhtenco",
+      "country_code": "MX",
+      "name_es": "San Salvador Cuauhtenco",
+      "name_en": "San Salvador Cuauhtenco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MA",
+      "lat": 19.2243,
+      "lng": -99.0132,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

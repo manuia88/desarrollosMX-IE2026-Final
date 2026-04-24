@@ -31,6 +31,7 @@
     "registry:snapshot": "node --experimental-strip-types scripts/registry-snapshot.mjs",
     "cascades:export": "node --experimental-strip-types scripts/cascades-export.mjs",
     "scores:lineage-export": "node --experimental-strip-types scripts/scores-lineage-export.mjs",
+    "ingest:zones": "node --experimental-strip-types scripts/ingest/00_seed-zones-canonical.ts",
     "test:security": "vitest run tests/security --passWithNoTests",
     "prepare": "husky"
   },

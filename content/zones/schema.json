@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://desarrollosmx.com/schemas/zones.json",
+  "title": "DMX Zone Entry Schema",
+  "description": "Canonical geographic entity for public.zones. Either a single ZoneEntry or a NestedFile wrapping admin entity + children.",
+  "oneOf": [{ "$ref": "#/definitions/ZoneEntry" }, { "$ref": "#/definitions/ZoneNestedFile" }],
+  "definitions": {
+    "ScopeType": {
+      "type": "string",
+      "enum": [
+        "country",
+        "region",
+        "estado",
+        "provincia",
+        "departamento",
+        "state",
+        "territory",
+        "city",
+        "ciudad",
+        "cidade",
+        "county",
+        "municipio",
+        "alcaldia",
+        "partido",
+        "delegacao",
+        "barrio",
+        "colonia",
+        "bairro",
+        "neighborhood",
+        "suburb",
+        "zip",
+        "census_tract"
+      ]
+    },
+    "CountryCode": {
+      "type": "string",
+      "enum": ["MX", "CO", "AR", "BR", "US", "XX"]
+    },
+    "DataSource": {
+      "type": "string",
+      "enum": ["inegi", "dane", "ibge", "census", "osm", "manual"]
+    },
+    "Metadata": {
+      "type": "object",
+      "required": ["admin_level"],
+      "properties": {
+        "admin_level": { "type": "integer", "minimum": 2, "maximum": 11 },
+        "data_source": { "$ref": "#/definitions/DataSource" },
+        "seed_version": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "ZoneEntry": {
+      "type": "object",
+      "required": ["scope_type", "scope_id", "country_code", "name_es", "name_en", "metadata"],
+      "additionalProperties": false,
+      "properties": {
+        "scope_type": { "$ref": "#/definitions/ScopeType" },
+        "scope_id": { "type": "string", "minLength": 1 },
+        "country_code": { "$ref": "#/definitions/CountryCode" },
+        "name_es": { "type": "string", "minLength": 1 },
+        "name_en": { "type": "string", "minLength": 1 },
+        "name_pt": { "type": ["string", "null"] },
+        "parent_scope_id": { "type": ["string", "null"] },
+        "lat": { "type": ["number", "null"], "minimum": -90, "maximum": 90 },
+        "lng": { "type": ["number", "null"], "minimum": -180, "maximum": 180 },
+        "area_km2": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+        "population": { "type": ["integer", "null"], "minimum": 0 },
+        "metadata": { "$ref": "#/definitions/Metadata" }
+      }
+    },
+    "ZoneNestedFile": {
+      "type": "object",
+      "required": ["alcaldia", "colonias"],
+      "additionalProperties": false,
+      "properties": {
+        "alcaldia": { "$ref": "#/definitions/ZoneEntry" },
+        "colonias": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ZoneEntry" }
+        }
+      }
+    }
+  }
+}

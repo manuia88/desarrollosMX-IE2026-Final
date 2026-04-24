@@ -1620,3 +1620,87 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - Históricos intactos (biblia-v5, ADRs 001-028, FASE_01-25 pre-completadas)
 - ADR-029 canoniza fronteras semantic 3 catálogos (score calculators IE / UI feature flags / producto humano)
 - Ref: `docs/01_DECISIONES_ARQUITECTONICAS/ADR-029_CANONICAL_CATALOG_NAMING.md`
+
+---
+
+## Laterales derivados Opción D FASE 07.5 (canonical zones polymorphic)
+
+### L-NEW13 — FK enforcement zones master (post-Opción D)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** `ALTER TABLE ADD FOREIGN KEY` en 18+ tablas existentes con `zone_id` / `colonia_id` / `scope_id` → `public.zones(id)`. Validar consistency post-seed complete Opción D antes de aplicar constraint.
+- **Para qué sirve:** integridad referencial real + zero `zone_id` huérfano. Durante H1 la consistency está enforced a nivel app (UUIDs v5 determinísticos), pero DB-level FK cierra el loop definitivamente.
+- **Beneficio concreto:** imposibilita corrupt writes que apunten a zones inexistentes; migra deuda diferida ADR-030 a shipped.
+- **Fase target:** FASE 08 post-Opción D merge completo.
+- **Dependencia data:** seed zones canonical MX (mínimo CDMX H1) completo + audit `zone_id` huérfanos previo para remediar antes de ADD CONSTRAINT.
+- **Estimado:** 2-3 h (migration cascade + data validation).
+- **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
+
+### L-NEW14 — Seed expansión nacional MX (31 estados restantes)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** `content/zones/mx/estados/{jalisco,nuevo-leon,puebla,guanajuato,queretaro,...}/` con alcaldías / municipios + ~10K colonias / barrios representativos. Source data INEGI abierta + complementos manuales brokers locales.
+- **Para qué sirve:** moat de datos Hispanoamérica — cobertura nacional MX antes de cualquier competidor portal. Habilita scoring IE a escala país completo.
+- **Beneficio concreto:** pasar de 229 entries CDMX H1 a ~15K entries MX nacional; desbloqueo FASE 13 portal asesor expansión nacional con zones reales.
+- **Fase target:** FASE 13 Portal Asesor expansión nacional.
+- **Dependencia data:** INEGI boundaries abiertas + lib h3-js instalada si se quiere populate `h3_r8`.
+- **Estimado:** 15-20 h (paralelizable con sub-agents por estado — cada estado es archivo independiente en `content/zones/mx/estados/`).
+- **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
+
+### L-NEW15 — Seed Colombia canonical (Bogotá / Medellín / Cali H2)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** `content/zones/co/` con departamentos / municipios / barrios. Data DANE pública + cross-check Google Maps Geocoding para boundaries.
+- **Para qué sirve:** validación multi-país día 1 en producción — primer país post-MX; prueba de fuego del polimorfismo `scope_type` (municipio CO ≠ municipio MX semánticamente en algunos contextos).
+- **Beneficio concreto:** desbloqueo mercado CO (3° economía hispanohablante); zero refactor schema requerido gracias a ADR-030.
+- **Fase target:** FASE 38 International Expansion H2.
+- **Dependencia data:** DANE dataset + taxonomy CO confirmada (`departamento > municipio > comuna > barrio`).
+- **Estimado:** 10-12 h.
+- **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
+
+### L-NEW16 — Seed Argentina / Brasil / USA canonical
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** `content/zones/{ar,br,us}/` con taxonomy per-país:
+  - AR: provincias / partidos / comunas / barrios.
+  - BR: estados / municípios / bairros.
+  - US: states / counties / census_tracts / zip_codes.
+- **Para qué sirve:** cobertura LATAM completa + entry US market. Valida los 22 valores enum `scope_type` declarados en ADR-030 U1.
+- **Beneficio concreto:** DMX primera plataforma LATAM con schema único multi-país sin branches per-country; ventaja competitiva vs portales locales (Zonaprop AR, ZAP BR, Zillow US) que están limitados a un país cada uno.
+- **Fase target:** FASE 38+ International Expansion escalada.
+- **Dependencia data:** datasets oficiales AR (INDEC) + BR (IBGE) + US (Census TIGER/Line).
+- **Estimado:** 20-25 h (3 países paralelos — sub-agents independientes).
+- **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
+
+### L-NEW17 — OpenStreetMap bulk import automation
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** adaptador `scripts/ingest/lib/osm-loader.ts` que consume Overpass API. Import masivo boundaries reales (MultiPolygon geography 4326) + compute H3 r8 con lib `h3-js` oficial. Pipeline idempotente que respeta UUIDs v5 de zones ya seedeadas.
+- **Para qué sirve:** poblar `boundary` + `h3_r8` NULL de H1 con data real global free. OSM ≈ INEGI-comparable en calidad para boundaries administrativas.
+- **Beneficio concreto:** activar Mapbox GL rendering interactive + spatial queries reales `ST_Contains` — desbloquea visualizaciones tipo Zillow heatmap con zero costo licencias.
+- **Fase target:** H2 Data Lake cuando escala >10K zones justifique el overhead de sync.
+- **Dependencia data:** Overpass API rate limits + storage para MultiPolygons pesados + lib `h3-js`.
+- **Estimado:** 8-10 h.
+- **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
+
+### L-NEW18 — APIs oficiales conectores (INEGI / DANE / IBGE / Census)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** conectores real-time sync por país — webhook / cron pull que mantiene `zones` fresh (population updates, boundary re-delimitations, renames oficiales). 1 conector por país, shape común via ADR-030.
+- **Para qué sirve:** data fresca sin manual updates PM-intensivos — el gobierno re-delimita colonias / census tracts cada ~5 años y DMX auto-sincroniza.
+- **Beneficio concreto:** elimina deuda operativa PM; DMX queda always-current vs portales que rehacen seed manual anual.
+- **Fase target:** H2+ post-launch.
+- **Dependencia data:** credenciales API por país (varias son gratuitas con registro) + rate limits documentados.
+- **Estimado:** 12-15 h (1 conector por país).
+- **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
+
+### L-NEW19 — Zones aliases + fuzzy search + Stripe/Google research
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** tabla `zones_aliases (zone_id, alias text, locale, source)` — "Roma Norte" ↔ "La Roma" ↔ "Colonia Roma" ↔ "Cuauhtémoc—Roma". Incluye research doc Stripe Connect country-state pattern + cross-check Google Maps Geocoding para validar boundaries.
+- **Para qué sirve:** search UX emergente — usuarios escriben el nombre que conocen, no el canonical. Research valida que el patrón polimórfico DMX alinea con estándares industria payments (Stripe) + maps (Google).
+- **Beneficio concreto:** search "roma" → matches correctos en autocomplete; reduce fricción onboarding signup marketing. Stripe research desbloquea integración billing multi-país sin reinventar taxonomies.
+- **Fase target:** FASE 12 N5 (search UX) + FASE 22 (marketing signup).
+- **Dependencia data:** fuzzy search infrastructure (pg_trgm ya habilitado) + acceso Google Maps Geocoding API free tier.
+- **Estimado:** 6-8 h.
+- **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`

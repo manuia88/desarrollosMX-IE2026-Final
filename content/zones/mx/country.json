@@ -1,0 +1,18 @@
+{
+  "scope_type": "country",
+  "scope_id": "MX",
+  "country_code": "MX",
+  "name_es": "México",
+  "name_en": "Mexico",
+  "name_pt": "México",
+  "parent_scope_id": null,
+  "lat": 23.6345,
+  "lng": -102.5528,
+  "area_km2": 1964375,
+  "population": 128932753,
+  "metadata": {
+    "admin_level": 2,
+    "data_source": "manual",
+    "seed_version": "v1_h1_cdmx"
+  }
+}
