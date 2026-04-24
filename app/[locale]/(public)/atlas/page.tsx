@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { defaultLocale, locales } from '@/shared/lib/i18n/config';
-import { createAdminClientExt } from '@/shared/lib/supabase/admin-ext';
+import { createAdminClient } from '@/shared/lib/supabase/admin';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -36,7 +36,7 @@ interface ListedColonia {
 }
 
 async function fetchPublishedColonias(): Promise<ReadonlyArray<ListedColonia>> {
-  const supabase = createAdminClientExt();
+  const supabase = createAdminClient();
 
   const { data: publishedRows, error: wikiErr } = await supabase
     .from('colonia_wiki_entries')

@@ -12,7 +12,7 @@ import {
   type WikiSectionKey,
 } from '@/features/atlas/types';
 import { defaultLocale, locales } from '@/shared/lib/i18n/config';
-import { createAdminClientExt } from '@/shared/lib/supabase/admin-ext';
+import { createAdminClient } from '@/shared/lib/supabase/admin';
 
 interface PageProps {
   params: Promise<{ locale: string; coloniaSlug: string }>;
@@ -51,7 +51,7 @@ interface WikiFetchResult {
 }
 
 async function fetchWiki(slug: string): Promise<WikiFetchResult | null> {
-  const supabase = createAdminClientExt();
+  const supabase = createAdminClient();
   const resolution = await resolveColoniaIdBySlug(slug, supabase);
   if (!resolution) return null;
 

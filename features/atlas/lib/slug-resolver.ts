@@ -1,5 +1,5 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { DatabaseWithAtlasExt } from '@/shared/lib/supabase/admin-ext';
+import type { Database } from '@/shared/types/database';
 
 export interface SlugResolution {
   readonly colonia_id: string;
@@ -11,7 +11,7 @@ export interface SlugResolution {
 
 export async function resolveColoniaIdBySlug(
   slug: string,
-  supabase: SupabaseClient<DatabaseWithAtlasExt>,
+  supabase: SupabaseClient<Database>,
 ): Promise<SlugResolution | null> {
   if (!slug || typeof slug !== 'string') return null;
   const { data, error } = await supabase
@@ -33,7 +33,7 @@ export async function resolveColoniaIdBySlug(
 
 export async function resolveSlugByColoniaId(
   coloniaId: string,
-  supabase: SupabaseClient<DatabaseWithAtlasExt>,
+  supabase: SupabaseClient<Database>,
 ): Promise<string | null> {
   if (!coloniaId || typeof coloniaId !== 'string') return null;
   const { data, error } = await supabase

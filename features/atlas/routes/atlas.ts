@@ -17,7 +17,7 @@ import type { AtlasListedColonia, WikiEntry, WikiSection } from '@/features/atla
 import { WIKI_SECTION_KEYS, type WikiSectionKey } from '@/features/atlas/types';
 import { publicProcedure, router } from '@/server/trpc/init';
 import { batchResolveZoneLabels } from '@/shared/lib/market/zone-label-resolver';
-import { createAdminClientExt } from '@/shared/lib/supabase/admin-ext';
+import { createAdminClient } from '@/shared/lib/supabase/admin';
 
 interface JsonbSection {
   readonly heading?: unknown;
@@ -43,7 +43,7 @@ export const atlasRouter = router({
   getByColoniaSlug: publicProcedure
     .input(getByColoniaSlugInputSchema)
     .query(async ({ input }): Promise<WikiEntry | null> => {
-      const supabase = createAdminClientExt();
+      const supabase = createAdminClient();
 
       const { data: slugRow, error: slugError } = await supabase
         .from('zone_slugs')
@@ -95,7 +95,7 @@ export const atlasRouter = router({
   listPublishedColonias: publicProcedure
     .input(listPublishedColoniasInputSchema)
     .query(async ({ input }): Promise<ReadonlyArray<AtlasListedColonia>> => {
-      const supabase = createAdminClientExt();
+      const supabase = createAdminClient();
 
       const { data: publishedRows, error: wikiError } = await supabase
         .from('colonia_wiki_entries')

@@ -16,7 +16,7 @@ import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { ensureUniqueSlug, slugify } from '../features/atlas/lib/slugify';
 import { WIKI_SECTION_KEYS, type WikiSectionKey } from '../features/atlas/types';
-import type { DatabaseWithAtlasExt } from '../shared/lib/supabase/admin-ext';
+import type { Database } from '../shared/types/database';
 
 const MODEL_ID = 'claude-haiku-4-5-20251001';
 const MODEL_PRICING_KEY = 'claude-haiku-4-5';
@@ -122,7 +122,7 @@ function extractAlcaldia(payload: unknown): string | null {
   return null;
 }
 
-type SupabaseAdmin = SupabaseClient<DatabaseWithAtlasExt>;
+type SupabaseAdmin = SupabaseClient<Database>;
 
 async function fetchColoniaSources(
   client: SupabaseAdmin,
@@ -349,7 +349,7 @@ async function main(): Promise<void> {
     throw new Error('ANTHROPIC_API_KEY required (or pass --dry-run)');
   }
 
-  const supabase = createClient<DatabaseWithAtlasExt>(supabaseUrl, serviceRoleKey, {
+  const supabase = createClient<Database>(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false, autoRefreshToken: false },
   });
   const anthropic = anthropicKey ? new Anthropic({ apiKey: anthropicKey }) : null;
