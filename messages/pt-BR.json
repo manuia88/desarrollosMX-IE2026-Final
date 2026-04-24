@@ -2359,5 +2359,31 @@
       "empty_sections": "Esta entrada ainda não tem seções publicadas.",
       "methodology_note": "Entradas seed geradas com assistência de LLM — conteúdo revisável."
     }
+  },
+  "Legal": {
+    "breadcrumb_legal": "Legal",
+    "terminos": {
+      "page_title": "Termos e Condições",
+      "meta_description": "Termos e condições de uso do DesarrollosMX. Rascunho H1 pendente de revisão jurídica.",
+      "breadcrumb": "Termos e Condições",
+      "back_home": "Voltar ao início",
+      "draft_badge": "Rascunho H1 — pendente de revisão jurídica",
+      "last_updated_label": "Última atualização"
+    },
+    "privacidad": {
+      "page_title": "Política de Privacidade",
+      "meta_description": "Política de privacidade do DesarrollosMX. Tratamento de dados conforme a LGPD. Rascunho H1.",
+      "breadcrumb": "Política de Privacidade",
+      "back_home": "Voltar ao início",
+      "draft_badge": "Rascunho H1 — pendente de revisão jurídica",
+      "last_updated_label": "Última atualização"
+    }
+  },
+  "FAQ": {
+    "page_title": "Perguntas frequentes",
+    "meta_description": "Respostas às perguntas mais frequentes sobre DesarrollosMX: índices, cobertura, segurança e contas.",
+    "breadcrumb": "FAQ",
+    "intro": "Respostas rápidas sobre DesarrollosMX.",
+    "back_home": "Voltar ao início"
   }
 }

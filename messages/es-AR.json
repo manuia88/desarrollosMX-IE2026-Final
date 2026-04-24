@@ -2359,5 +2359,31 @@
       "empty_sections": "Esta entrada todavía no tiene secciones publicadas.",
       "methodology_note": "Entradas seed generadas con asistencia de LLM — contenido revisable."
     }
+  },
+  "Legal": {
+    "breadcrumb_legal": "Legal",
+    "terminos": {
+      "page_title": "Términos y Condiciones",
+      "meta_description": "Términos y condiciones de uso de DesarrollosMX. Borrador H1 pendiente de revisión legal.",
+      "breadcrumb": "Términos y condiciones",
+      "back_home": "Volver al inicio",
+      "draft_badge": "Borrador H1 — pendiente revisión legal",
+      "last_updated_label": "Última actualización"
+    },
+    "privacidad": {
+      "page_title": "Política de Privacidad",
+      "meta_description": "Política de privacidad de DesarrollosMX. Tratamiento de datos conforme a la Ley 25.326. Borrador H1.",
+      "breadcrumb": "Política de privacidad",
+      "back_home": "Volver al inicio",
+      "draft_badge": "Borrador H1 — pendiente revisión legal",
+      "last_updated_label": "Última actualización"
+    }
+  },
+  "FAQ": {
+    "page_title": "Preguntas frecuentes",
+    "meta_description": "Respuestas a las preguntas más frecuentes sobre DesarrollosMX: índices, cobertura, seguridad y cuentas.",
+    "breadcrumb": "FAQ",
+    "intro": "Respuestas rápidas sobre DesarrollosMX.",
+    "back_home": "Volver al inicio"
   }
 }
