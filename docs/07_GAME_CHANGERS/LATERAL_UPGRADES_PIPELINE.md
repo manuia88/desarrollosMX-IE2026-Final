@@ -1762,3 +1762,82 @@ Detectados durante ejecución real 07.5.A — fallbacks usados que requieren gro
 - **Ref:** SESIÓN 07.5.A DEUDA-2.
 
 ---
+
+## Sesión 07.5.B derivados + upgrades 07.5.C (L-NEW23 - L-NEW29)
+
+Deudas detectadas post-07.5.B + upgrades laterales/cross-functions 07.5.C agendados pre-scope principal. Formato founder-friendly (qué es / para qué sirve / beneficio concreto + fase target + estimado + ref).
+
+### L-NEW23 — Fix registry gap N1-N4 calculators (pre-FASE 11 blocker)
+
+- **Status:** 🔴 bug estructural, pre-FASE 11 obligatorio
+- **Qué es:** SCORE_REGISTRY declara score_types N1/N2/N3/N4 (F15, H17, otros) pero archivos frozen `shared/lib/ie/n{1,2,3,4}/index.ts` NO registran calculators correspondientes. Runtime 07.5.B: compute_ie_n1 dlq=458 + compute_n2/n3/n4 skipped=458 cada → ningún zone_score populado L2-L4.
+- **Para qué sirve:** desbloquear IE tier L2-L4 scoring real producción. Sin fix, IE entrega solo N0 + parcial N1 — gap crítico para monetization SaaS.
+- **Beneficio concreto:** 458 zones × 4 niveles adicionales = 1832 zone_scores extra + DMX indices re-computables con input completo. IE tier premium funcional.
+- **Fase target:** pre-FASE 11 (bloqueante).
+- **Estimado:** 3-5 h (investigación + fix + tests + re-compute 07.5.B partial).
+- **Ref:** SESIÓN 07.5.B DEUDA D-B-1.
+
+### L-NEW24 — Cleanup Node loader hack scripts/compute
+
+- **Status:** 🟡 deuda técnica, no bloqueante
+- **Qué es:** sustituir custom Node loader (`scripts/compute/_ts-resolver.mjs` + `_register-ts-loader.mjs` ~55 LOC) por solución estándar (`tsx` devDep, `esbuild-register`, o refactor frozen code).
+- **Para qué sirve:** scripts/compute/*.ts corren con 1 comando estándar, zero loader custom. Reduce superficie mantenimiento + mejor DX.
+- **Beneficio concreto:** elimina código experimental Node.js no-convencional.
+- **Fase target:** FASE 13 housekeeping post expansión data.
+- **Estimado:** 1-2 h (instalar `tsx` devDep + remove `.mjs` + update npm scripts).
+- **Ref:** SESIÓN 07.5.B DEUDA D-B-4.
+
+### L-NEW25 — DNA similarity index pgvector (cosine top-k neighbors)
+
+- **Status:** 🟢 lateral upgrade agendado (tipo Spotify "Similar Artists")
+- **Qué es:** índice pgvector sobre `colonia_dna_vectors.vector` (HNSW cosine ya creado en schema) + RPC `get_similar_colonias(colonia_id, top_k)` retorna top-10 colonias más similares por cosine distance.
+- **Para qué sirve:** feature UX "Zonas similares a Roma Norte" con matching basado en DNA multidimensional (no solo precio o ubicación).
+- **Beneficio concreto:** user que busca "como Roma Norte pero más económica" obtiene 10 alternativas con ranking objetivo. Diferenciador vs portales tradicionales (solo filtros precio+zona).
+- **Fase target:** FASE 11 N5 (similar zones discovery).
+- **Dependencia:** colonia_dna_vectors populated (07.5.C shipped) + HNSW index existente.
+- **Estimado:** 2-3 h (RPC + tests + integration UI callback).
+- **Ref:** SESIÓN 07.5.C U-C-2.
+
+### L-NEW26 — Pulse streaks detection (hot/cold momentum)
+
+- **Status:** 🟢 lateral upgrade agendado (tipo Strava Segments)
+- **Qué es:** función SQL `detect_pulse_streaks(scope_id, min_streak_days=7)` escanea zone_pulse_scores y retorna períodos donde pulse_score creció (hot streak) o decreció (cold streak) consecutivamente. Streak metadata: duration_days, magnitude_delta, start/end dates.
+- **Para qué sirve:** alertas tempranas trending zones. UI puede mostrar "Roma Norte en hot streak 14 días" tipo emoji 🔥 Strava.
+- **Beneficio concreto:** engagement diario app + storytelling marketing + diferenciador vs portales que solo muestran precio cerrado hoy.
+- **Fase target:** FASE 11 pulse features.
+- **Estimado:** 2 h (SQL function + tests + integration IE).
+- **Ref:** SESIÓN 07.5.C U-C-4.
+
+### L-NEW27 — Zone "Year in Review" Wrapped-style
+
+- **Status:** 🟢 lateral upgrade agendado (tipo Spotify Wrapped)
+- **Qué es:** generar highlights anuales per colonia desde zone_pulse_scores 365d: mejor día (peak pulse), peor día (trough), trends dominantes, comparativos vs año anterior. Template markdown/JSON via Haiku LLM (2026-12 anual).
+- **Para qué sirve:** marketing storytelling fin-de-año + SEO content per colonia + user retention narrativa.
+- **Beneficio concreto:** 210 artículos/stories únicos anuales auto-generados. Contenido orgánico sin esfuerzo manual. Momento PR anual (similar Spotify Wrapped diciembre).
+- **Fase target:** FASE 22 marketing automation.
+- **Dependencia:** zone_pulse_scores 12 meses acumulados (ship 07.5.C) + LLM Haiku autorizado.
+- **Estimado:** 4 h (template + LLM wrapper + scheduler cron + UI landing).
+- **Ref:** SESIÓN 07.5.C U-C-5.
+
+### L-NEW28 — Pulse-triggered IE cascade webhook
+
+- **Status:** 🟢 cross-function upgrade agendado
+- **Qué es:** trigger postgres sobre zone_pulse_scores INSERT/UPDATE que si pulse_delta > threshold (ej. ±15% daily) encola job re-compute N-scores para esa zone en ie_score_queue. Reusa infra cascade_triggers existente (fase11_xl_cascade_triggers).
+- **Para qué sirve:** IE scores always-fresh cuando pulse detecta movement significativo. Elimina cron diario blanket re-compute.
+- **Beneficio concreto:** IE responsive a market events real-time (no espera daily batch). Ahorro compute (solo zones con momentum real re-compute).
+- **Fase target:** FASE 11 intelligent cascade.
+- **Dependencia:** zone_pulse_scores (ship 07.5.C) + registry gap L-NEW23 resuelto.
+- **Estimado:** 2 h (trigger SQL + test + integration queue).
+- **Ref:** SESIÓN 07.5.C U-C-8.
+
+### L-NEW29 — DMX 15th index reconciliation
+
+- **Status:** 🟡 gap docs vs schema, pre-FASE 11
+- **Qué es:** bootstrap 07.5.A-B prometía 15 DMX indices. Schema real (fase11_xl_dmx_indices_schema) define 14 códigos (DEV/FAM/GNT/GRN/IAB/ICO/IDS/IPV/IRE/LIV/MOM/STA/STR/YNG). Investigar si falta 1 índice en schema (aggregate, missing design) o si docs están off-by-one.
+- **Para qué sirve:** alinear docs + schema + código + bootstrap narrative para evitar confusion cross-reference futura.
+- **Beneficio concreto:** fuente única verdad DMX indices = schema. Zero ambiguity docs vs código.
+- **Fase target:** pre-FASE 11 (30 min investigación).
+- **Estimado:** 0.5 h (grep schema + docs + decisión: deprecate prompt N=15 O add 15th index).
+- **Ref:** SESIÓN 07.5.B DEUDA D-B-2.
+
+---
