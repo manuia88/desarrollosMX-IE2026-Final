@@ -2041,4 +2041,38 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 - **Estimado:** 2-3 h (diagnose + fix + re-run 10 zones validación).
 - **Ref:** SESIÓN 07.5.E cache_hit_rate=0.0% post-execution (205/210 calls all input_cached=0).
 
+## Sesión 07.5.F + FASE 07.6 preparación (L-NEW47 - L-NEW49)
+
+### L-NEW47 — FASE 07.6 Product Audit Comprehensive (formal plan ADR-032)
+
+- **Status:** 🔷 AGENDADA FASE formal post-07.5.F shipped — 40h PM wall-clock
+- **Qué es:** Fase PM-heavy dedicada a auditoría producto exhaustiva + mapping 160+ features prototype vs DMX actual + crosswalk matrix + design migration plan + RICE priorities + critical path graph + roadmap integration fases 07.5.F→29 + 8 founder decision gates + canonización final. 6 sub-sesiones 07.6.A-F con tags granulares.
+- **Para qué sirve:** evitar rework masivo al ejecutar FASE 11.T-Z sin plan integrado post-inputs prototype. Memoria feedback_arquitectura_escalable_desacoplada.md dice "opción más grande dado contexto moonshot".
+- **Beneficio concreto:** roadmap formal 07.5.F→29 con features prototype asignadas a fases específicas, design system refreshed (ADR-031), 8 gates founder cerrados, L-NEW backlog consolidado. Unlock ejecución 11.T-Z con plan realista.
+- **Fase target:** FASE 07.6 dedicada (entre 07.5 y 11.T-Z).
+- **Dependencia:** tag `fase-07.5-ingesta-canonical-complete` shipped (trigger inicio).
+- **Estimado:** 40h PM wall-clock (5-6 días) + founder review 3h.
+- **Ref:** ADR-032, docs/02_PLAN_MAESTRO/FASE_07.6_PRODUCT_AUDIT.md.
+
+### L-NEW48 — Smoke test E2E integrity canonical pattern per sesión
+
+- **Status:** 🟢 pattern canonizable, agendar post-FASE 07.6
+- **Qué es:** sistematizar patrón smoke test E2E implementado en 07.5.F (script e2e-fase-07.5-integration.ts) como pattern canonical reutilizable per sesión futura. Cada sesión ejecuta smoke test zone representativa cross-capas antes de merge.
+- **Para qué sirve:** detectar gaps data layer mid-development antes de shipping a main. Zero-tolerance schema drift.
+- **Beneficio concreto:** zero rollback post-merge por broken integrations. Confidence ship cada sesión.
+- **Fase target:** FASE 24 Observability (infra testing automation).
+- **Estimado:** 3-4 h (framework skeleton + integration en CI).
+- **Ref:** SESIÓN 07.5.F pattern.
+
+### L-NEW49 — Fix Haiku prompt caching ephemeral TTL (cross-ref L-NEW46)
+
+- **Status:** 🔴 investigación priority, pre-FASE 22 blocker para LLM-heavy features
+- **Qué es:** investigar raíz por qué Anthropic SDK 0.90.0 NO aplicó prompt caching en script 13 atlas wiki (U-E-1 feature agregada en 07.5.E tuvo 0% cache hit rate, cost real 3× proyección). Hipótesis a validar: (a) SDK threshold min 2048 tokens/breakpoint; (b) orden blocks system array; (c) system dinámico invalidando cache key; (d) TTL ephemeral incorrecto.
+- **Para qué sirve:** reducir cost LLM operations futuras (L-NEW27 Wrapped annual + L-NEW41 audio TTS + L-NEW43 Q&A chat RAG + L-NEW45 multi-locale translations) en 70-80% via caching correcto. Aplicable a 200+ llamadas LLM proyectadas en fases 22-24.
+- **Beneficio concreto:** ahorro proyectado $20-50 USD/mes cuando fases 22+ shipped. Feature LLM-heavy factibles económicamente.
+- **Fase target:** pre-FASE 22 (1-2 h investigación + 0.5 h fix Anthropic SDK config).
+- **Dependencia:** documentación Anthropic prompt caching updated 2026 + review SDK changelog.
+- **Estimado:** 2-3 h.
+- **Ref:** SESIÓN 07.5.E DEUDA D-E-1 + L-NEW46 tracker.
+
 ---

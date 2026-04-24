@@ -30,3 +30,7 @@ docs/referencias-ui/
 supabase/.branches/
 supabase/.temp/
 .vercel
+
+# Product audit input folder — gitignored (files pasados por founder para analysis)
+tmp/
+
