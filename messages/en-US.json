@@ -2136,7 +2136,9 @@
       "shared_tags_label": "Shared tags",
       "dmx_label": "Top DMX indices",
       "see_similar_cta": "See similar neighborhoods (Genome)",
-      "unlabeled_zone": "Unnamed neighborhood"
+      "unlabeled_zone": "Unnamed neighborhood",
+      "ghost_warning_badge": "⚠ Over-hyped zone",
+      "ghost_warning_tooltip": "This neighborhood appears in top Ghost Zones — social and press buzz exceeds DMX fundamentals. Review prices vs comparables before deciding."
     },
     "vibe_tags": {
       "walkability": "Walkable",
@@ -2202,6 +2204,130 @@
       "drought_risk_score": "Drought risk",
       "seasonality_index": "Seasonality",
       "climate_change_delta": "Climate change"
+    }
+  },
+  "GhostZones": {
+    "landing": {
+      "kicker": "Rotten Tomatoes of real estate",
+      "title": "Ghost Zones — detect over-hyped areas",
+      "subtitle": "Identify neighborhoods where social and press hype isn't backed by DMX fundamentals. Avoid traps and find under-valued opportunities.",
+      "meta_description": "Detector of over-hyped vs under-valued zones using DMX fundamentals + search and press buzz.",
+      "feature_1_title": "Transparent breakdown",
+      "feature_1_body": "See exactly how much weight search hype, press, and the gap vs DMX fundamentals carry.",
+      "feature_2_title": "Hype halving alert",
+      "feature_2_body": "When noise exceeds fundamentals by 3×, we flag the zone with a warning.",
+      "feature_3_title": "12-month timeline",
+      "feature_3_body": "Track how the ghost score evolved over the last year to spot transitions and early bubbles.",
+      "cta_title": "Pro+ access",
+      "cta_body": "Full ranking and per-neighborhood history are available to Pro+ accounts. Sign up or sign in to view the data.",
+      "cta_primary": "View ranking",
+      "cta_secondary": "View methodology"
+    },
+    "ranking": {
+      "title": "Ghost Zones ranking",
+      "meta_description": "Ranking of the most over-hyped and under-valued neighborhoods with transparent breakdown and 12m timeline.",
+      "intro": "Sorted by ghost score descending. Click any neighborhood to see its history.",
+      "loading": "Loading ranking…",
+      "load_error": "Could not load the ranking.",
+      "empty_state": "No data yet for this period. Check back in a few days.",
+      "unlabeled_zone": "Unnamed neighborhood",
+      "ghost_score_label": "Ghost score",
+      "dmx_avg_label": "DMX avg",
+      "hype_halving_badge": "Hype halving",
+      "show_timeline": "Show 12m timeline",
+      "hide_timeline": "Hide timeline",
+      "buzz_summary": "Searches: {search} · press: {press}",
+      "auth_required_title": "Pro+ access required",
+      "auth_required_body": "Create an account to access the full Ghost Zones ranking with breakdown and history.",
+      "auth_required_cta": "Create account"
+    },
+    "timeline": {
+      "chart_aria": "Ghost score evolution last 12 months",
+      "empty": "Not enough data for timeline.",
+      "empty_aria": "Empty timeline",
+      "loading": "Loading timeline…",
+      "error": "Error loading timeline."
+    },
+    "breakdown": {
+      "search": "Searches",
+      "press": "Press",
+      "dmx_gap": "Fundamentals gap"
+    },
+    "hype_levels": {
+      "sub_valued": "Under-valued",
+      "aligned": "Aligned",
+      "over_hyped": "Over-hyped",
+      "extreme_hype": "Extreme hype"
+    }
+  },
+  "Constellations": {
+    "landing": {
+      "kicker": "LinkedIn Network for neighborhoods",
+      "title": "Zone Constellations — the graph of your neighborhoods",
+      "subtitle": "Explore multi-layer relations between neighborhoods: migration, climate twin, DNA genome, and pulse. Discover natural clusters and relational paths.",
+      "meta_description": "Interconnected graph of relations between neighborhoods: migration, climate, genome, and pulse with Louvain clusters and path finder.",
+      "edge_migration_title": "Migration",
+      "edge_migration_body": "Real moving flows between zones (RPP deeds + stubs).",
+      "edge_climate_title": "Climate Twin",
+      "edge_climate_body": "15-year historical climate similarity (NOAA + CONAGUA).",
+      "edge_genoma_title": "DNA Genome",
+      "edge_genoma_body": "Cosine similarity on 64-dim vectors of neighborhood traits.",
+      "edge_pulse_title": "Pulse Correlation",
+      "edge_pulse_body": "Pulse score proximity in the same period.",
+      "contagion_title": "Contagion paths",
+      "contagion_body": "How hype from over-hyped zones propagates to real neighboring zones.",
+      "explore_title": "Explore a neighborhood",
+      "explore_body": "Use /indices/constellations/:coloniaId to view the focused graph with sliders + path finder.",
+      "methodology_cta": "View methodology"
+    },
+    "focus": {
+      "title": "Neighborhood constellation",
+      "title_prefix": "Constellation",
+      "meta_description": "Focused graph of multi-type relations for this neighborhood.",
+      "intro": "Nodes colored by Louvain cluster. Edge thickness by combined weight. Use sliders to adjust weights.",
+      "loading": "Loading graph…",
+      "error": "Error loading graph.",
+      "no_edges": "This neighborhood has no strong relations computed yet.",
+      "invalid_id": "Invalid neighborhood ID.",
+      "unlabeled_zone": "Unnamed neighborhood"
+    },
+    "graph": {
+      "aria_label": "Graph of related neighborhoods",
+      "empty": "No relations to display.",
+      "unlabeled_zone": "Unnamed neighborhood"
+    },
+    "edge_types": {
+      "migration": "Migration",
+      "climate_twin": "Climate twin",
+      "genoma_similarity": "DNA Genome",
+      "pulse_correlation": "Pulse"
+    },
+    "sliders": {
+      "title": "Edge weights",
+      "help": "Adjust each layer's weight to see how the relation ranking changes. Client-side — no re-query.",
+      "reset": "Reset",
+      "sum_label": "Sum: {sum}%"
+    },
+    "path_finder": {
+      "title": "Path finder",
+      "help": "Find the shortest route between 2 neighborhoods through the graph (max 5 hops).",
+      "source_label": "Source neighborhood (UUID)",
+      "source_placeholder": "e.g. aaaa-...",
+      "target_label": "Target neighborhood (UUID)",
+      "target_placeholder": "e.g. bbbb-...",
+      "search_cta": "Find path",
+      "loading": "Searching…",
+      "error": "Error finding path.",
+      "result_found": "Path found in {hops} hops (total weight {weight})",
+      "result_not_found": "No path found within the limit.",
+      "unlabeled_zone": "Unnamed neighborhood"
+    },
+    "contagion": {
+      "loading": "Loading contagion paths…",
+      "error": "Error loading paths.",
+      "empty": "No contagion paths detected in this period.",
+      "weight_label": "Weight",
+      "unlabeled_zone": "Unnamed neighborhood"
     }
   }
 }

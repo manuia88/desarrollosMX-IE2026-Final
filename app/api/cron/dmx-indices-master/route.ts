@@ -33,12 +33,15 @@ import {
   buildAndPersistSignatures,
   refreshTwinsForZone,
 } from '@/shared/lib/intelligence-engine/climate/twin-engine';
+import { buildAllConstellationEdges } from '@/shared/lib/intelligence-engine/constellations/constellation-engine';
+import { buildClusters } from '@/shared/lib/intelligence-engine/constellations/louvain';
 import {
   batchCalculateForwardCurvesCDMX,
   batchCalculatePulseForecastsCDMX,
 } from '@/shared/lib/intelligence-engine/futures/curve-calculator';
 import { batchBuildAllCDMXEmbeddings } from '@/shared/lib/intelligence-engine/genome/embedding-builder';
 import { batchComputeVibeTagsCDMX } from '@/shared/lib/intelligence-engine/genome/vibe-tags-heuristic';
+import { buildAllCDMXGhostZones } from '@/shared/lib/intelligence-engine/ghost-zones/ghost-engine';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 
 export const maxDuration = 300;
@@ -127,6 +130,13 @@ export async function POST(request: Request): Promise<NextResponse> {
   let climateSignaturesBuilt = 0;
   let climateTwinsPersisted = 0;
   let climateFailed = 0;
+  let ghostZonesProcessed = 0;
+  let ghostZonesUpserted = 0;
+  let ghostZonesFailed = 0;
+  let constellationsProcessed = 0;
+  let constellationsEdgesUpserted = 0;
+  let constellationsClustersComputed = 0;
+  let constellationsFailed = 0;
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -293,6 +303,55 @@ export async function POST(request: Request): Promise<NextResponse> {
       });
     }
 
+    // BLOQUE 11.Q — Ghost Zones refresh (monthly/quarterly/annual).
+    // Stub H1 hash-based (FNV-1a) idempotente sobre colonias CDMX con
+    // DMX-LIV/INV/IAB disponibles. Falla NO tumba dispatch.
+    try {
+      const ghost = await buildAllCDMXGhostZones({ supabase, periodDate });
+      ghostZonesProcessed = ghost.zones_processed;
+      ghostZonesUpserted = ghost.rows_upserted;
+      ghostZonesFailed = ghost.failures;
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:ghost_zones`, message });
+      console.error('[dmx-indices-master] ghost zones dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+
+    // BLOQUE 11.R — Zone Constellations edges + Louvain clusters.
+    // Depende de migration_flow (11.G) + climate_twin (11.P) + genoma (11.M)
+    // + pulse (11.F) del mismo dispatch — corre al final del bucket.
+    try {
+      const edgesResult = await buildAllConstellationEdges({ supabase, periodDate });
+      constellationsProcessed = edgesResult.zones_processed;
+      constellationsEdgesUpserted = edgesResult.edges_upserted;
+      constellationsFailed = edgesResult.failures;
+
+      try {
+        const clustersResult = await buildClusters({ supabase, periodDate });
+        constellationsClustersComputed = clustersResult.clusters_computed;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errors.push({ stage: `${dispatched}:constellations_clusters`, message });
+        console.error('[dmx-indices-master] constellations clusters failed', {
+          dispatched,
+          message,
+          error: err,
+        });
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:constellations`, message });
+      console.error('[dmx-indices-master] constellations dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+
     // BLOQUE 11.P — Climate Twin ingestion + signature + twin refresh.
     // Corre monthly/quarterly/annual. Falla NO tumba dispatch.
     try {
@@ -441,6 +500,13 @@ export async function POST(request: Request): Promise<NextResponse> {
     climate_signatures_built: climateSignaturesBuilt,
     climate_twins_persisted: climateTwinsPersisted,
     climate_failed: climateFailed,
+    ghost_zones_processed: ghostZonesProcessed,
+    ghost_zones_upserted: ghostZonesUpserted,
+    ghost_zones_failed: ghostZonesFailed,
+    constellations_processed: constellationsProcessed,
+    constellations_edges_upserted: constellationsEdgesUpserted,
+    constellations_clusters_computed: constellationsClustersComputed,
+    constellations_failed: constellationsFailed,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

@@ -13050,6 +13050,30 @@ export type Database = {
           },
         ]
       }
+      zone_constellation_clusters: {
+        Row: {
+          cluster_id: number
+          computed_at: string
+          id: string
+          period_date: string
+          zone_id: string
+        }
+        Insert: {
+          cluster_id: number
+          computed_at?: string
+          id?: string
+          period_date: string
+          zone_id: string
+        }
+        Update: {
+          cluster_id?: number
+          computed_at?: string
+          id?: string
+          period_date?: string
+          zone_id?: string
+        }
+        Relationships: []
+      }
       zone_constellations_edges: {
         Row: {
           calculated_at: string

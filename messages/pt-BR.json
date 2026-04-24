@@ -2136,7 +2136,9 @@
       "shared_tags_label": "Tags compartilhadas",
       "dmx_label": "Top índices DMX",
       "see_similar_cta": "Ver bairros similares (Genoma)",
-      "unlabeled_zone": "Bairro sem nome"
+      "unlabeled_zone": "Bairro sem nome",
+      "ghost_warning_badge": "⚠ Área super-hypada",
+      "ghost_warning_tooltip": "Este bairro aparece no top Ghost Zones — o buzz em redes e imprensa supera os fundamentals DMX. Revise preços vs comparáveis antes de decidir."
     },
     "vibe_tags": {
       "walkability": "Caminhável",
@@ -2202,6 +2204,130 @@
       "drought_risk_score": "Risco seca",
       "seasonality_index": "Sazonalidade",
       "climate_change_delta": "Mudança climática"
+    }
+  },
+  "GhostZones": {
+    "landing": {
+      "kicker": "Rotten Tomatoes do mercado imobiliário",
+      "title": "Ghost Zones — detecte áreas super-hypadas",
+      "subtitle": "Identifique bairros onde o hype em redes e imprensa não é respaldado pelos fundamentals DMX. Evite armadilhas e detecte oportunidades sub-valorizadas.",
+      "meta_description": "Detector de áreas super-hypadas vs sub-valorizadas com DMX fundamentals + buzz de buscas e imprensa.",
+      "feature_1_title": "Breakdown transparente",
+      "feature_1_body": "Você vê exatamente o peso do hype de buscas, imprensa e o gap vs fundamentals DMX.",
+      "feature_2_title": "Alerta hype halving",
+      "feature_2_body": "Quando o barulho supera em 3× os fundamentals, marcamos a área com aviso.",
+      "feature_3_title": "Timeline 12 meses",
+      "feature_3_body": "Acompanhe como o ghost score mudou no último ano para detectar transições e bolhas antecipadas.",
+      "cta_title": "Acesso Pro+",
+      "cta_body": "O ranking completo e o histórico por bairro estão disponíveis para contas Pro+. Cadastre-se ou entre para ver os dados.",
+      "cta_primary": "Ver ranking",
+      "cta_secondary": "Ver metodologia"
+    },
+    "ranking": {
+      "title": "Ranking Ghost Zones",
+      "meta_description": "Ranking de bairros mais super-hypados e sub-valorizados com breakdown transparente e timeline 12m.",
+      "intro": "Ordenados por ghost score descendente. Clique em qualquer bairro para ver seu histórico.",
+      "loading": "Carregando ranking…",
+      "load_error": "Não foi possível carregar o ranking.",
+      "empty_state": "Ainda não há dados neste período. Volte em alguns dias.",
+      "unlabeled_zone": "Bairro sem nome",
+      "ghost_score_label": "Ghost score",
+      "dmx_avg_label": "DMX médio",
+      "hype_halving_badge": "Hype halving",
+      "show_timeline": "Ver timeline 12m",
+      "hide_timeline": "Ocultar timeline",
+      "buzz_summary": "Buscas: {search} · imprensa: {press}",
+      "auth_required_title": "Acesso Pro+ necessário",
+      "auth_required_body": "Crie sua conta para acessar o ranking Ghost Zones completo com breakdown e histórico.",
+      "auth_required_cta": "Criar conta"
+    },
+    "timeline": {
+      "chart_aria": "Evolução do ghost score últimos 12 meses",
+      "empty": "Sem dados suficientes para timeline.",
+      "empty_aria": "Timeline vazio",
+      "loading": "Carregando timeline…",
+      "error": "Erro ao carregar timeline."
+    },
+    "breakdown": {
+      "search": "Buscas",
+      "press": "Imprensa",
+      "dmx_gap": "Gap fundamentals"
+    },
+    "hype_levels": {
+      "sub_valued": "Sub-valorizada",
+      "aligned": "Alinhada",
+      "over_hyped": "Super-hypada",
+      "extreme_hype": "Hype extremo"
+    }
+  },
+  "Constellations": {
+    "landing": {
+      "kicker": "LinkedIn Network de bairros",
+      "title": "Zone Constellations — o grafo dos seus bairros",
+      "subtitle": "Explore relações multi-camadas entre bairros: migração, clima gêmeo, DNA genoma e pulse. Descubra clusters naturais e paths relacionais.",
+      "meta_description": "Grafo interconectado de relações entre bairros: migração, clima, genoma e pulse com clusters Louvain e path finder.",
+      "edge_migration_title": "Migração",
+      "edge_migration_body": "Fluxos reais de mudanças entre zonas (RPP escrituras + stubs).",
+      "edge_climate_title": "Clima Gêmeo",
+      "edge_climate_body": "Similaridade climática histórica 15 anos (NOAA + CONAGUA).",
+      "edge_genoma_title": "DNA Genoma",
+      "edge_genoma_body": "Cosine similarity sobre vetores 64-dim de características de bairro.",
+      "edge_pulse_title": "Pulse Correlation",
+      "edge_pulse_body": "Proximidade de score Pulse no mesmo período.",
+      "contagion_title": "Paths de contágio",
+      "contagion_body": "Como o hype de zonas super-hypadas se propaga para zonas reais vizinhas.",
+      "explore_title": "Explore um bairro",
+      "explore_body": "Use /indices/constellations/:coloniaId para ver o grafo focado com sliders + path finder.",
+      "methodology_cta": "Ver metodologia"
+    },
+    "focus": {
+      "title": "Constelação do bairro",
+      "title_prefix": "Constelação",
+      "meta_description": "Grafo focado de relações multi-tipo para este bairro.",
+      "intro": "Nós coloridos por cluster Louvain. Espessura de arestas por peso combinado. Use os sliders para ajustar pesos.",
+      "loading": "Carregando grafo…",
+      "error": "Erro ao carregar grafo.",
+      "no_edges": "Este bairro ainda não tem relações fortes calculadas.",
+      "invalid_id": "ID de bairro inválido.",
+      "unlabeled_zone": "Bairro sem nome"
+    },
+    "graph": {
+      "aria_label": "Grafo de bairros relacionados",
+      "empty": "Sem relações para mostrar.",
+      "unlabeled_zone": "Bairro sem nome"
+    },
+    "edge_types": {
+      "migration": "Migração",
+      "climate_twin": "Clima gêmeo",
+      "genoma_similarity": "DNA Genoma",
+      "pulse_correlation": "Pulse"
+    },
+    "sliders": {
+      "title": "Pesos das arestas",
+      "help": "Ajuste os pesos de cada camada para ver como muda o ranking de relações. Cliente-side — sem re-query.",
+      "reset": "Resetar",
+      "sum_label": "Soma: {sum}%"
+    },
+    "path_finder": {
+      "title": "Path finder",
+      "help": "Encontre a rota mais curta entre 2 bairros através do grafo (máx 5 hops).",
+      "source_label": "Bairro origem (UUID)",
+      "source_placeholder": "Ex. aaaa-...",
+      "target_label": "Bairro destino (UUID)",
+      "target_placeholder": "Ex. bbbb-...",
+      "search_cta": "Buscar rota",
+      "loading": "Buscando…",
+      "error": "Erro ao buscar rota.",
+      "result_found": "Rota encontrada em {hops} hops (peso total {weight})",
+      "result_not_found": "Sem rota encontrada dentro do limite.",
+      "unlabeled_zone": "Bairro sem nome"
+    },
+    "contagion": {
+      "loading": "Carregando contagion paths…",
+      "error": "Erro ao carregar paths.",
+      "empty": "Sem contagion paths detectados neste período.",
+      "weight_label": "Peso",
+      "unlabeled_zone": "Bairro sem nome"
     }
   }
 }

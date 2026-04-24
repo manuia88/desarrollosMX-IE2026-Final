@@ -22,8 +22,8 @@ async function fileExists(relPath: string): Promise<boolean> {
 }
 
 describe('SCORE_REGISTRY shape', () => {
-  it('contiene exactamente 135 entries (133 pre-11.O + LifePath + Climate Twin 11.O/P)', () => {
-    expect(SCORE_REGISTRY).toHaveLength(135);
+  it('contiene exactamente 137 entries (136 pre-11.R + Zone Constellations 11.R)', () => {
+    expect(SCORE_REGISTRY).toHaveLength(137);
   });
 
   it('cada score_id es único', () => {
@@ -98,7 +98,7 @@ describe('helpers', () => {
 });
 
 describe('counts por nivel', () => {
-  it('32 N0 + 18 N1 + 15 N2 + 12 N3 + 7 N4 + 51 N5 = 135 (+LifePath + Climate Twin 11.O/P)', () => {
+  it('32 N0 + 18 N1 + 15 N2 + 12 N3 + 7 N4 + 53 N5 = 137 (+Zone Constellations 11.R)', () => {
     expect(getScoresByLevel(0)).toHaveLength(32);
     expect(getScoresByLevel(1)).toHaveLength(18); // 16 + 1 stub F15 + 1 stub H17
     expect(getScoresByLevel(2)).toHaveLength(15); // 14 + 1 stub D11
@@ -107,8 +107,9 @@ describe('counts por nivel', () => {
     // N5 = 25 (AI content + I01-I06) + 15 DMX índices (7 pre + 8 FASE 11 XL) +
     // 1 Pulse + 1 Migration Flow + 1 Trend Genome + 1 Scorecard Nacional (11.I) +
     // 1 Newsletter (11.J) + 1 Genome Similarity (11.M) + 1 Futures Curve (11.N)
-    // + 1 LifePath (11.O) + 1 Climate Twin (11.P) + 2 stubs I07/I08 = 51
-    expect(getScoresByLevel(5)).toHaveLength(51);
+    // + 1 LifePath (11.O) + 1 Climate Twin (11.P) + 1 Ghost Zones (11.Q)
+    // + 1 Zone Constellations (11.R) + 2 stubs I07/I08 = 53
+    expect(getScoresByLevel(5)).toHaveLength(53);
   });
 });
 
