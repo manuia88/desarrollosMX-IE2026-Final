@@ -1,0 +1,342 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-MH",
+    "country_code": "MX",
+    "name_es": "Miguel Hidalgo",
+    "name_en": "Miguel Hidalgo",
+    "name_pt": "Miguel Hidalgo",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.4335,
+    "lng": -99.2012,
+    "area_km2": 46.41,
+    "population": 414470,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-polanco-i-chapultepec",
+      "country_code": "MX",
+      "name_es": "Polanco I Sección Chapultepec",
+      "name_en": "Polanco I Seccion Chapultepec",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4327,
+      "lng": -99.1907,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-polanco-ii-reforma",
+      "country_code": "MX",
+      "name_es": "Polanco II Sección Reforma",
+      "name_en": "Polanco II Seccion Reforma",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4368,
+      "lng": -99.1958,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-polanco-iii-rincon-del-bosque",
+      "country_code": "MX",
+      "name_es": "Polanco III Sección Rincón del Bosque",
+      "name_en": "Polanco III Seccion Rincon del Bosque",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4398,
+      "lng": -99.1987,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-polanco-iv-los-morales",
+      "country_code": "MX",
+      "name_es": "Polanco IV Sección Los Morales",
+      "name_en": "Polanco IV Seccion Los Morales",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4461,
+      "lng": -99.2024,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-polanco-v",
+      "country_code": "MX",
+      "name_es": "Polanco V Sección",
+      "name_en": "Polanco V Seccion",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4425,
+      "lng": -99.2078,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-bosques-de-las-lomas",
+      "country_code": "MX",
+      "name_es": "Bosques de las Lomas",
+      "name_en": "Bosques de las Lomas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4208,
+      "lng": -99.2389,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-lomas-de-chapultepec",
+      "country_code": "MX",
+      "name_es": "Lomas de Chapultepec I-IV",
+      "name_en": "Lomas de Chapultepec I-IV",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4256,
+      "lng": -99.2167,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-anzures",
+      "country_code": "MX",
+      "name_es": "Anzures",
+      "name_en": "Anzures",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4284,
+      "lng": -99.1778,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-tacubaya",
+      "country_code": "MX",
+      "name_es": "Tacubaya",
+      "name_en": "Tacubaya",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4038,
+      "lng": -99.1884,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-tacuba",
+      "country_code": "MX",
+      "name_es": "Tacuba",
+      "name_en": "Tacuba",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4584,
+      "lng": -99.1867,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-granada",
+      "country_code": "MX",
+      "name_es": "Granada",
+      "name_en": "Granada",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4435,
+      "lng": -99.1806,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-ampliacion-granada",
+      "country_code": "MX",
+      "name_es": "Ampliación Granada",
+      "name_en": "Ampliacion Granada",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4488,
+      "lng": -99.1835,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-cuauhtemoc-pensil",
+      "country_code": "MX",
+      "name_es": "Cuauhtémoc Pensil",
+      "name_en": "Cuauhtemoc Pensil",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4517,
+      "lng": -99.1928,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-san-miguel-chapultepec",
+      "country_code": "MX",
+      "name_es": "San Miguel Chapultepec",
+      "name_en": "San Miguel Chapultepec",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4143,
+      "lng": -99.1891,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-popotla",
+      "country_code": "MX",
+      "name_es": "Popotla",
+      "name_en": "Popotla",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4547,
+      "lng": -99.1817,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-irrigacion",
+      "country_code": "MX",
+      "name_es": "Irrigación",
+      "name_en": "Irrigacion",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4466,
+      "lng": -99.2094,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-argentina-antigua",
+      "country_code": "MX",
+      "name_es": "Argentina Antigua",
+      "name_en": "Argentina Antigua",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4536,
+      "lng": -99.193,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-verónica-anzures",
+      "country_code": "MX",
+      "name_es": "Verónica Anzures",
+      "name_en": "Veronica Anzures",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4361,
+      "lng": -99.1742,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-lomas-altas",
+      "country_code": "MX",
+      "name_es": "Lomas Altas",
+      "name_en": "Lomas Altas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4147,
+      "lng": -99.2237,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-MH-reforma-social",
+      "country_code": "MX",
+      "name_es": "Reforma Social",
+      "name_en": "Reforma Social",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-MH",
+      "lat": 19.4317,
+      "lng": -99.1983,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

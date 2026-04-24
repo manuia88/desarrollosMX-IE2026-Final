@@ -1,0 +1,342 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-BJ",
+    "country_code": "MX",
+    "name_es": "Benito Juárez",
+    "name_en": "Benito Juarez",
+    "name_pt": "Benito Juárez",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.3728,
+    "lng": -99.1556,
+    "area_km2": 26.63,
+    "population": 434153,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-del-valle-centro",
+      "country_code": "MX",
+      "name_es": "Del Valle Centro",
+      "name_en": "Del Valle Centro",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3878,
+      "lng": -99.1661,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-del-valle-norte",
+      "country_code": "MX",
+      "name_es": "Del Valle Norte",
+      "name_en": "Del Valle Norte",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3929,
+      "lng": -99.1688,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-del-valle-sur",
+      "country_code": "MX",
+      "name_es": "Del Valle Sur",
+      "name_en": "Del Valle Sur",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3807,
+      "lng": -99.1626,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-narvarte-poniente",
+      "country_code": "MX",
+      "name_es": "Narvarte Poniente",
+      "name_en": "Narvarte Poniente",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3909,
+      "lng": -99.1544,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-narvarte-oriente",
+      "country_code": "MX",
+      "name_es": "Narvarte Oriente",
+      "name_en": "Narvarte Oriente",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3887,
+      "lng": -99.1472,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-napoles",
+      "country_code": "MX",
+      "name_es": "Nápoles",
+      "name_en": "Napoles",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3933,
+      "lng": -99.1781,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-alamos",
+      "country_code": "MX",
+      "name_es": "Álamos",
+      "name_en": "Alamos",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3866,
+      "lng": -99.1415,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-portales",
+      "country_code": "MX",
+      "name_es": "Portales",
+      "name_en": "Portales",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3664,
+      "lng": -99.1484,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-mixcoac",
+      "country_code": "MX",
+      "name_es": "Mixcoac",
+      "name_en": "Mixcoac",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3756,
+      "lng": -99.1862,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-insurgentes-mixcoac",
+      "country_code": "MX",
+      "name_es": "Insurgentes Mixcoac",
+      "name_en": "Insurgentes Mixcoac",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3766,
+      "lng": -99.1792,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-san-pedro-de-los-pinos",
+      "country_code": "MX",
+      "name_es": "San Pedro de los Pinos",
+      "name_en": "San Pedro de los Pinos",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3889,
+      "lng": -99.1884,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-acacias",
+      "country_code": "MX",
+      "name_es": "Acacias",
+      "name_en": "Acacias",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3812,
+      "lng": -99.1673,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-letran-valle",
+      "country_code": "MX",
+      "name_es": "Letrán Valle",
+      "name_en": "Letran Valle",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3734,
+      "lng": -99.1527,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-postal",
+      "country_code": "MX",
+      "name_es": "Postal",
+      "name_en": "Postal",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3712,
+      "lng": -99.1474,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-ninos-heroes-de-chapultepec",
+      "country_code": "MX",
+      "name_es": "Niños Héroes de Chapultepec",
+      "name_en": "Ninos Heroes de Chapultepec",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3945,
+      "lng": -99.1521,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-vertiz-narvarte",
+      "country_code": "MX",
+      "name_es": "Vértiz Narvarte",
+      "name_en": "Vertiz Narvarte",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3842,
+      "lng": -99.1501,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-tlacoquemecatl",
+      "country_code": "MX",
+      "name_es": "Tlacoquemécatl",
+      "name_en": "Tlacoquemecatl",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3782,
+      "lng": -99.1704,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-actipan",
+      "country_code": "MX",
+      "name_es": "Actipan",
+      "name_en": "Actipan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3737,
+      "lng": -99.1739,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-moderna",
+      "country_code": "MX",
+      "name_es": "Moderna",
+      "name_en": "Moderna",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3698,
+      "lng": -99.1416,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-BJ-piedad-narvarte",
+      "country_code": "MX",
+      "name_es": "Piedad Narvarte",
+      "name_en": "Piedad Narvarte",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-BJ",
+      "lat": 19.3856,
+      "lng": -99.1453,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

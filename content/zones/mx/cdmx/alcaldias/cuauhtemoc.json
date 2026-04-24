@@ -1,0 +1,342 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-CU",
+    "country_code": "MX",
+    "name_es": "Cuauhtémoc",
+    "name_en": "Cuauhtemoc",
+    "name_pt": "Cuauhtémoc",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.4326,
+    "lng": -99.15,
+    "area_km2": 32.45,
+    "population": 545884,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-roma-norte",
+      "country_code": "MX",
+      "name_es": "Roma Norte",
+      "name_en": "Roma Norte",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4166,
+      "lng": -99.1631,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-roma-sur",
+      "country_code": "MX",
+      "name_es": "Roma Sur",
+      "name_en": "Roma Sur",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4076,
+      "lng": -99.158,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-condesa",
+      "country_code": "MX",
+      "name_es": "Condesa",
+      "name_en": "Condesa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4118,
+      "lng": -99.1742,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-hipodromo",
+      "country_code": "MX",
+      "name_es": "Hipódromo",
+      "name_en": "Hipodromo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4107,
+      "lng": -99.1712,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-hipodromo-condesa",
+      "country_code": "MX",
+      "name_es": "Hipódromo Condesa",
+      "name_en": "Hipodromo Condesa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4133,
+      "lng": -99.1765,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-juarez",
+      "country_code": "MX",
+      "name_es": "Juárez",
+      "name_en": "Juarez",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4253,
+      "lng": -99.1659,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-centro-historico",
+      "country_code": "MX",
+      "name_es": "Centro Histórico",
+      "name_en": "Centro Historico",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4337,
+      "lng": -99.1381,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-doctores",
+      "country_code": "MX",
+      "name_es": "Doctores",
+      "name_en": "Doctores",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4193,
+      "lng": -99.1468,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-obrera",
+      "country_code": "MX",
+      "name_es": "Obrera",
+      "name_en": "Obrera",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4124,
+      "lng": -99.1428,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-buenos-aires",
+      "country_code": "MX",
+      "name_es": "Buenos Aires",
+      "name_en": "Buenos Aires",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4056,
+      "lng": -99.1454,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-tabacalera",
+      "country_code": "MX",
+      "name_es": "Tabacalera",
+      "name_en": "Tabacalera",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4351,
+      "lng": -99.1545,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-guerrero",
+      "country_code": "MX",
+      "name_es": "Guerrero",
+      "name_en": "Guerrero",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4451,
+      "lng": -99.1483,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-san-rafael",
+      "country_code": "MX",
+      "name_es": "San Rafael",
+      "name_en": "San Rafael",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4392,
+      "lng": -99.159,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-santa-maria-la-ribera",
+      "country_code": "MX",
+      "name_es": "Santa María la Ribera",
+      "name_en": "Santa Maria la Ribera",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4503,
+      "lng": -99.1565,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-atlampa",
+      "country_code": "MX",
+      "name_es": "Atlampa",
+      "name_en": "Atlampa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4554,
+      "lng": -99.1594,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-paulino-navarro",
+      "country_code": "MX",
+      "name_es": "Paulino Navarro",
+      "name_en": "Paulino Navarro",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4067,
+      "lng": -99.1373,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-morelos",
+      "country_code": "MX",
+      "name_es": "Morelos",
+      "name_en": "Morelos",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4411,
+      "lng": -99.1298,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-transito",
+      "country_code": "MX",
+      "name_es": "Tránsito",
+      "name_en": "Transito",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4182,
+      "lng": -99.135,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-cuauhtemoc",
+      "country_code": "MX",
+      "name_es": "Cuauhtémoc",
+      "name_en": "Cuauhtemoc",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4271,
+      "lng": -99.1562,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CU-vista-alegre",
+      "country_code": "MX",
+      "name_es": "Vista Alegre",
+      "name_en": "Vista Alegre",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CU",
+      "lat": 19.4034,
+      "lng": -99.1398,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

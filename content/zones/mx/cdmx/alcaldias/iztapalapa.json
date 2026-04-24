@@ -1,0 +1,310 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-IZ",
+    "country_code": "MX",
+    "name_es": "Iztapalapa",
+    "name_en": "Iztapalapa",
+    "name_pt": "Iztapalapa",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.3574,
+    "lng": -99.0869,
+    "area_km2": 114.3,
+    "population": 1835486,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-agricola-oriental",
+      "country_code": "MX",
+      "name_es": "Agrícola Oriental",
+      "name_en": "Agricola Oriental",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.4011,
+      "lng": -99.0723,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-paraiso",
+      "country_code": "MX",
+      "name_es": "Paraíso",
+      "name_en": "Paraiso",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3763,
+      "lng": -99.0926,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-mixcoatl",
+      "country_code": "MX",
+      "name_es": "Mixcoatl",
+      "name_en": "Mixcoatl",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3701,
+      "lng": -99.1149,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-jardines-de-churubusco",
+      "country_code": "MX",
+      "name_es": "Jardines de Churubusco",
+      "name_en": "Jardines de Churubusco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3565,
+      "lng": -99.1215,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-cerro-de-la-estrella",
+      "country_code": "MX",
+      "name_es": "Cerro de la Estrella",
+      "name_en": "Cerro de la Estrella",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3496,
+      "lng": -99.0829,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-santa-cruz-meyehualco",
+      "country_code": "MX",
+      "name_es": "Santa Cruz Meyehualco",
+      "name_en": "Santa Cruz Meyehualco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3582,
+      "lng": -99.0471,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-san-miguel-teotongo",
+      "country_code": "MX",
+      "name_es": "San Miguel Teotongo",
+      "name_en": "San Miguel Teotongo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3417,
+      "lng": -99.0292,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-santa-martha-acatitla",
+      "country_code": "MX",
+      "name_es": "Santa Martha Acatitla",
+      "name_en": "Santa Martha Acatitla",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3646,
+      "lng": -99.0321,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-chinampac-de-juarez",
+      "country_code": "MX",
+      "name_es": "Chinampac de Juárez",
+      "name_en": "Chinampac de Juarez",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3766,
+      "lng": -99.0365,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-renovacion",
+      "country_code": "MX",
+      "name_es": "Renovación",
+      "name_en": "Renovacion",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3804,
+      "lng": -99.0592,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-leyes-de-reforma-3a",
+      "country_code": "MX",
+      "name_es": "Leyes de Reforma 3a Sección",
+      "name_en": "Leyes de Reforma 3a Seccion",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3712,
+      "lng": -99.081,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-alvaro-obregon-iz",
+      "country_code": "MX",
+      "name_es": "Álvaro Obregón",
+      "name_en": "Alvaro Obregon (Iztapalapa)",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.369,
+      "lng": -99.0887,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-sector-popular",
+      "country_code": "MX",
+      "name_es": "Sector Popular",
+      "name_en": "Sector Popular",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3638,
+      "lng": -99.1084,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-reforma-politica",
+      "country_code": "MX",
+      "name_es": "Reforma Política",
+      "name_en": "Reforma Politica",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3353,
+      "lng": -99.0457,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-constitucion-de-1917",
+      "country_code": "MX",
+      "name_es": "Constitución de 1917",
+      "name_en": "Constitucion de 1917",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3432,
+      "lng": -99.0707,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-desarrollo-urbano-quetzalcoatl",
+      "country_code": "MX",
+      "name_es": "Desarrollo Urbano Quetzalcóatl",
+      "name_en": "Desarrollo Urbano Quetzalcoatl",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3326,
+      "lng": -99.0572,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-lomas-estrella",
+      "country_code": "MX",
+      "name_es": "Lomas Estrella",
+      "name_en": "Lomas Estrella",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3399,
+      "lng": -99.0931,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IZ-el-molino-tezonco",
+      "country_code": "MX",
+      "name_es": "El Molino Tezonco",
+      "name_en": "El Molino Tezonco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IZ",
+      "lat": 19.3205,
+      "lng": -99.0501,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

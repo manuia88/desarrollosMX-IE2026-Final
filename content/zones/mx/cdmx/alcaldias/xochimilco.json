@@ -1,0 +1,182 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-XO",
+    "country_code": "MX",
+    "name_es": "Xochimilco",
+    "name_en": "Xochimilco",
+    "name_pt": "Xochimilco",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.2667,
+    "lng": -99.1,
+    "area_km2": 122.0,
+    "population": 442178,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-xochimilco-centro",
+      "country_code": "MX",
+      "name_es": "Xochimilco Centro",
+      "name_en": "Xochimilco Centro",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2593,
+      "lng": -99.1032,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-san-gregorio-atlapulco",
+      "country_code": "MX",
+      "name_es": "San Gregorio Atlapulco",
+      "name_en": "San Gregorio Atlapulco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2583,
+      "lng": -99.0606,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-san-luis-tlaxialtemalco",
+      "country_code": "MX",
+      "name_es": "San Luis Tlaxialtemalco",
+      "name_en": "San Luis Tlaxialtemalco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2443,
+      "lng": -99.0425,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-santiago-tulyehualco",
+      "country_code": "MX",
+      "name_es": "Santiago Tulyehualco",
+      "name_en": "Santiago Tulyehualco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2514,
+      "lng": -99.0264,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-santa-maria-tepepan",
+      "country_code": "MX",
+      "name_es": "Santa María Tepepan",
+      "name_en": "Santa Maria Tepepan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.271,
+      "lng": -99.1281,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-tepepan",
+      "country_code": "MX",
+      "name_es": "Tepepan",
+      "name_en": "Tepepan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2754,
+      "lng": -99.1244,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-san-mateo-xalpa",
+      "country_code": "MX",
+      "name_es": "San Mateo Xalpa",
+      "name_en": "San Mateo Xalpa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2262,
+      "lng": -99.0851,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-pueblo-nativitas",
+      "country_code": "MX",
+      "name_es": "Pueblo Nativitas",
+      "name_en": "Pueblo Nativitas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2668,
+      "lng": -99.0821,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-barrio-san-lucas-xochimanca",
+      "country_code": "MX",
+      "name_es": "Barrio San Lucas Xochimanca",
+      "name_en": "Barrio San Lucas Xochimanca",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2437,
+      "lng": -99.1078,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-XO-barrio-san-pedro-xochimilco",
+      "country_code": "MX",
+      "name_es": "Barrio San Pedro Xochimilco",
+      "name_en": "Barrio San Pedro Xochimilco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-XO",
+      "lat": 19.2572,
+      "lng": -99.1018,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

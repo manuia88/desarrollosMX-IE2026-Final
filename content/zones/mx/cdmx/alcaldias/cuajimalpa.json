@@ -1,0 +1,86 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-CJ",
+    "country_code": "MX",
+    "name_es": "Cuajimalpa de Morelos",
+    "name_en": "Cuajimalpa de Morelos",
+    "name_pt": "Cuajimalpa de Morelos",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.35,
+    "lng": -99.3,
+    "area_km2": 71.2,
+    "population": 217686,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CJ-cuajimalpa-pueblo",
+      "country_code": "MX",
+      "name_es": "Cuajimalpa Pueblo",
+      "name_en": "Cuajimalpa Pueblo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CJ",
+      "lat": 19.3547,
+      "lng": -99.3015,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CJ-san-pedro-cuajimalpa",
+      "country_code": "MX",
+      "name_es": "San Pedro Cuajimalpa",
+      "name_en": "San Pedro Cuajimalpa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CJ",
+      "lat": 19.3582,
+      "lng": -99.2993,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CJ-san-mateo-tlaltenango",
+      "country_code": "MX",
+      "name_es": "San Mateo Tlaltenango",
+      "name_en": "San Mateo Tlaltenango",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CJ",
+      "lat": 19.3787,
+      "lng": -99.2784,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-CJ-santa-fe-cuajimalpa",
+      "country_code": "MX",
+      "name_es": "Santa Fe Cuajimalpa (fracción)",
+      "name_en": "Santa Fe Cuajimalpa (fraction)",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-CJ",
+      "lat": 19.3612,
+      "lng": -99.268,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

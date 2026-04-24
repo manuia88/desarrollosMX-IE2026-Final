@@ -1,0 +1,182 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-TH",
+    "country_code": "MX",
+    "name_es": "Tláhuac",
+    "name_en": "Tlahuac",
+    "name_pt": "Tláhuac",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.2869,
+    "lng": -99.0104,
+    "area_km2": 85.34,
+    "population": 392313,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-san-francisco-tlaltenco",
+      "country_code": "MX",
+      "name_es": "San Francisco Tlaltenco",
+      "name_en": "San Francisco Tlaltenco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.2966,
+      "lng": -99.0198,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-santa-catarina-yecahuizotl",
+      "country_code": "MX",
+      "name_es": "Santa Catarina Yecahuizotl",
+      "name_en": "Santa Catarina Yecahuizotl",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.2617,
+      "lng": -98.9604,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-san-pedro-tlahuac-centro",
+      "country_code": "MX",
+      "name_es": "San Pedro Tláhuac Centro",
+      "name_en": "San Pedro Tlahuac Centro",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.2882,
+      "lng": -99.0046,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-miguel-hidalgo-tlahuac",
+      "country_code": "MX",
+      "name_es": "Miguel Hidalgo",
+      "name_en": "Miguel Hidalgo Tlahuac",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.2934,
+      "lng": -99.012,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-del-mar",
+      "country_code": "MX",
+      "name_es": "Del Mar",
+      "name_en": "Del Mar",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.306,
+      "lng": -99.0213,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-la-nopalera",
+      "country_code": "MX",
+      "name_es": "La Nopalera",
+      "name_en": "La Nopalera",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.3071,
+      "lng": -99.0091,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-agricola-metropolitana",
+      "country_code": "MX",
+      "name_es": "Agrícola Metropolitana",
+      "name_en": "Agricola Metropolitana",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.3119,
+      "lng": -99.0062,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-zapotitla",
+      "country_code": "MX",
+      "name_es": "Zapotitla",
+      "name_en": "Zapotitla",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.3144,
+      "lng": -99.0002,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-selene",
+      "country_code": "MX",
+      "name_es": "Selene",
+      "name_en": "Selene",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.304,
+      "lng": -99.0039,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TH-los-olivos",
+      "country_code": "MX",
+      "name_es": "Los Olivos",
+      "name_en": "Los Olivos",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TH",
+      "lat": 19.3016,
+      "lng": -99.0178,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

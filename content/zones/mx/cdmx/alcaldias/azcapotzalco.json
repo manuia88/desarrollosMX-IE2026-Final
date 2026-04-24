@@ -1,0 +1,214 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-AZ",
+    "country_code": "MX",
+    "name_es": "Azcapotzalco",
+    "name_en": "Azcapotzalco",
+    "name_pt": "Azcapotzalco",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.4861,
+    "lng": -99.1861,
+    "area_km2": 33.52,
+    "population": 432205,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-claveria",
+      "country_code": "MX",
+      "name_es": "Clavería",
+      "name_en": "Claveria",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4724,
+      "lng": -99.1848,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-san-alvaro",
+      "country_code": "MX",
+      "name_es": "San Álvaro",
+      "name_en": "San Alvaro",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4732,
+      "lng": -99.1893,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-ex-hacienda-del-rosario",
+      "country_code": "MX",
+      "name_es": "Ex Hacienda del Rosario",
+      "name_en": "Ex Hacienda del Rosario",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.5024,
+      "lng": -99.2024,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-el-rosario",
+      "country_code": "MX",
+      "name_es": "El Rosario",
+      "name_en": "El Rosario",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.5,
+      "lng": -99.2067,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-pro-hogar",
+      "country_code": "MX",
+      "name_es": "Pro Hogar",
+      "name_en": "Pro Hogar",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4682,
+      "lng": -99.1783,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-santa-ines",
+      "country_code": "MX",
+      "name_es": "Santa Inés",
+      "name_en": "Santa Ines",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4876,
+      "lng": -99.1747,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-nueva-santa-maria",
+      "country_code": "MX",
+      "name_es": "Nueva Santa María",
+      "name_en": "Nueva Santa Maria",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4635,
+      "lng": -99.1792,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-san-bartolo-cahualtongo",
+      "country_code": "MX",
+      "name_es": "San Bartolo Cahualtongo",
+      "name_en": "San Bartolo Cahualtongo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4912,
+      "lng": -99.215,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-santa-catarina",
+      "country_code": "MX",
+      "name_es": "Santa Catarina",
+      "name_en": "Santa Catarina Azcapotzalco",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4956,
+      "lng": -99.1821,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-barrio-huautla",
+      "country_code": "MX",
+      "name_es": "Barrio Huautla",
+      "name_en": "Barrio Huautla",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4831,
+      "lng": -99.1715,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-san-pedro-xalpa",
+      "country_code": "MX",
+      "name_es": "San Pedro Xalpa",
+      "name_en": "San Pedro Xalpa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.5036,
+      "lng": -99.198,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AZ-potrero-del-llano",
+      "country_code": "MX",
+      "name_es": "Potrero del Llano",
+      "name_en": "Potrero del Llano",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AZ",
+      "lat": 19.4789,
+      "lng": -99.1912,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

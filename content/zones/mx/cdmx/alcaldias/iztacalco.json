@@ -1,0 +1,182 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-IC",
+    "country_code": "MX",
+    "name_es": "Iztacalco",
+    "name_en": "Iztacalco",
+    "name_pt": "Iztacalco",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.3958,
+    "lng": -99.0974,
+    "area_km2": 23.3,
+    "population": 404695,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-agricola-oriental",
+      "country_code": "MX",
+      "name_es": "Agrícola Oriental",
+      "name_en": "Agricola Oriental",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.4014,
+      "lng": -99.0876,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-agricola-pantitlan",
+      "country_code": "MX",
+      "name_es": "Agrícola Pantitlán",
+      "name_en": "Agricola Pantitlan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.4066,
+      "lng": -99.0741,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-pantitlan",
+      "country_code": "MX",
+      "name_es": "Pantitlán",
+      "name_en": "Pantitlan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.4132,
+      "lng": -99.0702,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-la-cruz",
+      "country_code": "MX",
+      "name_es": "La Cruz",
+      "name_en": "La Cruz",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.394,
+      "lng": -99.1052,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-gabriel-ramos-millan",
+      "country_code": "MX",
+      "name_es": "Gabriel Ramos Millán",
+      "name_en": "Gabriel Ramos Millan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.3991,
+      "lng": -99.1022,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-granjas-mexico",
+      "country_code": "MX",
+      "name_es": "Granjas México",
+      "name_en": "Granjas Mexico",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.3939,
+      "lng": -99.1128,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-viaducto-piedad",
+      "country_code": "MX",
+      "name_es": "Viaducto Piedad",
+      "name_en": "Viaducto Piedad",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.3906,
+      "lng": -99.1179,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-militar-marte",
+      "country_code": "MX",
+      "name_es": "Militar Marte",
+      "name_en": "Militar Marte",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.3871,
+      "lng": -99.1153,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-ramos-millan",
+      "country_code": "MX",
+      "name_es": "Ramos Millán",
+      "name_en": "Ramos Millan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.3975,
+      "lng": -99.1067,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-IC-juventino-rosas",
+      "country_code": "MX",
+      "name_es": "Juventino Rosas",
+      "name_en": "Juventino Rosas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-IC",
+      "lat": 19.3883,
+      "lng": -99.1087,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

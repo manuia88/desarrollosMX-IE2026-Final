@@ -1,0 +1,262 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-AO",
+    "country_code": "MX",
+    "name_es": "Álvaro Obregón",
+    "name_en": "Alvaro Obregon",
+    "name_pt": "Álvaro Obregón",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.3587,
+    "lng": -99.2065,
+    "area_km2": 96.17,
+    "population": 759137,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-san-angel",
+      "country_code": "MX",
+      "name_es": "San Ángel",
+      "name_en": "San Angel",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3463,
+      "lng": -99.1887,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-san-angel-inn",
+      "country_code": "MX",
+      "name_es": "San Ángel Inn",
+      "name_en": "San Angel Inn",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3443,
+      "lng": -99.1968,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-chimalistac",
+      "country_code": "MX",
+      "name_es": "Chimalistac",
+      "name_en": "Chimalistac",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3493,
+      "lng": -99.1834,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-tlacopac",
+      "country_code": "MX",
+      "name_es": "Tlacopac",
+      "name_en": "Tlacopac",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3421,
+      "lng": -99.1924,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-florida",
+      "country_code": "MX",
+      "name_es": "Florida",
+      "name_en": "Florida",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3556,
+      "lng": -99.1858,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-jardines-del-pedregal",
+      "country_code": "MX",
+      "name_es": "Jardines del Pedregal",
+      "name_en": "Jardines del Pedregal",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3205,
+      "lng": -99.2034,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-pedregal-de-san-angel",
+      "country_code": "MX",
+      "name_es": "Pedregal de San Ángel",
+      "name_en": "Pedregal de San Angel",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3153,
+      "lng": -99.1987,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-santa-fe",
+      "country_code": "MX",
+      "name_es": "Santa Fe",
+      "name_en": "Santa Fe",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3603,
+      "lng": -99.2601,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-lomas-de-santa-fe",
+      "country_code": "MX",
+      "name_es": "Lomas de Santa Fe",
+      "name_en": "Lomas de Santa Fe",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3648,
+      "lng": -99.2569,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-molino-de-rosas",
+      "country_code": "MX",
+      "name_es": "Molino de Rosas",
+      "name_en": "Molino de Rosas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3733,
+      "lng": -99.2128,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-olivar-de-los-padres",
+      "country_code": "MX",
+      "name_es": "Olivar de los Padres",
+      "name_en": "Olivar de los Padres",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3612,
+      "lng": -99.2307,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-las-aguilas",
+      "country_code": "MX",
+      "name_es": "Las Águilas",
+      "name_en": "Las Aguilas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3482,
+      "lng": -99.2194,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-pino-suarez",
+      "country_code": "MX",
+      "name_es": "Pino Suárez",
+      "name_en": "Pino Suarez",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3712,
+      "lng": -99.2051,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-mixcoac-ao",
+      "country_code": "MX",
+      "name_es": "Mixcoac (fracción AO)",
+      "name_en": "Mixcoac (AO fraction)",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.377,
+      "lng": -99.1908,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-AO-san-jose-insurgentes",
+      "country_code": "MX",
+      "name_es": "San José Insurgentes",
+      "name_en": "San Jose Insurgentes",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-AO",
+      "lat": 19.3685,
+      "lng": -99.1854,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

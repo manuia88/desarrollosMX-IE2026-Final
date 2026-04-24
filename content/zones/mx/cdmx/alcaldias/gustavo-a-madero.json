@@ -1,0 +1,262 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-GM",
+    "country_code": "MX",
+    "name_es": "Gustavo A. Madero",
+    "name_en": "Gustavo A. Madero",
+    "name_pt": "Gustavo A. Madero",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.4833,
+    "lng": -99.1167,
+    "area_km2": 87.93,
+    "population": 1173351,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-lindavista-norte",
+      "country_code": "MX",
+      "name_es": "Lindavista Norte",
+      "name_en": "Lindavista Norte",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4937,
+      "lng": -99.1311,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-lindavista-vallejo",
+      "country_code": "MX",
+      "name_es": "Lindavista Vallejo",
+      "name_en": "Lindavista Vallejo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4876,
+      "lng": -99.1478,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-la-villa",
+      "country_code": "MX",
+      "name_es": "La Villa",
+      "name_en": "La Villa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4846,
+      "lng": -99.1185,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-aragon-la-villa",
+      "country_code": "MX",
+      "name_es": "Aragón La Villa",
+      "name_en": "Aragon La Villa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4806,
+      "lng": -99.0998,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-magdalena-de-las-salinas",
+      "country_code": "MX",
+      "name_es": "Magdalena de las Salinas",
+      "name_en": "Magdalena de las Salinas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4751,
+      "lng": -99.1336,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-tepeyac-insurgentes",
+      "country_code": "MX",
+      "name_es": "Tepeyac Insurgentes",
+      "name_en": "Tepeyac Insurgentes",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4864,
+      "lng": -99.1236,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-guadalupe-insurgentes",
+      "country_code": "MX",
+      "name_es": "Guadalupe Insurgentes",
+      "name_en": "Guadalupe Insurgentes",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4734,
+      "lng": -99.1324,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-industrial",
+      "country_code": "MX",
+      "name_es": "Industrial",
+      "name_en": "Industrial",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4676,
+      "lng": -99.1256,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-nueva-industrial-vallejo",
+      "country_code": "MX",
+      "name_es": "Nueva Industrial Vallejo",
+      "name_en": "Nueva Industrial Vallejo",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4828,
+      "lng": -99.1588,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-heroes-de-chapultepec",
+      "country_code": "MX",
+      "name_es": "Héroes de Chapultepec",
+      "name_en": "Heroes de Chapultepec",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4791,
+      "lng": -99.1387,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-cuautepec-barrio-alto",
+      "country_code": "MX",
+      "name_es": "Cuautepec Barrio Alto",
+      "name_en": "Cuautepec Barrio Alto",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.5371,
+      "lng": -99.1474,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-ticoman",
+      "country_code": "MX",
+      "name_es": "Ticomán",
+      "name_en": "Ticoman",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.5121,
+      "lng": -99.1358,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-aragon-inguaran",
+      "country_code": "MX",
+      "name_es": "Aragón Inguarán",
+      "name_en": "Aragon Inguaran",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4737,
+      "lng": -99.0938,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-siete-de-noviembre",
+      "country_code": "MX",
+      "name_es": "Siete de Noviembre",
+      "name_en": "Siete de Noviembre",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.4668,
+      "lng": -99.1321,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-GM-san-felipe-de-jesus",
+      "country_code": "MX",
+      "name_es": "San Felipe de Jesús",
+      "name_en": "San Felipe de Jesus",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-GM",
+      "lat": 19.5083,
+      "lng": -99.1145,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}

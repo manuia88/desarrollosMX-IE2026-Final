@@ -1,0 +1,262 @@
+{
+  "alcaldia": {
+    "scope_type": "alcaldia",
+    "scope_id": "MX-CDMX-TL",
+    "country_code": "MX",
+    "name_es": "Tlalpan",
+    "name_en": "Tlalpan",
+    "name_pt": "Tlalpan",
+    "parent_scope_id": "MX-CDMX-city",
+    "lat": 19.2833,
+    "lng": -99.1667,
+    "area_km2": 312.0,
+    "population": 699928,
+    "metadata": {
+      "admin_level": 8,
+      "data_source": "inegi",
+      "seed_version": "v1_h1_cdmx"
+    }
+  },
+  "colonias": [
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-villa-coapa",
+      "country_code": "MX",
+      "name_es": "Villa Coapa",
+      "name_en": "Villa Coapa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.3033,
+      "lng": -99.1383,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-prados-coapa",
+      "country_code": "MX",
+      "name_es": "Prados Coapa",
+      "name_en": "Prados Coapa",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2974,
+      "lng": -99.1426,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-jardines-en-la-montana",
+      "country_code": "MX",
+      "name_es": "Jardines en la Montaña",
+      "name_en": "Jardines en la Montana",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2851,
+      "lng": -99.1739,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-miguel-hidalgo-tlalpan",
+      "country_code": "MX",
+      "name_es": "Miguel Hidalgo",
+      "name_en": "Miguel Hidalgo Tlalpan",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2987,
+      "lng": -99.1673,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-tlalpan-centro",
+      "country_code": "MX",
+      "name_es": "Tlalpan Centro",
+      "name_en": "Tlalpan Centro",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2921,
+      "lng": -99.1641,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-fuentes-del-pedregal",
+      "country_code": "MX",
+      "name_es": "Fuentes del Pedregal",
+      "name_en": "Fuentes del Pedregal",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.3037,
+      "lng": -99.1967,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-chimalcoyotl",
+      "country_code": "MX",
+      "name_es": "Chimalcoyotl",
+      "name_en": "Chimalcoyotl",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2701,
+      "lng": -99.1812,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-ajusco-medio",
+      "country_code": "MX",
+      "name_es": "Ajusco Medio",
+      "name_en": "Ajusco Medio",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2633,
+      "lng": -99.1998,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-pedregal-de-san-nicolas",
+      "country_code": "MX",
+      "name_es": "Pedregal de San Nicolás",
+      "name_en": "Pedregal de San Nicolas",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.3093,
+      "lng": -99.2016,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-cantera-puente-de-piedra",
+      "country_code": "MX",
+      "name_es": "Cantera Puente de Piedra",
+      "name_en": "Cantera Puente de Piedra",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2755,
+      "lng": -99.175,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-residencial-cafetales",
+      "country_code": "MX",
+      "name_es": "Residencial Cafetales",
+      "name_en": "Residencial Cafetales",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.312,
+      "lng": -99.1298,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-san-buenaventura",
+      "country_code": "MX",
+      "name_es": "San Buenaventura",
+      "name_en": "San Buenaventura",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2783,
+      "lng": -99.1598,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-san-pedro-martir",
+      "country_code": "MX",
+      "name_es": "San Pedro Mártir",
+      "name_en": "San Pedro Martir",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.2579,
+      "lng": -99.1808,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-lomas-de-padierna",
+      "country_code": "MX",
+      "name_es": "Lomas de Padierna",
+      "name_en": "Lomas de Padierna",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.314,
+      "lng": -99.2103,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    },
+    {
+      "scope_type": "colonia",
+      "scope_id": "MX-CDMX-TL-heroes-de-padierna",
+      "country_code": "MX",
+      "name_es": "Héroes de Padierna",
+      "name_en": "Heroes de Padierna",
+      "name_pt": null,
+      "parent_scope_id": "MX-CDMX-TL",
+      "lat": 19.3185,
+      "lng": -99.2148,
+      "metadata": {
+        "admin_level": 10,
+        "data_source": "manual",
+        "seed_version": "v1_h1_cdmx"
+      }
+    }
+  ]
+}
