@@ -1934,4 +1934,111 @@ Upgrades laterales cross-industry + cross-function DMX modules agendados durante
 - **Estimado:** 3-4 h (template + markdown generator + scheduled updates).
 - **Ref:** SESIÓN 07.5.D U-D-cross-3.
 
+## Sesión 07.5.D carryover + 07.5.E laterales + cross-functions (L-NEW38 - L-NEW45)
+
+Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecosystem. 8 entradas con destino concreto y formato founder-friendly.
+
+### L-NEW38 — Climate data real ingestion (NOAA/CONAGUA/CLIMAT APIs) — carryover 07.5.D
+
+- **Status:** 🟡 deuda carryover 07.5.D — synthetic data limitations
+- **Qué es:** reemplazar `scripts/compute/10_compute-climate-signatures.ts` synthetic-heuristic-v1 con APIs reales: NOAA (global/MX estaciones) + CONAGUA (MX nacional) + CLIMAT (WMO global). Ingest monthly historical 2011-2026 + daily near-realtime. Agregar nueva fuente `climate_noaa` + `climate_conagua` al ingest_allowed_sources.
+- **Para qué sirve:** resolver 3 synthetic-data limitations 07.5.D detectadas:
+    · Edges overcount +46% (climate component synthetic uniform pull composite arriba threshold)
+    · Ghost zones 0>60 threshold (distribución 39-52 flat por calibración CDMX promedio)
+    · Twin matches similarity=100 uniforme (signatures casi idénticas por synthetic seed + jitter)
+  Real climate data diferencia zones → cada metric hace su trabajo properly.
+- **Beneficio concreto:** climate signatures reales (temp anomalías 2011-2026 IPCC tier) + twin matches significativos (Roma Norte ↔ Palermo BA comparable) + ghost zones threshold calibrable a distribución real + anomaly detection accionable (heat waves detectadas).
+- **Fase target:** FASE 13 expansión data layer.
+- **Dependencia:** NOAA API token (free, requiere registro) + CONAGUA dataset descargas (free) + script extender patrón 02_ingest-macro-banxico-inegi.
+- **Estimado:** 6-8 h (NOAA conector + CONAGUA loader + re-run 10_climate con real data + tests).
+- **Ref:** SESIÓN 07.5.D deudas D-D-1/2/3.
+
+### L-NEW39 — Wiki Infobox Wikipedia-style per colonia (structured metadata)
+
+- **Status:** 🟢 lateral upgrade agendado
+- **Qué es:** además de markdown sections, extraer infobox estructurado: {population, founded_year, elevation_m, climate_type, famous_for, notable_places_json, nearest_metro, area_km2, main_industries}. Render UI: sidebar tipo Wikipedia fichas Roma Norte/Condesa.
+- **Para qué sirve:** SEO structured data (Schema.org Place) + users scan rápido datos clave + AI assistants (Bing/Google/Perplexity/ChatGPT) cite infobox autoritativa.
+- **Beneficio concreto:** DMX entries aparecen como source en AI-generated answers + organic search + featured snippets Google.
+- **Fase target:** FASE 12 Atlas UX + SEO phase.
+- **Dependencia:** wiki_entries ship 07.5.E + UI component infobox.
+- **Estimado:** 4-5 h (extraction logic + schema + UI component + tests).
+- **Ref:** SESIÓN 07.5.E U-E-lateral-1.
+
+### L-NEW40 — Wiki audio narration TTS (accessibility + podcast UX)
+
+- **Status:** 🟢 lateral upgrade agendado
+- **Qué es:** convertir wiki entries 8 sections a audio via Anthropic Claude TTS API (o OpenAI fallback). Generar MP3 per colonia × locale. Store Vercel Blob (ADR existente + L-NEW cleanup cubierto).
+- **Para qué sirve:** accesibilidad + audio UX (coches, commute, mientras cocinan) + podcast distribution (Spotify/Apple).
+- **Beneficio concreto:** nuevo canal distribución (podcasts) + accesibilidad WCAG 2.1 AAA + retention diario (audio daily brief).
+- **Fase target:** FASE 22 multimedia content.
+- **Dependencia:** wiki_entries ship 07.5.E + TTS API + Vercel Blob storage (L-NEW24 cleanup post).
+- **Estimado:** 6-8 h (TTS wrapper + 5 locales × 210 entries = 1050 files · budget $20-30 first run).
+- **Ref:** SESIÓN 07.5.E U-E-lateral-2.
+
+### L-NEW41 — Wiki citizen editable with AI pre-review (Wikipedia community model)
+
+- **Status:** 🟢 lateral upgrade agendado
+- **Qué es:** UI permite users sugerir edits a wiki entries. AI agent (Haiku) pre-revisa diff vs fuentes DMX + cita evidence + approve/flag_for_review. Moderator approval → merge.
+- **Para qué sirve:** moat contenido comunidad (vecinos conocen su colonia mejor que AI) + engagement + differentiator vs portales solo algoritmos.
+- **Beneficio concreto:** wiki entries quality mejora 20-30% con context local + comunidad invested en plataforma (retention + UGC).
+- **Fase target:** FASE 22+ community features.
+- **Dependencia:** wiki_entries + auth users + moderation workflow.
+- **Estimado:** 12-15 h (UI edit flow + AI reviewer + moderation queue + diffs).
+- **Ref:** SESIÓN 07.5.E U-E-lateral-3.
+
+### L-NEW42 — Wiki embeddings para semantic search "encuentra colonias con vibe X"
+
+- **Status:** 🟢 lateral upgrade agendado
+- **Qué es:** embed wiki entries con OpenAI text-embedding-3-large (o Voyage AI) + pgvector index. RPC `search_wiki_semantic(query_text, top_k)` retorna colonias más relevantes. Integrar en global search UI.
+- **Para qué sirve:** natural language zone discovery — "colonia bohemia cerca metro con cafés de especialidad" → matches semánticos (no solo keyword).
+- **Beneficio concreto:** UX conversacional + differentiator vs filtros tradicionales (rango precio + m²) + hooks AI chat.
+- **Fase target:** FASE 11 N5 (similar zones discovery) — ya se menciona pgvector para DNA similarity en L-NEW25.
+- **Dependencia:** wiki_entries ship 07.5.E + OpenAI embeddings API + pgvector extension.
+- **Estimado:** 4-5 h (embeddings batch + index + RPC + UI integration).
+- **Ref:** SESIÓN 07.5.E U-E-lateral-4.
+
+### L-NEW43 — Wiki Q&A chat interface (RAG sobre wiki corpus)
+
+- **Status:** 🟢 lateral upgrade agendado
+- **Qué es:** chat UI conversacional sobre wiki corpus. RAG pipeline: user query → embed → retrieve top-5 wiki entries → pass to Haiku → synthesized answer con citations. Tipo Perplexity.
+- **Para qué sirve:** natural language discovery — "¿cuál es la colonia más tranquila cerca de Roma Norte con buenos cafés?" respondido conversacional.
+- **Beneficio concreto:** conversational UX diferenciador + session time 3-5x vs search tradicional + retention.
+- **Fase target:** FASE 22+ chat features.
+- **Dependencia:** L-NEW42 embeddings + chat UI infra + Haiku RAG wrapper.
+- **Estimado:** 8-10 h (RAG pipeline + chat UI + citations + tests).
+- **Ref:** SESIÓN 07.5.E U-E-lateral-5.
+
+### L-NEW44 — Wiki → IE narrative explainer (cross-function IE explainable AI)
+
+- **Status:** 🟢 cross-function upgrade agendado
+- **Qué es:** cuando user ve score IE N1/N2/N3/N4 de colonia (ej. Roma Norte N1=78), UI tiene button "¿por qué?" → retrieve wiki entry sección relevante + generate narrative con Haiku explicando contribución factors. Tipo Zillow Zestimate "what affects this estimate".
+- **Para qué sirve:** explainable AI sobre IE scoring — reduce fricción trust ("el número es arbitrario" → "estos 5 factores contribuyen Y%").
+- **Beneficio concreto:** trust + conversion (users entienden scoring = más commit + share) + feature distintivo (pocos portales explican).
+- **Fase target:** FASE 11 IE UX enhancement (post L-NEW23 registry gap fix).
+- **Dependencia:** wiki_entries + IE scoring functional (L-NEW23 resolved) + Haiku wrapper.
+- **Estimado:** 5-7 h (retrieval logic + narrative template + UI integration).
+- **Ref:** SESIÓN 07.5.E U-E-cross-1.
+
+### L-NEW45 — Wiki multi-locale translations sentiment-aware
+
+- **Status:** 🟢 lateral upgrade agendado — H2 expansion enabler
+- **Qué es:** generar wiki entries en 5 locales (es-MX base + en-US + pt-BR + es-AR + es-CO) con tono adaptado per region. No machine translation flat — prompt engineering per locale sentiment (formal PT-BR, coloquial AR, neutral MX, profesional EN-US, colombiano CO).
+- **Para qué sirve:** local resonance H2 expansion. User en Buenos Aires lee entry Palermo con "che, el barrio" natural, no traducción rígida.
+- **Beneficio concreto:** retention usuarios internacionales + diferenciador vs Google Translate portals.
+- **Fase target:** FASE 38+ International Expansion H2.
+- **Dependencia:** wiki_entries es-MX ship 07.5.E + locale-aware prompt templates + budget ×5 generations.
+- **Estimado:** 6-8 h + $5-10 LLM cost per re-generation (5 locales × 210 entries con prompt caching).
+- **Ref:** SESIÓN 07.5.E U-E-lateral-6.
+
+### L-NEW46 — Fix Haiku prompt caching cache_control ephemeral TTL (carryover 07.5.E)
+
+- **Status:** 🟡 deuda carryover 07.5.E — U-E-1 caching non-hit detectado post-ejecución
+- **Qué es:** script `scripts/compute/13_compute-atlas-wiki-haiku.ts` envía `system` array con 2 bloques `cache_control: { type: 'ephemeral' }` (schema + examples ~1100 tokens), pero 210 requests reportaron `input_cached=0` + `cache_created=0` en TODAS las calls. Cache no activa. Diagnosticar: (a) posible que Anthropic SDK v0.90.0 requiera field explícito extra; (b) posible min-tokens-per-breakpoint regression (threshold ahora 2048 en vez de 1024); (c) order blocks en system array vs messages; (d) system prompts dinámicos invalidando cache key.
+- **Para qué sirve:** reducir cost 70-80% en re-generaciones futuras (07.5.F multi-locale × 5 → $8 → $2).
+- **Beneficio concreto:** $6 saved per full re-run. Cumulative con L-NEW40 (TTS multi-locale) + L-NEW45 (multi-locale sentiment) × múltiples regeneraciones = $20-50 saved lifetime fase H1.
+- **Fase target:** FASE 22 antes Multimedia/Multi-locale.
+- **Dependencia:** investigar Anthropic docs actuales cache_control + test mínimo 2-call (first+second) validar cache_creation_input_tokens>0 first y cache_read>0 second.
+- **Estimado:** 2-3 h (diagnose + fix + re-run 10 zones validación).
+- **Ref:** SESIÓN 07.5.E cache_hit_rate=0.0% post-execution (205/210 calls all input_cached=0).
+
 ---
