@@ -23,7 +23,7 @@
 // position = count + 1. percentile = (1 − position/total) × 100.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { ScoreRegistryEntry } from '../registry';
+import type { ScoreRegistryEntry } from '../score-registry';
 import type { CalculatorInput, CalculatorOutput } from './base';
 
 // Tipado laxo porque las tablas zone_scores/project_scores/user_scores/score_history

@@ -4,7 +4,7 @@
 // Cache in-memory por country con TTL 1h evita query repetida por tick worker.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { ScoreTier } from '../registry';
+import type { ScoreTier } from '../score-registry';
 
 export interface TierGateResult {
   readonly gated: boolean;

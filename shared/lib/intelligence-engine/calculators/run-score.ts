@@ -11,7 +11,7 @@ import { generateNarrative } from '@/shared/lib/intelligence-engine/narrative/ai
 import { hashUserIdForTelemetry } from '@/shared/lib/telemetry/hash-user-id';
 import { posthog } from '@/shared/lib/telemetry/posthog';
 import { SupabaseScoreQueue } from '../queue';
-import { getScoreById, type ScoreRegistryEntry } from '../registry';
+import { getScoreById, type ScoreRegistryEntry } from '../score-registry';
 import type { Calculator, CalculatorInput, CalculatorOutput } from './base';
 import {
   type PersistResult,
@@ -211,7 +211,7 @@ export async function runScore(
       // Solo enqueue cuando entity apropiada para el scoreId existe.
       // Downstream scores con `dependencies: [scoreId]` en registry.
       // Iteración manual para evitar import cycles.
-      const { SCORE_REGISTRY } = await import('../registry');
+      const { SCORE_REGISTRY } = await import('../score-registry');
       const downstream = SCORE_REGISTRY.filter((e) => e.dependencies.includes(scoreId));
       for (const d of downstream) {
         const entityId = input.zoneId ?? input.projectId ?? input.userId;

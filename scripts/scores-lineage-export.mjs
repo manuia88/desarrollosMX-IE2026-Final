@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const registryMod = await import(
-  pathToFileURL(resolve(process.cwd(), 'shared/lib/intelligence-engine/registry.ts')).href
+  pathToFileURL(resolve(process.cwd(), 'shared/lib/intelligence-engine/score-registry.ts')).href
 );
 const SCORE_REGISTRY = registryMod.SCORE_REGISTRY;
 
@@ -105,7 +105,7 @@ ${rows}`);
 
 const content = `# Catálogo 03.15 — Score Lineage Graph
 
-> **AUTO-GENERADO** desde \`shared/lib/intelligence-engine/registry.ts\`.
+> **AUTO-GENERADO** desde \`shared/lib/intelligence-engine/score-registry.ts\`.
 > No editar a mano. Regenerar con \`npm run scores:lineage-export\`.
 >
 > Última actualización: ${new Date().toISOString().slice(0, 10)}

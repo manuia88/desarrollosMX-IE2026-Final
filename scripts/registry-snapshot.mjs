@@ -12,7 +12,7 @@ import { pathToFileURL } from 'node:url';
 // Fallback: ejecutar con `node --experimental-strip-types scripts/registry-snapshot.mjs`.
 
 const repoRoot = resolve(new URL('..', import.meta.url).pathname);
-const registryPath = resolve(repoRoot, 'shared/lib/intelligence-engine/registry.ts');
+const registryPath = resolve(repoRoot, 'shared/lib/intelligence-engine/score-registry.ts');
 const outPath = resolve(repoRoot, 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.json');
 
 try {

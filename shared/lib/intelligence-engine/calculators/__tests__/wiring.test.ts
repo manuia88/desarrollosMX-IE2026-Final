@@ -4,7 +4,7 @@
 // contiene la clave y el loader resuelve un Calculator válido.
 
 import { describe, expect, it } from 'vitest';
-import { SCORE_REGISTRY } from '../../registry';
+import { SCORE_REGISTRY } from '../../score-registry';
 import { registerN0Calculators } from '../n0';
 import { registerN01ToN11Calculators } from '../n01-n11';
 import { registerCalculator } from '../run-score';

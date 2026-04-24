@@ -476,3 +476,22 @@ Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-026_GLOBAL_PROPTECH_BENCHMARKS.md`. 
 | **TOTAL** | 452 → **459** (+7) |
 
 **Autor BLOQUE 11.S append:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 tarde | **Status:** Shipped H1 (main SHA 2071e9f, PR #32)
+
+---
+
+## Relaciones con otros catálogos (ADR-029)
+
+Este documento es el **inventario humano de features del producto**. NO confundir con:
+
+| Catálogo | Propósito | Frontera semantic |
+|---|---|---|
+| `shared/lib/intelligence-engine/score-registry.ts` | Score calculators IE | Fórmulas computacionales + dependencies + triggers cascade |
+| `public.ui_feature_flags` (tabla DB) | Feature flags UI tier-gating | Runtime feature gating pro/free/enterprise |
+| **`FEATURE_INVENTORY.md` (este doc)** | **Catálogo humano producto** | **Documentación narrativa para PM/stakeholders** |
+
+Los 3 catálogos son independientes. No existe obligación de sync 1:1 entre ellos:
+- Score calculators (`score-registry.ts`) pueden no tener feature flag si no son UI-gated
+- Feature flags (`ui_feature_flags` DB) pueden agrupar capabilities de varios FI-N
+- FI-N entries (este doc) agrupan features del punto de vista producto, no implementación
+
+Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-029_CANONICAL_CATALOG_NAMING.md` para rationale completo.

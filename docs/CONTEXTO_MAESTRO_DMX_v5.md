@@ -86,7 +86,7 @@ search_trends(0), market_pulse(0), zone_price_index(0), zona_snapshots(0)
 - **IE data**: geo_data_points, geo_snapshots (v4 nueva), macro_series, market_prices_secondary, str_market_data, search_trends, market_pulse, zone_price_index, zona_snapshots, external_data
 - **Tracking/Growth**: events, search_logs, project_views, wishlist, unit_change_log, inventory_snapshots, demand_queries, ai_generated_content, ai_usage_tracking, ai_prompt_versions, ai_coaching_log, automation_rules, workflow_executions
 - **Sistema**: audit_log, admin_actions, api_keys, api_request_logs, api_rate_limits, webhooks, webhook_logs, notificaciones, notificaciones_config, plans, subscriptions, supported_cities, metricas_kpi, asesor_outcomes, asesor_status, disc_profiles
-- **Permisos v5 (v5-S0 Tarea 1)**: `feature_registry`, `role_features`, `profile_feature_overrides`; función `resolve_features()` con cascada override > role > global default (BIBLIA-§2-Decisión4).
+- **Permisos v5 (v5-S0 Tarea 1)**: `ui_feature_flags`, `role_features`, `profile_feature_overrides`; función `resolve_features()` con cascada override > role > global default (BIBLIA-§2-Decisión4).
 
 ### Schemas críticos (de E2E por módulo)
 Principalmente relevantes para el cableado frontend-backend Dopamine:
@@ -1134,7 +1134,7 @@ Nuevas v5 (10):
 12. STATUS_MAP traduce frontend↔BD, nunca hardcodear
 13. Card3D es el componente estándar de cards
 14. Cada módulo tiene su tint color — respetar
-15. Todo feature nuevo → agregar a feature_registry primero
+15. Todo feature nuevo → agregar a ui_feature_flags primero
 16. Cada módulo = sprint independiente
 17. build limpio obligatorio antes de commit
 18. Módulo 7 = "Desarrollos" (no "Inventario")
@@ -1178,7 +1178,7 @@ Registradas oficialmente como **DISC-01..DISC-09** (BIBLIA-§4):
 - **Tablas que biblia menciona pero no verifiqué en BD**: `asesor_outcomes`, `calendario_eventos`, `disc_profiles`, `market_alerts`, `ai_coaching_log`, `comisiones`, `supported_cities`. Todas aparecen en lista BE1-§Categorías pero no confirmadas con `information_schema`.
 
 ### 25.4 BD tiene pero doc no describe
-- **Sistema de permisos v5** (feature_registry, role_features, profile_feature_overrides + resolve_features): CREADAS en v5-S0 Tarea 1. Biblia 17 los menciona pero BE1 original no los tenía.
+- **Sistema de permisos v5** (ui_feature_flags, role_features, profile_feature_overrides + resolve_features): CREADAS en v5-S0 Tarea 1. Biblia 17 los menciona pero BE1 original no los tenía.
 - **Tabla marketing_portales**: CREADA en v5.1-S3. No está en BE1 original.
 - **Migración streaks_function**: aplicada en v5.1 (commit fixture). Falta documentar.
 
@@ -1273,7 +1273,7 @@ De los 14 hallazgos seguridad prioritarios + 10 tareas fundación (BIBLIA-§8, S
 - ❌ Tarea 2: ALTER dmx_indices CHECK (+DMX-MOM, DMX-LIV) — DISC-04
 - ❌ Tarea 3: ALTER tareas.type CHECK (ampliar) — o STATUS_MAP en FE
 - ❌ Tarea 4: DROP operaciones.lado (requiere autorización Manu) — DISC-03
-- ❌ Tarea 5: Seed ~120 feature_registry rows
+- ❌ Tarea 5: Seed ~120 ui_feature_flags rows
 - ❌ Tarea 6: Seed role_features defaults
 - ✅ Tarea 7: lib/constants/status-maps.ts (DONE v5.1-S1)
 - ❌ Tarea 8: lib/constants/feature-keys.ts

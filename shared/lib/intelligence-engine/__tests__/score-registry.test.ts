@@ -8,7 +8,7 @@ import {
   getScoresByLevel,
   getScoresByTier,
   SCORE_REGISTRY,
-} from '../registry';
+} from '../score-registry';
 
 const REPO_ROOT = resolve(__dirname, '..', '..', '..', '..');
 
