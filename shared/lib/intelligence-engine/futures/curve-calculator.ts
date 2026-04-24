@@ -444,3 +444,152 @@ export async function batchCalculatePulseForecastsCDMX(
   }
   return { forecasts_computed: forecastsComputed, failed };
 }
+
+// ============================================================
+// BLOQUE 11.R.5 (U15) — Constellations × Futures correlation boost.
+//
+// computeCorrelationBoost: fetch top K constellation edges del
+// coloniaId, weighted-average forward_Xm de esos targets, ajusta el
+// forward del source con un boost factor (±5% max) basado en coherencia
+// con neighbors. On-demand query (no persiste — summary inline).
+// ============================================================
+
+const CORRELATION_BOOST_MAX_PCT = 0.05;
+const CORRELATION_BOOST_TOP_K = 10;
+
+export interface CorrelationBoost {
+  readonly indexCode: string;
+  readonly horizon: ForwardHorizon;
+  readonly own_forward: number | null;
+  readonly neighbors_avg: number | null;
+  readonly neighbors_count: number;
+  readonly boost_pct: number; // -5..+5
+  readonly adjusted_forward: number | null;
+}
+
+export interface ComputeCorrelationBoostOptions {
+  readonly coloniaId: string;
+  readonly indexCode: string;
+  readonly horizon: ForwardHorizon;
+  readonly countryCode?: string;
+  readonly supabase: SupabaseClient<Database>;
+}
+
+export async function computeCorrelationBoost(
+  opts: ComputeCorrelationBoostOptions,
+): Promise<CorrelationBoost> {
+  const country = opts.countryCode ?? 'MX';
+  const columnName = `forward_${opts.horizon}m` as
+    | 'forward_3m'
+    | 'forward_6m'
+    | 'forward_12m'
+    | 'forward_24m';
+
+  const { data: ownRow } = await opts.supabase
+    .from('futures_curve_projections')
+    .select('forward_3m, forward_6m, forward_12m, forward_24m')
+    .eq('index_code', opts.indexCode)
+    .eq('scope_type', 'colonia')
+    .eq('scope_id', opts.coloniaId)
+    .eq('country_code', country)
+    .order('base_period_date', { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  const ownForward = ownRow ? (ownRow[columnName] as number | null) : null;
+
+  const { data: edges } = await opts.supabase
+    .from('zone_constellations_edges')
+    .select('target_colonia_id, edge_weight, period_date')
+    .eq('source_colonia_id', opts.coloniaId)
+    .order('period_date', { ascending: false })
+    .order('edge_weight', { ascending: false })
+    .limit(CORRELATION_BOOST_TOP_K * 2);
+
+  const filteredEdges = (edges ?? [])
+    .filter(
+      (e): e is { target_colonia_id: string; edge_weight: number; period_date: string } =>
+        typeof e.target_colonia_id === 'string' && typeof e.edge_weight === 'number',
+    )
+    .slice(0, CORRELATION_BOOST_TOP_K);
+
+  if (filteredEdges.length === 0 || ownForward === null) {
+    return {
+      indexCode: opts.indexCode,
+      horizon: opts.horizon,
+      own_forward: ownForward,
+      neighbors_avg: null,
+      neighbors_count: 0,
+      boost_pct: 0,
+      adjusted_forward: ownForward,
+    };
+  }
+
+  const neighborIds = filteredEdges.map((e) => e.target_colonia_id);
+  const { data: neighborRows } = await opts.supabase
+    .from('futures_curve_projections')
+    .select('scope_id, forward_3m, forward_6m, forward_12m, forward_24m')
+    .eq('index_code', opts.indexCode)
+    .eq('scope_type', 'colonia')
+    .eq('country_code', country)
+    .in('scope_id', neighborIds);
+
+  if (!neighborRows || neighborRows.length === 0) {
+    return {
+      indexCode: opts.indexCode,
+      horizon: opts.horizon,
+      own_forward: ownForward,
+      neighbors_avg: null,
+      neighbors_count: 0,
+      boost_pct: 0,
+      adjusted_forward: ownForward,
+    };
+  }
+
+  const weightById = new Map<string, number>();
+  for (const e of filteredEdges) weightById.set(e.target_colonia_id, e.edge_weight);
+
+  let weightedSum = 0;
+  let weightSum = 0;
+  for (const n of neighborRows) {
+    const sid = n.scope_id;
+    if (typeof sid !== 'string') continue;
+    const f = n[columnName];
+    if (typeof f !== 'number') continue;
+    const w = weightById.get(sid) ?? 0;
+    if (w <= 0) continue;
+    weightedSum += f * w;
+    weightSum += w;
+  }
+
+  if (weightSum === 0) {
+    return {
+      indexCode: opts.indexCode,
+      horizon: opts.horizon,
+      own_forward: ownForward,
+      neighbors_avg: null,
+      neighbors_count: 0,
+      boost_pct: 0,
+      adjusted_forward: ownForward,
+    };
+  }
+
+  const neighborsAvg = weightedSum / weightSum;
+  // Boost proportional a gap (neighbor - own) / own, capped a ±5%.
+  const rawBoost = ownForward !== 0 ? (neighborsAvg - ownForward) / ownForward : 0;
+  const boostPct = Math.max(
+    -CORRELATION_BOOST_MAX_PCT,
+    Math.min(CORRELATION_BOOST_MAX_PCT, rawBoost),
+  );
+  const adjusted = ownForward * (1 + boostPct);
+
+  return {
+    indexCode: opts.indexCode,
+    horizon: opts.horizon,
+    own_forward: Math.round(ownForward * 100) / 100,
+    neighbors_avg: Math.round(neighborsAvg * 100) / 100,
+    neighbors_count: neighborRows.length,
+    boost_pct: Math.round(boostPct * 10_000) / 100, // 2-decimal percentage
+    adjusted_forward: Math.round(adjusted * 100) / 100,
+  };
+}

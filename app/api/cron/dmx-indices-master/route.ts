@@ -33,6 +33,8 @@ import {
   buildAndPersistSignatures,
   refreshTwinsForZone,
 } from '@/shared/lib/intelligence-engine/climate/twin-engine';
+import { buildAllConstellationEdges } from '@/shared/lib/intelligence-engine/constellations/constellation-engine';
+import { buildClusters } from '@/shared/lib/intelligence-engine/constellations/louvain';
 import {
   batchCalculateForwardCurvesCDMX,
   batchCalculatePulseForecastsCDMX,
@@ -131,6 +133,10 @@ export async function POST(request: Request): Promise<NextResponse> {
   let ghostZonesProcessed = 0;
   let ghostZonesUpserted = 0;
   let ghostZonesFailed = 0;
+  let constellationsProcessed = 0;
+  let constellationsEdgesUpserted = 0;
+  let constellationsClustersComputed = 0;
+  let constellationsFailed = 0;
 
   try {
     // H1 alcance: monthly/quarterly/annual corren el batch CDMX colonias completo.
@@ -315,6 +321,37 @@ export async function POST(request: Request): Promise<NextResponse> {
       });
     }
 
+    // BLOQUE 11.R — Zone Constellations edges + Louvain clusters.
+    // Depende de migration_flow (11.G) + climate_twin (11.P) + genoma (11.M)
+    // + pulse (11.F) del mismo dispatch — corre al final del bucket.
+    try {
+      const edgesResult = await buildAllConstellationEdges({ supabase, periodDate });
+      constellationsProcessed = edgesResult.zones_processed;
+      constellationsEdgesUpserted = edgesResult.edges_upserted;
+      constellationsFailed = edgesResult.failures;
+
+      try {
+        const clustersResult = await buildClusters({ supabase, periodDate });
+        constellationsClustersComputed = clustersResult.clusters_computed;
+      } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        errors.push({ stage: `${dispatched}:constellations_clusters`, message });
+        console.error('[dmx-indices-master] constellations clusters failed', {
+          dispatched,
+          message,
+          error: err,
+        });
+      }
+    } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
+      errors.push({ stage: `${dispatched}:constellations`, message });
+      console.error('[dmx-indices-master] constellations dispatch failed', {
+        dispatched,
+        message,
+        error: err,
+      });
+    }
+
     // BLOQUE 11.P — Climate Twin ingestion + signature + twin refresh.
     // Corre monthly/quarterly/annual. Falla NO tumba dispatch.
     try {
@@ -466,6 +503,10 @@ export async function POST(request: Request): Promise<NextResponse> {
     ghost_zones_processed: ghostZonesProcessed,
     ghost_zones_upserted: ghostZonesUpserted,
     ghost_zones_failed: ghostZonesFailed,
+    constellations_processed: constellationsProcessed,
+    constellations_edges_upserted: constellationsEdgesUpserted,
+    constellations_clusters_computed: constellationsClustersComputed,
+    constellations_failed: constellationsFailed,
     duration_ms: Date.now() - t0,
     errors,
     utc_timestamp: now.toISOString(),

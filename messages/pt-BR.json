@@ -2259,5 +2259,75 @@
       "over_hyped": "Super-hypada",
       "extreme_hype": "Hype extremo"
     }
+  },
+  "Constellations": {
+    "landing": {
+      "kicker": "LinkedIn Network de bairros",
+      "title": "Zone Constellations — o grafo dos seus bairros",
+      "subtitle": "Explore relações multi-camadas entre bairros: migração, clima gêmeo, DNA genoma e pulse. Descubra clusters naturais e paths relacionais.",
+      "meta_description": "Grafo interconectado de relações entre bairros: migração, clima, genoma e pulse com clusters Louvain e path finder.",
+      "edge_migration_title": "Migração",
+      "edge_migration_body": "Fluxos reais de mudanças entre zonas (RPP escrituras + stubs).",
+      "edge_climate_title": "Clima Gêmeo",
+      "edge_climate_body": "Similaridade climática histórica 15 anos (NOAA + CONAGUA).",
+      "edge_genoma_title": "DNA Genoma",
+      "edge_genoma_body": "Cosine similarity sobre vetores 64-dim de características de bairro.",
+      "edge_pulse_title": "Pulse Correlation",
+      "edge_pulse_body": "Proximidade de score Pulse no mesmo período.",
+      "contagion_title": "Paths de contágio",
+      "contagion_body": "Como o hype de zonas super-hypadas se propaga para zonas reais vizinhas.",
+      "explore_title": "Explore um bairro",
+      "explore_body": "Use /indices/constellations/:coloniaId para ver o grafo focado com sliders + path finder.",
+      "methodology_cta": "Ver metodologia"
+    },
+    "focus": {
+      "title": "Constelação do bairro",
+      "title_prefix": "Constelação",
+      "meta_description": "Grafo focado de relações multi-tipo para este bairro.",
+      "intro": "Nós coloridos por cluster Louvain. Espessura de arestas por peso combinado. Use os sliders para ajustar pesos.",
+      "loading": "Carregando grafo…",
+      "error": "Erro ao carregar grafo.",
+      "no_edges": "Este bairro ainda não tem relações fortes calculadas.",
+      "invalid_id": "ID de bairro inválido.",
+      "unlabeled_zone": "Bairro sem nome"
+    },
+    "graph": {
+      "aria_label": "Grafo de bairros relacionados",
+      "empty": "Sem relações para mostrar.",
+      "unlabeled_zone": "Bairro sem nome"
+    },
+    "edge_types": {
+      "migration": "Migração",
+      "climate_twin": "Clima gêmeo",
+      "genoma_similarity": "DNA Genoma",
+      "pulse_correlation": "Pulse"
+    },
+    "sliders": {
+      "title": "Pesos das arestas",
+      "help": "Ajuste os pesos de cada camada para ver como muda o ranking de relações. Cliente-side — sem re-query.",
+      "reset": "Resetar",
+      "sum_label": "Soma: {sum}%"
+    },
+    "path_finder": {
+      "title": "Path finder",
+      "help": "Encontre a rota mais curta entre 2 bairros através do grafo (máx 5 hops).",
+      "source_label": "Bairro origem (UUID)",
+      "source_placeholder": "Ex. aaaa-...",
+      "target_label": "Bairro destino (UUID)",
+      "target_placeholder": "Ex. bbbb-...",
+      "search_cta": "Buscar rota",
+      "loading": "Buscando…",
+      "error": "Erro ao buscar rota.",
+      "result_found": "Rota encontrada em {hops} hops (peso total {weight})",
+      "result_not_found": "Sem rota encontrada dentro do limite.",
+      "unlabeled_zone": "Bairro sem nome"
+    },
+    "contagion": {
+      "loading": "Carregando contagion paths…",
+      "error": "Erro ao carregar paths.",
+      "empty": "Sem contagion paths detectados neste período.",
+      "weight_label": "Peso",
+      "unlabeled_zone": "Bairro sem nome"
+    }
   }
 }

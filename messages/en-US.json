@@ -2259,5 +2259,75 @@
       "over_hyped": "Over-hyped",
       "extreme_hype": "Extreme hype"
     }
+  },
+  "Constellations": {
+    "landing": {
+      "kicker": "LinkedIn Network for neighborhoods",
+      "title": "Zone Constellations — the graph of your neighborhoods",
+      "subtitle": "Explore multi-layer relations between neighborhoods: migration, climate twin, DNA genome, and pulse. Discover natural clusters and relational paths.",
+      "meta_description": "Interconnected graph of relations between neighborhoods: migration, climate, genome, and pulse with Louvain clusters and path finder.",
+      "edge_migration_title": "Migration",
+      "edge_migration_body": "Real moving flows between zones (RPP deeds + stubs).",
+      "edge_climate_title": "Climate Twin",
+      "edge_climate_body": "15-year historical climate similarity (NOAA + CONAGUA).",
+      "edge_genoma_title": "DNA Genome",
+      "edge_genoma_body": "Cosine similarity on 64-dim vectors of neighborhood traits.",
+      "edge_pulse_title": "Pulse Correlation",
+      "edge_pulse_body": "Pulse score proximity in the same period.",
+      "contagion_title": "Contagion paths",
+      "contagion_body": "How hype from over-hyped zones propagates to real neighboring zones.",
+      "explore_title": "Explore a neighborhood",
+      "explore_body": "Use /indices/constellations/:coloniaId to view the focused graph with sliders + path finder.",
+      "methodology_cta": "View methodology"
+    },
+    "focus": {
+      "title": "Neighborhood constellation",
+      "title_prefix": "Constellation",
+      "meta_description": "Focused graph of multi-type relations for this neighborhood.",
+      "intro": "Nodes colored by Louvain cluster. Edge thickness by combined weight. Use sliders to adjust weights.",
+      "loading": "Loading graph…",
+      "error": "Error loading graph.",
+      "no_edges": "This neighborhood has no strong relations computed yet.",
+      "invalid_id": "Invalid neighborhood ID.",
+      "unlabeled_zone": "Unnamed neighborhood"
+    },
+    "graph": {
+      "aria_label": "Graph of related neighborhoods",
+      "empty": "No relations to display.",
+      "unlabeled_zone": "Unnamed neighborhood"
+    },
+    "edge_types": {
+      "migration": "Migration",
+      "climate_twin": "Climate twin",
+      "genoma_similarity": "DNA Genome",
+      "pulse_correlation": "Pulse"
+    },
+    "sliders": {
+      "title": "Edge weights",
+      "help": "Adjust each layer's weight to see how the relation ranking changes. Client-side — no re-query.",
+      "reset": "Reset",
+      "sum_label": "Sum: {sum}%"
+    },
+    "path_finder": {
+      "title": "Path finder",
+      "help": "Find the shortest route between 2 neighborhoods through the graph (max 5 hops).",
+      "source_label": "Source neighborhood (UUID)",
+      "source_placeholder": "e.g. aaaa-...",
+      "target_label": "Target neighborhood (UUID)",
+      "target_placeholder": "e.g. bbbb-...",
+      "search_cta": "Find path",
+      "loading": "Searching…",
+      "error": "Error finding path.",
+      "result_found": "Path found in {hops} hops (total weight {weight})",
+      "result_not_found": "No path found within the limit.",
+      "unlabeled_zone": "Unnamed neighborhood"
+    },
+    "contagion": {
+      "loading": "Loading contagion paths…",
+      "error": "Error loading paths.",
+      "empty": "No contagion paths detected in this period.",
+      "weight_label": "Weight",
+      "unlabeled_zone": "Unnamed neighborhood"
+    }
   }
 }

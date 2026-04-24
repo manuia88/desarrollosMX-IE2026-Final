@@ -1,6 +1,7 @@
 import { meRouter } from '@/features/auth/routes/me';
 import { mfaRouter } from '@/features/auth/routes/mfa';
 import { roleRequestRouter } from '@/features/auth/routes/role-request';
+import { constellationsRouter } from '@/features/constellations/routes/constellations';
 import { fxRouter } from '@/features/fx/routes/fx';
 import { ghostZonesRouter } from '@/features/ghost-zones/routes/ghost-zones';
 import { aiRouter } from '@/features/ia-generativa/routes/ai';
@@ -39,6 +40,7 @@ export const appRouter = router({
   })),
   ai: aiRouter,
   causal: causalRouter,
+  constellations: constellationsRouter,
   fx: fxRouter,
   ghostZones: ghostZonesRouter,
   market: marketRouter,
