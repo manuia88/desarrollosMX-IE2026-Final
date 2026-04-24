@@ -455,3 +455,24 @@ Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-026_GLOBAL_PROPTECH_BENCHMARKS.md`. 
 | **TOTAL** | 441 → **452** (+11) |
 
 **Autor BLOQUES 11.Q+11.R append:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 | **Status:** Shipped H1 (main SHA acb7d16, PR #30)
+
+### 11.10 Living Atlas wiki colectiva (FI-100 a FI-106)
+
+| ID | Nombre | Dimensión IE | Nivel | Status | Rutas asociadas |
+|---|---|---|---|---|---|
+| FI-100 | Wiki Content Renderer seguro (react-markdown + remark-gfm + rehype-sanitize, ADR-028) | LivingAtlas | H1 | Full | features/atlas/components/WikiContentRenderer.tsx |
+| FI-101 | SEO Slug Router (resolveColoniaIdBySlug + resolveSlugByColoniaId + `zone_slugs` multi-country) | LivingAtlas | H1 | Full | features/atlas/lib/slug-resolver.ts · features/atlas/lib/slugify.ts |
+| FI-102 | Markdown Safe Pipeline (XSS blocked: javascript:, \<script\>, on* handlers, \<iframe\>; GFM tablas + task lists + strikethrough) | LivingAtlas | H1 | Full | features/atlas/components/WikiContentRenderer.tsx · ADR-028 |
+| FI-103 | Wiki TOC con smooth-scroll anchors + sticky sidebar (8 secciones canónicas) | LivingAtlas | H1 | Full | features/atlas/components/WikiSectionList.tsx · /atlas/[coloniaSlug] |
+| FI-104 | Atlas Landing con lista colonias publicadas + empty state + metadata 5 locales | LivingAtlas | H1 | Full | app/[locale]/(public)/atlas/page.tsx · trpc.atlas.listPublishedColonias |
+| FI-105 | Atlas × Genoma cross-function (sidebar link `/indices/DMX-LIV/similares?scope_id=<coloniaId>` reuso 11.M) | Cross-fn (Atlas × Genoma) | H1 | Full | app/[locale]/(public)/atlas/[coloniaSlug]/page.tsx · CF-11.S-1 |
+| FI-106 | Atlas × Climate Twin cross-function (sidebar link `/indices/DMX-LIV/clima-gemelo?scope_id=<coloniaId>` reuso 11.P) | Cross-fn (Atlas × Climate Twin) | H1 | Full | app/[locale]/(public)/atlas/[coloniaSlug]/page.tsx · CF-11.S-2 |
+
+### 11.11 Totales actualizados post BLOQUE 11.S
+
+| Categoría | Cambio |
+|---|---|
+| **FASE 11 XL (FI-*)** | 99 → **106** (+7) |
+| **TOTAL** | 452 → **459** (+7) |
+
+**Autor BLOQUE 11.S append:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 tarde | **Status:** Shipped H1 (main SHA 2071e9f, PR #32)

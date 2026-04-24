@@ -368,3 +368,27 @@
 - `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` — scores GHOST_ZONES_RANKING + ZONE_CONSTELLATIONS
 
 **Autor BLOQUES 11.Q+11.R:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 | **Status:** Shipped H1 (main SHA acb7d16, PR #30)
+
+### Canal Living Atlas (Producto 10.23)
+
+- **Landing público SEO-first:** `/{locale}/atlas` — lista colonias publicadas ordenadas alfabéticamente con cards `[colonia-label / colonia-slug]` → Link a detail. Empty state bilingüe cuando `colonia_wiki_entries published=true` = 0 rows. Count dinámico en header. Metadata: canonical + alternates 5 locales + description multi-lingüe.
+- **Detail público por slug:** `/{locale}/atlas/[coloniaSlug]` — resolución `zone_slugs → colonia_id → colonia_wiki_entries (published=true, latest version)`. Layout 2 columnas: contenido principal con TOC sticky + 8 secciones anchored + WikiContentRenderer (react-markdown + remark-gfm + rehype-sanitize, ADR-028). Sidebar sticky con cross-links a Genoma similares + Climate Twin clima-gemelo. Footer methodology note. JSON-LD Article structured data server-side con `dateModified=edited_at` + `inLanguage=locale`.
+- **SEO safety + XSS safety:** XSS blocked por rehype-sanitize default schema — javascript: URIs, `<script>`, `on*` handlers, `<iframe>` todos stripped. JSON-LD escape `<` → `\\u003c` para cerrar script tag safety. URLs kebab-case inmutables (UNIQUE constraint BD) — link rot protegido.
+- **Seed cost transparency:** `$1.73 USD` para 200 colonias ≈ `$0.0086` por colonia (900 input tokens × $0.80/M + 2200 output × $4.00/M). Hard cap `$3 USD` con guard pre-batch + running cost. Re-seed con nueva versión `haiku_v2` requiere solo bumping `version` en upsert — idempotente por `(colonia_id, version)`.
+- **Workflow editorial diferido:** H1 `published=true + reviewed=false`. L-NEW8 FASE 12 N5 activa `reviewed=true` gate con editor Tiptap/Lexical + moderación humana (agentes locales + brokers enriquecen contenido). UI `/admin/atlas/[slug]/edit` con revisión por párrafo + attribution.
+- **Cross-function CF-11.S-1 Atlas × Genoma:** sidebar sticky link `/indices/DMX-LIV/similares?scope_id=<coloniaId>` (URL encode) reutiliza 11.M genoma similarity engine on-demand — "Ver colonias similares" (Genoma). Zero migration, zero schema change.
+- **Cross-function CF-11.S-2 Atlas × Climate Twin:** sidebar sticky link `/indices/DMX-LIV/clima-gemelo?scope_id=<coloniaId>` reutiliza 11.P climate twin engine on-demand — "Clima Gemelo" para descubrir colonias con patrones climáticos similares. Zero migration, zero schema change.
+- **Editor rico futuro (L-NEW8 FASE 12 N5):** Tiptap o Lexical WYSIWYG editor con moderación `reviewed_by` human workflow — reactiva gate `reviewed=true` + attribution por párrafo. Enriquecimiento colaborativo via agentes locales y brokers sin tocar markdown crudo.
+- **Sections normalizadas futuro (L-NEW9 FASE 13):** si escala nacional >5k colonias, refactor `sections jsonb` → tabla `colonia_wiki_sections (colonia_id, version, section_key, heading, content_md)` con PK compuesta — habilita queries "mejor gastronomía por ciudad" agregadas + fragment-level review workflow + GIN indexing per-section.
+- **Brand kits enterprise (H2):** API bulk wiki export JSON/markdown para desarrolladores con brand kits custom por zonas portafolio; widget embebible `<iframe>` estilo `/embed/atlas/<slug>` para sitios de asesores inmobiliarios.
+- **Categoría nueva:** primer portal MX con contenido editorial por colonia indexable SEO en LATAM. Competidores (Habi/La Haus/Inmuebles24) ofrecen listings sin contexto narrativo editorial. "Wikipedia de colonias" como narrative handle.
+
+### Cross-references append 11.S
+
+- `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` — L-NEW8/9 agendados + 5 upgrades shipped (U16..U20) + L-NEW10 cleanup ✅ SHIPPED
+- `docs/03_CATALOGOS/03.1_CATALOGO_BD_TABLAS.md` §21 — zone_slugs + wiki RLS relax + allowlist v25
+- `docs/03_CATALOGOS/03.13_E2E_CONNECTIONS_MAP.md` — 2 cross-functions CF-11.S-1 (Atlas × Genoma) + CF-11.S-2 (Atlas × Climate Twin)
+- `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` — score LIVING_ATLAS
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-028-living-atlas-markdown-stack.md` — decisión stack markdown
+
+**Autor BLOQUE 11.S:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 tarde | **Status:** Shipped H1 (main SHA 2071e9f, PR #32)

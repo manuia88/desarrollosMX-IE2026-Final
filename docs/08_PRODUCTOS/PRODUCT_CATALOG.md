@@ -934,3 +934,26 @@
 **Total actualizado: 44 productos empaquetados (42 pre + 2 BLOQUES 11.Q+11.R).**
 
 **Autor BLOQUES 11.Q+11.R:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 | **Status:** Shipped H1 (main SHA acb7d16, PR #30)
+
+### Producto 10.23 — "Living Atlas" (wiki colectiva colonias)
+
+**Pitch:** Wikipedia editorial de las colonias de CDMX. Cada entrada cubre 8 secciones narrativas (historia, carácter, transporte, gastronomía, vida cultural, seguridad, mercado inmobiliario + intro) con markdown seguro renderizado server-side, TOC smooth-scroll anchors, URLs SEO-friendly por slug (`/atlas/roma-norte`, `/atlas/condesa`), metadata 5 locales + JSON-LD Article structured data. Seed inicial generado por Claude Haiku 4.5 cost-capped (proyección ~$1.73 USD para 200 colonias, hard cap $3 USD).
+**Audiencia:** Comprador (descubrir el tejido cultural real detrás de una colonia, no solo precios) + Asesor inmobiliario (copy editorial reutilizable en pitches + sitio propio) + MasterBroker (mapas editoriales para marketing B2C). Público general con SEO indexable.
+**Tiers pricing:**
+- **Free (público)**: lectura completa 200 colonias CDMX H1 (landing + detail + cross-links a Genoma + Climate Twin)
+- **Pro (agendado L-NEW8 FASE 12 N5)**: editor rico Tiptap/Lexical + revisión colaborativa con workflow `reviewed=true` para agentes locales y brokers que quieran enriquecer contenido (sus ediciones aparecen con attribution)
+- **Enterprise** (H2): API bulk wiki export + brand kits por desarrollador (contenido custom por zonas portafolio) + widget embebible `<iframe>` para sitios de asesores
+**Canal primario:** `/{locale}/atlas` landing SEO-first + `/{locale}/atlas/[coloniaSlug]` detail públicas. Cross-function CF-11.S-1 Atlas × Genoma (link sidebar similares 11.M) + CF-11.S-2 Atlas × Climate Twin (link sidebar clima-gemelo 11.P).
+**Features:** FI-100, FI-101, FI-102, FI-103, FI-104, FI-105, FI-106.
+**Diferenciador moat:** primer portal MX con contenido editorial por colonia indexable SEO — competidores (Habi/La Haus/Inmuebles24) ofrecen listings sin contexto narrativo editorial. Combina LLM seed (escala inicial) + workflow editorial humano (enriquecimiento L-NEW8) + renderer XSS-safe production-ready + cross-functions con Genoma/Climate Twin que ningún portal puede replicar sin pipeline completo DMX. Slug routing multi-country + multi-scope desacoplado (tabla `zone_slugs` normalizada) escala a 5+ países sin refactor.
+**Status:** H1 Shipped (main SHA 2071e9f → PR #32). Script seed Haiku `haiku_v1` implícito; upgrades L-NN agendados (L-NEW8 editor Tiptap/Lexical + reviewed queue FASE 12 N5 · L-NEW9 sections normalizadas FASE 13 si escala nacional >5k colonias).
+
+### Matriz actualizada 11.S
+
+| # | Producto | Persona primaria | Free | Pro/Starter | Enterprise |
+|---|---|---|---|---|---|
+| 10.23 | Living Atlas | Comprador + Asesor + MasterBroker | 200 colonias CDMX wiki + cross-links Genoma/Climate | Editor Tiptap + reviewed queue collaborative (L-NEW8 FASE 12 N5) | API bulk + brand kits + widgets embebibles |
+
+**Total actualizado: 45 productos empaquetados (44 pre + 1 BLOQUE 11.S).**
+
+**Autor BLOQUE 11.S:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-24 tarde | **Status:** Shipped H1 (main SHA 2071e9f, PR #32)
