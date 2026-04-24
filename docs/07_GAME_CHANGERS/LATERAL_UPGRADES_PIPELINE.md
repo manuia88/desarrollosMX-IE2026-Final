@@ -4,6 +4,8 @@
 > **Filosofía:** DMX no es portal más — es categoría nueva (Spatial Decision Intelligence). Estos laterales convierten datos crudos del IE en features que generan engagement, viralidad, retención y posicionamiento de marca.
 > **Maintenance:** cada lateral tiene status (proposed/approved/scheduled/in_progress/done). Cuando se ejecuta la fase target, el lateral pasa a "done" y se mueve a histórico.
 
+> **2026-04-24 — FASE 07.6.B Crosswalk Matrix shipped.** ~69 candidatos L-NEW nuevos detectados durante crosswalk × 150 features prototype × DMX shipped — pendientes consolidación canonical en sub-sesión 07.6.F. Ver `docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md` sección "L-NEW candidates nuevos detectados (71 entries pendientes 07.6.F)".
+
 ---
 
 ## Status legend
