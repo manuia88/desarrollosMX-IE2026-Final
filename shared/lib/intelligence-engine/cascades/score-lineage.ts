@@ -2,7 +2,7 @@
 // Exporta dependency tree desde SCORE_REGISTRY + mermaid graph auto-gen.
 // Consumidor: /api/admin/scores/dependencies/:scoreId + scripts/scores-lineage-export.mjs.
 
-import { SCORE_REGISTRY, type ScoreRegistryEntry } from '../registry';
+import { SCORE_REGISTRY, type ScoreRegistryEntry } from '../score-registry';
 
 export interface LineageNode {
   readonly score_id: string;

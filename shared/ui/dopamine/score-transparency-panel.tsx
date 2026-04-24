@@ -7,7 +7,7 @@ import type {
   Confidence,
 } from '@/shared/lib/intelligence-engine/calculators/base';
 import { getScoreLineage } from '@/shared/lib/intelligence-engine/cascades/score-lineage';
-import type { ScoreRegistryEntry } from '@/shared/lib/intelligence-engine/registry';
+import type { ScoreRegistryEntry } from '@/shared/lib/intelligence-engine/score-registry';
 import { cn } from '../primitives/cn';
 import { Dialog } from '../primitives/dialog';
 import { ConfidenceBadge } from './confidence-badge';

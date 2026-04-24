@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import type { CalculatorOutput } from '@/shared/lib/intelligence-engine/calculators/base';
-import { SCORE_REGISTRY } from '@/shared/lib/intelligence-engine/registry';
+import { SCORE_REGISTRY } from '@/shared/lib/intelligence-engine/score-registry';
 import {
   IntelligenceCard,
   type IntelligenceCardEntry,

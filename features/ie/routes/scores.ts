@@ -4,7 +4,7 @@ import { authenticatedProcedure } from '@/server/trpc/middleware';
 import { filterRowsForPublic } from '@/shared/lib/intelligence-engine/calculators/score-visibility';
 import { tierGate } from '@/shared/lib/intelligence-engine/calculators/tier-gate';
 import { getScoreLineage } from '@/shared/lib/intelligence-engine/cascades/score-lineage';
-import { SCORE_REGISTRY } from '@/shared/lib/intelligence-engine/registry';
+import { SCORE_REGISTRY } from '@/shared/lib/intelligence-engine/score-registry';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 
 const ADMIN_ROLES: ReadonlySet<string> = new Set(['superadmin', 'mb_admin']);

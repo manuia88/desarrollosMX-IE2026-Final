@@ -1,3 +1,13 @@
+// score-registry.ts — catálogo de SCORE CALCULATORS del Intelligence Engine.
+//
+// NO confundir con:
+//   - Tabla DB `public.ui_feature_flags` (feature flags UI tier-gating, ver
+//     migration 20260424220000).
+//   - `docs/08_PRODUCTOS/FEATURE_INVENTORY.md` (catálogo docs producto humano).
+//
+// Este archivo es SCORE CALCULATORS IE: fórmulas, dependencies, triggers cascade.
+// Ver ADR-029 canonical-catalog-naming.
+//
 // Registry central del Intelligence Engine: 138 scores (incluye 15 índices DMX FASE 11 XL + PULSE + MIGRATION_FLOW + TREND_GENOME + SCORECARD_NACIONAL + LIFEPATH + CLIMATE_TWIN + GHOST_ZONES_RANKING 11.Q + ZONE_CONSTELLATIONS 11.R + LIVING_ATLAS 11.S).
 // Fuente autoritaria: docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md +
 // ADR-010 §D4/§D7 (cascadas formales) + ADR-027 (FASE 11 XL índices DMX).

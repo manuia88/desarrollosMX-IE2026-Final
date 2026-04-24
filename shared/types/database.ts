@@ -2278,59 +2278,6 @@ export type Database = {
         }
         Relationships: []
       }
-      feature_registry: {
-        Row: {
-          category: string
-          code: string
-          created_at: string
-          description_es: string | null
-          h_phase: number
-          is_beta: boolean
-          is_enabled: boolean
-          is_premium: boolean
-          min_plan: string | null
-          module: string
-          name_en: string
-          name_es: string
-        }
-        Insert: {
-          category: string
-          code: string
-          created_at?: string
-          description_es?: string | null
-          h_phase?: number
-          is_beta?: boolean
-          is_enabled?: boolean
-          is_premium?: boolean
-          min_plan?: string | null
-          module: string
-          name_en: string
-          name_es: string
-        }
-        Update: {
-          category?: string
-          code?: string
-          created_at?: string
-          description_es?: string | null
-          h_phase?: number
-          is_beta?: boolean
-          is_enabled?: boolean
-          is_premium?: boolean
-          min_plan?: string | null
-          module?: string
-          name_en?: string
-          name_es?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "feature_registry_min_plan_fkey"
-            columns: ["min_plan"]
-            isOneToOne: false
-            referencedRelation: "plans"
-            referencedColumns: ["code"]
-          },
-        ]
-      }
       fiscal_docs: {
         Row: {
           cancel_reason: string | null
@@ -6231,7 +6178,7 @@ export type Database = {
             foreignKeyName: "profile_feature_overrides_feature_code_fkey"
             columns: ["feature_code"]
             isOneToOne: false
-            referencedRelation: "feature_registry"
+            referencedRelation: "ui_feature_flags"
             referencedColumns: ["code"]
           },
           {
@@ -6888,7 +6835,7 @@ export type Database = {
             foreignKeyName: "role_features_feature_code_fkey"
             columns: ["feature_code"]
             isOneToOne: false
-            referencedRelation: "feature_registry"
+            referencedRelation: "ui_feature_flags"
             referencedColumns: ["code"]
           },
         ]
@@ -12707,6 +12654,59 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      ui_feature_flags: {
+        Row: {
+          category: string
+          code: string
+          created_at: string
+          description_es: string | null
+          h_phase: number
+          is_beta: boolean
+          is_enabled: boolean
+          is_premium: boolean
+          min_plan: string | null
+          module: string
+          name_en: string
+          name_es: string
+        }
+        Insert: {
+          category: string
+          code: string
+          created_at?: string
+          description_es?: string | null
+          h_phase?: number
+          is_beta?: boolean
+          is_enabled?: boolean
+          is_premium?: boolean
+          min_plan?: string | null
+          module: string
+          name_en: string
+          name_es: string
+        }
+        Update: {
+          category?: string
+          code?: string
+          created_at?: string
+          description_es?: string | null
+          h_phase?: number
+          is_beta?: boolean
+          is_enabled?: boolean
+          is_premium?: boolean
+          min_plan?: string | null
+          module?: string
+          name_en?: string
+          name_es?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feature_registry_min_plan_fkey"
+            columns: ["min_plan"]
+            isOneToOne: false
+            referencedRelation: "plans"
+            referencedColumns: ["code"]
+          },
+        ]
       }
       user_scores: {
         Row: {

@@ -2,7 +2,7 @@
 
 import type { CalculatorOutput } from '@/shared/lib/intelligence-engine/calculators/base';
 import type { TierGateResult } from '@/shared/lib/intelligence-engine/calculators/tier-gate';
-import { SCORE_REGISTRY } from '@/shared/lib/intelligence-engine/registry';
+import { SCORE_REGISTRY } from '@/shared/lib/intelligence-engine/score-registry';
 import {
   IntelligenceCard,
   type IntelligenceCardEntry,

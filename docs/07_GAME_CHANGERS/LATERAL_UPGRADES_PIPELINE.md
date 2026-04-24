@@ -1608,3 +1608,15 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 15 upgrades shipped en main (9 de 11.Q+R + 5 de 11.S + L-NEW10 cleanup). 6 agendados L-NN (L-NEW4..L-NEW9). Zero items pendientes sin destino concreto.
 
 **Última actualización:** 2026-04-24 tarde — L73-L143 + L-NEW1..L-NEW10 + 15 upgrades shipped 11.Q+R+S = **94 laterales FASE 11 XL** + 0 items sin destino.
+
+---
+
+## Refactors estructurales completados
+
+### L-NEW11 [SHIPPED 2026-04-24] — Canonical catalog naming (ADR-029)
+- Shipped BATCH 5 pre-Opción D
+- Rename `registry.ts` → `score-registry.ts` + tabla `feature_registry` → `ui_feature_flags`
+- Docs activos actualizados (catálogos 03.* + operacional 05.* + CONTEXTO_MAESTRO + FEATURE_INVENTORY footer)
+- Históricos intactos (biblia-v5, ADRs 001-028, FASE_01-25 pre-completadas)
+- ADR-029 canoniza fronteras semantic 3 catálogos (score calculators IE / UI feature flags / producto humano)
+- Ref: `docs/01_DECISIONES_ARQUITECTONICAS/ADR-029_CANONICAL_CATALOG_NAMING.md`

@@ -4,7 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useMemo, useState } from 'react';
 import type { CalculatorOutput } from '@/shared/lib/intelligence-engine/calculators/base';
 import type { TierGateResult } from '@/shared/lib/intelligence-engine/calculators/tier-gate';
-import type { ScoreRegistryEntry } from '@/shared/lib/intelligence-engine/registry';
+import type { ScoreRegistryEntry } from '@/shared/lib/intelligence-engine/score-registry';
 import { cn } from '../primitives/cn';
 import { ConfidenceBadge } from './confidence-badge';
 import { ScorePlaceholder } from './score-placeholder';
