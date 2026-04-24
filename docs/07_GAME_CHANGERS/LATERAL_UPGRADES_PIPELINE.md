@@ -2075,4 +2075,13 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 - **Estimado:** 2-3 h.
 - **Ref:** SESIÓN 07.5.E DEUDA D-E-1 + L-NEW46 tracker.
 
+### L-NEW50 — [SHIPPED 2026-04-24] dmx_indices.scope_id canonical text backfill
+
+- **Status:** ✅ SHIPPED post-07.5.F pre-07.6 — zero deuda
+- **Qué es:** Fix schema drift detectado SESIÓN 07.5.F. Tabla `dmx_indices` usaba UUID `zones.id` en `scope_id`; migradas 3192 filas a canonical text `MX-XXX` format consistency con `zone_pulse_scores` / `climate_*` / `constellations` / `ghost`.
+- **Para qué sirve:** query cross-tabla ergonómico + E2E integration consistency sin JOIN `zones` intermedio. Single source of truth para scope canonical.
+- **Resultado:** Roma Norte by canonical retorna 14 dmx indices (antes 0). 100% filas migradas. Zero regresiones tests (3064 pass + 2 skip).
+- **Fase shipped:** pre-FASE 07.6 cleanup.
+- **Ref:** PR #48, commit `bf2d9ef`, tag `fix-dmx-canonical-scope`, migration `20260501000000_dmx_indices_canonical_scope_id_backfill`.
+
 ---
