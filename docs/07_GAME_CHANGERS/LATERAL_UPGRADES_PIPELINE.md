@@ -1555,6 +1555,33 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Fase target:** FASE 12 + extensión 11.J Newsletter (nuevo template + cron weekly + personalización LifePath profiles).
 - **Dependencia data:** `lifepath_user_profiles` + `zone_constellations_edges` + plantilla email render server.
 
+### L-NEW8 — Editor rico Tiptap/Lexical wiki colonias (11.S agendado)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** editor rico (Tiptap o Lexical) para `colonia_wiki_entries` — reemplaza H1 read-only por workflow editorial con moderación humana (`reviewed=true` gate reactivado). Reemplaza mutaciones directas a markdown por AST-based editor.
+- **Para qué sirve:** habilitar edición colectiva tipo wikipedia en una interfaz moderna WYSIWYG; desbloquear contributions de expertos locales sin que toquen markdown crudo.
+- **Beneficio concreto:** cada colonia puede ser enriquecida manualmente con experiencia de agentes/brokers/residentes; amplifica calidad del atlas sin costo LLM recurrente.
+- **Fase target:** FASE 12 N5 (editor admin + moderation workflow).
+- **Dependencia data:** `colonia_wiki_entries` ya existe; solo requiere UI editor + endpoints authenticated tRPC upsert draft + publish.
+
+### L-NEW9 — Sections normalizadas per-row (11.S agendado)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** refactor del schema `colonia_wiki_entries.sections jsonb` a tabla normalizada `colonia_wiki_sections` (colonia_id, version, section_key, heading, content_md) con PK compuesta y constraint de 8 secciones canónicas.
+- **Para qué sirve:** query by section nacional (ej. "traeme la sección de gastronomía de las top 50 colonias"), indexing GIN por sección, paginación server-side de secciones largas, soporte futuro de fragment-level review workflow (editorial aprueba una sola sección en vez del blob entero).
+- **Beneficio concreto:** escala a nacional (20k+ colonias) sin payload jsonb gigante; habilita experiencias agregadas tipo "mejor gastronomía por ciudad"; baja latencia de queries H1 con jsonb access patterns.
+- **Fase target:** FASE 13 si cobertura escala a nacional (CDMX colonias 1k, MTY/GDL/PUE/QRO siguientes 4k, long tail 15k+).
+- **Dependencia data:** migration ALTER que normaliza — backfill desde jsonb existente es 1:1.
+
+### L-NEW10 — Retirar cast transitional admin-ext tras db:types regen (11.S agendado)
+
+- **Status:** 🟢 agendado con destino concreto
+- **Qué es:** tras `npm run db:types` post-merge 11.S (regenera `shared/types/database.ts` con la tabla `zone_slugs`), eliminar `shared/lib/supabase/admin-ext.ts` y retargetear sus callers (atlas router, seed script, atlas pages) al `createAdminClient()` regular.
+- **Para qué sirve:** eliminar el único `as unknown as` cast del bloque 11.S (encapsulado hoy en admin-ext.ts por timing: migration file existe, typedef aún no). Mantiene la regla "zero deuda técnica" y "zero escape hatches sin L-NN agendado".
+- **Beneficio concreto:** cero deuda residual en tipos; el cast desaparece sin merma funcional porque el tipo generado lo reemplaza perfectamente.
+- **Fase target:** inmediatamente después del push de 11.S y `db:types` regen (typical mismo día del merge).
+- **Dependencia:** `supabase db push` + `npm run db:types` ejecutados por founder post-autorización.
+
 ### Upgrades 11.Q+11.R shipped (PR #30 SHA acb7d16)
 
 | # | Upgrade | Bloque | Status |
@@ -1569,6 +1596,6 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 | U13 | Ghost × Constellations contagion paths | 11.R | ✅ shipped acb7d16 |
 | U15 | Constellations × Futures correlation boost ±5% | 11.R | ✅ shipped acb7d16 |
 
-9 upgrades shipped en main. 4 agendados L-NN (L-NEW4..L-NEW7). Zero items pendientes sin destino concreto.
+9 upgrades shipped en main. 7 agendados L-NN (L-NEW4..L-NEW10). Zero items pendientes sin destino concreto.
 
-**Última actualización:** 2026-04-24 — L73-L143 + L-NEW1..L-NEW7 + 9 upgrades shipped 11.Q+R = **85 laterales FASE 11 XL** + 0 items sin destino.
+**Última actualización:** 2026-04-24 — L73-L143 + L-NEW1..L-NEW10 + 9 upgrades shipped 11.Q+R = **88 laterales FASE 11 XL** + 0 items sin destino.

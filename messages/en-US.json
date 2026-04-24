@@ -2329,5 +2329,35 @@
       "weight_label": "Weight",
       "unlabeled_zone": "Unnamed neighborhood"
     }
+  },
+  "Atlas": {
+    "landing": {
+      "meta_title": "Neighborhood Atlas — DesarrollosMX",
+      "meta_description": "Editorial guide to neighborhoods: history, character, food scene, cultural life, and real estate market.",
+      "breadcrumb_label": "Breadcrumb",
+      "breadcrumb_atlas": "Atlas",
+      "title": "Neighborhood Atlas",
+      "subtitle": "Explore editorial guides for neighborhoods with the best quality-of-life profile.",
+      "empty": "No neighborhoods published yet. Check back soon.",
+      "section_label": "Neighborhood index",
+      "count": "{count} neighborhoods available",
+      "methodology_note": "Seed content generated with LLM assistance and continuous editorial review."
+    },
+    "detail": {
+      "meta_fallback_title": "Neighborhood not found — DesarrollosMX",
+      "meta_title": "{label} — Neighborhood Atlas",
+      "meta_description": "Editorial guide to {label}: history, character, food, transport, and real estate market.",
+      "breadcrumb_label": "Breadcrumb",
+      "breadcrumb_atlas": "Atlas",
+      "subtitle": "Editorial guide with historical, cultural, and market context.",
+      "toc_label": "Sections",
+      "aside_label": "Related tools",
+      "cross_links_heading": "Explore more",
+      "cross_similares": "Similar neighborhoods (Genome)",
+      "cross_clima_gemelo": "Climate twin",
+      "edition_meta": "Version {version}",
+      "empty_sections": "This entry has no published sections yet.",
+      "methodology_note": "Seed entries generated with LLM assistance — content is reviewable."
+    }
   }
 }

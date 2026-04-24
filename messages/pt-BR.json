@@ -2329,5 +2329,35 @@
       "weight_label": "Peso",
       "unlabeled_zone": "Bairro sem nome"
     }
+  },
+  "Atlas": {
+    "landing": {
+      "meta_title": "Atlas de Bairros — DesarrollosMX",
+      "meta_description": "Guia editorial de bairros com história, caráter, gastronomia, vida cultural e mercado imobiliário.",
+      "breadcrumb_label": "Trilha de navegação",
+      "breadcrumb_atlas": "Atlas",
+      "title": "Atlas de Bairros",
+      "subtitle": "Explore guias editoriais dos bairros com melhor perfil de vida.",
+      "empty": "Ainda não há bairros publicados. Volte em breve.",
+      "section_label": "Lista de bairros",
+      "count": "{count} bairros disponíveis",
+      "methodology_note": "Conteúdo seed gerado com assistência de LLM e revisão editorial contínua."
+    },
+    "detail": {
+      "meta_fallback_title": "Bairro não encontrado — DesarrollosMX",
+      "meta_title": "{label} — Atlas de Bairros",
+      "meta_description": "Guia editorial de {label}: história, caráter, gastronomia, transporte e mercado imobiliário.",
+      "breadcrumb_label": "Trilha de navegação",
+      "breadcrumb_atlas": "Atlas",
+      "subtitle": "Guia editorial do bairro com contexto histórico, cultural e de mercado.",
+      "toc_label": "Seções",
+      "aside_label": "Ferramentas relacionadas",
+      "cross_links_heading": "Explore também",
+      "cross_similares": "Bairros semelhantes (Genoma)",
+      "cross_clima_gemelo": "Clima gêmeo",
+      "edition_meta": "Versão {version}",
+      "empty_sections": "Esta entrada ainda não tem seções publicadas.",
+      "methodology_note": "Entradas seed geradas com assistência de LLM — conteúdo revisável."
+    }
   }
 }

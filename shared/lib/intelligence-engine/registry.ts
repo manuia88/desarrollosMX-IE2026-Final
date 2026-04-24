@@ -1,4 +1,4 @@
-// Registry central del Intelligence Engine: 137 scores (incluye 15 índices DMX FASE 11 XL + PULSE + MIGRATION_FLOW + TREND_GENOME + SCORECARD_NACIONAL + LIFEPATH + CLIMATE_TWIN + GHOST_ZONES_RANKING 11.Q + ZONE_CONSTELLATIONS 11.R).
+// Registry central del Intelligence Engine: 138 scores (incluye 15 índices DMX FASE 11 XL + PULSE + MIGRATION_FLOW + TREND_GENOME + SCORECARD_NACIONAL + LIFEPATH + CLIMATE_TWIN + GHOST_ZONES_RANKING 11.Q + ZONE_CONSTELLATIONS 11.R + LIVING_ATLAS 11.S).
 // Fuente autoritaria: docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md +
 // ADR-010 §D4/§D7 (cascadas formales) + ADR-027 (FASE 11 XL índices DMX).
 // Consumido por:
@@ -1948,6 +1948,29 @@ export const SCORE_REGISTRY: readonly ScoreRegistryEntry[] = [
       'zone_pulse_scores',
     ],
     calculator_path: 'shared/lib/intelligence-engine/constellations/constellation-engine.ts',
+    country_codes: ['MX'],
+  },
+
+  // --------------- Living Atlas — BLOQUE 11.S ---------------
+  // "Wiki colectiva de 200 colonias" — contenido narrativo LLM-seeded
+  // (Claude Haiku 4.5) renderizado via markdown stack unified/remark/rehype
+  // (ADR-028). 8 secciones: intro, historia, caracter, transporte,
+  // gastronomia, vida_cultural, seguridad_vida, mercado_inmobiliario.
+  // level 5 agregado, tier 3 público. No tiene fórmula cuantitativa —
+  // calculator_path apunta al seed script (el "score" aquí es cobertura
+  // de colonias con wiki publicada). Persiste en public.colonia_wiki_entries
+  // + public.zone_slugs (11.S.-1).
+  {
+    score_id: 'LIVING_ATLAS',
+    name: 'Living Atlas (wiki colectiva colonias)',
+    level: 5,
+    category: 'agregado',
+    tier: 3,
+    dependencies: [],
+    triggers_cascade: [],
+    formula_doc: 'docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md#living-atlas',
+    confidence_sources: ['colonia_wiki_entries', 'zone_slugs'],
+    calculator_path: 'scripts/seed-living-atlas-wiki.ts',
     country_codes: ['MX'],
   },
 

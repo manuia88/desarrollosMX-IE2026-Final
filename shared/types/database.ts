@@ -13947,6 +13947,47 @@ export type Database = {
           },
         ]
       }
+      zone_slugs: {
+        Row: {
+          country_code: string
+          created_at: string
+          id: string
+          scope_type: string
+          slug: string
+          source_label: string
+          updated_at: string
+          zone_id: string
+        }
+        Insert: {
+          country_code?: string
+          created_at?: string
+          id?: string
+          scope_type: string
+          slug: string
+          source_label: string
+          updated_at?: string
+          zone_id: string
+        }
+        Update: {
+          country_code?: string
+          created_at?: string
+          id?: string
+          scope_type?: string
+          slug?: string
+          source_label?: string
+          updated_at?: string
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zone_slugs_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
       zone_streaks: {
         Row: {
           computed_at: string

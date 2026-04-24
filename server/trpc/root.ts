@@ -1,3 +1,4 @@
+import { atlasRouter } from '@/features/atlas/routes/atlas';
 import { meRouter } from '@/features/auth/routes/me';
 import { mfaRouter } from '@/features/auth/routes/mfa';
 import { roleRequestRouter } from '@/features/auth/routes/role-request';
@@ -39,6 +40,7 @@ export const appRouter = router({
     timestamp: Date.now(),
   })),
   ai: aiRouter,
+  atlas: atlasRouter,
   causal: causalRouter,
   constellations: constellationsRouter,
   fx: fxRouter,
