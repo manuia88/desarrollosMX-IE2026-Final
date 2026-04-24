@@ -899,3 +899,133 @@ Pre-deploy CRÍTICOS (founder ejecutar antes de merge main):
 Próxima fase: FASE 11 — Índices DMX (7 índices propietarios: DMX-IPV,
 IAB, IDS, IRE, ICO, MOM, LIV). Publicación mensual DMX-MOM newsletter +
 trimestral full report "DMX Índice de Colonias CDMX — Q#".
+
+═══════════════════════════════════════════════════════════════
+14. BATCH PROTOCOL POST-AUDITORÍA (canonizado 2026-04-24)
+═══════════════════════════════════════════════════════════════
+
+Tras auditoría integral FASE 0→11.S (2026-04-24), surge un patrón de
+ejecución "BATCH quirúrgico" diferente a "FASE completa". Los batches
+son intervenciones atómicas post-audit para resolver blockers
+específicos antes de avanzar a siguiente FASE grande.
+
+ESTRUCTURA BATCH (diferencia vs FASE):
+  - Scope EXACTO delimitado (1-3 CRITICAL hallazgos auditoría max)
+  - Wall-clock 15 min - 3h (no multi-día como FASE)
+  - 1 PR atómico con 1 commit squash
+  - Audit PM independiente pre-push (no confiar "CC audit clean")
+  - Zero scope creep (si detectas otra oportunidad → documentar
+    SUGGESTED pero NO añadir al batch)
+  - Branch naming: `fix/pre-<MILESTONE>-<critical-short-name>`
+
+BATCHES PRE-OPCIÓN D (shipped 2026-04-24):
+  BATCH 1 (PR #35) — CRITICAL-007 search_path + CRITICAL-009 public
+    bucket listing (~12 min) → main@7e55043
+  BATCH 2 (PR #36) — CRITICAL-003 legal pages + FAQ 5 locales +
+    ADR-028 (~30-35 min) → main@76bea52
+  BATCH 3 (PR #37) — CRITICAL-001 circular dep + ESLint audit script
+    + CI job enforcement (~1h 45m) → main@728222e
+  BATCH 4 (PR #38) — CRITICAL-002 score-worker auth + orchestrator
+    fail-fast hardening + memoria canonizada crons
+    observability (~70 min) → main@1140b2c
+  BATCH 5 (PR #39) — Canonical catalog naming ADR-029 (rename
+    registry.ts + tabla feature_registry→ui_feature_flags, 5-6h con
+    sub-agents paralelos) → main@3efcc1d
+
+Tag intermedio: `pre-optionD-complete` → `main@3efcc1d` (rollback
+checkpoint antes de arrancar Opción D FASE 07.5).
+
+MEMORIAS CANONIZADAS DURANTE BATCHES:
+  - feedback_cron_observability_obligatorio (BATCH 4)
+  - feedback_arquitectura_escalable_desacoplada amplificada 2x
+  - feedback_verify_before_spend amplificada (Vercel Pro deferred)
+
+═══════════════════════════════════════════════════════════════
+15. FASE 07.5 INGESTA CANONICAL FOUNDATIONAL (estructura)
+═══════════════════════════════════════════════════════════════
+
+Fase insertada entre 07b y 08 post-auditoría 2026-04-24. Razón:
+detectado que ~85+/105 tablas públicas están VACÍAS en prod.
+Los 19 bloques FASE 11 XL shipped (11.A-S) son lógica+UI+schemas
+sin data real = demo-ware si se ship sin ingesta foundational.
+
+SUB-SESIONES (7 total):
+  07.5.0 foundational — Tabla `zones` master polimórfica multi-país
+    + seed CDMX H1 (~219 entries) + estructura escalable
+    content/zones/{country}/ + ADR-030 + 6 upgrades directos
+    canonizados (CHECK constraints · nombres localizados es/en/pt
+    · PostGIS boundary · H3 r8 · OSM admin_level · UUIDs v5
+    determinísticos namespace DMX)
+  07.5.A — Scripts ingest 01 inegi-colonias + 02 geo-boundaries
+    + 03 macro-banxico-inegi + 04 demographics
+  07.5.B — Calculators N0-N4 + DMX índices compute batch sobre
+    seed zones
+  07.5.C — Pulse 12m + genoma embeddings 64-dim sobre colonias
+    seed
+  07.5.D — Climate 15y heurístico + constellations edges + ghost
+    zones ranking compute
+  07.5.E — Seed LLM atlas wiki (script 12 Haiku 4.5 cost-cap $3)
+    + orchestrator universal
+  07.5.F — E2E validation + tag `fase-07.5-ingesta-canonical-
+    complete` + sumarize consistency
+
+DEPENDENCIAS: 07b shipped + BATCHES 1-5 shipped + tag
+  `pre-optionD-complete@3efcc1d`
+
+FK ENFORCEMENT diferido: `L-NEW13 FASE 08 post-Opción D` agrega
+  `ALTER TABLE ADD FOREIGN KEY` en 18+ tablas con zone_id →
+  zones(id) + 6 con colonia_id (scope_type='colonia' invariante).
+  Evita cascade breakage mid-ejecución Opción D.
+
+═══════════════════════════════════════════════════════════════
+16. MEMORIAS CANONIZADAS ACTIVAS (snapshot 2026-04-24 muy tarde)
+═══════════════════════════════════════════════════════════════
+
+24 entries en `/Users/manuelacosta/.claude/projects/.../memory/`:
+
+  USER (1): user_founder_profile
+  PROJECT (1): project_phase_workflow
+  REFERENCE (2): reference_key_paths · reference_credentials_status
+  FEEDBACK (20):
+    - feedback_build_cacheComponents
+    - feedback_audit_rls_allowlist
+    - feedback_verify_before_spend (amplificada 2026-04-24:
+      "opción más grande NO aplica gastos recurrentes ROI deferido")
+    - feedback_airroi_cost_empirical
+    - feedback_next_public_literal_only
+    - feedback_card3d_no_tilt
+    - feedback_subagents_over_revert
+    - feedback_instruction_format
+    - feedback_upgrades_destino
+    - feedback_zero_deuda_tecnica
+    - feedback_supabase_migrations_manual_push
+    - feedback_arquitectura_escalable_desacoplada (amplificada 2x
+      2026-04-24: "regla ambigüedad opción más grande" + "lint
+      rule cross-feature imports recommendation")
+    - feedback_pm_schema_audit_pre_prompt (NUEVA auditoría)
+    - feedback_cc_guardrails_exhaustivos (NUEVA auditoría)
+    - feedback_pm_audit_exhaustivo_post_cc (NUEVA auditoría)
+    - feedback_formato_prompts_founder
+    - feedback_cron_observability_obligatorio (NUEVA BATCH 4)
+
+Las memorias son fuente de autoridad operacional. CC sesión nueva
+carga CLAUDE.md + MEMORY.md index automáticamente. PM debe mantener
+memorias consolidadas (amplificar existentes > crear nuevas) y
+reflejarlas aquí en §16 como snapshot vivo.
+
+═══════════════════════════════════════════════════════════════
+17. STOP POINTS AMPLIFICADOS (post-auditoría)
+═══════════════════════════════════════════════════════════════
+
+A los 10 STOP POINTS originales (§2), post-auditoría 2026-04-24
+se añaden 3 nuevos:
+
+⑪ Detección de pattern recurrente 3+ features con mismo issue
+  → canonizar en memoria feedback_*.md nueva O amplificar
+  memoria existente (evaluar U5 upgrade auditoría)
+⑫ Before spending recurrente $>$ → validar "¿ROI inmediato o
+  deferido?". Si deferido, agendar con L-NN + milestone trigger
+  específico (no upgrade AHORA)
+⑬ Schema ambiguo / tabla master faltante / 3+ patrones referencia
+  a mismo concepto → ritual ritual pre-prompt PM exhaustivo ANTES
+  de enviar prompt CC (nunca improvisar mid-ejecución)

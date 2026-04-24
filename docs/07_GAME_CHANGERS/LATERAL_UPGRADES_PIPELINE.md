@@ -1607,7 +1607,7 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 
 15 upgrades shipped en main (9 de 11.Q+R + 5 de 11.S + L-NEW10 cleanup). 6 agendados L-NN (L-NEW4..L-NEW9). Zero items pendientes sin destino concreto.
 
-**Última actualización:** 2026-04-24 tarde — L73-L143 + L-NEW1..L-NEW10 + 15 upgrades shipped 11.Q+R+S = **94 laterales FASE 11 XL** + 0 items sin destino.
+**Última actualización:** 2026-04-24 muy tarde — L73-L143 + L-NEW1..L-NEW11 (L-NEW11 SHIPPED BATCH 5) + L-NEW12..L-NEW19 agendados pre-Opción D con destino concreto + 15 upgrades shipped 11.Q+R+S = **103 laterales FASE 11 XL + pre-Opción D** + 0 items sin destino.
 
 ---
 
@@ -1623,7 +1623,23 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 
 ---
 
-## Laterales derivados Opción D FASE 07.5 (canonical zones polymorphic)
+## Laterales agendados pre-Opción D + derivados FASE 07.5 (L-NEW12 - L-NEW19)
+
+Agendados durante auditoría integral 2026-04-24 + ritual pre-prompt Opción D + sesión 07.5.0 foundational (canonical zones polymorphic shipped PR #40). 8 entradas con destino concreto FASE específica. Formato founder-friendly (qué es / para qué sirve / beneficio concreto + fase target + estimado).
+
+### L-NEW12 — Vercel Pro upgrade pre-launch público
+
+- **Status:** 🟢 agendado checklist pre-launch público
+- **Qué es:** Upgrade plan Vercel Hobby → Pro ($20/mes) + activar 14 crons automatizados + redeploy + smoke test `ingest_runs` post-primer disparo + monitor 24-48h primeras ejecuciones reales.
+- **Para qué sirve:** activar ingesta automática real cuando ya tengamos users en producción. Hoy Hobby limita 2 crons/daily y 12/14 crons quedan silenciados, pero pre-launch los scripts CLI manuales son suficientes.
+- **Beneficio concreto:** desbloquea data fresca automática 24/7 sin intervención manual. Ingesta continua = diferenciador vs portales con data snapshot viejo.
+- **Fase target:** semana antes ship público (milestone trigger pre-launch).
+- **Prerequisites completados 2026-04-24:**
+  - `CRON_SECRET` agregada Production + Preview con Sensitive toggle ON (2 valores independientes).
+  - Fix score-worker auth Bearer CRON_SECRET (BATCH 4 PR #38).
+  - Orchestrator INSERT fail-fast hardening (BATCH 4 shipped).
+- **Estimado:** 1 h (upgrade + redeploy + monitor).
+- **Filosofía aplicada:** `feedback_verify_before_spend.md` amplificada 2026-04-24 — "opción más grande NO aplica a gastos recurrentes cuyo ROI es deferido hasta milestone futuro". $240/año sin users reales = zero ROI inmediato.
 
 ### L-NEW13 — FK enforcement zones master (post-Opción D)
 
@@ -1635,6 +1651,7 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Dependencia data:** seed zones canonical MX (mínimo CDMX H1) completo + audit `zone_id` huérfanos previo para remediar antes de ADD CONSTRAINT.
 - **Estimado:** 2-3 h (migration cascade + data validation).
 - **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
+- **Filosofía aplicada:** "zero cascade breakage" — diferido de Opción D porque aplicar FK simultáneamente con ingesta masiva agrega cascade risk mid-pipeline.
 
 ### L-NEW14 — Seed expansión nacional MX (31 estados restantes)
 
@@ -1697,10 +1714,12 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 ### L-NEW19 — Zones aliases + fuzzy search + Stripe/Google research
 
 - **Status:** 🟢 agendado con destino concreto
-- **Qué es:** tabla `zones_aliases (zone_id, alias text, locale, source)` — "Roma Norte" ↔ "La Roma" ↔ "Colonia Roma" ↔ "Cuauhtémoc—Roma". Incluye research doc Stripe Connect country-state pattern + cross-check Google Maps Geocoding para validar boundaries.
+- **Qué es:** tabla `zones_aliases (zone_id, alias text, alias_type text CHECK('historic'|'informal'|'official_alt'|'typo_common'), locale, source)` — "Roma Norte" ↔ "La Roma" ↔ "Colonia Roma" ↔ "Cuauhtémoc—Roma". Incluye research doc Stripe Connect country-state pattern + cross-check Google Maps Geocoding para validar boundaries.
 - **Para qué sirve:** search UX emergente — usuarios escriben el nombre que conocen, no el canonical. Research valida que el patrón polimórfico DMX alinea con estándares industria payments (Stripe) + maps (Google).
 - **Beneficio concreto:** search "roma" → matches correctos en autocomplete; reduce fricción onboarding signup marketing. Stripe research desbloquea integración billing multi-país sin reinventar taxonomies.
 - **Fase target:** FASE 12 N5 (search UX) + FASE 22 (marketing signup).
 - **Dependencia data:** fuzzy search infrastructure (pg_trgm ya habilitado) + acceso Google Maps Geocoding API free tier.
 - **Estimado:** 6-8 h.
 - **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
+
+---
