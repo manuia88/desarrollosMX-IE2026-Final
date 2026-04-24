@@ -1,29 +1,8 @@
-// Catálogo de los 15 índices DMX publicados + helpers puros.
-// SSOT frente a UI/SEO/PDF/tests. Cualquier cambio de código de índice o
-// peso declarado aquí vive en migration dmx_indices_methodology_versions.
+// Registro + helpers del feature indices-publicos.
+// Los contratos cross-feature (INDEX_CODES, IndexCode, SCOPE_TYPES, ScopeType)
+// viven en `@/shared/types/scores` desde BATCH 3 pre-Opción D (REFACTOR-001).
 
-export const INDEX_CODES = [
-  'IPV',
-  'IAB',
-  'IDS',
-  'IRE',
-  'ICO',
-  'MOM',
-  'LIV',
-  'FAM',
-  'YNG',
-  'GRN',
-  'STR',
-  'INV',
-  'DEV',
-  'GNT',
-  'STA',
-] as const;
-
-export type IndexCode = (typeof INDEX_CODES)[number];
-
-export const SCOPE_TYPES = ['colonia', 'alcaldia', 'city', 'estado'] as const;
-export type ScopeType = (typeof SCOPE_TYPES)[number];
+import { INDEX_CODES, type IndexCode, SCOPE_TYPES, type ScopeType } from '@/shared/types/scores';
 
 export const PERIOD_TYPES = ['monthly', 'quarterly', 'annual'] as const;
 export type PeriodType = (typeof PERIOD_TYPES)[number];

@@ -1,6 +1,5 @@
 import { z } from 'zod';
-import { INDEX_CODES } from '@/features/indices-publicos/lib/index-registry-helpers';
-import { CITATION_TYPES } from '../types';
+import { CITATION_TYPES, INDEX_CODES } from '@/shared/types/scores';
 
 export const scopeTypeSchema = z.enum(['colonia', 'alcaldia', 'city', 'estado']);
 export const indexCodeSchema = z.enum(INDEX_CODES);

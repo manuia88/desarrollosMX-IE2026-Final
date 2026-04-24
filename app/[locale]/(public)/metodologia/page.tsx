@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { MethodologyCard } from '@/features/indices-publicos/components/MethodologyCard';
-import { INDEX_CODES } from '@/features/indices-publicos/lib/index-registry-helpers';
+import { INDEX_CODES } from '@/shared/types/scores';
 
 type Props = {
   params: Promise<{ locale: string }>;

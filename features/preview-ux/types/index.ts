@@ -1,6 +1,6 @@
 import type { RankingRow } from '@/features/indices-publicos/components/RankingTable';
-import type { IndexCode } from '@/features/indices-publicos/lib/index-registry-helpers';
 import type { AlphaZonePublicRow } from '@/features/trend-genome/types';
+import type { IndexCode } from '@/shared/types/scores';
 
 export const PERSONA_TYPES = ['comprador', 'asesor', 'developer', 'masterbroker'] as const;
 export type PersonaType = (typeof PERSONA_TYPES)[number];

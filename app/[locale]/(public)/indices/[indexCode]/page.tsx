@@ -4,14 +4,9 @@ import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { Suspense } from 'react';
 import { IndexDetailClient } from '@/features/indices-publicos/components/IndexDetailClient';
-import {
-  INDEX_CODES,
-  type IndexCode,
-  isIndexCode,
-  isScopeType,
-  type ScopeType,
-} from '@/features/indices-publicos/lib/index-registry-helpers';
+import { isIndexCode, isScopeType } from '@/features/indices-publicos/lib/index-registry-helpers';
 import { defaultLocale, locales } from '@/shared/lib/i18n/config';
+import { INDEX_CODES, type IndexCode, type ScopeType } from '@/shared/types/scores';
 
 interface PageProps {
   params: Promise<{ locale: string; indexCode: string }>;

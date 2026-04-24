@@ -15,13 +15,10 @@ import {
 import {
   COUNTRY_CODES,
   type CountryCode,
-  INDEX_CODES,
-  type IndexCode,
-  SCOPE_TYPES,
-  type ScopeType,
 } from '@/features/indices-publicos/lib/index-registry-helpers';
 import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
 import { trpc } from '@/shared/lib/trpc/client';
+import { INDEX_CODES, type IndexCode, SCOPE_TYPES, type ScopeType } from '@/shared/types/scores';
 
 const MAX_SCOPES = 4;
 

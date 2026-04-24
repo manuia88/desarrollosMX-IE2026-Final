@@ -1,7 +1,8 @@
 'use client';
 
 import { trpc } from '@/shared/lib/trpc/client';
-import type { CountryCode, IndexCode, PeriodType, ScopeType } from '../lib/index-registry-helpers';
+import type { IndexCode, ScopeType } from '@/shared/types/scores';
+import type { CountryCode, PeriodType } from '../lib/index-registry-helpers';
 
 const STALE_TIME_5M = 5 * 60 * 1000;
 

@@ -2,14 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { INDEX_CODES, type IndexCode, type ScopeType } from '@/shared/types/scores';
 import { cn } from '@/shared/ui/primitives/cn';
 import { useIndexRanking } from '../hooks/useIndexRanking';
-import {
-  INDEX_CODES,
-  INDEX_REGISTRY,
-  type IndexCode,
-  type ScopeType,
-} from '../lib/index-registry-helpers';
+import { INDEX_REGISTRY } from '../lib/index-registry-helpers';
 import { IndexBadge } from './IndexBadge';
 import { RankingTable } from './RankingTable';
 

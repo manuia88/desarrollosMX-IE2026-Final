@@ -11,10 +11,10 @@
 // determinística o simplemente omite la sección del email.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Citation } from '@/features/causal-engine/types';
 import { resolveZoneLabel } from '@/shared/lib/market/zone-label-resolver';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import type { Database } from '@/shared/types/database';
+import type { Citation } from '@/shared/types/scores';
 
 export type CausalHook = (params: {
   readonly scopeId: string;

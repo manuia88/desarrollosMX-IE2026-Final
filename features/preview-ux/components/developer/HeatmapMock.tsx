@@ -2,10 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
-import {
-  INDEX_CODES,
-  type IndexCode,
-} from '@/features/indices-publicos/lib/index-registry-helpers';
+import { INDEX_CODES, type IndexCode } from '@/shared/types/scores';
 
 // Deterministic pseudo-random color band per (index, cell) so the SVG looks
 // like real data without an RNG. Output is one of 4 score bands.

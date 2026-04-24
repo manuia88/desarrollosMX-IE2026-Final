@@ -1,8 +1,9 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
+import type { IndexCode } from '@/shared/types/scores';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
-import { INDEX_REGISTRY, type IndexCode } from '../lib/index-registry-helpers';
+import { INDEX_REGISTRY } from '../lib/index-registry-helpers';
 import { IndexBadge } from './IndexBadge';
 
 export interface MethodologyCardProps {

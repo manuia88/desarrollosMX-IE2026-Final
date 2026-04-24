@@ -2,11 +2,8 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { MethodologyDetailClient } from '@/features/indices-publicos/components/MethodologyDetailClient';
-import {
-  INDEX_CODES,
-  type IndexCode,
-  isIndexCode,
-} from '@/features/indices-publicos/lib/index-registry-helpers';
+import { isIndexCode } from '@/features/indices-publicos/lib/index-registry-helpers';
+import { INDEX_CODES, type IndexCode } from '@/shared/types/scores';
 
 type Props = {
   params: Promise<{ locale: string; indexCode: string }>;

@@ -4,13 +4,11 @@
 
 import { NextResponse } from 'next/server';
 import { getTranslations } from 'next-intl/server';
-import {
-  type IndexCode,
-  isIndexCode,
-} from '@/features/indices-publicos/lib/index-registry-helpers';
+import { isIndexCode } from '@/features/indices-publicos/lib/index-registry-helpers';
 import type { MethodologyRow } from '@/features/indices-publicos/lib/methodology-helpers';
 import { renderMethodologyPDF } from '@/features/indices-publicos/lib/pdf-generator';
 import { createClient } from '@/shared/lib/supabase/server';
+import type { IndexCode } from '@/shared/types/scores';
 
 export const maxDuration = 60;
 

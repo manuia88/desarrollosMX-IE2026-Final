@@ -1,5 +1,5 @@
 import { Document, Page, StyleSheet, Text, View } from '@react-pdf/renderer';
-import type { IndexCode } from '../lib/index-registry-helpers';
+import type { IndexCode } from '@/shared/types/scores';
 import type { MethodologyRow, WeightEntry } from '../lib/methodology-helpers';
 import { normalizeWeightsToPercent } from '../lib/methodology-helpers';
 

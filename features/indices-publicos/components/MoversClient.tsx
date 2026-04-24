@@ -2,9 +2,9 @@
 
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import type { ScopeType } from '@/shared/types/scores';
 import { cn } from '@/shared/ui/primitives/cn';
 import { useIndexMovers } from '../hooks/useIndexRanking';
-import type { ScopeType } from '../lib/index-registry-helpers';
 import { MapboxChoropleth } from './MapboxChoropleth';
 
 export interface MoversClientProps {

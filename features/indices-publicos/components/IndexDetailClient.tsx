@@ -1,13 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Suspense, useId, useState } from 'react';
-import { CausalExplanation } from '@/features/causal-engine/components/CausalExplanation';
 import { VitalSigns, VitalSignsComparison } from '@/features/pulse-score/components';
+import { isCausalLocaleSupported, useCausalExplanation } from '@/shared/hooks/useCausalExplanation';
 import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
+import type { IndexCode, ScopeType } from '@/shared/types/scores';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
+import { CausalExplanation } from '@/shared/ui/molecules/CausalExplanation';
 import { cn } from '@/shared/ui/primitives/cn';
 import { useIndexDetail, useIndexRanking } from '../hooks/useIndexRanking';
 
@@ -15,9 +17,7 @@ const COMPARE_SLUG_REGEX = /^[a-z0-9][a-z0-9-]{0,120}$/i;
 
 import {
   bandToLabelPillTone,
-  type IndexCode,
   resolveScoreBand,
-  type ScopeType,
   type ScoreBand,
   type TrendDirection,
   trendToArrow,
@@ -53,6 +53,7 @@ export function IndexDetailClient({
 }: IndexDetailClientProps) {
   void locale;
   const t = useTranslations('IndicesPublic');
+  const activeLocale = useLocale();
   const compareInputId = useId();
   const [compareOpen, setCompareOpen] = useState<boolean>(false);
   const [compareRaw, setCompareRaw] = useState<string>('');
@@ -71,6 +72,18 @@ export function IndexDetailClient({
   const detailRow = detail.data ?? null;
   const shareText = t('share.share_text', { code: indexCode });
   const datalistId = `${compareInputId}-suggestions`;
+
+  const causalLocaleSupported = isCausalLocaleSupported(activeLocale);
+  const causalEnabled = Boolean(detailRow && scopeId) && causalLocaleSupported;
+  const causalQuery = useCausalExplanation({
+    scoreId:
+      detailRow && scopeId ? `${indexCode}:${scopeType}:${scopeId}:${detailRow.period_date}` : '',
+    indexCode,
+    scopeType,
+    scopeId: scopeId ?? '',
+    ...(detailRow?.period_date ? { periodDate: detailRow.period_date } : {}),
+    enabled: causalEnabled,
+  });
 
   return (
     <div className={cn('space-y-6', className)}>
@@ -158,11 +171,11 @@ export function IndexDetailClient({
 
       {detailRow && scopeId ? (
         <CausalExplanation
-          scoreId={`${indexCode}:${scopeType}:${scopeId}:${detailRow.period_date}`}
-          indexCode={indexCode}
-          scopeType={scopeType}
+          data={causalQuery.data}
+          isLoading={causalQuery.isLoading}
+          error={causalQuery.error}
+          localeSupported={causalLocaleSupported}
           scopeId={scopeId}
-          periodDate={detailRow.period_date}
           scopeLabel={resolveZoneLabelSync({ scopeType, scopeId })}
         />
       ) : null}

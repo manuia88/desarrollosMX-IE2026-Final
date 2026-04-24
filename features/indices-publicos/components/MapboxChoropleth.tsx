@@ -4,13 +4,13 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { useTranslations } from 'next-intl';
 import { useEffect, useMemo, useRef } from 'react';
 import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
+import type { ScopeType } from '@/shared/types/scores';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import { LabelPill } from '@/shared/ui/dopamine/label-pill';
 import { cn } from '@/shared/ui/primitives/cn';
 import {
   bandToLabelPillTone,
   resolveScoreBand,
-  type ScopeType,
   type ScoreBand,
 } from '../lib/index-registry-helpers';
 

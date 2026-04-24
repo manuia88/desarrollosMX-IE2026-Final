@@ -3,14 +3,11 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { SimilarColoniasList } from '@/features/genome/components/SimilarColoniasList';
-import {
-  INDEX_CODES,
-  type IndexCode,
-  isIndexCode,
-} from '@/features/indices-publicos/lib/index-registry-helpers';
+import { isIndexCode } from '@/features/indices-publicos/lib/index-registry-helpers';
 import { defaultLocale, locales } from '@/shared/lib/i18n/config';
 import { findSimilarColonias } from '@/shared/lib/intelligence-engine/genome/similarity-engine';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
+import { INDEX_CODES, type IndexCode } from '@/shared/types/scores';
 
 interface PageProps {
   params: Promise<{ locale: string; indexCode: string }>;

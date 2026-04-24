@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 import { IndexBadge } from '@/features/indices-publicos/components/IndexBadge';
-import type { IndexCode } from '@/features/indices-publicos/lib/index-registry-helpers';
 import { resolveZoneLabelSync } from '@/shared/lib/market/zone-label-resolver';
+import type { IndexCode } from '@/shared/types/scores';
 import { Card3D } from '@/shared/ui/dopamine/card-3d';
 import type { MockIndexScore } from '../../types';
 
