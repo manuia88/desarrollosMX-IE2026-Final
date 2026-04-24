@@ -1723,3 +1723,42 @@ Agendados durante auditoría integral 2026-04-24 + ritual pre-prompt Opción D +
 - **Ref:** `docs/01_DECISIONES_ARQUITECTONICAS/ADR-030_CANONICAL_ZONES_POLYMORPHIC.md`
 
 ---
+
+## Sesión 07.5.A derivados (L-NEW20 - L-NEW22)
+
+Detectados durante ejecución real 07.5.A — fallbacks usados que requieren ground truth + bug INEGI BIE descubierto en runtime. Formato founder-friendly (qué es / para qué sirve / beneficio concreto + fase target + estimado + ref sesión).
+
+### L-NEW20 — Boundaries reales CDMX (GeoJSON oficiales)
+
+- **Status:** 🟡 agendado con destino concreto, no bloqueante H1
+- **Qué es:** Descargar GeoJSON oficiales de las 210 colonias CDMX desde fuentes públicas (datos.cdmx.gob.mx tiene catálogo oficial colonias 2020 con polygons reales) y depositarlos en `content/zones/boundaries/<scope_id>.geojson`. Re-run `scripts/ingest/01_ingest-geo-boundaries.ts` los promueve automáticamente sin tocar código.
+- **Para qué sirve:** Reemplazar boundaries fallback bbox-500m (cuadrados aproximados ~500m × ~500m alrededor del centroide) con polígonos reales de cada colonia. Base sólida para análisis espacial preciso PostGIS.
+- **Beneficio concreto:** Atlas / Living Atlas / mapas Mapbox GL muestran límites reales en lugar de cuadrados; queries `ST_Within` / `ST_Intersects` retornan resultados precisos en lugar de aproximados; spatial joins property↔colonia confiables.
+- **Fase target:** FASE 13 expansión data layer, o L-NEW si bloquea UX antes (ej. mapa público landing).
+- **Dependencia data:** acceso datos.cdmx.gob.mx (free, sin token) + script 01 ya preparado para detectar `.geojson` en `content/zones/boundaries/` automáticamente.
+- **Estimado:** 4-6 h (descarga GeoJSON 210 colonias + parse + drop archivos + re-run script 01).
+- **Ref:** SESIÓN 07.5.A T1 (transparencia 1).
+
+### L-NEW21 — Demographics real AGEB-level (Censo 2020 + ENIGH 2022 microdatos)
+
+- **Status:** 🟡 agendado con destino concreto, no bloqueante H1
+- **Qué es:** Descargar microdatos INEGI Censo 2020 (CSV/dBase ~5GB) + ENIGH 2022 (~2GB) y procesarlos a nivel AGEB → agregar a colonia mediante mapeo geográfico (PostGIS spatial join AGEB polygon ↔ colonia polygon). Reemplaza el synthetic v1 determinístico actual de `scripts/ingest/03_ingest-demographics.ts`.
+- **Para qué sirve:** Reemplazar distribuciones synthetic calibradas a CDMX promedio con datos reales censo y encuesta hogares por colonia. Base ground truth para Intelligence Engine N0-N4 scoring.
+- **Beneficio concreto:** `profession_distribution`, `age_distribution`, `salary_range_distribution` reflejan realidad demográfica de cada colonia (no promedio CDMX); IE matching property↔buyer basado en datos verídicos vs proxies sintéticos; reduces sesgo en zone scoring.
+- **Fase target:** FASE 13 expansión data layer, o post-launch público si IE H1 funciona bien con synthetic baseline.
+- **Dependencia data:** descarga microdatos INEGI (free, requiere registro académico) + script Python procesamiento + mapping AGEB→colonia (puede aprovechar boundaries de L-NEW20 si shipped antes).
+- **Estimado:** 8-12 h (descarga + procesamiento Python + agregación AGEB→colonia + reload tablas + tests).
+- **Ref:** SESIÓN 07.5.A T2 (transparencia 2).
+
+### L-NEW22 — Fix INEGI BIE API (token + indicator IDs 2026)
+
+- **Status:** 🔴 bug runtime, requiere investigación 1-2 h
+- **Qué es:** Investigar por qué INEGI BIE API retorna HTTP 400 con ErrorCode:100 "No se encontraron resultados" en TODOS los indicators probados (628194 INPC general, 736182 PIB trimestral, 910407, 6207067314, 1002000001) con áreas geográficas 0700/00000/01000 y ambos hosts BIE/BISE. Banxico SIE funcionó perfecto (880 rows ingested) → no es problema de red ni env vars genérico.
+- **Para qué sirve:** Desbloquear ingesta macro INEGI (INPC mensual + PIB trimestral) que actualmente falla en `scripts/ingest/02_ingest-macro-banxico-inegi.ts` (Banxico OK, INEGI dlq=2). Estos series son secundarias al corpus core (Banxico FX/tasas/TIIE/cetes), pero necesarias para cálculos inflación-ajuste y comparativos macro.
+- **Beneficio concreto:** Serie INPC mensual + PIB quarterly disponibles en `macro_series` para cálculos inflación-ajuste real (precios property normalizados a pesos constantes) + comparativos macroeconómicos en IE scorecards.
+- **Fase target:** pre-FASE 11 (1-2 h investigación) — verificar token INEGI activo en portal, IDs vigentes 2026 (probablemente cambió ID schema), área geográfica correcta para nivel nacional.
+- **Dependencia data:** acceso al portal desarrolladores INEGI (token actual en `.env.local` puede haber expirado) + documentación API actualizada 2026.
+- **Estimado:** 1-2 h investigación + 0.5 h fix script 02 + re-run.
+- **Ref:** SESIÓN 07.5.A DEUDA-2.
+
+---
