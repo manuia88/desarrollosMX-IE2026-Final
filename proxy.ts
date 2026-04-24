@@ -11,7 +11,7 @@ import {
 import { requireEnv } from '@/shared/lib/supabase/env';
 import type { Database } from '@/shared/types/database';
 
-const PUBLIC_SUFFIXES = ['', '/', '/auth', '/marketplace'];
+const PUBLIC_SUFFIXES = ['', '/', '/auth', '/marketplace', '/legal', '/faq'];
 
 const APPROVAL_REQUIRED_ROLES: ReadonlySet<string> = new Set([
   'asesor',

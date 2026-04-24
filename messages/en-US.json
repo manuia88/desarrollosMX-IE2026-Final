@@ -2359,5 +2359,31 @@
       "empty_sections": "This entry has no published sections yet.",
       "methodology_note": "Seed entries generated with LLM assistance — content is reviewable."
     }
+  },
+  "Legal": {
+    "breadcrumb_legal": "Legal",
+    "terminos": {
+      "page_title": "Terms and Conditions",
+      "meta_description": "DesarrollosMX terms of service. H1 draft pending legal review.",
+      "breadcrumb": "Terms and Conditions",
+      "back_home": "Back to home",
+      "draft_badge": "H1 draft — pending legal review",
+      "last_updated_label": "Last updated"
+    },
+    "privacidad": {
+      "page_title": "Privacy Policy",
+      "meta_description": "DesarrollosMX privacy policy. Data handling per applicable U.S. state privacy laws (CCPA/CPRA). H1 draft.",
+      "breadcrumb": "Privacy Policy",
+      "back_home": "Back to home",
+      "draft_badge": "H1 draft — pending legal review",
+      "last_updated_label": "Last updated"
+    }
+  },
+  "FAQ": {
+    "page_title": "Frequently Asked Questions",
+    "meta_description": "Answers to the most common questions about DesarrollosMX: indices, coverage, security, and accounts.",
+    "breadcrumb": "FAQ",
+    "intro": "Quick answers about DesarrollosMX.",
+    "back_home": "Back to home"
   }
 }
