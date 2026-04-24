@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { ALLOWED_SOURCES, assertAllowedSource, assertAllowedUrl } from '../allowlist';
 import {
   recordFailure as breakerRecordFailure,
@@ -208,5 +208,42 @@ describe('circuit-breaker', () => {
     breakerRecordSuccess('test_source');
     expect(() => checkCircuit('test_source')).not.toThrow();
     resetCircuit('test_source');
+  });
+});
+
+describe('runIngest — ingest_runs INSERT fail-fast (CRITICAL-002 hardening)', () => {
+  it('throws si el INSERT inicial a ingest_runs retorna error', async () => {
+    vi.doMock('@/shared/lib/supabase/admin', () => ({
+      createAdminClient: () => ({
+        from: (_table: string) => ({
+          insert: () =>
+            Promise.resolve({
+              error: { message: 'rls_policy_violation', code: '42501' },
+            }),
+        }),
+      }),
+    }));
+    vi.doMock('@/shared/lib/telemetry/sentry', () => ({
+      sentry: { captureException: vi.fn() },
+    }));
+
+    const { runIngest } = await import('../orchestrator');
+    const job = {
+      source: 'banxico' as const,
+      countryCode: 'MX',
+      run: async () => ({
+        rows_inserted: 0,
+        rows_updated: 0,
+        rows_skipped: 0,
+        rows_dlq: 0,
+        errors: [],
+      }),
+    };
+
+    await expect(runIngest(job)).rejects.toThrow(/ingest_runs_insert_failed/);
+
+    vi.doUnmock('@/shared/lib/supabase/admin');
+    vi.doUnmock('@/shared/lib/telemetry/sentry');
+    vi.resetModules();
   });
 });
