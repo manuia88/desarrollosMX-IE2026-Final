@@ -1429,6 +1429,60 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Fase target:** FASE 13 (consolidación E2E MX post FASE 12 N5)
 - **Dependencia data:** migración zona_snapshots.payload → columnas canónicas zones
 
+### L138 — LifePath AI refinement LLM (FASE 11 BLOQUE 11.O agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** swap `methodology='heuristic_v1'` por `llm_v1` en matching engine LifePath. LLM reescribe matching por afinidad contextual (conversación user) en vez de fórmula determinística de 7 componentes.
+- **Para qué sirve:** matches más naturales ("familia con niños quiere cerca de escuela Y aire limpio") vs hoy "priority sliders 0-10 genéricos".
+- **Beneficio concreto:** precisión matching percibida +30% user testing (LLM captura sutilezas que heurística pierde).
+- **Fase target:** FASE 12 N5 (AI Content Engine)
+- **Dependencia data:** ADR-022 abstract source toggle + LLM provider + prompt templates LifePath
+
+### L139 — LifePath para inversionistas (perfil diferente) (FASE 11 BLOQUE 11.O agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** cuestionario LifePath complementario orientado a perfil inversionista (ROI target, horizonte, riesgo tolerado, tipo de activo STR/LTR/mixed).
+- **Para qué sirve:** diferenciar user personas; hoy LifePath es buyer-first, falta inversionista-first.
+- **Beneficio concreto:** monetización portal Developer + pro tier upgrade (inversores pagan por matching investment-grade).
+- **Fase target:** FASE 15 Portal Developer
+- **Dependencia data:** schema `lifepath_profile_type` enum + registry de nuevos componentes (rent_yield · cap_rate · gentrification_exposure)
+
+### L140 — LifePath con AI copilot conversacional (FASE 11 BLOQUE 11.O agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** extensión del AI Shell (FASE 20) para permitir cuestionario conversacional en vez de 15 preguntas rígidas. "Cuéntame cómo te gusta vivir" → LLM extrae answers + confirma.
+- **Para qué sirve:** UX friction lower; retention (user no abandona quiz).
+- **Beneficio concreto:** conversion quiz → resultados +40% (estimado Stitch Fix benchmarks).
+- **Fase target:** FASE 20 AI Shell expansion
+- **Dependencia data:** AI Shell MCP integration + LifePath schema introspection
+
+### L141 — NOAA GHCND real ingestion + station lookup lat/lng (FASE 11 BLOQUE 11.P agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** reemplazar `heuristicMonthlyAggregate` determinístico por `fetchNoaaGhcnd()` usando API pública `ncei.noaa.gov/cdo-web/api/v2/data`. Rate limit 5 req/s, 10K req/día free. Station lookup cache una-vez por lat/lng → station_id.
+- **Para qué sirve:** data real (vs CDMX pattern sintético) para predicciones creíbles; soporta expansión fuera de CDMX (ciudades MX + LatAm).
+- **Beneficio concreto:** credibilidad "Zillow del clima" ≠ "fake data"; precisión twin matching real vs heurística ±30% estimado.
+- **Fase target:** FASE 12 N5 (swap `source='noaa'`)
+- **Dependencia data:** `NOAA_API_TOKEN` env + `climate_stations` tabla (station_id, lat, lng, country_code)
+
+### L142 — Climate × Insurance vertical (FASE 11 BLOQUE 11.P agendado)
+
+- **Status:** 🟢 queued
+- **Qué es:** nuevo módulo que cruza `climate_twin_matches` + `climate_future_projections` + extreme_events históricos con pricing de seguros (hogar, flood, earthquake). Partnership con insurtech o producto propio.
+- **Para qué sirve:** monetizar data climática; categoría nueva "Climate Risk Score" adoptada por fintechs/aseguradoras.
+- **Beneficio concreto:** recurring revenue tier enterprise + datos de riesgo agregados para el IE (cascada hacia DMX-STA estabilidad).
+- **Fase target:** FASE 25 Insurance vertical
+- **Dependencia data:** partnership insurtech + actuarial validation
+
+### L143 — Daily climate 15y big data ingestion (S3 offload) (FASE 11 BLOQUE 11.P agendado)
+
+- **Status:** 🟡 deuda escalabilidad conocida
+- **Qué es:** hoy SEED persiste monthly aggregates (180 rows × 200 zonas = 36K rows). H2 data lake (Parquet S3) para daily granular 15y: 1.1M+ rows sin tocar Postgres 8GB.
+- **Para qué sirve:** ML models sobre data granular sin degradar DB prod; queries históricas exportables.
+- **Beneficio concreto:** precisión anomaly detection +50% vs monthly (daily captura ondas de calor 3-5d); análisis costo/beneficio vs Supabase tier upgrade.
+- **Fase target:** H2 Data Lake (FASE 27+ observability + big data infra)
+- **Dependencia data:** S3 + Parquet pipeline + DuckDB/Trino query layer
+
 ### Cross-references FASE 11 XL append
 
 - `docs/CONTEXTO_MAESTRO_DMX_v5.md` Addendum 2026-04-21 FASE 11 XL
@@ -1465,4 +1519,4 @@ Post founder approval FASE 11 XL (7→15 índices + 10 moonshots core, ~90h), se
 - **Fase target:** FASE 24 Observabilidad
 - **Dependencia data:** `@sentry/nextjs` integration
 
-**Última actualización:** 2026-04-23 — L73-L137 + L-NEW1/L-NEW2/L-NEW3 (FIX 11.O+P) = 68 laterales FASE 11 XL + 0 items sin destino concreto.
+**Última actualización:** 2026-04-23 (tarde) — L73-L143 + L-NEW1/L-NEW2/L-NEW3 (11.M/N/O/P + FIX) = **74 laterales FASE 11 XL** + 0 items sin destino concreto.

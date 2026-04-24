@@ -15,7 +15,7 @@ El criterio de done de FASE 11 XL es **E2E connectedness end-to-end** (ADR-018):
 
 ## Progreso de ejecución
 
-**Status actualizado 2026-04-23 post-merge PR #26:** 14/27 bloques FASE 11 XL completados (52%).
+**Status actualizado 2026-04-23 post-merge PR #28:** 16/27 bloques FASE 11 XL completados (59%).
 
 | Bloque | Status | Merge SHA | PR |
 |---|---|---|---|
@@ -33,8 +33,8 @@ El criterio de done de FASE 11 XL es **E2E connectedness end-to-end** (ADR-018):
 | 11.L APIs públicas + Widget + Time Machine | ✅ shipped | ba913a1 | #25 |
 | **11.M Genoma de Colonias SEED** | ✅ **shipped** | **aa0334b** | **#26** |
 | **11.N Futures Curve SEED + Pulse Pronóstico 30d (L93)** | ✅ **shipped** | **aa0334b** | **#26** |
-| 11.O LifePath SEED | ⏳ pending | — | — |
-| 11.P Climate Twin SEED | ⏳ pending | — | — |
+| **11.O LifePath SEED** | ✅ **shipped** | **9f6442f** | **#28** |
+| **11.P Climate Twin SEED** | ✅ **shipped** | **9f6442f** | **#28** |
 | 11.Q Ghost Zones Detector | ⏳ pending | — | — |
 | 11.R Zone Constellations SEED | ⏳ pending | — | — |
 | 11.S Living Atlas SEED | ⏳ pending | — | — |
@@ -49,6 +49,7 @@ El criterio de done de FASE 11 XL es **E2E connectedness end-to-end** (ADR-018):
 ### Notas de incidents resueltos
 
 - **Incident 2026-04-23 — migrations 11.J no aplicadas en Supabase cloud.** PR #23 (FASE 11 bloques F-J) mergeó código + migration files al repo pero GitHub Actions NO ejecutó `supabase db push`. Las tablas `newsletter_subscribers`, `newsletter_deliveries`, `zone_streaks`, `newsletter_ab_tests`, `dmx_wrapped_snapshots` quedaron declaradas en migrations locales sin existir en prod durante ~2 semanas. **Resuelto en PR #26** (mismo merge que 11.M+N) aplicando 9 migrations pendientes vía `supabase db push --linked` manual + reconcile history (6 timestamps duplicados repair) + regen types. Regla canonizada: tras cada merge que incluya migrations, ejecutar `supabase db push --linked` manual desde terminal (ver feedback memory `feedback_supabase_migrations_manual_push`).
+- **Fix 2026-04-23 tarde — schema conflict 11.O/11.P (Opción B refinada founder).** Pre-0 audit detectó que las tablas propuestas `lifepath_user_profiles` + `climate_twin_projections` YA existían en schema XL maestro (`20260421100000`). Decisión producto: ALTER in-place + rename → separar semánticamente "Clima Futuro" (projections) de "Clima Gemelo Histórico" (nuevas tablas). Fix commit adicional (mismo merge PR #28) refactorizó `climate_annual_summaries` de `numeric[]` → `vector(12)` + HNSW cosine + nueva `climate_zone_signatures` (aggregate per-zone) + RPC `find_climate_twins` O(log N) DB-side. Filosofía escalable canonizada (`feedback_arquitectura_escalable_desacoplada.md`). 6 migrations totales: `lifepath_alter` + `climate_twin_schema` + `audit_v22` + `climate_pgvector_refactor` + `climate_source_heuristic` + `audit_v23`.
 
 ## Bloques
 

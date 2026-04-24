@@ -301,3 +301,36 @@
 - `docs/03_CATALOGOS/03.13_E2E_CONNECTIONS_MAP.md` — conexiones Genoma/Futures cross-function
 
 **Autor BLOQUES 11.M+11.N:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 | **Status:** Shipped H1 (product + channels live post-push)
+
+## GTM Channels FASE 11 BLOQUES 11.O + 11.P
+
+### Canal LifePath Match (Producto 10.19)
+
+- **Landing primario:** `/{locale}/lifepath` — landing público con 2 cards (cómo funciona · por qué distinto) + CTA "Empezar cuestionario".
+- **Quiz:** `/{locale}/lifepath/quiz` — multi-step 3 pasos × 5 preguntas con progress bar + Zod validation + tRPC authenticated.
+- **Resultados:** `/{locale}/lifepath/resultados` — top 20 colonias ordenadas por score con breakdown 7 componentes (familia/budget/movilidad/amenidades/seguridad/verde/vibe) + shared_vibe_tags chips + top_dmx_indices + cross-link a `/indices/DMX-LIV/similares?scope_id=` (Genoma similarity 11.M).
+- **Amplificación content:** blog posts "elige tu colonia como eliges outfit en Stitch Fix" + social proof de matches sorprendentes.
+- **Cross-function Genoma:** desde resultados LifePath → "Ver colonias similares" → Genoma (11.M) por vibe_tags + 64-dim embedding.
+- **Authenticated default:** saveProfile requiere login (RLS `user_id = auth.uid()` sobre `lifepath_user_profiles`).
+- **AI tier futuro (L138/L140):** swap `methodology='heuristic_v1'` → `llm_v1` para matching conversacional.
+
+### Canal Clima Gemelo Histórico (Producto 10.20)
+
+- **Landing primario:** `/{locale}/indices/[indexCode]/clima-gemelo?scope_id=<uuid>` — para cualquier indexCode (DMX-LIV/DMX-IPV/etc) permite twins climáticos de la zona + chart histórico 15y.
+- **Empty state:** cuando no hay `scope_id` en URL → mostrar top 10 zonas con cobertura climática + links directos (UX friction ~0).
+- **UI dual-axis:** `ClimateComparisonChart` Recharts (bar lluvia mm derecha + line temp °C izquierda, 15y eje X) con Legend + Tooltip i18n.
+- **Twin list:** top 10 gemelos climáticos con similarity 0-100 + shared_patterns chips (features con diff < 10%).
+- **Cross-function Pulse (11.F):** `checkClimateAnomalyImpactOnPulse` ajusta Pulse Score -5% si eventos extremos en mes actual.
+- **Amplificación content:** "Roma Norte tiene el clima más parecido a Pedregal de 2011-2026" — storytelling climático ligado a decisión inmobiliaria long-term.
+- **Newsletter cross (futuro):** `climate_section` opt-in para alertar anomalías climáticas en zonas favoritas (agendado post-11.P en 11.J extension).
+- **Categoría nueva:** posicionar "Climate Risk Score para vivienda" — competidores portales no tienen data climática integrada.
+- **API bulk futuro (L142):** JSON endpoint para aseguradoras/bancos con climate risk vector embedding.
+
+### Cross-references append 11.O+11.P
+
+- `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` — L138-L143 + L-NEW1/2/3 agendados 11.O+P
+- `docs/03_CATALOGOS/03.1_CATALOGO_BD_TABLAS.md` §19 — 5 tablas nuevas + ALTER lifepath + rename climate
+- `docs/03_CATALOGOS/03.13_E2E_CONNECTIONS_MAP.md` — 6 cross-functions CF-11.O-1..4 + CF-11.P-1..2
+- `docs/03_CATALOGOS/03.8_CATALOGO_SCORES_IE.md` — scores LIFEPATH_MATCH + CLIMATE_TWIN
+
+**Autor BLOQUES 11.O+11.P:** Manu Acosta + Claude Opus 4.7 | **Fecha:** 2026-04-23 tarde | **Status:** Shipped H1 (main SHA 9f6442f, PR #28)
