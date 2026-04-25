@@ -6,6 +6,8 @@
 
 > **2026-04-24 — FASE 07.6.B Crosswalk Matrix shipped.** ~69 candidatos L-NEW nuevos detectados durante crosswalk × 150 features prototype × DMX shipped — pendientes consolidación canonical en sub-sesión 07.6.F. Ver `docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md` sección "L-NEW candidates nuevos detectados (71 entries pendientes 07.6.F)".
 
+> **2026-04-24 — FASE 07.6.D RICE Priorities shipped.** Top-20 critical path features identificadas en `docs/08_PRODUCT_AUDIT/03_RICE_PRIORITIES.md`. **5 foundational blockers** detectados (DEALS table · PROPS table · WhatsApp infra · DISC framework · Banking APIs) — bloquean ~40% del top-30 critical path. Tier breakdown: 5 Critical · 21 High · 31 Medium · 92 Low. Build buckets: 🟢 Build-now 48 · 🟡 Build-fase 78 · 🔴 Build-H2+ 23. Zero cycles dependency graph. L-NEW candidates 07.6.B + 07.6.C + 07.6.D pendientes consolidación canonical 07.6.F.
+
 ---
 
 ## Status legend
