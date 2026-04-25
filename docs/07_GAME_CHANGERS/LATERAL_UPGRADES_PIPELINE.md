@@ -8,6 +8,8 @@
 
 > **2026-04-24 — FASE 07.6.D RICE Priorities shipped.** Top-20 critical path features identificadas en `docs/08_PRODUCT_AUDIT/03_RICE_PRIORITIES.md`. **5 foundational blockers** detectados (DEALS table · PROPS table · WhatsApp infra · DISC framework · Banking APIs) — bloquean ~40% del top-30 critical path. Tier breakdown: 5 Critical · 21 High · 31 Medium · 92 Low. Build buckets: 🟢 Build-now 48 · 🟡 Build-fase 78 · 🔴 Build-H2+ 23. Zero cycles dependency graph. L-NEW candidates 07.6.B + 07.6.C + 07.6.D pendientes consolidación canonical 07.6.F.
 
+> **2026-04-25 — FASE 07.6.F Founder Gates + L-NEW Canonization shipped (CIERRE FASE 07.6).** 81 L-NEW entries canonical agregadas (L-NEW52 → L-NEW132) consolidando 90 candidatos brutos detectados en sub-sesiones 07.6.B (77 brutos crosswalk) + 07.6.C (5 brutos design) + 07.6.E (8 brutos roadmap). 9 duplicados cross-source eliminados (4 B↔E gates founder, 5 intra-source folds incluyendo gamification 5-en-1). Total pipeline: **132 L-NEW entries** (1-51 existing + 9 ✅ SHIPPED + 81 nuevos). 13 Founder Gates formalizados en `docs/08_PRODUCT_AUDIT/05_FOUNDER_DECISION_GATES.md` (ADR-033 → ADR-045). 5 mini-fases foundational stub agregadas a plan maestro (FASE 07.7 CRM, 11.W DISC Voice, 11.X Properties Inventory, 21.A WhatsApp, 22.A Banking).
+
 ---
 
 ## Status legend
@@ -2094,3 +2096,1009 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 - **Ref:** PR fix/zero-deuda-pre-07.6.B, tag `fix-zero-deuda-pre-07.6.B`, migration `supabase/migrations/20260502000000_fk_enforcement_zones_v34.sql` (Parte A).
 
 ---
+## Append a LATERAL_UPGRADES_PIPELINE.md
+
+> Las entradas siguientes se agregarán al pipeline existing tras L-NEW51. Numbering canonical secuencial L-NEW52..L-NEW132.
+
+### Bloque B — CROSSWALK MATRIX 07.6.B (66 únicas)
+
+#### C1 CRM/Asesor (6 únicas, 1 mergeado en bloque combinado)
+
+### L-NEW52 — CRM Foundation Stack (leads + buyer_twins + deals + family_units + referrals)
+
+- **Status:** 🟢 proposed
+- **Origen:** detectado en 07.6.B (CROSSWALK §C1 L-NEW-C1-01) · combinado con 07.6.E (L-NEW-ROADMAP-2 persona-types CRM gate ADR-033)
+- **Qué es:** schema base CRM (leads + buyer_twins + deals + family_units + referrals + asesor_public_profiles) habilitado vía mini-fase FASE 07.7 con ADR-033 persona_type enum.
+- **Para qué sirve:** desbloquea Asesor Portal (FASE 13) y todo lo downstream que requiere historial cierres/leads (AVM spread, gemelo digital, referrals, family planning).
+- **Beneficio concreto:** elimina greenfield bloqueado en 26 features cascade — sin esta foundation, FASE 13/14/22 no arrancan.
+- **Fase target:** FASE 07.7 (foundational mini-fase, 11 migrations, 88h ya planificada en 04_ROADMAP)
+- **Estimado:** 88h
+- **RICE estimate:** 1166 (top RICE per crosswalk #4 capa C1)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C1; docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 1.1
+
+### L-NEW53 — Lead Enrichment Cascade Orchestrator
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C1-02)
+- **Qué es:** trigger + worker que dispara IE shipped scoring (LIV/MOV/SEC/ECO + DNA + climate twins) automáticamente en INSERT de lead.
+- **Para qué sirve:** cada lead nuevo llega al asesor pre-enriquecido con contexto IE — zero work manual.
+- **Beneficio concreto:** asesor abre lead y ya tiene Atlas + LifePath + zonas afines listas. RICE top capa C1 = 1166.
+- **Fase target:** FASE 13-14 Asesor Portal
+- **Estimado:** 22h (M)
+- **RICE estimate:** 1166
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C1 #9 #10
+
+### L-NEW54 — DISC Voice Pipeline (Whisper + LLM + buyer_twin.disc_profile)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C1-03) · combinado con 07.6.E (L-NEW-ROADMAP-4 DISC framework gate ADR-036)
+- **Qué es:** mini-fase 11.W: pipeline grabar audio → Whisper transcribe → LLM clasifica DISC (4-axis) → guarda en `buyer_twins.disc_profile` jsonb.
+- **Para qué sirve:** asesor entiende perfil personalidad comprador para argumentar y negociar correctamente sin fricciones.
+- **Beneficio concreto:** desbloquea 7 features cascade (objection playbook, agent WA, gemelo 6D, asesor-buyer matching).
+- **Fase target:** FASE 11.W (foundational mini-fase, 8 migrations, 64h)
+- **Estimado:** 64h
+- **RICE estimate:** 850 (estimación PM, top-tier capa C1)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C1 #18; docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 1.2
+
+### L-NEW55 — Asesor Gamification Engine (ELO + badges + streaks + IE unlock)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C1-04 + L-NEW-C5-52 + L-NEW-C5-56 + L-NEW-C5-57 + L-NEW-C5-58 unificados)
+- **Qué es:** engine gamification para asesores — ELO Glicko-2 ajustado por zone_tier, badges con DSL criteria + awarder cron, streaks pattern reuso de streaks-calculator, levels/XP system wired a `ui_feature_flags`.
+- **Para qué sirve:** retiene asesores top via reconocimiento ranking + desbloqueos progresivos features IE pro avanzados.
+- **Beneficio concreto:** track record verificable + competencia friendly + churn baja vs portales sin progression layer.
+- **Fase target:** FASE 14 Asesor M6-M10 + extensión 23
+- **Estimado:** 45h (L)
+- **RICE estimate:** 1167 (TOP RICE per crosswalk C5.5.3 streaks)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C1 #28-29 + sec C5.5.1/2/3
+
+### L-NEW56 — Asesor Report Card público (analog ie_score_visibility_rules)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C1-05 + L-NEW-C2-C unified — Certificación + Report Card same canonical)
+- **Qué es:** página pública per-asesor con métricas verificadas (cierres, NPS comprador, especialidad zonas, badges) controladas por visibility_rules estilo `ie_score_visibility_rules`.
+- **Para qué sirve:** comprador puede validar trayectoria asesor antes de contactar — confianza tipo Yelp/Zillow agent profiles.
+- **Beneficio concreto:** asesores top capturan más leads orgánicos via SEO `/asesor/[slug]`. Acelera elección comprador.
+- **Fase target:** FASE 14 + 21 Portal Público
+- **Estimado:** 22h (M)
+- **RICE estimate:** 720
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C1 #27 + sec C2 #30
+
+### L-NEW57 — Day Planner Agent (LLM + Calendar + revenue_predictor)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C1-06)
+- **Qué es:** agente que prioriza día asesor (visitas, llamadas, follow-ups) usando revenue_predictor scoring + integración Google Calendar OAuth.
+- **Para qué sirve:** asesor empieza el día con plan optimizado revenue-first — reemplaza agendas manuales caóticas.
+- **Beneficio concreto:** +30% conversion estimada por priorización ML vs gut-feel.
+- **Fase target:** FASE 13-14 Asesor M3-M7
+- **Estimado:** 45h (L)
+- **RICE estimate:** 540
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C1 #19-21
+
+### L-NEW58 — Property Fax cross-link (due-diligence pipeline)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C1-07)
+- **Qué es:** explicitar dependencia de feature #24 due diligence con L10 Property Fax pipeline (FASE 17 DocIntel).
+- **Para qué sirve:** comprador descarga reporte completo property fax (historial precio, dueños, gravámenes, vecinos verificados, IE scores) en 1 PDF.
+- **Beneficio concreto:** elimina 2-3 visitas notario/registro público — UX comparable a Carfax para autos.
+- **Fase target:** FASE 17 DocIntel + 18 Legal
+- **Estimado:** 45h (L)
+- **RICE estimate:** 480
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C1 #24
+
+#### C2 IE/Insights (5 únicas — 2 mergeadas en C1)
+
+### L-NEW59 — Buyer persona generator por zona (cierres CRM)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C2-A)
+- **Qué es:** ML/heuristic engine que extrae el perfil dominante comprador per zona desde data CRM cierres (ej. "Roma Norte: 70% DINK 28-35y, 20% young families, 10% inversionistas").
+- **Para qué sirve:** desarrolladores diseñan amenities right-fit + asesores filtran leads matching zona.
+- **Beneficio concreto:** reduce mismatch comprador-zona; data feature exclusivo DMX no replicable por scrapers.
+- **Fase target:** FASE 13-14 (post-CRM data acumulada 6m+)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 425
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C2 candidate-A
+
+### L-NEW60 — Spread listado-vs-cierre AVM v1
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C2-B)
+- **Qué es:** primera implementación AVM con spread real listado vs cierre — requiere data CRM mínima (~50 deals zona).
+- **Para qué sirve:** comprador ve "este listado pide $5.2M pero zona cierra a 92% = $4.78M" — negotiation power.
+- **Beneficio concreto:** transparencia precio cierre que ningún portal MX ofrece. RICE top critical path #9 = 8,385.
+- **Fase target:** FASE 11.X.2 (post-07.7 data CRM)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 8,385 (canonical 07.6.D top-30)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C2 #1
+
+### L-NEW61 — Developer pipeline tracker + competitor radar unificado
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C2-D)
+- **Qué es:** dashboard developer-side con pipeline propio + radar competidores (proyectos cercanos, absorption rate, precio promedio, SKU mix).
+- **Para qué sirve:** desarrollador toma decisiones launch/pricing con visibilidad zona completa.
+- **Beneficio concreto:** sustituye Excel hand-curated $3-5K/mes consultor por dashboard self-serve.
+- **Fase target:** FASE 15 Desarrollador
+- **Estimado:** 45h (L)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C2 #14 + #23
+
+### L-NEW62 — Demand graph instrumentation portal-publico
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C2-E)
+- **Qué es:** instrumentación clicks/saves/searches/views en portal público que feed cascade webhook a L-NEW28 + actualización demand_graph zonas top-buscadas.
+- **Para qué sirve:** señales tempranas demand surges + supply gaps zona-level — alimenta Atlas movers.
+- **Beneficio concreto:** detection 2-4 weeks antes que portales tradicionales (que reportan post-cierre).
+- **Fase target:** FASE 21 Portal Público + L-NEW28 cascade webhook existing
+- **Estimado:** 22h (M)
+- **RICE estimate:** 540
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C2 candidate-E
+
+### L-NEW63 — Verified purchase reviews flow post-cierre
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C2-F)
+- **Qué es:** flow gated post-cierre (deal status='cerrado') que invita comprador a review zona/desarrollo + asesor con LLM moderation pre-publish.
+- **Para qué sirve:** reviews honestas verificadas tipo Yelp/Tripadvisor — sin spam ni fake reviews.
+- **Beneficio concreto:** moat content único — competidores no tienen verified-purchase gating.
+- **Fase target:** FASE 14 Asesor + 22 Marketing
+- **Estimado:** 22h (M)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C2 candidate-F
+
+### L-NEW64 — Project-photos EXIF geo+timestamp validation
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C2-G)
+- **Qué es:** server-side validation EXIF geo+timestamp en uploads developer/asesor (matches zone polygon + foto reciente <12m).
+- **Para qué sirve:** elimina photos viejas/de otros desarrollos/stock photos genéricos.
+- **Beneficio concreto:** trust layer fundamental — alimenta L-NEW65 DMX Verified Media badge.
+- **Fase target:** FASE 15 Desarrollador
+- **Estimado:** 11h (S)
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C2 candidate-G
+
+#### C3 Comms/WhatsApp/Sales (21 únicas — 1 mergeada en CT)
+
+### L-NEW65 — Agente WhatsApp con contexto IE (extiende L59)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-01)
+- **Qué es:** agente WA inteligente con contexto IE shipped (LIV/MOV/SEC/ECO + DNA + climate) responde preguntas comprador en español natural via Twilio.
+- **Para qué sirve:** comprador pregunta "¿cómo está Roma Norte para familia?" y agente responde con scores + comparables + insights zona.
+- **Beneficio concreto:** primera línea de soporte 24/7 + lead-qual automática + datos que ningún chatbot portal compite.
+- **Fase target:** FASE 22 Marketing+Comms (post-21.A WA infra)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 1100 (canonical 07.6.D)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #1
+
+### L-NEW66 — Voice note intelligence (Whisper + DISC + sentiment)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-02)
+- **Qué es:** voice note inbound WhatsApp → Whisper transcript → LLM clasifica DISC + sentiment + intent → enriquece buyer_twin profile.
+- **Para qué sirve:** voicenotes (canal preferido MX) ya no son blackbox — datos estructurados feed CRM.
+- **Beneficio concreto:** acelera DISC profiling (no hace falta survey explícito) + detecta urgencia/objeciones tono voz.
+- **Fase target:** FASE 22 + 11.W
+- **Estimado:** 45h (L)
+- **RICE estimate:** 580
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #2
+
+### L-NEW67 — Objection playbook dinámico (zona × DISC × momento)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-03)
+- **Qué es:** playbook dinámico que sugiere argumentos asesor por combinación zona × DISC comprador × momento ciclo (frio/calientes/cierre).
+- **Para qué sirve:** asesor jr aprende argumentos top-performers replicables — eleva piso entrenamiento.
+- **Beneficio concreto:** +20% conversion estimada vs scripts genéricos.
+- **Fase target:** FASE 22 (post-DISC + CRM)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 480
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #3
+
+### L-NEW68 — Argument builder (botón generar argumento precio)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-04)
+- **Qué es:** botón asesor que genera argumento contextualizado precio (vs zona avg, vs comparables, vs spread close-list, vs plusvalia 12m).
+- **Para qué sirve:** asesor copy-paste argumento data-driven en WA al comprador en <5s.
+- **Beneficio concreto:** elimina 5-10 min búsqueda manual datos + argumento más fuerte basado en métricas.
+- **Fase target:** FASE 13 Asesor Portal
+- **Estimado:** 11h (S)
+- **RICE estimate:** 540
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #4
+
+### L-NEW69 — Negotiation co-pilot (DISC + history)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-05)
+- **Qué es:** copilot LLM real-time durante negociación — sugiere siguiente movimiento basado en DISC comprador + historial zona cierres.
+- **Para qué sirve:** asesores intermedios juegan al nivel top con asistencia LLM-driven.
+- **Beneficio concreto:** democratización know-how negociación; reduce variance results agente jr/sr.
+- **Fase target:** H2 (post-1000 closings data acumulada)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #5
+
+### L-NEW70 — Family-aware messaging (persona-tagged)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-06)
+- **Qué es:** mensajes asesor adaptados a persona específica family_unit (suegra, esposo, esposa, hijos teen) con tono diferenciado per receptor.
+- **Para qué sirve:** decisiones residenciales son family decisions — comunicación per-persona acelera consenso.
+- **Beneficio concreto:** primera plataforma MX con multi-stakeholder messaging — diferenciador real.
+- **Fase target:** H2 (requiere family_units mature)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #6
+
+### L-NEW71 — Winning cadence discovery (auto-replicate)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-07)
+- **Qué es:** ML que detecta cadences asesores top (frequency, channels, timing) y replica auto a asesores juniors.
+- **Para qué sirve:** auto-coaching basado en data — replica patterns ganadores sin intervención manager.
+- **Beneficio concreto:** scaling training program sin headcount L&D.
+- **Fase target:** H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #7
+
+> **Nota numbering:** L-NEW72–L-NEW76 reservados para 07.6.C design patterns (sub-bloque siguiente).
+
+#### Bloque C — DESIGN MIGRATION 07.6.C (5 entries, numbering pre-asignado)
+
+### L-NEW72 — Property Photo Scene Library (SVG illustrations)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.C (DESIGN_MIGRATION sec 6)
+- **Qué es:** set reutilizable de SVG illustrations (building/interior/view/garden + 6+ variantes) parametrizables por color y mood — alternativa a stock photos.
+- **Para qué sirve:** zero CDN cost · brand-coherent · a11y-perfect · cero dependencia bancos de fotos.
+- **Beneficio concreto:** elimina costos Shutterstock $500-1500/año + look 100% brand DMX.
+- **Fase target:** FASE 11.T-W (M3b PropertyListings componente #7)
+- **Estimado:** 8h
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/02_DESIGN_MIGRATION.md sec 6 L-NEW72; SA-Componentes §7
+
+### L-NEW73 — Marquee Live-Data Component
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.C (DESIGN_MIGRATION sec 6)
+- **Qué es:** pattern reusable para tickers data-driven (LiveTicker actual + tasa BANXICO + AVM movers + INPC delta) con props `{items, speed, direction, pauseOnHover, reducedMotion}`.
+- **Para qué sirve:** un solo componente sirve para todas las experiencias data-marquee de la plataforma.
+- **Beneficio concreto:** reduce duplicación a 1× pattern; +5 surfaces consumen sin re-implementar.
+- **Fase target:** FASE 11.T (M3a primitives + DMX-LIV ticker)
+- **Estimado:** 6h
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/02_DESIGN_MIGRATION.md sec 6 L-NEW73; SA-Componentes §3 + SA-Tokens §6
+
+### L-NEW74 — Radar Comparator Engine
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.C (DESIGN_MIGRATION sec 6) · cross-ref 07.6.B (L-NEW-C3-21 Comparador objetivo multidim)
+- **Qué es:** extender `ColoniaComparator` a comparator universal (2 colonias, 2 desarrollos, 2 properties) con SVG axes parametrizables.
+- **Para qué sirve:** UI consistency — un solo componente comparador para 3+ entidades distintas.
+- **Beneficio concreto:** reuso pattern + cross-ref con L-NEW36 multi-comparable existing engine.
+- **Fase target:** FASE 11.V (Comparator) + FASE 21 portal público
+- **Estimado:** 22h
+- **RICE estimate:** 6,000 (heredado C3.21 RICE 07.6.D top-30 #25)
+- **Ref:** docs/08_PRODUCT_AUDIT/02_DESIGN_MIGRATION.md sec 6 L-NEW74; SA-Componentes §6
+
+### L-NEW75 — Vinyl Tile Layered Display
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.C (DESIGN_MIGRATION sec 6)
+- **Qué es:** pattern dataviz "switch entre N capas en single tile" reusable: Atlas tile multi-capa LIV/MOV/SEC/ECO, Indices nacional tile estado-level.
+- **Para qué sirve:** densidad información sin overload visual — toggle layers in-place.
+- **Beneficio concreto:** UX moderna tipo Robinhood/Coinbase para data layers — categoría visual nueva real estate MX.
+- **Fase target:** FASE 11.U (Atlas tile colonia)
+- **Estimado:** 24h
+- **RICE estimate:** 480
+- **Ref:** docs/08_PRODUCT_AUDIT/02_DESIGN_MIGRATION.md sec 6 L-NEW75; SA-Componentes §5
+
+### L-NEW76 — Disclosure Primitive (accordion WCAG-compliant)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.C (DESIGN_MIGRATION sec 6)
+- **Qué es:** extracción del accordion pattern a `shared/ui/primitives/disclosure.tsx` reusable (Settings, Help docs, Onboarding) — WCAG-compliant single/multi-open.
+- **Para qué sirve:** primitive shared evita 5+ implementaciones ad-hoc per-feature.
+- **Beneficio concreto:** A11y consistency garantizada + dev velocity acelerada en ~5 features futuras.
+- **Fase target:** FASE 11.T (M3b Faq #11)
+- **Estimado:** 6h
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/02_DESIGN_MIGRATION.md sec 6 L-NEW76; SA-Componentes §11
+
+---
+
+#### C3 (continuation, post L-NEW76 design block)
+
+### L-NEW77 — Behavioral trigger nurturing (extends L1+L76+L90)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-08)
+- **Qué es:** nurturing engine con triggers behavioral (clicks listings, saves, sin actividad N días) que alimenta cadences cross-channel.
+- **Para qué sirve:** "sistema nunca te suelta" — comprador siempre recibe siguiente paso right-sized.
+- **Beneficio concreto:** RICE top capa 200k — activa C3 sequence engine.
+- **Fase target:** FASE 13+22
+- **Estimado:** 22h (M)
+- **RICE estimate:** 200,000 (canonical crosswalk top capa)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #8
+
+### L-NEW78 — Omnichannel orchestration (WA+email+portal+phone escalation)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-09)
+- **Qué es:** orchestrator decide canal óptimo per momento + escalation rules (no-WA-response 24h → email; no-email 48h → phone).
+- **Para qué sirve:** unifica fragmentado canal mix — un solo dashboard governance comms.
+- **Beneficio concreto:** reduce drop-off cross-channel; un canal falla, otro sube.
+- **Fase target:** FASE 22+H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 540
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #9
+
+### L-NEW79 — Emotion-triggered interventions
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-10)
+- **Qué es:** intervenciones automatizadas basadas en sentiment detection voice notes / WA messages (frustration, excitement, doubt).
+- **Para qué sirve:** asesor recibe alert "comprador frustrado" o "comprador entusiasmado" para timing apropiado.
+- **Beneficio concreto:** reducción churn lead emocional + cierre acelerado en momentos hot.
+- **Fase target:** H2 (sentiment infra + DISC mature)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #10
+
+### L-NEW80 — Drip condicional rules-engine DSL
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-12)
+- **Qué es:** rules-engine DSL para drip campaigns condicionadas (ej. `if visited >= 3 listings AND saved >= 1 AND lifepath_age <= 35 → trigger campaign-young-buyer`).
+- **Para qué sirve:** marketing team configura campaigns sin código ni deploys.
+- **Beneficio concreto:** time-to-launch campaign de semanas a horas.
+- **Fase target:** FASE 22+H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #12
+
+### L-NEW81 — Asesor-buyer matching (DISC + workload)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-13)
+- **Qué es:** routing engine que asigna nuevo lead al asesor con DISC complementario + workload disponible + zone expertise match.
+- **Para qué sirve:** ningún lead pierde tiempo con asesor mismatch — primera asignación es la correcta.
+- **Beneficio concreto:** +25% conversion estimada vs round-robin actual.
+- **Fase target:** FASE 13 Asesor Portal
+- **Estimado:** 22h (M)
+- **RICE estimate:** 720
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #13
+
+### L-NEW82 — Autonomous buyer-property matcher (3-tap approval)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-14)
+- **Qué es:** matcher autónomo gemelo digital × inventory live → top-N proposals con 3-tap approval comprador (👍/👎/save).
+- **Para qué sirve:** comprador no tiene que buscar — sistema le lleva opciones right-fit.
+- **Beneficio concreto:** UX estilo Tinder/Hinge para real estate; muy diferenciador.
+- **Fase target:** FASE 13+H2 (requiere properties inventory mature)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 480
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #14
+
+### L-NEW83 — "3 y listo" (top-3 propiedades por gemelo)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-15)
+- **Qué es:** UX comprador minimalista — 3 propiedades curadas top match gemelo, no scroll infinito.
+- **Para qué sirve:** elimina paralisis decision shopping; comprador ve 3 opciones de calidad y se enfoca.
+- **Beneficio concreto:** time-to-decision de semanas a días — categoría nueva "curated real estate" tipo Stitch Fix.
+- **Fase target:** FASE 20+H2
+- **Estimado:** 22h (M)
+- **RICE estimate:** 540
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #15
+
+### L-NEW84 — Precision selling assignment
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-16)
+- **Qué es:** assignment top-asesor para deals high-value (probability×value × propensity score predictivo).
+- **Para qué sirve:** asegurar deals top reciben asesor top — capacity allocation óptima.
+- **Beneficio concreto:** revenue per advisor optimizado.
+- **Fase target:** H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #16
+
+### L-NEW85 — Reporte personalizado PDF primer contacto WA
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-17)
+- **Qué es:** PDF auto-generado per-lead (zona match + IE scores + comparables + estimación financiera) entregado vía WA en <60s post-form.
+- **Para qué sirve:** primera impresión comprador es valor concreto, no "vamos a contactarte".
+- **Beneficio concreto:** WA 3-5× response rate vs genérico — RICE top crosswalk 200k.
+- **Fase target:** FASE 13+22 (post-21.A WA infra)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 6,600 (canonical 07.6.D top-30 #22)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #17
+
+### L-NEW86 — Social proof engine datos reales
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-18)
+- **Qué es:** widgets "5 personas vieron este listing últimas 24h" / "3 cierres últimos 7 días en Roma Norte" basado en data real (no fake).
+- **Para qué sirve:** trust + urgency genuinos — no Booking-style pressure tactics fake.
+- **Beneficio concreto:** RICE 8,750 top-30; conversion lift sin scammy.
+- **Fase target:** FASE 21+22
+- **Estimado:** 11h (S)
+- **RICE estimate:** 8,750 (canonical 07.6.D top-30 #13)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #18
+
+### L-NEW87 — Financing simulator integrado (INFONAVIT/FOVISSSTE/banco)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-19) · combinado con 07.6.E (L-NEW-ROADMAP-3 Banking partnership track)
+- **Qué es:** simulador financiamiento integrado (rates schedules + INFONAVIT/FOVISSSTE rules + banco) — feature unificada vía mini-fase 22.A.
+- **Para qué sirve:** elimina objeción #1 affordability — "puedo pagar esto?" respuesta clara.
+- **Beneficio concreto:** RICE top C3 375k crosswalk — bloqueante adopción comprador.
+- **Fase target:** FASE 20.H + 21 (post-22.A)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 6,250 (canonical 07.6.D top-30 #23)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #19; docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 1.5
+
+### L-NEW88 — "Pregunta sin pena" RAG chat público
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-20)
+- **Qué es:** chat público RAG-based donde cualquiera pregunta sin login ("¿qué pasa si no tengo enganche?") con respuestas humanas + data DMX.
+- **Para qué sirve:** zero-shame UX — capturar early-funnel curiosos que no quieren contacto agente.
+- **Beneficio concreto:** SEO indexación masiva long-tail Q&A real-estate + viralidad share answers.
+- **Fase target:** FASE 21+22
+- **Estimado:** 22h (M)
+- **RICE estimate:** 333,000 (canonical crosswalk top capa C3.20)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #20
+
+### L-NEW89 — Comparador objetivo multidimensional (extends score_comparison_matrix)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-21) · cross-ref 07.6.C (L-NEW74 Radar Comparator Engine)
+- **Qué es:** UI compare side-by-side N entidades (zonas/desarrollos/properties) con axes IE shipped + DNA + climate + plusvalía — extiende `score_comparison_matrix`.
+- **Para qué sirve:** decisión tipo Wirecutter para real estate — comparativa objetiva data-driven.
+- **Beneficio concreto:** RICE 6,000 top-30; categoría nueva real estate decision tooling.
+- **Fase target:** FASE 11+21
+- **Estimado:** 22h (M)
+- **RICE estimate:** 6,000 (canonical 07.6.D top-30 #25)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #21
+
+### L-NEW90 — Decision engine ML maduro (top-5 IE proof points)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C3-22) · split de T.1.1 (T.1.1 = engine público shallow, este = ML maduro narrative)
+- **Qué es:** ML engine que genera top-5 proof points (causal_explanations) per-comprador justificando recomendación con datos verificables.
+- **Para qué sirve:** explicabilidad — comprador entiende por qué esta zona y no otra.
+- **Beneficio concreto:** trust transparente + diferenciador vs black-box competitors.
+- **Fase target:** H2 (mismo bloque T.1.1)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #22
+
+#### C4 Surfaces/SEO/APIs (9 únicas)
+
+### L-NEW91 — Programmatic SEO Engine `/zona/[slug]`
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-1)
+- **Qué es:** SSR + sitemap + JSON-LD para `/zona/[slug]` cubriendo 20K+ zonas H2 — SEO crawlable nativo.
+- **Para qué sirve:** Google indexa cada zona DMX como página única — top-rank long-tail real estate MX.
+- **Beneficio concreto:** organic traffic compound — vs portales con sitemap fragmentado.
+- **Fase target:** FASE 21 Portal Público
+- **Estimado:** 22h (M)
+- **RICE estimate:** 720
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-1
+
+### L-NEW92 — Smart Visit Routing Engine (TSP Mapbox + LLM talking points)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-2)
+- **Qué es:** TSP optimization + Mapbox routing para visitas + LLM genera talking points per-property en ruta.
+- **Para qué sirve:** asesor visita 5 properties en ruta óptima con notas precisas per-stop.
+- **Beneficio concreto:** elimina 60-90 min planning manual day-of-visits.
+- **Fase target:** FASE 14 Asesor M6-M10
+- **Estimado:** 22h (M)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-2
+
+### L-NEW93 — Waiting List Match Engine (cron inventory × subscriptions)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-3)
+- **Qué es:** cron diario que matchea nuevo inventory con subscriptions waiting list — notif WA/email cuando match >= threshold.
+- **Para qué sirve:** comprador "Quiero Roma Norte 3-4M, 2BR, mascota OK" — sistema avisa cuando aparece.
+- **Beneficio concreto:** RICE 10k top-30 #8 — capture demand pre-listing público.
+- **Fase target:** FASE 22 (depende H2 listings)
+- **Estimado:** 11h (S)
+- **RICE estimate:** 10,000 (canonical 07.6.D top-30 #8)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-3
+
+### L-NEW94 — DMX Verified Media (sello EXIF+GPS+SHA256+badge)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-4)
+- **Qué es:** sello DMX Verified Media via EXIF geo + GPS + SHA256 hash + badge UI.
+- **Para qué sirve:** comprador distingue listings con fotos verified vs stock/fake.
+- **Beneficio concreto:** trust layer único MX — competidores no tienen esto.
+- **Fase target:** FASE 15 Desarrollador
+- **Estimado:** 11h (S)
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-4
+
+### L-NEW95 — Marketing Pitch Generator (Anthropic 3-variant A/B)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-5)
+- **Qué es:** generador 3 variantes pitch marketing per-listing (Claude Haiku) con A/B testing automático para optimizar conversion.
+- **Para qué sirve:** developer no escribe copy; sistema genera y mide qué convierte.
+- **Beneficio concreto:** -80% time copywriting + lift conversion data-driven.
+- **Fase target:** FASE 15 Desarrollador
+- **Estimado:** 11h (S)
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-5
+
+### L-NEW96 — Risk Composite API (`/api/v1/risk` signed JWT)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-6)
+- **Qué es:** endpoint público `/api/v1/risk` con signed JWT response — composite risk score (climate + economic + crime + market).
+- **Para qué sirve:** B2B integración fondos/aseguradoras consumen DMX risk.
+- **Beneficio concreto:** monetización tier-1 B2B ($5-15K/mes per cliente).
+- **Fase target:** FASE 30 Platform API H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-6
+
+### L-NEW97 — Gentrification Radar API (time-travel + alphas)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-7)
+- **Qué es:** endpoint que devuelve gentrification time-travel (snapshot zona N años atrás vs hoy) + alphas predicción.
+- **Para qué sirve:** fondos/policy makers entienden trayectoria zona pre-decision.
+- **Beneficio concreto:** primera API público gentrification MX — categoría nueva.
+- **Fase target:** FASE 23 Inversor + Monetización
+- **Estimado:** 45h (L)
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-7
+
+### L-NEW98 — Data Marketplace Bundles ($5-15K/mes + concierge)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-8)
+- **Qué es:** catalog bundles B2B (DemandGraph $5K · ZoneDNA $10K · Wrapped $15K) + Stripe checkout + concierge B2B onboarding.
+- **Para qué sirve:** monetización data plays sin freemium — $5-15K/mes recurring.
+- **Beneficio concreto:** revenue diversification beyond commission asesor.
+- **Fase target:** FASE 23 Monetización
+- **Estimado:** 45h (L)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-8
+
+### L-NEW99 — DMX SDK (npm + pip + Partner Program)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C4-9)
+- **Qué es:** SDKs oficiales npm + pip (TypeScript + Python) + Partner Program (paraguas L13 existing).
+- **Para qué sirve:** developers terceros consumen DMX data en sus apps.
+- **Beneficio concreto:** plataforma de plataformas — moonshot tipo Stripe API.
+- **Fase target:** H2 FASE 30 + 33
+- **Estimado:** 45h (L)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C4 candidate-9
+
+#### C5 Engagement/Revenue/Investor (4 únicas — 5 mergeadas en L-NEW55, 1 en T.2.5)
+
+### L-NEW100 — Wire E02 portfolio-optimizer stub → activate
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C5-51)
+- **Qué es:** activar stub `E02 portfolio-optimizer` con `investor_portfolios` real data (post-23.A).
+- **Para qué sirve:** investor obtiene optimización portfolio multi-property automatizada.
+- **Beneficio concreto:** stub ya construido — solo wire ON gives feature completa.
+- **Fase target:** FASE 23 Inversor
+- **Estimado:** 11h (S)
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C5.4.1
+
+### L-NEW101 — Investment calculator 5y (AVM + pulse + AirROI lead magnet)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C5-53)
+- **Qué es:** calculator unificado 5y projection combinando AVM + pulse_forecasts + AirROI rentability.
+- **Para qué sirve:** investor entiende ROI total (rent+plusvalia) en 5 años per-property.
+- **Beneficio concreto:** RICE 7,350 top-30; lead magnet portal público.
+- **Fase target:** FASE 21 + 23
+- **Estimado:** 45h (L)
+- **RICE estimate:** 7,350 (canonical 07.6.D top-30 #20)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C5.4.8
+
+### L-NEW102 — Objection feedback loop dev-side (C04 calculator)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C5-54)
+- **Qué es:** feedback loop developer recibe objections compradores aggregated (C04 dynamic-advisor calculator) per-zona/SKU.
+- **Para qué sirve:** developer entiende qué frena ventas — adjust pricing/amenities data-driven.
+- **Beneficio concreto:** ciclo aprendizaje devs sin investigación qualitativa cara.
+- **Fase target:** FASE 15 Desarrollador
+- **Estimado:** 22h (M)
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C5
+
+### L-NEW103 — AVM weekly recompute cron + drift notif (3% threshold)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C5-55)
+- **Qué es:** cron weekly recompute AVM 200K+ properties + alert WA/email cuando drift >3% (price moved sig).
+- **Para qué sirve:** owner sabe en tiempo cuasi-real cómo cambia su valor — feature comparable Mint/Zillow.
+- **Beneficio concreto:** RICE 8,794 top-30 #15.
+- **Fase target:** FASE 11.X.2 + 24
+- **Estimado:** 22h (M)
+- **RICE estimate:** 8,794 (canonical 07.6.D top-30 #15)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C5.2.5
+
+### L-NEW104 — Developer ratings + reviews verified buyers + DMX Verified Developer badge
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C5-59)
+- **Qué es:** ratings + reviews verified buyers (post-cierre) + badge "DMX Verified Developer".
+- **Para qué sirve:** comprador valida developer pre-compra preventa — confianza tipo Trustpilot.
+- **Beneficio concreto:** RICE 5,250 top-30 #28; protección consumidor + signal devs serios.
+- **Fase target:** FASE 23 + 26 (sentiment compliance)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 5,250 (canonical 07.6.D top-30 #28)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C5.5.5
+
+### L-NEW105 — Dynamic pricing primary sale (extends STR dynamic-advisor)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C5-60)
+- **Qué es:** dynamic pricing engine primary sale developers (extends STR dynamic-advisor pattern para LTR/sale).
+- **Para qué sirve:** developers ajustan precio inteligente by demand signals + competitor radar + season.
+- **Beneficio concreto:** lift sales velocity sin descuento manual.
+- **Fase target:** FASE 15 Desarrollador
+- **Estimado:** 45h (L)
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C5
+
+### L-NEW106 — Diversification advisor (constellations_edges 21,945 rows)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C5-61)
+- **Qué es:** advisor portfolio diversification reusando constellations edges (21,945 rows shipped) — sugiere zonas no-correlacionadas.
+- **Para qué sirve:** investor reduce risk concentration auto-recomendado.
+- **Beneficio concreto:** moat data único — ningún competitor tiene constellation graph.
+- **Fase target:** FASE 23 Inversor (moat layer)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C5
+
+#### C6 Agentic/Future (12 únicas)
+
+### L-NEW107 — Opportunity Hunter (cron SEDUVI/DENUE/catastro)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-1)
+- **Qué es:** daily cron scrape SEDUVI/DENUE/catastro abierto detectando nuevos permisos construcción / cambios uso / oportunidades land-banking.
+- **Para qué sirve:** developer/investor identifica deals pre-mercado.
+- **Beneficio concreto:** alpha generation sustainable; categoría nueva real estate intelligence.
+- **Fase target:** FASE 31 Agentic Marketplace H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #1
+
+### L-NEW108 — Auto-captación generator (demand-gap × inventario)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-2)
+- **Qué es:** generator auto identifica demand-gap (zonas demanda > supply) y produce captación pitch para developers/owners.
+- **Para qué sirve:** asesor recibe leads pre-qualified zonas hot.
+- **Beneficio concreto:** captación tracking data-driven vs cold-calling random.
+- **Fase target:** FASE 31 Agentic H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #2
+
+### L-NEW109 — Developer outreach business case engine
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-3)
+- **Qué es:** engine genera business case per-developer (zonas under-served + pricing recommendation + market sizing) automáticamente.
+- **Para qué sirve:** sales team DMX outreach con materials data-driven.
+- **Beneficio concreto:** acelera enterprise sales cycle.
+- **Fase target:** FASE 31 + 15
+- **Estimado:** 22h (M)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #3
+
+### L-NEW110 — Anomaly correlation discovery (118 IE scores)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-4)
+- **Qué es:** ML correlation-mining sobre 118 IE scores buscando anomaly patterns no obvios (ej. score X cae cuando Y sube en cohort Z).
+- **Para qué sirve:** descubre rules market que humans no detectarían.
+- **Beneficio concreto:** rules H2 nuevas alimentando IE next-gen.
+- **Fase target:** FASE 31+ H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #4
+
+### L-NEW111 — Morning briefing daily cron asesor
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-5)
+- **Qué es:** brief diario asesor (cron 7am) — top movers, deals follow-up, alertas zonas, action items prioritizados.
+- **Para qué sirve:** asesor empieza día con clarity total — single email/WA briefing.
+- **Beneficio concreto:** reduce cognitive load + activa tasks importantes.
+- **Fase target:** FASE 14 stub + 26
+- **Estimado:** 22h (M)
+- **RICE estimate:** 480
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #5
+
+### L-NEW112 — Monthly portfolio report inversor (pro-tier upsell)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-7)
+- **Qué es:** report mensual investor portfolio (returns + comparables + alerts) gated tier pro $99/mes.
+- **Para qué sirve:** inversor obtiene Excel-killer dashboard sin esfuerzo.
+- **Beneficio concreto:** monetización pro-tier asesores premium.
+- **Fase target:** FASE 23 pro-tier upsell
+- **Estimado:** 22h (M)
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #7
+
+### L-NEW113 — Quarterly developer absorption brief
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-8)
+- **Qué es:** brief trimestral developer (absorption rate + competitor moves + recommendations) auto-generado.
+- **Para qué sirve:** developer toma decisiones launch/repricing con data trimestral cierta.
+- **Beneficio concreto:** sustituye consultores ad-hoc trimestrales caros.
+- **Fase target:** FASE 15 Desarrollador
+- **Estimado:** 22h (M)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #8
+
+### L-NEW114 — WhatsApp Business API + Resend delivery service compartido
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-9) · combinado con 07.6.E (L-NEW-ROADMAP-5 WhatsApp provider abstract layer)
+- **Qué es:** delivery service compartido WhatsApp Business API (Twilio H1) + Resend email — abstracción multi-provider revertible.
+- **Para qué sirve:** infra base 8 features cascade (WA notifs, alerts, briefings, reports).
+- **Beneficio concreto:** mini-fase 21.A unblocks 20 features WA-dependent.
+- **Fase target:** FASE 21.A (foundational mini-fase, 9 migrations, 76h)
+- **Estimado:** 76h
+- **RICE estimate:** 1100 (top-tier capa C6)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #9; docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 1.4
+
+### L-NEW115 — Full Cycle Agent state machine + tools registry (ADR-014 anchor)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-10)
+- **Qué es:** state machine agente full-cycle (lead → contact → visit → offer → close) con tools registry abierto LLM autónomo.
+- **Para qué sirve:** asesor agente "extends" capacities — automate playbook completo.
+- **Beneficio concreto:** scaling sin contratar; categoría nueva agentic real estate.
+- **Fase target:** FASE 31 Agentic Marketplace H2
+- **Estimado:** 90h (XL)
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #10
+
+### L-NEW116 — HITL approvals checkpoint engine
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-11)
+- **Qué es:** human-in-the-loop checkpoints en agent flows — bloquea actions de alto impacto until human approve.
+- **Para qué sirve:** safety layer agentic sin perder velocity.
+- **Beneficio concreto:** trust + governance — diferenciador vs autonomous-only.
+- **Fase target:** FASE 31 Agentic H2
+- **Estimado:** 45h (L)
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #11
+
+### L-NEW117 — Self-improving eval harness + policy versioning
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-C6-12)
+- **Qué es:** harness auto-eval agents + policy versioning (rollback A/B testing safe).
+- **Para qué sirve:** continuous improvement agentic stack governance.
+- **Beneficio concreto:** infra moonshot fase H3 mature agents.
+- **Fase target:** FASE 31+ H3
+- **Estimado:** 90h (XL)
+- **RICE estimate:** 200
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #12
+
+### L-NEW118 — Weekly zone report generator + delivery
+
+- **Status:** 🟢 proposed (consolidable bajo L34 Newsletter expandido — flag dup en seguimiento)
+- **Origen:** 07.6.B (L-NEW-C6-6)
+- **Qué es:** weekly zone report cron (top movers + alertas + insights) delivery WA/email — consolidable bajo L34 Newsletter pattern existing expandido.
+- **Para qué sirve:** subscriber retention zonas seguidas.
+- **Beneficio concreto:** frequency engagement weekly vs monthly L34.
+- **Fase target:** FASE 22 Marketing
+- **Estimado:** 11h (S)
+- **RICE estimate:** 280
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C6 #6 — flag consolidable bajo L34 Newsletter
+
+#### CT — Capa T (comprador transversal) (8 únicas — 1 mergeada con C3-11)
+
+### L-NEW119 — Buyer decisions corpus + cohort k-NN match
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-CT-1)
+- **Qué es:** corpus decisiones compradores anónimo + k-NN cohort match ("compradores como tú decidieron X en zona Y").
+- **Para qué sirve:** comprador encuentra precedentes similares — categoría nueva social proof statistical.
+- **Beneficio concreto:** trust data-driven — competitors no tienen this.
+- **Fase target:** FASE 22+H2 (T.1.3)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec CT-1
+
+### L-NEW120 — Transaction Safety Net checklist (12 items + LLM contract analyzer)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-CT-2)
+- **Qué es:** checklist post-compra 12 items + LLM contract analyzer (red flags clauses).
+- **Para qué sirve:** comprador first-time evita errores costosos cierre.
+- **Beneficio concreto:** RICE 7,000 top-30 #21; trust layer cerrado.
+- **Fase target:** FASE 18+20.H (T.1.4)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 7,000 (canonical 07.6.D top-30 #21)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec CT-2
+
+### L-NEW121 — GPS Enganche savings plans + milestones gamificados
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-CT-3)
+- **Qué es:** plans ahorro enganche con milestones gamificados (badges, streaks weekly contributions).
+- **Para qué sirve:** comprador first-time tiene plan claro + accountability.
+- **Beneficio concreto:** RICE 8,750 top-30 #11; financial inclusion.
+- **Fase target:** FASE 20.B.3 + 22 (T.1.5)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 8,750 (canonical 07.6.D top-30 #11)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec CT-3
+
+### L-NEW122 — Buyer twin snapshots versionados timeline
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-CT-4)
+- **Qué es:** snapshots gemelo digital versionados con timeline visualization (cómo cambió perfil/preferencias en 6m).
+- **Para qué sirve:** asesor entiende evolution comprador — adapt stage-specific.
+- **Beneficio concreto:** RICE 8,000 top-30 #17; categoría nueva persistent buyer profile.
+- **Fase target:** FASE 20.A PPD (T.2.1)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 8,000 (canonical 07.6.D top-30 #17)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec CT-4
+
+### L-NEW123 — Life-event predictor (heurística + LLM signals)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-CT-5)
+- **Qué es:** predictor life events (boda, hijo, jubilación) con heurística + LLM signals analizando comm patterns.
+- **Para qué sirve:** asesor proactive — contacta en momento apropiado.
+- **Beneficio concreto:** timing dramatic — life-event triggers 3× compra acelera.
+- **Fase target:** FASE 20.E + 22 (T.2.2)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 380
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec CT-5
+
+### L-NEW124 — Family DNA inheritance multi-gen
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-CT-6)
+- **Qué es:** DNA inheritance pattern multi-generación — preferencias hijo correlacionadas con padres + abuelos.
+- **Para qué sirve:** matching multi-gen — desarrolla relación 50-año vs single-transaction.
+- **Beneficio concreto:** moat datos retention 20+ años — moonshot diferenciador.
+- **Fase target:** H2/H3 FASE 38+ (T.2.3)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 200
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec CT-6
+
+### L-NEW125 — Buyer portfolio residencial Mint-style
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-CT-8) · cross-ref L33 + L85 existing
+- **Qué es:** portfolio residencial dashboard (Mint/Personal Capital style) — properties owned + estimated value + appreciation + cash flow.
+- **Para qué sirve:** propietario tiene visión completa real estate wealth en 1 dashboard.
+- **Beneficio concreto:** RICE 7,969 top-30 #18; categoría nueva consumer wealth real estate.
+- **Fase target:** FASE 20.C.3 (T.2.5)
+- **Estimado:** 45h (L)
+- **RICE estimate:** 7,969 (canonical 07.6.D top-30 #18)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec CT-8
+
+### L-NEW126 — Post-purchase alert engine (plusvalía/rent/sell signals)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B (L-NEW-CT-9)
+- **Qué es:** alert engine post-purchase — detecta signals optimal moment refinance / rent / sell per-property.
+- **Para qué sirve:** propietario nunca pierde optimal exit window.
+- **Beneficio concreto:** RICE 10,000 top-30 #7; recurring engagement post-cierre.
+- **Fase target:** FASE 20.D.3 + 22 (T.2.6)
+- **Estimado:** 22h (M)
+- **RICE estimate:** 10,000 (canonical 07.6.D top-30 #7)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec CT-9
+
+#### Cross-source merge unique entry (1 — referral consolidación)
+
+### L-NEW127 — Post-close referral engine 7d (WA + market report + magic link)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.B merge de [L-NEW-C3-11 post-close referral 7d WA+market report] + [L-NEW-CT-7 buyer referral magic link] — mismo concepto referral engine post-cierre, ambas explícitamente CONSOLIDA en CROSSWALK
+- **Qué es:** referral engine post-cierre 7d → WA + market report + magic link tracking comprador refiere amigos via link único.
+- **Para qué sirve:** transformar buyer satisfecho en canal acquisition orgánico.
+- **Beneficio concreto:** referral programs convert 5× cold leads — moat acquisition cost low.
+- **Fase target:** FASE 22.B (consolidación T.2.4 + C3.11) + FASE 20.A
+- **Estimado:** 22h (M)
+- **RICE estimate:** 8,750 (canonical 07.6.D top-30 #12 = T.2.4)
+- **Ref:** docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md sec C3 #11 + sec CT-7 (CONSOLIDA)
+
+### Bloque E — ROADMAP INTEGRATION 07.6.E (4 únicas — 4 mergeadas en B, 2 descartadas como meta)
+
+### L-NEW128 — Properties Inventory Model ADR (foundational gate)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.E (L-NEW-ROADMAP-1)
+- **Qué es:** ADR-039 Gate-7 founder BLOQUEANTE — decidir DMX inventory model: portal-own vs MLS aggregator vs hybrid (recomendación PM = hybrid).
+- **Para qué sirve:** sin esta decisión, FASE 11.X Properties no arranca — 9 features directos + 5 cascade bloqueados.
+- **Beneficio concreto:** desbloquea mini-fase FASE 11.X (12 migrations · 132h · 16 features unblocked).
+- **Fase target:** pre-FASE 11.X (founder gate session B sec 6.2)
+- **Estimado:** 4h (founder + ADR scribe)
+- **RICE estimate:** N/A (gate decision, no feature)
+- **Ref:** docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 6.2 Gate-7
+
+### L-NEW129 — Banking partnership negotiation track (paralelo Gate-6)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.E (L-NEW-ROADMAP-3)
+- **Qué es:** track negotiation paralelo Gate-6 ADR-045 (static-rates H1 + partner-broker track Q2-Q4 2026).
+- **Para qué sirve:** mientras DMX usa stubs static, PM/founder negocian partnerships INFONAVIT/banks para H2 real APIs.
+- **Beneficio concreto:** evita slip Banking phase H2 — partnership work baked early.
+- **Fase target:** Q2 2026 paralelo a FASE 22.A
+- **Estimado:** 30-50h (founder + legal + comms partner)
+- **RICE estimate:** N/A (process track)
+- **Ref:** docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 6.2 Gate-6 + sec 9.2
+
+### L-NEW130 — i18n vendor decision (5 locales)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.E (L-NEW-ROADMAP-8)
+- **Qué es:** decisión vendor i18n nativo 5 locales (es-CO/AR/pt-BR/en-US — es-MX founder ya cubre).
+- **Para qué sirve:** sin vendor scouting Q3 2026, locale rollout slip Q4 2026 (935 i18n entries × 4 locales = 3,740 entries pending).
+- **Beneficio concreto:** desbloquea launch multi-país día 1 H1 cierre.
+- **Fase target:** Q3 2026 scouting + pre-FASE 08
+- **Estimado:** 8h (research + 3 vendor evaluations)
+- **RICE estimate:** N/A (vendor selection)
+- **Ref:** docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 8.1 ROADMAP-8 + sec 9.2
+
+### L-NEW131 — Fix zone_streaks 0 rows + avm_estimates 0 rows (anomalías shipped)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.E (sec 8.2 sorpresas heredadas crosswalk)
+- **Qué es:** fix incremental anomalías shipped — `zone_streaks` 0 rows pese calculator shipped (FASE 14.D streaks) + `avm_estimates` 0 rows (FASE 11.X.D weekly recompute).
+- **Para qué sirve:** activate calculators dormidas que ya shipped pero no produjeron data.
+- **Beneficio concreto:** zero-effort upgrade — wiring missing, infra ya construida.
+- **Fase target:** FASE 14.D (streaks) + FASE 11.X.D (AVM)
+- **Estimado:** 4h total
+- **RICE estimate:** 320
+- **Ref:** docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 8.2 anomalías 1+2
+
+### L-NEW132 — STR shipped investor-surface (C5.4.3 wire-only)
+
+- **Status:** 🟢 proposed
+- **Origen:** 07.6.E (sec 8.2 sorpresa #5)
+- **Qué es:** wire-only feature — STR (short-term rental) data shipped pero NO surfaced en investor portal (`C5.4.3`).
+- **Para qué sirve:** investor ve ROI rental Airbnb-style per-property — feature ya construida.
+- **Beneficio concreto:** zero engineering — solo UI surface; activate latent value.
+- **Fase target:** FASE 23.A surface-only
+- **Estimado:** 4h (UI wire)
+- **RICE estimate:** 240
+- **Ref:** docs/08_PRODUCT_AUDIT/04_ROADMAP_INTEGRATION.md sec 8.2 anomalía #5
+
+---
+
