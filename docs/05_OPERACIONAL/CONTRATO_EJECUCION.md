@@ -1014,6 +1014,163 @@ SCOPE OUT: NO cambios de código funcionales, NO LLM calls
 REFS: ADR-032, docs/02_PLAN_MAESTRO/FASE_07.6_PRODUCT_AUDIT.md,
   L-NEW47 pipeline entry.
 
+NEXT POST-07.6: insertar 5 mini-fases foundational §15.6-15.10
+  (07.7 CRM + 11.W DISC + 11.X Properties + 21.A WhatsApp +
+  22.A Banking) — 47 migrations · 420h · 13 ADRs nuevos +
+  13 founder gates en `docs/08_PRODUCT_AUDIT/05_FOUNDER_DECISION_GATES.md`.
+
+═══════════════════════════════════════════════════════════════
+15.6. FASE 07.7 CRM FOUNDATION (mini-fase foundational, BLK_DEALS)
+═══════════════════════════════════════════════════════════════
+
+Mini-fase insertada entre 07.6 y 08 post-07.6.E roadmap mapping.
+Razón: schema deals/leads/buyer_twins canonical es prerequisito
+para FASE 13 Asesor M1-M5 (sin schema = greenfield retrofit
+costoso) y FASE 11.J data CRM cierres alimenta AVM spread C2.1.
+Resuelve blocker BLK_DEALS top-3 critical path.
+
+SUB-BLOQUES (6 total, ~88h):
+  07.7.A — leads + buyer_twins + deals schema (3 migrations · 17h)
+  07.7.B — operaciones + family_units + referrals polimórfico
+    (3 migrations · 17h)
+  07.7.C — pipeline stages + behavioral signals + audit
+    (2 migrations · 14h)
+  07.7.D — RPCs + tRPC router base (1 migration · 26h)
+  07.7.E — tests + types + audit_rls_allowlist v36 (1 migration · 12h)
+  07.7.F — seed data dev + verificación (sin migration · 2h)
+
+DEPENDENCIAS: tag `fase-07.6-complete` shipped + Gates founder
+  1-3 cerrados (ADR-033 persona_type · ADR-034 referrals
+  polymorphic · ADR-035 retention CFDI-aware).
+
+MIGRATIONS: 11 totales · audit_rls_allowlist v36 incluido.
+WALL-CLOCK: 11 días serial / 5 días 3 devs paralelo.
+UNBLOCKS: 26 features (11 directos top-30 + 15 cascade).
+
+REFS: ADR-033/034/035 (a crear), 04_ROADMAP_INTEGRATION.md §1.1,
+  docs/02_PLAN_MAESTRO/FASE_07.7_CRM_FOUNDATION.md.
+
+═══════════════════════════════════════════════════════════════
+15.7. FASE 11.W DISC VOICE PIPELINE (mini-fase foundational, BLK_DISC)
+═══════════════════════════════════════════════════════════════
+
+Mini-fase post-FASE 07.7. Razón: 7 features capa C3 + cross
+requieren `buyer_twins.disc_profile` habilitado (agente WhatsApp
+C3.F1, objection playbook C3.F3, DISC auto-detectado C1.18,
+gemelo digital 6D T.2.1). Sin DISC, todos quedan greenfield.
+
+SUB-BLOQUES (5 total, ~64h):
+  11.W.A — DISC framework canonization + privacy ADRs
+    (2 migrations · 8h)
+  11.W.B — self-assessment manual stub H1 (1 migration · 17h)
+  11.W.C — Whisper integration audio pipeline (3 migrations · 23h)
+  11.W.D — LLM DISC classifier (1 migration · 14h)
+  11.W.E — wire buyer_twins + tests + smoke (1 migration · 2h)
+
+DEPENDENCIAS: tag `fase-07.7-crm-foundation-complete` shipped +
+  Gates founder 4-6 cerrados (ADR-036 DISC framework · ADR-037
+  Whisper provider · ADR-038 privacy voice biométrico).
+
+MIGRATIONS: 8 totales.
+WALL-CLOCK: 8 días serial / 4 días 3 devs paralelo.
+UNBLOCKS: 11 features (7 directos C3 + 4 cascade).
+
+REFS: ADR-036/037/038 (a crear), 04_ROADMAP_INTEGRATION.md §1.2,
+  docs/02_PLAN_MAESTRO/FASE_11.W_DISC_VOICE_PIPELINE.md.
+
+═══════════════════════════════════════════════════════════════
+15.8. FASE 11.X PROPERTIES INVENTORY (mini-fase foundational, BLK_PROPS)
+═══════════════════════════════════════════════════════════════
+
+Mini-fase post-FASE 11.W. Razón: tabla `properties` master es
+blocker más estructural (BD + storage + ingestion + AVM data
+wire). 9 directos + 5 cascade dependen (C2.1 AVM spread, C5.4.1
+portfolio inversor, C2.2 price truth meter, C5.2.5 auto-valuation,
+T.2.6 post-compra, etc.).
+
+SUB-BLOQUES (6 total, ~132h):
+  11.X.A — properties + property_units + amenities schema
+    (3 migrations · 26h)
+  11.X.B — listing states machine + history (2 migrations · 19h)
+  11.X.C — property media + verified pipeline (2 migrations · 21h)
+  11.X.D — wire AVM + zone_pulse data foundation (2 migrations · 26h)
+  11.X.E — ingestion adapter asesor manual + future MLS
+    (2 migrations · 37h)
+  11.X.F — tests + types + seed verificación (sin migration · 3h)
+
+DEPENDENCIAS: Gate-7 founder cerrado (ADR-039 inventory model
+  BLOQUEANTE — portal-own vs MLS aggregator vs hybrid) + tag
+  `fase-11.W-disc-voice-pipeline-complete` + Gates 8-9 (ADR-040
+  asset_class scope · ADR-041 STR collision split vs merge).
+
+MIGRATIONS: 12 totales · audit_rls_allowlist v37 incluido.
+WALL-CLOCK: 17 días serial / 7 días 3 devs paralelo.
+UNBLOCKS: 16 features (11 directos + 5 cascade).
+
+REFS: ADR-039/040/041 (a crear), 04_ROADMAP_INTEGRATION.md §1.3,
+  docs/02_PLAN_MAESTRO/FASE_11.X_PROPERTIES_INVENTORY.md,
+  feedback_arquitectura_escalable_desacoplada (split canonized).
+
+═══════════════════════════════════════════════════════════════
+15.9. FASE 21.A WHATSAPP INTEGRATION (mini-fase foundational, BLK_WA)
+═══════════════════════════════════════════════════════════════
+
+Mini-fase pre-FASE 22 Marketing+Comms. Razón: WhatsApp es canal
+primario 80% destino comprador LATAM. 8 directos + 12 cascade
+notifs dependen (C3.F1 agente WA, C3.17 reporte personalizado,
+T.2.6 post-compra, T.1.5 GPS enganche, T.2.4 referrals magic-link).
+
+SUB-BLOQUES (5 total, ~76h):
+  21.A.A — provider abstraction + ADR-042 (2 migrations · 20h)
+  21.A.B — templates + WABA approval flow (2 migrations · 18h)
+  21.A.C — sender service + opt-in consent (3 migrations · 23h)
+  21.A.D — webhooks inbound + alerts engine wire
+    (1 migration · 14h)
+  21.A.E — cost cap + observability + tests (1 migration · 1h)
+
+DEPENDENCIAS: Gate-10 founder cerrado (ADR-042 Twilio vs Meta
+  BLOQUEANTE) + tag `fase-21-portal-publico-complete` + Gates
+  11-12 (ADR-043 WABA verification path · ADR-044 templates
+  initial scope).
+
+MIGRATIONS: 9 totales.
+WALL-CLOCK: 10 días serial / 4 días 3 devs paralelo.
+UNBLOCKS: 20 features (8 directos + 12 cascade WA notifs).
+
+REFS: ADR-042/043/044 (a crear), 04_ROADMAP_INTEGRATION.md §1.4,
+  docs/02_PLAN_MAESTRO/FASE_21.A_WHATSAPP_INTEGRATION.md,
+  feedback_arquitectura_escalable_desacoplada (provider abstraction).
+
+═══════════════════════════════════════════════════════════════
+15.10. FASE 22.A BANKING FINANCING (mini-fase foundational, BLK_BANK)
+═══════════════════════════════════════════════════════════════
+
+Mini-fase paralelo FASE 22 (feature-flagged hasta tag completo).
+Razón: T.1.2 Financial Clarity (RICE 14,167 top-4 critical path)
+imposible sin mortgage rates + simulator. T.1.5 GPS enganche y
+C3.F19 Financing Simulator también dependen.
+
+SUB-BLOQUES (5 total, ~60h):
+  22.A.A — mortgage rates static stubs MX (2 migrations · 18h)
+  22.A.B — mortgage simulator engine (1 migration · 19h)
+  22.A.C — affordability + safety net deepening (1 migration · 13h)
+  22.A.D — INFONAVIT/FOVISSSTE rules engine (2 migrations · 13h)
+  22.A.E — future API negotiation track + tests
+    (1 migration · 2h)
+
+DEPENDENCIAS: Gate-13 founder cerrado (ADR-045 banking
+  integration path BLOQUEANTE — static-rates vs partner-broker
+  vs INFONAVIT-API) + tag `fase-21.A-whatsapp-integration-complete`
+  + Gates adicionales (ADR-046 legal status DMX · ADR-047
+  lenders coverage initial top-5 + INFONAVIT + FOVISSSTE).
+
+MIGRATIONS: 7 totales · audit_rls_allowlist v38 incluido.
+WALL-CLOCK: 8 días serial / 4 días 3 devs paralelo.
+UNBLOCKS: 11 features (4 directos + 7 cascade).
+
+REFS: ADR-045/046/047 (a crear), 04_ROADMAP_INTEGRATION.md §1.5,
+  docs/02_PLAN_MAESTRO/FASE_22.A_BANKING_FINANCING.md.
+
 ═══════════════════════════════════════════════════════════════
 16. MEMORIAS CANONIZADAS ACTIVAS (snapshot 2026-04-24 muy tarde)
 ═══════════════════════════════════════════════════════════════
