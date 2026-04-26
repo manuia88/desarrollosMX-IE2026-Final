@@ -83,14 +83,14 @@ Dashboard del portal desarrollador (developer). Primera vista tras login de usua
 
 ## Tablas BD tocadas
 
-- `developers` — company data.
+- `desarrolladoras` — company data (BD canonical, ADR-049).
 - `proyectos` — inventario (counts).
 - `unidades` — disponibles/apartadas/vendidas.
 - `operaciones` — revenue MTD.
 - `leads_dev` — conversion.
 - `documents` — docs pending approval.
 - `landings` — pending publish.
-- `fiscal_documents` — CFDIs pending.
+- `fiscal_docs` — CFDIs pending (BD canonical, ADR-049).
 - `dev_trust_scores` — H05 breakdown.
 - `ai_generated_content`.
 

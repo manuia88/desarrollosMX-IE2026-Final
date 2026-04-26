@@ -55,6 +55,22 @@ Zero imports cross-feature — todo lo compartido va en `/shared/`.
 9. **Multi-country formatters** — `formatCurrency`, `formatDate`, `formatAddress`, `formatPhone` enrutados por `country_code`.
 10. **A11y + `prefers-reduced-motion`** — aria-labels, semantic HTML, keyboard nav, contrast ≥ 4.5:1, focus visible, reduced-motion respeta.
 
+## audit-dead-ui obligatorio (ADR-018 enforcement)
+
+Cada PR a `main` ejecuta `npm run audit:dead-ui:ci` automáticamente vía GitHub Actions workflow `.github/workflows/e2e-audit.yml`. PR que detecte violations (severity `error`) falla CI y no mergea hasta resolver.
+
+Patterns detectados (ADR-018 §M1):
+
+1. Button sin onClick activo (acepta `disabled`, `type="submit"`, `href`, `formAction`, `asChild`).
+2. `<form>` sin `onSubmit` ni `action` (Server Action).
+3. `useEffect` sin dependency array (warn).
+4. `<Link>` / `<a>` con `href="#"` o `href=""`.
+5. tRPC stub sin marcado ADR-018 (`// STUB — activar` + heurística mensaje validación).
+6. Hardcoded mock data en render path (gap parcial — agendar implementación high-confidence post-A.2).
+7. `alert()` o `console.*` placeholders en handlers (`onClick`, `onSubmit`, `onChange`, `on*`).
+
+Local: `npm run audit:dead-ui` antes de commit. Tests del enforcer en `scripts/__tests__/audit-dead-ui.test.ts`. Ver [ADR-018](docs/01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md) para spec completo + STUBs marcados (4 señales) permitidos.
+
 ## Convenciones
 
 - Archivos: `kebab-case`. Componentes: `PascalCase`. Vars/funcs/hooks: `camelCase`. Constantes: `SCREAMING_SNAKE_CASE`.

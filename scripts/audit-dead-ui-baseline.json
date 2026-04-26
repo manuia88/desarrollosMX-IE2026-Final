@@ -1,0 +1,180 @@
+{
+  "allowlist": [
+    {
+      "file": "shared/lib/ingest/geo/dgis.ts",
+      "line": 297,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/fgj.ts",
+      "line": 343,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/fgj.ts",
+      "line": 391,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/fgj.ts",
+      "line": 411,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/gtfs.ts",
+      "line": 178,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/gtfs.ts",
+      "line": 339,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/sacmex.ts",
+      "line": 321,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/sacmex.ts",
+      "line": 360,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/sacmex.ts",
+      "line": 409,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/sacmex.ts",
+      "line": 451,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/geo/siged.ts",
+      "line": 268,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/banxico.ts",
+      "line": 142,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/bbva-research.ts",
+      "line": 228,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/bbva-research.ts",
+      "line": 232,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/bbva-research.ts",
+      "line": 280,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/bbva-research.ts",
+      "line": 315,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/cnbv.ts",
+      "line": 330,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/cnbv.ts",
+      "line": 335,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/fovissste.ts",
+      "line": 517,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/fovissste.ts",
+      "line": 521,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/fovissste.ts",
+      "line": 569,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/fovissste.ts",
+      "line": 604,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/inegi.ts",
+      "line": 186,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/macro/infonavit.ts",
+      "line": 390,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/market/market-pdf-extractor.ts",
+      "line": 206,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/market/market-pdf-extractor.ts",
+      "line": 210,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/market/market-pdf-extractor.ts",
+      "line": 254,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/market/market-pdf-extractor.ts",
+      "line": 292,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/ingest/str/airroi-mcp.ts",
+      "line": 381,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/intelligence-engine/calculators/indices/ids.ts",
+      "line": 400,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/intelligence-engine/calculators/indices/ipv.ts",
+      "line": 398,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/intelligence-engine/calculators/indices/ire.ts",
+      "line": 438,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/intelligence-engine/calculators/n4/e01-full-project-score.ts",
+      "line": 246,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/intelligence-engine/calculators/n4/g01-full-score-publico.ts",
+      "line": 184,
+      "pattern": "unmarked_stub_error"
+    },
+    {
+      "file": "shared/lib/intelligence-engine/ghost-zones/ghost-engine.ts",
+      "line": 317,
+      "pattern": "unmarked_stub_error"
+    }
+  ],
+  "note": "Baseline pre-existing violations al 2026-04-25 (FASE 07.7.A.2). Cada entry agendada L-NEW para cierre en su FASE de implementaci\u00f3n. Removido cuando c\u00f3digo se actualice."
+}
