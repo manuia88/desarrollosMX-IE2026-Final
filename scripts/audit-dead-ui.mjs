@@ -45,8 +45,7 @@ const GLOB_TS_ROUTERS = [
 const isCi = process.argv.includes('--ci');
 const asJson = process.argv.includes('--json') || isCi;
 const allowlistFlagIdx = process.argv.indexOf('--allowlist');
-const allowlistPath =
-  allowlistFlagIdx !== -1 ? process.argv[allowlistFlagIdx + 1] : null;
+const allowlistPath = allowlistFlagIdx !== -1 ? process.argv[allowlistFlagIdx + 1] : null;
 
 const STUB_COMMENT_RE = /\/\/\s*STUB\s*[—-]\s*(activar|disponible)/i;
 
