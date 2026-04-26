@@ -3102,3 +3102,57 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 
 ---
 
+### L-NEW-COUNTRY-EXPANSION-CO — Activación Colombia tier 2 H2
+
+- **Status:** 🟢 proposed (defer ADR-051 founder canon 2026-04-25 Opción B)
+- **Origen:** F1.A — formaliza scope multi-país H1 vs H2 (memoria 28 + ADR-051)
+- **Qué es:** activación tier 2 Colombia post-launch H1 — config preserved es-CO + countries CO seeds + retention_policies CO 7 entity_types preservados desde día 1 (ADR-035). Expansión = activate testing/QA exhaustivo + integraciones DIAN/Certicámara + ingestion DANE/Banco República/Superfinanciera/Catastro Multipropósito/Policía Nacional CO crime.
+- **Para qué sirve:** tras validation MX H1, abrir mercado Bogotá + Medellín con arquitectura ya extensible (zero rebuild masivo).
+- **Beneficio concreto:** TAM expansion ~$90B real estate Colombia residential; pivot canónico de SaaS regional latam.
+- **Fase target:** FASE 38 H3 expansion (post-launch H1 + 6-9 meses)
+- **Estimado:** ~80h CC (testing/QA + compliance integrations DIAN + ingestion 5 sources tier 2 + i18n es-CO completion)
+- **RICE estimate:** Reach 500K (Bogotá+Medellín mid-high) × Impact 8 (mercado real estate validated) × Confidence 0.7 (post-launch validated) / Effort 80h ≈ **35**
+- **Dependencies:** launch H1 cerrado · revenue MX validated 6-9m · founder gate decision activate expansion
+- **Ref:** ADR-051 + ADR-003 + ADR-035 + memoria `project_scope_multipais_h1_opcion_b`
+
+### L-NEW-COUNTRY-EXPANSION-AR — Activación Argentina tier 2 H2
+
+- **Status:** 🟢 proposed (defer ADR-051 founder canon 2026-04-25 Opción B)
+- **Origen:** F1.A — formaliza scope multi-país H1 vs H2
+- **Qué es:** activación tier 2 Argentina post-launch H1 — config preserved es-AR + countries AR seeds + retention_policies AR 7 entity_types preservados (ADR-035 7y/10y CFDI-aware). Expansión = activate testing/QA + integraciones AFIP CAE + Ley 25.326 PII enforcement + ingestion INDEC/BCRA/ARBA Provincia BA catastro.
+- **Para qué sirve:** tras validation CO o paralelo expansion, abrir CABA + GBA con SaaS regional consolidado.
+- **Beneficio concreto:** mercado real estate AR alto premium CABA + diferenciación regional Pampa.
+- **Fase target:** FASE 38 H3 expansion (paralelo o post CO ramp)
+- **Estimado:** ~80h CC (testing/QA + AFIP integrations research + ingestion 3 sources tier 2 + i18n es-AR completion + currency ARS volátil consideration)
+- **RICE estimate:** Reach 250K (CABA+GBA upper tier) × Impact 7 × Confidence 0.6 (currency volatility risk) / Effort 80h ≈ **13**
+- **Dependencies:** launch H1 + CO ramp validated · ARS macro volatility manageable · founder gate
+- **Ref:** ADR-051 + ADR-003 + ADR-035
+
+### L-NEW-COUNTRY-EXPANSION-BR — Activación Brasil tier 2 H2
+
+- **Status:** 🟢 proposed (defer ADR-051 founder canon 2026-04-25 Opción B)
+- **Origen:** F1.A — formaliza scope multi-país H1 vs H2
+- **Qué es:** activación tier 2 Brasil post-launch H1 — config preserved pt-BR + countries BR seeds + retention_policies BR 7 entity_types preservados (ADR-035 LGPD + Receita Federal CTN Art. 195 5-7y). Expansión = activate testing/QA + LGPD compliance enforcement (72h breach notif) + integraciones Receita Federal NFS-e + ingestion IBGE/Banco Central Brasil/IPTU municipios + idioma pt-BR completion (5 locales messages files preserved).
+- **Para qué sirve:** TAM real estate Brasil ~$240B (mercado más grande LATAM). Idioma diferente (pt-BR vs es-* triple). Diferenciación canónica vs competitors hispanohablantes.
+- **Beneficio concreto:** abre mercado largest LATAM single shot · São Paulo + Rio inversión institucional alto LTV.
+- **Fase target:** FASE 38 H3 expansion (típicamente último por idioma)
+- **Estimado:** ~100h CC (idioma pt-BR completo +20h vs CO/AR · testing/QA · Receita Federal integrations · 3 sources tier 2 ingestion · LGPD compliance enforcement)
+- **RICE estimate:** Reach 1.2M (SP+Rio upper tier) × Impact 9 (largest LATAM TAM) × Confidence 0.6 (idioma + LGPD complexity) / Effort 100h ≈ **65**
+- **Dependencies:** launch H1 + CO/AR ramp validated · pt-BR i18n completion · LGPD compliance audit · founder gate
+- **Ref:** ADR-051 + ADR-003 + ADR-035 + LGPD Lei 13.709
+
+### L-NEW-US-LATINX-DATA-SOURCES — Sources US-specific audience Latinx (defer pending validation)
+
+- **Status:** 🟡 deferred-pending-validation (defer ADR-051 founder canon 2026-04-25)
+- **Origen:** F1.A — gap explícito 03.9 NO documenta sources US-specific
+- **Qué es:** sources US-specific (Census Bureau ACS demographics, Zillow Research price trends si applicable, NOAA national subset US, Realtor.com público feeds) para audience tier 1 H1 US Latinx. Pendiente validation feedback usuarios H1.
+- **Para qué sirve:** audience US Latinx H1 primarily expat/inversionista comprando MX → data layer MX H1 sirve interface en `en-US` SIN requerir sources US-specific. Sources US-specific solo emerge necesidad si feedback usuarios H1 demand explicit US-side data (ej. "compárame Zona X CDMX vs Zona Y Houston").
+- **Beneficio concreto:** decisión data-driven post-launch H1 evita over-engineering pre-validation. Si emerge demand → activación FASE 22.A.
+- **Fase target:** FASE 22.A (post-launch H1 validation gate) o defer post-launch H1 si no emerge
+- **Estimado:** ~30h CC (research + 3-4 sources US ingestors + i18n en-US data refinement)
+- **RICE estimate:** Reach 200K (US Latinx tier 1) × Impact 5 (incremental complementary data) × Confidence 0.4 (validation pending) / Effort 30h ≈ **13**
+- **Dependencies:** launch H1 cerrado · feedback usuarios US Latinx H1 que demande sources US-specific · founder gate decision
+- **Ref:** ADR-051 + memoria `project_scope_multipais_h1_opcion_b` punto 4
+
+---
+

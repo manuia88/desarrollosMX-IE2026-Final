@@ -800,3 +800,35 @@ CRM disponible para wiring UI M01:
 - 26 features RICE downstream desbloqueadas
 
 **Status A.5 + FASE 07.7 master:** Shipped (tag dual `fase-07.7.A.5-complete` + `fase-07.7-complete` pushed). FASE 07.7 CERRADA. Próximo: B.1 M01 Dashboard Asesor (FASE 14+).
+
+### DECISIÓN N+2: Scope multi-país H1 Opción B — ADR-051 (2026-04-25)
+
+Founder dictó scope multi-país H1 vs H2 post audit F0 (commit 49f773e SA-IE-Filter P40 detección complejidad multi-país desproporcionada para velocity H1):
+
+- **Tier 1 H1 active** (testing/QA exhaustivo + enforcement + ingestion): `es-MX` + `en-US` (audience MX residential/comercial + US Latinx expat/inversionista comprando MX).
+- **Tier 2 H2 prepared** (config + seeds preserved, NO testing/QA exhaustivo H1): `es-CO` + `es-AR` + `pt-BR` (activación FASE 38 H3 expansion ~6-9 meses post-launch H1).
+
+### Compatibilidad ADRs anteriores (PRESERVED)
+
+- **ADR-003 multi-country desde día 1** — vision intact, posterga ejecución testing/QA tier 2.
+- **ADR-035 retention multi-país CFDI-aware** — 28 seeds (4 países × 7 entity_types) intactos. Enforcement cron `crm_retention_cleanup` activo MX H1, CO/AR/BR pasivo (rows preservados, no DELETE).
+- **ADR-049 country_code char(2)** — schema multi-país BD intacto.
+- **BIBLIA DECISIÓN 2 (5 locales)** — messages files preserved (`es-MX`, `es-CO`, `es-AR`, `pt-BR`, `en-US`), countries seeds intactos.
+
+### Outputs F1.A scope multi-país
+
+- ADR-051 nuevo (`docs/01_DECISIONES_ARQUITECTONICAS/ADR-051_MULTI_COUNTRY_SCOPE_H1_TIER.md`).
+- 03.9 banner tier scope + tabla tier mapping + Reality Status F1.A scope multi-país (~80 LOC append).
+- LATERAL_UPGRADES_PIPELINE +4 L-NEW expansion (CO + AR + BR + US Latinx) destinos canon FASE 38 / 22.A.
+- 02.0_INDICE_MAESTRO tier marker per FASE.
+- 11_IE_FILTER_AUDIT P40 status RESOLVED.
+- Memoria `project_scope_multipais_h1_opcion_b` (28 entries MEMORY.md).
+
+### Reglas de evolución
+
+1. Si emerge feature H1 que requiere CO/AR/BR enforcement → FLAG founder ANTES de implementar (override H1 scope decision pending).
+2. Si feature solo afecta MX → no requiere consult, build per canon.
+3. Si feature solo afecta US Latinx → adapt usando es-MX patterns + en-US copy (mismo patrón asesor MX).
+4. Sources US-specific defer L-NEW-US-LATINX-DATA-SOURCES (FASE 22.A o post-launch H1) hasta validation feedback usuarios H1.
+
+**Status DECISIÓN N+2 + F1.A foundation:** Shipped (tag `fase-07.7-data-real-foundation`). Próximo F1.B Climate Real (NOAA + CONAGUA replace synthetic ~8-10h CC).

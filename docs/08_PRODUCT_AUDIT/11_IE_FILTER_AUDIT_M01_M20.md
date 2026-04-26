@@ -197,7 +197,7 @@ Si NO a las cinco → no se construye.
 |---|---|---|---|---|---|---|---|---|---|---|
 | P38 | DMXWrappedTeaser `/wrapped/[year]` (action 15) | 🟡 | Y teaser→wrapped page | Y dmx_wrapped_snapshots | Y banner contextual | Y enero re-engagement | Y Referral (Spotify) | **5/5** | ACELERAR | Banner + cron `annual_wrapped`. |
 | P39 | SSG/ISR + Vercel OG + JSON-LD multi-locale (action 17) | 🟡 | N SEO infra | Y routes existentes | Y org SEO CAC | Y rich-snippets influence | Y organic acquisition | **4/5** | MANTENER | Replicar pattern landing root. |
-| P40 | A11y AA + i18n 5 locales (action 18) | 🟡 | N UI quality | Y messages/{5}.json | Y a11y reduce fricción | Y LATAM expansion | Y per-locale conversion | **4/5** | MANTENER | Validar nuevas rutas. |
+| P40 | A11y AA + i18n 5 locales (action 18) | 🟡 | N UI quality | Y messages/{5}.json | Y a11y reduce fricción | Y LATAM expansion | Y per-locale conversion | **4/5** | RESOLVED ADR-051 (Tier 1 H1: es-MX+en-US · Tier 2 H2: CO/AR/BR FASE 38) | A11y AA enforcement H1 + i18n config 5 locales preserved · testing/QA exhaustivo solo Tier 1 H1. |
 | P41 | CtaFooter + newsletter cabling (action 9) | 🟡 | Y signup→A6 | Y newsletter procedure | Y footer captura | Y subscribe low-friction | Y Activation | **5/5** | ACELERAR | Port + cablear. |
 | P42 | Faq landing embed vs page (action 20) | 🟡 | N UI static | Y i18n keys | Y inline vs navigation | Y clarifies objections | Y scroll-depth Activation | **4/5** | MANTENER | Decisión section vs standalone. |
 
@@ -222,7 +222,7 @@ Si NO a las cinco → no se construye.
 > **Honesto y escéptico (criterio canon):** este audit identifica **3 features parciales** con conflicto interno o bajo leverage suficiente para flag CORTAR pre-B-construction. Notar que ninguna feature ✅ active (8) cae en categoría CORTAR — la inversión backend hecha está alineada.
 
 1. **P35 — LifestyleMatchWizard 6-tile vs feature `lifepath` long-form existente** (M18 action 3): **CONFLICTO PRODUCTO IRRESUELTO**. Score 3-5/5 dependiendo de cuál se mantenga. Mantener AMBOS = deuda técnica + UX confuso (canon "zero deuda técnica antes de avanzar"). Recomendación: **CORTAR `lifepath` (sunk cost, 0 rows en tabla, no traction)**, mantener LifestyleMatchWizard 6-tile (Netflix-pattern probado high-conversion). Confidence: **baja** — requiere founder validation antes de cortar feature `lifepath` que ya tiene routes/components shipped.
-2. **P40 — A11y AA + i18n 5 locales completos pre-launch H1** (M19 action 18): Score **4/5** (Q1 N por scope UI). NO cortar la a11y/i18n en sí (es non-negotiable canon § 10). PERO **CORTAR el alcance "5 locales H1"** → empezar solo `es-MX` H1 + `es-CO` H2. CO/AR/BR son LATAM expansion fuera scope inversión H1 (founder regla "verificar antes de gasto"). Mantener arquitectura i18n-ready, no traducciones completas.
+2. **P40 — A11y AA + i18n 5 locales completos pre-launch H1** (M19 action 18): Score **4/5** (Q1 N por scope UI). **RESOLVED — Opción B founder 2026-04-25 + ADR-051.** Tier 1 H1 active = `es-MX` + `en-US` (testing/QA exhaustivo + enforcement). Tier 2 H2 prepared = `es-CO` + `es-AR` + `pt-BR` (config + seeds preserved, NO testing/QA exhaustivo H1, activación FASE 38 expansion ~6-9 meses post-launch). NO cortar i18n architecture (non-negotiable canon § 10). Messages files 5 locales preserved + retention_policies 28 seeds preserved (ADR-035) + countries seeds intactos. Activación H2 = config flip, no rebuild. Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-051_MULTI_COUNTRY_SCOPE_H1_TIER.md` + memoria `project_scope_multipais_h1_opcion_b`. L-NEW backlog explícito: L-NEW-COUNTRY-EXPANSION-CO/AR/BR (FASE 38) + L-NEW-US-LATINX-DATA-SOURCES (FASE 22.A o post-launch H1).
 3. **P42 — Faq landing embed vs page standalone** (M19 action 20): Score 4/5. Decisión producto micro: embed inline en landing O page `/faq` standalone. **CORTAR el doble-mantenimiento** (embed + page) → elegir UNO. Recomendación: page standalone `/faq` (ya existe ✅), banner CTA "FAQ" en landing footer suficiente. Embed completo en landing añade ruido, dilute conversion path.
 
 ### Features 🟡 parcial que pasan filtro 5/5 (priorizar completar, NO cortar)
@@ -336,7 +336,7 @@ Combinación RICE (de `03_RICE_PRIORITIES.md`) × score IE filter (de este doc) 
 
 - **High confidence (38 features):** features ✅ active (8) + features con evidence convergente entre 06_AUDIT + M0X spec + 01_CROSSWALK + MCP query. La mayoría de M15/M16/M19 caen aquí.
 - **Medium confidence (5 features):** P6-P7 M10 dev (data fragmentaria spec M10), P34-P37 M18 (decisión producto LifestyleMatch pendiente).
-- **Low confidence (2 features):** P35 lifepath (conflicto producto irresuelto), P40 a11y/i18n alcance H1 (decisión scope pendiente).
+- **Low confidence (2 features):** P35 lifepath (conflicto producto irresuelto — pendiente FASE 13 founder gate cut decision; deprecated header agregado F1.A), P40 a11y/i18n alcance H1 (**RESOLVED — Opción B founder 2026-04-25 + ADR-051**, ver §"Top 3 features CORTAR" arriba).
 
 ---
 
