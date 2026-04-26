@@ -67,17 +67,17 @@ export const captacionCreateInput = z.object({
 export const captacionUpdateInput = z.object({
   id: z.string().uuid(),
   propietarioNombre: z.string().min(2).max(120).optional(),
-  propietarioTelefono: z.string().max(40).nullable().optional(),
-  propietarioEmail: z.string().email().max(120).nullable().optional(),
+  propietarioTelefono: z.string().max(40).nullish(),
+  propietarioEmail: z.string().email().max(120).nullish(),
   direccion: z.string().min(5).max(200).optional(),
   tipoOperacion: captacionOperacionEnum.optional(),
   precioSolicitado: z.number().positive().optional(),
   currency: captacionCurrencyEnum.optional(),
-  zoneId: z.string().uuid().nullable().optional(),
-  ciudad: z.string().max(80).nullable().optional(),
-  colonia: z.string().max(80).nullable().optional(),
+  zoneId: z.string().uuid().nullish(),
+  ciudad: z.string().max(80).nullish(),
+  colonia: z.string().max(80).nullish(),
   features: featuresSchema.optional(),
-  notes: z.string().max(4000).nullable().optional(),
+  notes: z.string().max(4000).nullish(),
 });
 
 export const captacionAdvanceStageInput = z.object({
