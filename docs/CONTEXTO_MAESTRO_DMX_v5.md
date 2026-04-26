@@ -24,6 +24,8 @@ Convenciones de citas:
 
 ## 1. IDENTIDAD Y VISIÓN
 
+> **Scope multi-país H1 — ADR-051 (founder canon 2026-04-25 Opción B):** Tier 1 H1 active = `es-MX` + `en-US` (audience MX residential/comercial + US Latinx expat/inversionista comprando MX, testing/QA exhaustivo + enforcement). Tier 2 H2 prepared = `es-CO` + `es-AR` + `pt-BR` (config + seeds preserved, activación FASE 38 expansion ~6-9m post-launch). ADR-003 + ADR-035 + BIBLIA DECISIÓN 2 PRESERVED. Ver `docs/01_DECISIONES_ARQUITECTONICAS/ADR-051_MULTI_COUNTRY_SCOPE_H1_TIER.md`.
+
 - **Nombre**: DesarrollosMX v5 Dopamine Edition (BIBLIA-§1)
 - **Categoría**: **Spatial Decision Intelligence** (IE1-§1.3, BIBLIA-§1)
 - **Misión**: *"Construir la representación digital más precisa de las ciudades de México, y hacer que cada decisión que involucre una ubicación sea fundamentalmente mejor."* (IE1-§1.1, BIBLIA-§1)
