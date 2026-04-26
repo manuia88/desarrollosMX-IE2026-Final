@@ -1,7 +1,7 @@
 # FASE 07.7 — CRM Foundation (mini-fase foundational, BLK_DEALS resolution)
 
 ## Status
-🟡 AGENDADA pre-FASE 11.T (resolución blocker BLK_DEALS — schema deals/leads/buyer_twins canonical)
+🟢 SHIPPED A.4 schema core (2026-04-25) — sub-bloques A.5 / B / C / D / E / F siguen pendientes pre-tag `fase-07.7-complete`. A.4 resolvió BLK_DEALS schema canonical (leads + buyer_twins + deals + operaciones + family_units + referrals + behavioral_signals + audit_crm_log).
 
 ## Trigger
 - Inicio: tag `fase-07.6-complete` + founder cerró Gates 1, 2, 3 (ref `docs/08_PRODUCT_AUDIT/05_FOUNDER_DECISION_GATES.md`)
@@ -84,3 +84,90 @@ Establecer el cimiento de datos del CRM (leads, gemelos digitales del comprador,
 - `docs/08_PRODUCT_AUDIT/03_RICE_PRIORITIES.md` sec 7 (BLK_DEALS source)
 - `docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md` (26 features afectadas)
 - ADR-033/034/035 (a crear post-Gates 1-3)
+
+---
+
+## Sub-bloque A.4 — SHIPPED 2026-04-25
+
+> Resolución BLK_DEALS schema core CRM. Cierra Gates 1-3 (ADR-033/034/035). Listos para wiring UI M01-M07 portal asesor downstream.
+
+### Migrations creadas (11)
+
+Todas en `supabase/migrations/`:
+
+1. `20260425210000_crm_001_catalogs.sql` — 4 catalogs (`persona_types` 6 seeds · `lead_sources` 8 seeds · `deal_stages` 7 seeds FSM · `retention_policies` 28 seeds multi-país)
+2. `20260425210100_crm_002_family_units.sql` — `family_units` + `family_unit_members`
+3. `20260425210200_crm_003_leads.sql` — `leads` (schema H1 simple — pre-FASE 13 contactos completo)
+4. `20260425210300_crm_004_buyer_twins.sql` — `buyer_twins` + `buyer_twin_traits`
+5. `20260425210400_crm_005_deals_operaciones.sql` — `deals` + `operaciones` (canonical ADR-049, schema minimalista)
+6. `20260425210500_crm_006_referrals.sql` — `referrals` polymorphic source/target + `referral_rewards`
+7. `20260425210600_crm_007_behavioral_signals.sql` — `behavioral_signals` pg_partman monthly, retention 24m
+8. `20260425210700_crm_008_audit_crm_log.sql` — `audit_crm_log` pg_partman monthly, retention 84m (7y CFDI-aware)
+9. `20260425210800_crm_009_rls_helpers_policies.sql` — 7 SECDEF helpers RLS + policies por tabla
+10. `20260425210900_crm_010_domain_triggers.sql` — triggers `tg_audit_crm_log` + cascadas STUB
+11. `20260425211000_audit_rls_allowlist_v28.sql` — allowlist incremento v27→v28 cubre 14 tablas + 7 SECDEF nuevos
+
+### Tablas (14)
+
+`persona_types` · `lead_sources` · `deal_stages` · `retention_policies` · `family_units` · `family_unit_members` · `leads` · `buyer_twins` · `buyer_twin_traits` · `deals` · `operaciones` · `referrals` · `referral_rewards` · `behavioral_signals` (partitioned) · `audit_crm_log` (partitioned)
+
+> **Nota:** son 15 tablas si se cuenta `audit_crm_log` aparte. La cuenta canónica del scope de A.4 es **14 tablas de dominio CRM + 1 tabla de auditoría particionada** (= 15 total — `behavioral_signals` también particionada cuenta como tabla de dominio).
+
+Todas con `ENABLE ROW LEVEL SECURITY` en la misma migration (regla #3 CLAUDE.md).
+
+### SECDEF helpers RLS (7)
+
+Pre-FASE 13 (auth/permissions completo) los helpers son STUBs funcionales con lógica básica:
+
+- `rls_is_admin()` — basado en `profiles.rol = 'admin'`
+- `rls_is_asesor()` — basado en `profiles.rol = 'asesor'`
+- `rls_is_master_broker()` — basado en `profiles.rol = 'master_broker'`
+- `rls_is_developer()` — basado en `profiles.rol = 'developer'`
+- `rls_owns_lead(lead_id)` — `leads.asesor_id = auth.uid()`
+- `rls_is_assigned_lead(lead_id)` — STUB FASE 13 (extiende a manager + co-asesor team)
+- `rls_is_brokerage_member(brokerage_id)` — STUB pre-FASE 13 (extiende cuando `brokerage_members` exista)
+
+### tRPC procedures (~25)
+
+Router raíz `crm.*` con 7 sub-routers:
+
+| Sub-router | Procedures | Notas |
+|---|---|---|
+| `crm.lead.*` | `list`, `getById`, `create`, `update`, `assign`, `convertToBuyerTwin`, `softDelete` | RLS por `asesor_id` + manager visibility |
+| `crm.deal.*` | `list`, `getById`, `create`, `updateStage` (FSM), `attachLead`, `closeWon`, `closeLost` | FSM enforcement vía `deal_stages` slugs |
+| `crm.operacion.*` | `list`, `getById`, `createFromDeal` | Schema minimalista — parts/commissions FASE 07.7.B |
+| `crm.buyerTwin.*` | `list`, `getById`, `upsertTrait`, `recomputeEmbedding` (STUB FASE 13.B.7) | Embeddings cascada pendiente |
+| `crm.referral.*` | `create`, `attribute`, `listRewards`, `markRewardPaid` | Polymorphic source/target ADR-034 |
+| `crm.familyUnit.*` | `create`, `addMember`, `removeMember`, `list` | Multi-comprador group buying |
+| `crm.catalogs.*` | `personaTypes`, `leadSources`, `dealStages`, `retentionPolicies` | Read-only catalogs |
+
+### ADRs cerrados (3)
+
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-033_PERSONA_TYPES_CATALOG_EXTENSIBLE.md` — catalog table extensible (no enum) para evolución sin migrations
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-034_REFERRALS_POLYMORPHIC_SOURCE_TARGET.md` — polymorphic source_type/target_type cierra consolidación cross-capa C5.5/T.2.4
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-035_RETENTION_MULTI_COUNTRY_CFDI_AWARE.md` — retention multi-país (5y MX, 10y CO, 7y AR/BR) CFDI-aware
+
+### Métricas A.4
+
+- Tests: **+71** (3088 → 3159 unit + integration)
+- audit-dead-ui baseline: **25 mantenido** (zero regression)
+- LOC migrations SQL: ~1,800
+- LOC tRPC procedures: ~1,200
+- LOC types regenerados (`db:types`): ~600
+- audit:rls clean v28
+- 0 violations audit:e2e
+- 0 violations audit:selects
+
+### Próximo: A.5 + cierre FASE
+
+- A.5 — E2E tests retrofit (Playwright happy paths CRM lead→deal→operacion + referral attribution)
+- A.5 — `audit-dead-ui:ci` validation extra para nuevas UIs `crm.*` consumidoras
+- Tag `fase-07.7-complete` post-A.5 cierra FASE 07.7 (sub-bloques B-F quedan opcionales para FASE 07.7.B detalle ops)
+
+### Handoff downstream
+
+- 26 features RICE downstream desbloqueadas (top 5 ya documentadas arriba)
+- M01 Dashboard Asesor (FASE 14+) lee `leads` + `deals` + `operaciones` con disclosure badges H1
+- M03 Contactos (FASE 13) extenderá `leads` → `contactos` full schema
+- M07 Operaciones (FASE 14) extenderá `operaciones` con `operacion_parts` + `operacion_commissions`
+

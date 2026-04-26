@@ -305,3 +305,61 @@ El brief original A.3.3 propuso **crear 4 tablas nuevas** `zone_<source>_<metric
 ---
 
 **Estado:** A.3.2 (decisiones gap-by-gap) cerrado. Procede A.3.3-A.3.6 ejecución P0 fixes + catálogos + tag.
+
+---
+
+## §9 Handoff A.4 → A.5 → B.1 M01 (2026-04-25)
+
+> Sub-fase **07.7.A.4** CRM Foundation shipped post-A.3. Esta sección documenta el handoff downstream y el estado de los disclosure bugs heredados de A.3.
+
+### §9.1 Status A.4 shipped
+
+- **Schema canonical CRM entregado:** 14 tablas dominio + 1 audit particionada (`audit_crm_log` retention 84m=7y CFDI-aware ADR-035) + 7 SECDEF helpers RLS + ~25 procedures tRPC `crm.*` (sub-routers `lead`, `deal`, `operacion`, `buyerTwin`, `referral`, `familyUnit`, `catalogs`).
+- **3 ADRs cerrados:** ADR-033 (persona_types catalog extensible) · ADR-034 (referrals polymorphic source/target) · ADR-035 (retention multi-país CFDI-aware).
+- **11 migrations atómicas** `20260425210000_crm_001_catalogs.sql` … `20260425211000_audit_rls_allowlist_v28.sql`.
+- **Tests +71** (3088 → 3159). audit-dead-ui baseline 25 mantenido. audit:rls clean v28.
+- **BLK_DEALS resuelto** — blocker #3 critical path top-30 RICE cerrado.
+
+### §9.2 INEGI silent gap revisited (cross-reference A.3 § PRE-0)
+
+- **Resultado A.3 PRE-0 Check 4:** 5 sources con `ingest_runs` 2026-04-24 (banxico + 4 INEGI/SHF related). **NO se detectó silent gap nuevo** durante session A.4. INEGI hallazgo A.3 (`source='inegi*'` 0 rows en `macro_series` aún tras runs success) sigue agendado L-NEW-MACRO-INEGI-INPC-01 (P0, 30 min, recomendación: durante A.4 — completar post-tag A.5 antes de M01 FASE 14+).
+- **Reality A.4:** CRM no consume data layer macro/demographics. Audit silent gap es no-bloqueante para A.4 schema.
+
+### §9.3 3 disclosure bugs P0 MUST-HAVE en B.1 M01
+
+> Heredados de A.3 (synthetic data layer documentado §1, §2, §5). **Bloqueantes pre-launch público M01.**
+
+| # | Bug | Origen A.3 | Acción B.1 M01 (FASE 14+) |
+|---|---|---|---|
+| 1 | **S5 — Atlas Wiki Haiku narrative cita synthetic como "INEGI"** en `colonia_wiki_entries.facts_cited` jsonb | A.3 §1 + §5 | L-NEW-DEMO-DISCLOSURE-S5 — prompt fix Haiku + flag `not_ground_truth` en facts. Si Atlas Wiki entries exposed en preview/UI, narrative reads "según INEGI..." citando datos sintéticos. **Bloquea launch público.** |
+| 2 | **A3-DEMO-01 — UI ficha colonia M01 consumirá `zone_demographics_cache` MV sin badge "Estimación H1"** | A.3 §1 demographics 100% synthetic self-flagged | L-NEW-DEMO-DISCLOSURE-A3-01 — badge UI mandatorio sobre datos `not_ground_truth=true`. Spec en M01 desde inicio FASE 14 (recomendación founder). |
+| 3 | **CLIMATE-DISCLOSURE-01 — heuristic_v1 (43,776 rows synthetic SEED) consumido por climate_twin_matches + Atlas Wiki narrative sin badge "Modelo H1"** | A.3 §1 climate `noaa-ingestion.ts:43-89` synthetic | L-NEW-CLIMATE-DISCLOSURE-01 + L-NEW-CLIMATE-NOAA-01 (FASE 12 real NOAA replace). Disclosure pre-launch. |
+
+### §9.4 14 tablas CRM + 25 procedures listos para wiring UI
+
+> Schema A.4 ready. **UI consumer M01-M07 portal asesor pendiente FASE 14+.**
+
+- **M01 Dashboard Asesor (FASE 14):** consume `crm.lead.list` + `crm.deal.list` + `crm.operacion.list` para widgets pipeline + KPIs.
+- **M03 Contactos (FASE 13):** extiende `leads` schema H1 simple → `contactos` full schema (phones jsonb[] + emails jsonb[] + FTS search_vector + normalize_phone() anti-duplicados). Migration de promoción FASE 13 mantiene historia.
+- **M07 Operaciones (FASE 14):** extiende `operaciones` minimalista → schema full con `operacion_parts` + `operacion_commissions` + `operacion_pagos` + Wizard 6 pasos UI. Defer FASE 07.7.B detalle ops.
+- **M05 Captaciones / M06 Tareas / M04 Búsquedas:** consume `buyer_twins` + `buyer_twin_traits` para matching algorítmico (cuando embedding cascada FASE 13.B.7 active).
+
+### §9.5 26 features downstream desbloqueadas (RICE)
+
+11 directos top critical path + 15 cascade. Top 5:
+
+1. C1.10 Buyer twin preloaded gemelo (RICE 5,893)
+2. C1.11 Portal-to-CRM auto-capture (RICE 7,700)
+3. C2.1 AVM spread listado vs cierre (RICE 8,385) — depende cierres CRM acumulados
+4. C5.5.3 Streaks asesor diarios
+5. T.2.4 Referral magic link perfil (RICE 8,750) — habilitado por ADR-034 polymorphic
+
+Lista completa: `docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md` + `docs/08_PRODUCT_AUDIT/03_RICE_PRIORITIES.md`.
+
+### §9.6 Próximo wall-clock
+
+- **A.5** (E2E tests retrofit) → tag `fase-07.7-complete` cierra FASE.
+- **B.1 M01** (FASE 14+) → consume CRM `crm.*` + agrega 3 disclosure badges P0.
+- **Sub-bloques B/C/D/E/F** de FASE 07.7 quedan opcionales (B detalle ops mejor agendar en FASE 14 cohesivo con M07 wizard).
+
+**Estado §9:** Handoff documentado. CRM Foundation A.4 entregado. M01 ready post-A.5 + 3 disclosures P0.

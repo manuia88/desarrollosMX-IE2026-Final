@@ -172,6 +172,24 @@ Wizard:
 - `audit_log` — mutaciones.
 - `timeline_entries` — cada cambio status.
 
+### Tablas CRM Foundation A.4 shipped 2026-04-25
+
+> Sub-fase **07.7.A.4** entregó schema **minimalista** `operaciones` + `deals` + `retention_policies` (canonical ADR-049). M07 Operaciones (FASE 14) extiende este cimiento con `operacion_parts` + `operacion_commissions` + `operacion_pagos` + flow CFDI + Legal — agendado **FASE 07.7.B detalle ops**.
+
+| Tabla | Propósito | Columnas canonical principales |
+|---|---|---|
+| `deals` | Stage FSM pre-operacion (pipeline asesor) | `id`, `lead_id` FK, `asesor_id`, `country_code`, `stage_id` FK `deal_stages`, `expected_value`, `expected_close_date`, `created_at`, `updated_at` |
+| `operaciones` | Operación canonical post-deal won (schema H1 minimalista) | `id`, `deal_id` FK, `country_code`, `side` CHECK (`ambos/comprador/vendedor`), `fiscal_status` CHECK (`pending/invoiced/paid`), `total_amount`, `currency`, `closed_at`, `created_at` |
+| `retention_policies` | Retention multi-país CFDI-aware (ADR-035) | `id`, `country_code`, `entity_type`, `retention_months`, `legal_basis`, `created_at` (28 seeds: MX 60m=5y · CO 120m=10y · AR 84m=7y · BR 84m=7y) |
+
+**NOTA:** schema operaciones MINIMALISTA A.4 — `parts/commissions` detalle FASE 07.7.B con `operacion_parts` + `operacion_commissions`. Status FSM `propuesta/oferta_aceptada/escritura/cerrada/pagando/cancelada` se modela en `deal_stages` slugs (M07 spec) — `fiscal_status` `pending/invoiced/paid` separado en `operaciones` para tracking CFDI/factura independiente del flow comercial.
+
+Cascadas STUB pendientes FASE 07.7.B:
+- `UPDATE deals.stage_id (closed_won) → trg_crm_handle_deal_stage_change → cascade_deal_won_to_operacion` (auto-INSERT operacion al cerrar deal)
+- `INSERT operaciones → trg_crm_handle_operacion_insert → cascade_operacion_commission_calc` (calc % + IVA + split desde profile asesor)
+
+RLS habilitado vía SECDEF helpers `rls_owns_lead` + `rls_is_assigned_lead` + `rls_is_admin` (cf migration `20260425210800_crm_009_rls_helpers_policies.sql`).
+
 ## Estados UI
 
 - **Loading**: skeleton tabla.

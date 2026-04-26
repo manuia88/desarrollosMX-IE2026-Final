@@ -113,6 +113,22 @@ Detail:
 - `ai_generated_content` — INSERT (type='argumentario').
 - `audit_log` — INSERT on create/update/delete.
 
+### Tablas CRM Foundation A.4 shipped 2026-04-25
+
+> Sub-fase **07.7.A.4** entregó schema CRM core. M03 Contactos (FASE 13) extiende este cimiento con schema completo `contactos` (phones jsonb[] + emails jsonb[] + FTS search_vector + normalize_phone). Pre-FASE 13 el módulo lee directamente `leads`/`buyer_twins` con schema H1 simple.
+
+| Tabla | Propósito | Columnas canonical principales |
+|---|---|---|
+| `leads` | Captación inicial pre-conversion buyer_twin | `id`, `asesor_id`, `country_code`, `first_name`, `last_name`, `phone`, `email`, `lead_source_id` FK, `persona_type_id` FK, `status`, `created_at`, `updated_at`, `deleted_at` |
+| `buyer_twins` | Gemelo digital comprador (DISC + Big5 + behavioral embedding) | `id`, `lead_id` FK, `disc_profile` jsonb, `big_five_profile` jsonb, `embedding` vector(1536) STUB FASE 13.B.7, `recompute_pending` boolean, `created_at`, `updated_at` |
+| `buyer_twin_traits` | Traits granulares (1-N) — preferencias zone/precio/amenities | `id`, `buyer_twin_id` FK, `trait_key`, `trait_value` jsonb, `confidence`, `source` (manual/inferred), `created_at` |
+| `family_units` | Multi-comprador group buying (parejas, familias) | `id`, `name`, `country_code`, `decision_mode` (consensual/single_leader), `created_at` |
+| `family_unit_members` | Miembros del family_unit | `id`, `family_unit_id` FK, `lead_id` FK, `role` (head/co_decider/influencer), `weight` numeric |
+
+**NOTA:** schema lead H1 simple — `contactos` table FASE 13 con `phones jsonb[]` + `emails jsonb[]` + FTS `search_vector` + `normalize_phone()` + anti-duplicados pendiente. La transición lead→contacto se hará vía migration de promoción FASE 13 (lead retiene historia, contacto canonical va a portal asesor).
+
+RLS habilitado vía SECDEF helpers `rls_owns_lead` (asesor_id = auth.uid()) + `rls_is_asesor` + `rls_is_admin` (cf migration `20260425210800_crm_009_rls_helpers_policies.sql`).
+
 ## Estados UI
 
 - **Loading**: skeleton 20 rows shimmer. Header con placeholder.
