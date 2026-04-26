@@ -2,9 +2,11 @@
 
 > Cómo trabajar en este repo. Todo cambio a estas reglas pasa por un ADR.
 
-## Frontend canon (actualizado 2026-04-25)
+## Frontend canon (actualizado 2026-04-26)
 
 Frontend canon DMX = **prototype JSX** en `tmp/product_audit_input/DMX-prototype/` ↔ documentado en `docs/08_PRODUCT_AUDIT/07_FRONTEND_PROTOTYPE_CANONICAL.md` ↔ formalizado en `docs/01_DECISIONES_ARQUITECTONICAS/ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md`.
+
+Portal asesor extiende prototype canon vía **ADR-050** (`docs/01_DECISIONES_ARQUITECTONICAS/ADR-050_DESIGN_LANGUAGE_CANON_PROTOTYPE_ASESOR.md`): 3 accents operacionales (teal/violet/gold) + 3 surfaces (elevated/recessed/spotlight) + 4 score gradients (excellent/good/warning/critical) + AI gradient violet+indigo+rose + 4 shadows narrativas + 10 wayfinding colors per módulo.
 
 Reemplaza:
 - Frontend Dopamine (`ADR-023_DESIGN_SYSTEM_REFINEMENT.md` — SUPERSEDED frontend, mantiene parcial backend / utility classes en portales internos).
@@ -13,6 +15,29 @@ Reemplaza:
 
 Mapping prototype ↔ M01-M20 ↔ backend en `docs/08_PRODUCT_AUDIT/08_PROTOTYPE_TO_MODULES_MAPPING.md`.
 Audit estado real M01-M20 en `docs/08_PRODUCT_AUDIT/06_AUDIT_ESTADO_REAL_M01_M20.md`.
+
+### Foundation visual asesor (FASE 13.A shipped 2026-04-26)
+
+- Tokens canon en `styles/tokens.css` (Tailwind v4 @theme): namespace `--canon-*` (prototype base) + asesor extensions (`--accent-*`, `--surface-*`, `--gradient-score-*`, `--gradient-ai`, `--shadow-canon-*`, `--mod-*`).
+- Motion primitives en `shared/ui/motion/`: `BlurText`, `FadeUp`, `StaggerContainer`, `Marquee` + hooks `useInView`, `useTilt3D`. Respect `prefers-reduced-motion` global.
+- UI primitives canon en `shared/ui/primitives/canon/`: `Card`, `Button` (CVA 4 variants: primary/glass/ghost/ghost-solid × sm/md/lg), `ScorePill` (5 tiers), `MomentumPill` (3 directions), `GlassOverlay`, `IconCircle` (6 tones × 3 sizes), `cn` util.
+- Co-existence Dopamine: `shared/ui/primitives/{card,button,...}.tsx` legacy preservados (consumidos por 20+ features). Migration gradual feature-by-feature en F2 implementation.
+- Fonts: Outfit (400/600/700/800) + DM Sans (400/500/600/700) via `next/font/google` en `app/fonts.ts` (zero CDN imports).
+
+### Reglas inviolables canon (asesor + landing unified, ADR-050 §2.8)
+
+1. Buttons SIEMPRE `border-radius: 9999px` (pill obligatorio).
+2. Brand gradient principal SOLO `linear-gradient(90deg, #6366F1, #EC4899)`. Variantes score/AI son aditivas.
+3. Cero emoji en UI (excepto messaging chat usuario-asesor).
+4. Transforms hover SOLO eje Y (`translateY`). NO rotateX/rotateY/scale en cards.
+5. Motion duración total ≤ 850ms (cap absoluto).
+6. Viewport-triggered animations usan `once: true` IntersectionObserver.
+7. Hardcoded colors fuera de tokens `@theme` PROHIBIDO.
+8. Numerical respect: big nums Outfit 800 + tabular-nums; data tables ui-monospace; gradient cromático SOLO en cifras hero.
+9. AI signal differentiation: `--gradient-ai` o `--shadow-canon-spotlight` violet glow. Data observada usa indigo o accent del módulo.
+10. Disclosure flag visible en cada feature con data sintética/placeholder.
+11. Keyboard-first: kbd shortcuts documentados (`?` shortcuts overlay, `cmd+k` global search, `j/k` row nav, `g d` go dashboard).
+12. `prefers-reduced-motion` respetado vía media query global en `styles/tokens.css`.
 
 ## Stack (H1 cerrado)
 

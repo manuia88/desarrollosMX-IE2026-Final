@@ -882,3 +882,33 @@ Defer a F2 Construction:
 - **L-NEW-CLIMATE-DISCLOSURE-01** (~1h, M01 P0) — climate forecasts UI sin badge fuente
 
 **Status DECISIÓN N+3 + F1.G master cierre:** Shipped (tag `fase-07.7-data-real-shipped`). Próximo F2 Construction M01-M20 / FASE 13.A foundation visual.
+
+---
+
+## DECISIÓN N+4 — FASE 13.A Foundation Visual Portal Asesor shipped (2026-04-26)
+
+ADR-050 (`docs/01_DECISIONES_ARQUITECTONICAS/ADR-050_DESIGN_LANGUAGE_CANON_PROTOTYPE_ASESOR.md`) formaliza el design language canon del portal asesor como extensión aditiva sobre ADR-048 prototype canon. Founder approval 2026-04-26.
+
+**Decisión:** Portal asesor adopta tokens prototype dark canon (navy + cream + indigo→rose + Outfit/DM Sans) + extensiones específicas:
+- 3 accents operacionales: teal (Producto), violet (AI), gold (Performance)
+- 3 surfaces compositivas: elevated, recessed, spotlight
+- 4 score gradients narrativos: excellent (green→emerald), good (indigo→violet), warning (amber→orange), critical (red→rose)
+- 1 AI gradient distintivo: violet+indigo+rose (135deg)
+- 4 shadows narrativas: rest, hover, focus, spotlight
+- 10 wayfinding colors per módulo: M01 indigo, M02 teal, M03 rose, M04 violet, M05 emerald, M06 amber, M07 blue, M08 orange, M09 gold, Academia purple
+
+**Outputs FASE 13.A:**
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-050_DESIGN_LANGUAGE_CANON_PROTOTYPE_ASESOR.md` (~190 LOC)
+- `styles/tokens.css` extendido con namespace `--canon-*` + asesor extensions (zero breaking Dopamine v5.1 OKLCH preservado co-existence)
+- `shared/ui/motion/`: BlurText, FadeUp, StaggerContainer, Marquee + hooks useInView, use3DTilt + barrel index
+- `shared/ui/primitives/canon/`: Card, Button (CVA 4 variants × 3 sizes), ScorePill (5 tiers), MomentumPill (3 directions), GlassOverlay, IconCircle (6 tones × 3 sizes), cn util + barrel index
+- `app/fonts.ts` + `app/layout.tsx`: Outfit + DM Sans via `next/font/google` (zero CDN)
+- `CLAUDE.md` Frontend canon section actualizado con ADR-050 + 12 reglas inviolables
+- `docs/referencias-ui/M*.tsx`: deprecated header banners (BIBLIA DECISIÓN 2 — preservar layout structure como referencia, visual SUPERSEDED)
+
+**12 reglas inviolables canon (ADR-050 §2.8):**
+1. Buttons SIEMPRE pill 9999px. 2. Brand gradient SOLO indigo→rose 90deg. 3. Cero emoji UI. 4. Transforms SOLO Y axis. 5. Motion ≤ 850ms cap. 6. once:true viewport-triggered. 7. Hardcoded colors prohibido. 8. Numerical respect (Outfit 800 + tabular). 9. AI signal differentiation (violet glow). 10. Disclosure flag synthetic data. 11. Keyboard-first kbd. 12. prefers-reduced-motion respected.
+
+**BIBLIA DECISIÓN 2 respetada** (no borrar): primitives Dopamine `shared/ui/primitives/{card,button,...}.tsx` consumidos por 20+ features preservados. Migration gradual feature-by-feature en F2 implementation. Banner deprecated en `docs/referencias-ui/M*.tsx` apunta a layout structure válido + visual SUPERSEDED ADR-050.
+
+**Status DECISIÓN N+4:** Shipped (tag `fase-13.A-complete`). Próximo FASE 13.B M01 Dashboard Asesor "Command Center" (~8-10h CC) — Hero Pulse + KPI Strip + Pipeline Carousel + Daily Standup + Performance Today + 10 innovaciones visuales.
