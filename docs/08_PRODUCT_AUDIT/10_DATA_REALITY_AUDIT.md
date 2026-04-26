@@ -435,3 +435,69 @@ Cero rows perdidas — UPSERT idempotente garantiza integridad.
 
 **Tag:** `fase-07.7-data-real-recompute`. **Próximo:** F1.C.C Tier 2 Demographics (AGEB overlay RESAGEBURB + ENIGH downscale + cache wiki fix combo).
 
+---
+
+## §11 F1.C.C Tier 2 Demographics — AGEB spatial overlay + ENIGH downscale (2026-04-26)
+
+> Sub-fase **07.7.F1.C.C** ship Tier 2 demographics via PostGIS spatial overlay sobre RESAGEBURB CSV + Marco Geoestadístico 09a.shp (AGEBs urbanos CDMX), promueve 208/210 colonias de Tier 1 `inegi_municipal_proxy` (16 valores únicos) → Tier 2 `inegi_ageb_overlay` (208 valores per-colonia distintos). ENIGH downscale via graproes_anios proxy genera median_salary_mxn per colonia (rango MXN 17,717-30,353).
+
+### §11.1 Pipeline shipped (5 steps)
+
+1. **Download MGN CDMX ZIP** (~83 MB) desde INEGI BVINEGI catálogo 889463807469 → extracción 09a.shp (AGEB urbanos) vía shpjs auto-reproyectando EPSG:6372→4326 con .prj bundled proj4js. **2,431 AGEB polygons** parsed.
+2. **Download RESAGEBURB CSV** (~12 MB ZIP / 44 MB CSV / 230 columnas) desde INEGI Censo 2020 microdatos. papaparse `dynamicTyping: false` preserve hex AGEB codes (e.g., '003A'). Filtro AGEB-total (MZA='000', AGEB!='0000'). **2,433 AGEB rows** parsed.
+3. **Staging UPSERT** vía SECDEF `load_inegi_ageb_staging_batch(jsonb)` chunks 200 rows. Casts GeoJSON text → PostGIS geometry vía ST_GeomFromGeoJSON + ST_Multi + ST_MakeValid. **2,431 rows en staging**.
+4. **Spatial overlay RPC** vía SECDEF `recompute_zone_demographics_from_ageb()`. PostGIS ST_Intersects + ST_Area population-weighted aggregation. UPSERT inegi_census_zone_stats con data_origin='inegi_ageb_overlay'. **208 colonias updated** (snapshot_date='2020-12-31' censo reference).
+5. **ENIGH downscale**: ratio = colonia_graproes / state_graproes_2020 (CDMX 11.5 años); clamp [0.30, 3.00]; median_salary_mxn = ENIGH_2022_CDMX_median × ratio (state_median MXN 22,219 from INEGI Comunicado 414/23). UPSERT enigh_zone_income con data_origin='enigh_2022_state_downscaled_via_censo_2020_proxy'. **208 colonias downscaled**.
+
+### §11.2 Cobertura post-Tier 2
+
+| Tabla | Tier 1 (municipal proxy) | Tier 2 (AGEB overlay) | Status |
+|---|---|---|---|
+| `inegi_census_zone_stats` | 226 (todas colonias, snapshot 2026-04-26) | 208 (208 colonias con boundary, snapshot 2020-12-31) | Coexisten — UI prefiere Tier 2 cuando exists |
+| `inegi_ageb_staging` | — | 2,431 AGEBs urbanos CDMX | Source-of-truth spatial overlay |
+| `enigh_zone_income` | 2 synthetic legacy | 208 downscaled (rango MXN 17,717-30,353, avg 24,157) | Tier 2 supersedes synthetic |
+
+### §11.3 Bug fixes shipped en F1.C.C
+
+**Bug A — shpjs fileName prefix.** Original filter `fileName === '09a'` no matched porque INEGI MGN ZIP nests layers en directorio `conjunto_de_datos/09a`. Fix: extract basename via `name.split('/').pop()`.
+
+**Bug B — geometry/geography type mismatch.** `zones.boundary` es `geography` type (no `geometry`). Original RPC ST_Intersects(geometry, geography) emitía silently `lwgeom_distance_spheroid returned negative!` y retornaba 0 results. Fix: cast `z.boundary::geometry` en ST_Intersects + ST_Intersection. Migration `.101035` fix shipped post-discovery.
+
+### §11.4 Methodology canon
+
+- **AGEB-overlay weighted formulas (per SA-ITER §4.2/§4.3):**
+  - Counts (POBTOT, TOTHOG): `SUM(X * frac)` donde `frac = ST_Area(ST_Intersection) / ST_Area(ageb)`
+  - Ratios (GRAPROES, PEA_ratio): `SUM(X * pobtot * frac) / SUM(pobtot * frac)` — **population-weighted** (NO area-weighted, evita skew por AGEBs sparsely populated con high overlap).
+- **ENIGH downscale formula:** `median_mxn = state_median × clamp(colonia_graproes / state_graproes, 0.30, 3.00)`. Linear in education ratio (Pearson r≈0.72-0.78 income↔education en INEGI cross-sections CDMX). Caveat: relación convex en top decile — formula under-estimates Polanco/Lomas, over-estimates Iztapalapa por ~10%. Acceptable H1; flag `data_origin='enigh_2022_state_downscaled_via_censo_2020_proxy'` para UI badge "Estimación H1".
+
+### §11.5 Migrations shipped F1.C.C
+
+| Migration | Tipo | Descripción |
+|---|---|---|
+| `20260426095736_inegi_ageb_staging` | Schema | inegi_ageb_staging table + GIST index + RLS service-role-only |
+| `20260426095751_inegi_census_tier2_columns` | Schema | ALTER inegi_census_zone_stats + enigh_zone_income con 8 indicators + per_ageb_aggregations jsonb |
+| `20260426095849_recompute_zone_demographics_from_ageb` | RPC | SECDEF spatial overlay (initial, geography cast bug) |
+| `20260426100007_audit_rls_allowlist_v32` | Audit | Allowlist v32 — 1 SECDEF nueva |
+| `20260426100358_load_inegi_ageb_staging_batch` | RPC | SECDEF batch loader jsonb-driven (UPSERT staging con ST_GeomFromGeoJSON) |
+| `20260426100437_audit_rls_allowlist_v33` | Audit | Allowlist v33 — 2 SECDEF totales (RPC + batch loader) |
+| `20260426101035_recompute_zone_demographics_geography_cast_fix` | RPC fix | Cast `z.boundary::geometry` resolver lwgeom_distance_spheroid error |
+
+### §11.6 L-NEW updates F1.C.C
+
+- ✅ ~~L-NEW-DEMO-TIER2-AGEB-OVERLAY-F1CC~~ — **SHIPPED F1.C.C 2026-04-26**.
+- 🟡 **L-NEW-COMPUTE-ATLAS-WIKI-CACHE-FIX-01** — defer F1.G (después de Tier 2 wiki refresh contextual será meaningful).
+- 🟡 **L-NEW-DEMO-TIER2-AGEB-OVERLAY-EXPAND-COLONIAS-H2** — los 18 colonias remaining (sin overlap AGEB; no boundary o boundary mal-positioned) defer post F1.D L-NEW expand IECM colonias completo.
+- 🟡 **L-NEW-DEMO-PROXY-COMPOSITE-01** (FASE 22.B) — composite proxy (0.5×graproes + 0.3×employment + 0.2×housing) lift Pearson r de 0.75 → 0.82-0.85.
+
+### §11.7 Status §11
+
+✅ Tier 2 AGEB spatial overlay shipped (208/210 colonias = 99% coverage).
+✅ ENIGH 2022 downscale shipped (208 colonias per-colonia distinct values).
+✅ inegi_census_zone_stats `inegi_ageb_overlay` granularity per colonia (vs Tier 1 municipal proxy 16 valores).
+✅ enigh_zone_income downscaled rango realista (MXN 17.7k-30.3k consistente con CDMX 5to-95to percentil).
+✅ audit:rls 0 violations post v33.
+✅ Bug fixes shipped in-PR (shpjs prefix + geography cast).
+
+**Tag:** `fase-07.7-data-real-tier2`. **Próximo:** F1.F Tests E2E zone freshness Tier 2 + F1.G master cierre (incluye atlas wiki cache fix + bulk re-run combo).
+
+
