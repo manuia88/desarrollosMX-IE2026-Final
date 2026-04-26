@@ -36,8 +36,8 @@ export const methodology = {
   ],
   validity: { unit: 'days', value: 30 } as const,
   confidence_thresholds: { min_listings_per_op: 5, high_listings_per_op: 25 },
-  cetes_series_id: 'cetes_28d',
-  cetes_source_candidates: ['banxico', 'banxico_SF43783'] as const,
+  cetes_series_id: 'SF44070',
+  cetes_source_candidates: ['banxico_SF44070', 'banxico'] as const,
   window_days: 90,
   circuit_breaker_pct: 20,
 } as const;

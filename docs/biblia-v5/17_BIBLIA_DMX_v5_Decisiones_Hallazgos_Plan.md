@@ -643,3 +643,51 @@ QUÉ SUBIR POR FASE:
 # FIN DE BIBLIA DMX v5
 # Este documento + los 16 archivos fuente = TODO el contexto del proyecto
 # Nada resumido. Nada omitido. Todo verificado contra BD real y código real.
+
+
+---
+
+## Append 07.7.A.3 — Data Reality Audit (2026-04-25)
+
+> **Audit canónico:** [`docs/08_PRODUCT_AUDIT/10_DATA_REALITY_AUDIT.md`](../08_PRODUCT_AUDIT/10_DATA_REALITY_AUDIT.md)
+
+### DECISIÓN 1 (Frontend) — yA SUPERSEDED por ADR-048 (frontend prototype canonical)
+
+Frontend canon DMX = **prototype JSX** en `tmp/product_audit_input/DMX-prototype/` (per `CLAUDE.md` + ADR-048). Esta DECISIÓN 1 original (Frontend Dopamine INTOCABLE) está cerrada. Mantenida en histórico para trazabilidad de la evolución de criterios.
+
+### DECISIÓN 2 (Backend preserva) — REAFIRMADA + amplificada con A.3 reality
+
+**Original:** Backend existente (Supabase + tRPC + IE engines + ingest drivers) se PRESERVA. NO se borran archivos sin justificación.
+
+**A.3 amplifica:** los 4 archivos `shared/lib/ingest/geo/{dgis,fgj,gtfs,sacmex}.ts` aparentaban ser stubs (10 baseline `unmarked_stub_error` entries) pero auditoría reveló que son drivers completos (495-606 LOC cada uno con parsers, dedup, quality gates, lineage, UPSERT idempotente a `geo_data_points`). A.3 NO los borra ni reescribe — solo agrega STUB markers ADR-018 referenciando L-NEW IDs canónicos para HTTP fetch agendado FASE 11.E. **Refactor in-place sin pérdida.**
+
+### Hallazgo crítico A.3 — synthetic data layer mucho mayor de lo documentado
+
+| Capa | Reality | Self-flag honesto en código |
+|---|---|---|
+| Demographics (210+210) | SYNTHETIC fallback v1 | ✅ `not_ground_truth=true` en lineage |
+| GeoJSON colonias (210) | SYNTHETIC bbox-500m IDÉNTICO | ✅ `boundary_source=fallback` |
+| Climate (43,776) | SYNTHETIC SEED heuristic_v1 | ✅ check constraint + check label |
+
+**El sistema YA marca synthetic en lineage**, pero **disclosure UI bugs P0 detectados**:
+
+- **S5 high severity:** Atlas Wiki Haiku narrative cita synthetic como "INEGI" en `facts_cited` jsonb. Si Atlas Wiki entries están exposed en preview/UI, narrative reads "según INEGI..." citando datos sintéticos. Fix bloquea launch público.
+- **A3-DEMO-01 M01 blocker:** UI ficha colonia (en construcción FASE 14+) consumirá `zone_demographics_cache` MV sin badge "Estimación H1". Pre-requisito proactivo M01.
+
+Ambos agendados L-NEW M01 implementation (FASE 14+) como **P0 pre-launch**.
+
+### Plan reality state — H1 launch readiness
+
+- ✅ **Banxico macro_series**: REAL fresh 1d (880 rows, 4 series alineadas IDOC + ICO).
+- 🟡 **INEGI Census 2020 + ENIGH 2022**: SYNTHETIC self-flagged (M01 puede consumir + badge UI).
+- 🔴 **5 sources macro (SHF/BBVA/CNBV/Infonavit/FOVISSSTE)**: drivers + tests, cero ejecuciones. Defer L-NEW FASE 11/12 (no bloquea M01, calcs degradan graceful).
+- 🟡 **4 geo CDMX (DGIS/FGJ/GTFS/SACMEX)**: drivers completos, HTTP fetch missing. Defer L-NEW FASE 11.E.
+- 🟡 **Climate heuristic_v1**: SEED H1 (twin engine produce narrativa funcional). Defer L-NEW NOAA FASE 12.
+
+**M01 NOT BLOCKED** — disponibilidad data baseline + synthetic con disclosures permite Dashboard Asesor H1.
+
+### Próxima sub-fase A.4
+
+A.4 CRM Foundation schema (`deals`, `leads`, `buyer_twins`, `operaciones`, `family_units`, `referrals`). Independiente de A.3 reality (CRM no consume data layer auditada).
+
+**Status A.3:** Shipped (tag `fase-07.7.A.3-complete`).

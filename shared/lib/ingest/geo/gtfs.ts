@@ -11,6 +11,7 @@ import {
 } from '../quality-gates';
 import type { IngestCtx, IngestJob, IngestResult } from '../types';
 
+// STUB — activar L-NEW-GEO-GTFS-01 (FASE 11.E)
 // GTFS (General Transit Feed Specification) estáticos de 5 sistemas MX:
 // Metro CDMX, Metrobús, Tren Suburbano, Cablebús, EcoBici. Cada sistema
 // publica un ZIP con stops.txt / routes.txt / trips.txt / stop_times.txt.
@@ -18,8 +19,9 @@ import type { IngestCtx, IngestJob, IngestResult } from '../types';
 // ZIP extraction: bloqueante externo (no hay unzipper/adm-zip/fflate instalados
 // y FASE 07 no autoriza nuevas deps — sólo pdf-parse aprobado). El driver
 // acepta pre-extracted CSVs: admin/ETL externo descomprime el ZIP y pasa
-// { stopsCsv, routesCsv?, systemName }. ZIP in-driver agendado BLOQUE 7.H o
-// FASE 07b.A (cuando se autorice unzipper o similar).
+// { stopsCsv, routesCsv?, systemName }. ZIP in-driver + auto-fetch CKAN
+// resource id 32ed1b6b-41cd-49b3-b7f0-b57acb0eb819 agendado L-NEW-GEO-GTFS-01
+// (FASE 11.E, ~5h cuando se autorice fflate). Reality audit: docs/08_PRODUCT_AUDIT/10_DATA_REALITY_AUDIT.md §5.
 //
 // source='gtfs' fijo (allowlist shared/lib/ingest/allowlist.ts:22). El
 // systemName distingue los 5 feeds vía meta.system_name + source_id prefix

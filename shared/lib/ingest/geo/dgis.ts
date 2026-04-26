@@ -11,11 +11,15 @@ import {
 } from '../quality-gates';
 import type { IngestCtx, IngestJob, IngestResult } from '../types';
 
+// STUB — activar L-NEW-GEO-DGIS-01 (FASE 11.E)
 // DGIS/CLUES — Dirección General de Información en Salud, Secretaría de Salud
 // federal. CLUES = Clave Única de Establecimientos de Salud (12 chars).
 // Dataset publica hospitales, clínicas, centros de salud, consultorios por
 // institución (IMSS, ISSSTE, SSA, PEMEX, SEDENA, SEMAR, Privado) con
 // nivel_atencion (primer/segundo/tercer) + georreferencia.
+// Auto-fetch CKAN salud (datos.cdmx.gob.mx hospitales-y-centros-de-salud)
+// agendado L-NEW-GEO-DGIS-01 (FASE 11.E, ~4h). Reality audit:
+// docs/08_PRODUCT_AUDIT/10_DATA_REALITY_AUDIT.md §5.
 //
 // NOTA allowlist: source canónico es 'clues' (no 'dgis'). El plan maestro
 // escribe "DGIS/CLUES" pero allowlist.ts usa 'clues' como identificador

@@ -11,6 +11,7 @@ import {
 } from '../quality-gates';
 import type { IngestCtx, IngestJob, IngestResult } from '../types';
 
+// STUB — activar L-NEW-GEO-FGJ-01 (FASE 11.E)
 // FGJ CDMX (Fiscalía General de Justicia). Dataset abierto:
 // https://datos.cdmx.gob.mx/dataset/carpetas-de-investigacion-fgj-de-la-ciudad-de-mexico
 // Periodicidad semanal. El portal publica carpetas con fecha_hechos,
@@ -18,6 +19,9 @@ import type { IngestCtx, IngestJob, IngestResult } from '../types';
 // dual CSV/JSON: admin descarga manual → upload, o scrape controlado
 // vuelca JSON. Categorización heurística reduce ~300 delitos a 8 buckets
 // normalizados para snapshots downstream (crime_rate).
+// Auto-fetch CKAN CSVs anuales 2016-2024 archivo.datos.cdmx.gob.mx/FGJ/
+// agendado L-NEW-GEO-FGJ-01 (FASE 11.E, ~4h). Reality audit:
+// docs/08_PRODUCT_AUDIT/10_DATA_REALITY_AUDIT.md §5.
 //
 // Refs: docs/02_PLAN_MAESTRO/FASE_07_INGESTA_DATOS.md §7.D.2
 //       docs/01_DECISIONES_ARQUITECTONICAS/ADR-010_IE_PIPELINE_ARCHITECTURE.md §D2
