@@ -133,20 +133,19 @@ Portal interno de administración DMX. **17 pages** para super-admins + staff DM
 
 ## Tablas BD tocadas
 
-- `asesores`, `developers`, `mbs` (moderación).
+- `asesores`, `desarrolladoras`, `mbs` (moderación). <!-- ADR-049: BD canonical `desarrolladoras` (no `developers`). -->
 - `proyectos` (moderación).
 - `kyc_submissions`.
 - `stripe_events`.
-- `macro_indicators`.
+- `macro_series`. <!-- ADR-049: BD canonical `macro_series` (no `macro_indicators`); particionada anual 2022..2030. -->
 - `zone_scores` (gestión).
-- `anomalies`.
+- `market_anomalies`. <!-- ADR-049: BD canonical `market_anomalies` (no `anomalies` para tabla). Ruta UX `/admin/anomalies` se preserva. -->
 - `api_metrics`.
 - `cohort_reports`.
-- `feature_registry`.
+- `ui_feature_flags`. <!-- ADR-049 + ADR-029: BD canonical `ui_feature_flags` consolida `feature_registry` + `feature_flags`. -->
 - `role_features`.
 - `audit_log`.
 - `system_config`.
-- `feature_flags`.
 - `impersonation_sessions`.
 
 ## Estados UI

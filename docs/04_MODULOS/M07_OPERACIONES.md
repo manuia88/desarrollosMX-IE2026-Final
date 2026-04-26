@@ -90,7 +90,7 @@ Módulo de operaciones (ventas/rentas) del asesor. Wizard 6 pasos para crear ope
 ### Flujo 6 — CFDI emisión (México)
 1. Al status `cerrada`, trigger `fiscal.emitCFDI`.
 2. Facturapi.io emite CFDI 4.0 con complemento Pago.
-3. PDF + XML almacenados en `fiscal_documents`.
+3. PDF + XML almacenados en `fiscal_docs`.
 4. Email automático al comprador con CFDI.
 
 ## Wireframe textual
@@ -166,7 +166,7 @@ Wizard:
 - `operacion_commissions` — % + IVA + split.
 - `operacion_pagos` — ciclo cobro.
 - `operacion_attachments`.
-- `fiscal_documents` — CFDI PDF+XML.
+- `fiscal_docs` — CFDI PDF+XML.
 - `legal_flows` — state machine.
 - `proyectos`, `unidades`, `propiedades_secundarias`, `contactos`, `asesores` — SELECT picker.
 - `audit_log` — mutaciones.

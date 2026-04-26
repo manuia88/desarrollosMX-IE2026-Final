@@ -66,7 +66,7 @@ Personalización por `buyer_persona` autenticado (artwork + orden secciones). Op
 4. Submit → crea `visitas` + notif asesor.
 
 ### Flujo 7 — Personalización auth
-1. Si user logueado, `user_scores.buyer_persona` ya definido.
+1. Si user logueado, `user_buyer_profiles.buyer_persona` ya definido (ADR-049 — tabla NUEVA separada de `user_scores` IE).
 2. Orden de tabs + artwork adapta:
    - Investor → Tab Inversión primero.
    - Family → Tab Zona primero (schools + safety).
@@ -135,7 +135,7 @@ Personalización por `buyer_persona` autenticado (artwork + orden secciones). Op
 - `zone_scores`.
 - `project_scores`.
 - `project_brokers`.
-- `user_scores` — si auth, buyer_persona.
+- `user_buyer_profiles` — si auth, buyer_persona/budget_mxn/timeline (ADR-049 — tabla NUEVA, no `user_scores`).
 - `wishlist_items` — si auth.
 - `apartados` — en CTA apartar.
 - `visitas` — en agendar.

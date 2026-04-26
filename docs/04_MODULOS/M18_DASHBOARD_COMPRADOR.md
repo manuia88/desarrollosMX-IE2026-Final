@@ -43,7 +43,7 @@ Homepage adapta: orden de secciones, score presentation, artwork (amenidad más 
 ### Flujo 1 — Onboarding primer login
 1. User signup via WA OTP (primary) o email.
 2. Wizard: Lifestyle Match A10 (6 opciones visuales).
-3. Guarda `user_scores.buyer_persona`.
+3. Guarda `user_buyer_profiles.buyer_persona` (ADR-049 — tabla NUEVA separada de `user_scores` IE).
 4. Afloja: budget rango, ciudad, timeline.
 5. Genera primera Discover Weekly on-the-fly.
 6. Redirige a Dashboard personalizado.
@@ -89,7 +89,7 @@ Homepage adapta: orden de secciones, score presentation, artwork (amenidad más 
 
 ### Flujo 7 — Watchlist + Score Alerts
 1. Guarda propiedades + zonas.
-2. Suscripción score_subscriptions → notif si score cambia >5%.
+2. Suscripción `zone_alert_subscriptions` → notif si score cambia >5% (ADR-049).
 3. Ej: "DMX Score Del Valle subió de 8.4 a 8.7 ↑".
 4. Listing con filtros + bulk actions.
 
@@ -177,10 +177,14 @@ Homepage adapta: orden de secciones, score presentation, artwork (amenidad más 
 
 ## Tablas BD tocadas
 
+> ADR-049 separa `user_buyer_profiles` (persona M18) de `user_scores` (IE scores). Pre-implementación M18 requiere migration `create_user_buyer_profiles` con cols `buyer_persona text`, `budget_mxn numeric`, `timeline text`, `lifestyle_tags jsonb`, RLS owner-only.
+
 - `users` — auth + preferences.
-- `user_scores` — buyer_persona, budget, timeline.
+- `user_buyer_profiles` — buyer_persona, budget_mxn, timeline, lifestyle_tags (NUEVA, ADR-049).
+- `user_scores` — IE scores N4 (level/tier/score_value/components). NO contiene persona/budget/timeline.
 - `wishlist_items`.
-- `score_subscriptions`.
+- `zone_alert_subscriptions`. <!-- ADR-049: BD canonical `zone_alert_subscriptions` (no `score_subscriptions`). -->
+
 - `discover_weekly_generations`.
 - `affordability_calcs`.
 - `inversion_simulations`.

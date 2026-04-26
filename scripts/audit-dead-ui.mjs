@@ -44,8 +44,39 @@ const GLOB_TS_ROUTERS = [
 
 const isCi = process.argv.includes('--ci');
 const asJson = process.argv.includes('--json') || isCi;
+const allowlistFlagIdx = process.argv.indexOf('--allowlist');
+const allowlistPath = allowlistFlagIdx !== -1 ? process.argv[allowlistFlagIdx + 1] : null;
 
 const STUB_COMMENT_RE = /\/\/\s*STUB\s*[—-]\s*(activar|disponible)/i;
+
+/**
+ * Carga allowlist (baseline de violations conocidas pre-existentes).
+ * Cada entrada {file, line?, pattern?} suprime violations matching.
+ * @returns {Promise<Array<{file:string,line?:number,pattern?:string}>>}
+ */
+async function loadAllowlist() {
+  if (!allowlistPath) return [];
+  try {
+    const raw = await readFile(resolve(ROOT, allowlistPath), 'utf-8');
+    const data = JSON.parse(raw);
+    return Array.isArray(data) ? data : (data.allowlist ?? []);
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * @param {Violation} v
+ * @param {Array<{file:string,line?:number,pattern?:string}>} allowlist
+ */
+function isAllowlisted(v, allowlist) {
+  return allowlist.some(
+    (a) =>
+      a.file === v.file &&
+      (a.pattern == null || a.pattern === v.pattern) &&
+      (a.line == null || a.line === v.line),
+  );
+}
 
 /** @typedef {{file:string,line:number,column:number,pattern:string,message:string,severity:'error'|'warn'}} Violation */
 
@@ -65,8 +96,13 @@ async function main() {
     parseAndWalk(code, file, violations, 'router');
   }
 
-  output(violations);
-  const hasError = violations.some((v) => v.severity === 'error');
+  const allowlist = await loadAllowlist();
+  const filtered = allowlist.length
+    ? violations.filter((v) => !isAllowlisted(v, allowlist))
+    : violations;
+
+  output(filtered);
+  const hasError = filtered.some((v) => v.severity === 'error');
   process.exit(hasError ? 1 : 0);
 }
 
@@ -285,10 +321,13 @@ function checkRouterNode(node, file, code, violations) {
 
     // Heurística adicional: si el throw expone un mensaje claramente legítimo
     // (env missing, validation, lookup, upstream error), no es stub.
-    const argText = code.slice(node.range[0], node.range[1]);
+    // Inspeccionar SOLO los argumentos (excluyendo `new Error` para evitar
+    // que la palabra "Error" del constructor matchee `error` del regex).
+    const argsStart = node.callee.range[1];
+    const argText = code.slice(argsStart, node.range[1]);
     const hasInterpolation = /\$\{/.test(argText);
     const validationKeywords =
-      /missing|invalid|required|unknown|not[ _]found|\bno\b|\bfor\b|cannot|must\s+be|expected|fail|status|response|error|denied|exceed/i;
+      /missing|invalid|required|unknown|not[ _]found|\bno\b|\bfor\b|cannot|must\s+be|expected|fail|status|response|denied|exceed/i;
     if (hasInterpolation || validationKeywords.test(argText)) {
       return;
     }
@@ -340,9 +379,6 @@ function relative(abs) {
 function output(violations) {
   if (asJson) {
     process.stdout.write(`${JSON.stringify(violations, null, 2)}\n`);
-    if (!isCi) {
-      summary(violations);
-    }
     return;
   }
   if (!violations.length) {
@@ -367,4 +403,8 @@ function summary(violations) {
   else if (warns) console.log(pc.yellow(`\n${warns} warn(s)`));
 }
 
-await main();
+export { parseAndWalk };
+
+if (import.meta.url === `file://${process.argv[1]}`) {
+  await main();
+}

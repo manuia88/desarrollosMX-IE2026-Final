@@ -8,6 +8,10 @@
 > Frontend references → ver `docs/08_PRODUCT_AUDIT/07_FRONTEND_PROTOTYPE_CANONICAL.md` + `docs/01_DECISIONES_ARQUITECTONICAS/ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md`.
 >
 > **Adicional (auditoría FASE 07.7.A.1):** este doc describe BD Pulppo-clone planeada que NUNCA se aplicó al repo H1 actual. 240 tablas en `public.*` pero NINGUNA del dominio CRM Asesor M01-M05. Tratar como **histórico canon Pulppo**, no como ground-truth estado actual H1. Estado real implementación M01-M20 → ver `docs/08_PRODUCT_AUDIT/06_AUDIT_ESTADO_REAL_M01_M20.md`.
+>
+> **Numeración M9/M10 cap.15 ≠ catálogo M01-M20 (ADR-049):** este capítulo numera "M9 Marketing" / "M10 Estadísticas" siguiendo Pulppo histórico. Numeración H1 canonical: **M08 Marketing Asesor / M09 Estadísticas Asesor / M10 Dashboard Dev** (ver `docs/04_MODULOS/`). Cuando este doc menciona "M9/M10", léase como "lo que M01-M20 catalog llama M08/M09".
+>
+> **Naming BD reconciliado (ADR-049):** referencias internas a `fiscal_documents` / `developers` / `macro_indicators` / `anomalies` / `feature_registry` / `feature_flags` / `score_subscriptions` deben leerse como `fiscal_docs` / `desarrolladoras` / `macro_series` / `market_anomalies` / `ui_feature_flags` / `zone_alert_subscriptions` (BD canonical shipped).
 
 ---
 

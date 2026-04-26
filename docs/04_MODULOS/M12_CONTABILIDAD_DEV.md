@@ -19,7 +19,7 @@ Módulo de contabilidad **completa en H1** (decisión founder — no MVP). Para 
 3. Datos pre-hidratados: receptor (cliente RFC + régimen + CP), conceptos (unidad + monto), IVA, total.
 4. Preview XML + PDF.
 5. Submit → Facturapi.io timbrado → UUID fiscal.
-6. INSERT `fiscal_documents` + email al cliente.
+6. INSERT `fiscal_docs` + email al cliente.
 
 ### Flujo 2 — Cancelar CFDI
 1. Lista CFDIs → botón cancelar (con motivo SAT 01-04).
@@ -114,7 +114,7 @@ Módulo de contabilidad **completa en H1** (decisión founder — no MVP). Para 
 ## Tablas BD tocadas
 
 - `developer_rfcs` — multi RFC.
-- `fiscal_documents` — CFDIs.
+- `fiscal_docs` — CFDIs.
 - `fiscal_complementos` — Pago, NCR, Recibo.
 - `bank_statements` — OFX/CSV parsed.
 - `bank_matches`.
