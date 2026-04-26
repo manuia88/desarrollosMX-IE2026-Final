@@ -9,7 +9,7 @@ import {
 } from '@/features/widget-embed/schemas/embed';
 
 interface PageProps {
-  readonly params: Promise<{ coloniaA: string; coloniaB: string }>;
+  readonly params: Promise<{ coloniaSlug: string; coloniaB: string }>;
   readonly searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
@@ -24,7 +24,7 @@ function resolveTheme(raw: string | undefined): 'light' | 'dark' | 'auto' {
 }
 
 export default async function EmbedPulseComparePage({ params, searchParams }: PageProps) {
-  const { coloniaA, coloniaB } = await params;
+  const { coloniaSlug: coloniaA, coloniaB } = await params;
   const sp = await searchParams;
 
   const parsedA = widgetScopeIdSchema.safeParse(coloniaA);
