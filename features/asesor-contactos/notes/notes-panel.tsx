@@ -2,8 +2,8 @@
 
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, useState } from 'react';
-import type { ContactNoteLevel } from '@/features/crm/schemas/contact-notes';
 import { trpc } from '@/shared/lib/trpc/client';
+import type { ContactNoteLevel } from '@/shared/schemas/contact-notes';
 import { NoteCard } from './note-card';
 import { NoteEditor } from './note-editor';
 

@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import type { ContactNoteLevel } from '@/features/crm/schemas/contact-notes';
+import type { ContactNoteLevel } from '@/shared/schemas/contact-notes';
 
 export interface NoteCardProps {
   id: string;
