@@ -4,9 +4,9 @@ import { ASESOR_NAV_ITEMS } from '../lib/nav-items';
 
 describe('getActiveModuleId', () => {
   it('returns the matching module id when path begins with route', () => {
-    expect(getActiveModuleId('/es-MX/dashboard', 'es-MX')).toBe('dashboard');
-    expect(getActiveModuleId('/es-MX/desarrollos/abc', 'es-MX')).toBe('desarrollos');
-    expect(getActiveModuleId('/en-US/contactos', 'en-US')).toBe('contactos');
+    expect(getActiveModuleId('/es-MX/asesores/dashboard', 'es-MX')).toBe('dashboard');
+    expect(getActiveModuleId('/es-MX/asesores/desarrollos/abc', 'es-MX')).toBe('desarrollos');
+    expect(getActiveModuleId('/en-US/asesores/contactos', 'en-US')).toBe('contactos');
   });
 
   it('returns null when path matches no module', () => {
@@ -15,7 +15,7 @@ describe('getActiveModuleId', () => {
   });
 
   it('handles path without locale prefix gracefully', () => {
-    expect(getActiveModuleId('/dashboard', 'es-MX')).toBe('dashboard');
+    expect(getActiveModuleId('/asesores/dashboard', 'es-MX')).toBe('dashboard');
   });
 });
 
@@ -25,7 +25,7 @@ describe('buildBreadcrumb', () => {
   });
 
   it('returns single breadcrumb segment for matching module', () => {
-    const breadcrumb = buildBreadcrumb('/es-MX/dashboard', 'es-MX');
+    const breadcrumb = buildBreadcrumb('/es-MX/asesores/dashboard', 'es-MX');
     expect(breadcrumb).toHaveLength(1);
     expect(breadcrumb[0]?.labelKey).toBe('breadcrumb.dashboard');
   });
