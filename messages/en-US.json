@@ -2385,5 +2385,267 @@
     "breadcrumb": "FAQ",
     "intro": "Quick answers about DesarrollosMX.",
     "back_home": "Back to home"
+  },
+  "AsesorShell": {
+    "sidebar": {
+      "aria": "Advisor primary navigation",
+      "navAria": "Portal modules",
+      "items": {
+        "dashboard": "Dashboard",
+        "desarrollos": "Developments",
+        "contactos": "Contacts",
+        "busquedas": "Searches",
+        "captaciones": "Listings",
+        "tareas": "Tasks",
+        "operaciones": "Deals",
+        "marketing": "Marketing",
+        "estadisticas": "Stats",
+        "academia": "Academy",
+        "ajustes": "Settings"
+      }
+    },
+    "topbar": {
+      "aria": "Advisor top bar",
+      "searchPlaceholder": "Search contacts, developments, commands...",
+      "availability": {
+        "aria": "Availability",
+        "disponible": "Available",
+        "ocupado": "Busy",
+        "en_visita": "On visit"
+      },
+      "notifications": "{count, plural, =0 {No notifications} one {# new notification} other {# new notifications}}"
+    },
+    "breadcrumb": {
+      "root": "Portal",
+      "dashboard": "Dashboard",
+      "desarrollos": "Developments",
+      "contactos": "Contacts",
+      "busquedas": "Searches",
+      "captaciones": "Listings",
+      "tareas": "Tasks",
+      "operaciones": "Deals",
+      "marketing": "Marketing",
+      "estadisticas": "Stats",
+      "academia": "Academy",
+      "ajustes": "Settings"
+    },
+    "copilot": {
+      "railAria": "Copilot and assistance rail",
+      "close": "Close panel",
+      "voice": {
+        "aria": "Activate voice",
+        "title": "Voice mode",
+        "stub": "Soon you will be able to dictate and listen to actions from here."
+      },
+      "copilot": {
+        "aria": "AI assistant",
+        "title": "AI Copilot",
+        "stub": "Chat with your copilot to clear blockers and move deals forward."
+      },
+      "briefing": {
+        "aria": "Daily briefing",
+        "title": "Daily briefing",
+        "stub": "Your executive recap of the day will appear here."
+      },
+      "vibe": {
+        "aria": "Mood",
+        "title": "Vibe of the day",
+        "stub": "See your mood and energy for the day at a glance."
+      },
+      "help": {
+        "aria": "Help",
+        "title": "Help center",
+        "stub": "Keyboard shortcuts, guides and support coming soon."
+      }
+    },
+    "fab": {
+      "toggleAria": "Quick actions",
+      "menuAria": "Quick actions menu",
+      "lead": "Create lead",
+      "visita": "Schedule visit",
+      "comparable": "New comparable",
+      "nota": "New note",
+      "screenshot": "Screenshot"
+    },
+    "palette": {
+      "inputAria": "Search commands and navigation",
+      "placeholder": "Search actions, modules, commands...",
+      "escHint": "ESC",
+      "empty": "No results. Try a different word.",
+      "sections": {
+        "recientes": "Recent",
+        "acciones": "Actions",
+        "navegacion": "Navigation",
+        "ia": "AI",
+        "ajustes": "Settings"
+      },
+      "commands": {
+        "nav": {
+          "dashboard": "Go to Dashboard",
+          "desarrollos": "Go to Developments",
+          "contactos": "Go to Contacts",
+          "busquedas": "Go to Searches",
+          "captaciones": "Go to Listings",
+          "tareas": "Go to Tasks",
+          "operaciones": "Go to Deals",
+          "marketing": "Go to Marketing",
+          "estadisticas": "Go to Stats",
+          "academia": "Go to Academy",
+          "ajustes": "Go to Settings"
+        },
+        "actions": {
+          "lead": "Create new lead",
+          "visita": "Schedule visit",
+          "comparable": "Create comparable",
+          "nota": "New note",
+          "screenshot": "Screenshot"
+        },
+        "settings": {
+          "profile": "Profile"
+        }
+      }
+    },
+    "disclosure": {
+      "synthetic": "Synthetic H1"
+    }
+  },
+  "AsesorDashboard": {
+    "hero": {
+      "aria": "Daily pulse",
+      "greeting": "Hi, {name}",
+      "headline": {
+        "withPipeline": "You have {amount} in pipeline at {days, plural, one {# day} other {# days}}",
+        "noProjection": "You have {amount} in active pipeline",
+        "empty": "Build your first deal"
+      },
+      "chip": {
+        "aiAction": "AI action",
+        "followUp": "Follow up",
+        "closeDeal": "Close deal"
+      },
+      "disclosure": {
+        "synthetic": "H1 estimate"
+      }
+    },
+    "kpi": {
+      "aria": "Key indicators",
+      "pipeline": {
+        "title": "Pipeline",
+        "empty": "No pipeline yet",
+        "activeLabel": "Active"
+      },
+      "leads": {
+        "title": "Leads",
+        "empty": "No leads yet"
+      },
+      "visits": {
+        "title": "Visits 7d",
+        "empty": "No visits 7d"
+      },
+      "avgTime": {
+        "title": "Avg time",
+        "unit": "d",
+        "empty": "No closes yet",
+        "tier": {
+          "excellent": "Excellent",
+          "good": "Good",
+          "warning": "Improve",
+          "critical": "Critical",
+          "neutral": "—"
+        }
+      },
+      "xp": {
+        "title": "XP"
+      }
+    },
+    "pipeline": {
+      "title": "Active pipeline",
+      "dealRef": "Deal {ref}",
+      "stage": {
+        "active": "Active"
+      },
+      "action": {
+        "whatsapp": "WhatsApp",
+        "call": "Call",
+        "viewDeal": "View deal",
+        "whatsappDisabled": "WhatsApp — enabled once the lead has a phone on file",
+        "callDisabled": "Call — enabled once the lead has a phone on file"
+      },
+      "empty": {
+        "body": "No active deals yet. Create one to start tracking your pipeline.",
+        "cta": "Create deal"
+      }
+    },
+    "briefing": {
+      "title": "Daily briefing",
+      "disclosure": "AI generated",
+      "empty": "Your briefing will appear once you have recent activity.",
+      "listen": "Listen ({minutes} min)",
+      "listening": "Playing...",
+      "listenAria": "Press and hold to listen to the briefing",
+      "bulletPipeline": "You have {count, plural, one {# active deal} other {# active deals}} waiting to advance.",
+      "bulletLeads": "{count, plural, =0 {No leads came in this week} one {# lead came in this week} other {# leads came in this week}}.",
+      "bulletVisits": "{count, plural, =0 {No visits in 7 days} one {# visit in 7 days} other {# visits in 7 days}}."
+    },
+    "agenda": {
+      "title": "Today",
+      "count": "{count, plural, =0 {no events} one {# event} other {# events}}",
+      "empty": "No events scheduled for today.",
+      "type": {
+        "visit": "Visit",
+        "call": "Call",
+        "sign": "Signing"
+      }
+    },
+    "activity": {
+      "title": "Recent activity",
+      "empty": "No recent activity. Close a deal to start seeing it here.",
+      "operacionLabel": "Deal {ref} · {status}"
+    },
+    "streak": {
+      "title": "30-day streak",
+      "days": "{count, plural, =0 {0 days} one {# day} other {# days}}",
+      "subtitle": "Active days. Keep the streak by closing a deal today.",
+      "chartAria": "Activity histogram for the last {count} days"
+    },
+    "xp": {
+      "title": "Level {level}",
+      "aria": "XP progress {current} of {next}",
+      "progress": "{current} / {next} XP"
+    },
+    "badges": {
+      "title": "Badges",
+      "empty": "No badges unlocked yet. Your first deal will earn the first one.",
+      "newAria": "New badge",
+      "newBadge": "NEW",
+      "firstDeal": "First deal",
+      "firstClose": "First close",
+      "streak3": "3-day streak",
+      "streak7": "7-day streak",
+      "pipeline1m": "1M pipeline",
+      "leads10": "10 leads"
+    },
+    "recommendations": {
+      "title": "AI suggestions",
+      "aria": "Suggestions generated by artificial intelligence",
+      "disclosure": "AI generated",
+      "empty": "Once you have activity, you will receive personalized suggestions here.",
+      "nextAction": {
+        "title": "Your next action",
+        "body": "You have leads not contacted in the last 3 days. Start with the most recent.",
+        "cta": "View leads"
+      },
+      "coldDeals": {
+        "title": "Cold deals",
+        "body": "{count, plural, =0 {No cold deals} one {# deal with no movement in 14 days} other {# deals with no movement in 14 days}}.",
+        "cta": "Review deals"
+      },
+      "topLeads": {
+        "title": "High-potential leads",
+        "body": "Your AI detects 2 recent leads matching your best closed deal.",
+        "cta": "View matches"
+      },
+      "ctaPending": "Coming soon — wiring lands in next phase"
+    }
   }
 }

@@ -255,6 +255,47 @@
   --mod-marketing: #f97316;
   --mod-estadisticas: #eab308;
   --mod-academia: #8b5cf6;
+
+  /* Conversation thermometer scale (5 segments cold→hot) */
+  --temp-cold: #3b82f6;
+  --temp-cool: #06b6d4;
+  --temp-warm: #22c55e;
+  --temp-hot: #f59e0b;
+  --temp-burning: #ef4444;
+
+  /* Mood low/mixed slate accents (canon-asesor MoodStripe) */
+  --mood-slate-1: #64748b;
+  --mood-slate-2: #475569;
+}
+
+/* ============================================================
+ * Canon-asesor keyframes (FASE 13.B.3 innovations visuales)
+ * ============================================================ */
+@keyframes mood-pulse {
+  from {
+    opacity: 0.85;
+  }
+  to {
+    opacity: 0.55;
+  }
+}
+
+@keyframes diff-after-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heatmap-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
 }
 
 /* ============================================================

@@ -1,11 +1,23 @@
 # M01 — Dashboard Asesor (Command Center)
 
 > **Portal:** Asesor
-> **Ruta principal:** `/asesores`
+> **Ruta principal:** `/[locale]/dashboard` (route group `(asesor)`)
+> **Status:** SHIPPED 2026-04-26 (FASE 13.B)
 > **Fase donde se construye:** [FASE 13 — Portal Asesor M1-M5](../02_PLAN_MAESTRO/FASE_13_PORTAL_ASESOR_M1_M5.md)
-> **Sidebar tint:** bgLavender `#F0EEFF`
+> **Sidebar tint canon:** `--mod-dashboard` (#6366f1 indigo) — ADR-050 wayfinding
 > **Priority:** [H1]
-> **Referencia visual:** `/docs/referencias-ui/M1_Dashboard.tsx` (gitignored local)
+> **Referencia visual:** `/docs/referencias-ui/M1_Dashboard.tsx` layout structure; re-skin canon dark via ADR-050.
+
+## Implementación shipped (FASE 13.B)
+
+- **Server layout + auth gate:** `app/[locale]/(asesor)/layout.tsx` valida sesión + role en `ALLOWED_ASESOR_ROLES = {asesor, admin_desarrolladora, broker_manager, mb_admin, mb_coordinator}`.
+- **Server page:** `app/[locale]/(asesor)/dashboard/page.tsx` carga `loadDashboardSummary(asesorId)` (paralelo: leads + deals + operaciones via supabase server client + RLS) y compone 10 secciones.
+- **Shell wrapper:** `features/asesor-shell/` (5 componentes + 3 hooks): AsesorSidebar (60→240px hover-expand) + AsesorTopbar (72px breadcrumb + ⌘K + availability + notifs + avatar) + CopilotRail (5 buttons + drawer overlay) + QuickActionsFloater (5 actions + ⇧L/V/C/N/S kbd) + CommandPalette (cmdk + 4 sections).
+- **Dashboard sections:** `features/asesor-dashboard/` (10 componentes + lib derive): HeroPulse + KpiStrip + PipelineCarousel + DailyStandup{MorningBriefing,TodayAgenda,ActivityFeed} + PerformanceToday{StreakWidget,XpProgressBar,BadgesRow,SmartRecommendations}.
+- **Innovaciones visuales canon-asesor:** `shared/ui/primitives/canon-asesor/` — 8 componentes (DecisionCrystal, ConfidenceHalo, TideLineChart, ConversationThermometer, MoodStripe, DiffCard, HeatmapDensity, CalendarConstellation) + 2 hooks (useListenMode, useSpatialSearch) marcados ADR-018 stub.
+- **Tokens canon adicionales:** `--temp-{cold,cool,warm,hot,burning}`, `--mood-slate-{1,2}`, keyframes `mood-pulse`, `diff-after-in`, `heatmap-fade` agregados a `styles/tokens.css`.
+- **Pre-shipped foundation 13.A:** `shared/ui/primitives/canon/{button,card,score-pill,momentum-pill,glass-overlay,icon-circle,disclosure-pill}` + `shared/ui/motion/*` + tokens ADR-050.
+- **i18n:** namespaces `AsesorShell.*` + `AsesorDashboard.*` agregados en es-MX + en-US (Tier 1 H1) + es-CO/es-AR/pt-BR (fallback graceful).
 
 ---
 
