@@ -4344,24 +4344,42 @@ export type Database = {
       inegi_census_zone_stats: {
         Row: {
           age_distribution: Json
+          data_origin: string
+          densidad_hab_km2: number | null
           dominant_profession: string | null
+          edad_mediana_anios: number | null
+          hogares_censales: number | null
           id: string
+          poblacion_12_y_mas: number | null
+          poblacion_total: number | null
           profession_distribution: Json
           snapshot_date: string
           zone_id: string
         }
         Insert: {
           age_distribution?: Json
+          data_origin?: string
+          densidad_hab_km2?: number | null
           dominant_profession?: string | null
+          edad_mediana_anios?: number | null
+          hogares_censales?: number | null
           id?: string
+          poblacion_12_y_mas?: number | null
+          poblacion_total?: number | null
           profession_distribution?: Json
           snapshot_date: string
           zone_id: string
         }
         Update: {
           age_distribution?: Json
+          data_origin?: string
+          densidad_hab_km2?: number | null
           dominant_profession?: string | null
+          edad_mediana_anios?: number | null
+          hogares_censales?: number | null
           id?: string
+          poblacion_12_y_mas?: number | null
+          poblacion_total?: number | null
           profession_distribution?: Json
           snapshot_date?: string
           zone_id?: string
