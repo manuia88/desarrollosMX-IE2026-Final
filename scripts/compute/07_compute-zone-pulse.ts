@@ -19,7 +19,7 @@
  *
  * Flags:
  *   --dry-run              Log preview sin mutar zone_pulse_scores. NO UPSERT.
- *   --limit-zones=N        Procesa sólo N zones (default: 500 cap).
+ *   --limit-zones=N        Procesa sólo N zones (default: 300, max 300).
  *   --lookback-days=N      Días de histórico por zone (default: 365).
  *   --country=XX           ISO country code (default: MX).
  */
@@ -66,7 +66,7 @@ type PulseSeriesEntry = {
 };
 
 const DEFAULT_COUNTRY = 'MX';
-const DEFAULT_LIMIT_ZONES = 500;
+const DEFAULT_LIMIT_ZONES = 300;
 const DEFAULT_LOOKBACK_DAYS = 365;
 const MAX_ZONES_CAP = 300;
 const MAX_LOOKBACK_CAP = 400;

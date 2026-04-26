@@ -382,3 +382,56 @@ Post-A.5 retrofit E2E + tag dual `fase-07.7.A.5-complete` + `fase-07.7-complete`
 | audit:rls 0 violations post v29 | ✅ Confirmado |
 
 **Activación tests E2E `.skip()` en B.1:** los 5 tests `zone-data-freshness.spec.ts` se activan cambiando `test.describe.skip` → `test.describe` cuando UI canónica `/zonas/[colonia]` shipped + 7 testIDs wired (`demographics-disclosure-badge`, `climate-disclosure-badge`, `atlas-wiki-narrative`, `atlas-wiki-disclosure-flag`, `str-source-attribution`, `zone-name-header`, `zone-data-freshness-indicator`).
+
+---
+
+## §10 F1.E.r — Re-compute Cascada IE post Data Real (2026-04-26)
+
+> Sub-fase **07.7.F1.E.r** re-ejecuta scripts compute 01-09 sobre data real (climate hybrid F1.B/F1.C.A + geometry MGN F1.D + demographics Tier 1 F1.C.B). Atlas wiki Haiku LLM batch (script 13) defer a F1.C.C post Tier 2 demographics + cache fix L-NEW.
+
+### §10.1 Cascada re-ejecutada (idempotente UPSERT)
+
+| Tabla | Rows | Source | Estado |
+|---|---|---|---|
+| `zone_scores` (n0+n1) | 5,267 | `compute_ie_n0` + `compute_ie_n1` | ✅ refreshed sobre data real |
+| `dmx_indices` | 3,192 | `compute_dmx_indices` | ✅ refreshed (PRC + ICC + ICO + IRD + IPV + IRE) |
+| `zone_pulse_scores` | 83,676 | `compute_zone_pulse` | ✅ refreshed (228 zones × 365d) |
+| `colonia_dna_vectors` | 210 | `compute_colonia_dna` | ✅ refreshed (UPDATE in-place) |
+| `pulse_forecasts` | 7,296 | `compute_pulse_forecasts` | ✅ refreshed (228 zones × 30d) |
+| `colonia_wiki_entries` | 6/210 refreshed | `compute_atlas_wiki` | 🟡 deferred F1.C.C (cache fix L-NEW) |
+
+### §10.2 Bug fix scripts compute 07/09 — DEFAULT_LIMIT_ZONES alignment
+
+Scripts `07_compute-zone-pulse.ts` + `09_compute-zone-pulse-forecasts.ts` tenían `DEFAULT_LIMIT_ZONES=500` mientras `MAX_ZONES_CAP=300` enforced en `parseArgs` validation → orchestrator abortaba C07 con FATAL `cap excedido: limitZones=500 (max 300) × lookbackDays=365 (max 400)`. Fix: bajar default a 300 (cubre 228 zonas CDMX H1 con margen). Docstrings ajustados a `default: 300, max 300`. Cero regresiones — script 08 ya tenía DEFAULT=210 ≤ MAX=300 OK.
+
+### §10.3 Atlas Wiki Haiku cache failure → defer L-NEW
+
+Cache `cache_creation_input_tokens=0` en cada call. Blocks `WIKI_SCHEMA_DEFINITION` (~150 tokens) + `WIKI_EXAMPLES_3` (~600 tokens) ambos por debajo del mínimo Anthropic Haiku 4.5 (1024-2048 tokens). Cost real proyectado $1.68 vs cap $1 USD → STOP manual a $0.05 spent (6/210 refreshed).
+
+**Decisión defer post-cache-fix a F1.C.C:**
+- Tier 2 demographics + ENIGH downscale en F1.C.C alteran significativamente el contexto que consume el wiki (demographics y ENIGH son inputs en el prompt LLM).
+- Refresh ahora sería throwaway: re-refresh post F1.C.C inevitable.
+- Entries 2026-04-24 actuales son 2 días stale (post F1.B + F1.D pero pre F1.C.B Tier 1) — aceptable como state-of-record durante F1.C.C dev window.
+
+**L-NEW-COMPUTE-ATLAS-WIKI-CACHE-FIX-01** (~3h, F1.C.C scope):
+1. Expandir `WIKI_EXAMPLES_3` a 5+ ejemplos completos (~2048+ tokens combinados).
+2. Considerar consolidar `WIKI_SCHEMA_DEFINITION` + `WIKI_EXAMPLES` en UN solo block con cache_control.
+3. Verify `cache_creation_input_tokens > 0` en dry-run pre-bulk (1 zone test).
+4. Restart C13 con `--no-skip-existing` — projected $0.30 con caching activo (90% off subsecuentes).
+
+### §10.4 Cleanup ingest_runs zombie
+
+2 runs `running` en BD pre-cleanup:
+- `compute_ie_n0` (start 09:07:47, sesión inicial standalone con `tail -20` que retornó pero ingest_run no flushed — zombie). Marcado `failed` con error `zombie_orchestrator_session_recovery_F1ER`.
+- `compute_atlas_wiki` (start 09:42:41, sesión actual abortada manual). Marcado `budget_exceeded` con error `manual_abort_cache_block_under_min_tokens_F1ER_defer_to_F1CC`.
+
+Cero rows perdidas — UPSERT idempotente garantiza integridad.
+
+### §10.5 Status §10
+
+✅ Cascada IE refreshed sobre data real (5 tablas core: zone_scores + dmx_indices + zone_pulse + dna + forecasts).
+🟡 Atlas wiki refresh deferred F1.C.C (L-NEW cache fix + bulk re-run combinado).
+✅ Bug fix scripts 07/09 shipped — orchestrator full pipeline ahora corre clean con defaults.
+
+**Tag:** `fase-07.7-data-real-recompute`. **Próximo:** F1.C.C Tier 2 Demographics (AGEB overlay RESAGEBURB + ENIGH downscale + cache wiki fix combo).
+
