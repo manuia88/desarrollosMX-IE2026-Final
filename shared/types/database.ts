@@ -2403,6 +2403,7 @@ export type Database = {
       climate_monthly_aggregates: {
         Row: {
           computed_at: string
+          cross_validation_status: string
           extreme_events_count: Json
           humidity_avg: number | null
           rainfall_mm: number | null
@@ -2415,6 +2416,7 @@ export type Database = {
         }
         Insert: {
           computed_at?: string
+          cross_validation_status?: string
           extreme_events_count?: Json
           humidity_avg?: number | null
           rainfall_mm?: number | null
@@ -2427,6 +2429,7 @@ export type Database = {
         }
         Update: {
           computed_at?: string
+          cross_validation_status?: string
           extreme_events_count?: Json
           humidity_avg?: number | null
           rainfall_mm?: number | null
@@ -2440,6 +2443,59 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "climate_monthly_aggregates_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      climate_source_observations: {
+        Row: {
+          extreme_events_count: Json
+          humidity_avg: number | null
+          id: string
+          ingested_at: string
+          rainfall_mm: number | null
+          source: string
+          station_id: string
+          temp_avg: number | null
+          temp_max: number | null
+          temp_min: number | null
+          year_month: string
+          zone_id: string
+        }
+        Insert: {
+          extreme_events_count?: Json
+          humidity_avg?: number | null
+          id?: string
+          ingested_at?: string
+          rainfall_mm?: number | null
+          source: string
+          station_id: string
+          temp_avg?: number | null
+          temp_max?: number | null
+          temp_min?: number | null
+          year_month: string
+          zone_id: string
+        }
+        Update: {
+          extreme_events_count?: Json
+          humidity_avg?: number | null
+          id?: string
+          ingested_at?: string
+          rainfall_mm?: number | null
+          source?: string
+          station_id?: string
+          temp_avg?: number | null
+          temp_max?: number | null
+          temp_min?: number | null
+          year_month?: string
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "climate_source_observations_zone_id_fkey"
             columns: ["zone_id"]
             isOneToOne: false
             referencedRelation: "zones"
@@ -17196,6 +17252,10 @@ export type Database = {
       recompute_buyer_twin_embedding: {
         Args: { p_twin_id: string }
         Returns: undefined
+      }
+      recompute_climate_aggregates_from_observations: {
+        Args: { p_year_month?: string; p_zone_id?: string }
+        Returns: Json
       }
       recompute_zone_tier: {
         Args: {
