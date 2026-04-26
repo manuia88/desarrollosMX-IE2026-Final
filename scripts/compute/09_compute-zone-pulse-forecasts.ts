@@ -21,7 +21,7 @@
  *
  * Flags:
  *   --dry-run              Log preview sin mutar pulse_forecasts. NO UPSERT.
- *   --limit-zones=N        Procesa sólo N zones (default: 500 cap).
+ *   --limit-zones=N        Procesa sólo N zones (default: 300, max 300).
  *   --horizon-days=N       Días hacia el futuro por zone (default: 30).
  *   --country=XX           ISO country code (default: MX).
  */
@@ -57,7 +57,7 @@ export type ForecastSeriesEntry = {
 };
 
 const DEFAULT_COUNTRY = 'MX';
-const DEFAULT_LIMIT_ZONES = 500;
+const DEFAULT_LIMIT_ZONES = 300;
 const DEFAULT_HORIZON_DAYS = 30;
 const MAX_ZONES_CAP = 300;
 const MAX_HORIZON_CAP = 60;
