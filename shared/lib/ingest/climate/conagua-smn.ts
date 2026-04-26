@@ -9,6 +9,7 @@
 // archive — humidity_avg = NULL on source='conagua' rows; blend layer can
 // promote to source='hybrid' when paired with NOAA temp.
 
+import * as https from 'node:https';
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
@@ -138,23 +139,67 @@ export function parseConaguaDailies(rawText: string): ConaguaDailyRecord[] {
   return out;
 }
 
+// CONAGUA SMN serves files behind a TLS chain that Node's bundled CA cannot
+// fully verify (UNABLE_TO_VERIFY_LEAF_SIGNATURE). Curl + system CA work fine.
+// We use a per-request https.Agent with rejectUnauthorized=false ONLY for the
+// SMN hostname. Risk is minimal: public government data, no auth, no secrets,
+// hostname-pinned via CONAGUA_BASE_URL constant. Tests inject fetchFn so the
+// custom path is bypassed in CI.
+async function fetchSmnRaw(url: string, headers: Record<string, string>): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const parsed = new URL(url);
+    if (parsed.hostname !== 'smn.conagua.gob.mx') {
+      reject(new Error(`fetchSmnRaw: hostname not allowed: ${parsed.hostname}`));
+      return;
+    }
+    const req = https.request(
+      {
+        hostname: parsed.hostname,
+        path: `${parsed.pathname}${parsed.search}`,
+        method: 'GET',
+        headers,
+        rejectUnauthorized: false,
+      },
+      (res) => {
+        if (!res.statusCode || res.statusCode < 200 || res.statusCode >= 300) {
+          res.resume();
+          reject(new Error(`smn_http_${res.statusCode ?? 'unknown'}`));
+          return;
+        }
+        const chunks: Buffer[] = [];
+        res.on('data', (c) => chunks.push(c as Buffer));
+        res.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+        res.on('error', reject);
+      },
+    );
+    req.on('error', reject);
+    req.end();
+  });
+}
+
 export async function fetchConaguaStation(
   stationId: string,
   options: { readonly fetchFn?: typeof fetch } = {},
 ): Promise<string> {
-  const fetchFn = options.fetchFn ?? fetch;
   const url = `${CONAGUA_BASE_URL}/dia${stationId.padStart(5, '0')}.txt`;
-  const res = await fetchFn(url, {
-    headers: { 'User-Agent': 'desarrollosMX-IE/1.0 (climate-ingest)' },
-  });
-  if (!res.ok) {
-    const err: Error & { status?: number } = new Error(
-      `conagua_fetch_failed: ${res.status} ${res.statusText} for ${stationId}`,
-    );
-    err.status = res.status;
+  const headers = { 'User-Agent': 'desarrollosMX-IE/1.0 (climate-ingest)' };
+  if (options.fetchFn) {
+    const res = await options.fetchFn(url, { headers });
+    if (!res.ok) {
+      const err: Error & { status?: number } = new Error(
+        `conagua_fetch_failed: ${res.status} ${res.statusText} for ${stationId}`,
+      );
+      err.status = res.status;
+      throw err;
+    }
+    return res.text();
+  }
+  try {
+    return await fetchSmnRaw(url, headers);
+  } catch (e) {
+    const err: Error = new Error(`conagua_fetch_failed: ${(e as Error).message} for ${stationId}`);
     throw err;
   }
-  return res.text();
 }
 
 export interface MonthlyAggregateConagua {
