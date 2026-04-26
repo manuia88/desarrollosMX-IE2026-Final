@@ -2755,5 +2755,153 @@
       "photoPlaceholder": "Photo pending",
       "scoreEstimation": "Estimated score"
     }
+  },
+  "AsesorContactos": {
+    "page": {
+      "title": "Contacts",
+      "subtitle": "Active leads and buyers with IE context."
+    },
+    "disclosure": {
+      "crmH1Source": "H1: leads + buyer_twins (CRM Foundation)"
+    },
+    "tabs": {
+      "aria": "Filter contacts by scope",
+      "labels": {
+        "all": "All",
+        "mine": "Mine",
+        "team": "Team",
+        "recent": "Recent"
+      }
+    },
+    "filters": {
+      "aria": "Contact filters",
+      "searchPlaceholder": "Search by name…",
+      "searchAria": "Search contacts by name",
+      "statusLabel": "Status",
+      "statusAll": "All",
+      "statusLabels": {
+        "new": "New",
+        "qualified": "Qualified",
+        "nurturing": "Nurturing",
+        "converted": "Converted",
+        "lost": "Lost"
+      }
+    },
+    "card": {
+      "open": "View {name} detail",
+      "birthdayShort": "🎂 {days}d",
+      "birthdayBadge": "Birthday in {days} days",
+      "lastContactAgo": "Last contact: {days} d",
+      "qualification": "Score {score}",
+      "status": {
+        "new": "New",
+        "qualified": "Qualified",
+        "nurturing": "Nurturing",
+        "converted": "Converted",
+        "lost": "Lost"
+      }
+    },
+    "disc": {
+      "unknownShort": "DISC pending",
+      "unknownAria": "DISC profile not yet computed",
+      "summaryAria": "DISC: D {D} I {I} S {S} C {C}"
+    },
+    "grid": {
+      "aria": "{count, plural, =0 {No contacts} one {# contact} other {# contacts}}"
+    },
+    "empty": {
+      "isStubTitle": "No contacts yet",
+      "isStubBody": "Create your first contact or sync from an external source.",
+      "noResultsTitle": "No results",
+      "noResultsBody": "Adjust filters to see more contacts."
+    },
+    "drawer": {
+      "aria": "{name} detail",
+      "close": "Close",
+      "closeAria": "Close panel",
+      "discTitle": "DISC profile",
+      "insightsTitle": "Insights",
+      "notesTitle": "Notes",
+      "lastContact": "Last contact {days} days ago",
+      "qualification": "Score {score}/100",
+      "status": "Status",
+      "statuses": {
+        "new": "New",
+        "qualified": "Qualified",
+        "nurturing": "Nurturing",
+        "converted": "Converted",
+        "lost": "Lost"
+      },
+      "hasFamilyUnit": "Belongs to a family unit",
+      "birthdayIn": "Birthday in {days} days"
+    },
+    "whatsapp": {
+      "trigger": "WhatsApp",
+      "triggerTitle": "Generate template draft",
+      "disabledNoPhone": "No phone on file",
+      "dialogAria": "WhatsApp draft",
+      "dialogTitle": "WhatsApp draft",
+      "dialogSubtitle": "Template generated from profile. Review and edit before sending.",
+      "objectiveLegend": "Goal",
+      "objectives": {
+        "follow_up": "Follow up",
+        "birthday": "Birthday",
+        "reengagement": "Reactivation",
+        "invite_visit": "Invite to visit"
+      },
+      "messageLegend": "Message",
+      "disclosureWebQr": "Sent via WhatsApp Web (not the official API). Verify before sending.",
+      "copy": "Copy",
+      "openWhatsAppWeb": "Open WhatsApp Web",
+      "close": "Close"
+    },
+    "scanOcr": {
+      "trigger": "Scan",
+      "dialogAria": "Scan document",
+      "dialogTitle": "Scan contact",
+      "dialogSubtitle": "Extract data from a card or ID with local OCR.",
+      "modeLegend": "Type",
+      "modes": {
+        "business_card": "Card",
+        "ine": "ID (INE)"
+      },
+      "fileInputAria": "Select image",
+      "recognizing": "Recognizing… {progress}%",
+      "errorMissingTesseract": "OCR unavailable. Check your connection and try again.",
+      "result": {
+        "fullName": "Name",
+        "email": "Email",
+        "phone": "Phone",
+        "company": "Company",
+        "curp": "CURP",
+        "birthdate": "Birthdate",
+        "address": "Address"
+      },
+      "disclosureLocal": "OCR runs 100% in your browser. No data is uploaded.",
+      "close": "Close"
+    },
+    "reEngagement": {
+      "title": "Re-engagement opportunities",
+      "birthdaySummary": "{count, plural, =0 {} one {# upcoming birthday} other {# upcoming birthdays}}",
+      "staleSummary": "{count, plural, =0 {} one {# stale contact >30 d} other {# stale contacts >30 d}}"
+    },
+    "enrichment": {
+      "aria": "Enrichment pipeline",
+      "title": "Enrichment pipeline (Clay-pattern)",
+      "subtitle": "Source → Enrich → Validate → Push.",
+      "stubBadge": "Pipeline in progress",
+      "stages": {
+        "source": "Source",
+        "enrich": "Enrich",
+        "validate": "Validate",
+        "push": "Push"
+      },
+      "copy": {
+        "source": "Source: manual, OCR, CSV or VCF.",
+        "enrich": "Enrich with zone_score IE + buyer_twin auto + family_unit detect.",
+        "validate": "Validate with Zod + FTS Postgres dedup.",
+        "push": "Upsert lead + buyer_twin + audit_crm_log."
+      }
+    }
   }
 }
