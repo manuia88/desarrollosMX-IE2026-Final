@@ -691,3 +691,57 @@ Ambos agendados L-NEW M01 implementation (FASE 14+) como **P0 pre-launch**.
 A.4 CRM Foundation schema (`deals`, `leads`, `buyer_twins`, `operaciones`, `family_units`, `referrals`). Independiente de A.3 reality (CRM no consume data layer auditada).
 
 **Status A.3:** Shipped (tag `fase-07.7.A.3-complete`).
+
+---
+
+## Append 07.7.A.4 — CRM Foundation shipped (2026-04-25)
+
+> **Audit canónico:** [`docs/02_PLAN_MAESTRO/FASE_07.7_CRM_FOUNDATION.md`](../02_PLAN_MAESTRO/FASE_07.7_CRM_FOUNDATION.md) §"Sub-bloque A.4 — SHIPPED".
+
+### DECISIÓN N: CRM Foundation A.4 shipped — schema canonical entregado
+
+Sub-fase **07.7.A.4** resolvió **BLK_DEALS** (blocker #3 critical path top-30 RICE). 14 tablas dominio CRM + 1 audit particionada + 7 SECDEF helpers RLS + ~25 procedures tRPC `crm.*` shipped en 11 migrations atómicas.
+
+**Tablas (14 dominio + 1 audit):** `persona_types` · `lead_sources` · `deal_stages` · `retention_policies` · `family_units` · `family_unit_members` · `leads` · `buyer_twins` · `buyer_twin_traits` · `deals` · `operaciones` (canonical ADR-049) · `referrals` (polymorphic ADR-034) · `referral_rewards` · `behavioral_signals` (pg_partman 24m) · `audit_crm_log` (pg_partman 84m = 7y CFDI-aware ADR-035).
+
+**Migrations (11):**
+
+```
+supabase/migrations/
+├── 20260425210000_crm_001_catalogs.sql
+├── 20260425210100_crm_002_family_units.sql
+├── 20260425210200_crm_003_leads.sql
+├── 20260425210300_crm_004_buyer_twins.sql
+├── 20260425210400_crm_005_deals_operaciones.sql
+├── 20260425210500_crm_006_referrals.sql
+├── 20260425210600_crm_007_behavioral_signals.sql
+├── 20260425210700_crm_008_audit_crm_log.sql
+├── 20260425210800_crm_009_rls_helpers_policies.sql
+├── 20260425210900_crm_010_domain_triggers.sql
+└── 20260425211000_audit_rls_allowlist_v28.sql
+```
+
+**SECDEF helpers RLS (7):** `rls_is_admin` · `rls_is_asesor` · `rls_is_master_broker` · `rls_is_developer` · `rls_owns_lead(lead_id)` · `rls_is_assigned_lead(lead_id)` STUB · `rls_is_brokerage_member(brokerage_id)` STUB.
+
+**ADRs cerrados (3):**
+
+- ADR-033 persona_types catalog extensible (no enum) — evolución sin migrations
+- ADR-034 referrals polymorphic source/target — consolida cross-capa C5.5/T.2.4
+- ADR-035 retention multi-país CFDI-aware — 5y MX · 10y CO · 7y AR/BR
+
+**Tests:** +71 (3088 → 3159). audit-dead-ui baseline 25 mantenido. audit:rls clean v28. 0 violations audit:e2e/audit:selects.
+
+### Cascadas CRM activas + STUBs
+
+- ✅ ACTIVE: `INSERT/UPDATE leads/deals/operaciones/buyer_twins → tg_audit_crm_log → audit_crm_log INSERT`
+- 🟡 STUB FASE 07.7.B: `UPDATE deals.stage (closed_won) → cascade_deal_won_to_operacion`
+- 🟡 STUB FASE 07.7.B: `INSERT operaciones → cascade_operacion_commission_calc`
+- 🟡 STUB FASE 13.B.7: `UPDATE buyer_twins.disc/big5 → recompute_buyer_twin_embedding`
+
+### Handoff A.4 → A.5 → B.1 M01
+
+- **A.5 next:** E2E tests retrofit (Playwright happy paths CRM lead→deal→operacion + referral) + audit-dead-ui CI extra para UIs `crm.*` consumer + tag `fase-07.7-complete`.
+- **B.1 M01 next (FASE 14+):** UI Dashboard Asesor consume `crm.lead.list`, `crm.deal.list`, `crm.operacion.list`. **3 disclosure bugs P0 MUST-HAVE** heredados de A.3: S5 (Atlas Wiki cita synthetic como INEGI) + A3-DEMO-01 (ficha colonia sin badge) + CLIMATE-DISCLOSURE-01.
+- **26 features RICE downstream** desbloqueadas. Top 5: C1.10 buyer twin preloaded · C1.11 portal-to-CRM auto-capture · C2.1 AVM spread · C5.5.3 streaks asesor · T.2.4 referral magic link.
+
+**Status A.4:** Shipped (handoff a sub-bloque A.5 — E2E retrofit + tag `fase-07.7-complete`).
