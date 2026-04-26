@@ -3,6 +3,12 @@
 ## Frontend Dopamine → Backend Existente → Gaps
 ## Regla: Frontend Dopamine es INTOCABLE. Backend se adapta. No se borra nada. Si hay conflicto → pedir autorización.
 
+> **2026-04-25 STATUS UPDATE:** Frontend Dopamine SUPERSEDED por prototype JSX (ADR-048).
+> Este doc mantiene canon en sección **BACKEND** (BD/tRPC/cascadas/RLS).
+> Frontend references → ver `docs/08_PRODUCT_AUDIT/07_FRONTEND_PROTOTYPE_CANONICAL.md` + `docs/01_DECISIONES_ARQUITECTONICAS/ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md`.
+>
+> **Adicional (auditoría FASE 07.7.A.1):** este doc describe BD Pulppo-clone planeada que NUNCA se aplicó al repo H1 actual. 240 tablas en `public.*` pero NINGUNA del dominio CRM Asesor M01-M05. Tratar como **histórico canon Pulppo**, no como ground-truth estado actual H1. Estado real implementación M01-M20 → ver `docs/08_PRODUCT_AUDIT/06_AUDIT_ESTADO_REAL_M01_M20.md`.
+
 ---
 
 # REGLAS DE ESTA PARTE

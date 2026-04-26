@@ -41,6 +41,13 @@ Si NO a las cinco → no se construye.
 # SECCIÓN 2: DECISIONES TOMADAS EN ESTE CHAT
 
 ### DECISIÓN 1: Frontend Dopamine es INTOCABLE
+
+> **2026-04-25 ACTUALIZACIÓN — SUPERSEDED por ADR-048:** DECISIÓN 1 modificada — frontend canon ahora es **prototype JSX puro** (`tmp/product_audit_input/DMX-prototype/`), formalizado en ADR-048, NO Dopamine.
+> Texto original mantiene historia. Para canon vigente ver:
+> - `docs/01_DECISIONES_ARQUITECTONICAS/ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md`
+> - `docs/08_PRODUCT_AUDIT/07_FRONTEND_PROTOTYPE_CANONICAL.md`
+> - `docs/08_PRODUCT_AUDIT/08_PROTOTYPE_TO_MODULES_MAPPING.md`
+
 El diseño de los 10 módulos JSX + 9 DOCX es la fuente de verdad del frontend.
 No se le quita nada. No se modifica nada del diseño. Solo se le agrega.
 Si el backend necesita adaptarse al frontend → se adapta.

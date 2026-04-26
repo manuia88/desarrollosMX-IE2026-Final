@@ -1,10 +1,13 @@
 # 02 — Design Migration Plan (FASE 07.6.C)
 
+> **Status (2026-04-25):** SUPERSEDED por `docs/01_DECISIONES_ARQUITECTONICAS/ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md` + `docs/08_PRODUCT_AUDIT/07_FRONTEND_PROTOTYPE_CANONICAL.md`.
+> Análisis hybrid-blend ya no aplica. Re-evaluar plan migración bajo prototype puro (M3a/M3b/M3c siguen vigentes con framing canon-puro).
+
 > Plan formal migración diseño Dopamine (ADR-023) ↔ prototype JSX (`tmp/product_audit_input/DMX-prototype/`).
 > Generado: 2026-04-24 sub-sesión 07.6.C.
 > Input: `01_CROSSWALK_MATRIX.md` (632 líneas, 150 features) + prototype assets (17 JSX × 1709 LOC + 1823 líneas styles.css + 1311 líneas README spec).
 > Output paralelo: `03_RICE_PRIORITIES.md` (sub-sesión 07.6.D).
-> ADR formal: `docs/01_DECISIONES_ARQUITECTONICAS/ADR-031_DESIGN_SYSTEM_REFRESH.md`.
+> ADR formal (SUPERSEDED 2026-04-25): `docs/01_DECISIONES_ARQUITECTONICAS/ADR-031_DESIGN_SYSTEM_REFRESH.md` → reemplazado por ADR-048.
 
 ## Resumen ejecutivo
 
