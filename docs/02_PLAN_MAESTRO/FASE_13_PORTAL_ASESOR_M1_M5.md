@@ -4,7 +4,7 @@
 > Foundation visual canon prototype + asesor extensions disponible en `styles/tokens.css` (`--canon-*` + `--accent-*` + `--surface-*` + `--gradient-score-*` + `--gradient-ai` + `--shadow-canon-*` + `--mod-*`), `shared/ui/motion/` (BlurText/FadeUp/StaggerContainer/Marquee + useInView/use3DTilt), `shared/ui/primitives/canon/` (Card/Button CVA/ScorePill/MomentumPill/GlassOverlay/IconCircle/cn).
 >
 > **Status sub-bloque 13.B M01 Dashboard "Command Center":** SHIPPED 2026-04-26 (tag `fase-13.B-complete`).
-> Asesor Shell (Sidebar + Topbar + CopilotRail + QuickActionsFloater + CommandPalette `cmdk`) + 10 dashboard sections (HeroPulse + KPI Strip + Pipeline Carousel + Daily Standup + Performance Today) + 8 innovaciones visuales `canon-asesor` (DecisionCrystal, ConfidenceHalo, TideLineChart, ConversationThermometer, MoodStripe, DiffCard, HeatmapDensity, CalendarConstellation) + 2 hooks (useListenMode + useSpatialSearch — STUB ADR-018 con 4 señales). Auth gated en role `{asesor, admin_desarrolladora, broker_manager, mb_admin, mb_coordinator}`. tRPC wired vía supabase server client + RLS. i18n es-MX + en-US Tier 1 (CO/AR/BR fallback graceful). 49 tests Vitest agregados (3290 total). Tokens canon adicionales: `--temp-*`, `--mood-slate-*`, keyframes `mood-pulse / diff-after-in / heatmap-fade`. Próximo: 13.C M02 Desarrollos.
+> Asesor Shell (Sidebar + Topbar + CopilotRail + QuickActionsFloater + CommandPalette `cmdk`) + 10 dashboard sections (HeroPulse + KPI Strip + Pipeline Carousel + Daily Standup + Performance Today) + 8 innovaciones visuales `canon-asesor` (DecisionCrystal, ConfidenceHalo, TideLineChart, ConversationThermometer, MoodStripe, DiffCard, HeatmapDensity, CalendarConstellation) + 2 hooks (useListenMode + useSpatialSearch — STUB ADR-018 con 4 señales). Auth gated en role `{asesor, admin_desarrolladora, broker_manager, mb_admin, mb_coordinator}`. tRPC wired vía supabase server client + RLS. i18n es-MX + en-US Tier 1 (CO/AR/BR fallback graceful). 49 tests Vitest agregados (3290 total). Tokens canon adicionales: `--temp-*`, `--mood-slate-*`, keyframes `mood-pulse / diff-after-in / heatmap-fade`. **F2.13.C M02 Desarrollos shipped 2026-04-26** (UI RE-SKIN canon + STUB datasource ADR-018, +36 tests, 66 i18n keys × 5 locales, tint teal `#14b8a6`, 11 components + 3 hooks). Datasource real difiere a FASE 15 M11. Próximo: 13.D M03 Contactos.
 
 > **Duración estimada:** 7 sesiones Claude Code (~28 horas con agentes paralelos)
 > **Dependencias:** FASE 00-06 (bootstrap, BD, auth, AI shell, DS Dopamine, i18n, seguridad), FASE 07 (ingesta), FASE 08-10 (IE N0-N3), FASE 11 XL (15 índices DMX + moonshots core + seeds: Migration/Pulse/Trend Genome/Scorecard Nacional/Genoma/LifePath/Climate Twin/Constellations/Living Atlas — seeds implementados), FASE 12 (N5 AI scores + LifePath v1 + Climate Twin v1 + Mapa 12 capas)
@@ -208,7 +208,21 @@ Crítico:
 - [ ] Scoring personalizado respeta perfil cartera.
 - [ ] Drawer detalle abre en <300ms.
 
-### BLOQUE 13.C — M02 Desarrollos
+### BLOQUE 13.C — M02 Desarrollos ✅ SHIPPED 2026-04-26
+
+> **Estado:** UI canon RE-SKIN + STUB datasource ADR-018 (4 señales canon-permitidas). PR #__. Tag `fase-13.C-complete`. Datasource real (tabla `proyectos` + 8 dependencias) se materializa en FASE 15 M11 (Inventario Dev). UI shipped: route `/asesores/desarrollos` + 11 components + 3 hooks + 3 lib utilities + 36 tests Vitest + 66 i18n keys × 5 locales + sidebar tint canon `--mod-desarrollos: #14b8a6` (teal).
+>
+> **Outputs canon shipped 13.C:**
+> - `features/asesor-desarrollos/` (components + hooks + lib + __tests__)
+> - `app/[locale]/(asesor)/asesores/desarrollos/page.tsx` (server component + Suspense)
+> - `messages/{es-MX, en-US, es-CO, es-AR, pt-BR}.json` namespace `AsesorDesarrollos.*` (66 keys)
+> - 4 STUB markers ADR-018 §M1 visibles: procedures `// STUB FASE 15 M11`, empty state honesto "Sin desarrollos asignados — Habla con tu Master Broker", `<DisclosurePill tone="amber">datasourcePending</DisclosurePill>`, button "+ Nuevo proyecto" disabled + tooltip discernible.
+>
+> **Diferido a FASE 15 M11:**
+> - Tabla `proyectos` + RLS (asesor / admin_desarrolladora / broker_manager / mb_admin / mb_coordinator) + SECDEF helpers
+> - 8 tablas hijo: `unidades`, `precios_unidad`, `project_brokers`, `photos`, `documents`, `marketing_assets`, `exclusividad_acuerdos`, `acm_valuaciones`
+> - Procedures tRPC `developer.listProjectsForAsesor`, `getProjectById`, `scores.getProjectScores`, `getACM`, `marketing.getAssetsForProject`, `getExclusividad`
+> - Mapbox minimap, Supabase Realtime unidades, asset generation pipeline.
 
 #### MÓDULO 13.C.1 — Ruta y tabs
 

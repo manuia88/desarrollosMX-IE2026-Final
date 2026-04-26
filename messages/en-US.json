@@ -2647,5 +2647,113 @@
       },
       "ctaPending": "Coming soon — wiring lands in next phase"
     }
+  },
+  "AsesorDesarrollos": {
+    "page": {
+      "title": "Developments",
+      "subtitle": "Inventory available for your portfolio. Filter, compare and share.",
+      "newProject": "New project",
+      "newProjectDisabled": "New project (coming soon)",
+      "newProjectDisabledTooltip": "Available in module M11 — phase 15"
+    },
+    "tabs": {
+      "own": "Own",
+      "exclusive": "Exclusive",
+      "dmx": "DMX",
+      "mls": "MLS",
+      "ariaLabel": "Select inventory segment",
+      "countLabel": "{count, plural, =0 {No projects} one {# project} other {# projects}}"
+    },
+    "filters": {
+      "search": "Search address, neighborhood, code…",
+      "country": "Country",
+      "city": "City",
+      "colonia": "Neighborhood",
+      "priceMin": "Price from",
+      "priceMax": "Price to",
+      "bedrooms": "Bedrooms",
+      "amenities": "Amenities",
+      "tipo": "Property type",
+      "clear": "Clear filters",
+      "apply": "Apply",
+      "ariaSearch": "Search developments",
+      "chipRemove": "Remove filter {name}"
+    },
+    "sort": {
+      "label": "Sort by",
+      "byScore": "Best IE Score",
+      "byPrice": "Lowest price",
+      "byDate": "Most recent",
+      "byMomentum": "Highest momentum"
+    },
+    "card": {
+      "score": "IE {value}",
+      "exclusividad": "EXC {months}-{contract}-{pct}%",
+      "unitsAvailable": "{count, plural, =0 {No units} one {# unit available} other {# units available}}",
+      "priceFrom": "From {amount}",
+      "priceUntil": "Up to {amount}",
+      "menu": "More actions",
+      "ago": "Updated {time}",
+      "ariaOpen": "View details of {name}",
+      "tipoOperacion": "{tipo} for {operacion}"
+    },
+    "qualityScore": {
+      "competitivo": "Competitive",
+      "moderado": "Moderate",
+      "fueraMercado": "Out of market",
+      "sinACM": "No ACM",
+      "title": "Price quality",
+      "ariaLabel": "Price quality: {level}"
+    },
+    "drawer": {
+      "title": "Development detail",
+      "close": "Close detail",
+      "ariaLabel": "Detail of {name}",
+      "panes": {
+        "overview": "Overview",
+        "unidades": "Units",
+        "galeria": "Gallery",
+        "documentos": "Documents",
+        "scores": "IE Scores",
+        "competencia": "Competition"
+      },
+      "ctaApartar": "Reserve unit",
+      "ctaCompartir": "Share asset",
+      "ctaApartarDisabled": "Reserve (coming soon)",
+      "minimapStub": "Map available in M11 — phase 15"
+    },
+    "actions": {
+      "viewDetail": "View detail",
+      "share": "Share",
+      "whatsapp": "Send via WhatsApp",
+      "saveFolder": "Save to folder",
+      "marketingAssets": "Marketing assets",
+      "requestInfo": "Request more info",
+      "report": "Report issue"
+    },
+    "empty": {
+      "titleDefault": "No developments assigned",
+      "subtitleDefault": "Talk to your Master Broker to activate your inventory.",
+      "titleOwn": "No projects assigned to you yet",
+      "titleExclusive": "Your agency has no active exclusives",
+      "titleDmx": "No matching projects",
+      "titleMls": "No syndicated projects",
+      "ctaContact": "Contact my MB",
+      "ctaClear": "Clear filters"
+    },
+    "a11y": {
+      "openCard": "Open development {name}",
+      "closeDrawer": "Close detail panel",
+      "filterBy": "Filter by {field}",
+      "sortBy": "Sort by {field}",
+      "paginate": "Developments pagination",
+      "gridLabel": "Developments grid",
+      "exclusividadBadge": "Exclusivity {months} months, contract {contract} months, commission {pct} percent"
+    },
+    "disclosure": {
+      "datasourcePending": "Datasource pending — phase 15",
+      "photoPlaceholder": "Photo pending",
+      "scoreEstimation": "Estimated score"
+    }
   }
 }

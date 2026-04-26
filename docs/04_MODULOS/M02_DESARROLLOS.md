@@ -3,9 +3,17 @@
 > **Portal:** Asesor
 > **Ruta principal:** `/asesores/desarrollos`
 > **Fase donde se construye:** [FASE 13 — Portal Asesor M1-M5](../02_PLAN_MAESTRO/FASE_13_PORTAL_ASESOR_M1_M5.md)
-> **Sidebar tint:** bgSlate `#F0F2F7`
+> **Sidebar tint canon:** `--mod-desarrollos: #14b8a6` (teal, ADR-050)
 > **Priority:** [H1]
 > **Referencia visual:** `/docs/referencias-ui/M2_Desarrollos.tsx`
+>
+> **Estado 2026-04-26:**
+> - UI shipped FASE 13.C (route + 11 components + 3 hooks + 3 lib utilities + 36 tests, 66 i18n keys × 5 locales).
+> - Datasource STUB ADR-018 (4 señales canon-permitidas): procedures retornan empty array honesto + empty state "Sin desarrollos asignados — Habla con tu Master Broker" + DisclosurePill datasource pending + button "+ Nuevo proyecto" disabled discernible.
+> - Tablas BD `proyectos` + 8 dependencias (`unidades`, `precios_unidad`, `project_brokers`, `photos`, `documents`, `marketing_assets`, `exclusividad_acuerdos`, `acm_valuaciones`) se materializan en FASE 15 M11 (Inventario Dev) con shape definitivo + RLS + SECDEF helpers.
+> - Components shipped: `DesarrollosPage`, `DesarrollosTabs`, `DesarrollosFilters`, `DesarrollosSort`, `DesarrollosGrid`, `DesarrollosSkeleton`, `DesarrolloCard`, `DesarrolloDetailDrawer`, `QualityScoreBadge` (4 niveles canon NO invertidos), `ExclusividadBadge` (formato X-Y-Z), `EmptyState` (SVG inline canon), `PhotoPlaceholder` (gradient teal canon, NO Lorem Picsum).
+> - Hooks shipped: `useDesarrollosFilters` (URL search params), `useDesarrollosTab`, `useDesarrolloDrawer` (focus trap + ESC handler).
+> - Tests Vitest shipped: schemas + quality-score + loader STUB + components/hooks smoke (zero render dependencias DOM).
 
 ---
 

@@ -2647,5 +2647,113 @@
       },
       "ctaPending": "Próximamente — wiring real en próxima fase"
     }
+  },
+  "AsesorDesarrollos": {
+    "page": {
+      "title": "Desarrollos",
+      "subtitle": "Inventario disponible para tu cartera. Filtra, compara y comparte.",
+      "newProject": "Nuevo proyecto",
+      "newProjectDisabled": "Nuevo proyecto (próximamente)",
+      "newProjectDisabledTooltip": "Disponible en módulo M11 — fase 15"
+    },
+    "tabs": {
+      "own": "Propias",
+      "exclusive": "Exclusivas",
+      "dmx": "DMX",
+      "mls": "MLS",
+      "ariaLabel": "Selecciona el segmento de inventario",
+      "countLabel": "{count, plural, =0 {Sin proyectos} one {# proyecto} other {# proyectos}}"
+    },
+    "filters": {
+      "search": "Buscar dirección, colonia, código…",
+      "country": "País",
+      "city": "Ciudad",
+      "colonia": "Colonia",
+      "priceMin": "Precio desde",
+      "priceMax": "Precio hasta",
+      "bedrooms": "Recámaras",
+      "amenities": "Amenidades",
+      "tipo": "Tipo de propiedad",
+      "clear": "Limpiar filtros",
+      "apply": "Aplicar",
+      "ariaSearch": "Buscar desarrollos",
+      "chipRemove": "Quitar filtro {name}"
+    },
+    "sort": {
+      "label": "Ordenar por",
+      "byScore": "Mejor IE Score",
+      "byPrice": "Menor precio",
+      "byDate": "Más reciente",
+      "byMomentum": "Mayor momentum"
+    },
+    "card": {
+      "score": "IE {value}",
+      "exclusividad": "EXC {months}-{contract}-{pct}%",
+      "unitsAvailable": "{count, plural, =0 {Sin unidades} one {# unidad disponible} other {# unidades disponibles}}",
+      "priceFrom": "Desde {amount}",
+      "priceUntil": "Hasta {amount}",
+      "menu": "Más acciones",
+      "ago": "Actualizado {time}",
+      "ariaOpen": "Ver detalle de {name}",
+      "tipoOperacion": "{tipo} en {operacion}"
+    },
+    "qualityScore": {
+      "competitivo": "Competitivo",
+      "moderado": "Moderado",
+      "fueraMercado": "Fuera de mercado",
+      "sinACM": "Sin ACM",
+      "title": "Calidad de precio",
+      "ariaLabel": "Calidad de precio: {level}"
+    },
+    "drawer": {
+      "title": "Detalle del desarrollo",
+      "close": "Cerrar detalle",
+      "ariaLabel": "Detalle de {name}",
+      "panes": {
+        "overview": "Resumen",
+        "unidades": "Unidades",
+        "galeria": "Galería",
+        "documentos": "Documentos",
+        "scores": "IE Scores",
+        "competencia": "Competencia"
+      },
+      "ctaApartar": "Apartar unidad",
+      "ctaCompartir": "Compartir asset",
+      "ctaApartarDisabled": "Apartar (próximamente)",
+      "minimapStub": "Mapa disponible en M11 — fase 15"
+    },
+    "actions": {
+      "viewDetail": "Ver detalle",
+      "share": "Compartir",
+      "whatsapp": "Enviar por WhatsApp",
+      "saveFolder": "Guardar en carpeta",
+      "marketingAssets": "Assets de marketing",
+      "requestInfo": "Solicitar más info",
+      "report": "Reportar problema"
+    },
+    "empty": {
+      "titleDefault": "Sin desarrollos asignados",
+      "subtitleDefault": "Habla con tu Master Broker para activar tu inventario.",
+      "titleOwn": "Aún no te asignan proyectos",
+      "titleExclusive": "Tu inmobiliaria no tiene exclusivas activas",
+      "titleDmx": "Sin proyectos que coincidan",
+      "titleMls": "Sin proyectos sindicados",
+      "ctaContact": "Contactar a mi MB",
+      "ctaClear": "Limpiar filtros"
+    },
+    "a11y": {
+      "openCard": "Abrir desarrollo {name}",
+      "closeDrawer": "Cerrar panel de detalle",
+      "filterBy": "Filtrar por {field}",
+      "sortBy": "Ordenar por {field}",
+      "paginate": "Paginación de desarrollos",
+      "gridLabel": "Cuadrícula de desarrollos",
+      "exclusividadBadge": "Exclusividad {months} meses, contrato {contract} meses, comisión {pct} por ciento"
+    },
+    "disclosure": {
+      "datasourcePending": "Datasource en construcción — fase 15",
+      "photoPlaceholder": "Foto pendiente",
+      "scoreEstimation": "Score estimado"
+    }
   }
 }
