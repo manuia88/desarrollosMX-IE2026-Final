@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, useState } from 'react';
-import type { MatchScoreBreakdown } from '../lib/matcher-engine';
+import type { MatchScoreBreakdown } from '@/shared/lib/matcher/matcher-engine';
 
 export interface MatchScoreBadgeProps {
   score: number;

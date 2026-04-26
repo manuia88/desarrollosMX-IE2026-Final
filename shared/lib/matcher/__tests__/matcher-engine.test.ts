@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import type { BusquedaCriteria } from '../lib/filter-schemas';
 import {
+  type BusquedaCriteria,
   computeMatch,
   MATCHER_WEIGHTS,
   type MatcherInput,
   runMatcher,
   type UnidadCandidate,
-} from '../lib/matcher-engine';
+} from '../matcher-engine';
 
 const baseCriteria: BusquedaCriteria = {
   operacion: 'venta',

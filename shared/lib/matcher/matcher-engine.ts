@@ -1,4 +1,15 @@
-import type { BusquedaCriteria } from './filter-schemas';
+export interface BusquedaCriteria {
+  tipo?: 'departamento' | 'casa' | 'terreno' | 'oficina' | 'local' | undefined;
+  operacion: 'venta' | 'renta';
+  zone_ids: string[];
+  ciudades: string[];
+  price_min?: number | undefined;
+  price_max?: number | undefined;
+  currency: 'MXN' | 'USD';
+  recamaras_min?: number | undefined;
+  recamaras_max?: number | undefined;
+  amenities: string[];
+}
 
 export type DiscProfile = 'D' | 'I' | 'S' | 'C';
 

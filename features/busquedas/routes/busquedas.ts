@@ -1,5 +1,4 @@
 import { TRPCError } from '@trpc/server';
-import { runMatcher, type UnidadCandidate } from '@/features/asesor-busquedas/lib/matcher-engine';
 import {
   type BusquedaCriteria,
   busquedaCreateInput,
@@ -10,6 +9,7 @@ import {
 } from '@/features/busquedas/schemas';
 import { router } from '@/server/trpc/init';
 import { authenticatedProcedure } from '@/server/trpc/middleware';
+import { runMatcher, type UnidadCandidate } from '@/shared/lib/matcher/matcher-engine';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 
 const FIELDS =

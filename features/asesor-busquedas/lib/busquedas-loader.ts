@@ -1,8 +1,8 @@
 import 'server-only';
+import type { MatchScore, UnidadCandidate } from '@/shared/lib/matcher/matcher-engine';
+import { runMatcher } from '@/shared/lib/matcher/matcher-engine';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import type { BusquedaCriteria, BusquedasFilters, TabKey } from './filter-schemas';
-import type { MatchScore, UnidadCandidate } from './matcher-engine';
-import { runMatcher } from './matcher-engine';
 
 export interface BusquedaSummary {
   id: string;

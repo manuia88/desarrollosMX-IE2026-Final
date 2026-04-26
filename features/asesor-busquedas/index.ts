@@ -1,3 +1,11 @@
+export type {
+  DiscProfile,
+  MatcherInput,
+  MatchScore,
+  MatchScoreBreakdown,
+  UnidadCandidate,
+} from '@/shared/lib/matcher/matcher-engine';
+export { computeMatch, MATCHER_WEIGHTS, runMatcher } from '@/shared/lib/matcher/matcher-engine';
 export type { BusquedaCardProps } from './components/busqueda-card';
 export { BusquedaCard } from './components/busqueda-card';
 export type { BusquedaDetailDrawerProps } from './components/busqueda-detail-drawer';
@@ -50,11 +58,3 @@ export {
   tabEnum,
   tipoEnum,
 } from './lib/filter-schemas';
-export type {
-  DiscProfile,
-  MatcherInput,
-  MatchScore,
-  MatchScoreBreakdown,
-  UnidadCandidate,
-} from './lib/matcher-engine';
-export { computeMatch, MATCHER_WEIGHTS, runMatcher } from './lib/matcher-engine';
