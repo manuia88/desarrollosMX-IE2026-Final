@@ -3,6 +3,7 @@ import { meRouter } from '@/features/auth/routes/me';
 import { mfaRouter } from '@/features/auth/routes/mfa';
 import { roleRequestRouter } from '@/features/auth/routes/role-request';
 import { busquedasRouter } from '@/features/busquedas/routes/busquedas';
+import { captacionesRouter } from '@/features/captaciones/routes/captaciones';
 import { constellationsRouter } from '@/features/constellations/routes/constellations';
 import { crmRouter } from '@/features/crm/routes/crm';
 import { desarrollosRouter } from '@/features/desarrollos/routes/desarrollos';
@@ -45,6 +46,7 @@ export const appRouter = router({
   ai: aiRouter,
   atlas: atlasRouter,
   busquedas: busquedasRouter,
+  captaciones: captacionesRouter,
   causal: causalRouter,
   constellations: constellationsRouter,
   crm: crmRouter,

@@ -2747,6 +2747,193 @@
       "cityPreferred": "Preferred city"
     }
   },
+  "AsesorCaptaciones": {
+    "page": {
+      "title": "Listings pipeline",
+      "subtitle": "Move listings across pipeline stages. Run ACM once a listing is signed.",
+      "ctaCreate": "New listing"
+    },
+    "disclosure": {
+      "acmH1": "ACM H1 — canonical weights: price 30%, zone 25%, amenities 20%, size 15%, DISC 10%.",
+      "h1Notice": "H1 data — some measurements will be refined in H2 as the database grows.",
+      "zoneFallback": "Synthetic H1 zone score — no recent pulse-scores for this zone.",
+      "stubMifiel": "Mifiel signature — activates PHASE 14",
+      "stubAiPromocion": "AI Promotion — activates PHASE 15",
+      "stubVisionClassify": "Vision classify — activates PHASE 15",
+      "stubNotasDetalle": "Detailed notes (3 tiers) — activates PHASE 14"
+    },
+    "kanban": {
+      "ariaLabel": "Listings pipeline",
+      "ariaMoveBack": "Move to previous stage",
+      "ariaMoveFwd": "Move to next stage",
+      "announceDragStart": "Dragging listing. Drop on the target column.",
+      "announceMoved": "Listing moved to {stage}.",
+      "emptyColumn": "No listings in this stage.",
+      "stage": {
+        "prospecto": "Prospect",
+        "presentacion": "Presentation",
+        "firmado": "Signed",
+        "en_promocion": "Active",
+        "vendido": "Sold",
+        "cerrado_no_listado": "Closed unlisted"
+      },
+      "error": {
+        "illegal": "That transition is not allowed by the pipeline.",
+        "terminal": "Listing is already closed — cannot move.",
+        "same": "Already in that stage.",
+        "useCloseDialog": "Use the close dialog with confirmation.",
+        "serverFailed": "Failed to save the transition: {detail}"
+      }
+    },
+    "stage": {
+      "prospecto": "Prospect",
+      "presentacion": "Presentation",
+      "firmado": "Signed",
+      "en_promocion": "Active",
+      "vendido": "Sold",
+      "cerrado_no_listado": "Closed unlisted"
+    },
+    "card": {
+      "ariaOpen": "Open listing for {name}",
+      "createdAt": "Created",
+      "tipo": {
+        "venta": "Sale",
+        "renta": "Rent"
+      }
+    },
+    "filters": {
+      "ariaSearch": "Search listings",
+      "search": "Search owner, address, notes…",
+      "country": "Country",
+      "status": "Stage",
+      "operacion": "Operation",
+      "statusOption": {
+        "prospecto": "Prospect",
+        "presentacion": "Presentation",
+        "firmado": "Signed",
+        "en_promocion": "Active",
+        "vendido": "Sold",
+        "cerrado_no_listado": "Closed unlisted"
+      },
+      "operacionOption": {
+        "venta": "Sale",
+        "renta": "Rent"
+      },
+      "clear": "Clear"
+    },
+    "create": {
+      "title": "New listing",
+      "subtitle": "Minimum data to open the listing. Complete the rest in detailed edit.",
+      "fieldPropietario": "Owner",
+      "fieldDireccion": "Address",
+      "fieldTipo": "Operation",
+      "fieldPrecio": "Asking price",
+      "tipoOption": {
+        "venta": "Sale",
+        "renta": "Rent"
+      },
+      "cancel": "Cancel",
+      "submit": "Create listing",
+      "submitting": "Creating…",
+      "disabledTooltip": "Fill owner (≥2), address (≥5) and price (>0).",
+      "closeAria": "Close dialog",
+      "errorGeneric": "Could not create listing."
+    },
+    "edit": {
+      "title": "Edit listing",
+      "sectionLocation": "Location",
+      "sectionOperation": "Operation",
+      "sectionNotes": "Notes",
+      "fieldDireccion": "Address",
+      "fieldCiudad": "City",
+      "fieldColonia": "Neighborhood",
+      "fieldTipo": "Operation",
+      "fieldPrecio": "Asking price",
+      "fieldNotes": "Notes",
+      "tipoOption": {
+        "venta": "Sale",
+        "renta": "Rent"
+      },
+      "cancel": "Cancel",
+      "submit": "Save changes",
+      "submitting": "Saving…",
+      "closeAria": "Close edit",
+      "errorGeneric": "Could not save changes."
+    },
+    "detail": {
+      "closeAria": "Close detail",
+      "loading": "Loading…",
+      "notFound": "Listing not found or no permissions.",
+      "edit": "Edit",
+      "runAcm": "Run ACM",
+      "runningAcm": "Computing ACM…",
+      "closeCaptacion": "Close listing",
+      "notesTitle": "Notes",
+      "closedTitle": "Closed",
+      "motivoUnknown": "No reason recorded",
+      "motivoLabel": {
+        "vendida": "Sold",
+        "propietario_decidio_no_vender": "Owner decided not to sell",
+        "precio_no_competitivo": "Price not competitive",
+        "otro": "Other reason"
+      }
+    },
+    "acm": {
+      "title": "ACM Score",
+      "emptyState": "ACM not yet computed. Tap Run ACM to calculate the score.",
+      "dim": {
+        "priceFit": "Price vs zone",
+        "zoneScore": "Zone pulse",
+        "amenities": "Amenities",
+        "sizeFit": "Size vs median",
+        "discZone": "DISC × Zone"
+      }
+    },
+    "rationale": {
+      "priceFair": "Price in line with median",
+      "priceUnder": "Price below median",
+      "priceOver": "Price above median",
+      "zoneStrong": "Zone with strong pulse",
+      "zoneWeak": "Zone with weak pulse or no data",
+      "amenitiesRich": "Strong amenities",
+      "amenitiesScarce": "Sparse amenities",
+      "sizeMatchesMedian": "Size matches median",
+      "sizeOff": "Size off median",
+      "discAligned": "DISC aligned",
+      "discNeutral": "DISC neutral"
+    },
+    "close": {
+      "title": "Close listing",
+      "subtitle": "Irreversible action. Type CERRAR to confirm.",
+      "fieldMotivo": "Reason",
+      "fieldNotes": "Additional notes",
+      "fieldConfirm": "Type CERRAR to confirm",
+      "motivoOption": {
+        "vendida": "Sold",
+        "propietario_decidio_no_vender": "Owner decided not to sell",
+        "precio_no_competitivo": "Price not competitive",
+        "otro": "Other reason"
+      },
+      "cancel": "Cancel",
+      "submit": "Close listing",
+      "submitting": "Closing…",
+      "disabledTooltip": "Type CERRAR (uppercase) to enable.",
+      "closeAria": "Close dialog",
+      "errorGeneric": "Could not close the listing."
+    },
+    "empty": {
+      "title": "No listings yet",
+      "subtitleDefault": "Create the first listing to activate the pipeline.",
+      "ctaCreate": "Create listing",
+      "ctaClear": "Clear filters"
+    },
+    "stub": {
+      "shareRadar": "Share Radar — activates PHASE 15",
+      "publishProperty": "Publish as property — activates PHASE 15",
+      "duplicate": "Duplicate listing — activates PHASE 14",
+      "encounters": "Encounters — activates PHASE 14"
+    }
+  },
   "AsesorDesarrollos": {
     "page": {
       "title": "Developments",

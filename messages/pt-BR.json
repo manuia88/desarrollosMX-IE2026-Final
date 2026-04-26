@@ -2747,6 +2747,193 @@
       "cityPreferred": "Cidade preferida"
     }
   },
+  "AsesorCaptaciones": {
+    "page": {
+      "title": "Captações",
+      "subtitle": "Pipeline de imóveis em captação. Mova o cartão entre etapas e rode o ACM quando estiver assinado.",
+      "ctaCreate": "Nova captação"
+    },
+    "disclosure": {
+      "acmH1": "ACM H1 — pesos canon: preço 30%, zona 25%, comodidades 20%, tamanho 15%, DISC 10%.",
+      "h1Notice": "Dados H1 — algumas medições serão refinadas em H2 conforme a base cresce.",
+      "zoneFallback": "Score de zona H1 sintético — sem pulse-scores recentes para esta zona.",
+      "stubMifiel": "Assinatura Mifiel — ativação FASE 14",
+      "stubAiPromocion": "AI Promoção — ativação FASE 15",
+      "stubVisionClassify": "Vision classify — ativação FASE 15",
+      "stubNotasDetalle": "Notas detalhadas (3 níveis) — ativação FASE 14"
+    },
+    "kanban": {
+      "ariaLabel": "Pipeline de captações",
+      "ariaMoveBack": "Mover para etapa anterior",
+      "ariaMoveFwd": "Mover para próxima etapa",
+      "announceDragStart": "Arrastando captação. Solte sobre a coluna destino.",
+      "announceMoved": "Captação movida para {stage}.",
+      "emptyColumn": "Sem captações nesta etapa.",
+      "stage": {
+        "prospecto": "Prospecto",
+        "presentacion": "Apresentação",
+        "firmado": "Assinado",
+        "en_promocion": "Em promoção",
+        "vendido": "Vendido",
+        "cerrado_no_listado": "Encerrado sem listar"
+      },
+      "error": {
+        "illegal": "Essa transição não é permitida no pipeline.",
+        "terminal": "A captação já foi encerrada — não pode ser movida.",
+        "same": "Já está nessa etapa.",
+        "useCloseDialog": "Para encerrar use o diálogo de fechamento com confirmação.",
+        "serverFailed": "Falha ao salvar a transição: {detail}"
+      }
+    },
+    "stage": {
+      "prospecto": "Prospecto",
+      "presentacion": "Apresentação",
+      "firmado": "Assinado",
+      "en_promocion": "Em promoção",
+      "vendido": "Vendido",
+      "cerrado_no_listado": "Encerrado sem listar"
+    },
+    "card": {
+      "ariaOpen": "Abrir captação de {name}",
+      "createdAt": "Criada",
+      "tipo": {
+        "venta": "Venda",
+        "renta": "Aluguel"
+      }
+    },
+    "filters": {
+      "ariaSearch": "Buscar captações",
+      "search": "Buscar proprietário, endereço, notas…",
+      "country": "País",
+      "status": "Etapa",
+      "operacion": "Operação",
+      "statusOption": {
+        "prospecto": "Prospecto",
+        "presentacion": "Apresentação",
+        "firmado": "Assinado",
+        "en_promocion": "Em promoção",
+        "vendido": "Vendido",
+        "cerrado_no_listado": "Encerrado sem listar"
+      },
+      "operacionOption": {
+        "venta": "Venda",
+        "renta": "Aluguel"
+      },
+      "clear": "Limpar"
+    },
+    "create": {
+      "title": "Nova captação",
+      "subtitle": "Dados mínimos para abrir a captação. Complete o restante na edição detalhada.",
+      "fieldPropietario": "Proprietário",
+      "fieldDireccion": "Endereço",
+      "fieldTipo": "Operação",
+      "fieldPrecio": "Preço solicitado",
+      "tipoOption": {
+        "venta": "Venda",
+        "renta": "Aluguel"
+      },
+      "cancel": "Cancelar",
+      "submit": "Criar captação",
+      "submitting": "Criando…",
+      "disabledTooltip": "Complete proprietário (≥2), endereço (≥5) e preço (>0).",
+      "closeAria": "Fechar diálogo",
+      "errorGeneric": "Não foi possível criar a captação."
+    },
+    "edit": {
+      "title": "Editar captação",
+      "sectionLocation": "Localização",
+      "sectionOperation": "Operação",
+      "sectionNotes": "Notas",
+      "fieldDireccion": "Endereço",
+      "fieldCiudad": "Cidade",
+      "fieldColonia": "Bairro",
+      "fieldTipo": "Operação",
+      "fieldPrecio": "Preço solicitado",
+      "fieldNotes": "Notas",
+      "tipoOption": {
+        "venta": "Venda",
+        "renta": "Aluguel"
+      },
+      "cancel": "Cancelar",
+      "submit": "Salvar alterações",
+      "submitting": "Salvando…",
+      "closeAria": "Fechar edição",
+      "errorGeneric": "Não foi possível salvar as alterações."
+    },
+    "detail": {
+      "closeAria": "Fechar detalhe",
+      "loading": "Carregando…",
+      "notFound": "Captação não encontrada ou sem permissões.",
+      "edit": "Editar",
+      "runAcm": "Rodar ACM",
+      "runningAcm": "Calculando ACM…",
+      "closeCaptacion": "Encerrar captação",
+      "notesTitle": "Notas",
+      "closedTitle": "Encerrada",
+      "motivoUnknown": "Sem motivo registrado",
+      "motivoLabel": {
+        "vendida": "Vendida",
+        "propietario_decidio_no_vender": "Proprietário decidiu não vender",
+        "precio_no_competitivo": "Preço não competitivo",
+        "otro": "Outro motivo"
+      }
+    },
+    "acm": {
+      "title": "Score ACM",
+      "emptyState": "ACM ainda não rodado. Toque Rodar ACM para calcular o score.",
+      "dim": {
+        "priceFit": "Preço vs zona",
+        "zoneScore": "Pulse da zona",
+        "amenities": "Comodidades",
+        "sizeFit": "Tamanho vs mediana",
+        "discZone": "DISC × Zona"
+      }
+    },
+    "rationale": {
+      "priceFair": "Preço em linha com a mediana",
+      "priceUnder": "Preço abaixo da mediana",
+      "priceOver": "Preço acima da mediana",
+      "zoneStrong": "Zona com bom pulse",
+      "zoneWeak": "Zona com pulse fraco ou sem dados",
+      "amenitiesRich": "Comodidades fortes",
+      "amenitiesScarce": "Comodidades escassas",
+      "sizeMatchesMedian": "Tamanho na mediana",
+      "sizeOff": "Tamanho fora da mediana",
+      "discAligned": "Alinhado com DISC",
+      "discNeutral": "DISC neutro"
+    },
+    "close": {
+      "title": "Encerrar captação",
+      "subtitle": "Ação irreversível. Escreva CERRAR para confirmar.",
+      "fieldMotivo": "Motivo",
+      "fieldNotes": "Notas adicionais",
+      "fieldConfirm": "Escreva CERRAR para confirmar",
+      "motivoOption": {
+        "vendida": "Vendida",
+        "propietario_decidio_no_vender": "Proprietário decidiu não vender",
+        "precio_no_competitivo": "Preço não competitivo",
+        "otro": "Outro motivo"
+      },
+      "cancel": "Cancelar",
+      "submit": "Encerrar captação",
+      "submitting": "Encerrando…",
+      "disabledTooltip": "Escreva CERRAR (maiúsculas) para habilitar.",
+      "closeAria": "Fechar diálogo de encerramento",
+      "errorGeneric": "Não foi possível encerrar a captação."
+    },
+    "empty": {
+      "title": "Sem captações registradas",
+      "subtitleDefault": "Crie a primeira captação para ativar o pipeline.",
+      "ctaCreate": "Criar captação",
+      "ctaClear": "Limpar filtros"
+    },
+    "stub": {
+      "shareRadar": "Compartilhar Radar — ativação FASE 15",
+      "publishProperty": "Publicar como propriedade — ativação FASE 15",
+      "duplicate": "Duplicar captação — ativação FASE 14",
+      "encounters": "Encontros — ativação FASE 14"
+    }
+  },
   "AsesorDesarrollos": {
     "page": {
       "title": "Desarrollos",
