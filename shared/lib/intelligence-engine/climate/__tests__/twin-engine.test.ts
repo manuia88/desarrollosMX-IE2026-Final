@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { CLIMATE_SIGNATURE_DIM, type MonthlyAggregate } from '@/features/climate-twin/types';
-import { generateMonthlyHistory, heuristicMonthlyAggregate } from '../noaa-ingestion';
+import {
+  generateMonthlyHistory,
+  heuristicMonthlyAggregate,
+} from '@/shared/lib/ingest/climate/__tests__/synthetic-fixtures';
 import {
   aggregateByYear,
   aggregateSignatures,

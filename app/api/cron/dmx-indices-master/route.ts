@@ -18,6 +18,7 @@ import {
 } from '@/features/newsletter/lib/send-orchestrator';
 import { computeZoneStreaks } from '@/features/newsletter/lib/streaks-calculator';
 import { buildAnonWrapped } from '@/features/newsletter/lib/wrapped-builder';
+import { batchIngestMonthlyCDMX } from '@/shared/lib/ingest/climate/noaa';
 import {
   type CalculateMigrationFlowsBatchSummary,
   type CalculatePulseBatchSummary,
@@ -28,7 +29,6 @@ import {
   calculateAllPulseForCDMXColonias,
   calculateAllTrendGenomeForCDMXColonias,
 } from '@/shared/lib/intelligence-engine/calculators/indices';
-import { batchIngestMonthlyCDMX } from '@/shared/lib/intelligence-engine/climate/noaa-ingestion';
 import {
   buildAndPersistSignatures,
   refreshTwinsForZone,

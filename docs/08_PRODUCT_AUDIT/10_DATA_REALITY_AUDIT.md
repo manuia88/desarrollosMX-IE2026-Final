@@ -138,9 +138,11 @@ El brief original A.3.3 propuso **crear 4 tablas nuevas** `zone_<source>_<metric
 
 ---
 
-## §4 Climate Reality (SA-Climate-Geo full draft: tmp/A.3-drafts/SA-Climate-Geo.md, 675 líneas)
+## §4 Climate Reality (✅ RESOLVED F1.B 2026-04-26)
 
-### §4.1 `heuristic_v1` confirmed SYNTHETIC SEED
+**Status post F1.B:** synthetic SEED `heuristic_v1` reemplazado vía UPSERT atomic en backfill script. Datos reales NOAA NCEI (8 stations bbox central-MX, source='noaa') + CONAGUA SMN (13 stations CDMX Normales Climatológicas Diarios, source='conagua') reemplazan los 43,776 rows. Drivers en `shared/lib/ingest/climate/{noaa,conagua-smn,spatial-resolver}.ts`. Crons mensuales día 2 (`/api/cron/ingest/noaa` + `/api/cron/ingest/conagua`). Backfill: `tools/scripts/run-climate-real-backfill.ts`.
+
+### §4.1 `heuristic_v1` confirmed SYNTHETIC SEED (pre F1.B baseline — ahora resuelto)
 
 - **43,776 rows = 228 zonas × 192 meses (2011-01 → 2026-12, 16 años inclusive futuro 8 meses).**
 - **Generator:** `shared/lib/intelligence-engine/climate/noaa-ingestion.ts:43-89` `heuristicMonthlyAggregate()` — sinusoides + hash FNV-1a determinístico.
@@ -155,8 +157,8 @@ El brief original A.3.3 propuso **crear 4 tablas nuevas** `zone_<source>_<metric
 
 ### §4.3 L-NEW handoff
 
-- **L-NEW-CLIMATE-REAL-NOAA-01:** Real NOAA GHCND ingest replace `heuristic_v1`. Bloque sugerido: **FASE 12** (already planeado per `noaa-ingestion.ts:140` comment). Esfuerzo ~8h.
-- **L-NEW-CLIMATE-CONAGUA-SCRAPE-01:** Real CONAGUA SMN scraping legítimo (no portal listado ADR-012). Bloque sugerido: **FASE 12** (post NOAA baseline). Esfuerzo ~12h.
+- ~~**L-NEW-CLIMATE-REAL-NOAA-01**~~ — ✅ SHIPPED F1.B 2026-04-26. Driver real en `shared/lib/ingest/climate/noaa.ts`.
+- ~~**L-NEW-CLIMATE-CONAGUA-SCRAPE-01**~~ — ✅ SHIPPED F1.B 2026-04-26. Driver real en `shared/lib/ingest/climate/conagua-smn.ts`.
 - **L-NEW-CLIMATE-DISCLOSURE-UI-01:** Climate forecasts UI debe mostrar badge "Modelo SEED H1" hasta NOAA real ingest. Bloque sugerido: **M01 implementation FASE 14+**.
 
 ---

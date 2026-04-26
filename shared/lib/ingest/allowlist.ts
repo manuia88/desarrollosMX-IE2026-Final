@@ -30,6 +30,7 @@ export const ALLOWED_SOURCES = [
   'paot',
   'sedema',
   'conagua',
+  'noaa',
   'inah',
   'profeco',
   'locatel',
