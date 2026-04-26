@@ -11,6 +11,7 @@ import {
 } from '../quality-gates';
 import type { IngestCtx, IngestJob, IngestResult } from '../types';
 
+// STUB — activar L-NEW-GEO-SACMEX-01 (FASE 11.E)
 // SACMEX (Sistema de Aguas de la Ciudad de México). Portal publica avisos
 // de cortes, tandeo y baja presión por colonia/alcaldía vía HTML y CSV.
 // ADR-012 permite scraping responsable de portales gov.mx (diferente de
@@ -25,7 +26,9 @@ import type { IngestCtx, IngestJob, IngestResult } from '../types';
 // En H1 SOLO implementamos csv path. HTML parsing requiere cheerio/jsdom
 // (no instaladas y FASE 07 no autoriza nuevas deps). Driver acepta la
 // variante HTML en el union pero throws 'sacmex_html_parsing_not_implemented'.
-// Implementación HTML agendada H2 o FASE 07b.A.
+// Auto-fetch HTTP redirigido a CKAN reportes-de-agua (portal sacmex 503
+// degraded) agendado L-NEW-GEO-SACMEX-01 (FASE 11.E, ~4h). Reality audit:
+// docs/08_PRODUCT_AUDIT/10_DATA_REALITY_AUDIT.md §5.
 //
 // Refs: docs/02_PLAN_MAESTRO/FASE_07_INGESTA_DATOS.md §7.D.7
 //       docs/01_DECISIONES_ARQUITECTONICAS/ADR-012 (scraping gov.mx permitido)

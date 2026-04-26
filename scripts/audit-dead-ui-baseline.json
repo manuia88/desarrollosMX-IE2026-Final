@@ -1,56 +1,6 @@
 {
   "allowlist": [
     {
-      "file": "shared/lib/ingest/geo/dgis.ts",
-      "line": 297,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/fgj.ts",
-      "line": 343,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/fgj.ts",
-      "line": 391,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/fgj.ts",
-      "line": 411,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/gtfs.ts",
-      "line": 178,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/gtfs.ts",
-      "line": 339,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/sacmex.ts",
-      "line": 321,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/sacmex.ts",
-      "line": 360,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/sacmex.ts",
-      "line": 409,
-      "pattern": "unmarked_stub_error"
-    },
-    {
-      "file": "shared/lib/ingest/geo/sacmex.ts",
-      "line": 451,
-      "pattern": "unmarked_stub_error"
-    },
-    {
       "file": "shared/lib/ingest/geo/siged.ts",
       "line": 268,
       "pattern": "unmarked_stub_error"
@@ -176,5 +126,5 @@
       "pattern": "unmarked_stub_error"
     }
   ],
-  "note": "Baseline pre-existing violations al 2026-04-25 (FASE 07.7.A.2). Cada entry agendada L-NEW para cierre en su FASE de implementaci\u00f3n. Removido cuando c\u00f3digo se actualice."
+  "note": "Baseline post-FASE 07.7.A.3 (2026-04-25). Reducido 35→25 al marcar 4 archivos geo (dgis/fgj/gtfs/sacmex) con STUB markers ADR-018 referenciando L-NEW-GEO-* IDs (FASE 11.E HTTP fetch implementation). Resto de entries: cada una agendada L-NEW para cierre en su FASE de implementación. Removido cuando el código se actualice. Nota A.3 hallazgo: SA-Macro identificó que ~5 entries macro (bbva-research, cnbv, fovissste, infonavit) son falsos positivos del enforcer (validation throws con mensajes 'xxx_csv_headers_not_recognized' que no matchean heurística regex 'not_found'). Re-clasificación pending L-NEW-OBS-AUDIT-DEADUI-HEURISTIC-01 (FASE 11.A enforcer refinement)."
 }

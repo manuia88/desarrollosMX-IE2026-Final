@@ -6,7 +6,7 @@ const PERIOD = '2026-04-01';
 describe('DMX-ICO — Índice Costo Oportunidad', () => {
   it('version + methodology con cetes_series_id', () => {
     expect(version).toMatch(/^\d+\.\d+\.\d+/);
-    expect(methodology.cetes_series_id).toBe('cetes_28d');
+    expect(methodology.cetes_series_id).toBe('SF44070');
     expect(methodology.confidence_thresholds.min_listings_per_op).toBe(5);
   });
 
