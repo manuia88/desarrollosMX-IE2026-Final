@@ -1,10 +1,14 @@
 # ADR-031: Design System Refresh post-prototype audit
 
-**Status:** Aprobado 2026-04-24 · Founder OK máxima opción
+> **Status (2026-04-25):** SUPERSEDED por `ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md` (prototype puro, no hybrid blend).
+> Founder confirmó 2026-04-25 que frontend canon es prototype JSX puro, no hybrid Dopamine+prototype. Las decisiones específicas de ADR-031 (4 founder approvals tokens, 17 componentes adopt/adapt/port, server/client policy, i18n posture, a11y posture) se preservan literalmente en ADR-048 — el cambio es framing, NO granularidad.
+
+**Status:** SUPERSEDED 2026-04-25 by ADR-048 (originally Aprobado 2026-04-24 · Founder OK máxima opción)
 **Fecha:** 2026-04-24
 **Sub-sesión origen:** FASE 07.6.C (sesión 3/6)
 **Deciders:** Manu Acosta (founder) + PM
 **Supersedes:** ninguno (extiende ADR-023)
+**Superseded by:** [ADR-048 Frontend Prototype Canonical Replacement](./ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md)
 **Amends:** ADR-023 (Dopamine Design System Refinement) — secciones específicas listadas en §Consecuencias.
 **Referenced by:** FASE 07.6.C `02_DESIGN_MIGRATION.md`, FASE 11.T-Z (consumidores M3a/M3b), FASE 12-22 (consumidores M3b distribuidos).
 

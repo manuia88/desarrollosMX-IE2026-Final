@@ -1,11 +1,15 @@
 # ADR-023 — Design System Refinement (Dopamine cleaner aesthetic post-competitive analysis)
 
-**Status:** Accepted
+> **Status (2026-04-25):** SUPERSEDED frontend — ver `ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md` (prototype JSX canonical).
+> Mantiene relevance parcial backend (tokens semantic naming + ciertas reglas accessibility + utility classes Dopamine en portales internos).
+
+**Status:** Accepted (frontend SUPERSEDED 2026-04-25 by ADR-048)
 **Date:** 2026-04-19
 **Deciders:** Manu Acosta (founder)
 **Referenced by:** [FASE 04 Design System — módulo 4.P](../02_PLAN_MAESTRO/FASE_04_DESIGN_SYSTEM.md), [FASE 20 Portal Comprador](../02_PLAN_MAESTRO/FASE_20_PORTAL_COMPRADOR.md), [FASE 21 Portal Público](../02_PLAN_MAESTRO/FASE_21_PORTAL_PUBLICO.md)
 **References:** [Competitive Intel Findperty](../06_REFERENCIAS_LEGADO/competitive_intel_findperty_20260419.md), [ADR-021 PPD](./ADR-021_PROGRESSIVE_PREFERENCE_DISCOVERY.md), [ADR-022 Vibe Tags Hybrid](./ADR-022_VIBE_TAGS_HYBRID.md)
 **Supersedes:** —
+**Superseded by (frontend layer):** [ADR-048 Frontend Prototype Canonical Replacement](./ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md)
 
 ## 1. Context
 

@@ -2,6 +2,18 @@
 
 > Cómo trabajar en este repo. Todo cambio a estas reglas pasa por un ADR.
 
+## Frontend canon (actualizado 2026-04-25)
+
+Frontend canon DMX = **prototype JSX** en `tmp/product_audit_input/DMX-prototype/` ↔ documentado en `docs/08_PRODUCT_AUDIT/07_FRONTEND_PROTOTYPE_CANONICAL.md` ↔ formalizado en `docs/01_DECISIONES_ARQUITECTONICAS/ADR-048_FRONTEND_PROTOTYPE_CANONICAL_REPLACEMENT.md`.
+
+Reemplaza:
+- Frontend Dopamine (`ADR-023_DESIGN_SYSTEM_REFINEMENT.md` — SUPERSEDED frontend, mantiene parcial backend / utility classes en portales internos).
+- Hybrid blend (`ADR-031_DESIGN_SYSTEM_REFRESH.md` — SUPERSEDED por prototype puro).
+- BIBLIA DECISIÓN 1 — actualizada en `docs/biblia-v5/17_BIBLIA_DMX_v5_Decisiones_Hallazgos_Plan.md`.
+
+Mapping prototype ↔ M01-M20 ↔ backend en `docs/08_PRODUCT_AUDIT/08_PROTOTYPE_TO_MODULES_MAPPING.md`.
+Audit estado real M01-M20 en `docs/08_PRODUCT_AUDIT/06_AUDIT_ESTADO_REAL_M01_M20.md`.
+
 ## Stack (H1 cerrado)
 
 - Next.js 16 App Router + Turbopack. React 19 (Server Components).
