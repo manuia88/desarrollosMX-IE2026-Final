@@ -2284,6 +2284,125 @@ export type Database = {
           },
         ]
       }
+      captaciones: {
+        Row: {
+          acm_computed_at: string | null
+          acm_result: Json | null
+          asesor_id: string
+          brokerage_id: string | null
+          ciudad: string | null
+          closed_at: string | null
+          closed_motivo: string | null
+          closed_notes: string | null
+          colonia: string | null
+          country_code: string
+          created_at: string
+          created_by: string | null
+          currency: string
+          direccion: string
+          features: Json
+          id: string
+          lead_id: string | null
+          notes: string | null
+          precio_solicitado: number
+          propietario_email: string | null
+          propietario_nombre: string
+          propietario_telefono: string | null
+          status: Database["public"]["Enums"]["captacion_status"]
+          status_changed_at: string
+          tipo_operacion: Database["public"]["Enums"]["captacion_operacion"]
+          updated_at: string
+          zone_id: string | null
+        }
+        Insert: {
+          acm_computed_at?: string | null
+          acm_result?: Json | null
+          asesor_id: string
+          brokerage_id?: string | null
+          ciudad?: string | null
+          closed_at?: string | null
+          closed_motivo?: string | null
+          closed_notes?: string | null
+          colonia?: string | null
+          country_code: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          direccion: string
+          features?: Json
+          id?: string
+          lead_id?: string | null
+          notes?: string | null
+          precio_solicitado: number
+          propietario_email?: string | null
+          propietario_nombre: string
+          propietario_telefono?: string | null
+          status?: Database["public"]["Enums"]["captacion_status"]
+          status_changed_at?: string
+          tipo_operacion: Database["public"]["Enums"]["captacion_operacion"]
+          updated_at?: string
+          zone_id?: string | null
+        }
+        Update: {
+          acm_computed_at?: string | null
+          acm_result?: Json | null
+          asesor_id?: string
+          brokerage_id?: string | null
+          ciudad?: string | null
+          closed_at?: string | null
+          closed_motivo?: string | null
+          closed_notes?: string | null
+          colonia?: string | null
+          country_code?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          direccion?: string
+          features?: Json
+          id?: string
+          lead_id?: string | null
+          notes?: string | null
+          precio_solicitado?: number
+          propietario_email?: string | null
+          propietario_nombre?: string
+          propietario_telefono?: string | null
+          status?: Database["public"]["Enums"]["captacion_status"]
+          status_changed_at?: string
+          tipo_operacion?: Database["public"]["Enums"]["captacion_operacion"]
+          updated_at?: string
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "captaciones_brokerage_id_fkey"
+            columns: ["brokerage_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "captaciones_brokerage_id_fkey"
+            columns: ["brokerage_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "captaciones_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "captaciones_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cascade_replay_log: {
         Row: {
           cascade_event: string
@@ -18535,6 +18654,14 @@ export type Database = {
       }
     }
     Enums: {
+      captacion_operacion: "venta" | "renta"
+      captacion_status:
+        | "prospecto"
+        | "presentacion"
+        | "firmado"
+        | "en_promocion"
+        | "vendido"
+        | "cerrado_no_listado"
       exclusividad_scope: "full" | "category" | "territory"
       market_capture_source:
         | "chrome_extension"
@@ -18728,6 +18855,15 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      captacion_operacion: ["venta", "renta"],
+      captacion_status: [
+        "prospecto",
+        "presentacion",
+        "firmado",
+        "en_promocion",
+        "vendido",
+        "cerrado_no_listado",
+      ],
       exclusividad_scope: ["full", "category", "territory"],
       market_capture_source: [
         "chrome_extension",
