@@ -2755,5 +2755,153 @@
       "photoPlaceholder": "Foto pendiente",
       "scoreEstimation": "Score estimado"
     }
+  },
+  "AsesorContactos": {
+    "page": {
+      "title": "Contactos",
+      "subtitle": "Tus leads activos y compradores con contexto IE."
+    },
+    "disclosure": {
+      "crmH1Source": "H1: leads + buyer_twins (CRM Foundation)"
+    },
+    "tabs": {
+      "aria": "Filtra contactos por scope",
+      "labels": {
+        "all": "Todos",
+        "mine": "Míos",
+        "team": "Equipo",
+        "recent": "Recientes"
+      }
+    },
+    "filters": {
+      "aria": "Filtros de contactos",
+      "searchPlaceholder": "Buscar por nombre…",
+      "searchAria": "Buscar contactos por nombre",
+      "statusLabel": "Estado",
+      "statusAll": "Todos",
+      "statusLabels": {
+        "new": "Nuevo",
+        "qualified": "Calificado",
+        "nurturing": "En seguimiento",
+        "converted": "Convertido",
+        "lost": "Perdido"
+      }
+    },
+    "card": {
+      "open": "Ver detalle de {name}",
+      "birthdayShort": "🎂 {days}d",
+      "birthdayBadge": "Cumpleaños en {days} días",
+      "lastContactAgo": "Último contacto: {days} d",
+      "qualification": "Calificación {score}",
+      "status": {
+        "new": "Nuevo",
+        "qualified": "Calificado",
+        "nurturing": "En seguimiento",
+        "converted": "Convertido",
+        "lost": "Perdido"
+      }
+    },
+    "disc": {
+      "unknownShort": "DISC pendiente",
+      "unknownAria": "Perfil DISC aún no calculado",
+      "summaryAria": "DISC: D {D} I {I} S {S} C {C}"
+    },
+    "grid": {
+      "aria": "{count, plural, =0 {Sin contactos} one {# contacto} other {# contactos}}"
+    },
+    "empty": {
+      "isStubTitle": "Sin contactos en BD",
+      "isStubBody": "Crea tu primer contacto o sincroniza desde fuente externa.",
+      "noResultsTitle": "Sin resultados",
+      "noResultsBody": "Ajusta los filtros para ver más contactos."
+    },
+    "drawer": {
+      "aria": "Detalle de {name}",
+      "close": "Cerrar",
+      "closeAria": "Cerrar panel",
+      "discTitle": "Perfil DISC",
+      "insightsTitle": "Insights",
+      "notesTitle": "Notas",
+      "lastContact": "Último contacto hace {days} días",
+      "qualification": "Calificación {score}/100",
+      "status": "Estado",
+      "statuses": {
+        "new": "Nuevo",
+        "qualified": "Calificado",
+        "nurturing": "En seguimiento",
+        "converted": "Convertido",
+        "lost": "Perdido"
+      },
+      "hasFamilyUnit": "Pertenece a una unidad familiar",
+      "birthdayIn": "Cumpleaños en {days} días"
+    },
+    "whatsapp": {
+      "trigger": "WhatsApp",
+      "triggerTitle": "Generar borrador con plantilla",
+      "disabledNoPhone": "Sin teléfono registrado",
+      "dialogAria": "Borrador de WhatsApp",
+      "dialogTitle": "Borrador WhatsApp",
+      "dialogSubtitle": "Plantilla generada según perfil. Revisa y edita antes de enviar.",
+      "objectiveLegend": "Objetivo",
+      "objectives": {
+        "follow_up": "Seguimiento",
+        "birthday": "Cumpleaños",
+        "reengagement": "Reactivación",
+        "invite_visit": "Invitar a visita"
+      },
+      "messageLegend": "Mensaje",
+      "disclosureWebQr": "Envío via WhatsApp Web (no API oficial). Verifica antes de enviar.",
+      "copy": "Copiar",
+      "openWhatsAppWeb": "Abrir WhatsApp Web",
+      "close": "Cerrar"
+    },
+    "scanOcr": {
+      "trigger": "Escanear",
+      "dialogAria": "Escanear documento",
+      "dialogTitle": "Escanear contacto",
+      "dialogSubtitle": "Extrae datos de tarjeta o INE con OCR local.",
+      "modeLegend": "Tipo",
+      "modes": {
+        "business_card": "Tarjeta",
+        "ine": "INE"
+      },
+      "fileInputAria": "Selecciona imagen",
+      "recognizing": "Reconociendo… {progress}%",
+      "errorMissingTesseract": "OCR no disponible. Verifica tu conexión y reintenta.",
+      "result": {
+        "fullName": "Nombre",
+        "email": "Email",
+        "phone": "Teléfono",
+        "company": "Empresa",
+        "curp": "CURP",
+        "birthdate": "Nacimiento",
+        "address": "Dirección"
+      },
+      "disclosureLocal": "OCR corre 100% en tu navegador. Ningún dato se sube a servidores externos.",
+      "close": "Cerrar"
+    },
+    "reEngagement": {
+      "title": "Re-engagement sugerido",
+      "birthdaySummary": "{count, plural, =0 {} one {# cumpleaños próximo} other {# cumpleaños próximos}}",
+      "staleSummary": "{count, plural, =0 {} one {# contacto frío >30 d} other {# contactos fríos >30 d}}"
+    },
+    "enrichment": {
+      "aria": "Pipeline de enriquecimiento",
+      "title": "Pipeline de enriquecimiento (Clay-pattern)",
+      "subtitle": "Origen → Enriquecer → Validar → Push.",
+      "stubBadge": "Pipeline en construcción",
+      "stages": {
+        "source": "Origen",
+        "enrich": "Enriquecer",
+        "validate": "Validar",
+        "push": "Push"
+      },
+      "copy": {
+        "source": "Origen: manual, OCR, CSV o VCF.",
+        "enrich": "Enriquece con zone_score IE + buyer_twin auto + family_unit detect.",
+        "validate": "Valida con Zod + dedup FTS Postgres.",
+        "push": "Upsert lead + buyer_twin + audit_crm_log."
+      }
+    }
   }
 }
