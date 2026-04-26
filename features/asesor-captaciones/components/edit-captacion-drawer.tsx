@@ -3,7 +3,10 @@
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, type FormEvent, useEffect, useId, useRef, useState } from 'react';
 import { DisclosurePill } from '@/shared/ui/primitives/canon';
-import { useCaptacionMutations } from '../hooks/use-captacion-mutations';
+import {
+  useCaptacionMutations,
+  useInvalidateCaptacionQueries,
+} from '../hooks/use-captacion-mutations';
 import type { CaptacionDetail } from '../lib/captaciones-loader';
 
 export interface EditCaptacionDrawerProps {
@@ -17,6 +20,7 @@ export function EditCaptacionDrawer({ open, onClose, captacion }: EditCaptacionD
   const tDisc = useTranslations('AsesorCaptaciones.disclosure');
   const titleId = useId();
   const { update } = useCaptacionMutations();
+  const invalidate = useInvalidateCaptacionQueries();
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const closeRef = useRef<HTMLButtonElement | null>(null);
 
@@ -163,6 +167,7 @@ export function EditCaptacionDrawer({ open, onClose, captacion }: EditCaptacionD
         tipoOperacion,
         notes: notes.trim() || null,
       });
+      invalidate.invalidateOne(captacion.id);
       onClose();
     } catch (err) {
       setSubmitError(err instanceof Error ? err.message : t('errorGeneric'));

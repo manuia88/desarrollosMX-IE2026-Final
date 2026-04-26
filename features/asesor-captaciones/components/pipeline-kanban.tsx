@@ -3,7 +3,10 @@
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, useCallback, useMemo, useState } from 'react';
 import { useCaptacionDrawer } from '../hooks/use-captacion-drawer';
-import { useCaptacionMutations } from '../hooks/use-captacion-mutations';
+import {
+  useCaptacionMutations,
+  useInvalidateCaptacionQueries,
+} from '../hooks/use-captacion-mutations';
 import type { CaptacionSummary } from '../lib/captaciones-loader';
 import { type CaptacionStatusKey, STATUS_KEYS } from '../lib/filter-schemas';
 import { optimisticMove, validateTransition } from '../lib/kanban-state';
@@ -22,6 +25,7 @@ export function PipelineKanban({ captaciones }: PipelineKanbanProps) {
   const t = useTranslations('AsesorCaptaciones.kanban');
   const { open } = useCaptacionDrawer();
   const { advanceStage } = useCaptacionMutations();
+  const invalidate = useInvalidateCaptacionQueries();
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [hoverColumn, setHoverColumn] = useState<CaptacionStatusKey | null>(null);
   const [optimistic, setOptimistic] = useState<CaptacionSummary[]>(captaciones);
@@ -92,6 +96,7 @@ export function PipelineKanban({ captaciones }: PipelineKanbanProps) {
         { id: draggingId, toStatus: targetStatus },
         {
           onSuccess: () => {
+            invalidate.invalidateAll();
             setAnnouncement({
               message: t('announceMoved', { stage: t(`stage.${targetStatus}`) }),
               tone: 'info',
@@ -109,7 +114,7 @@ export function PipelineKanban({ captaciones }: PipelineKanbanProps) {
       setDraggingId(null);
       setHoverColumn(null);
     },
-    [draggingId, captaciones, advanceStage, t],
+    [draggingId, captaciones, advanceStage, t, invalidate.invalidateAll],
   );
 
   const handleKeyboardMove = useCallback(
@@ -133,6 +138,7 @@ export function PipelineKanban({ captaciones }: PipelineKanbanProps) {
         { id: cardId, toStatus: next },
         {
           onSuccess: () => {
+            invalidate.invalidateAll();
             setAnnouncement({
               message: t('announceMoved', { stage: t(`stage.${next}`) }),
               tone: 'info',
@@ -147,7 +153,7 @@ export function PipelineKanban({ captaciones }: PipelineKanbanProps) {
         },
       );
     },
-    [advanceStage, t],
+    [advanceStage, t, invalidate.invalidateAll],
   );
 
   const containerStyle: CSSProperties = {

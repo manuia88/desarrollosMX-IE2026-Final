@@ -2,7 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, type FormEvent, useEffect, useId, useRef, useState } from 'react';
-import { useCaptacionMutations } from '../hooks/use-captacion-mutations';
+import {
+  useCaptacionMutations,
+  useInvalidateCaptacionQueries,
+} from '../hooks/use-captacion-mutations';
 
 export interface CreateCaptacionDialogProps {
   open: boolean;
@@ -34,6 +37,7 @@ export function CreateCaptacionDialog({ open, onClose, onCreated }: CreateCaptac
   const firstInputRef = useRef<HTMLInputElement | null>(null);
   const titleId = useId();
   const { create } = useCaptacionMutations();
+  const invalidate = useInvalidateCaptacionQueries();
 
   useEffect(() => {
     if (open) {
@@ -136,6 +140,7 @@ export function CreateCaptacionDialog({ open, onClose, onCreated }: CreateCaptac
         precioSolicitado: precioNum,
         countryCode: form.countryCode,
       });
+      invalidate.invalidateAll();
       onCreated?.(result.id);
       onClose();
     } catch (err) {

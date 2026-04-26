@@ -2,7 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, type FormEvent, useEffect, useId, useRef, useState } from 'react';
-import { useCaptacionMutations } from '../hooks/use-captacion-mutations';
+import {
+  useCaptacionMutations,
+  useInvalidateCaptacionQueries,
+} from '../hooks/use-captacion-mutations';
 
 export interface CloseCaptacionDialogProps {
   open: boolean;
@@ -30,6 +33,7 @@ export function CloseCaptacionDialog({
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const firstInputRef = useRef<HTMLInputElement | null>(null);
   const { close } = useCaptacionMutations();
+  const invalidate = useInvalidateCaptacionQueries();
 
   const [confirmText, setConfirmText] = useState('');
   const [motivo, setMotivo] = useState<Motivo>('vendida');
@@ -111,6 +115,7 @@ export function CloseCaptacionDialog({
         confirmText: 'CERRAR',
         closedAsListed: motivo === 'vendida',
       });
+      invalidate.invalidateOne(captacionId);
       onClosed?.();
       onClose();
     } catch (err) {
