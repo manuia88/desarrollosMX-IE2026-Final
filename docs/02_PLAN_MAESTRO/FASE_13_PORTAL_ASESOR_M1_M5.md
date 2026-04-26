@@ -345,9 +345,19 @@ Crítico:
 - [ ] Pipeline test sobre 10 contactos encuentra ≥3 emails nuevos.
 - [ ] Log `enrichment_runs` auditable.
 
-### BLOQUE 13.E — M04 Búsquedas
+### BLOQUE 13.E — M04 Búsquedas ✅ SHIPPED 2026-04-26
 
-#### MÓDULO 13.E.1 — Kanban 6+1 (drag & drop real)
+**Estado:** List/Drawer/Matcher core shipped (PR #81 — fase-13.E-complete).
+**Diferido:** Kanban drag&drop (13.F+), Wizard Ofertar (M07), Notas 3-niveles + cross-agency (13.G+), Suggest semantic C03 (13.H+).
+**Outputs:**
+- BD: `busquedas` (FK lead_id + criteria jsonb + matched_count + last_run_at + status). Migration `20260426203131_busquedas_create.sql`. RLS 8 policies.
+- `features/asesor-busquedas/` (RE-SKIN canon prototype): page + tabs + filters + grid + card + drawer + match score badge + matcher engine.
+- `features/busquedas/` (tRPC): 8 procedures (list/get/create/update/pause/close/reopen/runMatcher) + Zod single source of truth.
+- Matcher engine deterministic: 5 dimensions canon (price 30% / zoneIE 25% / amenities 20% / family 15% / DISC 10%) + rationale chips.
+- i18n: 5 locales (es-MX + en-US Tier 1; CO/AR/BR fallback).
+- Tests: matcher exhaustive + tRPC smoke + Zod schema. Cero SECDEF nuevas — `audit_rls_allowlist` v30 vigente.
+
+#### MÓDULO 13.E.1 — Kanban 6+1 (drag & drop real) [DIFERIDO 13.F+]
 
 **Pasos:**
 - `[13.E.1.1]` `app/(asesor)/busquedas/page.tsx` con Kanban 6 columnas: Pendiente → Buscando → Visitando → Ofertando → Cerrando → Ganada (+ Perdida oculta toggle).

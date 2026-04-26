@@ -3,9 +3,26 @@
 > **Portal:** Asesor
 > **Ruta principal:** `/asesores/busquedas`
 > **Fase donde se construye:** [FASE 13 — Portal Asesor M1-M5](../02_PLAN_MAESTRO/FASE_13_PORTAL_ASESOR_M1_M5.md)
-> **Sidebar tint:** bgLavender `#F0EEFF`
+> **Sidebar tint:** purple `#a855f7` (token `--mod-busquedas`)
 > **Priority:** [H1]
 > **Referencia visual:** `/docs/referencias-ui/M4_Busquedas.tsx`
+> **Estado:** [SHIPPED 13.E — 2026-04-26] List/Drawer/Matcher core. Kanban + Wizard Ofertar diferidos a 13.F+/M07.
+
+## Estado FASE 13.E (shipped 2026-04-26)
+
+- BD: tabla `busquedas` (FK lead_id + criteria jsonb + matched_count + last_run_at + status). Migration `20260426203131_busquedas_create.sql`. RLS 8 policies (asesor / master broker / admin). Cero SECDEF nuevas — `audit_rls_allowlist` v30 vigente.
+- Feature `features/asesor-busquedas/` (RE-SKIN canon prototype): `BusquedasPage` + tabs activa/pausada/cerrada + filters + grid + card + detail drawer + match score badge + matcher engine deterministic.
+- Feature `features/busquedas/` (tRPC): 8 procedures (list/get/create/update/pause/close/reopen/runMatcher) + Zod schemas single source of truth.
+- Matcher engine canon: 5 dimensions (price 30%, zoneIE 25%, amenities 20%, family 15%, DISC 10%) + rationale chips. Pure deterministic function, no LLM, exhaustive Vitest coverage.
+- i18n keys: 5 locales (es-MX + en-US Tier 1; es-CO + es-AR + pt-BR fallback graceful).
+- Route: `app/[locale]/(asesor)/asesores/busquedas/page.tsx` (Suspense + canon shell).
+
+## Diferido (post 13.E)
+
+- Kanban drag&drop 6 columnas + validaciones HARD etapa → 13.F+.
+- Wizard Ofertar 6 pasos + parser EasyBroker/ML/Inmuebles24 → M07 Operaciones.
+- Notas 3 niveles visibility + historial cross-agencia → 13.G+.
+- Suggest semantic match C03 (Anthropic) → 13.H+.
 
 ---
 
