@@ -3374,6 +3374,68 @@ export type Database = {
           },
         ]
       }
+      exclusividad_acuerdos: {
+        Row: {
+          active: boolean
+          asesor_id: string | null
+          brokerage_id: string | null
+          comision_pct: number
+          created_at: string
+          end_date: string | null
+          id: string
+          meses_contrato: number
+          meses_exclusividad: number
+          meta: Json
+          proyecto_id: string
+          scope: Database["public"]["Enums"]["exclusividad_scope"]
+          signed_url: string | null
+          start_date: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          asesor_id?: string | null
+          brokerage_id?: string | null
+          comision_pct: number
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          meses_contrato: number
+          meses_exclusividad: number
+          meta?: Json
+          proyecto_id: string
+          scope?: Database["public"]["Enums"]["exclusividad_scope"]
+          signed_url?: string | null
+          start_date: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          asesor_id?: string | null
+          brokerage_id?: string | null
+          comision_pct?: number
+          created_at?: string
+          end_date?: string | null
+          id?: string
+          meses_contrato?: number
+          meses_exclusividad?: number
+          meta?: Json
+          proyecto_id?: string
+          scope?: Database["public"]["Enums"]["exclusividad_scope"]
+          signed_url?: string | null
+          start_date?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exclusividad_acuerdos_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       family_unit_members: {
         Row: {
           buyer_twin_id: string
@@ -7085,6 +7147,62 @@ export type Database = {
         }
         Relationships: []
       }
+      marketing_assets: {
+        Row: {
+          asset_type: Database["public"]["Enums"]["marketing_asset_type"]
+          created_at: string
+          display_order: number
+          expires_at: string | null
+          format: string | null
+          id: string
+          locale: string
+          meta: Json
+          proyecto_id: string
+          status: Database["public"]["Enums"]["marketing_asset_status"]
+          thumbnail_url: string | null
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          asset_type: Database["public"]["Enums"]["marketing_asset_type"]
+          created_at?: string
+          display_order?: number
+          expires_at?: string | null
+          format?: string | null
+          id?: string
+          locale?: string
+          meta?: Json
+          proyecto_id: string
+          status?: Database["public"]["Enums"]["marketing_asset_status"]
+          thumbnail_url?: string | null
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          asset_type?: Database["public"]["Enums"]["marketing_asset_type"]
+          created_at?: string
+          display_order?: number
+          expires_at?: string | null
+          format?: string | null
+          id?: string
+          locale?: string
+          meta?: Json
+          proyecto_id?: string
+          status?: Database["public"]["Enums"]["marketing_asset_status"]
+          thumbnail_url?: string | null
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "marketing_assets_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ml_training_snapshots: {
         Row: {
           corpus_name: string
@@ -7963,6 +8081,62 @@ export type Database = {
           },
         ]
       }
+      project_brokers: {
+        Row: {
+          active: boolean
+          assigned_at: string
+          broker_user_id: string
+          commission_pct: number | null
+          created_at: string
+          expires_at: string | null
+          id: string
+          meses_contrato: number | null
+          meses_exclusividad: number | null
+          meta: Json
+          proyecto_id: string
+          role: Database["public"]["Enums"]["project_broker_role"]
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          assigned_at?: string
+          broker_user_id: string
+          commission_pct?: number | null
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          meses_contrato?: number | null
+          meses_exclusividad?: number | null
+          meta?: Json
+          proyecto_id: string
+          role?: Database["public"]["Enums"]["project_broker_role"]
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          assigned_at?: string
+          broker_user_id?: string
+          commission_pct?: number | null
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          meses_contrato?: number | null
+          meses_exclusividad?: number | null
+          meta?: Json
+          proyecto_id?: string
+          role?: Database["public"]["Enums"]["project_broker_role"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_brokers_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_scores: {
         Row: {
           anomaly: Json | null
@@ -8100,6 +8274,124 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+        ]
+      }
+      proyectos: {
+        Row: {
+          amenities: Json
+          bedrooms_range: number[] | null
+          brochure_url: string | null
+          ciudad: string | null
+          colonia: string | null
+          country_code: string
+          cover_photo_url: string | null
+          created_at: string
+          currency: string
+          desarrolladora_id: string
+          description: string | null
+          direccion: string | null
+          id: string
+          is_active: boolean
+          lat: number | null
+          lng: number | null
+          meta: Json
+          nombre: string
+          operacion: Database["public"]["Enums"]["proyecto_operacion"]
+          price_max_mxn: number | null
+          price_min_mxn: number | null
+          privacy_level: Database["public"]["Enums"]["proyecto_privacy"]
+          slug: string
+          status: Database["public"]["Enums"]["proyecto_status"]
+          tipo: Database["public"]["Enums"]["proyecto_tipo"]
+          units_available: number | null
+          units_total: number | null
+          updated_at: string
+          zone_id: string | null
+        }
+        Insert: {
+          amenities?: Json
+          bedrooms_range?: number[] | null
+          brochure_url?: string | null
+          ciudad?: string | null
+          colonia?: string | null
+          country_code?: string
+          cover_photo_url?: string | null
+          created_at?: string
+          currency?: string
+          desarrolladora_id: string
+          description?: string | null
+          direccion?: string | null
+          id?: string
+          is_active?: boolean
+          lat?: number | null
+          lng?: number | null
+          meta?: Json
+          nombre: string
+          operacion?: Database["public"]["Enums"]["proyecto_operacion"]
+          price_max_mxn?: number | null
+          price_min_mxn?: number | null
+          privacy_level?: Database["public"]["Enums"]["proyecto_privacy"]
+          slug: string
+          status?: Database["public"]["Enums"]["proyecto_status"]
+          tipo?: Database["public"]["Enums"]["proyecto_tipo"]
+          units_available?: number | null
+          units_total?: number | null
+          updated_at?: string
+          zone_id?: string | null
+        }
+        Update: {
+          amenities?: Json
+          bedrooms_range?: number[] | null
+          brochure_url?: string | null
+          ciudad?: string | null
+          colonia?: string | null
+          country_code?: string
+          cover_photo_url?: string | null
+          created_at?: string
+          currency?: string
+          desarrolladora_id?: string
+          description?: string | null
+          direccion?: string | null
+          id?: string
+          is_active?: boolean
+          lat?: number | null
+          lng?: number | null
+          meta?: Json
+          nombre?: string
+          operacion?: Database["public"]["Enums"]["proyecto_operacion"]
+          price_max_mxn?: number | null
+          price_min_mxn?: number | null
+          privacy_level?: Database["public"]["Enums"]["proyecto_privacy"]
+          slug?: string
+          status?: Database["public"]["Enums"]["proyecto_status"]
+          tipo?: Database["public"]["Enums"]["proyecto_tipo"]
+          units_available?: number | null
+          units_total?: number | null
+          updated_at?: string
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "proyectos_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "proyectos_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "proyectos_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -14638,6 +14930,80 @@ export type Database = {
           },
         ]
       }
+      unidades: {
+        Row: {
+          area_m2: number | null
+          area_terreno_m2: number | null
+          banos: number | null
+          created_at: string
+          features: Json
+          floor: number | null
+          floor_plan_url: string | null
+          id: string
+          maintenance_fee_mxn: number | null
+          meta: Json
+          numero: string
+          parking: number | null
+          photos: string[]
+          price_mxn: number | null
+          proyecto_id: string
+          recamaras: number | null
+          status: Database["public"]["Enums"]["unidad_status"]
+          tipo: Database["public"]["Enums"]["unidad_tipo"]
+          updated_at: string
+        }
+        Insert: {
+          area_m2?: number | null
+          area_terreno_m2?: number | null
+          banos?: number | null
+          created_at?: string
+          features?: Json
+          floor?: number | null
+          floor_plan_url?: string | null
+          id?: string
+          maintenance_fee_mxn?: number | null
+          meta?: Json
+          numero: string
+          parking?: number | null
+          photos?: string[]
+          price_mxn?: number | null
+          proyecto_id: string
+          recamaras?: number | null
+          status?: Database["public"]["Enums"]["unidad_status"]
+          tipo?: Database["public"]["Enums"]["unidad_tipo"]
+          updated_at?: string
+        }
+        Update: {
+          area_m2?: number | null
+          area_terreno_m2?: number | null
+          banos?: number | null
+          created_at?: string
+          features?: Json
+          floor?: number | null
+          floor_plan_url?: string | null
+          id?: string
+          maintenance_fee_mxn?: number | null
+          meta?: Json
+          numero?: string
+          parking?: number | null
+          photos?: string[]
+          price_mxn?: number | null
+          proyecto_id?: string
+          recamaras?: number | null
+          status?: Database["public"]["Enums"]["unidad_status"]
+          tipo?: Database["public"]["Enums"]["unidad_tipo"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unidades_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_scores: {
         Row: {
           citations: Json
@@ -18113,11 +18479,50 @@ export type Database = {
       }
     }
     Enums: {
+      exclusividad_scope: "full" | "category" | "territory"
       market_capture_source:
         | "chrome_extension"
         | "admin_upload"
         | "partnership_feed"
         | "api_official"
+      marketing_asset_status: "ready" | "generating" | "expired" | "error"
+      marketing_asset_type:
+        | "photo_gallery"
+        | "video"
+        | "video_story"
+        | "brochure_pdf"
+        | "render_3d"
+        | "virtual_tour"
+        | "floor_plan"
+        | "post_cuadrado"
+        | "post_largo"
+        | "story"
+      project_broker_role: "lead_broker" | "associate" | "coordinator"
+      proyecto_operacion: "venta" | "renta"
+      proyecto_privacy: "public" | "broker_only" | "assigned_only"
+      proyecto_status: "preventa" | "construccion" | "terminado" | "entregado"
+      proyecto_tipo:
+        | "departamento"
+        | "casa"
+        | "townhouse"
+        | "loft"
+        | "penthouse"
+        | "oficina"
+        | "local"
+        | "terreno"
+      unidad_status:
+        | "disponible"
+        | "apartada"
+        | "vendida"
+        | "reservada"
+        | "bloqueada"
+      unidad_tipo:
+        | "departamento"
+        | "casa"
+        | "townhouse"
+        | "loft"
+        | "penthouse"
+        | "estudio"
       user_role:
         | "superadmin"
         | "admin_desarrolladora"
@@ -18267,11 +18672,54 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      exclusividad_scope: ["full", "category", "territory"],
       market_capture_source: [
         "chrome_extension",
         "admin_upload",
         "partnership_feed",
         "api_official",
+      ],
+      marketing_asset_status: ["ready", "generating", "expired", "error"],
+      marketing_asset_type: [
+        "photo_gallery",
+        "video",
+        "video_story",
+        "brochure_pdf",
+        "render_3d",
+        "virtual_tour",
+        "floor_plan",
+        "post_cuadrado",
+        "post_largo",
+        "story",
+      ],
+      project_broker_role: ["lead_broker", "associate", "coordinator"],
+      proyecto_operacion: ["venta", "renta"],
+      proyecto_privacy: ["public", "broker_only", "assigned_only"],
+      proyecto_status: ["preventa", "construccion", "terminado", "entregado"],
+      proyecto_tipo: [
+        "departamento",
+        "casa",
+        "townhouse",
+        "loft",
+        "penthouse",
+        "oficina",
+        "local",
+        "terreno",
+      ],
+      unidad_status: [
+        "disponible",
+        "apartada",
+        "vendida",
+        "reservada",
+        "bloqueada",
+      ],
+      unidad_tipo: [
+        "departamento",
+        "casa",
+        "townhouse",
+        "loft",
+        "penthouse",
+        "estudio",
       ],
       user_role: [
         "superadmin",
