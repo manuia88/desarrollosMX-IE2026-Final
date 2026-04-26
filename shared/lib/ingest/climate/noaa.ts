@@ -7,6 +7,10 @@
 // Auth: header `token: <process.env.NOAA_TOKEN>`. Free tier: 5 req/sec,
 // 10 000 req/day. Backfill 8 active stations × 192 months ≈ 1536 calls
 // at 250 ms throttle ≈ 6.4 min. Cost: $0.
+//
+// F1.C.A 2026-04-26: writes to climate_source_observations (NOT directly
+// climate_monthly_aggregates). Cross-validation winner derived by
+// recompute_climate_aggregates_from_observations() SECDEF post-fetch.
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
@@ -130,13 +134,14 @@ export type NoaaDataResponse = z.infer<typeof NoaaDataResponseSchema>;
 export interface MonthlyAggregateRow {
   readonly zone_id: string;
   readonly year_month: string;
+  readonly station_id: string;
   readonly temp_avg: number | null;
   readonly temp_max: number | null;
   readonly temp_min: number | null;
   readonly rainfall_mm: number | null;
   readonly humidity_avg: number | null;
   readonly extreme_events_count: Record<string, number>;
-  readonly source: 'noaa' | 'conagua' | 'hybrid';
+  readonly source: 'noaa';
 }
 
 export async function fetchNoaa(
@@ -425,6 +430,7 @@ export const noaaDriver: IngestDriver<NoaaFetchInput, NoaaFetchPayload> = {
         rows.push({
           zone_id,
           year_month: ym,
+          station_id,
           temp_avg: agg.temp_avg,
           temp_max: agg.temp_max,
           temp_min: agg.temp_min,
@@ -452,6 +458,7 @@ export const noaaDriver: IngestDriver<NoaaFetchInput, NoaaFetchPayload> = {
     const payload = rows.map((r) => ({
       zone_id: r.zone_id,
       year_month: r.year_month,
+      station_id: r.station_id,
       temp_avg: r.temp_avg,
       temp_max: r.temp_max,
       temp_min: r.temp_min,
@@ -461,15 +468,15 @@ export const noaaDriver: IngestDriver<NoaaFetchInput, NoaaFetchPayload> = {
       source: r.source,
     }));
     const { error } = await supabase
-      .from('climate_monthly_aggregates')
-      .upsert(payload, { onConflict: 'zone_id,year_month' });
+      .from('climate_source_observations')
+      .upsert(payload, { onConflict: 'zone_id,year_month,source' });
     if (error) {
       return {
         rows_inserted: 0,
         rows_updated: 0,
         rows_skipped: 0,
         rows_dlq: rows.length,
-        errors: [`climate_monthly_aggregates upsert failed: ${error.message}`],
+        errors: [`climate_source_observations upsert failed: ${error.message}`],
       };
     }
     return {

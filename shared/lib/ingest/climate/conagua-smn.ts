@@ -6,8 +6,12 @@
 // 13 CDMX active stations cover 2010-2025.
 //
 // F1.B 2026-04-26: replaces H2 STUB throw with real fetcher. No humidity in
-// archive — humidity_avg = NULL on source='conagua' rows; blend layer can
-// promote to source='hybrid' when paired with NOAA temp.
+// archive — humidity_avg = NULL on source='conagua' rows.
+//
+// F1.C.A 2026-04-26: writes to climate_source_observations (NOT directly
+// climate_monthly_aggregates). Cross-validation winner derived by
+// recompute_climate_aggregates_from_observations() SECDEF post-fetch
+// (CONAGUA preferred when match within tol; NOAA preferred on outlier).
 
 import * as https from 'node:https';
 import type { SupabaseClient } from '@supabase/supabase-js';
@@ -326,6 +330,7 @@ export async function fetchConaguaPayload(
 interface DbRow {
   zone_id: string;
   year_month: string;
+  station_id: string;
   temp_avg: number | null;
   temp_max: number | null;
   temp_min: number | null;
@@ -378,6 +383,7 @@ export const conaguaDriver: IngestDriver<ConaguaFetchInput, ConaguaFetchPayload>
         rows.push({
           zone_id,
           year_month: m.year_month,
+          station_id,
           temp_avg: m.temp_avg,
           temp_max: m.temp_max,
           temp_min: m.temp_min,
@@ -403,15 +409,15 @@ export const conaguaDriver: IngestDriver<ConaguaFetchInput, ConaguaFetchPayload>
     }
     const supabase = createAdminClient();
     const { error } = await supabase
-      .from('climate_monthly_aggregates')
-      .upsert(rows, { onConflict: 'zone_id,year_month' });
+      .from('climate_source_observations')
+      .upsert(rows, { onConflict: 'zone_id,year_month,source' });
     if (error) {
       return {
         rows_inserted: 0,
         rows_updated: 0,
         rows_skipped: 0,
         rows_dlq: rows.length,
-        errors: [`climate_monthly_aggregates upsert failed: ${error.message}`],
+        errors: [`climate_source_observations upsert failed: ${error.message}`],
       };
     }
     return {
