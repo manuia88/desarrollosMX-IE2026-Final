@@ -7,10 +7,10 @@
 > **Priority:** [H1]
 > **Referencia visual:** `/docs/referencias-ui/M2_Desarrollos.tsx`
 >
-> **Estado 2026-04-26:**
+> **Estado 2026-04-26 (FASE 13.C-datasource shipped):**
 > - UI shipped FASE 13.C (route + 11 components + 3 hooks + 3 lib utilities + 36 tests, 66 i18n keys × 5 locales).
-> - Datasource STUB ADR-018 (4 señales canon-permitidas): procedures retornan empty array honesto + empty state "Sin desarrollos asignados — Habla con tu Master Broker" + DisclosurePill datasource pending + button "+ Nuevo proyecto" disabled discernible.
-> - Tablas BD `proyectos` + 8 dependencias (`unidades`, `precios_unidad`, `project_brokers`, `photos`, `documents`, `marketing_assets`, `exclusividad_acuerdos`, `acm_valuaciones`) se materializan en FASE 15 M11 (Inventario Dev) con shape definitivo + RLS + SECDEF helpers.
+> - **Datasource real shipped FASE 13.C-datasource**: 5 tablas core BD creadas (`proyectos`, `unidades`, `project_brokers`, `marketing_assets`, `exclusividad_acuerdos`) con RLS por rol (asesor via project_brokers, admin_desarrolladora scope, master_broker scope, superadmin all). Procedures `desarrollos.list/get/searchByName/listUnidades/listBrokers/listAssets/listExclusividad` (7 procedures wired). Loader `loadDesarrollos` consume real BD vía `createAdminClient` con scope filtering (own/exclusive/dmx/mls). Empty state honesto cuando BD vacía: `isStub=true + reason="BD vacía..."`.
+> - Tablas BD restantes M11 FASE 15: `precios_unidad`, `photos`, `documents`, `acm_valuaciones` (no bloquean asesor read-only view).
 > - Components shipped: `DesarrollosPage`, `DesarrollosTabs`, `DesarrollosFilters`, `DesarrollosSort`, `DesarrollosGrid`, `DesarrollosSkeleton`, `DesarrolloCard`, `DesarrolloDetailDrawer`, `QualityScoreBadge` (4 niveles canon NO invertidos), `ExclusividadBadge` (formato X-Y-Z), `EmptyState` (SVG inline canon), `PhotoPlaceholder` (gradient teal canon, NO Lorem Picsum).
 > - Hooks shipped: `useDesarrollosFilters` (URL search params), `useDesarrollosTab`, `useDesarrolloDrawer` (focus trap + ESC handler).
 > - Tests Vitest shipped: schemas + quality-score + loader STUB + components/hooks smoke (zero render dependencias DOM).

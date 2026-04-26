@@ -4,6 +4,7 @@ import { mfaRouter } from '@/features/auth/routes/mfa';
 import { roleRequestRouter } from '@/features/auth/routes/role-request';
 import { constellationsRouter } from '@/features/constellations/routes/constellations';
 import { crmRouter } from '@/features/crm/routes/crm';
+import { desarrollosRouter } from '@/features/desarrollos/routes/desarrollos';
 import { fxRouter } from '@/features/fx/routes/fx';
 import { ghostZonesRouter } from '@/features/ghost-zones/routes/ghost-zones';
 import { aiRouter } from '@/features/ia-generativa/routes/ai';
@@ -45,6 +46,7 @@ export const appRouter = router({
   causal: causalRouter,
   constellations: constellationsRouter,
   crm: crmRouter,
+  desarrollos: desarrollosRouter,
   fx: fxRouter,
   ghostZones: ghostZonesRouter,
   market: marketRouter,
