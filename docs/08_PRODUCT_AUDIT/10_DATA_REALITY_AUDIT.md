@@ -363,3 +363,20 @@ Lista completa: `docs/08_PRODUCT_AUDIT/01_CROSSWALK_MATRIX.md` + `docs/08_PRODUC
 - **Sub-bloques B/C/D/E/F** de FASE 07.7 quedan opcionales (B detalle ops mejor agendar en FASE 14 cohesivo con M07 wizard).
 
 **Estado §9:** Handoff documentado. CRM Foundation A.4 entregado. M01 ready post-A.5 + 3 disclosures P0.
+
+### §9.7 Cierre A.5 (2026-04-25) — verificación handoff B.1
+
+Post-A.5 retrofit E2E + tag dual `fase-07.7.A.5-complete` + `fase-07.7-complete`. **FASE 07.7 CERRADA**.
+
+**Verificación handoff B.1 must-have:**
+
+| Item | Status post-A.5 |
+|---|---|
+| 3 disclosure bugs P0 documentados + L-NEW asignados | ✅ Confirmado §9.3 — L-NEW-DEMO-DISCLOSURE-S5 (~2h) + L-NEW-DEMO-DISCLOSURE-A3-01 (~1.5h) + L-NEW-CLIMATE-DISCLOSURE-01 (~1h) |
+| 14 tablas CRM + 24 procedures listos para wiring UI | ✅ A.4 shipped, BD prod aplicada |
+| E2E tests retrofit en place (.skip() activable B.1) | ✅ A.5 shipped — `tests/e2e/zone-data-freshness.spec.ts` 5 tests `.skip()` con STUB ADR-018 4 señales + testIDs canónicos documentados |
+| INEGI silent gap (A.3 hallazgo) resolved | ✅ A.4 PRE-0 Check 4 confirmó 5 sources con runs recientes, falsa alarma A.3. L-NEW-MACRO-INEGI-INPC-01 sigue agendado para investigación específica (no bloqueante para B.1) |
+| audit-dead-ui:ci baseline 25 mantenido + workflow gate active | ✅ `tests/e2e/audit-dead-ui-meta.spec.ts` valida `length === 25` + workflow `pull_request` + `branches:[main]` |
+| audit:rls 0 violations post v29 | ✅ Confirmado |
+
+**Activación tests E2E `.skip()` en B.1:** los 5 tests `zone-data-freshness.spec.ts` se activan cambiando `test.describe.skip` → `test.describe` cuando UI canónica `/zonas/[colonia]` shipped + 7 testIDs wired (`demographics-disclosure-badge`, `climate-disclosure-badge`, `atlas-wiki-narrative`, `atlas-wiki-disclosure-flag`, `str-source-attribution`, `zone-name-header`, `zone-data-freshness-indicator`).

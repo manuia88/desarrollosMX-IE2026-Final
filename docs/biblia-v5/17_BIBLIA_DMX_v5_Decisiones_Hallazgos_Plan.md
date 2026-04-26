@@ -745,3 +745,58 @@ supabase/migrations/
 - **26 features RICE downstream** desbloqueadas. Top 5: C1.10 buyer twin preloaded · C1.11 portal-to-CRM auto-capture · C2.1 AVM spread · C5.5.3 streaks asesor · T.2.4 referral magic link.
 
 **Status A.4:** Shipped (handoff a sub-bloque A.5 — E2E retrofit + tag `fase-07.7-complete`).
+
+---
+
+## Append 07.7.A.5 — E2E tests retrofit + CIERRE FASE 07.7 (2026-04-25)
+
+### DECISIÓN N+1: FASE 07.7 CIERRE master shipped
+
+Sub-fase **07.7.A.5** cierra **FASE 07.7 master** con tag dual `fase-07.7.A.5-complete` (sub-bloque) + `fase-07.7-complete` (CIERRE FASE).
+
+**5 sub-bloques A.1-A.5 shipped:**
+- A.1 — Audit M01-M20 + ADR-048 frontend prototype canonical replacement
+- A.2 — Bloqueadores estructurales + audit-dead-ui (ADR-049 enforcement)
+- A.3 — Data Reality Audit + scope pivot transparente + 4 STUB markers
+- A.4 — CRM Foundation schema (BLK_DEALS resuelto, 14 tablas + 24 procedures)
+- A.5 — E2E tests retrofit + docs cierre FASE master
+
+### Outputs A.5
+
+- **Integration tests** ampliados `features/crm/tests/integration/crm-router.test.ts`: 2 → 32 tests (+30 modo A mock-based via `createCaller` cubriendo Zod refines, enum guards, STUB markers, error paths, auth gate `UNAUTHORIZED`).
+- **Playwright E2E** — 3 specs nuevos en `tests/e2e/`:
+  - `zone-data-freshness.spec.ts` (5 tests `.skip()` + STUB ADR-018 4 señales)
+  - `audit-dead-ui-meta.spec.ts` (3 tests sin browser, baseline 25 + workflow gate)
+  - `crm-pipeline-flow.spec.ts` (3 tests API-direct via `createTRPCProxyClient<CrmRouter>`, conditional skip si no `PLAYWRIGHT_TEST_JWT`)
+
+### Métricas A.5
+
+- Tests: **+30** (3159 → 3189 pass + 2 skipped)
+- E2E specs: **+11** (5 zone skipped + 3 meta + 3 crm conditional)
+- audit-dead-ui:ci: **clean** (baseline 25 mantenido)
+- audit:rls: **0 violations** (post v29)
+- typecheck: **clean**
+- Cero migrations + cero SECDEF nuevas (A.5 tests + docs only)
+
+### Decisiones canon aplicadas
+
+- BIBLIA DECISIÓN 2 respetada (no borrar) — solo append + STUB markers donde UI no shipped
+- Memoria `feedback_audit_rls_strict_post_merge_gap` aplicada (zero SECDEF nuevas)
+- Memoria `feedback_zsh_no_hash_comments_terminal_blocks` aplicada (bloques copy-paste sin `#` comments)
+- Tag dual canónico: sub-bloque + master CIERRE FASE
+
+### Handoff B.1 — M01 Dashboard Asesor (greenfield 0%)
+
+3 disclosure bugs P0 must-have antes de wiring UI canónica (heredados A.3 → A.4 → A.5):
+
+- **L-NEW-DEMO-DISCLOSURE-S5** Atlas Wiki narrative fix (~2h)
+- **L-NEW-DEMO-DISCLOSURE-A3-01** UI ficha colonia badge "Estimación H1" (~1.5h)
+- **L-NEW-CLIMATE-DISCLOSURE-01** Climate UI badge "Modelo SEED H1" (~1h)
+
+CRM disponible para wiring UI M01:
+- 14 tablas dominio + 1 audit particionada
+- 24 procedures tRPC `crm.*` (lead 4 + deal 4 + operacion 3 + buyerTwin 3 + referral 3 + familyUnit 3 + catalogs 4)
+- 7 SECDEF helpers RLS funcionales
+- 26 features RICE downstream desbloqueadas
+
+**Status A.5 + FASE 07.7 master:** Shipped (tag dual `fase-07.7.A.5-complete` + `fase-07.7-complete` pushed). FASE 07.7 CERRADA. Próximo: B.1 M01 Dashboard Asesor (FASE 14+).

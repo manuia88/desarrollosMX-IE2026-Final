@@ -1,7 +1,7 @@
 # FASE 07.7 — CRM Foundation (mini-fase foundational, BLK_DEALS resolution)
 
 ## Status
-🟢 SHIPPED A.4 schema core (2026-04-25) — sub-bloques A.5 / B / C / D / E / F siguen pendientes pre-tag `fase-07.7-complete`. A.4 resolvió BLK_DEALS schema canonical (leads + buyer_twins + deals + operaciones + family_units + referrals + behavioral_signals + audit_crm_log).
+🟢 **SHIPPED full FASE 2026-04-25** — sub-bloques A.1 + A.2 + A.3 + A.4 + A.5 cerrados. Tags `fase-07.7.A.1-complete` … `fase-07.7.A.5-complete` + master `fase-07.7-complete` pushed. BLK_DEALS resuelto. CRM Foundation listo para wiring UI M01 portal asesor downstream (FASE 14 — handoff B.1 con 3 disclosure bugs P0 must-have).
 
 ## Trigger
 - Inicio: tag `fase-07.6-complete` + founder cerró Gates 1, 2, 3 (ref `docs/08_PRODUCT_AUDIT/05_FOUNDER_DECISION_GATES.md`)
@@ -170,4 +170,61 @@ Router raíz `crm.*` con 7 sub-routers:
 - M01 Dashboard Asesor (FASE 14+) lee `leads` + `deals` + `operaciones` con disclosure badges H1
 - M03 Contactos (FASE 13) extenderá `leads` → `contactos` full schema
 - M07 Operaciones (FASE 14) extenderá `operaciones` con `operacion_parts` + `operacion_commissions`
+
+---
+
+## Sub-bloque A.5 — SHIPPED 2026-04-25 (CIERRE FASE 07.7)
+
+> E2E tests retrofit + docs cierre. Cierra FASE 07.7 master con tag dual `fase-07.7.A.5-complete` + `fase-07.7-complete`.
+
+### Outputs A.5
+
+- **Integration tests** ampliados: `features/crm/tests/integration/crm-router.test.ts` 2 → 32 tests (+30 modo A mock-based: Zod refines, enum guards, STUB markers, error paths, auth gate `UNAUTHORIZED`).
+- **Playwright E2E** — 3 archivos nuevos en `tests/e2e/`:
+  - `zone-data-freshness.spec.ts` — 5 tests `.skip()` con STUB ADR-018 (4 señales: comentario inline + `test.describe.skip` + L-NEW IDs grep-able + doc reference). Activar B.1 cuando UI canónica `/zonas/[colonia]` shipped.
+  - `audit-dead-ui-meta.spec.ts` — 3 tests sin browser, corren siempre. Validan `audit:dead-ui:ci` 0 violations + baseline exactly 25 entries + workflow `e2e-audit.yml` gates PR + push to main.
+  - `crm-pipeline-flow.spec.ts` — 3 tests API-direct via `createTRPCProxyClient<CrmRouter>`. Skip graceful cuando `PLAYWRIGHT_TEST_JWT` no presente. Cubre: cascade lead→deal→close(won)→operacion + `TRPCClientError` en deal inexistente + STUB `buyerTwin.searchSimilar` retorna `NOT_IMPLEMENTED` con marker `buyer_twin_similar_stub_fase_13_b_7`.
+- **2 sub-agents paralelos AUDIT/DESIGN** ejecutados pre-implementación (drafts en `tmp/A.5-drafts/`).
+
+### Métricas A.5
+
+- Tests: **+30 integration** (3159 → 3189 pass + 2 skipped)
+- E2E specs: **+11 nuevos** (5 zone skipped + 3 meta corren siempre + 3 crm conditional skip si no JWT)
+- audit-dead-ui:ci: **clean** (baseline 25 mantenido)
+- audit:rls: **0 violations** (post v29 fix)
+- typecheck: **clean**
+- Cero migrations nuevas en A.5 (esta sesión es tests + docs)
+- Cero SECDEF nuevas (memoria `feedback_audit_rls_strict_post_merge_gap` aplicada)
+
+### Decisiones canon aplicadas
+
+- D1: UI canónica NO shipped (M01 0% complete) → tests visit-page con `.skip()` + STUB ADR-018 4 señales.
+- D2: Integration tests Modo A only (mock-based con `createCaller`). Modo B (real DB + JWT custom + preview branches) defer a sub-bloque dedicado "RLS Hardening" porque añade complejidad infra (`SUPABASE_JWT_SECRET`, JWT minting, namespace cleanup) fuera scope tests retrofit.
+- D3: Cero schema changes en A.5 (G5 STOP guard respetado).
+- D4: Tag dual canónico (`fase-07.7.A.5-complete` sub-bloque + `fase-07.7-complete` master CIERRE FASE).
+
+### Handoff B.1 — M01 Dashboard Asesor (greenfield 0%)
+
+3 disclosure bugs P0 must-have antes de wiring UI canónica:
+
+- **L-NEW-DEMO-DISCLOSURE-S5** — Atlas Wiki Haiku narrative cita synthetic como "INEGI" sin disclosure flag (~2h fix narrative + flag).
+- **L-NEW-DEMO-DISCLOSURE-A3-01** — UI ficha colonia consume sintético sin badge "Estimación H1" (~1.5h badge component + wiring).
+- **L-NEW-CLIMATE-DISCLOSURE-01** — Climate UI badge "Modelo SEED H1" hasta NOAA real ingest (~1h badge component).
+
+testIDs canónicos para B.1 wiring (zone-data-freshness.spec.ts activation):
+- `demographics-disclosure-badge`, `climate-disclosure-badge`, `atlas-wiki-narrative`, `atlas-wiki-disclosure-flag`, `str-source-attribution`, `zone-name-header`, `zone-data-freshness-indicator`.
+
+CRM disponible para wiring UI M01:
+- 14 tablas dominio + 1 audit particionada
+- 24 procedures tRPC en `crm.*` router (lead 4 + deal 4 + operacion 3 + buyerTwin 3 + referral 3 + familyUnit 3 + catalogs 4)
+- 7 SECDEF helpers RLS funcionales
+- pg_partman partitions en `behavioral_signals` (24m) + `audit_crm_log` (84m)
+- pgvector ivfflat en `buyer_twins.behavioral_embedding` (1536d, STUB knn FASE 13.B.7)
+
+### Tag dual al merge
+
+```
+git tag fase-07.7.A.5-complete  # sub-bloque granular
+git tag fase-07.7-complete       # CIERRE FASE master (5 sub-bloques A.1-A.5 shipped)
+```
 
