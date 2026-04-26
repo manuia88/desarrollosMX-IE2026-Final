@@ -3338,6 +3338,8 @@ export type Database = {
       }
       enigh_zone_income: {
         Row: {
+          data_origin: string
+          downscale_proxy_ratio: number | null
           id: string
           median_salary_mxn: number | null
           salary_range_distribution: Json
@@ -3345,6 +3347,8 @@ export type Database = {
           zone_id: string
         }
         Insert: {
+          data_origin?: string
+          downscale_proxy_ratio?: number | null
           id?: string
           median_salary_mxn?: number | null
           salary_range_distribution?: Json
@@ -3352,6 +3356,8 @@ export type Database = {
           zone_id: string
         }
         Update: {
+          data_origin?: string
+          downscale_proxy_ratio?: number | null
           id?: string
           median_salary_mxn?: number | null
           salary_range_distribution?: Json
@@ -4341,6 +4347,66 @@ export type Database = {
         }
         Relationships: []
       }
+      inegi_ageb_staging: {
+        Row: {
+          ageb_total_area_km2: number | null
+          cve_ageb: string
+          cve_ent: string
+          cve_loc: string
+          cve_mun: string
+          geom_4326: unknown
+          graproes: number | null
+          imported_at: string
+          pea: number | null
+          pob_0_14: number | null
+          pob_15_64: number | null
+          pob_65_mas: number | null
+          poblacion_12y: number | null
+          pobtot: number | null
+          tothog: number | null
+          vph_inter: number | null
+          vph_pc: number | null
+        }
+        Insert: {
+          ageb_total_area_km2?: number | null
+          cve_ageb: string
+          cve_ent: string
+          cve_loc: string
+          cve_mun: string
+          geom_4326: unknown
+          graproes?: number | null
+          imported_at?: string
+          pea?: number | null
+          pob_0_14?: number | null
+          pob_15_64?: number | null
+          pob_65_mas?: number | null
+          poblacion_12y?: number | null
+          pobtot?: number | null
+          tothog?: number | null
+          vph_inter?: number | null
+          vph_pc?: number | null
+        }
+        Update: {
+          ageb_total_area_km2?: number | null
+          cve_ageb?: string
+          cve_ent?: string
+          cve_loc?: string
+          cve_mun?: string
+          geom_4326?: unknown
+          graproes?: number | null
+          imported_at?: string
+          pea?: number | null
+          pob_0_14?: number | null
+          pob_15_64?: number | null
+          pob_65_mas?: number | null
+          poblacion_12y?: number | null
+          pobtot?: number | null
+          tothog?: number | null
+          vph_inter?: number | null
+          vph_pc?: number | null
+        }
+        Relationships: []
+      }
       inegi_census_zone_stats: {
         Row: {
           age_distribution: Json
@@ -4348,8 +4414,16 @@ export type Database = {
           densidad_hab_km2: number | null
           dominant_profession: string | null
           edad_mediana_anios: number | null
+          graproes_anios: number | null
           hogares_censales: number | null
           id: string
+          pct_pob_0_14: number | null
+          pct_pob_15_64: number | null
+          pct_pob_65_mas: number | null
+          pct_viviendas_internet: number | null
+          pct_viviendas_pc: number | null
+          pea_ratio: number | null
+          per_ageb_aggregations: Json | null
           poblacion_12_y_mas: number | null
           poblacion_total: number | null
           profession_distribution: Json
@@ -4362,8 +4436,16 @@ export type Database = {
           densidad_hab_km2?: number | null
           dominant_profession?: string | null
           edad_mediana_anios?: number | null
+          graproes_anios?: number | null
           hogares_censales?: number | null
           id?: string
+          pct_pob_0_14?: number | null
+          pct_pob_15_64?: number | null
+          pct_pob_65_mas?: number | null
+          pct_viviendas_internet?: number | null
+          pct_viviendas_pc?: number | null
+          pea_ratio?: number | null
+          per_ageb_aggregations?: Json | null
           poblacion_12_y_mas?: number | null
           poblacion_total?: number | null
           profession_distribution?: Json
@@ -4376,8 +4458,16 @@ export type Database = {
           densidad_hab_km2?: number | null
           dominant_profession?: string | null
           edad_mediana_anios?: number | null
+          graproes_anios?: number | null
           hogares_censales?: number | null
           id?: string
+          pct_pob_0_14?: number | null
+          pct_pob_15_64?: number | null
+          pct_pob_65_mas?: number | null
+          pct_viviendas_internet?: number | null
+          pct_viviendas_pc?: number | null
+          pea_ratio?: number | null
+          per_ageb_aggregations?: Json | null
           poblacion_12_y_mas?: number | null
           poblacion_total?: number | null
           profession_distribution?: Json
@@ -17127,6 +17217,7 @@ export type Database = {
         }[]
       }
       jsonb_diff: { Args: { a: Json; b: Json }; Returns: Json }
+      load_inegi_ageb_staging_batch: { Args: { p_rows: Json }; Returns: number }
       longtransactionsenabled: { Args: never; Returns: boolean }
       market_migration_alert_pct: {
         Args: { p_lookback_days?: number; p_market_id: string }
@@ -17273,6 +17364,10 @@ export type Database = {
       }
       recompute_climate_aggregates_from_observations: {
         Args: { p_year_month?: string; p_zone_id?: string }
+        Returns: Json
+      }
+      recompute_zone_demographics_from_ageb: {
+        Args: { p_zone_id?: string }
         Returns: Json
       }
       recompute_zone_tier: {
