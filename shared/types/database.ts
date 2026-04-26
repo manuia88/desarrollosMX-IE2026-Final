@@ -17955,6 +17955,16 @@ export type Database = {
         Returns: Record<string, unknown>
       }
       unlockrows: { Args: { "": string }; Returns: number }
+      update_zone_boundary_from_geojson: {
+        Args: {
+          p_area_km2: number
+          p_geojson_text: string
+          p_lat_centroid: number
+          p_lng_centroid: number
+          p_zone_id: string
+        }
+        Returns: Json
+      }
       updategeometrysrid: {
         Args: {
           catalogn_name: string
