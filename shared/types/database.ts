@@ -579,6 +579,468 @@ export type Database = {
         }
         Relationships: []
       }
+      audit_crm_log: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_default: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20251201: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20260101: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20260201: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20260301: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20260401: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20260501: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20260601: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20260701: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      audit_crm_log_p20260801: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       audit_log: {
         Row: {
           action: string
@@ -1329,6 +1791,270 @@ export type Database = {
         }
         Relationships: []
       }
+      behavioral_signals: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_default: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20251201: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20260101: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20260201: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20260301: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20260401: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20260501: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20260601: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20260701: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
+      behavioral_signals_p20260801: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
+        }
+        Relationships: []
+      }
       broker_companies: {
         Row: {
           contact_email: string | null
@@ -1384,6 +2110,120 @@ export type Database = {
             columns: ["country_code"]
             isOneToOne: false
             referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      buyer_twin_traits: {
+        Row: {
+          buyer_twin_id: string
+          computed_at: string
+          confidence: number
+          id: string
+          trait_code: string
+          trait_system: string
+          trait_value: number
+        }
+        Insert: {
+          buyer_twin_id: string
+          computed_at?: string
+          confidence?: number
+          id?: string
+          trait_code: string
+          trait_system: string
+          trait_value: number
+        }
+        Update: {
+          buyer_twin_id?: string
+          computed_at?: string
+          confidence?: number
+          id?: string
+          trait_code?: string
+          trait_system?: string
+          trait_value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "buyer_twin_traits_buyer_twin_id_fkey"
+            columns: ["buyer_twin_id"]
+            isOneToOne: false
+            referencedRelation: "buyer_twins"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      buyer_twins: {
+        Row: {
+          behavioral_embedding: string | null
+          big_five_profile: Json
+          country_code: string
+          created_at: string
+          disc_profile: Json
+          embedding_updated_at: string | null
+          id: string
+          last_signal_at: string | null
+          persona_type_id: string
+          price_range_currency: string | null
+          price_range_max: number | null
+          price_range_min: number | null
+          updated_at: string
+          user_id: string | null
+          zone_focus_ids: string[]
+        }
+        Insert: {
+          behavioral_embedding?: string | null
+          big_five_profile?: Json
+          country_code: string
+          created_at?: string
+          disc_profile?: Json
+          embedding_updated_at?: string | null
+          id?: string
+          last_signal_at?: string | null
+          persona_type_id: string
+          price_range_currency?: string | null
+          price_range_max?: number | null
+          price_range_min?: number | null
+          updated_at?: string
+          user_id?: string | null
+          zone_focus_ids?: string[]
+        }
+        Update: {
+          behavioral_embedding?: string | null
+          big_five_profile?: Json
+          country_code?: string
+          created_at?: string
+          disc_profile?: Json
+          embedding_updated_at?: string | null
+          id?: string
+          last_signal_at?: string | null
+          persona_type_id?: string
+          price_range_currency?: string | null
+          price_range_max?: number | null
+          price_range_min?: number | null
+          updated_at?: string
+          user_id?: string | null
+          zone_focus_ids?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "buyer_twins_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "buyer_twins_persona_type_id_fkey"
+            columns: ["persona_type_id"]
+            isOneToOne: false
+            referencedRelation: "persona_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "buyer_twins_price_range_currency_fkey"
+            columns: ["price_range_currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
             referencedColumns: ["code"]
           },
         ]
@@ -1958,6 +2798,129 @@ export type Database = {
           },
         ]
       }
+      deal_stages: {
+        Row: {
+          created_at: string
+          id: string
+          is_terminal: boolean
+          is_won: boolean
+          label_en: string
+          label_es: string
+          order_index: number
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_terminal?: boolean
+          is_won?: boolean
+          label_en: string
+          label_es: string
+          order_index: number
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_terminal?: boolean
+          is_won?: boolean
+          label_en?: string
+          label_es?: string
+          order_index?: number
+          slug?: string
+        }
+        Relationships: []
+      }
+      deals: {
+        Row: {
+          actual_close_date: string | null
+          amount: number
+          amount_currency: string
+          asesor_id: string
+          country_code: string
+          created_at: string
+          expected_close_date: string | null
+          id: string
+          lead_id: string
+          notes: string | null
+          probability: number
+          property_id: string | null
+          stage_id: string
+          updated_at: string
+          zone_id: string
+        }
+        Insert: {
+          actual_close_date?: string | null
+          amount: number
+          amount_currency: string
+          asesor_id: string
+          country_code: string
+          created_at?: string
+          expected_close_date?: string | null
+          id?: string
+          lead_id: string
+          notes?: string | null
+          probability?: number
+          property_id?: string | null
+          stage_id: string
+          updated_at?: string
+          zone_id: string
+        }
+        Update: {
+          actual_close_date?: string | null
+          amount?: number
+          amount_currency?: string
+          asesor_id?: string
+          country_code?: string
+          created_at?: string
+          expected_close_date?: string | null
+          id?: string
+          lead_id?: string
+          notes?: string | null
+          probability?: number
+          property_id?: string | null
+          stage_id?: string
+          updated_at?: string
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "deals_amount_currency_fkey"
+            columns: ["amount_currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "deals_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "deals_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deals_stage_id_fkey"
+            columns: ["stage_id"]
+            isOneToOne: false
+            referencedRelation: "deal_stages"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "deals_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       desarrolladoras: {
         Row: {
           contact_email: string | null
@@ -2345,6 +3308,109 @@ export type Database = {
             columns: ["zone_id"]
             isOneToOne: false
             referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      family_unit_members: {
+        Row: {
+          buyer_twin_id: string
+          created_at: string
+          family_unit_id: string
+          id: string
+          is_primary: boolean
+          relationship: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          created_at?: string
+          family_unit_id: string
+          id?: string
+          is_primary?: boolean
+          relationship: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          created_at?: string
+          family_unit_id?: string
+          id?: string
+          is_primary?: boolean
+          relationship?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_unit_members_buyer_twin_fk"
+            columns: ["buyer_twin_id"]
+            isOneToOne: false
+            referencedRelation: "buyer_twins"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "family_unit_members_family_unit_id_fkey"
+            columns: ["family_unit_id"]
+            isOneToOne: false
+            referencedRelation: "family_units"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      family_units: {
+        Row: {
+          combined_budget_currency: string | null
+          combined_budget_max: number | null
+          combined_budget_min: number | null
+          country_code: string
+          created_at: string
+          id: string
+          members_count: number
+          primary_buyer_twin_id: string
+          unit_type: string
+          updated_at: string
+        }
+        Insert: {
+          combined_budget_currency?: string | null
+          combined_budget_max?: number | null
+          combined_budget_min?: number | null
+          country_code: string
+          created_at?: string
+          id?: string
+          members_count?: number
+          primary_buyer_twin_id: string
+          unit_type: string
+          updated_at?: string
+        }
+        Update: {
+          combined_budget_currency?: string | null
+          combined_budget_max?: number | null
+          combined_budget_min?: number | null
+          country_code?: string
+          created_at?: string
+          id?: string
+          members_count?: number
+          primary_buyer_twin_id?: string
+          unit_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "family_units_combined_budget_currency_fkey"
+            columns: ["combined_budget_currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "family_units_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "family_units_primary_buyer_twin_fk"
+            columns: ["primary_buyer_twin_id"]
+            isOneToOne: false
+            referencedRelation: "buyer_twins"
             referencedColumns: ["id"]
           },
         ]
@@ -3507,6 +4573,118 @@ export type Database = {
             columns: ["last_successful_run_id"]
             isOneToOne: false
             referencedRelation: "ingest_runs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lead_sources: {
+        Row: {
+          active: boolean
+          attribution_weight: number
+          created_at: string
+          id: string
+          label_en: string
+          label_es: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          attribution_weight?: number
+          created_at?: string
+          id?: string
+          label_en: string
+          label_es: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          attribution_weight?: number
+          created_at?: string
+          id?: string
+          label_en?: string
+          label_es?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          assigned_asesor_id: string | null
+          brokerage_id: string | null
+          contact_email: string | null
+          contact_name: string
+          contact_phone: string | null
+          country_code: string
+          created_at: string
+          id: string
+          metadata: Json
+          notes: string | null
+          qualification_score: number
+          source_id: string
+          status: string
+          updated_at: string
+          user_id: string | null
+          zone_id: string
+        }
+        Insert: {
+          assigned_asesor_id?: string | null
+          brokerage_id?: string | null
+          contact_email?: string | null
+          contact_name: string
+          contact_phone?: string | null
+          country_code: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          notes?: string | null
+          qualification_score?: number
+          source_id: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          zone_id: string
+        }
+        Update: {
+          assigned_asesor_id?: string | null
+          brokerage_id?: string | null
+          contact_email?: string | null
+          contact_name?: string
+          contact_phone?: string | null
+          country_code?: string
+          created_at?: string
+          id?: string
+          metadata?: Json
+          notes?: string | null
+          qualification_score?: number
+          source_id?: string
+          status?: string
+          updated_at?: string
+          user_id?: string | null
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "leads_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "lead_sources"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leads_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
             referencedColumns: ["id"]
           },
         ]
@@ -5974,6 +7152,83 @@ export type Database = {
         }
         Relationships: []
       }
+      operaciones: {
+        Row: {
+          amount: number
+          amount_currency: string
+          cfdi_uuid: string | null
+          closed_at: string
+          commission_amount: number
+          commission_currency: string | null
+          country_code: string
+          created_at: string
+          deal_id: string
+          fiscal_status: string
+          id: string
+          operacion_type: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          amount_currency: string
+          cfdi_uuid?: string | null
+          closed_at?: string
+          commission_amount?: number
+          commission_currency?: string | null
+          country_code: string
+          created_at?: string
+          deal_id: string
+          fiscal_status?: string
+          id?: string
+          operacion_type: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          amount_currency?: string
+          cfdi_uuid?: string | null
+          closed_at?: string
+          commission_amount?: number
+          commission_currency?: string | null
+          country_code?: string
+          created_at?: string
+          deal_id?: string
+          fiscal_status?: string
+          id?: string
+          operacion_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operaciones_amount_currency_fkey"
+            columns: ["amount_currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "operaciones_commission_currency_fkey"
+            columns: ["commission_currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "operaciones_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "operaciones_deal_id_fkey"
+            columns: ["deal_id"]
+            isOneToOne: true
+            referencedRelation: "deals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       part_config: {
         Row: {
           async_partitioning_in_progress: string | null
@@ -6164,6 +7419,39 @@ export type Database = {
             referencedColumns: ["parent_table"]
           },
         ]
+      }
+      persona_types: {
+        Row: {
+          active: boolean
+          created_at: string
+          description: string | null
+          id: string
+          label_en: string
+          label_es: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          label_en: string
+          label_es: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          description?: string | null
+          id?: string
+          label_en?: string
+          label_es?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
       }
       plans: {
         Row: {
@@ -6955,6 +8243,187 @@ export type Database = {
           window_sec?: number
         }
         Relationships: []
+      }
+      referral_rewards: {
+        Row: {
+          amount: number
+          amount_currency: string
+          created_at: string
+          id: string
+          operacion_id: string | null
+          paid_at: string | null
+          payment_method: string | null
+          payment_reference: string | null
+          referral_id: string
+          reward_type: string
+        }
+        Insert: {
+          amount: number
+          amount_currency: string
+          created_at?: string
+          id?: string
+          operacion_id?: string | null
+          paid_at?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
+          referral_id: string
+          reward_type: string
+        }
+        Update: {
+          amount?: number
+          amount_currency?: string
+          created_at?: string
+          id?: string
+          operacion_id?: string | null
+          paid_at?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
+          referral_id?: string
+          reward_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referral_rewards_amount_currency_fkey"
+            columns: ["amount_currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "referral_rewards_operacion_id_fkey"
+            columns: ["operacion_id"]
+            isOneToOne: false
+            referencedRelation: "operaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "referral_rewards_referral_id_fkey"
+            columns: ["referral_id"]
+            isOneToOne: false
+            referencedRelation: "referrals"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      referrals: {
+        Row: {
+          attributed_at: string | null
+          attribution_chain: Json
+          country_code: string
+          created_at: string
+          expires_at: string | null
+          id: string
+          persona_type_id: string | null
+          reward_amount: number | null
+          reward_currency: string | null
+          source_id: string
+          source_type: string
+          status: string
+          target_id: string
+          target_type: string
+          updated_at: string
+        }
+        Insert: {
+          attributed_at?: string | null
+          attribution_chain?: Json
+          country_code: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          persona_type_id?: string | null
+          reward_amount?: number | null
+          reward_currency?: string | null
+          source_id: string
+          source_type: string
+          status?: string
+          target_id: string
+          target_type: string
+          updated_at?: string
+        }
+        Update: {
+          attributed_at?: string | null
+          attribution_chain?: Json
+          country_code?: string
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          persona_type_id?: string | null
+          reward_amount?: number | null
+          reward_currency?: string | null
+          source_id?: string
+          source_type?: string
+          status?: string
+          target_id?: string
+          target_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "referrals_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "referrals_persona_type_id_fkey"
+            columns: ["persona_type_id"]
+            isOneToOne: false
+            referencedRelation: "persona_types"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "referrals_reward_currency_fkey"
+            columns: ["reward_currency"]
+            isOneToOne: false
+            referencedRelation: "currencies"
+            referencedColumns: ["code"]
+          },
+        ]
+      }
+      retention_policies: {
+        Row: {
+          active: boolean
+          country_code: string
+          created_at: string
+          entity_type: string
+          id: string
+          jurisdiction_ref: string
+          notes: string | null
+          retention_years: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          country_code: string
+          created_at?: string
+          entity_type: string
+          id?: string
+          jurisdiction_ref: string
+          notes?: string | null
+          retention_years: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          country_code?: string
+          created_at?: string
+          entity_type?: string
+          id?: string
+          jurisdiction_ref?: string
+          notes?: string | null
+          retention_years?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "retention_policies_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+        ]
       }
       role_features: {
         Row: {
@@ -12162,6 +13631,48 @@ export type Database = {
         }
         Relationships: []
       }
+      template_public_audit_crm_log: {
+        Row: {
+          action: string
+          actor_role: string | null
+          actor_user_id: string | null
+          changes: Json
+          country_code: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address: unknown
+          occurred_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          action: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes: Json
+          country_code?: string | null
+          entity_id: string
+          entity_type: string
+          id: string
+          ip_address?: unknown
+          occurred_at: string
+          user_agent?: string | null
+        }
+        Update: {
+          action?: string
+          actor_role?: string | null
+          actor_user_id?: string | null
+          changes?: Json
+          country_code?: string | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          ip_address?: unknown
+          occurred_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       template_public_audit_log: {
         Row: {
           action: string
@@ -12213,6 +13724,30 @@ export type Database = {
           request_id?: string | null
           table_name?: string | null
           user_agent?: string | null
+        }
+        Relationships: []
+      }
+      template_public_behavioral_signals: {
+        Row: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Insert: {
+          buyer_twin_id: string
+          id: string
+          occurred_at: string
+          signal_data: Json
+          signal_type: string
+        }
+        Update: {
+          buyer_twin_id?: string
+          id?: string
+          occurred_at?: string
+          signal_data?: Json
+          signal_type?: string
         }
         Relationships: []
       }
@@ -15039,6 +16574,14 @@ export type Database = {
         Returns: Record<string, unknown>
       }
       cancel_account_deletion: { Args: never; Returns: undefined }
+      cascade_deal_won_to_operacion: {
+        Args: { p_deal_id: string }
+        Returns: undefined
+      }
+      cascade_operacion_commission_calc: {
+        Args: { p_operacion_id: string }
+        Returns: undefined
+      }
       check_automatic_maintenance_value: {
         Args: { p_automatic_maintenance: string }
         Returns: boolean
@@ -15325,6 +16868,7 @@ export type Database = {
         }
         Returns: number
       }
+      fn_crm_retention_cleanup: { Args: never; Returns: undefined }
       fn_enqueue_indices_for_zone: {
         Args: {
           p_changed_score_type: string
@@ -15617,6 +17161,10 @@ export type Database = {
         Returns: undefined
       }
       recompute_all_zone_tiers: { Args: never; Returns: number }
+      recompute_buyer_twin_embedding: {
+        Args: { p_twin_id: string }
+        Returns: undefined
+      }
       recompute_zone_tier: {
         Args: {
           p_country_code: string
@@ -15666,6 +17214,20 @@ export type Database = {
       request_account_deletion: { Args: never; Returns: string }
       reset_api_budgets_monthly: { Args: never; Returns: number }
       resolve_features: { Args: { p_user_id?: string }; Returns: string[] }
+      resolve_polymorphic_referral_source: {
+        Args: { s_id: string; s_type: string }
+        Returns: Json
+      }
+      rls_is_admin: { Args: never; Returns: boolean }
+      rls_is_asesor: { Args: never; Returns: boolean }
+      rls_is_assigned_lead: { Args: { p_lead_id: string }; Returns: boolean }
+      rls_is_brokerage_member: {
+        Args: { p_brokerage_id: string }
+        Returns: boolean
+      }
+      rls_is_developer: { Args: never; Returns: boolean }
+      rls_is_master_broker: { Args: never; Returns: boolean }
+      rls_owns_lead: { Args: { p_lead_id: string }; Returns: boolean }
       run_maintenance: {
         Args: {
           p_analyze?: boolean
