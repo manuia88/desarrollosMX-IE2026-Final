@@ -2385,5 +2385,267 @@
     "breadcrumb": "FAQ",
     "intro": "Respuestas rápidas sobre DesarrollosMX.",
     "back_home": "Volver al inicio"
+  },
+  "AsesorShell": {
+    "sidebar": {
+      "aria": "Navegación principal del asesor",
+      "navAria": "Módulos del portal",
+      "items": {
+        "dashboard": "Dashboard",
+        "desarrollos": "Desarrollos",
+        "contactos": "Contactos",
+        "busquedas": "Búsquedas",
+        "captaciones": "Captaciones",
+        "tareas": "Tareas",
+        "operaciones": "Operaciones",
+        "marketing": "Marketing",
+        "estadisticas": "Estadísticas",
+        "academia": "Academia",
+        "ajustes": "Ajustes"
+      }
+    },
+    "topbar": {
+      "aria": "Barra superior del asesor",
+      "searchPlaceholder": "Buscar contactos, desarrollos, comandos...",
+      "availability": {
+        "aria": "Disponibilidad",
+        "disponible": "Disponible",
+        "ocupado": "Ocupado",
+        "en_visita": "En visita"
+      },
+      "notifications": "{count, plural, =0 {Sin notificaciones} one {# notificación nueva} other {# notificaciones nuevas}}"
+    },
+    "breadcrumb": {
+      "root": "Portal",
+      "dashboard": "Dashboard",
+      "desarrollos": "Desarrollos",
+      "contactos": "Contactos",
+      "busquedas": "Búsquedas",
+      "captaciones": "Captaciones",
+      "tareas": "Tareas",
+      "operaciones": "Operaciones",
+      "marketing": "Marketing",
+      "estadisticas": "Estadísticas",
+      "academia": "Academia",
+      "ajustes": "Ajustes"
+    },
+    "copilot": {
+      "railAria": "Panel de copiloto y asistencia",
+      "close": "Cerrar panel",
+      "voice": {
+        "aria": "Activar voz",
+        "title": "Modo voz",
+        "stub": "Pronto podrás dictar y escuchar acciones por voz desde aquí."
+      },
+      "copilot": {
+        "aria": "Asistente IA",
+        "title": "Copiloto IA",
+        "stub": "Conversa con tu copiloto para resolver dudas y avanzar tratos."
+      },
+      "briefing": {
+        "aria": "Resumen del día",
+        "title": "Briefing del día",
+        "stub": "Tu resumen ejecutivo de la jornada se generará aquí."
+      },
+      "vibe": {
+        "aria": "Estado emocional",
+        "title": "Vibe del día",
+        "stub": "Visualiza el ánimo y energía de tu jornada en una sola vista."
+      },
+      "help": {
+        "aria": "Ayuda",
+        "title": "Centro de ayuda",
+        "stub": "Atajos de teclado, guías y soporte disponibles próximamente."
+      }
+    },
+    "fab": {
+      "toggleAria": "Acciones rápidas",
+      "menuAria": "Menú de acciones rápidas",
+      "lead": "Crear lead",
+      "visita": "Agendar visita",
+      "comparable": "Nuevo comparable",
+      "nota": "Nueva nota",
+      "screenshot": "Captura de pantalla"
+    },
+    "palette": {
+      "inputAria": "Buscar comandos y navegación",
+      "placeholder": "Buscar acciones, módulos, comandos...",
+      "escHint": "ESC",
+      "empty": "Sin resultados. Probá otra palabra.",
+      "sections": {
+        "recientes": "Recientes",
+        "acciones": "Acciones",
+        "navegacion": "Navegación",
+        "ia": "IA",
+        "ajustes": "Ajustes"
+      },
+      "commands": {
+        "nav": {
+          "dashboard": "Ir a Dashboard",
+          "desarrollos": "Ir a Desarrollos",
+          "contactos": "Ir a Contactos",
+          "busquedas": "Ir a Búsquedas",
+          "captaciones": "Ir a Captaciones",
+          "tareas": "Ir a Tareas",
+          "operaciones": "Ir a Operaciones",
+          "marketing": "Ir a Marketing",
+          "estadisticas": "Ir a Estadísticas",
+          "academia": "Ir a Academia",
+          "ajustes": "Ir a Ajustes"
+        },
+        "actions": {
+          "lead": "Crear nuevo lead",
+          "visita": "Agendar visita",
+          "comparable": "Crear comparable",
+          "nota": "Nueva nota",
+          "screenshot": "Capturar pantalla"
+        },
+        "settings": {
+          "profile": "Perfil"
+        }
+      }
+    },
+    "disclosure": {
+      "synthetic": "Sintético H1"
+    }
+  },
+  "AsesorDashboard": {
+    "hero": {
+      "aria": "Resumen del día",
+      "greeting": "Hola, {name}",
+      "headline": {
+        "withPipeline": "Tienes {amount} en pipeline a {days, plural, one {# día} other {# días}}",
+        "noProjection": "Tienes {amount} en pipeline activo",
+        "empty": "Construye tu primer trato"
+      },
+      "chip": {
+        "aiAction": "Acción IA",
+        "followUp": "Seguir contacto",
+        "closeDeal": "Cerrar trato"
+      },
+      "disclosure": {
+        "synthetic": "Estimación H1"
+      }
+    },
+    "kpi": {
+      "aria": "Indicadores clave",
+      "pipeline": {
+        "title": "Pipeline",
+        "empty": "Sin pipeline aún",
+        "activeLabel": "Activo"
+      },
+      "leads": {
+        "title": "Leads",
+        "empty": "Sin leads aún"
+      },
+      "visits": {
+        "title": "Visitas 7d",
+        "empty": "Sin visitas 7d"
+      },
+      "avgTime": {
+        "title": "Tiempo promedio",
+        "unit": "d",
+        "empty": "Sin cierres aún",
+        "tier": {
+          "excellent": "Excelente",
+          "good": "Bueno",
+          "warning": "Por mejorar",
+          "critical": "Crítico",
+          "neutral": "—"
+        }
+      },
+      "xp": {
+        "title": "XP"
+      }
+    },
+    "pipeline": {
+      "title": "Pipeline activo",
+      "dealRef": "Trato {ref}",
+      "stage": {
+        "active": "Activo"
+      },
+      "action": {
+        "whatsapp": "WhatsApp",
+        "call": "Llamar",
+        "viewDeal": "Ver trato",
+        "whatsappDisabled": "WhatsApp — disponible cuando el lead tenga teléfono cargado",
+        "callDisabled": "Llamada — disponible cuando el lead tenga teléfono cargado"
+      },
+      "empty": {
+        "body": "Aún no tienes tratos activos. Crea el primero para empezar a ver tu pipeline.",
+        "cta": "Crear trato"
+      }
+    },
+    "briefing": {
+      "title": "Briefing del día",
+      "disclosure": "Generado IA",
+      "empty": "Tu briefing aparecerá cuando tengas actividad reciente.",
+      "listen": "Escuchar ({minutes} min)",
+      "listening": "Reproduciendo...",
+      "listenAria": "Mantén presionado para escuchar el briefing",
+      "bulletPipeline": "Tienes {count, plural, one {# trato activo} other {# tratos activos}} esperando avance.",
+      "bulletLeads": "{count, plural, =0 {No entraron leads esta semana} one {Entró # lead esta semana} other {Entraron # leads esta semana}}.",
+      "bulletVisits": "{count, plural, =0 {Sin visitas en 7 días} one {# visita en 7 días} other {# visitas en 7 días}}."
+    },
+    "agenda": {
+      "title": "Agenda de hoy",
+      "count": "{count, plural, =0 {sin eventos} one {# evento} other {# eventos}}",
+      "empty": "Sin eventos agendados para hoy.",
+      "type": {
+        "visit": "Visita",
+        "call": "Llamada",
+        "sign": "Firma"
+      }
+    },
+    "activity": {
+      "title": "Actividad reciente",
+      "empty": "Sin actividad reciente. Cierra una operación para empezar a verla aquí.",
+      "operacionLabel": "Operación {ref} · {status}"
+    },
+    "streak": {
+      "title": "Racha 30 días",
+      "days": "{count, plural, =0 {0 días} one {# día} other {# días}}",
+      "subtitle": "Días con actividad. Mantén la racha cerrando un trato hoy.",
+      "chartAria": "Histograma de actividad últimos {count} días"
+    },
+    "xp": {
+      "title": "Nivel {level}",
+      "aria": "Progreso XP {current} de {next}",
+      "progress": "{current} / {next} XP"
+    },
+    "badges": {
+      "title": "Insignias",
+      "empty": "Aún no desbloqueas insignias. Tu primer trato te dará la primera.",
+      "newAria": "Insignia nueva",
+      "newBadge": "NEW",
+      "firstDeal": "Primer trato",
+      "firstClose": "Primer cierre",
+      "streak3": "Racha 3d",
+      "streak7": "Racha 7d",
+      "pipeline1m": "Pipeline 1M",
+      "leads10": "10 leads"
+    },
+    "recommendations": {
+      "title": "Sugerencias IA",
+      "aria": "Sugerencias generadas por inteligencia artificial",
+      "disclosure": "Generado IA",
+      "empty": "Cuando tengas actividad, recibirás sugerencias personalizadas aquí.",
+      "nextAction": {
+        "title": "Tu siguiente acción",
+        "body": "Tienes leads sin contactar en los últimos 3 días. Empieza por el más reciente.",
+        "cta": "Ver leads"
+      },
+      "coldDeals": {
+        "title": "Tratos en frío",
+        "body": "{count, plural, =0 {Sin tratos en frío} one {# trato sin movimiento en 14 días} other {# tratos sin movimiento en 14 días}}.",
+        "cta": "Revisar tratos"
+      },
+      "topLeads": {
+        "title": "Leads de alto potencial",
+        "body": "Tu IA detecta que 2 leads recientes coinciden con tu mejor trato cerrado.",
+        "cta": "Ver coincidencias"
+      },
+      "ctaPending": "Próximamente — wiring real en próxima fase"
+    }
   }
 }

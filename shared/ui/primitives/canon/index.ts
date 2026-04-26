@@ -3,6 +3,8 @@ export { Button, buttonVariants } from './button';
 export type { CardCanonVariant, CardProps } from './card';
 export { Card } from './card';
 export { cn } from './cn';
+export type { DisclosurePillProps, DisclosureTone } from './disclosure-pill';
+export { DisclosurePill } from './disclosure-pill';
 export type { GlassOverlayProps } from './glass-overlay';
 export { GlassOverlay } from './glass-overlay';
 export type { IconCircleProps, IconCircleSize } from './icon-circle';
