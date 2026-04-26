@@ -498,6 +498,80 @@ Cero rows perdidas — UPSERT idempotente garantiza integridad.
 ✅ audit:rls 0 violations post v33.
 ✅ Bug fixes shipped in-PR (shpjs prefix + geography cast).
 
-**Tag:** `fase-07.7-data-real-tier2`. **Próximo:** F1.F Tests E2E zone freshness Tier 2 + F1.G master cierre (incluye atlas wiki cache fix + bulk re-run combo).
+**Tag:** `fase-07.7-data-real-tier2`. **Próximo:** F1.G master cierre (F1.F tests defer F2 dedicated UI bloque — UI canonical M01 0% per memoria, tests `.skip()` huérfanos sin valor inmediato).
+
+---
+
+## §12 F1.G MASTER CIERRE — FASE 07.7 Data Real shipped (2026-04-26)
+
+> Sub-fase **07.7.F1.G** = MASTER CIERRE F1 Data Real. Documenta cobertura final + handoff F2 Construction M01-M20. Tag `fase-07.7-data-real-shipped`.
+
+### §12.1 Cobertura final F1 (vs synthetic baseline pre-F1)
+
+| Tabla | Pre-F1 | Post-F1 | Cobertura | Tag shipped |
+|---|---|---|---|---|
+| `climate_source_observations` | 0 | 76,756 | NOAA + CONAGUA real | `fase-07.7-data-real-climate-hybrid` (F1.C.A) |
+| `climate_monthly_aggregates` | 43,776 sintético | 46,226 con xval status | Replacement F1.B | `fase-07.7-data-real-climate` |
+| `climate_zone_signatures` | 228 sintético | 228 recomputed | Refresh sobre real | F1.E.r |
+| `zones.boundary` | 210 synthetic bbox-500m | 210 real MGN polygons | 100% colonias | `fase-07.7-data-real-geometry` (F1.D) |
+| `inegi_census_zone_stats` | 226 sintético | 226 Tier 1 + 208 Tier 2 | 99% per-colonia | `fase-07.7-data-real-demographics` + `tier2` |
+| `inegi_ageb_staging` | — | 2,431 AGEBs | New canonical | F1.C.C |
+| `enigh_zone_income` | 210 sintético | 208 downscaled realista | Tier 2 supersede | F1.C.C |
+| `colonia_wiki_entries` | 210 (2026-04-24) | 210 (defer cache fix) | L-NEW combo F2 | (defer) |
+| IE cascada (zone_scores + dmx + pulse + dna + forecasts) | computed sobre sintético | recomputed sobre data real | 100% refreshed | `fase-07.7-data-real-recompute` (F1.E.r) |
+
+### §12.2 16 sub-tags FASE 07.7 acumulados
+
+```
+fase-07.7-foundation-locked          (F0 baseline)
+fase-07.7.A.1-complete               (CRM Foundation A.1)
+fase-07.7.A.2-complete               (CRM Foundation A.2)
+fase-07.7.A.3-complete               (Data Reality Audit A.3)
+fase-07.7.A.4-complete               (CRM Foundation A.4 schema)
+fase-07.7.A.5-complete               (E2E retrofit A.5)
+fase-07.7-complete                   (Master CRM cierre 2026-04-25)
+fase-07.7-data-real-foundation       (F1.A multi-país H1 scope)
+fase-07.7-data-real-climate          (F1.B NOAA + CONAGUA)
+fase-07.7-data-real-climate-hybrid   (F1.C.A xval winner)
+fase-07.7-data-real-geometry         (F1.D MGN GeoJSON)
+fase-07.7-data-real-demographics     (F1.C.B Tier 1 municipal proxy)
+fase-07.7-data-real-recompute        (F1.E.r IE cascada refresh)
+fase-07.7-data-real-tier2            (F1.C.C AGEB overlay + ENIGH downscale)
+fase-07.7-data-real-shipped          (F1.G MASTER CIERRE)
+[+ housekeeping/checkpoint tags varios]
+```
+
+### §12.3 L-NEW Pipeline cohort defer F2 Construction
+
+| L-NEW | Esfuerzo | FASE destino | Bloquea M01? |
+|---|---|---|---|
+| L-NEW-COMPUTE-ATLAS-WIKI-CACHE-FIX-01 | ~3h | F2 (FASE 13.X) | NO (entries 2026-04-24 stale aceptable) |
+| L-NEW-DEMO-TIER2-AGEB-OVERLAY-EXPAND-COLONIAS-H2 | ~4h | post F1.D L-NEW IECM | NO (208/210 = 99% coverage) |
+| L-NEW-CRM-DEAL-WON-CASCADE-01 | ~3h | FASE 07.7.B | NO |
+| L-NEW-DEMO-DISCLOSURE-S5 | ~2h | M01 P0 (FASE 13) | ✅ Sí |
+| L-NEW-DEMO-DISCLOSURE-A3-01 | ~1.5h | M01 P0 (FASE 13) | ✅ Sí |
+| L-NEW-CLIMATE-DISCLOSURE-01 | ~1h | M01 P0 (FASE 13) | ✅ Sí |
+| L-NEW-DEMO-PROXY-COMPOSITE-01 | ~6h | FASE 22.B | NO |
+| L-NEW-DEMO-TIER3-MANZANA-OVERLAY | ~12h | H2 expansion | NO |
+
+### §12.4 Handoff F2 Construction M01-M20
+
+**Próximo:** FASE 13 Portal Asesor M1-M5 foundation visual (ADR-050 design tokens prototype-canon ADR-048). Wireing UI consume Data Real shipped F1:
+
+- **M01 Dashboard Asesor**: consume `inegi_census_zone_stats` (preferir `inegi_ageb_overlay` cuando exists, fallback `inegi_municipal_proxy` con badge "Estimación por alcaldía") + `enigh_zone_income` (preferir `enigh_2022_state_downscaled` con badge "Estimación H1") + `zones.boundary` real polygons + climate hybrid xval.
+- **3 disclosure badges P0** must-have pre-launch M01: S5 (atlas wiki sintético cita) + A3-01 (UI ficha colonia consume Tier 2 sin badge) + CLIMATE-01 (climate forecasts UI sin badge fuente).
+- **F1.F tests E2E** activan post-UI canonical wiring (descomentar `.skip()` en `tests/e2e/zone-data-freshness*.spec.ts` cuando `/zonas/[colonia]` UI shipped + 7 testIDs wired).
+
+### §12.5 Status §12 — CIERRE F1 master
+
+✅ FASE 07.7 Data Real CIERRE master shipped.
+✅ 16 sub-tags acumulados (CRM A.1-A.5 + F1.A-G Data Real).
+✅ Cobertura cero-sintético en 8/9 tablas core (atlas wiki defer combo F2).
+✅ audit:rls 0 violations post v33 · audit:dead-ui 25 baseline mantenido.
+✅ Migrations 1:1 sync (canon mcp_apply_migration_timestamp_drift resuelto).
+✅ L-NEW cohort documented + asignados a FASEs destino concretas (canon `upgrades_destino`).
+
+**Tag master:** `fase-07.7-data-real-shipped`. **Próximo:** F2 Construction M01-M20 / FASE 13 Portal Asesor M1-M5 foundation visual (~52-58h CC, ADR-050 design tokens prototype-canon).
+
 
 

@@ -832,3 +832,53 @@ Founder dictó scope multi-país H1 vs H2 post audit F0 (commit 49f773e SA-IE-Fi
 4. Sources US-specific defer L-NEW-US-LATINX-DATA-SOURCES (FASE 22.A o post-launch H1) hasta validation feedback usuarios H1.
 
 **Status DECISIÓN N+2 + F1.A foundation:** Shipped (tag `fase-07.7-data-real-foundation`). Próximo F1.B Climate Real (NOAA + CONAGUA replace synthetic ~8-10h CC).
+
+
+---
+
+## DECISIÓN N+3 — FASE 07.7 Data Real shipped (2026-04-26)
+
+**Status:** FASE 07.7 Data Real CIERRE master (`fase-07.7-data-real-shipped`). 16 sub-tags acumulados.
+
+### Sub-bloques shipped F1.A → F1.G (cierre master 2026-04-26)
+
+| Sub-bloque | Tag | Descripción |
+|---|---|---|
+| F1.A | `fase-07.7-data-real-foundation` | Multi-país scope H1 Opción B (es-MX + en-US active, CO/AR/BR defer H2) + ADR-051 |
+| F1.B | `fase-07.7-data-real-climate` | NOAA NCEI + CONAGUA SMN replace heuristic_v1 sintético (43,776 rows reemplazados) |
+| F1.C.A | `fase-07.7-data-real-climate-hybrid` | Climate hybrid separation: raw observations + cross-validation winner derivation |
+| F1.D | `fase-07.7-data-real-geometry` | GeoJSON CDMX MGN replace synthetic bbox-500m uniform polygons (210 colonias real) |
+| F1.C.B | `fase-07.7-data-real-demographics` | INEGI Censo 2020 Tier 1 municipal proxy (5 indicators × 16 alcaldías → 226 colonias) |
+| F1.E.r | `fase-07.7-data-real-recompute` | Re-compute IE cascada (zone_scores 5267 + dmx_indices 3192 + pulse 83676 + dna 210 + forecasts 7296) |
+| F1.C.C | `fase-07.7-data-real-tier2` | Tier 2 AGEB spatial overlay PostGIS (2,431 AGEBs CDMX + 208 colonias ENIGH downscale) |
+| F1.G | `fase-07.7-data-real-shipped` | **MASTER CIERRE** — docs canon + handoff F2 Construction M01-M20 |
+
+### Cobertura final Data Real (vs synthetic baseline pre-F1)
+
+| Tabla | Pre-F1 | Post-F1 | Cobertura |
+|---|---|---|---|
+| `climate_source_observations` | 0 | 76,756 | NOAA + CONAGUA real ingestion |
+| `climate_monthly_aggregates` | 43,776 sintético | 46,226 con cross_validation_status | Replacement + xval winner |
+| `climate_zone_signatures` | 228 sintético | 228 recomputed sobre data real | Refresh sobre real |
+| `zones.boundary` | 210 synthetic bbox-500m | 210 real MGN polygons | 100% colonias con boundary |
+| `inegi_census_zone_stats` | 226 sintético | 226 Tier 1 + 208 Tier 2 AGEB overlay | 99% colonias granularity per-colonia |
+| `inegi_ageb_staging` | — (no existía) | 2,431 AGEBs urbanos CDMX | New source-of-truth spatial |
+| `enigh_zone_income` | 210 sintético | 208 downscaled rango realista | Tier 2 supersede synthetic |
+| `colonia_wiki_entries` | 210 (2026-04-24) | 210 (defer cache fix combo F2) | L-NEW cache optimization |
+| IE cascada (zone_scores + dmx + pulse + dna + forecasts) | computed sobre sintético | recomputed sobre data real | Refreshed F1.E.r |
+
+### Handoff F2 Construction M01-M20
+
+**Próximo:** FASE 13 Portal Asesor M1-M5 foundation visual (ADR-050 design tokens prototype-canon). Wireing UI consume Data Real shipped F1. M01 Dashboard Asesor ready para conectar con `inegi_census_zone_stats` (preferir `inegi_ageb_overlay` cuando exists, fallback `inegi_municipal_proxy`) + `enigh_zone_income` (preferir `enigh_2022_state_downscaled` con badge "Estimación H1") + `zones.boundary` real polygons + climate hybrid.
+
+### L-NEW Pipeline F2 cohort
+
+Defer a F2 Construction:
+- **L-NEW-COMPUTE-ATLAS-WIKI-CACHE-FIX-01** (~3h) — expand WIKI_EXAMPLES_3 ≥2048 tokens + restart C13 con caching activo (~$0.30 vs $1.68 sin cache)
+- **L-NEW-DEMO-TIER2-AGEB-OVERLAY-EXPAND-COLONIAS-H2** — 18 colonias remaining sin overlap AGEB (require F1.D L-NEW expand IECM completo first)
+- **L-NEW-CRM-DEAL-WON-CASCADE-01** (FASE 07.7.B, ~3h) — auto-INSERT operacion on closed_won
+- **L-NEW-DEMO-DISCLOSURE-S5** (~2h, M01 P0) — atlas wiki Haiku narrative cita synthetic sin badge
+- **L-NEW-DEMO-DISCLOSURE-A3-01** (~1.5h, M01 P0) — UI ficha colonia consume Tier 2 sin badge "Estimación H1"
+- **L-NEW-CLIMATE-DISCLOSURE-01** (~1h, M01 P0) — climate forecasts UI sin badge fuente
+
+**Status DECISIÓN N+3 + F1.G master cierre:** Shipped (tag `fase-07.7-data-real-shipped`). Próximo F2 Construction M01-M20 / FASE 13.A foundation visual.
