@@ -14846,6 +14846,38 @@ export type Database = {
           },
         ]
       }
+      zone_climate_station_map: {
+        Row: {
+          distance_meters: number
+          station_id: string
+          station_source: string
+          updated_at: string
+          zone_id: string
+        }
+        Insert: {
+          distance_meters: number
+          station_id: string
+          station_source: string
+          updated_at?: string
+          zone_id: string
+        }
+        Update: {
+          distance_meters?: number
+          station_id?: string
+          station_source?: string
+          updated_at?: string
+          zone_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "zone_climate_station_map_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       zone_constellation_clusters: {
         Row: {
           cluster_id: number

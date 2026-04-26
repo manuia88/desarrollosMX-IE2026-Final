@@ -6,12 +6,6 @@ import {
   catastroCdmxDriver,
   ingestCatastroCdmx,
 } from '../catastro-cdmx';
-import {
-  CONAGUA_FEATURE_FLAG,
-  ConaguaNotImplementedError,
-  conaguaDriver,
-  ingestConagua,
-} from '../conagua';
 import { INAH_FEATURE_FLAG, InahNotImplementedError, inahDriver, ingestInah } from '../inah';
 import {
   ingestLocatel,
@@ -117,17 +111,6 @@ describe('GEO H2 stubs (ADR-018 compliant)', () => {
       'sedema_not_implemented_h2',
     );
     await expect(ingestSedema()).rejects.toBeInstanceOf(SedemaNotImplementedError);
-  });
-
-  it('conagua stub: driver registered, category=geo/daily, throws canonical error', async () => {
-    expect(conaguaDriver.source).toBe('conagua');
-    expect(conaguaDriver.category).toBe('geo');
-    expect(conaguaDriver.defaultPeriodicity).toBe('daily');
-    expect(CONAGUA_FEATURE_FLAG).toBe('ingest.conagua.enabled');
-    await expect(conaguaDriver.fetch(mockCtx('conagua'), undefined)).rejects.toThrow(
-      'conagua_not_implemented_h2',
-    );
-    await expect(ingestConagua()).rejects.toBeInstanceOf(ConaguaNotImplementedError);
   });
 
   it('inah stub: driver registered, category=geo/yearly, throws canonical error', async () => {

@@ -5,6 +5,8 @@
     { "path": "/api/cron/ingest/banxico", "schedule": "0 14 * * *" },
     { "path": "/api/cron/ingest/inegi", "schedule": "0 15 15 * *" },
     { "path": "/api/cron/ingest/denue", "schedule": "0 2 5 * *" },
+    { "path": "/api/cron/ingest/noaa", "schedule": "0 6 2 * *" },
+    { "path": "/api/cron/ingest/conagua", "schedule": "0 7 2 * *" },
     { "path": "/api/cron/autofetch/bbva_research", "schedule": "0 16 25 * *" },
     { "path": "/api/cron/autofetch/infonavit", "schedule": "0 16 10 * *" },
     { "path": "/api/cron/autofetch/cnbv", "schedule": "0 16 20 * *" },
