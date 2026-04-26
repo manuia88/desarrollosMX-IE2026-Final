@@ -2,9 +2,9 @@
   /* ============================================================
    * Typography
    * ============================================================ */
-  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-outfit, 'Outfit'), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-dm-sans, 'DM Sans'), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -150,6 +150,158 @@
   --motion-enter: 300ms cubic-bezier(0.22, 1, 0.36, 1);
   --motion-exit: 200ms cubic-bezier(0.4, 0, 1, 1);
   --motion-bounce: 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ============================================================
+   * CANON PROTOTYPE TOKENS (ADR-048 base + ADR-050 asesor extension)
+   * ============================================================
+   * Lenguaje visual canon DMX: dark navy + cream + indigo→rose.
+   * NO modificar tokens Dopamine v5.1 OKLCH arriba — preservados
+   * para 20+ features legacy. Migration plan ADR-048 M3b waves.
+   * ============================================================ */
+
+  /* ---- Canon backgrounds (dark navy stack) ---- */
+  --canon-bg: #06080f;
+  --canon-bg-2: #0d1017;
+  --canon-bg-3: #111827;
+
+  /* ---- Canon cream variants (text on dark) ---- */
+  --canon-cream: #f0ebe0;
+  --canon-cream-2: rgba(240, 235, 224, 0.62);
+  --canon-cream-3: rgba(240, 235, 224, 0.32);
+
+  /* ---- Canon indigo + rose (brand) ---- */
+  --canon-indigo: #6366f1;
+  --canon-indigo-2: #818cf8;
+  --canon-indigo-3: #a5b4fc;
+  --canon-rose: #ec4899;
+
+  /* ---- Canon status semantics ---- */
+  --canon-green: #22c55e;
+  --canon-amber: #f59e0b;
+  --canon-red: #ef4444;
+
+  /* ---- Canon borders (white alpha tints) ---- */
+  --canon-border: rgba(255, 255, 255, 0.08);
+  --canon-border-2: rgba(255, 255, 255, 0.14);
+  --canon-border-3: rgba(255, 255, 255, 0.22);
+
+  /* ---- Canon brand gradient (90deg indigo → rose, ADR-048 §2.1) ---- */
+  --canon-gradient: linear-gradient(90deg, #6366f1, #ec4899);
+
+  /* ---- Canon typography weights ---- */
+  --canon-weight-extrabold: 800;
+
+  /* ---- Canon radii (pill universal + card prototype) ---- */
+  --canon-radius-pill: 9999px;
+  --canon-radius-card: 22px;
+  --canon-radius-inner: 14px;
+  --canon-radius-chip: 10px;
+  --canon-radius-sharp: 6px;
+
+  /* ---- Canon motion durations + easings (ADR-050 §2.1) ---- */
+  --canon-duration-instant: 100ms;
+  --canon-duration-fast: 200ms;
+  --canon-duration-normal: 350ms;
+  --canon-duration-slow: 650ms;
+  --canon-duration-grand: 850ms;
+  --canon-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --canon-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ============================================================
+   * ASESOR EXTENSION (ADR-050 §2.2-2.7)
+   * ============================================================ */
+
+  /* ---- 3 accents operacionales (Producto / AI / Performance) ---- */
+  --accent-teal: #14b8a6;
+  --accent-violet: #a855f7;
+  --accent-gold: #eab308;
+  --accent-teal-soft: rgba(20, 184, 166, 0.12);
+  --accent-violet-soft: rgba(168, 85, 247, 0.12);
+  --accent-gold-soft: rgba(234, 179, 8, 0.12);
+
+  /* ---- 3 surfaces compositivas (elevated / recessed / spotlight) ---- */
+  --surface-elevated: #13182a;
+  --surface-recessed: #04060b;
+  --surface-spotlight: radial-gradient(
+    ellipse at center,
+    rgba(99, 102, 241, 0.18) 0%,
+    rgba(13, 16, 23, 0.92) 60%,
+    #0d1017 100%
+  );
+
+  /* ---- 4 score gradients narrativos (excellent / good / warning / critical) ---- */
+  --gradient-score-excellent: linear-gradient(90deg, #22c55e, #10b981);
+  --gradient-score-good: linear-gradient(90deg, #6366f1, #8b5cf6);
+  --gradient-score-warning: linear-gradient(90deg, #f59e0b, #f97316);
+  --gradient-score-critical: linear-gradient(90deg, #ef4444, #ec4899);
+
+  /* ---- AI signal gradient (violet+indigo+rose, distinto a brand) ---- */
+  --gradient-ai: linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #ec4899 100%);
+
+  /* ---- 4 shadows narrativas (rest / hover / focus / spotlight) ---- */
+  --shadow-canon-rest: 0 1px 2px rgba(0, 0, 0, 0.45);
+  --shadow-canon-hover: 0 12px 32px rgba(99, 102, 241, 0.18);
+  --shadow-canon-focus: 0 0 0 3px rgba(99, 102, 241, 0.45);
+  --shadow-canon-spotlight: 0 24px 64px rgba(168, 85, 247, 0.22);
+
+  /* ---- 10 wayfinding colors per módulo asesor ---- */
+  --mod-dashboard: #6366f1;
+  --mod-desarrollos: #14b8a6;
+  --mod-contactos: #ec4899;
+  --mod-busquedas: #a855f7;
+  --mod-captaciones: #10b981;
+  --mod-tareas: #f59e0b;
+  --mod-operaciones: #3b82f6;
+  --mod-marketing: #f97316;
+  --mod-estadisticas: #eab308;
+  --mod-academia: #8b5cf6;
+}
+
+/* ============================================================
+ * Canon keyframes (ADR-050 motion primitives)
+ * ============================================================ */
+@keyframes canon-blur-in {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes canon-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes canon-marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes canon-marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* ============================================================

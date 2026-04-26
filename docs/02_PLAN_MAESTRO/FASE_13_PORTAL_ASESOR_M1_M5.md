@@ -1,5 +1,8 @@
 # FASE 13 — Portal Asesor (M01 Dashboard + M02 Desarrollos + M03 Contactos + M04 Búsquedas + M05 Captaciones)
 
+> **Status sub-bloque 13.A Foundation Visual:** SHIPPED 2026-04-26 (tag `fase-13.A-complete`).
+> Foundation visual canon prototype + asesor extensions disponible en `styles/tokens.css` (`--canon-*` + `--accent-*` + `--surface-*` + `--gradient-score-*` + `--gradient-ai` + `--shadow-canon-*` + `--mod-*`), `shared/ui/motion/` (BlurText/FadeUp/StaggerContainer/Marquee + useInView/use3DTilt), `shared/ui/primitives/canon/` (Card/Button CVA/ScorePill/MomentumPill/GlassOverlay/IconCircle/cn). ADR-050 formaliza canon design language asesor + 12 reglas inviolables. Próximo: 13.B M01 Dashboard "Command Center".
+
 > **Duración estimada:** 7 sesiones Claude Code (~28 horas con agentes paralelos)
 > **Dependencias:** FASE 00-06 (bootstrap, BD, auth, AI shell, DS Dopamine, i18n, seguridad), FASE 07 (ingesta), FASE 08-10 (IE N0-N3), FASE 11 XL (15 índices DMX + moonshots core + seeds: Migration/Pulse/Trend Genome/Scorecard Nacional/Genoma/LifePath/Climate Twin/Constellations/Living Atlas — seeds implementados), FASE 12 (N5 AI scores + LifePath v1 + Climate Twin v1 + Mapa 12 capas)
 > **Bloqueantes externos:**
