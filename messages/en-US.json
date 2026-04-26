@@ -2648,6 +2648,105 @@
       "ctaPending": "Coming soon — wiring lands in next phase"
     }
   },
+  "AsesorBusquedas": {
+    "page": {
+      "title": "Searches",
+      "subtitle": "Pair each client with the inventory that fits best: price, IE zone, amenities and DISC profile."
+    },
+    "disclosure": {
+      "matcherH1": "H1 matcher — canon weights: price 30%, IE zone 25%, amenities 20%, family 15%, DISC 10%."
+    },
+    "tabs": {
+      "ariaLabel": "Filter searches by status",
+      "activa": "Active",
+      "pausada": "Paused",
+      "cerrada": "Closed"
+    },
+    "filters": {
+      "ariaSearch": "Search searches",
+      "search": "Search contact, notes…",
+      "country": "Country",
+      "tipo": "Type",
+      "operacion": "Deal",
+      "tipoOption": {
+        "departamento": "Apartment",
+        "casa": "House",
+        "terreno": "Land",
+        "oficina": "Office",
+        "local": "Retail"
+      },
+      "operacionOption": {
+        "venta": "Sale",
+        "renta": "Rent"
+      },
+      "clear": "Clear"
+    },
+    "card": {
+      "ariaOpen": "Open search for {name}",
+      "ariaMatched": "{count} matches found",
+      "leadUnknown": "No contact",
+      "priceAny": "Any price",
+      "rooms": "br",
+      "roomsAny": "Any rooms",
+      "matchedAbbr": "matches",
+      "lastRunAt": "Last match",
+      "createdAt": "Created"
+    },
+    "criteria": {
+      "tipo": {
+        "departamento": "Apartment",
+        "casa": "House",
+        "terreno": "Land",
+        "oficina": "Office",
+        "local": "Retail"
+      },
+      "operacion": {
+        "venta": "Sale",
+        "renta": "Rent"
+      }
+    },
+    "empty": {
+      "titleActiva": "No active searches",
+      "titlePausada": "No paused searches",
+      "titleCerrada": "No closed searches",
+      "subtitleDefault": "Create a search from a contact to start receiving matches.",
+      "ctaClear": "Clear filters"
+    },
+    "drawer": {
+      "closeAria": "Close detail",
+      "leadUnknown": "No contact",
+      "loading": "Loading…",
+      "notFound": "Search not found or no permission.",
+      "matchedSummary": "{count} matches in this run",
+      "syntheticZoneNotice": "Some zone scores are H1 estimates — will be refined with final data.",
+      "criteriaTitle": "Criteria",
+      "matchesTitle": "Top matches",
+      "noMatches": "No matches yet. Run the matcher once inventory is loaded.",
+      "proyectoUnknown": "Unnamed project",
+      "rec": "br"
+    },
+    "match": {
+      "ariaScore": "Match score {value} of 100",
+      "breakdownTitle": "Score breakdown",
+      "priceFit": "Price",
+      "zoneIE": "IE Zone",
+      "amenitiesMatch": "Amenities",
+      "familyFit": "Family",
+      "discZone": "DISC × Zone"
+    },
+    "rationale": {
+      "priceInRange": "Price in range",
+      "priceClose": "Price close",
+      "priceFar": "Price far from range",
+      "zoneStrong": "Strong IE zone",
+      "zoneModerate": "Moderate IE zone",
+      "amenitiesMatch": "Amenities match",
+      "amenitiesGap": "Amenities gap",
+      "familyFit": "Family fit",
+      "discAligned": "DISC aligned",
+      "cityPreferred": "Preferred city"
+    }
+  },
   "AsesorDesarrollos": {
     "page": {
       "title": "Developments",

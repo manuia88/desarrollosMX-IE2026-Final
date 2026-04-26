@@ -2114,6 +2114,62 @@ export type Database = {
           },
         ]
       }
+      busquedas: {
+        Row: {
+          asesor_id: string | null
+          brokerage_id: string | null
+          country_code: string
+          created_at: string
+          created_by: string | null
+          criteria: Json
+          id: string
+          last_run_at: string | null
+          lead_id: string
+          matched_count: number
+          notes: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          asesor_id?: string | null
+          brokerage_id?: string | null
+          country_code: string
+          created_at?: string
+          created_by?: string | null
+          criteria?: Json
+          id?: string
+          last_run_at?: string | null
+          lead_id: string
+          matched_count?: number
+          notes?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          asesor_id?: string | null
+          brokerage_id?: string | null
+          country_code?: string
+          created_at?: string
+          created_by?: string | null
+          criteria?: Json
+          id?: string
+          last_run_at?: string | null
+          lead_id?: string
+          matched_count?: number
+          notes?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "busquedas_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       buyer_twin_traits: {
         Row: {
           buyer_twin_id: string

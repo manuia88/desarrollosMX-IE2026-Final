@@ -2648,6 +2648,105 @@
       "ctaPending": "Próximamente — wiring real en próxima fase"
     }
   },
+  "AsesorBusquedas": {
+    "page": {
+      "title": "Buscas",
+      "subtitle": "Combine cada cliente com o inventário ideal: preço, zona IE, comodidades e perfil DISC."
+    },
+    "disclosure": {
+      "matcherH1": "Matcher H1 — pesos canon: preço 30%, zona IE 25%, comodidades 20%, família 15%, DISC 10%."
+    },
+    "tabs": {
+      "ariaLabel": "Filtrar buscas por status",
+      "activa": "Ativas",
+      "pausada": "Pausadas",
+      "cerrada": "Encerradas"
+    },
+    "filters": {
+      "ariaSearch": "Buscar buscas",
+      "search": "Buscar contato, notas…",
+      "country": "País",
+      "tipo": "Tipo",
+      "operacion": "Operação",
+      "tipoOption": {
+        "departamento": "Apartamento",
+        "casa": "Casa",
+        "terreno": "Terreno",
+        "oficina": "Escritório",
+        "local": "Loja"
+      },
+      "operacionOption": {
+        "venta": "Venda",
+        "renta": "Aluguel"
+      },
+      "clear": "Limpar"
+    },
+    "card": {
+      "ariaOpen": "Abrir busca de {name}",
+      "ariaMatched": "{count} matches encontrados",
+      "leadUnknown": "Sem contato",
+      "priceAny": "Qualquer preço",
+      "rooms": "qts",
+      "roomsAny": "Qualquer quantidade de quartos",
+      "matchedAbbr": "matches",
+      "lastRunAt": "Último match",
+      "createdAt": "Criada"
+    },
+    "criteria": {
+      "tipo": {
+        "departamento": "Apartamento",
+        "casa": "Casa",
+        "terreno": "Terreno",
+        "oficina": "Escritório",
+        "local": "Loja"
+      },
+      "operacion": {
+        "venta": "Venda",
+        "renta": "Aluguel"
+      }
+    },
+    "empty": {
+      "titleActiva": "Sem buscas ativas",
+      "titlePausada": "Sem buscas pausadas",
+      "titleCerrada": "Sem buscas encerradas",
+      "subtitleDefault": "Crie uma busca a partir de um contato para começar a receber matches.",
+      "ctaClear": "Limpar filtros"
+    },
+    "drawer": {
+      "closeAria": "Fechar detalhe",
+      "leadUnknown": "Sem contato",
+      "loading": "Carregando…",
+      "notFound": "Busca não encontrada ou sem permissão.",
+      "matchedSummary": "{count} matches nesta execução",
+      "syntheticZoneNotice": "Alguns zone scores são estimativas H1 — serão refinados com a BD final.",
+      "criteriaTitle": "Critérios",
+      "matchesTitle": "Top matches",
+      "noMatches": "Sem matches ainda. Rode o matcher após carregar inventário.",
+      "proyectoUnknown": "Projeto sem nome",
+      "rec": "qts"
+    },
+    "match": {
+      "ariaScore": "Match score {value} de 100",
+      "breakdownTitle": "Detalhamento match score",
+      "priceFit": "Preço",
+      "zoneIE": "Zona IE",
+      "amenitiesMatch": "Comodidades",
+      "familyFit": "Família",
+      "discZone": "DISC × Zona"
+    },
+    "rationale": {
+      "priceInRange": "Preço dentro da faixa",
+      "priceClose": "Preço próximo",
+      "priceFar": "Preço fora da faixa",
+      "zoneStrong": "Zona IE forte",
+      "zoneModerate": "Zona IE moderada",
+      "amenitiesMatch": "Comodidades combinam",
+      "amenitiesGap": "Faltam comodidades",
+      "familyFit": "Cabe para família",
+      "discAligned": "Alinhado com perfil DISC",
+      "cityPreferred": "Cidade preferida"
+    }
+  },
   "AsesorDesarrollos": {
     "page": {
       "title": "Desarrollos",
