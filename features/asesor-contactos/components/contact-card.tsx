@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import type { CSSProperties } from 'react';
+import { SuggestCopilotButton } from '../copilot-suggest/suggest-copilot-button';
 import type { ContactoSummary } from '../lib/contactos-loader';
 import { DiscMini } from './disc-mini';
 
@@ -56,14 +57,18 @@ export function ContactCard({ contacto, onOpen }: ContactCardProps) {
     flexShrink: 0,
   };
 
+  const handleOpen = () => onOpen(contacto.id);
+
   return (
-    <button
-      type="button"
-      onClick={() => onOpen(contacto.id)}
+    // biome-ignore lint/a11y/useSemanticElements: container hosts nested SuggestCopilotButton — native <button> would create invalid nested-button HTML
+    <div
+      role="button"
+      tabIndex={0}
+      onClick={handleOpen}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          onOpen(contacto.id);
+          handleOpen();
         }
       }}
       style={cardStyle}
@@ -144,6 +149,14 @@ export function ContactCard({ contacto, onOpen }: ContactCardProps) {
         <span>{t('lastContactAgo', { days: contacto.daysSinceLastContact })}</span>
         <span>{t('qualification', { score: Math.round(contacto.qualificationScore) })}</span>
       </footer>
-    </button>
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: presentation div gates clicks/keyboard for nested SuggestCopilotButton via stopPropagation */}
+      <div
+        style={{ display: 'flex', justifyContent: 'flex-end' }}
+        onClick={(e) => e.stopPropagation()}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        <SuggestCopilotButton contacto={contacto} />
+      </div>
+    </div>
   );
 }

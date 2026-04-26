@@ -29,6 +29,7 @@ import {
 } from '@/features/crm/schemas';
 import { router } from '@/server/trpc/init';
 import { authenticatedProcedure } from '@/server/trpc/middleware';
+import { contactNotesRouter } from './notes';
 
 // Type-erased helper porque Database types aún no incluyen tablas CRM (post db:types regen).
 // Post-merge + db push + db:types se reemplaza por client tipado nativo.
@@ -476,6 +477,7 @@ export const crmRouter = router({
   referral: referralRouter,
   familyUnit: familyUnitRouter,
   catalogs: catalogsRouter,
+  notes: contactNotesRouter,
 });
 
 export type CrmRouter = typeof crmRouter;

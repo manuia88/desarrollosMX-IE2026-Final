@@ -2745,6 +2745,28 @@
       "familyFit": "Encaja para familia",
       "discAligned": "Alineado con perfil DISC",
       "cityPreferred": "Ciudad preferida"
+    },
+    "kanban": {
+      "ariaLabel": "Pipeline de búsquedas por estado",
+      "emptyColumn": "Sin búsquedas en este estado.",
+      "stage": {
+        "activa": "Activas",
+        "pausada": "Pausadas",
+        "cerrada": "Cerradas"
+      }
+    },
+    "view": {
+      "ariaToggle": "Modo de vista",
+      "mode": {
+        "list": "Lista",
+        "grid": "Cuadrícula",
+        "kanban": "Kanban"
+      },
+      "ariaSelect": {
+        "list": "Cambiar a vista lista",
+        "grid": "Cambiar a vista cuadrícula",
+        "kanban": "Cambiar a vista kanban"
+      }
     }
   },
   "AsesorCaptaciones": {
@@ -3119,7 +3141,12 @@
         "lost": "Perdido"
       },
       "hasFamilyUnit": "Pertenece a una unidad familiar",
-      "birthdayIn": "Cumpleaños en {days} días"
+      "birthdayIn": "Cumpleaños en {days} días",
+      "tabs": {
+        "aria": "Pestañas del detalle de contacto",
+        "overview": "Resumen",
+        "notes": "Notas"
+      }
     },
     "whatsapp": {
       "trigger": "WhatsApp",
@@ -3187,6 +3214,91 @@
         "enrich": "Enriquece con zone_score IE + buyer_twin auto + family_unit detect.",
         "validate": "Valida con Zod + dedup FTS Postgres.",
         "push": "Upsert lead + buyer_twin + audit_crm_log."
+      }
+    },
+    "notes": {
+      "level": {
+        "personal": "Personal",
+        "colaborativo": "Colaborativo",
+        "sistema": "Sistema"
+      },
+      "edited": "editada",
+      "actions": {
+        "edit": "Editar",
+        "editAria": "Editar nota",
+        "delete": "Eliminar",
+        "deleteAria": "Eliminar nota",
+        "confirmDelete": "Confirmar",
+        "confirmDeleteAria": "Confirmar eliminación de nota",
+        "cancel": "Cancelar"
+      },
+      "editor": {
+        "ariaCreate": "Crear nueva nota",
+        "ariaEdit": "Editar nota existente",
+        "contentLabel": "Contenido de la nota",
+        "levelLabel": "Visibilidad",
+        "placeholder": "Escribe una nota en Markdown…",
+        "create": "Guardar nota",
+        "save": "Guardar cambios",
+        "saving": "Guardando…",
+        "cancel": "Cancelar"
+      },
+      "list": {
+        "loading": "Cargando notas…",
+        "empty": "Sin notas registradas para este contacto.",
+        "errorLoading": "No se pudieron cargar las notas: {detail}"
+      },
+      "errors": {
+        "createFailed": "No se pudo crear la nota: {detail}",
+        "updateFailed": "No se pudo actualizar la nota: {detail}",
+        "deleteFailed": "No se pudo eliminar la nota: {detail}"
+      }
+    },
+    "copilot": {
+      "button": {
+        "label": "Pregunta a Copilot",
+        "ariaOpen": "Abrir Copilot para {name}"
+      },
+      "dialog": {
+        "title": "Sugerencias Copilot",
+        "aria": "Sugerencias Copilot para {name}",
+        "contextSummary": "{name} — estado {status}, DISC {disc}, último contacto hace {days} días.",
+        "listAria": "Top 3 sugerencias",
+        "close": "Cerrar",
+        "closeAria": "Cerrar Copilot",
+        "disclosureDeterministic": "Sugerencias deterministic — upgrade LLM en FASE 16+. Cero costo H1."
+      },
+      "priority": {
+        "high": "Alta",
+        "med": "Media",
+        "low": "Baja"
+      },
+      "leadStatus": {
+        "new": "nuevo",
+        "qualified": "calificado",
+        "nurturing": "en seguimiento",
+        "converted": "convertido",
+        "lost": "perdido"
+      },
+      "actions": {
+        "reEngagementTemplate": "Plantilla de reactivación",
+        "discDDirectMessage": "Mensaje directo y propuesta concreta",
+        "discICall": "Llamada con calor humano y aspiraciones",
+        "discSReassure": "Reasegurar sin presionar, dar tiempo",
+        "discCData": "Enviar data, comparables y métricas",
+        "familyAmenitiesAndSchools": "Mostrar amenities familiares y escuelas",
+        "scheduleVisitPriority": "Agendar visita prioritaria",
+        "sendPersonalizedListing": "Enviar listing personalizado por DISC y presupuesto"
+      },
+      "reasons": {
+        "reasonInactiveLead": "Han pasado más de 14 días sin contacto.",
+        "reasonDiscD": "Perfil D responde mejor a directness y propuestas concretas.",
+        "reasonDiscI": "Perfil I responde mejor a calor humano y conexión personal.",
+        "reasonDiscS": "Perfil S necesita tiempo y reaseguramiento, no presión.",
+        "reasonDiscC": "Perfil C decide con datos, comparables y métricas.",
+        "reasonLargeFamily": "Familia grande prioriza amenities familiares y escuelas cercanas.",
+        "reasonQualifiedLead": "Lead calificado — momentum alto para visita.",
+        "reasonDefaultFollowUp": "Mantener cadencia con un listing alineado al perfil."
       }
     }
   }

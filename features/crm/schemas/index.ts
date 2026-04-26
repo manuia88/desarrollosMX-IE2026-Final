@@ -1,4 +1,5 @@
 export * from './buyer-twins';
+export * from './contact-notes';
 export * from './deal-stages';
 export * from './deals';
 export * from './family-units';

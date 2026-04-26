@@ -2745,6 +2745,28 @@
       "familyFit": "Family fit",
       "discAligned": "DISC aligned",
       "cityPreferred": "Preferred city"
+    },
+    "kanban": {
+      "ariaLabel": "Searches pipeline by status",
+      "emptyColumn": "No searches in this status.",
+      "stage": {
+        "activa": "Active",
+        "pausada": "Paused",
+        "cerrada": "Closed"
+      }
+    },
+    "view": {
+      "ariaToggle": "View mode",
+      "mode": {
+        "list": "List",
+        "grid": "Grid",
+        "kanban": "Kanban"
+      },
+      "ariaSelect": {
+        "list": "Switch to list view",
+        "grid": "Switch to grid view",
+        "kanban": "Switch to kanban view"
+      }
     }
   },
   "AsesorCaptaciones": {
@@ -3119,7 +3141,12 @@
         "lost": "Lost"
       },
       "hasFamilyUnit": "Belongs to a family unit",
-      "birthdayIn": "Birthday in {days} days"
+      "birthdayIn": "Birthday in {days} days",
+      "tabs": {
+        "aria": "Contact detail tabs",
+        "overview": "Overview",
+        "notes": "Notes"
+      }
     },
     "whatsapp": {
       "trigger": "WhatsApp",
@@ -3187,6 +3214,91 @@
         "enrich": "Enrich with zone_score IE + buyer_twin auto + family_unit detect.",
         "validate": "Validate with Zod + FTS Postgres dedup.",
         "push": "Upsert lead + buyer_twin + audit_crm_log."
+      }
+    },
+    "notes": {
+      "level": {
+        "personal": "Personal",
+        "colaborativo": "Collaborative",
+        "sistema": "System"
+      },
+      "edited": "edited",
+      "actions": {
+        "edit": "Edit",
+        "editAria": "Edit note",
+        "delete": "Delete",
+        "deleteAria": "Delete note",
+        "confirmDelete": "Confirm",
+        "confirmDeleteAria": "Confirm note deletion",
+        "cancel": "Cancel"
+      },
+      "editor": {
+        "ariaCreate": "Create new note",
+        "ariaEdit": "Edit existing note",
+        "contentLabel": "Note content",
+        "levelLabel": "Visibility",
+        "placeholder": "Write a note in Markdown…",
+        "create": "Save note",
+        "save": "Save changes",
+        "saving": "Saving…",
+        "cancel": "Cancel"
+      },
+      "list": {
+        "loading": "Loading notes…",
+        "empty": "No notes recorded for this contact.",
+        "errorLoading": "Could not load notes: {detail}"
+      },
+      "errors": {
+        "createFailed": "Could not create note: {detail}",
+        "updateFailed": "Could not update note: {detail}",
+        "deleteFailed": "Could not delete note: {detail}"
+      }
+    },
+    "copilot": {
+      "button": {
+        "label": "Ask Copilot",
+        "ariaOpen": "Open Copilot for {name}"
+      },
+      "dialog": {
+        "title": "Copilot suggestions",
+        "aria": "Copilot suggestions for {name}",
+        "contextSummary": "{name} — status {status}, DISC {disc}, last contact {days} days ago.",
+        "listAria": "Top 3 suggestions",
+        "close": "Close",
+        "closeAria": "Close Copilot",
+        "disclosureDeterministic": "Deterministic suggestions — LLM upgrade in PHASE 16+. Zero H1 cost."
+      },
+      "priority": {
+        "high": "High",
+        "med": "Medium",
+        "low": "Low"
+      },
+      "leadStatus": {
+        "new": "new",
+        "qualified": "qualified",
+        "nurturing": "nurturing",
+        "converted": "converted",
+        "lost": "lost"
+      },
+      "actions": {
+        "reEngagementTemplate": "Re-engagement template",
+        "discDDirectMessage": "Direct message with concrete proposal",
+        "discICall": "Warm call connecting on aspirations",
+        "discSReassure": "Reassure without pressuring, give time",
+        "discCData": "Send data, comparables and metrics",
+        "familyAmenitiesAndSchools": "Show family amenities and schools",
+        "scheduleVisitPriority": "Schedule priority visit",
+        "sendPersonalizedListing": "Send personalized listing by DISC and budget"
+      },
+      "reasons": {
+        "reasonInactiveLead": "More than 14 days without contact.",
+        "reasonDiscD": "D profile responds best to directness and concrete proposals.",
+        "reasonDiscI": "I profile responds best to warmth and personal connection.",
+        "reasonDiscS": "S profile needs time and reassurance, not pressure.",
+        "reasonDiscC": "C profile decides with data, comparables and metrics.",
+        "reasonLargeFamily": "Large family prioritizes family amenities and nearby schools.",
+        "reasonQualifiedLead": "Qualified lead — high momentum for visit.",
+        "reasonDefaultFollowUp": "Keep cadence with a listing aligned to the profile."
       }
     }
   }

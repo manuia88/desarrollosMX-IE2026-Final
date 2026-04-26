@@ -2896,6 +2896,58 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_notes: {
+        Row: {
+          author_user_id: string
+          content_md: string
+          created_at: string
+          id: string
+          lead_id: string
+          level: Database["public"]["Enums"]["contact_note_level"]
+          updated_at: string
+        }
+        Insert: {
+          author_user_id: string
+          content_md: string
+          created_at?: string
+          id?: string
+          lead_id: string
+          level?: Database["public"]["Enums"]["contact_note_level"]
+          updated_at?: string
+        }
+        Update: {
+          author_user_id?: string
+          content_md?: string
+          created_at?: string
+          id?: string
+          lead_id?: string
+          level?: Database["public"]["Enums"]["contact_note_level"]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contact_notes_author_user_id_fkey"
+            columns: ["author_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_notes_author_user_id_fkey"
+            columns: ["author_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contact_notes_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       countries: {
         Row: {
           address_format: Json
@@ -18662,6 +18714,7 @@ export type Database = {
         | "en_promocion"
         | "vendido"
         | "cerrado_no_listado"
+      contact_note_level: "personal" | "colaborativo" | "sistema"
       exclusividad_scope: "full" | "category" | "territory"
       market_capture_source:
         | "chrome_extension"
@@ -18864,6 +18917,7 @@ export const Constants = {
         "vendido",
         "cerrado_no_listado",
       ],
+      contact_note_level: ["personal", "colaborativo", "sistema"],
       exclusividad_scope: ["full", "category", "territory"],
       market_capture_source: [
         "chrome_extension",
