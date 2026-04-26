@@ -167,7 +167,7 @@
   /* ---- Canon cream variants (text on dark) ---- */
   --canon-cream: #f0ebe0;
   --canon-cream-2: rgba(240, 235, 224, 0.62);
-  --canon-cream-3: rgba(240, 235, 224, 0.32);
+  --canon-cream-3: rgba(240, 235, 224, 0.5);
 
   /* ---- Canon indigo + rose (brand) ---- */
   --canon-indigo: #6366f1;
