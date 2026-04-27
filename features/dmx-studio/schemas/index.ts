@@ -82,3 +82,150 @@ export const studioPublicGalleryBySlugInput = z.object({
 });
 
 export const togglePublicGalleryInput = z.object({ active: z.boolean() });
+
+// ================================================================
+// FASE 14.F.2 Sprint 1 — Onboarding + Voice Clone schemas
+// ================================================================
+
+export const onboardingStep1Input = z.object({
+  name: z.string().trim().min(1).max(160),
+  phone: z.string().trim().min(7).max(40),
+  city: z.string().trim().min(1).max(160),
+  zones: z.array(z.string().trim().min(1).max(120)).min(1).max(20),
+});
+export type OnboardingStep1Input = z.infer<typeof onboardingStep1Input>;
+
+export const onboardingStep2Input = z.object({
+  voiceSampleStoragePath: z.string().trim().min(1).max(512),
+  voiceLanguage: z.string().trim().min(2).max(10).default('es-MX'),
+  voiceName: z.string().trim().min(1).max(80),
+  consentSigned: z.boolean(),
+});
+export type OnboardingStep2Input = z.infer<typeof onboardingStep2Input>;
+
+export const onboardingStep3Input = z.object({
+  acknowledgedDisclosure: z.boolean(),
+});
+
+export const uploadVoiceSampleInput = z.object({
+  fileName: z.string().trim().min(1).max(160),
+  contentType: z.string().trim().min(1).max(80),
+  durationSeconds: z.number().min(3).max(120).optional(),
+});
+
+// ================================================================
+// FASE 14.F.2 Sprint 1 — Project lifecycle schemas
+// ================================================================
+
+export const STUDIO_STYLE_TEMPLATE_KEYS = [
+  'modern_cinematic',
+  'luxe_editorial',
+  'family_friendly',
+  'investor_pitch',
+  'minimal_clean',
+] as const;
+export const studioStyleTemplateKeyEnum = z.enum(STUDIO_STYLE_TEMPLATE_KEYS);
+export type StudioStyleTemplateKey = z.infer<typeof studioStyleTemplateKeyEnum>;
+
+export const STUDIO_PROJECT_TYPES = [
+  'standard',
+  'series',
+  'reel',
+  'story',
+  'portrait',
+  'documentary',
+  'remarketing',
+] as const;
+export const studioProjectTypeEnum = z.enum(STUDIO_PROJECT_TYPES);
+
+export const STUDIO_SPACE_TYPES = [
+  'sala',
+  'cocina',
+  'recamara',
+  'bano',
+  'fachada',
+  'exterior',
+  'plano',
+  'terraza',
+  'amenidad',
+  'otro',
+] as const;
+export const studioSpaceTypeEnum = z.enum(STUDIO_SPACE_TYPES);
+
+export const createStudioProjectInput = z.object({
+  title: z.string().trim().min(3).max(180),
+  projectType: studioProjectTypeEnum.default('standard'),
+  description: z.string().trim().max(2000).optional(),
+  styleTemplateKey: studioStyleTemplateKeyEnum.default('modern_cinematic'),
+  voiceCloneId: z.string().uuid().nullable().optional(),
+  proyectoId: z.string().uuid().nullable().optional(),
+  unidadId: z.string().uuid().nullable().optional(),
+  captacionId: z.string().uuid().nullable().optional(),
+  propertyData: z
+    .object({
+      price: z.number().nonnegative().nullable().optional(),
+      currency: z.string().length(3).optional(),
+      areaM2: z.number().positive().nullable().optional(),
+      bedrooms: z.number().int().nonnegative().nullable().optional(),
+      bathrooms: z.number().nonnegative().nullable().optional(),
+      parking: z.number().int().nonnegative().nullable().optional(),
+      zone: z.string().trim().max(120).optional(),
+      amenities: z.array(z.string().trim().min(1).max(80)).max(20).optional(),
+    })
+    .optional(),
+});
+export type CreateStudioProjectInput = z.infer<typeof createStudioProjectInput>;
+
+export const uploadProjectAssetInput = z.object({
+  projectId: z.string().uuid(),
+  storagePath: z.string().trim().min(1).max(512),
+  fileName: z.string().trim().min(1).max(200),
+  mimeType: z.string().trim().min(1).max(80),
+  sizeBytes: z.number().int().positive(),
+  width: z.number().int().positive().nullable().optional(),
+  height: z.number().int().positive().nullable().optional(),
+  orderIndex: z.number().int().nonnegative().default(0),
+});
+
+export const reorderProjectAssetsInput = z.object({
+  projectId: z.string().uuid(),
+  assetOrder: z.array(z.string().uuid()).min(1).max(30),
+});
+
+export const generateDirectorBriefInput = z.object({
+  projectId: z.string().uuid(),
+});
+
+export const generateVideoInput = z.object({
+  projectId: z.string().uuid(),
+});
+
+export const projectStatusInput = z.object({
+  projectId: z.string().uuid(),
+});
+
+export const selectHookVariantInput = z.object({
+  projectId: z.string().uuid(),
+  hookVariant: z.enum(['hook_a', 'hook_b', 'hook_c']),
+});
+
+export const submitProjectFeedbackInput = z.object({
+  projectId: z.string().uuid(),
+  rating: z.number().int().min(1).max(5),
+  selectedHook: z.enum(['hook_a', 'hook_b', 'hook_c']).optional(),
+  preferredFormat: z.enum(['9x16', '1x1', '16x9']).optional(),
+  comments: z.string().trim().max(2000).optional(),
+  wouldRecommend: z.boolean().optional(),
+});
+
+export const projectByIdInput = z.object({
+  projectId: z.string().uuid(),
+});
+
+export const listProjectsInput = z.object({
+  limit: z.number().int().min(1).max(50).default(20),
+  cursor: z.string().uuid().optional(),
+  status: z
+    .enum(['draft', 'scripting', 'rendering', 'rendered', 'published', 'archived', 'failed'])
+    .optional(),
+});

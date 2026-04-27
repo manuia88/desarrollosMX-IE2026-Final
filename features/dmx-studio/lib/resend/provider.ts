@@ -1,10 +1,10 @@
-// FASE 14.F.1 — DMX Studio dentro DMX único entorno (ADR-054).
+// FASE 14.F.2 — DMX Studio dentro DMX único entorno (ADR-054).
 // Email provider local para Studio (mirror del canon en features/newsletter/lib/email-provider.ts).
-// Inline para evitar cross-feature import (Regla #5 CLAUDE.md). Pattern idéntico
-// al canon: MockEmailProvider default + ResendEmailProvider STUB ADR-018.
-//
-// STUB ADR-018 — ResendEmailProvider activable L-NEW-RESEND-INSTALL: instalación
-// `npm i resend` espera approval founder. CI/dev/test → MockEmailProvider.
+// Inline para evitar cross-feature import (Regla #5 CLAUDE.md). Pattern: MockEmailProvider
+// (default CI/dev/test) + ResendEmailProvider (Resend SDK v6 real, requires RESEND_API_KEY).
+
+import { Resend } from 'resend';
+import { sentry } from '@/shared/lib/telemetry/sentry';
 
 export interface EmailSendInput {
   readonly to: string;
@@ -54,14 +54,58 @@ export class StudioMockEmailProvider implements EmailProvider {
   }
 }
 
+const STUDIO_FROM_DEFAULT = 'DMX Studio <studio@desarrollosmx.com>';
+
 export class StudioResendEmailProvider implements EmailProvider {
   readonly name = 'resend' as const;
-  async send(_input: EmailSendInput): Promise<EmailSendResult> {
-    throw new Error(
-      'NOT_IMPLEMENTED: StudioResendEmailProvider requires `resend` package. ' +
-        'Pointer L-NEW-RESEND-INSTALL → awaiting founder approval for `npm i resend`. ' +
-        'Set EMAIL_PROVIDER=mock or omit to continue using StudioMockEmailProvider.',
-    );
+  private readonly client: Resend;
+  private readonly fromAddress: string;
+
+  constructor(apiKey: string, fromAddress?: string) {
+    this.client = new Resend(apiKey);
+    this.fromAddress = fromAddress ?? process.env.RESEND_FROM_ADDRESS ?? STUDIO_FROM_DEFAULT;
+  }
+
+  async send(input: EmailSendInput): Promise<EmailSendResult> {
+    try {
+      const result = await this.client.emails.send({
+        from: this.fromAddress,
+        to: input.to,
+        subject: input.subject,
+        html: input.html,
+        ...(input.tags ? { tags: input.tags.map((t) => ({ name: t.name, value: t.value })) } : {}),
+      });
+      if (result.error) {
+        sentry.captureException(new Error(result.error.message), {
+          tags: { feature: 'dmx-studio.resend', op: 'send' },
+          extra: { to: input.to, subject: input.subject },
+        });
+        return {
+          providerMessageId: null,
+          provider: 'resend',
+          accepted: false,
+          error: result.error.message,
+        };
+      }
+      return {
+        providerMessageId: result.data?.id ?? null,
+        provider: 'resend',
+        accepted: true,
+        error: null,
+      };
+    } catch (err) {
+      sentry.captureException(err, {
+        tags: { feature: 'dmx-studio.resend', op: 'send.exception' },
+        extra: { to: input.to, subject: input.subject },
+      });
+      const message = err instanceof Error ? err.message : 'unknown_error';
+      return {
+        providerMessageId: null,
+        provider: 'resend',
+        accepted: false,
+        error: message,
+      };
+    }
   }
 }
 
@@ -70,7 +114,7 @@ type ProviderChoice = 'mock' | 'resend';
 function resolveChoice(): ProviderChoice {
   if (process.env.CI === 'true' || process.env.CI === '1') return 'mock';
   const raw = process.env.EMAIL_PROVIDER?.toLowerCase().trim();
-  if (raw === 'resend') return 'resend';
+  if (raw === 'resend' && process.env.RESEND_API_KEY) return 'resend';
   return 'mock';
 }
 
@@ -79,8 +123,16 @@ let cachedProvider: EmailProvider | null = null;
 export function getStudioEmailProvider(): EmailProvider {
   if (cachedProvider !== null) return cachedProvider;
   const choice = resolveChoice();
-  cachedProvider =
-    choice === 'resend' ? new StudioResendEmailProvider() : new StudioMockEmailProvider();
+  if (choice === 'resend') {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      cachedProvider = new StudioMockEmailProvider();
+    } else {
+      cachedProvider = new StudioResendEmailProvider(apiKey);
+    }
+  } else {
+    cachedProvider = new StudioMockEmailProvider();
+  }
   return cachedProvider;
 }
 

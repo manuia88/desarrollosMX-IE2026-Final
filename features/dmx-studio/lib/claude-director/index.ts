@@ -312,6 +312,87 @@ export function routeModels(scenes: ReadonlyArray<SceneInput>): RoutedScene[] {
   return scenes.map((s) => ({ index: s.index, recommendedModel: 'kling' }));
 }
 
+export interface DirectorAnalysisAsset {
+  readonly id: string;
+  readonly storageUrl: string;
+  readonly mimeType: string;
+  readonly orderIndex: number;
+  readonly spaceType: string | null;
+}
+
+export interface RunDirectorAnalysisInput {
+  readonly projectId: string;
+  readonly userId: string;
+  readonly title: string;
+  readonly projectType: string;
+  readonly sourceMetadata: Record<string, unknown>;
+  readonly styleTemplateKey: string;
+  readonly assets: ReadonlyArray<DirectorAnalysisAsset>;
+}
+
+const VALID_PHOTO_CATEGORIES = new Set<string>([...PHOTO_CATEGORY_VALUES]);
+
+function normalizeCategory(spaceType: string | null): (typeof PHOTO_CATEGORY_VALUES)[number] {
+  if (spaceType && VALID_PHOTO_CATEGORIES.has(spaceType)) {
+    return spaceType as (typeof PHOTO_CATEGORY_VALUES)[number];
+  }
+  return 'sala';
+}
+
+function pickPropertyData(input: RunDirectorAnalysisInput): PropertyData {
+  const property = (input.sourceMetadata.property ?? {}) as Record<string, unknown>;
+  const priceRaw = property.price;
+  const priceMxn =
+    typeof priceRaw === 'number' && Number.isFinite(priceRaw) && priceRaw > 0 ? priceRaw : 0;
+  const priceUsd = priceMxn > 0 ? Math.max(priceMxn / 17, 1000) : 1000;
+
+  const areaRaw = property.area_m2;
+  const areaM2 =
+    typeof areaRaw === 'number' && Number.isFinite(areaRaw) && areaRaw > 0 ? areaRaw : 60;
+
+  const bedroomsRaw = property.bedrooms;
+  const bedrooms =
+    typeof bedroomsRaw === 'number' && bedroomsRaw >= 0 && bedroomsRaw <= 20
+      ? Math.floor(bedroomsRaw)
+      : 2;
+
+  const bathroomsRaw = property.bathrooms;
+  const bathrooms =
+    typeof bathroomsRaw === 'number' && bathroomsRaw >= 0 && bathroomsRaw <= 20 ? bathroomsRaw : 1;
+
+  const zoneRaw = property.zone;
+  const zone = typeof zoneRaw === 'string' && zoneRaw.length > 0 ? zoneRaw : 'Zona sin especificar';
+
+  return {
+    id: input.projectId,
+    priceUsd,
+    priceMxn: priceMxn > 0 ? priceMxn : undefined,
+    areaM2,
+    bedrooms,
+    bathrooms,
+    zone,
+    city: typeof property.city === 'string' ? (property.city as string) : 'Ciudad de México',
+    country: 'MX',
+  };
+}
+
+export async function runDirectorAnalysis(
+  input: RunDirectorAnalysisInput,
+  opts: AnalyzePhotosOpts = {},
+): Promise<DirectorOutput> {
+  const photos: PhotoInput[] = input.assets.slice(0, 20).map((asset) => ({
+    id: asset.id,
+    url: asset.storageUrl.startsWith('http')
+      ? asset.storageUrl
+      : `https://storage.placeholder/${asset.storageUrl}`,
+    category: normalizeCategory(asset.spaceType),
+  }));
+
+  const propertyData = pickPropertyData(input);
+
+  return analyzePhotos({ photos, propertyData }, opts);
+}
+
 export async function testConnection(opts: TestConnectionOpts = {}): Promise<TestConnectionResult> {
   let client: Anthropic;
   try {

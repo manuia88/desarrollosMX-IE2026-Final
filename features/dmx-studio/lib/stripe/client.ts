@@ -1,16 +1,12 @@
-// DMX Studio dentro DMX único entorno (ADR-054). Stripe SDK wrapper STUB.
-// STUB ADR-018 — activar L-NEW-STRIPE-SDK-INSTALL.
-// 4 señales: comentario inline + fail-fast cuando se intenta usar live key sin
-// SDK instalado + tests deterministas con mock IDs + L-NEW pendiente.
-//
-// Diseño: cuando STRIPE_SECRET_KEY no está set o es 'sk_test_stub', el wrapper
-// devuelve mock IDs deterministas (cs_test_*, cus_test_*, sub_test_*) que se
-// persisten en BD igual que IDs reales. Esto permite cablear el stack
-// completo (UI -> tRPC -> wrapper -> DB) sin gastar credits Stripe.
-// Cuando STRIPE_SECRET_KEY=sk_live_* o sk_test_real_*, el wrapper lanza un
-// error explícito hasta que el SDK se instale via L-NEW-STRIPE-SDK-INSTALL.
+// DMX Studio dentro DMX único entorno (ADR-054). Stripe SDK wrapper.
+// Modo dual:
+// - Stub mode (STRIPE_SECRET_KEY ausente o 'sk_test_stub'): mock IDs deterministas
+//   (cs_test_*, cus_test_*, sub_test_*) que round-trip a BD sin gastar credits.
+//   Default en CI/dev/test.
+// - Live mode (STRIPE_SECRET_KEY=sk_live_* o sk_test_*): usa SDK real Stripe v22.
 
 import { createHash, createHmac, randomUUID } from 'node:crypto';
+import Stripe from 'stripe';
 import { sentry } from '@/shared/lib/telemetry/sentry';
 import type {
   CreateBillingPortalSessionParams,
@@ -68,14 +64,225 @@ function mockId(prefix: string): string {
   return `${prefix}_${randomUUID().replace(/-/g, '').slice(0, 24)}`;
 }
 
-function liveModeNotInstalled(op: string): never {
-  const err = new Error(
-    `Stripe SDK not installed — install via L-NEW-STRIPE-SDK-INSTALL approval (op=${op})`,
-  );
+function captureLiveError(err: unknown, op: string): never {
   sentry.captureException(err, {
-    tags: { feature: 'dmx-studio.stripe', op, mode: 'live-blocked' },
+    tags: { feature: 'dmx-studio.stripe', op, mode: 'live' },
   });
   throw err;
+}
+
+function adaptCustomer(customer: Stripe.Customer | Stripe.DeletedCustomer): StripeCustomer {
+  if ('deleted' in customer && customer.deleted) {
+    return {
+      id: customer.id,
+      object: 'customer',
+      email: null,
+      metadata: {},
+      created: nowSeconds(),
+    };
+  }
+  const live = customer as Stripe.Customer;
+  return {
+    id: live.id,
+    object: 'customer',
+    email: live.email ?? null,
+    metadata: { ...(live.metadata ?? {}) } as Record<string, string>,
+    created: live.created,
+  };
+}
+
+function adaptSession(session: Stripe.Checkout.Session): StripeCheckoutSession {
+  const customer =
+    typeof session.customer === 'string' ? session.customer : (session.customer?.id ?? null);
+  const subscription =
+    typeof session.subscription === 'string'
+      ? session.subscription
+      : (session.subscription?.id ?? null);
+  return {
+    id: session.id,
+    object: 'checkout.session',
+    url: session.url ?? null,
+    customer,
+    subscription,
+    mode: session.mode as 'subscription' | 'payment' | 'setup',
+    status: (session.status as 'open' | 'complete' | 'expired' | null) ?? null,
+    metadata: { ...(session.metadata ?? {}) } as Record<string, string>,
+    success_url: session.success_url ?? '',
+    cancel_url: session.cancel_url ?? '',
+  };
+}
+
+function adaptSubscription(sub: Stripe.Subscription): StripeSubscription {
+  const customer = typeof sub.customer === 'string' ? sub.customer : sub.customer.id;
+  const items: Array<{ readonly id: string; readonly price: { readonly id: string } }> =
+    sub.items.data.map((item) => ({
+      id: item.id,
+      price: { id: typeof item.price === 'string' ? item.price : item.price.id },
+    }));
+  // Stripe v22 schedule period fields can be on items; fall back to legacy fields.
+  const periodStart =
+    (sub as unknown as { current_period_start?: number }).current_period_start ??
+    sub.items.data[0]?.current_period_start ??
+    nowSeconds();
+  const periodEnd =
+    (sub as unknown as { current_period_end?: number }).current_period_end ??
+    sub.items.data[0]?.current_period_end ??
+    nextThirtyDays();
+  return {
+    id: sub.id,
+    object: 'subscription',
+    customer,
+    status: sub.status,
+    current_period_start: periodStart,
+    current_period_end: periodEnd,
+    cancel_at_period_end: sub.cancel_at_period_end,
+    items: { data: items },
+    metadata: { ...(sub.metadata ?? {}) } as Record<string, string>,
+  };
+}
+
+function adaptPortalSession(s: Stripe.BillingPortal.Session): StripeBillingPortalSession {
+  const customer = typeof s.customer === 'string' ? s.customer : s.customer;
+  return {
+    id: s.id,
+    object: 'billing_portal.session',
+    url: s.url,
+    customer: customer as string,
+    return_url: s.return_url ?? '',
+  };
+}
+
+let cachedSdk: Stripe | null = null;
+
+function getStripeSdk(): Stripe {
+  if (cachedSdk) return cachedSdk;
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) {
+    throw new Error('STRIPE_SECRET_KEY missing — cannot build live Stripe SDK client');
+  }
+  cachedSdk = new Stripe(key, { typescript: true });
+  return cachedSdk;
+}
+
+function buildLiveClient(): StudioStripeClient {
+  return {
+    checkout: {
+      sessions: {
+        async create(params) {
+          try {
+            const sdk = getStripeSdk();
+            const session = await sdk.checkout.sessions.create({
+              ...(params.customer ? { customer: params.customer } : {}),
+              ...(params.customer_email ? { customer_email: params.customer_email } : {}),
+              mode: params.mode,
+              success_url: params.success_url,
+              cancel_url: params.cancel_url,
+              line_items: params.line_items.map((li) => ({
+                price: li.price,
+                quantity: li.quantity,
+              })),
+              ...(params.client_reference_id
+                ? { client_reference_id: params.client_reference_id }
+                : {}),
+              ...(params.metadata ? { metadata: params.metadata } : {}),
+              ...(params.subscription_data ? { subscription_data: params.subscription_data } : {}),
+            });
+            return adaptSession(session);
+          } catch (err) {
+            return captureLiveError(err, 'checkout.sessions.create');
+          }
+        },
+        async retrieve(id) {
+          try {
+            const sdk = getStripeSdk();
+            const session = await sdk.checkout.sessions.retrieve(id);
+            return adaptSession(session);
+          } catch (err) {
+            return captureLiveError(err, 'checkout.sessions.retrieve');
+          }
+        },
+      },
+    },
+    billingPortal: {
+      sessions: {
+        async create(params) {
+          try {
+            const sdk = getStripeSdk();
+            const session = await sdk.billingPortal.sessions.create({
+              customer: params.customer,
+              return_url: params.return_url,
+            });
+            return adaptPortalSession(session);
+          } catch (err) {
+            return captureLiveError(err, 'billingPortal.sessions.create');
+          }
+        },
+      },
+    },
+    customers: {
+      async create(params) {
+        try {
+          const sdk = getStripeSdk();
+          const created = await sdk.customers.create({
+            ...(params.email ? { email: params.email } : {}),
+            ...(params.name ? { name: params.name } : {}),
+            ...(params.metadata ? { metadata: params.metadata } : {}),
+          });
+          return adaptCustomer(created);
+        } catch (err) {
+          return captureLiveError(err, 'customers.create');
+        }
+      },
+      async retrieve(id) {
+        try {
+          const sdk = getStripeSdk();
+          const customer = await sdk.customers.retrieve(id);
+          return adaptCustomer(customer);
+        } catch (err) {
+          return captureLiveError(err, 'customers.retrieve');
+        }
+      },
+    },
+    subscriptions: {
+      async update(id, params) {
+        try {
+          const sdk = getStripeSdk();
+          const sub = await sdk.subscriptions.update(id, {
+            ...(typeof params.cancel_at_period_end === 'boolean'
+              ? { cancel_at_period_end: params.cancel_at_period_end }
+              : {}),
+            ...(params.metadata ? { metadata: params.metadata } : {}),
+          });
+          return adaptSubscription(sub);
+        } catch (err) {
+          return captureLiveError(err, 'subscriptions.update');
+        }
+      },
+      async cancel(id) {
+        try {
+          const sdk = getStripeSdk();
+          const sub = await sdk.subscriptions.cancel(id);
+          return adaptSubscription(sub);
+        } catch (err) {
+          return captureLiveError(err, 'subscriptions.cancel');
+        }
+      },
+    },
+    webhooks: {
+      constructEvent(rawBody, signature, secret) {
+        try {
+          const sdk = getStripeSdk();
+          const event = sdk.webhooks.constructEvent(rawBody, signature, secret);
+          return event as unknown as StripeWebhookEvent;
+        } catch (err) {
+          sentry.captureException(err, {
+            tags: { feature: 'dmx-studio.stripe', op: 'webhook.constructEvent' },
+          });
+          throw err;
+        }
+      },
+    },
+  };
 }
 
 function buildStubClient(): StudioStripeClient {
@@ -219,44 +426,17 @@ function buildStubClient(): StudioStripeClient {
   };
 }
 
-function buildLiveBlockedClient(): StudioStripeClient {
-  return {
-    checkout: {
-      sessions: {
-        create: () => liveModeNotInstalled('checkout.sessions.create'),
-        retrieve: () => liveModeNotInstalled('checkout.sessions.retrieve'),
-      },
-    },
-    billingPortal: {
-      sessions: {
-        create: () => liveModeNotInstalled('billingPortal.sessions.create'),
-      },
-    },
-    customers: {
-      create: () => liveModeNotInstalled('customers.create'),
-      retrieve: () => liveModeNotInstalled('customers.retrieve'),
-    },
-    subscriptions: {
-      update: () => liveModeNotInstalled('subscriptions.update'),
-      cancel: () => liveModeNotInstalled('subscriptions.cancel'),
-    },
-    webhooks: {
-      constructEvent: () => liveModeNotInstalled('webhooks.constructEvent'),
-    },
-  };
-}
-
 let cachedClient: StudioStripeClient | null = null;
 
 export function getStripe(): StudioStripeClient {
   if (cachedClient) return cachedClient;
-  cachedClient = isStubMode() ? buildStubClient() : buildLiveBlockedClient();
+  cachedClient = isStubMode() ? buildStubClient() : buildLiveClient();
   return cachedClient;
 }
 
-// Test-only: clear cached singleton between tests.
 export function __resetStripeClientForTests(): void {
   cachedClient = null;
+  cachedSdk = null;
 }
 
 // Helper exposed for the API webhook route to compute the canonical stub
