@@ -3438,5 +3438,174 @@
         "generic": "Please review the form fields."
       }
     }
+  },
+  "Operaciones": {
+    "list": {
+      "title": "Operations",
+      "metaDescription": "Advisor operations pipeline",
+      "disclosure": "Synthetic data · F2.14.B preview",
+      "create": "New operation",
+      "loading": "Loading operations…",
+      "error": "Could not load operations.",
+      "emptyTitle": "You don't have any operations yet",
+      "emptyHelper": "Link a search or create a standalone operation with the 6-step wizard.",
+      "emptyCta": "Create your first operation",
+      "statusFilter": "Filter by status",
+      "sideFilter": "Filter by side",
+      "allStatuses": "All statuses",
+      "allSides": "Both sides"
+    },
+    "row": {
+      "completion": "Progress",
+      "sideUnknown": "No side"
+    },
+    "status": {
+      "propuesta": "Proposal",
+      "oferta_aceptada": "Offer accepted",
+      "escritura": "Closing deed",
+      "cerrada": "Closed",
+      "pagando": "Collecting",
+      "cancelada": "Cancelled",
+      "changerTitle": "Advance status",
+      "submit": "Apply change",
+      "terminal": "Operation cancelled — no transitions available.",
+      "requireFirmaSimple": "I confirm the buyer's simple signature",
+      "requireLegalFlow": "I confirm the Legal module is initiated",
+      "requireMifiel": "I confirm Mifiel NOM-151 signature is complete (H2 placeholder)",
+      "motivoLabel": "Cancellation reason",
+      "motivoPlaceholder": "At least 10 chars explaining why this is being cancelled…"
+    },
+    "side": {
+      "label": "Advisor side",
+      "ambos": {
+        "label": "Both sides",
+        "description": "I represent both buyer and seller in this operation."
+      },
+      "comprador": {
+        "label": "Buyer side",
+        "description": "Co-broke: another agency owns the listing, I represent the buyer."
+      },
+      "vendedor": {
+        "label": "Seller side",
+        "description": "Co-broke: another agency brings the buyer, I represent the seller."
+      }
+    },
+    "wizard": {
+      "step1Title": "1. Operation · choose side",
+      "step2Title": "2. Buyer",
+      "step3Title": "3. Seller and property",
+      "step4Title": "4. Status and amounts",
+      "step5Title": "5. Commission · VAT + split",
+      "step6Title": "6. Notes and review",
+      "stepProgress": "Step {current} of {total}",
+      "back": "Back",
+      "next": "Next",
+      "cancel": "Cancel",
+      "submit": "Create operation",
+      "submitting": "Creating…",
+      "asesorIdLabel": "Buyer-side advisor ID",
+      "contactoIdLabel": "Buyer contact ID (lead)",
+      "contactoHelper": "Paste the UUID for now; the picker arrives once M03 Contacts ships.",
+      "asesorVendedorLabel": "Seller-side advisor ID",
+      "propietarioLabel": "Owner contact ID (lead)",
+      "fechaCierreLabel": "Estimated closing date",
+      "cierreAmountLabel": "Closing amount",
+      "cierreCurrencyLabel": "Closing currency",
+      "notasLabel": "Internal notes (optional)"
+    },
+    "propiedad": {
+      "title": "Property",
+      "helper": "Lightweight H1 browser: paste the UUID. Visual browser ships with M02 expansion in H2.",
+      "typeLabel": "Property type",
+      "types": {
+        "proyecto": "Project",
+        "unidad": "Unit",
+        "propiedad_secundaria": "Secondary market"
+      },
+      "idLabel": "Property UUID",
+      "idPlaceholder": "property-uuid…",
+      "selected": "Selected: {type}"
+    },
+    "pegarLiga": {
+      "title": "Paste link",
+      "badge": "Coming soon · FASE 22 H2",
+      "label": "Listing URL",
+      "helper": "EasyBroker / Mercado Libre / Inmuebles24 parser available in H2.",
+      "placeholder": "https://easybroker.com/…",
+      "action": "Paste link",
+      "stubMessage": "Parser not implemented yet — paste the data manually or come back when FASE 22 H2 ships."
+    },
+    "comision": {
+      "title": "Commission and DMX split",
+      "pctLabel": "Commission %",
+      "ivaLabel": "VAT %",
+      "splitLabel": "DMX split %",
+      "base": "Calculation base",
+      "subtotal": "Subtotal {pct}%",
+      "ivaAmount": "VAT {pct}%",
+      "total": "Total with VAT",
+      "splitTitle": "Explicit split",
+      "splitInmobiliaria": "Your brokerage ({pct}%)",
+      "splitDmx": "DMX ({pct}%)",
+      "declaracionJurada": "I solemnly declare commission, VAT and split data are correct."
+    },
+    "pagos": {
+      "registrarTitle": "Record payment",
+      "amountLabel": "Amount received",
+      "currencyLabel": "Currency",
+      "fechaLabel": "Payment date",
+      "notesLabel": "Notes (optional)",
+      "submit": "Record payment",
+      "estado": {
+        "pending": "Pending",
+        "paid": "Partially paid",
+        "closed": "Paid in full",
+        "expired": "Expired"
+      }
+    },
+    "legal": {
+      "title": "Legal flow /legal",
+      "badge": "Coming soon · FASE 18 H2",
+      "stepsLabel": "Legal flow steps",
+      "fase18": "Mifiel NOM-151 + escrow ship in FASE 18 H2.",
+      "steps": {
+        "no_subido": "Not uploaded",
+        "en_revision": "Under review",
+        "aprobado": "Approved",
+        "contrato_enviado": "Contract sent",
+        "contrato_firmado": "NOM-151 signed"
+      }
+    },
+    "cfdi": {
+      "title": "CFDI 4.0",
+      "badge": "Coming soon · FASE 22 H2",
+      "description": "CFDI emission with Payment complement via Facturapi.io + Finkok PAC.",
+      "fase22": "Available once Facturapi.io contract is signed in FASE 22 H2."
+    },
+    "detail": {
+      "title": "Operation detail",
+      "loading": "Loading operation…",
+      "error": "Could not load operation.",
+      "created": "Created {date}",
+      "summary": "Summary",
+      "cierreAmount": "Closing amount",
+      "fechaCierre": "Closing date",
+      "completion": "Progress",
+      "parts": "Parts",
+      "partsEmpty": "No parts registered yet.",
+      "commission": "Commission",
+      "pagos": "Payments",
+      "pagosEmpty": "No payments registered.",
+      "notas": "Notes",
+      "refresh": "Refresh"
+    },
+    "partsRoles": {
+      "comprador": "Buyer",
+      "vendedor": "Seller",
+      "asesor_comprador": "Buyer-side advisor",
+      "asesor_vendedor": "Seller-side advisor",
+      "asesor_productor": "Listing advisor",
+      "propietario": "Owner"
+    }
   }
 }

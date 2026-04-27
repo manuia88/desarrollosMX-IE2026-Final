@@ -16,6 +16,7 @@ import { indicesPublicRouter } from '@/features/indices-publicos/routes/indices-
 import { lifepathRouter } from '@/features/lifepath/routes/lifepath';
 import { marketRouter } from '@/features/market/routes/market';
 import { newsletterPublicRouter } from '@/features/newsletter/routes/newsletter-public';
+import { operacionesRouter } from '@/features/operaciones/routes/operaciones';
 import { scianRouter } from '@/features/scian/routes/scian';
 import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
 import { envRouter } from '@/features/str-intelligence/routes/env';
@@ -60,6 +61,7 @@ export const appRouter = router({
   mfa: mfaRouter,
   migrationFlow: migrationFlowRouter,
   newsletter: newsletterPublicRouter,
+  operaciones: operacionesRouter,
   roleRequest: roleRequestRouter,
   scian: scianRouter,
   ltrStrConnection: ltrStrConnectionRouter,

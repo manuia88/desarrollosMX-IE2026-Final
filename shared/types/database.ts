@@ -7661,50 +7661,351 @@ export type Database = {
         }
         Relationships: []
       }
+      operacion_attachments: {
+        Row: {
+          created_at: string
+          file_name: string
+          file_size_bytes: number | null
+          id: string
+          mime_type: string | null
+          operacion_id: string
+          storage_path: string
+          tipo: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          file_name: string
+          file_size_bytes?: number | null
+          id?: string
+          mime_type?: string | null
+          operacion_id: string
+          storage_path: string
+          tipo: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          file_name?: string
+          file_size_bytes?: number | null
+          id?: string
+          mime_type?: string | null
+          operacion_id?: string
+          storage_path?: string
+          tipo?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operacion_attachments_operacion_id_fkey"
+            columns: ["operacion_id"]
+            isOneToOne: false
+            referencedRelation: "operaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operacion_attachments_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operacion_attachments_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      operacion_commissions: {
+        Row: {
+          base_amount: number
+          comision_amount: number | null
+          comision_pct: number
+          created_at: string
+          currency: string
+          declaracion_jurada: boolean
+          factura_attachment_id: string | null
+          id: string
+          iva_amount: number | null
+          iva_pct: number
+          operacion_id: string
+          split_dmx_amount: number | null
+          split_dmx_pct: number
+          split_inmobiliaria_amount: number | null
+          total_with_iva: number | null
+        }
+        Insert: {
+          base_amount: number
+          comision_amount?: number | null
+          comision_pct: number
+          created_at?: string
+          currency: string
+          declaracion_jurada?: boolean
+          factura_attachment_id?: string | null
+          id?: string
+          iva_amount?: number | null
+          iva_pct?: number
+          operacion_id: string
+          split_dmx_amount?: number | null
+          split_dmx_pct?: number
+          split_inmobiliaria_amount?: number | null
+          total_with_iva?: number | null
+        }
+        Update: {
+          base_amount?: number
+          comision_amount?: number | null
+          comision_pct?: number
+          created_at?: string
+          currency?: string
+          declaracion_jurada?: boolean
+          factura_attachment_id?: string | null
+          id?: string
+          iva_amount?: number | null
+          iva_pct?: number
+          operacion_id?: string
+          split_dmx_amount?: number | null
+          split_dmx_pct?: number
+          split_inmobiliaria_amount?: number | null
+          total_with_iva?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operacion_commissions_factura_attachment_fk"
+            columns: ["factura_attachment_id"]
+            isOneToOne: false
+            referencedRelation: "operacion_attachments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operacion_commissions_operacion_id_fkey"
+            columns: ["operacion_id"]
+            isOneToOne: true
+            referencedRelation: "operaciones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      operacion_pagos: {
+        Row: {
+          amount: number
+          comprobante_attachment_id: string | null
+          created_at: string
+          currency: string
+          estado_pago: string
+          fecha_pago: string
+          id: string
+          notes: string | null
+          operacion_id: string
+        }
+        Insert: {
+          amount: number
+          comprobante_attachment_id?: string | null
+          created_at?: string
+          currency: string
+          estado_pago?: string
+          fecha_pago: string
+          id?: string
+          notes?: string | null
+          operacion_id: string
+        }
+        Update: {
+          amount?: number
+          comprobante_attachment_id?: string | null
+          created_at?: string
+          currency?: string
+          estado_pago?: string
+          fecha_pago?: string
+          id?: string
+          notes?: string | null
+          operacion_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operacion_pagos_comprobante_attachment_fk"
+            columns: ["comprobante_attachment_id"]
+            isOneToOne: false
+            referencedRelation: "operacion_attachments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operacion_pagos_operacion_id_fkey"
+            columns: ["operacion_id"]
+            isOneToOne: false
+            referencedRelation: "operaciones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      operacion_parts: {
+        Row: {
+          asesor_id: string | null
+          contacto_id: string | null
+          country_code: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          operacion_id: string
+          role: string
+        }
+        Insert: {
+          asesor_id?: string | null
+          contacto_id?: string | null
+          country_code?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          operacion_id: string
+          role: string
+        }
+        Update: {
+          asesor_id?: string | null
+          contacto_id?: string | null
+          country_code?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          operacion_id?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "operacion_parts_asesor_id_fkey"
+            columns: ["asesor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operacion_parts_asesor_id_fkey"
+            columns: ["asesor_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operacion_parts_contacto_id_fkey"
+            columns: ["contacto_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operacion_parts_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "operacion_parts_operacion_id_fkey"
+            columns: ["operacion_id"]
+            isOneToOne: false
+            referencedRelation: "operaciones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       operaciones: {
         Row: {
           amount: number
           amount_currency: string
+          asesor_id: string | null
+          cancellation_reason: string | null
           cfdi_uuid: string | null
+          cierre_amount: number | null
+          cierre_currency: string | null
           closed_at: string
+          codigo: string | null
           commission_amount: number
           commission_currency: string | null
+          completion_pct: number
           country_code: string
           created_at: string
-          deal_id: string
+          deal_id: string | null
+          fecha_cierre: string | null
           fiscal_status: string
+          fx_rate: number | null
+          fx_rate_date: string | null
           id: string
+          notas: string | null
           operacion_type: string
+          promocion_amount: number | null
+          promocion_currency: string | null
+          propiedad_id: string | null
+          propiedad_type: string | null
+          reserva_amount: number | null
+          reserva_currency: string | null
+          side: string | null
+          status: string
           updated_at: string
         }
         Insert: {
           amount: number
           amount_currency: string
+          asesor_id?: string | null
+          cancellation_reason?: string | null
           cfdi_uuid?: string | null
+          cierre_amount?: number | null
+          cierre_currency?: string | null
           closed_at?: string
+          codigo?: string | null
           commission_amount?: number
           commission_currency?: string | null
+          completion_pct?: number
           country_code: string
           created_at?: string
-          deal_id: string
+          deal_id?: string | null
+          fecha_cierre?: string | null
           fiscal_status?: string
+          fx_rate?: number | null
+          fx_rate_date?: string | null
           id?: string
+          notas?: string | null
           operacion_type: string
+          promocion_amount?: number | null
+          promocion_currency?: string | null
+          propiedad_id?: string | null
+          propiedad_type?: string | null
+          reserva_amount?: number | null
+          reserva_currency?: string | null
+          side?: string | null
+          status?: string
           updated_at?: string
         }
         Update: {
           amount?: number
           amount_currency?: string
+          asesor_id?: string | null
+          cancellation_reason?: string | null
           cfdi_uuid?: string | null
+          cierre_amount?: number | null
+          cierre_currency?: string | null
           closed_at?: string
+          codigo?: string | null
           commission_amount?: number
           commission_currency?: string | null
+          completion_pct?: number
           country_code?: string
           created_at?: string
-          deal_id?: string
+          deal_id?: string | null
+          fecha_cierre?: string | null
           fiscal_status?: string
+          fx_rate?: number | null
+          fx_rate_date?: string | null
           id?: string
+          notas?: string | null
           operacion_type?: string
+          promocion_amount?: number | null
+          promocion_currency?: string | null
+          propiedad_id?: string | null
+          propiedad_type?: string | null
+          reserva_amount?: number | null
+          reserva_currency?: string | null
+          side?: string | null
+          status?: string
           updated_at?: string
         }
         Relationships: [
@@ -7714,6 +8015,20 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "operaciones_asesor_id_fkey"
+            columns: ["asesor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "operaciones_asesor_id_fkey"
+            columns: ["asesor_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
           },
           {
             foreignKeyName: "operaciones_commission_currency_fkey"
@@ -7732,7 +8047,7 @@ export type Database = {
           {
             foreignKeyName: "operaciones_deal_id_fkey"
             columns: ["deal_id"]
-            isOneToOne: true
+            isOneToOne: false
             referencedRelation: "deals"
             referencedColumns: ["id"]
           },
