@@ -21,6 +21,8 @@ export type { StreakWidgetProps } from './components/performance-today/StreakWid
 export { StreakWidget } from './components/performance-today/StreakWidget';
 export type { XpProgressBarProps } from './components/performance-today/XpProgressBar';
 export { XpProgressBar } from './components/performance-today/XpProgressBar';
+export type { StudioVideosWidgetProps } from './components/StudioVideosWidget';
+export { StudioVideosWidget } from './components/StudioVideosWidget';
 export type { DashboardSummary } from './lib/dashboard-loader';
 export { loadDashboardSummary } from './lib/dashboard-loader';
 export {
@@ -29,3 +31,8 @@ export {
   deriveStreak,
   pipelineDaysProjection,
 } from './lib/derive';
+export {
+  deriveStudioMetrics,
+  fetchStudioMetricsForUser,
+  type StudioMetricsSummary,
+} from './lib/studio-metrics';

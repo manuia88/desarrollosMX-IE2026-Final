@@ -58,30 +58,28 @@ export const studioLibraryRouter = router({
     return filtered;
   }),
 
-  bulkSignedUrls: studioProcedure
-    .input(bulkLibraryActionInput)
-    .mutation(async ({ ctx, input }) => {
-      const supabase = createAdminClient();
-      const { data: outputs, error } = await supabase
-        .from('studio_video_outputs')
-        .select('id, storage_url')
-        .in('id', input.videoOutputIds)
-        .eq('user_id', ctx.user.id);
-      if (error) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
+  bulkSignedUrls: studioProcedure.input(bulkLibraryActionInput).mutation(async ({ ctx, input }) => {
+    const supabase = createAdminClient();
+    const { data: outputs, error } = await supabase
+      .from('studio_video_outputs')
+      .select('id, storage_url')
+      .in('id', input.videoOutputIds)
+      .eq('user_id', ctx.user.id);
+    if (error) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
 
-      const result: Array<{ id: string; signedUrl: string | null; storagePath: string }> = [];
-      for (const row of outputs ?? []) {
-        const { data: signed } = await supabase.storage
-          .from(VIDEO_OUTPUTS_BUCKET)
-          .createSignedUrl(row.storage_url, SIGNED_URL_TTL_SECONDS);
-        result.push({
-          id: row.id,
-          signedUrl: signed?.signedUrl ?? null,
-          storagePath: row.storage_url,
-        });
-      }
-      return { items: result };
-    }),
+    const result: Array<{ id: string; signedUrl: string | null; storagePath: string }> = [];
+    for (const row of outputs ?? []) {
+      const { data: signed } = await supabase.storage
+        .from(VIDEO_OUTPUTS_BUCKET)
+        .createSignedUrl(row.storage_url, SIGNED_URL_TTL_SECONDS);
+      result.push({
+        id: row.id,
+        signedUrl: signed?.signedUrl ?? null,
+        storagePath: row.storage_url,
+      });
+    }
+    return { items: result };
+  }),
 
   bulkShareMessage: studioProcedure
     .input(bulkLibraryActionInput)
@@ -106,27 +104,22 @@ export const studioLibraryRouter = router({
       return { whatsappMessage: lines.join('\n'), count: outputs?.length ?? 0 };
     }),
 
-  delete: studioProcedure
-    .input(deleteLibraryVideoInput)
-    .mutation(async ({ ctx, input }) => {
-      const supabase = createAdminClient();
-      const { data: row } = await supabase
-        .from('studio_video_outputs')
-        .select('id, storage_url')
-        .eq('id', input.videoOutputId)
-        .eq('user_id', ctx.user.id)
-        .maybeSingle();
-      if (!row) throw new TRPCError({ code: 'NOT_FOUND' });
-      if (row.storage_url) {
-        await supabase.storage.from(VIDEO_OUTPUTS_BUCKET).remove([row.storage_url]);
-      }
-      const { error } = await supabase
-        .from('studio_video_outputs')
-        .delete()
-        .eq('id', row.id);
-      if (error) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
-      return { ok: true };
-    }),
+  delete: studioProcedure.input(deleteLibraryVideoInput).mutation(async ({ ctx, input }) => {
+    const supabase = createAdminClient();
+    const { data: row } = await supabase
+      .from('studio_video_outputs')
+      .select('id, storage_url')
+      .eq('id', input.videoOutputId)
+      .eq('user_id', ctx.user.id)
+      .maybeSingle();
+    if (!row) throw new TRPCError({ code: 'NOT_FOUND' });
+    if (row.storage_url) {
+      await supabase.storage.from(VIDEO_OUTPUTS_BUCKET).remove([row.storage_url]);
+    }
+    const { error } = await supabase.from('studio_video_outputs').delete().eq('id', row.id);
+    if (error) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
+    return { ok: true };
+  }),
 
   countByUser: studioProcedure.query(async ({ ctx }) => {
     const supabase = createAdminClient();

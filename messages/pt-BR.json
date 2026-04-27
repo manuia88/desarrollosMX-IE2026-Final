@@ -2414,7 +2414,9 @@
         "marketing": "Marketing",
         "estadisticas": "Estadísticas",
         "academia": "Academia",
-        "ajustes": "Ajustes"
+        "ajustes": "Ajustes",
+        "studioLibrary": "Studio · Biblioteca",
+        "studioUsage": "Studio · Uso"
       }
     },
     "topbar": {
@@ -2667,6 +2669,14 @@
       "subtitle": "Crea tu primer video inmobiliario con IA en 60 segundos.",
       "cta": "Únete a la lista de espera",
       "ctaAria": "Únete a la lista de espera de DMX Studio"
+    },
+    "studioVideosWidget": {
+      "badge": "Studio",
+      "title": "Seus vídeos recentes",
+      "totalLabel": "{count, plural, one {# vídeo} other {# vídeos}} no total",
+      "thumbAria": "Abrir projeto: {title}",
+      "ctaAria": "Ver toda a sua biblioteca de vídeos no Studio",
+      "cta": "Ver biblioteca"
     }
   },
   "AsesorBusquedas": {

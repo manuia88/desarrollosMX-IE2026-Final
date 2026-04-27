@@ -32,12 +32,12 @@ describe('buildBreadcrumb', () => {
 });
 
 describe('ASESOR_NAV_ITEMS', () => {
-  it('contains 11 unique modules (9 primary + 2 secondary)', () => {
-    expect(ASESOR_NAV_ITEMS).toHaveLength(11);
+  it('contains 13 unique modules (9 primary + 4 secondary, incluyendo Studio Library/Usage Sprint 2)', () => {
+    expect(ASESOR_NAV_ITEMS).toHaveLength(13);
     const primary = ASESOR_NAV_ITEMS.filter((i) => i.group === 'primary');
     const secondary = ASESOR_NAV_ITEMS.filter((i) => i.group === 'secondary');
     expect(primary).toHaveLength(9);
-    expect(secondary).toHaveLength(2);
+    expect(secondary).toHaveLength(4);
   });
 
   it('every item has unique id', () => {

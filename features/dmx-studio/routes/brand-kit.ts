@@ -145,26 +145,24 @@ export const studioBrandKitRouter = router({
     return { ok: true };
   }),
 
-  previewMockup: authenticatedProcedure
-    .input(previewBrandMockupInput)
-    .query(async ({ ctx }) => {
-      const supabase = createAdminClient();
-      const { data: kit } = await supabase
-        .from('studio_brand_kits')
-        .select(
-          'id, display_name, tagline, primary_color, secondary_color, accent_color, font_preference, logo_url, tone, intro_text, outro_text, contact_phone',
-        )
-        .eq('user_id', ctx.user.id)
-        .eq('is_default', true)
-        .maybeSingle();
-      return {
-        kit: kit ?? null,
-        sample: {
-          headline: kit?.tagline ?? 'Tu próximo hogar te espera',
-          price: '$4,850,000 MXN',
-          area: '125 m² · 3 rec · 2 baños',
-          zone: 'Polanco, CDMX',
-        },
-      };
-    }),
+  previewMockup: authenticatedProcedure.input(previewBrandMockupInput).query(async ({ ctx }) => {
+    const supabase = createAdminClient();
+    const { data: kit } = await supabase
+      .from('studio_brand_kits')
+      .select(
+        'id, display_name, tagline, primary_color, secondary_color, accent_color, font_preference, logo_url, tone, intro_text, outro_text, contact_phone',
+      )
+      .eq('user_id', ctx.user.id)
+      .eq('is_default', true)
+      .maybeSingle();
+    return {
+      kit: kit ?? null,
+      sample: {
+        headline: kit?.tagline ?? 'Tu próximo hogar te espera',
+        price: '$4,850,000 MXN',
+        area: '125 m² · 3 rec · 2 baños',
+        zone: 'Polanco, CDMX',
+      },
+    };
+  }),
 });
