@@ -18,6 +18,8 @@
     { "path": "/api/cron/score-history-purge", "schedule": "0 2 * * 0" },
     { "path": "/api/cron/heatmap-refresh", "schedule": "0 5 * * *" },
     { "path": "/api/cron/tareas-mark-expired", "schedule": "0 7 * * *" },
-    { "path": "/api/cron/asesor-stats-refresh", "schedule": "0 6 * * *" }
+    { "path": "/api/cron/asesor-stats-refresh", "schedule": "0 6 * * *" },
+    { "path": "/api/cron/studio-remarketing-scan", "schedule": "0 6 * * *" },
+    { "path": "/api/cron/studio-challenge-launch", "schedule": "0 0 * * 1" }
   ]
 }

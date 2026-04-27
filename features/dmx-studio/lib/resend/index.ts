@@ -9,6 +9,16 @@
 
 import { type EmailSendInput, type EmailSendResult, getStudioEmailProvider } from './provider';
 import {
+  CHALLENGE_WEEK_LAUNCHED_SUBJECT,
+  type RenderChallengeWeekLaunchedInput,
+  renderChallengeWeekLaunchedHtml,
+} from './templates/challenge-week-launched';
+import {
+  DAILY_CONTENT_READY_SUBJECT,
+  type RenderDailyContentReadyInput,
+  renderDailyContentReadyHtml,
+} from './templates/daily-content-ready';
+import {
   DRIP_DAY_3_SUBJECT,
   type RenderDripDay3Input,
   renderDripDay3Html,
@@ -23,6 +33,16 @@ import {
   renderDripDay14Html,
   renderDripDay14Subject,
 } from './templates/drip-day-14';
+import {
+  NEW_REMARKETING_GENERATED_SUBJECT,
+  type RenderNewRemarketingGeneratedInput,
+  renderNewRemarketingGeneratedHtml,
+} from './templates/new-remarketing-generated';
+import {
+  type RenderStreakMilestoneInput,
+  renderStreakMilestoneHtml,
+  renderStreakMilestoneSubject,
+} from './templates/streak-milestone';
 import {
   type RenderWelcomeStudioInput,
   renderWelcomeStudioHtml,
@@ -110,5 +130,92 @@ export async function sendDripDay14(args: SendDripDay14Args): Promise<EmailSendR
     subject: renderDripDay14Subject(args.foundersRemaining ?? null),
     html,
     tagValue: 'drip_day_14',
+  });
+}
+
+// ---------------------------------------------------------------------------
+// F14.F.5 Sprint 4 — Sprint 4 templates (calendar, remarketing, streaks,
+// challenges).
+// ---------------------------------------------------------------------------
+
+export interface SendDailyContentReadyArgs extends RenderDailyContentReadyInput {
+  readonly to: string;
+}
+
+export async function sendDailyContentReady(
+  args: SendDailyContentReadyArgs,
+): Promise<EmailSendResult> {
+  const html = renderDailyContentReadyHtml({
+    name: args.name ?? null,
+    calendarEntryType: args.calendarEntryType,
+    calendarEntryTitle: args.calendarEntryTitle,
+    calendarEntryUrl: args.calendarEntryUrl,
+  });
+  return sendStudioEmail({
+    to: args.to,
+    subject: DAILY_CONTENT_READY_SUBJECT,
+    html,
+    tagValue: 'daily_content_ready',
+  });
+}
+
+export interface SendNewRemarketingGeneratedArgs extends RenderNewRemarketingGeneratedInput {
+  readonly to: string;
+}
+
+export async function sendNewRemarketingGenerated(
+  args: SendNewRemarketingGeneratedArgs,
+): Promise<EmailSendResult> {
+  const html = renderNewRemarketingGeneratedHtml({
+    name: args.name ?? null,
+    sourceProjectTitle: args.sourceProjectTitle,
+    newProjectUrl: args.newProjectUrl,
+    angle: args.angle,
+  });
+  return sendStudioEmail({
+    to: args.to,
+    subject: NEW_REMARKETING_GENERATED_SUBJECT,
+    html,
+    tagValue: 'new_remarketing_generated',
+  });
+}
+
+export interface SendStreakMilestoneArgs extends RenderStreakMilestoneInput {
+  readonly to: string;
+}
+
+export async function sendStreakMilestone(args: SendStreakMilestoneArgs): Promise<EmailSendResult> {
+  const html = renderStreakMilestoneHtml({
+    name: args.name ?? null,
+    badgeKey: args.badgeKey,
+    currentStreakDays: args.currentStreakDays,
+  });
+  return sendStudioEmail({
+    to: args.to,
+    subject: renderStreakMilestoneSubject(args.badgeKey),
+    html,
+    tagValue: 'streak_milestone',
+  });
+}
+
+export interface SendChallengeWeekLaunchedArgs extends RenderChallengeWeekLaunchedInput {
+  readonly to: string;
+}
+
+export async function sendChallengeWeekLaunched(
+  args: SendChallengeWeekLaunchedArgs,
+): Promise<EmailSendResult> {
+  const html = renderChallengeWeekLaunchedHtml({
+    name: args.name ?? null,
+    challengeTitle: args.challengeTitle,
+    challengeDescription: args.challengeDescription,
+    weekStart: args.weekStart,
+    rewardXp: args.rewardXp,
+  });
+  return sendStudioEmail({
+    to: args.to,
+    subject: CHALLENGE_WEEK_LAUNCHED_SUBJECT,
+    html,
+    tagValue: 'challenge_week_launched',
   });
 }

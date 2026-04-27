@@ -1,4 +1,5 @@
 import { TRPCError } from '@trpc/server';
+import { getStudioMetricsForAsesor } from '@/features/dmx-studio/lib/cross-functions/m09-studio-metrics';
 import {
   estadisticasInput,
   leaderboardInput,
@@ -466,6 +467,22 @@ export const estadisticasRouter = router({
       month: targetMonth,
       entries: data ?? [],
     };
+  }),
+
+  getStudioMetrics: authenticatedProcedure.query(async ({ ctx }) => {
+    const supabase = createAdminClient();
+    try {
+      return await getStudioMetricsForAsesor(supabase, ctx.user.id);
+    } catch (err) {
+      sentry.captureException(err, {
+        tags: { feature: 'estadisticas', op: 'getStudioMetrics' },
+      });
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: err instanceof Error ? err.message : 'getStudioMetrics failed',
+        cause: err,
+      });
+    }
   }),
 });
 
