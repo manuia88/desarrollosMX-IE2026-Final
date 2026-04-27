@@ -39,6 +39,10 @@ Audit estado real M01-M20 en `docs/08_PRODUCT_AUDIT/06_AUDIT_ESTADO_REAL_M01_M20
 11. Keyboard-first: kbd shortcuts documentados (`?` shortcuts overlay, `cmd+k` global search, `j/k` row nav, `g d` go dashboard).
 12. `prefers-reduced-motion` respetado vía media query global en `styles/tokens.css`.
 
+## M21 DMX Studio Canon (ADR-054, 2026-04-27)
+
+M21 DMX Studio vive 100% dentro DMX único entorno: Repo `desarrollosMX-IE2026-Final` + Supabase `qxfuqwlktmhokwwlvggy` + Vercel `desarrollos-mx-ie-2026-final` + Github actual. Cualquier doc legacy (BIBLIA Studio v4 en `docs/M21_STUDIO/BIBLIA_DMX_STUDIO_v4.docx`, originales preservados en `tmp/BIBLIA_PROPERTYX_v{3,4}.docx`) con menciones a "repo separado", "supabase euiiefpkazvkqylmbhpf", "github.com/manuia88/propertyx" o "integración futura cuando ambos productos estén estables" está SUPERSEDED por [ADR-054](docs/01_DECISIONES_ARQUITECTONICAS/ADR-054_DMX_STUDIO_INTEGRATED_WITHIN_DMX.md). 21 tablas Studio se prefijan `studio_*` en Supabase DMX. Auth + Stripe compartidos desde día 1. Naming canon producto: **DMX Studio** (no "PropertyX").
+
 ## Stack (H1 cerrado)
 
 - Next.js 16 App Router + Turbopack. React 19 (Server Components).
