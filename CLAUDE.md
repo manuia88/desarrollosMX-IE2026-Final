@@ -59,8 +59,12 @@ Lista completa y rationale: `docs/00_FOUNDATION/00.2_STACK_Y_CONVENCIONES.md`.
 Cada dominio en `/features/<feature>/{components,hooks,routes,schemas,types,lib,tests}`.
 Zero imports cross-feature — todo lo compartido va en `/shared/`.
 
+**Pattern canónico forward (ADR-053): unified.** Un módulo = un directorio. UI portal (asesor/dev/admin) + dominio (routes tRPC + schemas Zod + lib + tests) viven juntos en `features/<dominio>/`. Sub-dirs `components/<portal>/` solo cuando el split por portal aporta clarity. Precedent shipped F14.B: `features/operaciones/` (M07).
+
+**Excepción legacy M01-M06** (FASE 13 portales asesor): split pattern `features/asesor-<dominio>/` (UI) + `features/<dominio>/` (dominio) preservado por costo migración. Migración a unified agendada `L-NEW-FEATURE-PATTERN-MIGRATE-M01-M06-SPLIT-TO-UNIFIED` H2 post-launch.
+
 - `app/` solo routing + layouts.
-- `features/` dominio.
+- `features/` dominio (unified canon forward; split legacy M01-M06).
 - `shared/{ui,lib,hooks,constants,schemas,types}` cross-feature.
 - `server/trpc/` context + middleware + root router.
 - `supabase/migrations/` versionadas con timestamp + nombre.
