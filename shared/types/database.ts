@@ -2493,6 +2493,42 @@ export type Database = {
         }
         Relationships: []
       }
+      client_folders: {
+        Row: {
+          cliente_contacto_id: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          slug: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cliente_contacto_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          slug: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cliente_contacto_id?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          slug?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       climate_annual_summaries: {
         Row: {
           climate_type: string | null
@@ -3858,6 +3894,42 @@ export type Database = {
           },
         ]
       }
+      folder_projects: {
+        Row: {
+          created_at: string
+          folder_id: string
+          project_id: string
+          sort_order: number
+        }
+        Insert: {
+          created_at?: string
+          folder_id: string
+          project_id: string
+          sort_order?: number
+        }
+        Update: {
+          created_at?: string
+          folder_id?: string
+          project_id?: string
+          sort_order?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "folder_projects_folder_id_fkey"
+            columns: ["folder_id"]
+            isOneToOne: false
+            referencedRelation: "client_folders"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "folder_projects_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       futures_curve_projections: {
         Row: {
           base_period_date: string
@@ -5029,6 +5101,582 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      landing_analytics: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_default: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20251201: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20260101: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20260201: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20260301: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20260401: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20260501: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20260601: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20260701: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landing_analytics_p20260801: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at?: string
+          event_type: string
+          id?: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
+      landings: {
+        Row: {
+          brand_colors: Json
+          copy: Json
+          country_code: string
+          created_at: string
+          id: string
+          is_published: boolean
+          project_ids: string[]
+          published_at: string | null
+          seo_meta: Json | null
+          slug: string
+          template: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          brand_colors?: Json
+          copy?: Json
+          country_code: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          project_ids: string[]
+          published_at?: string | null
+          seo_meta?: Json | null
+          slug: string
+          template: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          brand_colors?: Json
+          copy?: Json
+          country_code?: string
+          created_at?: string
+          id?: string
+          is_published?: boolean
+          project_ids?: string[]
+          published_at?: string | null
+          seo_meta?: Json | null
+          slug?: string
+          template?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       lead_sources: {
         Row: {
@@ -7430,6 +8078,83 @@ export type Database = {
           },
         ]
       }
+      marketing_portales: {
+        Row: {
+          created_at: string
+          credentials_encrypted: string | null
+          id: string
+          is_active: boolean
+          last_sync_at: string | null
+          portal: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          credentials_encrypted?: string | null
+          id?: string
+          is_active?: boolean
+          last_sync_at?: string | null
+          portal: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          credentials_encrypted?: string | null
+          id?: string
+          is_active?: boolean
+          last_sync_at?: string | null
+          portal?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      marketing_publications: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          external_id: string | null
+          id: string
+          portal: string
+          project_id: string
+          published_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          external_id?: string | null
+          id?: string
+          portal: string
+          project_id: string
+          published_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          external_id?: string | null
+          id?: string
+          portal?: string
+          project_id?: string
+          published_at?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "marketing_publications_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ml_training_snapshots: {
         Row: {
           corpus_name: string
@@ -8277,6 +9002,75 @@ export type Database = {
         }
         Relationships: []
       }
+      photos: {
+        Row: {
+          captacion_id: string | null
+          category: string | null
+          classify_confidence: number | null
+          classify_error: string | null
+          classify_status: string
+          created_at: string
+          display_order: number
+          file_size_bytes: number | null
+          id: string
+          mime_type: string | null
+          proyecto_id: string | null
+          storage_path: string
+          updated_at: string
+          url: string | null
+          user_id: string
+        }
+        Insert: {
+          captacion_id?: string | null
+          category?: string | null
+          classify_confidence?: number | null
+          classify_error?: string | null
+          classify_status?: string
+          created_at?: string
+          display_order?: number
+          file_size_bytes?: number | null
+          id?: string
+          mime_type?: string | null
+          proyecto_id?: string | null
+          storage_path: string
+          updated_at?: string
+          url?: string | null
+          user_id: string
+        }
+        Update: {
+          captacion_id?: string | null
+          category?: string | null
+          classify_confidence?: number | null
+          classify_error?: string | null
+          classify_status?: string
+          created_at?: string
+          display_order?: number
+          file_size_bytes?: number | null
+          id?: string
+          mime_type?: string | null
+          proyecto_id?: string | null
+          storage_path?: string
+          updated_at?: string
+          url?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "photos_captacion_id_fkey"
+            columns: ["captacion_id"]
+            isOneToOne: false
+            referencedRelation: "captaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "photos_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       plans: {
         Row: {
           audience: string
@@ -8980,6 +9774,60 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      qr_codes: {
+        Row: {
+          color_hex: string | null
+          copy: string | null
+          created_at: string
+          destino_id: string
+          destino_type: string
+          id: string
+          png_storage_path: string | null
+          scan_count: number
+          short_url: string
+          svg_storage_path: string | null
+          updated_at: string
+          user_id: string
+          utm_campaign: string | null
+          utm_medium: string
+          utm_source: string
+        }
+        Insert: {
+          color_hex?: string | null
+          copy?: string | null
+          created_at?: string
+          destino_id: string
+          destino_type: string
+          id?: string
+          png_storage_path?: string | null
+          scan_count?: number
+          short_url: string
+          svg_storage_path?: string | null
+          updated_at?: string
+          user_id: string
+          utm_campaign?: string | null
+          utm_medium?: string
+          utm_source?: string
+        }
+        Update: {
+          color_hex?: string | null
+          copy?: string | null
+          created_at?: string
+          destino_id?: string
+          destino_type?: string
+          id?: string
+          png_storage_path?: string | null
+          scan_count?: number
+          short_url?: string
+          svg_storage_path?: string | null
+          updated_at?: string
+          user_id?: string
+          utm_campaign?: string | null
+          utm_medium?: string
+          utm_source?: string
+        }
+        Relationships: []
       }
       rate_limit_log: {
         Row: {
@@ -14853,6 +15701,54 @@ export type Database = {
           },
         ]
       }
+      template_public_landing_analytics: {
+        Row: {
+          country_code: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash: string | null
+          landing_id: string
+          referer: string | null
+          user_agent: string | null
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+        }
+        Insert: {
+          country_code?: string | null
+          created_at: string
+          event_type: string
+          id: string
+          ip_hash?: string | null
+          landing_id: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Update: {
+          country_code?: string | null
+          created_at?: string
+          event_type?: string
+          id?: string
+          ip_hash?: string | null
+          landing_id?: string
+          referer?: string | null
+          user_agent?: string | null
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+        }
+        Relationships: []
+      }
       template_public_macro_series: {
         Row: {
           country_code: string
@@ -15681,6 +16577,39 @@ export type Database = {
           },
         ]
       }
+      utm_tracks: {
+        Row: {
+          clicks_count: number
+          created_at: string
+          id: string
+          short_url: string
+          source_id: string | null
+          source_type: string
+          user_id: string
+          utm_params: Json
+        }
+        Insert: {
+          clicks_count?: number
+          created_at?: string
+          id?: string
+          short_url: string
+          source_id?: string | null
+          source_type: string
+          user_id: string
+          utm_params?: Json
+        }
+        Update: {
+          clicks_count?: number
+          created_at?: string
+          id?: string
+          short_url?: string
+          source_id?: string | null
+          source_type?: string
+          user_id?: string
+          utm_params?: Json
+        }
+        Relationships: []
+      }
       vibe_tags: {
         Row: {
           created_at: string
@@ -15726,6 +16655,57 @@ export type Database = {
           entity_id?: string
           entity_type?: string
           viewed_at?: string
+        }
+        Relationships: []
+      }
+      wa_templates: {
+        Row: {
+          body: string
+          buttons: Json
+          category: string
+          created_at: string
+          footer: string | null
+          header_content: string | null
+          header_type: string
+          id: string
+          meta_template_id: string | null
+          name: string
+          placeholders: Json
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          body: string
+          buttons?: Json
+          category: string
+          created_at?: string
+          footer?: string | null
+          header_content?: string | null
+          header_type?: string
+          id?: string
+          meta_template_id?: string | null
+          name: string
+          placeholders?: Json
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          buttons?: Json
+          category?: string
+          created_at?: string
+          footer?: string | null
+          header_content?: string | null
+          header_type?: string
+          id?: string
+          meta_template_id?: string | null
+          name?: string
+          placeholders?: Json
+          status?: string
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

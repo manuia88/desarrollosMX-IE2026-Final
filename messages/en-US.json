@@ -3406,8 +3406,12 @@
     "wizard": {
       "aria": "New task wizard",
       "stepperAria": "Wizard steps",
-      "step1": { "title": "What is the task about?" },
-      "step2": { "title": "Detail and due date" },
+      "step1": {
+        "title": "What is the task about?"
+      },
+      "step2": {
+        "title": "Detail and due date"
+      },
       "next": "Next",
       "back": "Back",
       "submit": "Create task",
@@ -3606,6 +3610,171 @@
       "asesor_vendedor": "Seller-side advisor",
       "asesor_productor": "Listing advisor",
       "propietario": "Owner"
+    }
+  },
+  "Marketing": {
+    "list": {
+      "title": "Marketing",
+      "metaDescription": "Advisor marketing center",
+      "tabs": "Marketing tabs"
+    },
+    "tabs": {
+      "landings": "Landings",
+      "qr": "QR",
+      "wa": "WhatsApp",
+      "folders": "Folders",
+      "photos": "Photos",
+      "portales": "Portals"
+    },
+    "common": {
+      "loading": "Loading…",
+      "cancel": "Cancel",
+      "save": "Save",
+      "saving": "Saving…"
+    },
+    "landings": {
+      "heading": "Landings ({count})",
+      "actions": {
+        "new": "New landing"
+      },
+      "status": {
+        "published": "Published",
+        "draft": "Draft"
+      },
+      "card": {
+        "template": "Template",
+        "projects": "Projects",
+        "openPublic": "View public landing"
+      },
+      "empty": {
+        "body": "No landings yet. Create your first to start distributing."
+      },
+      "wizard": {
+        "title": "New landing",
+        "slug": "Slug (public URL)",
+        "template": "Template",
+        "headline": "Headline (max 120)",
+        "cta": "CTA (max 40)",
+        "brandPrimary": "Brand primary color",
+        "firstProjectId": "First project ID"
+      },
+      "templates": {
+        "hero": "Hero (one featured project)",
+        "grid": "Grid (multiple projects)",
+        "long-form": "Long-form (storytelling)",
+        "single-project": "Single project"
+      }
+    },
+    "qr": {
+      "heading": "QR codes ({count})",
+      "actions": {
+        "new": "New QR"
+      },
+      "scans": "{n} scans",
+      "empty": {
+        "body": "Generate your first QR to print or share."
+      },
+      "generator": {
+        "title": "New QR",
+        "destinoType": "Destination type",
+        "destinoId": "Destination ID or slug",
+        "copy": "Copy near QR (optional)",
+        "color": "Brand color"
+      },
+      "destinoTypes": {
+        "proyecto": "Project",
+        "landing": "Landing",
+        "microsite": "Microsite"
+      }
+    },
+    "wa": {
+      "heading": "WhatsApp templates ({count})",
+      "actions": {
+        "new": "New template"
+      },
+      "disclosureH1": "Web QR · no Meta Business H1",
+      "empty": {
+        "body": "Create local templates (Web QR style). Meta Business approval lands in F22."
+      },
+      "form": {
+        "title": "New WhatsApp template",
+        "disclosureMeta": "Local H1 · no Meta",
+        "name": "Internal name",
+        "category": "Category",
+        "body": "Message body (max 1024)",
+        "footer": "Footer (max 60, optional)"
+      },
+      "categories": {
+        "marketing": "Marketing",
+        "utility": "Utility"
+      }
+    },
+    "folders": {
+      "heading": "Folders ({count})",
+      "actions": {
+        "new": "New folder"
+      },
+      "empty": {
+        "body": "Create a folder to share a curated Radar with a buyer."
+      },
+      "editor": {
+        "title": "New folder",
+        "titleField": "Title",
+        "slug": "Slug (public URL /radar/<slug>)"
+      }
+    },
+    "photos": {
+      "heading": "Photos ({count})",
+      "disclosureClassify": "AI auto-classification",
+      "empty": {
+        "body": "Upload photos in M02 developments or M05 listings to see them here."
+      },
+      "uploadInstructions": "Initial upload lives in each project/listing; this tab adds filters and categories.",
+      "noPreview": "No preview",
+      "categories": {
+        "sala": "Living room",
+        "cocina": "Kitchen",
+        "recamara": "Bedroom",
+        "bano": "Bathroom",
+        "fachada": "Facade",
+        "exterior": "Exterior",
+        "plano": "Floor plan"
+      }
+    },
+    "portales": {
+      "heading": "Publishing to portals",
+      "statusActive": "Active",
+      "statusNotConfigured": "Not configured",
+      "statusComingF14C1": "Coming · F14.C.1",
+      "tagH1": "H1",
+      "tagH2": "H2",
+      "names": {
+        "inmuebles24": "Inmuebles24",
+        "mercadolibre": "Mercado Libre",
+        "vivanuncios": "Vivanuncios",
+        "icasas": "iCasas",
+        "propiedades_com": "Propiedades.com",
+        "facebook_marketplace": "Facebook Marketplace",
+        "easybroker": "EasyBroker"
+      }
+    },
+    "studioBanner": {
+      "title": "DMX Studio",
+      "body": "Create cinematic videos with AI voice, music and full copy. Built within DMX, coming soon.",
+      "coming": "coming soon"
+    },
+    "widget": {
+      "title": "Your marketing today",
+      "viewAll": "View marketing",
+      "viewAllAria": "Go to marketing center",
+      "empty": "Start by creating your first landing or QR.",
+      "emptyCta": "Get started",
+      "kpis": {
+        "landings": "Published landings",
+        "scans": "QR scans",
+        "visits": "Visits (30d)",
+        "leads": "Leads (30d)"
+      }
     }
   }
 }
