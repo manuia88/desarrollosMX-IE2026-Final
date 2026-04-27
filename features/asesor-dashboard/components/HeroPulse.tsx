@@ -18,13 +18,6 @@ export interface HeroPulseProps {
   onAction?: (id: 'next-action-ai' | 'follow-up' | 'close-deal') => void;
 }
 
-const GRADIENT_BY_MOOD: Record<HeroPulseProps['mood'], string> = {
-  high: 'linear-gradient(90deg, #22c55e, #10b981)',
-  neutral: 'linear-gradient(90deg, #6366f1, #8b5cf6)',
-  low: 'linear-gradient(90deg, #f59e0b, #f97316)',
-  mixed: 'linear-gradient(90deg, #6366f1, #8b5cf6)',
-};
-
 function compactCurrencyMxn(value: number | null): string {
   if (value === null) return '—';
   if (value >= 1_000_000) return `$${(value / 1_000_000).toFixed(1)}M`;
@@ -36,7 +29,7 @@ export function HeroPulse({
   asesorName,
   pipelineMxn,
   pipelineDaysProjection,
-  mood,
+  mood: _mood,
   isSyntheticData = false,
   onAction,
 }: HeroPulseProps) {
@@ -59,7 +52,7 @@ export function HeroPulse({
     lineHeight: 1.05,
     letterSpacing: '-0.01em',
     fontVariantNumeric: 'tabular-nums',
-    color: 'var(--canon-cream)',
+    color: 'var(--canon-white-pure)',
   };
 
   const headlineText =
@@ -101,20 +94,12 @@ export function HeroPulse({
         <FadeUp delay={0} durationMs={550} distance={16} blur={3}>
           <span
             className="text-[11px] uppercase tracking-[0.18em]"
-            style={{ color: 'var(--canon-cream-2)', fontFamily: 'var(--font-body)' }}
+            style={{ color: 'var(--canon-white-pure)', fontFamily: 'var(--font-body)' }}
           >
             {t('greeting', { name: asesorName })}
           </span>
         </FadeUp>
-        <BlurText
-          as="h1"
-          style={headlineStyle}
-          delay={0.05}
-          staggerMs={70}
-          gradientAll
-          gradientItalic={false}
-          gradient={GRADIENT_BY_MOOD[mood]}
-        >
+        <BlurText as="h1" style={headlineStyle} delay={0.05} staggerMs={70}>
           {headlineText}
         </BlurText>
         <FadeUp delay={0.2} durationMs={650} distance={20}>

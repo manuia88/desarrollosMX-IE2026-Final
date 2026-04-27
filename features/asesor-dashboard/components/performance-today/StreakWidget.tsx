@@ -60,7 +60,7 @@ export function StreakWidget({ days, bars }: StreakWidgetProps) {
         <header className="flex items-center justify-between">
           <h2
             className="text-[14px] font-semibold uppercase tracking-[0.08em]"
-            style={{ color: 'var(--canon-cream)', fontFamily: 'var(--font-body)' }}
+            style={{ color: 'var(--canon-white-pure)', fontFamily: 'var(--font-body)' }}
           >
             {t('title')}
           </h2>
@@ -79,7 +79,7 @@ export function StreakWidget({ days, bars }: StreakWidgetProps) {
         <StreakBars bars={bars} ariaLabel={t('chartAria', { count: bars.length })} />
         <span
           className="text-[11px]"
-          style={{ color: 'var(--canon-cream-3)', fontFamily: 'var(--font-body)' }}
+          style={{ color: 'var(--canon-cream-2)', fontFamily: 'var(--font-body)' }}
         >
           {t('subtitle')}
         </span>

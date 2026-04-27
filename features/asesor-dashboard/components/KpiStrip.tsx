@@ -45,7 +45,7 @@ function KpiTile({ title, bigNum, footer, empty, spark, variant = 'elevated' }: 
       >
         <span
           className="text-[10.5px] font-semibold uppercase tracking-[0.08em]"
-          style={{ color: 'var(--canon-cream-3)', fontFamily: 'var(--font-body)' }}
+          style={{ color: 'var(--canon-white-pure)', fontFamily: 'var(--font-body)' }}
         >
           {title}
         </span>
@@ -100,7 +100,7 @@ export function KpiStrip({
           empty={pipelineMxn === null}
           footer={
             pipelineMxn === null ? (
-              <span className="text-[11px]" style={{ color: 'var(--canon-cream-3)' }}>
+              <span className="text-[11px]" style={{ color: 'var(--canon-cream-2)' }}>
                 {t('pipeline.empty')}
               </span>
             ) : (
@@ -116,7 +116,7 @@ export function KpiStrip({
           empty={leadsCount === 0}
           footer={
             leadsCount === 0 ? (
-              <span className="text-[11px]" style={{ color: 'var(--canon-cream-3)' }}>
+              <span className="text-[11px]" style={{ color: 'var(--canon-cream-2)' }}>
                 {t('leads.empty')}
               </span>
             ) : (
@@ -133,7 +133,7 @@ export function KpiStrip({
           spark={visitsLast7dCount > 0 ? visitsLast7dSeries : undefined}
           footer={
             visitsLast7dCount === 0 ? (
-              <span className="text-[11px]" style={{ color: 'var(--canon-cream-3)' }}>
+              <span className="text-[11px]" style={{ color: 'var(--canon-cream-2)' }}>
                 {t('visits.empty')}
               </span>
             ) : null
@@ -145,7 +145,7 @@ export function KpiStrip({
           empty={avgCloseDays === null}
           footer={
             avgCloseDays === null ? (
-              <span className="text-[11px]" style={{ color: 'var(--canon-cream-3)' }}>
+              <span className="text-[11px]" style={{ color: 'var(--canon-cream-2)' }}>
                 {t('avgTime.empty')}
               </span>
             ) : (
