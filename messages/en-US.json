@@ -3776,5 +3776,361 @@
         "leads": "Leads (30d)"
       }
     }
+  },
+  "estadisticas": {
+    "page": {
+      "title": "Statistics",
+      "subtitle": "Your performance at a glance and in depth.",
+      "loading": "Loading metrics..."
+    },
+    "errors": {
+      "loadFailed": "We could not load your metrics. Please try again in a few seconds."
+    },
+    "sections": {
+      "quality": "Service quality",
+      "operations": "Operations metrics"
+    },
+    "tier": {
+      "green": "optimal",
+      "yellow": "watch",
+      "red": "critical"
+    },
+    "kpi": {
+      "pendingInquiries": {
+        "label": "Pending inquiries"
+      },
+      "firstResponseTime": {
+        "label": "First response time",
+        "sla_prefix": "SLA"
+      },
+      "avgResponseTime": {
+        "label": "Average response time",
+        "sla_prefix": "SLA"
+      },
+      "interactionsVolume": {
+        "label": "Interactions volume"
+      },
+      "avgSuggestions": {
+        "label": "Avg. suggestions"
+      },
+      "visitRate": {
+        "label": "Visit rate"
+      },
+      "offerRate": {
+        "label": "Offer rate"
+      },
+      "inventoryActivePct": {
+        "label": "% Inventory listed"
+      },
+      "inventoryTotal": {
+        "label": "Total inventory"
+      },
+      "acmsGenerated": {
+        "label": "CMAs generated"
+      },
+      "capturesNew": {
+        "label": "New captures"
+      }
+    },
+    "ranges": {
+      "aria_label": "Date range selector",
+      "hoy": "Today",
+      "7d": "7 days",
+      "30d": "30 days",
+      "90d": "90 days",
+      "custom": "Custom",
+      "from": "From",
+      "to": "To"
+    },
+    "charts": {
+      "revenue": {
+        "title": "Monthly revenue",
+        "aria": "Line chart: monthly revenue in MXN",
+        "tableCaption": "Data table: revenue per month",
+        "month": "Month",
+        "amount": "Amount MXN",
+        "empty": "No closed deals in the selected range."
+      },
+      "funnel": {
+        "title": "Opportunities pipeline",
+        "aria": "Horizontal bar chart: count per stage",
+        "tableCaption": "Data table: pipeline stages",
+        "stage": "Stage",
+        "count": "Count",
+        "empty": "No pipeline activity yet."
+      },
+      "visits": {
+        "title": "Visits and conversion",
+        "aria": "Bar chart: visits scheduled, completed, and closed",
+        "tableCaption": "Data table: visits per day",
+        "day": "Day",
+        "agendadas": "Scheduled",
+        "completadas": "Completed",
+        "operaciones": "Closed",
+        "slaUnavailable": "Visit data will be filled when the visits module is available.",
+        "empty": "No visits in the selected range."
+      },
+      "zones": {
+        "title": "Activity by zone",
+        "aria": "Heatmap: top 10 neighborhoods by activity",
+        "tableCaption": "Data table: neighborhoods and counts",
+        "colonia": "Neighborhood",
+        "count": "Activity",
+        "empty": "No zone activity in range."
+      }
+    },
+    "slideOver": {
+      "title": "Quick metrics",
+      "close": "Close panel"
+    },
+    "team": {
+      "toggle": "Compare with team",
+      "title": "Team comparison",
+      "close": "Close comparison",
+      "you": "You",
+      "average": "Team average",
+      "teamSize": "Team size",
+      "metric": {
+        "revenue_mxn": "Revenue MXN",
+        "operaciones_cerradas": "Closed deals",
+        "visitas_completadas": "Completed visits"
+      }
+    },
+    "pedagogy": {
+      "close": "Close drawer",
+      "miniChartComingSoon": "90-day mini chart coming soon.",
+      "recommendedAction": "Recommended action",
+      "pendingInquiries": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "How many inquiries you have unanswered right now."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Each unanswered inquiry is a buyer leaving for the competition."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Check your inbox at the start and end of every day.",
+            "2": "Set up push notifications.",
+            "3": "Define templates to respond in under 5 minutes."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "firstResponseTime": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "How long you take to respond to a new inquiry for the first time."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Industry SLA is 60 minutes. Below 15 min you double conversion."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Enable browser notifications.",
+            "2": "Create quick replies for common questions.",
+            "3": "Schedule an immediate-response window."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "avgResponseTime": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "Your average response time across the conversation."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Buyers read your speed as commitment. SLA 120 min."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Don't leave open threads at end of day.",
+            "2": "Use WhatsApp Business with labels.",
+            "3": "Delegate when you'll be away."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "interactionsVolume": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "Average daily interactions with your contacts."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Three or more touches per contact double the visit probability."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Schedule follow-ups in M06 Tasks.",
+            "2": "Use automated nudges.",
+            "3": "Prioritize leads with highest qualification_score."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "avgSuggestions": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "Average properties suggested per active search."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Below 10 suggestions per search points to weak inventory or filters."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Widen radius or relax criteria.",
+            "2": "Add nearby pre-construction projects.",
+            "3": "Review excluding filters in M04."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "visitRate": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "Percent of searches that lead to a scheduled visit."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Below 50% indicates friction in proposal or scheduling."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Offer two concrete time slots when proposing a visit.",
+            "2": "Share location and dossier ahead of time.",
+            "3": "Confirm the day before to reduce no-shows."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "offerRate": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "Percent of searches with a financial proposal sent."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Going from visit to offer is where most deals are lost."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Close every visit with a written call-to-action.",
+            "2": "Share a financial projection of the asset.",
+            "3": "Pair the offer with a neighborhood story."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "inventoryActivePct": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "Percent of your portfolio actively listed for sale."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Below 20% listed limits your match opportunities."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Reactivate signed but paused captures.",
+            "2": "Refresh photos and descriptions.",
+            "3": "Consider repricing."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "inventoryTotal": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "Total captures in your portfolio."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Three or more captures diversify your pipeline against seasonal dips."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Block one hour weekly for prospecting.",
+            "2": "Reactivate older contacts.",
+            "3": "Ask for referrals from current owners."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "acmsGenerated": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "Comparative market analyses generated in range."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "A solid CMA anchors the price conversation in data, not opinion."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Generate a CMA on every new capture.",
+            "2": "Share the CMA with the owner over WhatsApp.",
+            "3": "Re-run the CMA every 90 days."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      },
+      "capturesNew": {
+        "whatMeasures": {
+          "title": "What does it measure?",
+          "body": "New captures registered in the range."
+        },
+        "whyMatters": {
+          "title": "Why it matters",
+          "body": "Capture growth predicts the next 90 days of revenue."
+        },
+        "tips": {
+          "title": "Tips",
+          "items": {
+            "1": "Ask for referrals when closing every deal.",
+            "2": "Stay visible in your focus zones.",
+            "3": "Attend one owners event per month."
+          }
+        },
+        "howEvolves": {
+          "title": "How it evolves"
+        }
+      }
+    }
   }
 }

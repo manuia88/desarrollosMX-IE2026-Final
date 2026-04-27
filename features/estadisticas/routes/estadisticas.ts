@@ -40,6 +40,69 @@ function cacheKey(prefix: string, asesorId: string, args: Record<string, unknown
   return `${prefix}:${asesorId}:${JSON.stringify(args)}`;
 }
 
+type Totals = {
+  consultas_recibidas: number;
+  consultas_atendidas: number;
+  busquedas_total: number;
+  busquedas_activas: number;
+  busquedas_propuesta: number;
+  captaciones_creadas: number;
+  inventario_activo: number;
+  acms_generados: number;
+  operaciones_cerradas: number;
+  revenue_mxn: number;
+  visitas_agendadas: number;
+  visitas_completadas: number;
+};
+
+export type EstadisticasResult = {
+  rangeFrom: string;
+  rangeTo: string;
+  rows: StatsRow[];
+  totals: Totals;
+};
+
+export type SemaforoResult = {
+  rangeFrom: string;
+  rangeTo: string;
+  kpis: {
+    pendingInquiries: number;
+    firstResponseTime: number | null;
+    avgResponseTime: number | null;
+    interactionsVolume: number;
+    avgSuggestions: number;
+    visitRate: number | null;
+    offerRate: number | null;
+    inventoryActivePct: number | null;
+    inventoryTotal: number;
+    acmsGenerated: number;
+    capturesNew: number;
+  };
+  slaUnavailable: ReadonlyArray<string>;
+};
+
+export type FunnelResult = {
+  stages: Array<{ stage: string; count: number }>;
+};
+
+export type RevenueResult = {
+  series: Array<{ month: string; revenue_mxn: number; operaciones_cerradas: number }>;
+};
+
+export type VisitsResult = {
+  series: Array<{
+    day: string;
+    visitas_agendadas: number;
+    visitas_completadas: number;
+    operaciones_cerradas: number;
+  }>;
+  slaUnavailable: boolean;
+};
+
+export type ZonesResult = {
+  heatmap: Array<{ colonia: string; count: number }>;
+};
+
 async function fetchStatsRange(
   supabase: ReturnType<typeof createAdminClient>,
   asesorId: string,
@@ -106,7 +169,7 @@ function sumRows(rows: StatsRow[]) {
 export const estadisticasRouter = router({
   getEstadisticas: authenticatedProcedure.input(estadisticasInput).query(async ({ ctx, input }) => {
     const key = cacheKey('estadisticas:dashboard', ctx.user.id, input);
-    const cached = runtimeCache.get<unknown>(key);
+    const cached = runtimeCache.get<EstadisticasResult>(key);
     if (cached) return cached;
 
     const supabase = createAdminClient();
@@ -126,7 +189,7 @@ export const estadisticasRouter = router({
     .input(metricsSemaforoInput)
     .query(async ({ ctx, input }) => {
       const key = cacheKey('estadisticas:semaforo', ctx.user.id, input);
-      const cached = runtimeCache.get<unknown>(key);
+      const cached = runtimeCache.get<SemaforoResult>(key);
       if (cached) return cached;
 
       const supabase = createAdminClient();
@@ -176,7 +239,7 @@ export const estadisticasRouter = router({
     .input(pipelineFunnelInput)
     .query(async ({ ctx, input }) => {
       const key = cacheKey('estadisticas:funnel', ctx.user.id, input);
-      const cached = runtimeCache.get<unknown>(key);
+      const cached = runtimeCache.get<FunnelResult>(key);
       if (cached) return cached;
 
       const supabase = createAdminClient();
@@ -200,7 +263,7 @@ export const estadisticasRouter = router({
     .input(revenueByMonthInput)
     .query(async ({ ctx, input }) => {
       const key = cacheKey('estadisticas:revenue', ctx.user.id, input);
-      const cached = runtimeCache.get<unknown>(key);
+      const cached = runtimeCache.get<RevenueResult>(key);
       if (cached) return cached;
 
       const supabase = createAdminClient();
@@ -225,7 +288,7 @@ export const estadisticasRouter = router({
     .input(visitsConversionInput)
     .query(async ({ ctx, input }) => {
       const key = cacheKey('estadisticas:visits', ctx.user.id, input);
-      const cached = runtimeCache.get<unknown>(key);
+      const cached = runtimeCache.get<VisitsResult>(key);
       if (cached) return cached;
 
       const supabase = createAdminClient();
@@ -248,7 +311,7 @@ export const estadisticasRouter = router({
     .input(zonesActivityInput)
     .query(async ({ ctx, input }) => {
       const key = cacheKey('estadisticas:zones', ctx.user.id, input);
-      const cached = runtimeCache.get<unknown>(key);
+      const cached = runtimeCache.get<ZonesResult>(key);
       if (cached) return cached;
 
       const supabase = createAdminClient();

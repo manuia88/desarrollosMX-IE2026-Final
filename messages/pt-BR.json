@@ -3776,5 +3776,361 @@
         "leads": "Leads (30d)"
       }
     }
+  },
+  "estadisticas": {
+    "page": {
+      "title": "Estadísticas",
+      "subtitle": "Tu desempeño en lectura rápida y profunda.",
+      "loading": "Cargando métricas..."
+    },
+    "errors": {
+      "loadFailed": "No pudimos cargar tus métricas. Intenta de nuevo en unos segundos."
+    },
+    "sections": {
+      "quality": "Calidad de atención",
+      "operations": "Métricas de operaciones"
+    },
+    "tier": {
+      "green": "óptimo",
+      "yellow": "atención",
+      "red": "crítico"
+    },
+    "kpi": {
+      "pendingInquiries": {
+        "label": "Consultas pendientes"
+      },
+      "firstResponseTime": {
+        "label": "T. primera respuesta",
+        "sla_prefix": "SLA"
+      },
+      "avgResponseTime": {
+        "label": "T. respuesta promedio",
+        "sla_prefix": "SLA"
+      },
+      "interactionsVolume": {
+        "label": "Volumen interacciones"
+      },
+      "avgSuggestions": {
+        "label": "Sugerencias promedio"
+      },
+      "visitRate": {
+        "label": "Tasa de visita"
+      },
+      "offerRate": {
+        "label": "Tasa de oferta"
+      },
+      "inventoryActivePct": {
+        "label": "% inventario en venta"
+      },
+      "inventoryTotal": {
+        "label": "Inventario total"
+      },
+      "acmsGenerated": {
+        "label": "ACMs generados"
+      },
+      "capturesNew": {
+        "label": "Captaciones nuevas"
+      }
+    },
+    "ranges": {
+      "aria_label": "Selector de rango de fechas",
+      "hoy": "Hoy",
+      "7d": "7 días",
+      "30d": "30 días",
+      "90d": "90 días",
+      "custom": "Personalizado",
+      "from": "Desde",
+      "to": "Hasta"
+    },
+    "charts": {
+      "revenue": {
+        "title": "Revenue mensual",
+        "aria": "Gráfico de líneas: revenue mensual en MXN",
+        "tableCaption": "Tabla de datos: revenue por mes",
+        "month": "Mes",
+        "amount": "Monto MXN",
+        "empty": "Sin operaciones cerradas en el rango seleccionado."
+      },
+      "funnel": {
+        "title": "Pipeline de oportunidades",
+        "aria": "Gráfico de barras horizontal: conteo por etapa",
+        "tableCaption": "Tabla de datos: etapas del pipeline",
+        "stage": "Etapa",
+        "count": "Conteo",
+        "empty": "Aún no hay actividad en el pipeline."
+      },
+      "visits": {
+        "title": "Visitas y conversión",
+        "aria": "Gráfico de barras: visitas agendadas, completadas y cerradas",
+        "tableCaption": "Tabla de datos: visitas por día",
+        "day": "Día",
+        "agendadas": "Agendadas",
+        "completadas": "Completadas",
+        "operaciones": "Cerradas",
+        "slaUnavailable": "Datos de visitas se completarán cuando el módulo de visitas esté disponible.",
+        "empty": "Sin visitas en el rango seleccionado."
+      },
+      "zones": {
+        "title": "Actividad por zona",
+        "aria": "Mapa de calor: top 10 colonias por actividad",
+        "tableCaption": "Tabla de datos: colonias y conteo",
+        "colonia": "Colonia",
+        "count": "Actividad",
+        "empty": "Sin actividad por zona en el rango."
+      }
+    },
+    "slideOver": {
+      "title": "Métricas rápidas",
+      "close": "Cerrar panel"
+    },
+    "team": {
+      "toggle": "Comparar con equipo",
+      "title": "Comparativa con equipo",
+      "close": "Cerrar comparativa",
+      "you": "Tú",
+      "average": "Promedio equipo",
+      "teamSize": "Tamaño del equipo",
+      "metric": {
+        "revenue_mxn": "Revenue MXN",
+        "operaciones_cerradas": "Operaciones cerradas",
+        "visitas_completadas": "Visitas completadas"
+      }
+    },
+    "pedagogy": {
+      "close": "Cerrar drawer",
+      "miniChartComingSoon": "Mini chart 90d disponible próximamente.",
+      "recommendedAction": "Acción recomendada",
+      "pendingInquiries": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Cuántas consultas tienes sin atender en este momento."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "Cada consulta sin respuesta es un comprador que se va a la competencia."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Revisa tu bandeja al iniciar y al terminar el día.",
+            "2": "Configura notificaciones push.",
+            "3": "Define plantillas para responder en menos de 5 minutos."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "firstResponseTime": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Cuánto tardas en responder a una consulta nueva por primera vez."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "El SLA del mercado es 60 minutos. Por debajo de 15 min duplicas la conversión."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Activa notificaciones del navegador.",
+            "2": "Crea respuestas rápidas para preguntas frecuentes.",
+            "3": "Asigna un horario de respuesta inmediata."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "avgResponseTime": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Tu tiempo promedio de respuesta a lo largo de la conversación."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "El comprador interpreta tu velocidad como compromiso. SLA 120 min."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "No dejes hilos abiertos sin cierre del día.",
+            "2": "Usa WhatsApp Business con etiquetas.",
+            "3": "Delega a otro asesor si vas a estar fuera."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "interactionsVolume": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Promedio de interacciones por día con tus contactos."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "Tres o más toques por contacto duplican la probabilidad de visita."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Programa follow-ups en M06 Tareas.",
+            "2": "Usa nudges automáticos.",
+            "3": "Prioriza leads con mayor qualification_score."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "avgSuggestions": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Promedio de propiedades sugeridas por búsqueda activa."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "Menos de 10 sugerencias por búsqueda apunta a inventario o filtros débiles."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Amplía radius o flexibiliza criterios.",
+            "2": "Suma proyectos vecinos en preventa.",
+            "3": "Revisa filtros excluyentes en M04."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "visitRate": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Porcentaje de búsquedas que terminan en visita agendada."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "Por debajo de 50% indica fricción en propuesta o calendario."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Ofrece dos horarios concretos al sugerir visita.",
+            "2": "Comparte ubicación + dossier antes de la cita.",
+            "3": "Confirma el día anterior para reducir no-show."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "offerRate": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Porcentaje de búsquedas con propuesta económica enviada."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "Pasar de visita a oferta es donde se pierden la mayor parte de los deals."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Cierra cada visita con un call-to-action escrito.",
+            "2": "Comparte una proyección financiera del activo.",
+            "3": "Acompaña con una historia del barrio."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "inventoryActivePct": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Porcentaje de tu portafolio que está en venta activa."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "Inventario por debajo de 20% en venta limita tus posibilidades de match."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Reactiva captaciones firmadas pero pausadas.",
+            "2": "Renueva fotos y descripciones.",
+            "3": "Considera reposicionamiento de precio."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "inventoryTotal": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Total de captaciones en tu portafolio."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "Tres o más captaciones diversifica tu pipeline ante caídas estacionales."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Bloquea una hora semanal para prospección.",
+            "2": "Reactiva contactos antiguos.",
+            "3": "Pide referidos a propietarios actuales."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "acmsGenerated": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Análisis comparativos de mercado generados en el rango."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "Un ACM bien hecho ancla la conversación de precio en datos, no opinión."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Genera ACM en cada captación nueva.",
+            "2": "Comparte el ACM al propietario por WhatsApp.",
+            "3": "Re-corre el ACM cada 90 días."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      },
+      "capturesNew": {
+        "whatMeasures": {
+          "title": "¿Qué mide?",
+          "body": "Captaciones nuevas registradas en el rango."
+        },
+        "whyMatters": {
+          "title": "¿Por qué importa?",
+          "body": "El crecimiento de captaciones predice el revenue de los próximos 90 días."
+        },
+        "tips": {
+          "title": "Consejos",
+          "items": {
+            "1": "Pide referidos al cerrar cada operación.",
+            "2": "Mantén presencia en zonas focales.",
+            "3": "Asiste a un evento de propietarios al mes."
+          }
+        },
+        "howEvolves": {
+          "title": "¿Cómo evoluciona?"
+        }
+      }
+    }
   }
 }
