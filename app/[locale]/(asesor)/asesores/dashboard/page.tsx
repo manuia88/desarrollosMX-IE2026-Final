@@ -21,6 +21,7 @@ import type { ActivityItem } from '@/features/asesor-dashboard/components/daily-
 import type { AgendaEvent } from '@/features/asesor-dashboard/components/daily-standup/TodayAgenda';
 import type { BadgeItem } from '@/features/asesor-dashboard/components/performance-today/BadgesRow';
 import type { Recommendation } from '@/features/asesor-dashboard/components/performance-today/SmartRecommendations';
+import { MarketingTodayWidget } from '@/features/marketing/components/MarketingTodayWidget';
 import { TareasTodayWidget } from '@/features/tareas/components/TareasTodayWidget';
 import { createClient } from '@/shared/lib/supabase/server';
 
@@ -174,6 +175,7 @@ export default async function AsesorDashboardPage({ params }: DashboardPageProps
         xpNextThreshold={kpis.xpNextThreshold}
       />
       <TareasTodayWidget locale={locale} />
+      <MarketingTodayWidget locale={locale} />
       <PipelineCarousel deals={summary.deals} />
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         <MorningBriefing bullets={briefingBullets} />

@@ -3611,5 +3611,170 @@
       "asesor_productor": "Asesor productor",
       "propietario": "Propietario"
     }
+  },
+  "Marketing": {
+    "list": {
+      "title": "Marketing",
+      "metaDescription": "Centro de marketing del asesor",
+      "tabs": "Pestañas de marketing"
+    },
+    "tabs": {
+      "landings": "Landings",
+      "qr": "QR",
+      "wa": "WhatsApp",
+      "folders": "Folders",
+      "photos": "Fotos",
+      "portales": "Portales"
+    },
+    "common": {
+      "loading": "Cargando…",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "saving": "Guardando…"
+    },
+    "landings": {
+      "heading": "Landings ({count})",
+      "actions": {
+        "new": "Nueva landing"
+      },
+      "status": {
+        "published": "Publicado",
+        "draft": "Borrador"
+      },
+      "card": {
+        "template": "Template",
+        "projects": "Proyectos",
+        "openPublic": "Ver landing pública"
+      },
+      "empty": {
+        "body": "Aún no tienes landings. Crea la primera para empezar a distribuir."
+      },
+      "wizard": {
+        "title": "Nueva landing",
+        "slug": "Slug (URL pública)",
+        "template": "Template",
+        "headline": "Headline (máx 120)",
+        "cta": "CTA (máx 40)",
+        "brandPrimary": "Color primario marca",
+        "firstProjectId": "ID proyecto inicial"
+      },
+      "templates": {
+        "hero": "Hero (un proyecto destacado)",
+        "grid": "Grid (varios proyectos)",
+        "long-form": "Long-form (storytelling)",
+        "single-project": "Single project"
+      }
+    },
+    "qr": {
+      "heading": "QR codes ({count})",
+      "actions": {
+        "new": "Nuevo QR"
+      },
+      "scans": "{n} escaneos",
+      "empty": {
+        "body": "Genera tu primer QR para imprimir o compartir."
+      },
+      "generator": {
+        "title": "Nuevo QR",
+        "destinoType": "Tipo de destino",
+        "destinoId": "ID o slug destino",
+        "copy": "Copy junto al QR (opcional)",
+        "color": "Color marca"
+      },
+      "destinoTypes": {
+        "proyecto": "Proyecto",
+        "landing": "Landing",
+        "microsite": "Microsite"
+      }
+    },
+    "wa": {
+      "heading": "Plantillas WhatsApp ({count})",
+      "actions": {
+        "new": "Nueva plantilla"
+      },
+      "disclosureH1": "Web QR · sin Meta Business H1",
+      "empty": {
+        "body": "Crea plantillas locales (Web QR style). Aprobación Meta Business llega en F22."
+      },
+      "form": {
+        "title": "Nueva plantilla WhatsApp",
+        "disclosureMeta": "Local H1 · sin Meta",
+        "name": "Nombre interno",
+        "category": "Categoría",
+        "body": "Cuerpo del mensaje (máx 1024)",
+        "footer": "Footer (máx 60, opcional)"
+      },
+      "categories": {
+        "marketing": "Marketing",
+        "utility": "Utility"
+      }
+    },
+    "folders": {
+      "heading": "Folders ({count})",
+      "actions": {
+        "new": "Nuevo folder"
+      },
+      "empty": {
+        "body": "Crea un folder para compartir Radar curado con un comprador."
+      },
+      "editor": {
+        "title": "Nuevo folder",
+        "titleField": "Título",
+        "slug": "Slug (URL pública /radar/<slug>)"
+      }
+    },
+    "photos": {
+      "heading": "Fotos ({count})",
+      "disclosureClassify": "Auto-clasificación con IA",
+      "empty": {
+        "body": "Sube fotos en M02 desarrollos o M05 captaciones para verlas aquí."
+      },
+      "uploadInstructions": "La carga inicial vive en cada proyecto/captación; este tab agrega filtros y categorías.",
+      "noPreview": "Sin vista previa",
+      "categories": {
+        "sala": "Sala",
+        "cocina": "Cocina",
+        "recamara": "Recámara",
+        "bano": "Baño",
+        "fachada": "Fachada",
+        "exterior": "Exterior",
+        "plano": "Plano"
+      }
+    },
+    "portales": {
+      "heading": "Publicación a portales",
+      "statusActive": "Activo",
+      "statusNotConfigured": "Sin configurar",
+      "statusComingF14C1": "Próximamente · F14.C.1",
+      "tagH1": "H1",
+      "tagH2": "H2",
+      "names": {
+        "inmuebles24": "Inmuebles24",
+        "mercadolibre": "Mercado Libre",
+        "vivanuncios": "Vivanuncios",
+        "icasas": "iCasas",
+        "propiedades_com": "Propiedades.com",
+        "facebook_marketplace": "Facebook Marketplace",
+        "easybroker": "EasyBroker"
+      }
+    },
+    "studioBanner": {
+      "title": "DMX Studio",
+      "body": "Crea videos cinematográficos con voz IA, música y copy completo. Construido dentro de DMX, próximamente.",
+      "coming": "próximamente"
+    },
+    "widget": {
+      "title": "Tu marketing hoy",
+      "viewAll": "Ver marketing",
+      "viewAllAria": "Ir al centro de marketing",
+      "empty": "Comienza creando tu primer landing o QR.",
+      "emptyCta": "Empezar",
+      "kpis": {
+        "landings": "Landings publicados",
+        "scans": "Escaneos QR",
+        "visits": "Visitas (30d)",
+        "leads": "Leads (30d)"
+      }
+    }
   }
 }
