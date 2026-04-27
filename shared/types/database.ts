@@ -579,6 +579,78 @@ export type Database = {
         }
         Relationships: []
       }
+      asesor_gamification: {
+        Row: {
+          asesor_id: string
+          badge_unlocked: string[] | null
+          close_rate_pct: number | null
+          created_at: string
+          id: string
+          month: string
+          opt_in_public_ranking: boolean
+          rank_close_rate: number | null
+          rank_overall: number | null
+          rank_response_time: number | null
+          rank_revenue: number | null
+          rank_visits: number | null
+          response_time_avg_min: number | null
+          revenue_mxn: number | null
+          updated_at: string
+          visits_count: number | null
+        }
+        Insert: {
+          asesor_id: string
+          badge_unlocked?: string[] | null
+          close_rate_pct?: number | null
+          created_at?: string
+          id?: string
+          month: string
+          opt_in_public_ranking?: boolean
+          rank_close_rate?: number | null
+          rank_overall?: number | null
+          rank_response_time?: number | null
+          rank_revenue?: number | null
+          rank_visits?: number | null
+          response_time_avg_min?: number | null
+          revenue_mxn?: number | null
+          updated_at?: string
+          visits_count?: number | null
+        }
+        Update: {
+          asesor_id?: string
+          badge_unlocked?: string[] | null
+          close_rate_pct?: number | null
+          created_at?: string
+          id?: string
+          month?: string
+          opt_in_public_ranking?: boolean
+          rank_close_rate?: number | null
+          rank_overall?: number | null
+          rank_response_time?: number | null
+          rank_revenue?: number | null
+          rank_visits?: number | null
+          response_time_avg_min?: number | null
+          revenue_mxn?: number | null
+          updated_at?: string
+          visits_count?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "asesor_gamification_asesor_id_fkey"
+            columns: ["asesor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "asesor_gamification_asesor_id_fkey"
+            columns: ["asesor_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_crm_log: {
         Row: {
           action: string
@@ -18146,6 +18218,27 @@ export type Database = {
       }
     }
     Views: {
+      asesor_stats_daily: {
+        Row: {
+          acms_generados: number | null
+          asesor_id: string | null
+          busquedas_activas: number | null
+          busquedas_propuesta: number | null
+          busquedas_total: number | null
+          captaciones_creadas: number | null
+          consultas_atendidas: number | null
+          consultas_recibidas: number | null
+          day: string | null
+          inventario_activo: number | null
+          operaciones_cerradas: number | null
+          revenue_mxn: number | null
+          t_primera_respuesta_min: number | null
+          t_promedio_min: number | null
+          visitas_agendadas: number | null
+          visitas_completadas: number | null
+        }
+        Relationships: []
+      }
       geography_columns: {
         Row: {
           coord_dimension: number | null
