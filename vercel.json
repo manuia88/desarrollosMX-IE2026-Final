@@ -17,7 +17,7 @@
     { "path": "/api/cron/zone-demographics-refresh", "schedule": "0 4 * * *" },
     { "path": "/api/cron/score-history-purge", "schedule": "0 2 * * 0" },
     { "path": "/api/cron/heatmap-refresh", "schedule": "0 5 * * *" },
-    { "path": "/api/cron/tareas-mark-expired", "schedule": "0 */1 * * *" },
+    { "path": "/api/cron/tareas-mark-expired", "schedule": "0 7 * * *" },
     { "path": "/api/cron/asesor-stats-refresh", "schedule": "0 6 * * *" }
   ]
 }
