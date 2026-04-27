@@ -77,13 +77,13 @@ async function readableStreamToUint8Array(stream: ReadableStream<Uint8Array>): P
   const reader = stream.getReader();
   const chunks: Uint8Array[] = [];
   let total = 0;
-  // biome-ignore lint/correctness/noConstantCondition: drain loop terminates via reader done flag.
-  while (true) {
-    const { value, done } = await reader.read();
-    if (done) break;
-    if (value) {
-      chunks.push(value);
-      total += value.byteLength;
+  let done = false;
+  while (!done) {
+    const result = await reader.read();
+    done = result.done;
+    if (result.value) {
+      chunks.push(result.value);
+      total += result.value.byteLength;
     }
   }
   const merged = new Uint8Array(total);

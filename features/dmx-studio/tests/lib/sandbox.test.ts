@@ -3,9 +3,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 const createMock = vi.fn();
 
 vi.mock('@vercel/sandbox', () => {
-  class Sandbox {
-    static create = createMock;
-  }
+  const Sandbox = (() => {}) as unknown as { create: typeof createMock };
+  Sandbox.create = createMock;
   return { Sandbox };
 });
 
