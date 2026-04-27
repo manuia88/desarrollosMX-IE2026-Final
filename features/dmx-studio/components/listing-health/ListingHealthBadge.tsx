@@ -82,14 +82,18 @@ export function ListingHealthBadge({ importId }: ListingHealthBadgeProps) {
       void utils.studio.listingHealth.getByUrlImport.invalidate({ importId });
     },
   });
+  const analyzeMutate = analyzeMutation.mutate;
+  const queryHasData = query.data != null;
+  const queryIsLoading = query.isLoading;
+  const queryIsFetched = query.isFetched;
 
   useEffect(() => {
-    if (query.isLoading || analyzeAttempted) return;
-    if (query.data) return;
-    if (!query.isFetched) return;
+    if (queryIsLoading || analyzeAttempted) return;
+    if (queryHasData) return;
+    if (!queryIsFetched) return;
     setAnalyzeAttempted(true);
-    analyzeMutation.mutate({ importId });
-  }, [analyzeAttempted, analyzeMutation, importId, query.data, query.isFetched, query.isLoading]);
+    analyzeMutate({ importId });
+  }, [analyzeAttempted, analyzeMutate, importId, queryHasData, queryIsFetched, queryIsLoading]);
 
   if (query.isLoading || (analyzeMutation.isPending && !query.data)) {
     return (
