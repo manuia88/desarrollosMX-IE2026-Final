@@ -10,9 +10,16 @@ import { useMemo, useState } from 'react';
 import { trpc } from '@/shared/lib/trpc/client';
 import { FadeUp } from '@/shared/ui/motion';
 import { Button, Card, DisclosurePill } from '@/shared/ui/primitives/canon';
+import { BeatSyncIndicator } from './BeatSyncIndicator';
+import { BrandingToggle, type StudioPlanTier } from './BrandingToggle';
 import { CopyPackViewer } from './CopyPackViewer';
 import { FeedbackForm } from './FeedbackForm';
 import { HookSelector, type HookVariant } from './HookSelector';
+import {
+  type AvailableFormatDescriptor,
+  type MultiFormatTarget,
+  MultiFormatToggle,
+} from './MultiFormatToggle';
 import { ShareWhatsappButton } from './ShareWhatsappButton';
 
 export interface ResultPageProps {
@@ -27,6 +34,8 @@ interface VideoOutputShape {
   readonly storage_url: string;
   readonly selected_by_user: boolean;
   readonly duration_seconds: number | null;
+  readonly is_branded?: boolean;
+  readonly has_beat_sync?: boolean;
 }
 
 interface CopyOutputShape {
@@ -81,6 +90,7 @@ export function ResultPage({ projectId }: ResultPageProps) {
   }, [projectQuery.data]);
 
   const [currentHook, setCurrentHook] = useState<HookVariant>(initialSelected);
+  const [currentFormat, setCurrentFormat] = useState<MultiFormatTarget>('9x16');
 
   if (projectQuery.isLoading) {
     return (
@@ -113,9 +123,17 @@ export function ResultPage({ projectId }: ResultPageProps) {
   const portalDescription = extractPortalDescription(copy);
 
   const selectedByUser = outputs.find((o) => o.selected_by_user)?.hook_variant ?? null;
-  const currentVideo = outputs.find((o) => o.hook_variant === currentHook && o.format === '9x16');
-
+  const currentVideo = outputs.find(
+    (o) => o.hook_variant === currentHook && o.format === currentFormat,
+  );
   const downloads = outputs.filter((o) => o.hook_variant === currentHook);
+  const availableFormats: ReadonlyArray<AvailableFormatDescriptor> = downloads
+    .filter((o): o is VideoOutputShape & { format: MultiFormatTarget } =>
+      ['9x16', '1x1', '16x9'].includes(o.format),
+    )
+    .map((o) => ({ format: o.format, storagePath: o.storage_url }));
+  const studioPlan = ((projectQuery.data as { plan?: string } | undefined)?.plan ??
+    'pro') as StudioPlanTier;
 
   return (
     <>
@@ -137,6 +155,35 @@ export function ResultPage({ projectId }: ResultPageProps) {
             setCurrentHook(hook);
           }}
         />
+      </FadeUp>
+
+      <FadeUp delay={0.13}>
+        <Card
+          variant="elevated"
+          className="flex flex-col gap-4 p-5"
+          data-testid="multi-format-card"
+        >
+          <MultiFormatToggle
+            projectId={projectId}
+            hookVariant={currentHook}
+            currentFormat={currentFormat}
+            availableFormats={availableFormats}
+            onSelectFormat={(f) => {
+              setCurrentFormat(f);
+            }}
+          />
+          <div className="flex flex-wrap items-center gap-3">
+            {currentVideo?.id ? (
+              <BrandingToggle
+                projectId={projectId}
+                videoOutputId={currentVideo.id}
+                branded={currentVideo.is_branded ?? true}
+                plan={studioPlan}
+              />
+            ) : null}
+            <BeatSyncIndicator hasBeatSync={currentVideo?.has_beat_sync ?? false} />
+          </div>
+        </Card>
       </FadeUp>
 
       <FadeUp delay={0.15}>

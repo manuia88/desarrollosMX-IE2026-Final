@@ -5,7 +5,7 @@ vi.mock('@/shared/lib/supabase/admin', () => ({
 }));
 
 describe('studioRouter — module export smoke', () => {
-  it('exports the 10 expected namespaces (Sprint 1: 6 baseline + dashboard/onboarding/projects/voiceClones)', async () => {
+  it('exports the 13 expected namespaces (Sprint 1 baseline + Sprint 2 library/multiFormat/usage)', async () => {
     const mod = await import('../routes/studio');
     const r = mod.studioRouter as unknown as { _def: { record: Record<string, unknown> } };
     const names = Object.keys(r._def.record);
@@ -15,10 +15,13 @@ describe('studioRouter — module export smoke', () => {
         'dashboard',
         'foundersCohort',
         'landing',
+        'library',
+        'multiFormat',
         'onboarding',
         'projects',
         'publicGallery',
         'subscriptions',
+        'usage',
         'voiceClones',
         'waitlist',
       ].sort(),

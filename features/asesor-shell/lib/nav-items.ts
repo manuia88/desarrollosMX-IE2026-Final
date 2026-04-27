@@ -6,6 +6,7 @@ import {
   IconGraduationCap,
   IconHome,
   IconLayoutDashboard,
+  IconLayoutGrid,
   IconMegaphone,
   IconSearch,
   IconSettings,
@@ -24,7 +25,9 @@ export type ModuleId =
   | 'marketing'
   | 'estadisticas'
   | 'academia'
-  | 'ajustes';
+  | 'ajustes'
+  | 'studio-library'
+  | 'studio-usage';
 
 export type IconComponent = ComponentType<SVGProps<SVGSVGElement> & { size?: number }>;
 
@@ -116,6 +119,22 @@ export const ASESOR_NAV_ITEMS: readonly AsesorNavItem[] = [
     Icon: IconGraduationCap,
     route: '/asesores/academia',
     tintToken: '--mod-academia',
+    group: 'secondary',
+  },
+  {
+    id: 'studio-library',
+    labelKey: 'sidebar.items.studioLibrary',
+    Icon: IconLayoutGrid,
+    route: '/studio-app/library',
+    tintToken: '--mod-marketing',
+    group: 'secondary',
+  },
+  {
+    id: 'studio-usage',
+    labelKey: 'sidebar.items.studioUsage',
+    Icon: IconBarChart3,
+    route: '/studio-app/usage',
+    tintToken: '--mod-marketing',
     group: 'secondary',
   },
   {

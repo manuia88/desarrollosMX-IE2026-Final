@@ -14,6 +14,7 @@ import {
   pipelineDaysProjection,
   SmartRecommendations,
   StreakWidget,
+  StudioVideosWidget,
   TodayAgenda,
   XpProgressBar,
 } from '@/features/asesor-dashboard';
@@ -174,6 +175,7 @@ export default async function AsesorDashboardPage({ params }: DashboardPageProps
         xpCurrent={kpis.xpCurrent}
         xpNextThreshold={kpis.xpNextThreshold}
       />
+      <StudioVideosWidget locale={locale} />
       <TareasTodayWidget locale={locale} />
       <MarketingTodayWidget locale={locale} />
       <PipelineCarousel deals={summary.deals} />

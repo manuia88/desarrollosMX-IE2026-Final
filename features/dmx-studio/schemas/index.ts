@@ -51,6 +51,10 @@ export const joinStudioWaitlistInput = z.object({
 });
 export type JoinStudioWaitlistInput = z.infer<typeof joinStudioWaitlistInput>;
 
+export const STUDIO_BRAND_FONTS = ['outfit', 'dm_sans', 'inter', 'playfair'] as const;
+export const studioBrandFontEnum = z.enum(STUDIO_BRAND_FONTS);
+export type StudioBrandFont = z.infer<typeof studioBrandFontEnum>;
+
 export const upsertStudioBrandKitInput = z.object({
   displayName: z.string().trim().min(1).max(160).optional(),
   tagline: z.string().trim().max(280).optional(),
@@ -58,10 +62,15 @@ export const upsertStudioBrandKitInput = z.object({
     .string()
     .regex(/^#[0-9A-Fa-f]{6}$/)
     .optional(),
+  secondaryColor: z
+    .string()
+    .regex(/^#[0-9A-Fa-f]{6}$/)
+    .optional(),
   accentColor: z
     .string()
     .regex(/^#[0-9A-Fa-f]{6}$/)
     .optional(),
+  fontPreference: studioBrandFontEnum.default('outfit'),
   tone: z
     .enum(['professional', 'luxury', 'friendly', 'energetic', 'minimal', 'editorial'])
     .default('professional'),
@@ -69,8 +78,23 @@ export const upsertStudioBrandKitInput = z.object({
   cities: z.array(z.string().min(1).max(120)).max(10).default([]),
   contactPhone: z.string().trim().max(40).optional(),
   contactEmail: z.string().trim().email().max(254).optional(),
+  introText: z.string().trim().max(120).optional(),
+  outroText: z.string().trim().max(120).optional(),
 });
 export type UpsertStudioBrandKitInput = z.infer<typeof upsertStudioBrandKitInput>;
+
+export const uploadBrandLogoInput = z.object({
+  fileName: z.string().trim().min(1).max(160),
+  contentType: z
+    .enum(['image/svg+xml', 'image/png', 'image/webp', 'image/jpeg'])
+    .default('image/png'),
+  sizeBytes: z.number().int().positive().max(2_000_000),
+});
+export type UploadBrandLogoInput = z.infer<typeof uploadBrandLogoInput>;
+
+export const previewBrandMockupInput = z.object({
+  brandKitId: z.string().uuid().optional(),
+});
 
 export const studioPublicGalleryBySlugInput = z.object({
   slug: z
@@ -229,3 +253,53 @@ export const listProjectsInput = z.object({
     .enum(['draft', 'scripting', 'rendering', 'rendered', 'published', 'archived', 'failed'])
     .optional(),
 });
+
+// ================================================================
+// FASE 14.F.3 Sprint 2 — Library, Usage, Multi-format schemas
+// ================================================================
+
+export const STUDIO_LIBRARY_DATE_RANGES = ['7d', '30d', '90d', 'all'] as const;
+export const studioLibraryDateRangeEnum = z.enum(STUDIO_LIBRARY_DATE_RANGES);
+export type StudioLibraryDateRange = z.infer<typeof studioLibraryDateRangeEnum>;
+
+export const STUDIO_VIDEO_FORMATS = ['9x16', '1x1', '16x9'] as const;
+export const studioVideoFormatEnum = z.enum(STUDIO_VIDEO_FORMATS);
+export type StudioVideoFormatSchema = z.infer<typeof studioVideoFormatEnum>;
+
+export const listLibraryInput = z.object({
+  limit: z.number().int().min(1).max(50).default(24),
+  cursor: z.string().uuid().optional(),
+  projectType: studioProjectTypeEnum.optional(),
+  format: studioVideoFormatEnum.optional(),
+  dateRange: studioLibraryDateRangeEnum.default('all'),
+  search: z.string().trim().max(120).optional(),
+});
+export type ListLibraryInput = z.infer<typeof listLibraryInput>;
+
+export const bulkLibraryActionInput = z.object({
+  videoOutputIds: z.array(z.string().uuid()).min(1).max(50),
+});
+export type BulkLibraryActionInput = z.infer<typeof bulkLibraryActionInput>;
+
+export const deleteLibraryVideoInput = z.object({
+  videoOutputId: z.string().uuid(),
+});
+
+export const usageHistoryInput = z.object({
+  monthsBack: z.number().int().min(1).max(12).default(6),
+});
+export type UsageHistoryInput = z.infer<typeof usageHistoryInput>;
+
+export const generateAdditionalFormatsInput = z.object({
+  projectId: z.string().uuid(),
+  hookVariant: z.enum(['hook_a', 'hook_b', 'hook_c']),
+  enableBeatSync: z.boolean().default(false),
+});
+export type GenerateAdditionalFormatsInput = z.infer<typeof generateAdditionalFormatsInput>;
+
+export const applyBrandingOverlayInput = z.object({
+  projectId: z.string().uuid(),
+  videoOutputId: z.string().uuid(),
+  branded: z.boolean(),
+});
+export type ApplyBrandingOverlayInput = z.infer<typeof applyBrandingOverlayInput>;
