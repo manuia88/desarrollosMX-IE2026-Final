@@ -2358,6 +2358,19 @@
       "edition_meta": "Versão {version}",
       "empty_sections": "Esta entrada ainda não tem seções publicadas.",
       "methodology_note": "Entradas seed geradas com assistência de LLM — conteúdo revisável."
+    },
+    "disclosure": {
+      "climate": {
+        "modelSeed": "Modelo SEED H1",
+        "modelSeedTooltip": "Dados climáticos modelados — validação NOAA+CONAGUA pendente",
+        "outlierWarning": "Discrepância de fontes — NOAA priorizado",
+        "validated": "Validado NOAA+CONAGUA"
+      },
+      "demographics": {
+        "estimacion": "Estimativa H1",
+        "estimacionTooltip": "Dados proxy/downscaled — melhorará em H2 com INEGI direto",
+        "agebOverlay": "INEGI AGEB overlay"
+      }
     }
   },
   "Legal": {

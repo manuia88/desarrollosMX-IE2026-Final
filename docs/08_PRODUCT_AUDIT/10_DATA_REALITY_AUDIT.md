@@ -573,5 +573,52 @@ fase-07.7-data-real-shipped          (F1.G MASTER CIERRE)
 
 **Tag master:** `fase-07.7-data-real-shipped`. **Próximo:** F2 Construction M01-M20 / FASE 13 Portal Asesor M1-M5 foundation visual (~52-58h CC, ADR-050 design tokens prototype-canon).
 
+---
+
+## §13 — FASE 13.F PR-D Cleanup (2026-04-27)
+
+### §13.1 Climate tune thresholds (D.2)
+
+Pre-PR-D (temp_tol=5°C, rain_tol=30%):
+- match_count 10,589 (23%) · outlier 25,955 (56%) · pending 6,014 (13%) · single 3,668 (8%)
+
+Post-PR-D (temp_tol=7°C, rain_tol=50% — WMO Guide N°8 envelope):
+- match_count 14,580 (32%, +37.7%) · outlier 21,964 (47%, -15.4%)
+- single_source_noaa 1,046 · single_source_conagua 2,622
+- pending 6,014 (13%, sin cambio — heuristic_v1 NOAA+CONAGUA gaps reales)
+
+Migration `20260427200000_climate_recompute_tune_thresholds_v32.sql` applied via MCP. Recompute via MCP execute_sql post-apply. Outlier rate sigue ~47% por terreno volcánico CDMX heterogéneo (NOAA airport stations 700m elevación vs CONAGUA urbanas 50-200m). Mejora dramática requiere station network expansion (defer H2 commercial APIs verify-before-spend).
+
+### §13.2 Disclosure badges canon shipped (D.3)
+
+Components canon nuevos:
+- `features/atlas/components/ClimateBadge.tsx` (91 LOC) — 4 states amber/yellow/green/default
+- `features/atlas/components/DemoDisclosureBadge.tsx` (86 LOC) — 3 states amber/green/default
+
+i18n namespace `Atlas.disclosure` × 5 locales = 35 entries.
+
+Wire targets follow-up pendiente — grep no encontró structured climate/demo displays en Atlas wiki page (markdown only), asesor-dashboard, ni M17 widgets. Components stand-alone documentados en headers para wire futuro.
+
+### §13.3 Atlas Wiki Haiku (D.4)
+
+Script ejecutado con `--cost-cap-usd=1`. Resultado: 210 zonas SKIPPED por cache 7-day staleness (entries from 2026-04-24). Cost real: $0.00. Atlas Wiki entries 100% pobladas (210/210).
+
+### §13.4 Geo IECM matching deferred (D.1)
+
+Audit MCP reveló: 210/210 zonas colonia CDMX tienen `metadata.boundary_source='fallback:bbox-500m'` (NO 77 como prompt sesión asumía).
+
+Decisión canon: defer execution PR-D (scope 100% bbox-500m vs 37% asumido + GeoJSON IECM no accessible local). Documentar como L-NEW-ZONES-IECM-MATCH-CDMX-210 (P0 H2, ~12h CC + GeoJSON IECM source).
+
+### §13.5 PR-D outcomes summary
+
+| Sub-bloque | Estado | Outcome |
+|---|---|---|
+| D.1 Geo fuzzy match 210 zones | DEFERRED H2 | Scope diff (210 vs 77) + GeoJSON source unavailable. L-NEW agendado |
+| D.2 Climate tune thresholds | SHIPPED | match +37.7%, outlier -15.4%. WMO Guide N°8 envelope. |
+| D.3 Disclosure badges canon | SHIPPED stand-alone | 2 components + 35 i18n entries. Wire targets follow-up |
+| D.4 Atlas Wiki Haiku run | SHIPPED idempotent | 210 cached <7d. $0 cost (already populated 2026-04-24) |
+| D.5 Document gaps H2 | SHIPPED | §13 added |
+
+**Tag master**: `fase-07.7-deuda-h2-cleanup`. **Próximo**: PR-E F13.G Master cierre FASE 13.
 
 
