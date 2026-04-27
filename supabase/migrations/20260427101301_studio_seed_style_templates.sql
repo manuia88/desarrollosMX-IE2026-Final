@@ -1,0 +1,7 @@
+-- F14.F.1 Sprint 0: 5 style_templates canon BIBLIA v4.
+insert into public.studio_style_templates (key, name, description, tone, visual_treatment, music_mood, pacing, is_premium, is_active) values
+('modern_cinematic', 'Modern Cinematic', 'Cinematic premium con cortes dinamicos, color grading film. Ideal para listings residencial premium.', 'professional', '{"color_grading":"teal_orange","contrast":"high","grain":"subtle"}'::jsonb, 'epic_uplifting', 'medium', false, true),
+('luxe_editorial', 'Luxe Editorial', 'Estilo editorial revista lujo con tipografia serif y respiracion. Casas premium con vista.', 'luxury', '{"color_grading":"warm_film","contrast":"medium","typography":"serif"}'::jsonb, 'elegant_strings', 'slow', true, true),
+('family_friendly', 'Family Friendly', 'Tono calido familiar con musica acustica suave. Casas residenciales medio mercado.', 'friendly', '{"color_grading":"natural","contrast":"low","filter":"warm"}'::jsonb, 'acoustic_warm', 'medium', false, true),
+('investor_pitch', 'Investor Pitch', 'Datos hard hitting con highlights numericos pop. ROI numbers + cap rate big text.', 'professional', '{"color_grading":"clean","contrast":"high","data_overlays":true}'::jsonb, 'corporate_drive', 'fast', false, true),
+('minimal_clean', 'Minimal Clean', 'Estilo minimalista nordico. Espacio negativo + tipografia sans condensed. Apartamentos modernos.', 'minimal', '{"color_grading":"cool_neutral","contrast":"medium","typography":"sans"}'::jsonb, 'minimal_ambient', 'medium', false, true);

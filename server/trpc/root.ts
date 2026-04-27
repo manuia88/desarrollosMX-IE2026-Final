@@ -8,6 +8,7 @@ import { constellationsRouter } from '@/features/constellations/routes/constella
 import { crmRouter } from '@/features/crm/routes/crm';
 import { desarrollosRouter } from '@/features/desarrollos/routes/desarrollos';
 import { developerRouter } from '@/features/developer/routes/developer';
+import { studioRouter } from '@/features/dmx-studio/routes/studio';
 import { estadisticasRouter } from '@/features/estadisticas/routes/estadisticas';
 import { fxRouter } from '@/features/fx/routes/fx';
 import { ghostZonesRouter } from '@/features/ghost-zones/routes/ghost-zones';
@@ -88,6 +89,7 @@ export const appRouter = router({
   strWatchdog: strWatchdogRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
+  studio: studioRouter,
   tareas: tareasRouter,
   trendGenome: trendGenomeRouter,
   zoneInvestment: zoneInvestmentRouter,
