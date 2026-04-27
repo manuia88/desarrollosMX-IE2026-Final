@@ -5,9 +5,15 @@ import { PORTAL_NAMES, PORTAL_REAL_H1 } from '@/features/marketing/schemas';
 import { trpc } from '@/shared/lib/trpc/client';
 import { Card, DisclosurePill } from '@/shared/ui/primitives/canon';
 
+interface PortalConfigRow {
+  portal: string;
+  is_active: boolean;
+}
+
 export function PortalesSection() {
   const t = useTranslations('Marketing');
   const configs = trpc.marketing.portals.list.useQuery({ limit: 20 });
+  const cfgRows = (configs.data ?? []) as unknown as PortalConfigRow[];
 
   return (
     <div className="flex flex-col gap-4">
@@ -16,7 +22,7 @@ export function PortalesSection() {
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
         {PORTAL_NAMES.map((p) => {
           const isReal = (PORTAL_REAL_H1 as readonly string[]).includes(p);
-          const cfg = (configs.data ?? []).find((c) => c.portal === p);
+          const cfg = cfgRows.find((c) => c.portal === p);
           return (
             <Card key={p} className="flex items-center justify-between gap-3 p-4">
               <div className="flex flex-col gap-1">
