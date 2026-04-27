@@ -1,0 +1,35 @@
+export { tareasRouter } from './routes/tareas';
+export {
+  COLUMN_MAP,
+  type CompleteTareaInput,
+  type CreateTareaInput,
+  columnForType,
+  completeTareaInput,
+  createTareaInput,
+  type DeleteTareaInput,
+  deleteTareaInput,
+  type ListTareasInput,
+  listTareasInput,
+  type ReassignTareaInput,
+  reassignTareaInput,
+  type TareaColumn,
+  type TareaDetalleTipo,
+  type TareaPriority,
+  type TareaScope,
+  type TareaStatus,
+  type TareaType,
+  tareaDetalleTipoEnum,
+  tareaPriorityEnum,
+  tareaScopeEnum,
+  tareaStatusEnum,
+  tareaTypeEnum,
+  type UpdateTareaInput,
+  updateTareaInput,
+} from './schemas';
+export type {
+  GroupedTareas,
+  GroupedTareasKey,
+  TareaCardData,
+  TareaRow,
+} from './types';
+export { emptyGrouped, rowToCardData, statusOrderRank } from './types';
