@@ -15,6 +15,7 @@ import {
   QuickActionsFloater,
 } from '@/features/asesor-shell/components/QuickActionsFloater';
 import { buildBreadcrumb, getActiveModuleId } from '@/features/asesor-shell/lib/active-module';
+import { AmbientBackground } from '@/shared/ui/motion/ambient-background';
 
 export type { AvailabilityStatus, QuickActionId, ShellUser };
 
@@ -44,12 +45,13 @@ export function AsesorShell({
   return (
     <div
       data-theme="canon-dark"
-      className="min-h-screen"
+      className="relative min-h-screen"
       style={{
         background: 'var(--canon-bg)',
         color: 'var(--canon-cream)',
       }}
     >
+      <AmbientBackground coverage="page" intensity="subtle" />
       <AsesorSidebar activeModuleId={activeModuleId} locale={locale} />
       <AsesorTopbar user={user} breadcrumb={breadcrumb} unreadCount={unreadCount} />
       <CopilotRail />

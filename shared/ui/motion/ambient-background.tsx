@@ -4,6 +4,7 @@ import { type CSSProperties, useEffect, useState } from 'react';
 
 export interface AmbientBackgroundProps {
   intensity?: 'subtle' | 'medium';
+  coverage?: 'hero' | 'page';
   className?: string;
   scrollLinked?: boolean;
 }
@@ -47,6 +48,7 @@ function useScrollY(enabled: boolean): number {
 
 export function AmbientBackground({
   intensity = 'subtle',
+  coverage = 'hero',
   className = '',
   scrollLinked = true,
 }: AmbientBackgroundProps) {
@@ -57,22 +59,72 @@ export function AmbientBackground({
 
   const opacity = OPACITY_BY_INTENSITY[intensity];
 
-  const containerStyle: CSSProperties = {
-    position: 'absolute',
-    inset: 0,
-    pointerEvents: 'none',
-    zIndex: -1,
-    overflow: 'hidden',
-  };
+  const containerStyle: CSSProperties =
+    coverage === 'page'
+      ? {
+          position: 'fixed',
+          inset: 0,
+          pointerEvents: 'none',
+          zIndex: -1,
+          overflow: 'hidden',
+        }
+      : {
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          zIndex: -1,
+          overflow: 'hidden',
+        };
 
   const bloomBase: CSSProperties = {
     position: 'absolute',
     borderRadius: '50%',
-    filter: 'blur(80px)',
-    transform: `translateY(${offset}px)`,
     transition: reduced ? 'none' : 'transform 80ms linear',
     willChange: reduced ? 'auto' : 'transform',
   };
+
+  if (coverage === 'page') {
+    return (
+      <div aria-hidden="true" className={className} style={containerStyle}>
+        <div
+          style={{
+            ...bloomBase,
+            top: '8vh',
+            left: '8%',
+            width: '800px',
+            height: '800px',
+            filter: 'blur(120px)',
+            background: `rgba(99, 102, 241, ${opacity})`,
+            transform: `translateY(${offset}px)`,
+          }}
+        />
+        <div
+          style={{
+            ...bloomBase,
+            top: '40vh',
+            right: '-6%',
+            width: '700px',
+            height: '700px',
+            filter: 'blur(100px)',
+            background: `rgba(236, 72, 153, ${opacity * 0.8})`,
+            transform: `translateY(${-offset * 0.6}px)`,
+          }}
+        />
+        <div
+          style={{
+            ...bloomBase,
+            top: '78vh',
+            left: '24%',
+            width: '600px',
+            height: '600px',
+            filter: 'blur(100px)',
+            background: `rgba(168, 85, 247, ${opacity * 0.7})`,
+            transform: `translateY(${offset * 0.4}px)`,
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div aria-hidden="true" className={className} style={containerStyle}>
@@ -83,7 +135,9 @@ export function AmbientBackground({
           left: '12%',
           width: '40%',
           height: '40%',
+          filter: 'blur(80px)',
           background: `rgba(99, 102, 241, ${opacity})`,
+          transform: `translateY(${offset}px)`,
         }}
       />
       <div
@@ -93,6 +147,7 @@ export function AmbientBackground({
           right: '-8%',
           width: '36%',
           height: '36%',
+          filter: 'blur(80px)',
           background: `rgba(236, 72, 153, ${opacity})`,
           transform: `translateY(${-offset * 0.6}px)`,
         }}
@@ -104,6 +159,7 @@ export function AmbientBackground({
           left: '38%',
           width: '32%',
           height: '32%',
+          filter: 'blur(80px)',
           background: `rgba(168, 85, 247, ${opacity * 0.85})`,
           transform: `translateY(${offset * 0.4}px)`,
         }}

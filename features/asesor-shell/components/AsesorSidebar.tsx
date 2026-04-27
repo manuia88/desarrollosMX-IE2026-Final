@@ -103,15 +103,19 @@ interface NavItemProps {
 function NavItem({ item, active, expanded, label, locale }: NavItemProps) {
   const Icon = item.Icon;
   const tint = `var(${item.tintToken})`;
-  const itemStyle: CSSProperties = active
-    ? {
-        background: `color-mix(in oklab, ${tint} 12%, transparent)`,
-        color: tint,
-        boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${tint} 30%, transparent)`,
-      }
-    : {
-        color: 'var(--canon-cream)',
-      };
+  const linkStyle: CSSProperties = {
+    color: 'var(--canon-cream)',
+    ['--mod-tint' as string]: tint,
+    ['--icon-color' as string]: active
+      ? tint
+      : `color-mix(in oklab, ${tint} 65%, var(--canon-cream) 35%)`,
+    ...(active
+      ? {
+          background: `color-mix(in oklab, ${tint} 14%, transparent)`,
+          boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${tint} 30%, transparent)`,
+        }
+      : {}),
+  };
 
   return (
     <Link
@@ -121,9 +125,10 @@ function NavItem({ item, active, expanded, label, locale }: NavItemProps) {
       className={cn(
         'group relative flex h-11 items-center gap-3 rounded-[12px] px-3 transition-colors',
         'hover:bg-[color:rgba(255,255,255,0.06)]',
+        active ? '' : 'hover:[--icon-color:var(--mod-tint)]',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--canon-indigo)] focus-visible:ring-offset-1 focus-visible:ring-offset-[color:var(--canon-bg)]',
       )}
-      style={itemStyle}
+      style={linkStyle}
     >
       {active ? (
         <span
@@ -132,16 +137,28 @@ function NavItem({ item, active, expanded, label, locale }: NavItemProps) {
           style={{ background: tint }}
         />
       ) : null}
-      <Icon size={20} />
       <span
-        className={cn(
-          'truncate text-[13px] font-medium transition-opacity',
-          expanded ? 'opacity-100' : 'pointer-events-none opacity-0',
-        )}
-        style={{ fontFamily: 'var(--font-body)' }}
+        aria-hidden="true"
+        className="flex shrink-0 items-center justify-center transition-colors"
+        style={{
+          width: 22,
+          height: 22,
+          color: 'var(--icon-color)',
+        }}
       >
-        {label}
+        <Icon size={22} />
       </span>
+      {expanded ? (
+        <span
+          className="truncate text-[13px] font-medium"
+          style={{
+            color: active ? tint : 'var(--canon-cream)',
+            fontFamily: 'var(--font-body)',
+          }}
+        >
+          {label}
+        </span>
+      ) : null}
     </Link>
   );
 }
