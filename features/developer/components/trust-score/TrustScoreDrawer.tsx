@@ -290,6 +290,7 @@ export function TrustScoreDrawer({
           </section>
 
           <section style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {/* TODO L-NEW-STUDIO-TRUST-BOOST F14.F.2+: mention +5 pts cuando studio_video_projects published >= 1 */}
             <h3 style={sectionTitleStyle}>{t('improvements.title')}</h3>
             {trustScore && trustScore.improvements.length > 0 ? (
               <ul
