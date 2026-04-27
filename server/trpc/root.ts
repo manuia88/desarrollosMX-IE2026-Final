@@ -15,6 +15,7 @@ import { ieScoresRouter } from '@/features/ie/routes/scores';
 import { indicesPublicRouter } from '@/features/indices-publicos/routes/indices-public';
 import { lifepathRouter } from '@/features/lifepath/routes/lifepath';
 import { marketRouter } from '@/features/market/routes/market';
+import { marketingRouter } from '@/features/marketing/routes/marketing';
 import { newsletterPublicRouter } from '@/features/newsletter/routes/newsletter-public';
 import { operacionesRouter } from '@/features/operaciones/routes/operaciones';
 import { scianRouter } from '@/features/scian/routes/scian';
@@ -72,6 +73,7 @@ export const appRouter = router({
   ieScores: ieScoresRouter,
   indicesPublic: indicesPublicRouter,
   lifepath: lifepathRouter,
+  marketing: marketingRouter,
   invisibleHotels: invisibleHotelsRouter,
   nomad: nomadRouter,
   photoCv: photoCvRouter,
