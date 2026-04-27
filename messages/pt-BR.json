@@ -3336,8 +3336,17 @@
       "general": "Geral",
       "empty": "Sem tarefas nesta coluna"
     },
-    "priority": { "aria": "Prioridade", "alta": "Alta", "media": "Média", "baja": "Baixa" },
-    "status": { "pending": "Pendente", "expired": "Vencida", "done": "Concluída" },
+    "priority": {
+      "aria": "Prioridade",
+      "alta": "Alta",
+      "media": "Média",
+      "baja": "Baixa"
+    },
+    "status": {
+      "pending": "Pendente",
+      "expired": "Vencida",
+      "done": "Concluída"
+    },
     "detalleTipo": {
       "aria": "Tipo de detalhe",
       "contactar_propietario": "Contatar proprietário",
@@ -3364,7 +3373,9 @@
       "body": "Crie sua primeira tarefa para manter o fluxo.",
       "cta": "Criar tarefa"
     },
-    "errors": { "list": "Não foi possível carregar suas tarefas. Tente atualizar." },
+    "errors": {
+      "list": "Não foi possível carregar suas tarefas. Tente atualizar."
+    },
     "widget": {
       "title": "Tarefas de hoje",
       "viewAll": "Ver todas",
@@ -3373,7 +3384,11 @@
       "empty": "Sem tarefas hoje",
       "emptyCta": "Ir ao gestor"
     },
-    "equipo": { "aria": "Visão de equipe", "on": "Minha equipe", "off": "Só eu" },
+    "equipo": {
+      "aria": "Visão de equipe",
+      "on": "Minha equipe",
+      "off": "Só eu"
+    },
     "entityPicker": {
       "aria": "Buscar entidade",
       "listAria": "Resultados da busca",
@@ -3391,8 +3406,12 @@
     "wizard": {
       "aria": "Assistente de nova tarefa",
       "stepperAria": "Passos do assistente",
-      "step1": { "title": "Sobre o que é a tarefa?" },
-      "step2": { "title": "Detalhe e vencimento" },
+      "step1": {
+        "title": "Sobre o que é a tarefa?"
+      },
+      "step2": {
+        "title": "Detalhe e vencimento"
+      },
       "next": "Próximo",
       "back": "Voltar",
       "submit": "Criar tarefa",
@@ -3419,7 +3438,178 @@
         "redirectTo": "URL ao concluir (opcional)",
         "redirectToPlaceholder": "/asesores/visitas/registrar"
       },
-      "errors": { "generic": "Revise os dados do formulário." }
+      "errors": {
+        "generic": "Revise os dados do formulário."
+      }
+    }
+  },
+  "Operaciones": {
+    "list": {
+      "title": "Operaciones",
+      "metaDescription": "Pipeline de operaciones del asesor",
+      "disclosure": "Datos sintéticos · F2.14.B preview",
+      "create": "Nueva operación",
+      "loading": "Cargando operaciones…",
+      "error": "No se pudieron cargar las operaciones.",
+      "emptyTitle": "Aún no tienes operaciones",
+      "emptyHelper": "Vincula una búsqueda o crea una operación standalone con el wizard de 6 pasos.",
+      "emptyCta": "Crea tu primera operación",
+      "statusFilter": "Filtrar por estado",
+      "sideFilter": "Filtrar por lado",
+      "allStatuses": "Todos los estados",
+      "allSides": "Ambos lados"
+    },
+    "row": {
+      "completion": "Avance",
+      "sideUnknown": "Sin lado"
+    },
+    "status": {
+      "propuesta": "Propuesta",
+      "oferta_aceptada": "Oferta aceptada",
+      "escritura": "Escritura",
+      "cerrada": "Cerrada",
+      "pagando": "Pagando",
+      "cancelada": "Cancelada",
+      "changerTitle": "Avanzar estado",
+      "submit": "Aplicar cambio",
+      "terminal": "Operación cancelada — sin transiciones disponibles.",
+      "requireFirmaSimple": "Confirmo firma simple del comprador",
+      "requireLegalFlow": "Confirmo que módulo Legal está iniciado",
+      "requireMifiel": "Confirmo firma Mifiel NOM-151 completa (H2 placeholder)",
+      "motivoLabel": "Motivo de cancelación",
+      "motivoPlaceholder": "Mínimo 10 caracteres explicando por qué se cancela…"
+    },
+    "side": {
+      "label": "Lado del asesor",
+      "ambos": {
+        "label": "Ambos lados",
+        "description": "Represento al comprador y al vendedor en esta operación."
+      },
+      "comprador": {
+        "label": "Lado comprador",
+        "description": "Co-broke: otra inmobiliaria tiene la propiedad, yo represento al comprador."
+      },
+      "vendedor": {
+        "label": "Lado vendedor",
+        "description": "Co-broke: otra inmobiliaria trae al comprador, yo represento al vendedor."
+      }
+    },
+    "wizard": {
+      "step1Title": "1. Operación · selecciona el lado",
+      "step2Title": "2. Comprador",
+      "step3Title": "3. Vendedor y propiedad",
+      "step4Title": "4. Estado y valores",
+      "step5Title": "5. Comisión · IVA + split",
+      "step6Title": "6. Notas y revisión",
+      "stepProgress": "Paso {current} de {total}",
+      "back": "Atrás",
+      "next": "Siguiente",
+      "cancel": "Cancelar",
+      "submit": "Crear operación",
+      "submitting": "Creando…",
+      "asesorIdLabel": "ID asesor comprador",
+      "contactoIdLabel": "ID contacto comprador (lead)",
+      "contactoHelper": "Por ahora pegamos el UUID; el picker llega cuando M03 Contactos esté shipped.",
+      "asesorVendedorLabel": "ID asesor vendedor",
+      "propietarioLabel": "ID contacto propietario (lead)",
+      "fechaCierreLabel": "Fecha de cierre estimada",
+      "cierreAmountLabel": "Monto de cierre",
+      "cierreCurrencyLabel": "Moneda de cierre",
+      "notasLabel": "Notas internas (opcional)"
+    },
+    "propiedad": {
+      "title": "Propiedad",
+      "helper": "Browser ligero H1: pega el UUID directo. Browser visual llega con M02 expansion H2.",
+      "typeLabel": "Tipo de propiedad",
+      "types": {
+        "proyecto": "Proyecto",
+        "unidad": "Unidad",
+        "propiedad_secundaria": "Mercado secundario"
+      },
+      "idLabel": "UUID propiedad",
+      "idPlaceholder": "uuid-propiedad…",
+      "selected": "Seleccionado: {type}"
+    },
+    "pegarLiga": {
+      "title": "Pegar liga",
+      "badge": "Próximamente · FASE 22 H2",
+      "label": "URL del listing",
+      "helper": "Parser EasyBroker / Mercado Libre / Inmuebles24 disponible en H2.",
+      "placeholder": "https://easybroker.com/…",
+      "action": "Pegar liga",
+      "stubMessage": "Parser no implementado todavía — pega los datos manualmente o regresa cuando se active FASE 22 H2."
+    },
+    "comision": {
+      "title": "Comisión y split DMX",
+      "pctLabel": "% comisión",
+      "ivaLabel": "% IVA",
+      "splitLabel": "% split DMX",
+      "base": "Base de cálculo",
+      "subtotal": "Subtotal {pct}%",
+      "ivaAmount": "IVA {pct}%",
+      "total": "Total con IVA",
+      "splitTitle": "Split explícito",
+      "splitInmobiliaria": "Tu inmobiliaria ({pct}%)",
+      "splitDmx": "DMX ({pct}%)",
+      "declaracionJurada": "Declaro bajo protesta que los datos de comisión, IVA y split son correctos."
+    },
+    "pagos": {
+      "registrarTitle": "Registrar pago",
+      "amountLabel": "Monto recibido",
+      "currencyLabel": "Moneda",
+      "fechaLabel": "Fecha de pago",
+      "notesLabel": "Notas (opcional)",
+      "submit": "Registrar pago",
+      "estado": {
+        "pending": "Pendiente",
+        "paid": "Pagado parcial",
+        "closed": "Pago íntegro",
+        "expired": "Expirado"
+      }
+    },
+    "legal": {
+      "title": "Flujo Legal /legal",
+      "badge": "Próximamente · FASE 18 H2",
+      "stepsLabel": "Pasos del flujo Legal",
+      "fase18": "Mifiel NOM-151 + escrow se activan en FASE 18 H2.",
+      "steps": {
+        "no_subido": "No subido",
+        "en_revision": "En revisión",
+        "aprobado": "Aprobado",
+        "contrato_enviado": "Contrato enviado",
+        "contrato_firmado": "Firmado NOM-151"
+      }
+    },
+    "cfdi": {
+      "title": "CFDI 4.0",
+      "badge": "Próximamente · FASE 22 H2",
+      "description": "Emisión CFDI con complemento Pago via Facturapi.io + Finkok PAC.",
+      "fase22": "Disponible cuando se firme contrato Facturapi.io en FASE 22 H2."
+    },
+    "detail": {
+      "title": "Detalle operación",
+      "loading": "Cargando operación…",
+      "error": "No se pudo cargar la operación.",
+      "created": "Creada {date}",
+      "summary": "Resumen",
+      "cierreAmount": "Monto cierre",
+      "fechaCierre": "Fecha cierre",
+      "completion": "Avance",
+      "parts": "Partes",
+      "partsEmpty": "Sin partes registradas todavía.",
+      "commission": "Comisión",
+      "pagos": "Pagos",
+      "pagosEmpty": "Sin pagos registrados.",
+      "notas": "Notas",
+      "refresh": "Actualizar"
+    },
+    "partsRoles": {
+      "comprador": "Comprador",
+      "vendedor": "Vendedor",
+      "asesor_comprador": "Asesor comprador",
+      "asesor_vendedor": "Asesor vendedor",
+      "asesor_productor": "Asesor productor",
+      "propietario": "Propietario"
     }
   }
 }
