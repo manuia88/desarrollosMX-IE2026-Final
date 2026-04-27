@@ -4132,5 +4132,142 @@
         }
       }
     }
+  },
+  "dev": {
+    "sidebar": {
+      "aria": "Navegación portal desarrollador",
+      "nav": "Módulos del portal",
+      "dashboard": "Dashboard",
+      "inventario": "Inventario",
+      "contabilidad": "Contabilidad",
+      "crm": "CRM Dev",
+      "marketing": "Marketing Dev",
+      "analytics": "Analytics IE",
+      "ajustes": "Configuración",
+      "comingSoon": "Próximamente {phase}"
+    },
+    "header": {
+      "aria": "Encabezado portal desarrollador",
+      "brand": "DMX Dev",
+      "noCompany": "Mi desarrolladora",
+      "search": "Buscar",
+      "cmdk": "Atajo de búsqueda",
+      "notifications": "Notificaciones, {count} sin leer",
+      "userAvatar": "Avatar de {name}",
+      "comingSoon": "Próximamente FASE 15"
+    },
+    "companyHeader": {
+      "ariaLabel": "Información de la desarrolladora {name}",
+      "logoAlt": "Logotipo de {name}",
+      "verified": "Verificada",
+      "verifiedLabel": "Desarrolladora verificada",
+      "taxIdLabel": "RFC enmascarado",
+      "yearsOperating": "{years} años operando",
+      "trustScoreLabel": "Trust Score",
+      "trustScoreAria": "Trust Score {score} nivel {level}",
+      "trustScorePendingAria": "Trust Score pendiente",
+      "pending": "Pendiente",
+      "level": {
+        "bronze": "Bronce",
+        "silver": "Plata",
+        "gold": "Oro",
+        "platinum": "Platino"
+      }
+    },
+    "dashboard": {
+      "metaTitle": "Dashboard desarrolladora",
+      "metaDescription": "Resumen de tu portafolio, reputación y operación.",
+      "greeting": "Buenos días, {companyName}",
+      "quickActions": "Acciones rápidas",
+      "loading": {
+        "kpis": "Cargando KPIs...",
+        "inventory": "Cargando inventario..."
+      }
+    },
+    "trustScore": {
+      "cardTitle": "Trust Score",
+      "drawerTitle": "Trust Score detallado",
+      "outOf": "/100",
+      "viewDetail": "Ver detalle",
+      "close": "Cerrar",
+      "pending": "Pendiente",
+      "pendingPlaceholder": "Calculo H05 ship FASE 19",
+      "level": {
+        "bronze": "Bronce",
+        "silver": "Plata",
+        "gold": "Oro",
+        "platinum": "Platino"
+      },
+      "breakdown": {
+        "title": "Categorías",
+        "financial_health": "Salud financiera",
+        "on_time_delivery": "Entrega a tiempo",
+        "doc_transparency": "Transparencia documental",
+        "post_venta": "Post-venta",
+        "reviews": "Reviews"
+      },
+      "improvements": {
+        "title": "Sugerencias para mejorar",
+        "empty": "Sin sugerencias activas."
+      },
+      "citations": {
+        "title": "Cómo se calcula",
+        "empty": "Sin fuentes registradas."
+      },
+      "placeholderBanner": "Calculado mensualmente — disponible FASE 19 con doc intel + on-chain verification."
+    },
+    "kpis": {
+      "sectionTitle": "KPIs MTD del {rangeFrom} al {rangeTo}",
+      "proyectosActivos": "Proyectos activos",
+      "unidadesVendidas": "Unidades vendidas",
+      "revenueMxn": "Revenue",
+      "conversionPct": "Conversión",
+      "ticketsOpen": "Tickets abiertos"
+    },
+    "inventory": {
+      "title": "Inventario por proyecto",
+      "aria": "Gráfico de barras horizontal apilado: estado de unidades por proyecto",
+      "tableCaption": "Unidades por proyecto y estado",
+      "proyecto": "Proyecto",
+      "disponible": "Disponible",
+      "apartada": "Apartada",
+      "vendida": "Vendida",
+      "otra": "Otra",
+      "total": "Total",
+      "empty": "Sin proyectos activos. Crea tu primer proyecto para empezar."
+    },
+    "briefing": {
+      "title": "Morning Briefing",
+      "generatedAt": "Generado {time}",
+      "regenerate": "Regenerar",
+      "placeholderBanner": "Briefing AI ship FASE 17 — placeholder visible.",
+      "loadingLabel": "Generando briefing..."
+    },
+    "quickActions": {
+      "comingSoon": "Próximamente FASE 15",
+      "actions": {
+        "uploadDoc": "Subir documento",
+        "createLanding": "Crear landing",
+        "emitCfdi": "Emitir CFDI",
+        "sendCommunique": "Enviar comunicado",
+        "startCampaign": "Iniciar campaña"
+      }
+    },
+    "pendientes": {
+      "title": "Pendientes",
+      "documentsLabel": "Documentos por aprobar",
+      "landingsLabel": "Landings sin publicar",
+      "cfdisLabel": "CFDIs pendientes",
+      "empty": "Sin pendientes",
+      "comingSoon": "FASE 15",
+      "viewAll": "Ver todos",
+      "tipoLabel": {
+        "escritura": "Escritura",
+        "licencia": "Licencia",
+        "plano": "Plano",
+        "contrato": "Contrato",
+        "otro": "Otro"
+      }
+    }
   }
 }
