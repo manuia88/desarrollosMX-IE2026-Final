@@ -15,7 +15,7 @@ export default async function StudioLayout({ children, params }: StudioLayoutPro
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect(`/${locale}/auth/login?next=/${locale}/studio`);
+    redirect(`/${locale}/auth/login?next=/${locale}/studio-app`);
   }
 
   const { data: extension } = await supabase
@@ -30,7 +30,7 @@ export default async function StudioLayout({ children, params }: StudioLayoutPro
       studio_role: 'studio_user',
       onboarding_completed: false,
     });
-    redirect(`/${locale}/studio/onboarding`);
+    redirect(`/${locale}/studio-app/onboarding`);
   }
 
   const validRoles = new Set(['studio_user', 'studio_admin', 'studio_photographer']);

@@ -1,4 +1,5 @@
 import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
 import {
   createStudioProjectInput,
   generateDirectorBriefInput,
@@ -200,6 +201,51 @@ export const studioProjectsRouter = router({
       return { ok: true, count: input.assetOrder.length };
     }),
 
+  classifyAsset: studioProcedure
+    .input(
+      z.object({
+        projectId: z.string().uuid(),
+        assetId: z.string().uuid(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const supabase = createAdminClient();
+      const { data: asset } = await supabase
+        .from('studio_video_assets')
+        .select('id, storage_url, project_id, user_id')
+        .eq('id', input.assetId)
+        .eq('project_id', input.projectId)
+        .eq('user_id', ctx.user.id)
+        .maybeSingle();
+      if (!asset) throw new TRPCError({ code: 'NOT_FOUND' });
+
+      const { classifyAsset: runClassifyAsset } = await import(
+        '@/features/dmx-studio/lib/director/space-classifier'
+      );
+      try {
+        const result = await runClassifyAsset({
+          assetId: asset.id,
+          userId: ctx.user.id,
+          storagePath: asset.storage_url,
+        });
+        return {
+          ok: true,
+          assetId: asset.id,
+          spaceType: result.spaceType,
+          confidence: result.confidence,
+        };
+      } catch (err) {
+        sentry.captureException(err, {
+          tags: { feature: 'dmx-studio.director', op: 'classifyAsset' },
+          extra: { projectId: input.projectId, assetId: input.assetId },
+        });
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: err instanceof Error ? err.message : 'classify_failed',
+        });
+      }
+    }),
+
   generateDirectorBrief: studioProcedure
     .input(generateDirectorBriefInput)
     .mutation(async ({ ctx, input }) => {
@@ -246,7 +292,7 @@ export const studioProjectsRouter = router({
             mimeType: a.mime_type ?? 'image/jpeg',
             orderIndex: a.order_index,
             spaceType:
-              ((a.ai_classification as Record<string, unknown> | null)?.['space_type'] as
+              ((a.ai_classification as Record<string, unknown> | null)?.space_type as
                 | string
                 | undefined) ?? null,
           })),

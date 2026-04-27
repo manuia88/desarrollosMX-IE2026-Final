@@ -7,14 +7,14 @@ export async function requireStudioOnboardingComplete(locale: string): Promise<v
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    redirect(`/${locale}/auth/login?next=/${locale}/studio`);
+    redirect(`/${locale}/auth/login?next=/${locale}/studio-app`);
   }
   const { data: extension } = await supabase
     .from('studio_users_extension')
     .select('onboarding_completed')
     .eq('user_id', user.id)
     .maybeSingle();
-  if (!extension || !extension.onboarding_completed) {
-    redirect(`/${locale}/studio/onboarding`);
+  if (!extension?.onboarding_completed) {
+    redirect(`/${locale}/studio-app/onboarding`);
   }
 }

@@ -341,26 +341,26 @@ function normalizeCategory(spaceType: string | null): (typeof PHOTO_CATEGORY_VAL
 
 function pickPropertyData(input: RunDirectorAnalysisInput): PropertyData {
   const property = (input.sourceMetadata.property ?? {}) as Record<string, unknown>;
-  const priceRaw = property['price'];
+  const priceRaw = property.price;
   const priceMxn =
     typeof priceRaw === 'number' && Number.isFinite(priceRaw) && priceRaw > 0 ? priceRaw : 0;
   const priceUsd = priceMxn > 0 ? Math.max(priceMxn / 17, 1000) : 1000;
 
-  const areaRaw = property['area_m2'];
+  const areaRaw = property.area_m2;
   const areaM2 =
     typeof areaRaw === 'number' && Number.isFinite(areaRaw) && areaRaw > 0 ? areaRaw : 60;
 
-  const bedroomsRaw = property['bedrooms'];
+  const bedroomsRaw = property.bedrooms;
   const bedrooms =
     typeof bedroomsRaw === 'number' && bedroomsRaw >= 0 && bedroomsRaw <= 20
       ? Math.floor(bedroomsRaw)
       : 2;
 
-  const bathroomsRaw = property['bathrooms'];
+  const bathroomsRaw = property.bathrooms;
   const bathrooms =
     typeof bathroomsRaw === 'number' && bathroomsRaw >= 0 && bathroomsRaw <= 20 ? bathroomsRaw : 1;
 
-  const zoneRaw = property['zone'];
+  const zoneRaw = property.zone;
   const zone = typeof zoneRaw === 'string' && zoneRaw.length > 0 ? zoneRaw : 'Zona sin especificar';
 
   return {
@@ -371,7 +371,7 @@ function pickPropertyData(input: RunDirectorAnalysisInput): PropertyData {
     bedrooms,
     bathrooms,
     zone,
-    city: typeof property['city'] === 'string' ? (property['city'] as string) : 'Ciudad de México',
+    city: typeof property.city === 'string' ? (property.city as string) : 'Ciudad de México',
     country: 'MX',
   };
 }
