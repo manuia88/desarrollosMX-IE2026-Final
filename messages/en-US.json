@@ -4132,5 +4132,141 @@
         }
       }
     }
+  },
+  "dev": {
+    "sidebar": {
+      "aria": "Developer portal navigation",
+      "nav": "Portal modules",
+      "dashboard": "Dashboard",
+      "inventario": "Inventory",
+      "contabilidad": "Accounting",
+      "crm": "Dev CRM",
+      "marketing": "Dev Marketing",
+      "analytics": "IE Analytics",
+      "ajustes": "Settings",
+      "comingSoon": "Coming {phase}"
+    },
+    "header": {
+      "aria": "Developer portal header",
+      "brand": "DMX Dev",
+      "noCompany": "My company",
+      "search": "Search",
+      "cmdk": "Search shortcut",
+      "notifications": "Notifications, {count} unread",
+      "userAvatar": "Avatar of {name}"
+    },
+    "companyHeader": {
+      "ariaLabel": "Company info: {name}",
+      "logoAlt": "{name} logo",
+      "verified": "Verified",
+      "verifiedLabel": "Verified company",
+      "taxIdLabel": "Masked tax ID",
+      "yearsOperating": "{years} years operating",
+      "trustScoreLabel": "Trust Score",
+      "trustScoreAria": "Trust Score {score} level {level}",
+      "trustScorePendingAria": "Trust Score pending",
+      "pending": "Pending",
+      "level": {
+        "bronze": "Bronze",
+        "silver": "Silver",
+        "gold": "Gold",
+        "platinum": "Platinum"
+      }
+    },
+    "dashboard": {
+      "metaTitle": "Developer dashboard",
+      "metaDescription": "Snapshot of your portfolio, reputation, and operations.",
+      "greeting": "Good morning, {companyName}",
+      "quickActions": "Quick actions",
+      "loading": {
+        "kpis": "Loading KPIs...",
+        "inventory": "Loading inventory..."
+      }
+    },
+    "trustScore": {
+      "cardTitle": "Trust Score",
+      "drawerTitle": "Trust Score breakdown",
+      "outOf": "/100",
+      "viewDetail": "View detail",
+      "close": "Close",
+      "pending": "Pending",
+      "pendingPlaceholder": "H05 calculation ship FASE 19",
+      "level": {
+        "bronze": "Bronze",
+        "silver": "Silver",
+        "gold": "Gold",
+        "platinum": "Platinum"
+      },
+      "breakdown": {
+        "title": "Categories",
+        "financial_health": "Financial health",
+        "on_time_delivery": "On-time delivery",
+        "doc_transparency": "Document transparency",
+        "post_venta": "Post-sale",
+        "reviews": "Reviews"
+      },
+      "improvements": {
+        "title": "Suggestions to improve",
+        "empty": "No active suggestions."
+      },
+      "citations": {
+        "title": "How it's calculated",
+        "empty": "No sources registered."
+      },
+      "placeholderBanner": "Calculated monthly — available FASE 19 with doc intel + on-chain verification."
+    },
+    "kpis": {
+      "sectionTitle": "MTD KPIs from {rangeFrom} to {rangeTo}",
+      "proyectosActivos": "Active projects",
+      "unidadesVendidas": "Units sold",
+      "revenueMxn": "Revenue",
+      "conversionPct": "Conversion",
+      "ticketsOpen": "Open tickets"
+    },
+    "inventory": {
+      "title": "Inventory by project",
+      "aria": "Stacked horizontal bar chart: unit status per project",
+      "tableCaption": "Units by project and status",
+      "proyecto": "Project",
+      "disponible": "Available",
+      "apartada": "Reserved",
+      "vendida": "Sold",
+      "otra": "Other",
+      "total": "Total",
+      "empty": "No active projects. Create your first project to get started."
+    },
+    "briefing": {
+      "title": "Morning Briefing",
+      "generatedAt": "Generated {time}",
+      "regenerate": "Regenerate",
+      "placeholderBanner": "AI briefing ship FASE 17 — placeholder visible.",
+      "loadingLabel": "Generating briefing..."
+    },
+    "quickActions": {
+      "comingSoon": "Coming FASE 15",
+      "actions": {
+        "uploadDoc": "Upload document",
+        "createLanding": "Create landing",
+        "emitCfdi": "Issue CFDI",
+        "sendCommunique": "Send announcement",
+        "startCampaign": "Start campaign"
+      }
+    },
+    "pendientes": {
+      "title": "Pending",
+      "documentsLabel": "Documents to approve",
+      "landingsLabel": "Landings unpublished",
+      "cfdisLabel": "CFDIs pending",
+      "empty": "No pending items",
+      "comingSoon": "FASE 15",
+      "viewAll": "View all",
+      "tipoLabel": {
+        "escritura": "Title deed",
+        "licencia": "License",
+        "plano": "Floor plan",
+        "contrato": "Contract",
+        "otro": "Other"
+      }
+    }
   }
 }
