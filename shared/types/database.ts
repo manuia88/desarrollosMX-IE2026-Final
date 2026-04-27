@@ -19439,6 +19439,7 @@ export type Database = {
         }
         Returns: number
       }
+      refresh_asesor_stats_daily: { Args: never; Returns: undefined }
       register_view: {
         Args: {
           p_dedup_key: string
