@@ -2921,6 +2921,8 @@
       "runAcm": "Correr ACM",
       "runningAcm": "Calculando ACM…",
       "closeCaptacion": "Cerrar captación",
+      "generateStudio": "Generar Studio video",
+      "generateStudioAria": "Generar video con DMX Studio desde esta captación",
       "notesTitle": "Notas",
       "closedTitle": "Cerrada",
       "motivoUnknown": "Sin motivo registrado",
@@ -4628,6 +4630,16 @@
         "stepReviewLabel": "Revisar",
         "continueButton": "Continuar",
         "backButton": "Volver"
+      },
+      "matchingBusquedas": {
+        "loading": "Buscando matches con tus búsquedas activas…",
+        "title": "Matches con búsquedas",
+        "titleSingular": "búsqueda activa matchea con tu video",
+        "titlePlural": "búsquedas activas matchean con tu video",
+        "description": "Tu video matchea con {count} búsqueda(s) activa(s) — leads listos para enviar el preview.",
+        "empty": "Aún no hay búsquedas activas que matcheen con esta propiedad.",
+        "countAria": "{count} búsquedas matched",
+        "notificationStub": "Notificación a leads pendiente — activable H2."
       }
     },
     "pipeline": {
@@ -4798,6 +4810,39 @@
       "brandedBadge": "Con tu marca",
       "unbrandedBadge": "Sin marca (reventa)",
       "errorGenerate": "No pudimos generar los formatos adicionales"
+    },
+    "timeMachine": {
+      "title": "Time Machine",
+      "subtitle": "Histórico de versiones de este copy",
+      "loading": "Cargando versiones…",
+      "errorLoading": "No pudimos cargar el histórico",
+      "emptyState": "Aún no hay versiones generadas",
+      "currentBadge": "Actual",
+      "versionLabel": "Versión {n}",
+      "toneLabel": "Tono",
+      "toneFormal": "Formal",
+      "toneCercano": "Cercano",
+      "toneAspiracional": "Aspiracional",
+      "toneOriginal": "Original",
+      "costLabel": "Costo",
+      "rollbackCta": "Restaurar esta versión",
+      "rollbackConfirm": "¿Restaurar esta versión como la actual?",
+      "rollbackPending": "Restaurando…",
+      "rollbackSuccess": "Versión restaurada",
+      "rollbackError": "No pudimos restaurar la versión",
+      "compareCta": "Comparar con actual",
+      "diffTitle": "Comparación de versiones",
+      "diffLeftLabel": "Versión A",
+      "diffRightLabel": "Versión B",
+      "diffAddedLabel": "Agregado",
+      "diffRemovedLabel": "Eliminado",
+      "diffUnchangedLabel": "Sin cambios",
+      "drawerTitle": "Historial completo",
+      "drawerOpen": "Abrir historial",
+      "drawerClose": "Cerrar historial",
+      "drawerFilterAll": "Todos los tonos",
+      "drawerFilterTone": "Filtrar por tono",
+      "drawerEmpty": "Sin versiones que coincidan con el filtro"
     }
   }
 }

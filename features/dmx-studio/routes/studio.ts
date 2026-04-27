@@ -2,6 +2,7 @@ import { router } from '@/server/trpc/init';
 import { studioBrandKitRouter } from './brand-kit';
 import { studioCopyPackRouter } from './copy-pack';
 import { studioCopyVersionsRouter } from './copy-versions';
+import { studioCrossFunctionsRouter } from './cross-functions';
 import { studioDashboardRouter } from './dashboard';
 import { studioFoundersCohortRouter } from './founders-cohort';
 import { studioLandingRouter } from './landing';
@@ -21,6 +22,7 @@ export const studioRouter = router({
   brandKit: studioBrandKitRouter,
   copyPack: studioCopyPackRouter,
   copyVersions: studioCopyVersionsRouter,
+  crossFunctions: studioCrossFunctionsRouter,
   dashboard: studioDashboardRouter,
   foundersCohort: studioFoundersCohortRouter,
   landing: studioLandingRouter,
