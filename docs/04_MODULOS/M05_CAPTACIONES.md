@@ -220,4 +220,21 @@ Ver `/docs/referencias-ui/M5_Captaciones.tsx` (757 LOC). Tint bgPeach, kanban 6 
 - Módulos relacionados: M02 Desarrollos (publish), M03 Contactos (propietario), M06 Tareas, M08 Marketing (Radar)
 
 ---
+
+## Status SHIPPED — FASE 13.F PR-B (2026-04-27)
+
+**Tag**: `fase-13.F-complete`
+
+Implementación H1 MVP shipped:
+- BD: tabla `captaciones` (1 MVP, NO 5 detalle del doc M05 obsoleto) + 2 enums (captacion_status 6 stages founder canon: prospecto/presentacion/firmado/en_promocion/vendido/cerrado_no_listado, captacion_operacion venta/renta) + 9 indexes + 8 RLS policies + 2 triggers
+- ACM Engine determinístico: `shared/lib/acm/` 5 dimensions weighted (priceFit 30 + zoneScore 25 + amenities 20 + sizeFit 15 + discZone 10), provenance jsonb sha256 inputsHash, zero LLM cost H1
+- Frontend: `features/asesor-captaciones/` 11 components canon RE-SKIN + 6 hooks + 3 lib (Kanban HTML5 native drag-drop + keyboard alt + 3-section MVP editor + StatusBadge CVA emerald --mod-captaciones)
+- Backend: 8 tRPC procedures (`features/captaciones/routes/`) — list/get/create/update/advanceStage/close/runAcm/pause
+- 137 i18n keys × 5 locales = 685 entries
+
+STUBs marcados ADR-018 (4 señales): Mifiel firma + AI Promoción Anthropic + Vision Classify fotos + Notas detalladas 3 niveles + Compartir Radar/Publicar/Duplicar/Encuentros (post-H1).
+
+Discrepancia stages doc M05 vs founder canon: founder canon prevalece. Doc M05 stages legacy (Pendiente/Seguimiento/Encuentro/Valuación/Documentación/Captado) marcado para revisar próximo sprint.
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent H) | **Fecha:** 2026-04-17

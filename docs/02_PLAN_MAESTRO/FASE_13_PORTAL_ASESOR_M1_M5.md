@@ -1,5 +1,7 @@
 # FASE 13 — Portal Asesor (M01 Dashboard + M02 Desarrollos + M03 Contactos + M04 Búsquedas + M05 Captaciones)
 
+> **STATUS MASTER FASE 13: SHIPPED 2026-04-27 — tag `fase-13-complete`. M01-M05 todos shipped + zero deuda técnica resolved (climate tune + disclosure badges + Atlas Wiki). Próximo: [FASE 14 M06-M10](./FASE_14_PORTAL_ASESOR_M6_M10.md).**
+
 > **Status sub-bloque 13.A Foundation Visual:** SHIPPED 2026-04-26 (tag `fase-13.A-complete`).
 > Foundation visual canon prototype + asesor extensions disponible en `styles/tokens.css` (`--canon-*` + `--accent-*` + `--surface-*` + `--gradient-score-*` + `--gradient-ai` + `--shadow-canon-*` + `--mod-*`), `shared/ui/motion/` (BlurText/FadeUp/StaggerContainer/Marquee + useInView/use3DTilt), `shared/ui/primitives/canon/` (Card/Button CVA/ScorePill/MomentumPill/GlassOverlay/IconCircle/cn).
 >
