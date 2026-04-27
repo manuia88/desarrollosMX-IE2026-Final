@@ -2659,6 +2659,14 @@
         "cta": "Ver coincidencias"
       },
       "ctaPending": "Próximamente — wiring real en próxima fase"
+    },
+    "studioBanner": {
+      "aria": "Promoción DMX Studio",
+      "badge": "Próximamente",
+      "title": "Próximamente: DMX Studio",
+      "subtitle": "Crea tu primer video inmobiliario con IA en 60 segundos.",
+      "cta": "Únete a la lista de espera",
+      "ctaAria": "Únete a la lista de espera de DMX Studio"
     }
   },
   "AsesorBusquedas": {

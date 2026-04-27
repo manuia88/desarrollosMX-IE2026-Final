@@ -7,8 +7,7 @@
 // dev/CI/test → MockEmailProvider. Si EMAIL_PROVIDER=resend en runtime → throw
 // NOT_IMPLEMENTED.
 
-import { getEmailProvider } from '@/features/newsletter/lib/email-provider';
-import type { EmailSendInput, EmailSendResult } from '@/features/newsletter/types';
+import { type EmailSendInput, type EmailSendResult, getStudioEmailProvider } from './provider';
 import {
   DRIP_DAY_3_SUBJECT,
   type RenderDripDay3Input,
@@ -40,7 +39,7 @@ interface SendArgs {
 }
 
 async function sendStudioEmail(args: SendArgs): Promise<EmailSendResult> {
-  const provider = getEmailProvider();
+  const provider = getStudioEmailProvider();
   const input: EmailSendInput = {
     to: args.to,
     subject: args.subject,
