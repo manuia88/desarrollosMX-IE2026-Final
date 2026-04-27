@@ -1,10 +1,3 @@
-export type {
-  DevCompanyHeaderCompany,
-  DevCompanyHeaderProps,
-  DevCompanyHeaderTrustScore,
-  TrustScoreLevel,
-} from './components/DevCompanyHeader';
-export { DevCompanyHeader } from './components/DevCompanyHeader';
 export type { DevHeaderProps, DevHeaderUser } from './components/DevHeader';
 export { DevHeader } from './components/DevHeader';
 export type { DevShellProps } from './components/DevShell';

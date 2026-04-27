@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
-import { DevCompanyHeader } from '@/features/dev-shell';
+import { DevCompanyHeader } from '@/features/developer/components/DevCompanyHeader';
 import { DevKpiGrid } from '@/features/developer/components/DevKpiGrid';
 import { DevQuickActions } from '@/features/developer/components/DevQuickActions';
 import { InventorySnapshot } from '@/features/developer/components/InventorySnapshot';

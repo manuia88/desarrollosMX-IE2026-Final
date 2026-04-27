@@ -6,7 +6,7 @@ vi.mock('next-intl', () => ({
     vars ? `${k}:${JSON.stringify(vars)}` : k,
 }));
 
-import { DevCompanyHeader } from '../DevCompanyHeader';
+import { DevCompanyHeader } from '../components/DevCompanyHeader';
 
 interface ReactDomServerNode {
   readonly renderToStaticMarkup: (element: ReactElement) => string;
