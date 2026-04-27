@@ -45,13 +45,13 @@ export function PipelineCarousel({ deals }: PipelineCarouselProps) {
       >
         <h2
           className="text-[14px] font-semibold uppercase tracking-[0.08em]"
-          style={{ color: 'var(--canon-cream)', fontFamily: 'var(--font-body)' }}
+          style={{ color: 'var(--canon-white-pure)', fontFamily: 'var(--font-body)' }}
         >
           {t('title')}
         </h2>
         <p
           className="text-[14px]"
-          style={{ color: 'var(--canon-cream-3)', fontFamily: 'var(--font-body)' }}
+          style={{ color: 'var(--canon-cream-2)', fontFamily: 'var(--font-body)' }}
         >
           {t('empty.body')}
         </p>
@@ -90,7 +90,7 @@ export function PipelineCarousel({ deals }: PipelineCarouselProps) {
       <header className="flex items-center justify-between">
         <h2
           className="text-[14px] font-semibold uppercase tracking-[0.08em]"
-          style={{ color: 'var(--canon-cream)', fontFamily: 'var(--font-body)' }}
+          style={{ color: 'var(--canon-white-pure)', fontFamily: 'var(--font-body)' }}
         >
           {t('title')}
         </h2>

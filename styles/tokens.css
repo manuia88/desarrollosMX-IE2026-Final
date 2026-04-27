@@ -244,13 +244,15 @@
   --shadow-canon-focus: 0 0 0 3px rgba(99, 102, 241, 0.45);
   --shadow-canon-spotlight: 0 24px 64px rgba(168, 85, 247, 0.22);
 
-  /* ---- Card luminous tokens (FASE 13.G.1.1 cards refinement) ---- */
+  /* ---- Card luminous tokens (FASE 13.G.1.1 cards refinement, F2.13.G.1.2 amplificar breath) ---- */
   --canon-white-pure: #ffffff;
   --canon-card-border-default: rgba(255, 255, 255, 0.14);
   --canon-card-border-hover: rgba(99, 102, 241, 0.4);
   --canon-card-shadow-hover: 0 24px 60px rgba(99, 102, 241, 0.18);
-  --canon-card-shadow-glow-rest: 0 12px 32px rgba(99, 102, 241, 0.08);
-  --canon-card-shadow-glow-peak: 0 16px 40px rgba(99, 102, 241, 0.18);
+  --canon-card-shadow-glow-rest: 0 16px 40px rgba(99, 102, 241, 0.15);
+  --canon-card-shadow-glow-peak: 0 32px 80px rgba(99, 102, 241, 0.45);
+  --canon-card-border-glow-rest: rgba(99, 102, 241, 0.4);
+  --canon-card-border-glow-peak: rgba(99, 102, 241, 0.7);
 
   /* ---- 10 wayfinding colors per módulo asesor ---- */
   --mod-dashboard: #6366f1;
@@ -357,14 +359,16 @@
   0%,
   100% {
     box-shadow: var(--canon-card-shadow-glow-rest);
+    border-color: var(--canon-card-border-glow-rest);
   }
   50% {
     box-shadow: var(--canon-card-shadow-glow-peak);
+    border-color: var(--canon-card-border-glow-peak);
   }
 }
 
 .canon-breath {
-  animation: canon-breath-glow 8s ease-in-out infinite;
+  animation: canon-breath-glow 6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
