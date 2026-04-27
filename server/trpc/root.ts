@@ -7,6 +7,7 @@ import { captacionesRouter } from '@/features/captaciones/routes/captaciones';
 import { constellationsRouter } from '@/features/constellations/routes/constellations';
 import { crmRouter } from '@/features/crm/routes/crm';
 import { desarrollosRouter } from '@/features/desarrollos/routes/desarrollos';
+import { estadisticasRouter } from '@/features/estadisticas/routes/estadisticas';
 import { fxRouter } from '@/features/fx/routes/fx';
 import { ghostZonesRouter } from '@/features/ghost-zones/routes/ghost-zones';
 import { aiRouter } from '@/features/ia-generativa/routes/ai';
@@ -54,6 +55,7 @@ export const appRouter = router({
   constellations: constellationsRouter,
   crm: crmRouter,
   desarrollos: desarrollosRouter,
+  estadisticas: estadisticasRouter,
   fx: fxRouter,
   ghostZones: ghostZonesRouter,
   market: marketRouter,
