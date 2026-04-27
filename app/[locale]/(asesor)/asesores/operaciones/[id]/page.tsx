@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
-import { OperacionDetail } from '@/features/asesor-operaciones/components';
+import { OperacionDetail } from '@/features/operaciones/components';
 import { createClient } from '@/shared/lib/supabase/server';
 
 interface RouteProps {
