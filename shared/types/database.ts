@@ -15740,6 +15740,57 @@ export type Database = {
           },
         ]
       }
+      studio_ai_coach_sessions: {
+        Row: {
+          completed: boolean
+          created_at: string
+          dismissed: boolean
+          id: string
+          mood_detected: string
+          session_date: string
+          suggested_action: string
+          user_id: string
+          user_response: string | null
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          dismissed?: boolean
+          id?: string
+          mood_detected: string
+          session_date: string
+          suggested_action: string
+          user_id: string
+          user_response?: string | null
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          dismissed?: boolean
+          id?: string
+          mood_detected?: string
+          session_date?: string
+          suggested_action?: string
+          user_id?: string
+          user_response?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_ai_coach_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_ai_coach_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_api_jobs: {
         Row: {
           actual_cost_usd: number | null
@@ -15930,6 +15981,104 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      studio_challenge_participations: {
+        Row: {
+          challenge_id: string
+          completed_at: string | null
+          created_at: string
+          id: string
+          project_id: string | null
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          project_id?: string | null
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          project_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_challenge_participations_challenge_id_fkey"
+            columns: ["challenge_id"]
+            isOneToOne: false
+            referencedRelation: "studio_community_challenges"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_challenge_participations_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_challenge_participations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_challenge_participations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_community_challenges: {
+        Row: {
+          challenge_type: string
+          completers_count: number
+          created_at: string
+          description: string
+          id: string
+          is_active: boolean
+          participants_count: number
+          reward_xp: number
+          target_value: string
+          title: string
+          week_start: string
+        }
+        Insert: {
+          challenge_type: string
+          completers_count?: number
+          created_at?: string
+          description: string
+          id?: string
+          is_active?: boolean
+          participants_count?: number
+          reward_xp?: number
+          target_value: string
+          title: string
+          week_start: string
+        }
+        Update: {
+          challenge_type?: string
+          completers_count?: number
+          created_at?: string
+          description?: string
+          id?: string
+          is_active?: boolean
+          participants_count?: number
+          reward_xp?: number
+          target_value?: string
+          title?: string
+          week_start?: string
+        }
+        Relationships: []
       }
       studio_content_calendar: {
         Row: {
@@ -16626,6 +16775,74 @@ export type Database = {
           },
         ]
       }
+      studio_remarketing_jobs: {
+        Row: {
+          angle: string
+          created_at: string
+          error_message: string | null
+          generated_at: string | null
+          id: string
+          new_project_id: string | null
+          notification_sent_at: string | null
+          source_project_id: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          angle: string
+          created_at?: string
+          error_message?: string | null
+          generated_at?: string | null
+          id?: string
+          new_project_id?: string | null
+          notification_sent_at?: string | null
+          source_project_id: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          angle?: string
+          created_at?: string
+          error_message?: string | null
+          generated_at?: string | null
+          id?: string
+          new_project_id?: string | null
+          notification_sent_at?: string | null
+          source_project_id?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_remarketing_jobs_new_project_id_fkey"
+            columns: ["new_project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_remarketing_jobs_source_project_id_fkey"
+            columns: ["source_project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_remarketing_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_remarketing_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_series_projects: {
         Row: {
           cover_image_url: string | null
@@ -16688,6 +16905,54 @@ export type Database = {
             foreignKeyName: "studio_series_projects_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_streaks: {
+        Row: {
+          badges_unlocked: string[]
+          current_streak_days: number
+          id: string
+          last_activity_date: string | null
+          longest_streak_days: number
+          total_videos_generated: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          badges_unlocked?: string[]
+          current_streak_days?: number
+          id?: string
+          last_activity_date?: string | null
+          longest_streak_days?: number
+          total_videos_generated?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          badges_unlocked?: string[]
+          current_streak_days?: number
+          id?: string
+          last_activity_date?: string | null
+          longest_streak_days?: number
+          total_videos_generated?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_streaks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_streaks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
             referencedRelation: "public_profiles"
             referencedColumns: ["id"]
           },
