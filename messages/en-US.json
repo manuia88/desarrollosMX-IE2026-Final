@@ -4153,7 +4153,8 @@
       "search": "Search",
       "cmdk": "Search shortcut",
       "notifications": "Notifications, {count} unread",
-      "userAvatar": "Avatar of {name}"
+      "userAvatar": "Avatar of {name}",
+      "comingSoon": "Coming FASE 15"
     },
     "companyHeader": {
       "ariaLabel": "Company info: {name}",

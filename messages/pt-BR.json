@@ -4153,7 +4153,8 @@
       "search": "Buscar",
       "cmdk": "Atajo de búsqueda",
       "notifications": "Notificaciones, {count} sin leer",
-      "userAvatar": "Avatar de {name}"
+      "userAvatar": "Avatar de {name}",
+      "comingSoon": "Próximamente FASE 15"
     },
     "companyHeader": {
       "ariaLabel": "Información de la desarrolladora {name}",

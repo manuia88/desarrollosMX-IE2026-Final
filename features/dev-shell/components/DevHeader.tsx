@@ -59,26 +59,32 @@ export function DevHeader({ user, companyName, unreadCount = 0 }: DevHeaderProps
       <div className="flex items-center gap-3">
         <button
           type="button"
-          className="flex h-9 items-center gap-2 rounded-full px-3 text-xs"
+          disabled
+          aria-disabled="true"
+          className="flex h-9 cursor-not-allowed items-center gap-2 rounded-full px-3 text-xs opacity-60"
           style={{
             background: 'rgba(255,255,255,0.04)',
             border: '1px solid rgba(255,255,255,0.08)',
             color: 'var(--canon-cream-2)',
           }}
           aria-label={t('cmdk')}
+          title={t('comingSoon')}
         >
           <span aria-hidden="true">⌘K</span>
           <span>{t('search')}</span>
         </button>
         <button
           type="button"
-          className="relative flex h-9 w-9 items-center justify-center rounded-full"
+          disabled
+          aria-disabled="true"
+          className="relative flex h-9 w-9 cursor-not-allowed items-center justify-center rounded-full opacity-60"
           style={{
             background: 'rgba(255,255,255,0.04)',
             border: '1px solid rgba(255,255,255,0.08)',
             color: 'var(--canon-cream-2)',
           }}
           aria-label={t('notifications', { count: unreadCount })}
+          title={t('comingSoon')}
         >
           <span aria-hidden="true">●</span>
           {unreadCount > 0 ? (
