@@ -34,3 +34,4 @@ supabase/.temp/
 # Product audit input folder — gitignored (files pasados por founder para analysis)
 tmp/
 
+.claude/scheduled_tasks.lock
