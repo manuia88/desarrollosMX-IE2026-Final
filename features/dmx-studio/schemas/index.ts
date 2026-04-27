@@ -303,3 +303,146 @@ export const applyBrandingOverlayInput = z.object({
   branded: z.boolean(),
 });
 export type ApplyBrandingOverlayInput = z.infer<typeof applyBrandingOverlayInput>;
+
+// ================================================================
+// FASE 14.F.4 Sprint 3 — URL Import + Copy Pack + Time Machine + Health
+// ================================================================
+
+export const STUDIO_PORTAL_KEYS = [
+  'inmuebles24',
+  'lamudi',
+  'easybroker',
+  'vivanuncios',
+  'segundamano',
+  'propiedades_com',
+  'manual_url',
+  'unknown',
+] as const;
+export const studioPortalEnum = z.enum(STUDIO_PORTAL_KEYS);
+export type StudioPortal = z.infer<typeof studioPortalEnum>;
+
+export const STUDIO_URL_IMPORT_STATUS = [
+  'pending',
+  'scraping',
+  'completed',
+  'failed',
+  'blocked',
+  'manual_required',
+] as const;
+export const studioUrlImportStatusEnum = z.enum(STUDIO_URL_IMPORT_STATUS);
+export type StudioUrlImportStatus = z.infer<typeof studioUrlImportStatusEnum>;
+
+export const parseUrlInput = z.object({
+  url: z.string().url().max(2000),
+});
+export type ParseUrlInput = z.infer<typeof parseUrlInput>;
+
+export const bulkParseUrlsInput = z.object({
+  urls: z.array(z.string().url().max(2000)).min(1).max(10),
+});
+export type BulkParseUrlsInput = z.infer<typeof bulkParseUrlsInput>;
+
+export const urlImportStatusInput = z.object({
+  batchId: z.string().uuid(),
+});
+export type UrlImportStatusInput = z.infer<typeof urlImportStatusInput>;
+
+export const urlImportPreviewInput = z.object({
+  importId: z.string().uuid(),
+});
+export type UrlImportPreviewInput = z.infer<typeof urlImportPreviewInput>;
+
+export const confirmUrlImportInput = z.object({
+  importId: z.string().uuid(),
+  title: z.string().trim().min(3).max(180).optional(),
+  overrides: z
+    .object({
+      price: z.number().nonnegative().nullable().optional(),
+      areaM2: z.number().positive().nullable().optional(),
+      bedrooms: z.number().int().nonnegative().nullable().optional(),
+      bathrooms: z.number().nonnegative().nullable().optional(),
+      zone: z.string().trim().max(120).optional(),
+    })
+    .optional(),
+});
+export type ConfirmUrlImportInput = z.infer<typeof confirmUrlImportInput>;
+
+export const STUDIO_COPY_TONES = ['formal', 'cercano', 'aspiracional', 'original'] as const;
+export const studioCopyToneEnum = z.enum(STUDIO_COPY_TONES);
+export type StudioCopyTone = z.infer<typeof studioCopyToneEnum>;
+
+export const STUDIO_COPY_CHANNELS = [
+  'instagram_caption',
+  'tiktok_caption',
+  'wa_message',
+  'email_subject',
+  'email_body',
+  'portal_listing',
+  'narration_script',
+  'hashtags',
+  'blog_post',
+  'video_title',
+] as const;
+export const studioCopyChannelEnum = z.enum(STUDIO_COPY_CHANNELS);
+export type StudioCopyChannel = z.infer<typeof studioCopyChannelEnum>;
+
+export const generateCopyPackInput = z.object({
+  projectId: z.string().uuid(),
+});
+export type GenerateCopyPackInput = z.infer<typeof generateCopyPackInput>;
+
+export const getCopyPackByProjectInput = z.object({
+  projectId: z.string().uuid(),
+});
+
+export const regenerateCopyOutputInput = z.object({
+  copyOutputId: z.string().uuid(),
+});
+export type RegenerateCopyOutputInput = z.infer<typeof regenerateCopyOutputInput>;
+
+export const getCopyVariationsInput = z.object({
+  copyOutputId: z.string().uuid(),
+});
+
+export const selectCopyVariationInput = z.object({
+  copyOutputId: z.string().uuid(),
+  versionId: z.string().uuid(),
+});
+export type SelectCopyVariationInput = z.infer<typeof selectCopyVariationInput>;
+
+export const listCopyVersionsInput = z.object({
+  copyOutputId: z.string().uuid(),
+  limit: z.number().int().min(1).max(50).default(20),
+});
+
+export const rollbackCopyVersionInput = z.object({
+  copyOutputId: z.string().uuid(),
+  versionId: z.string().uuid(),
+});
+
+export const compareCopyVersionsInput = z.object({
+  versionIdA: z.string().uuid(),
+  versionIdB: z.string().uuid(),
+});
+
+export const analyzeListingHealthInput = z.object({
+  importId: z.string().uuid(),
+});
+
+export const getListingHealthByImportInput = z.object({
+  importId: z.string().uuid(),
+});
+
+export const analyzeCompetitionInput = z.object({
+  projectId: z.string().uuid(),
+});
+export type AnalyzeCompetitionInput = z.infer<typeof analyzeCompetitionInput>;
+
+export const importFromCaptacionInput = z.object({
+  captacionId: z.string().uuid(),
+});
+export type ImportFromCaptacionInput = z.infer<typeof importFromCaptacionInput>;
+
+export const findMatchingBusquedasInput = z.object({
+  projectId: z.string().uuid(),
+});

@@ -16084,6 +16084,70 @@ export type Database = {
           },
         ]
       }
+      studio_copy_versions: {
+        Row: {
+          ai_model: string | null
+          content: string
+          copy_output_id: string
+          cost_usd: number | null
+          id: string
+          is_current: boolean
+          meta: Json
+          regenerated_at: string
+          regenerated_by: string | null
+          tone: string
+          version_number: number
+        }
+        Insert: {
+          ai_model?: string | null
+          content: string
+          copy_output_id: string
+          cost_usd?: number | null
+          id?: string
+          is_current?: boolean
+          meta?: Json
+          regenerated_at?: string
+          regenerated_by?: string | null
+          tone: string
+          version_number: number
+        }
+        Update: {
+          ai_model?: string | null
+          content?: string
+          copy_output_id?: string
+          cost_usd?: number | null
+          id?: string
+          is_current?: boolean
+          meta?: Json
+          regenerated_at?: string
+          regenerated_by?: string | null
+          tone?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_copy_versions_copy_output_id_fkey"
+            columns: ["copy_output_id"]
+            isOneToOne: false
+            referencedRelation: "studio_copy_outputs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_copy_versions_regenerated_by_fkey"
+            columns: ["regenerated_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_copy_versions_regenerated_by_fkey"
+            columns: ["regenerated_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_drone_simulations: {
         Row: {
           altitude_m: number | null
@@ -16231,6 +16295,53 @@ export type Database = {
           },
         ]
       }
+      studio_listing_health_scores: {
+        Row: {
+          calculated_at: string
+          id: string
+          improvement_suggestions: Json
+          missing_fields: Json
+          score_description_length: number
+          score_metadata_quality: number
+          score_missing_fields: number
+          score_overall: number
+          score_photos_count: number
+          url_import_id: string
+        }
+        Insert: {
+          calculated_at?: string
+          id?: string
+          improvement_suggestions?: Json
+          missing_fields?: Json
+          score_description_length: number
+          score_metadata_quality: number
+          score_missing_fields: number
+          score_overall: number
+          score_photos_count: number
+          url_import_id: string
+        }
+        Update: {
+          calculated_at?: string
+          id?: string
+          improvement_suggestions?: Json
+          missing_fields?: Json
+          score_description_length?: number
+          score_metadata_quality?: number
+          score_missing_fields?: number
+          score_overall?: number
+          score_photos_count?: number
+          url_import_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_listing_health_scores_url_import_id_fkey"
+            columns: ["url_import_id"]
+            isOneToOne: true
+            referencedRelation: "studio_portal_imports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_music_tracks: {
         Row: {
           bpm: number | null
@@ -16359,46 +16470,67 @@ export type Database = {
       }
       studio_portal_imports: {
         Row: {
+          area_extracted: number | null
+          bedrooms_extracted: number | null
+          bulk_batch_id: string | null
           created_at: string
           error_message: string | null
           id: string
           is_stub: boolean
           meta: Json
+          photos_extracted: number
+          price_extracted: number | null
           project_id: string | null
+          retry_count: number
           scrape_status: string
           scraped_data: Json
           source_portal: string
           source_url: string
           updated_at: string
           user_id: string
+          zone_extracted: string | null
         }
         Insert: {
+          area_extracted?: number | null
+          bedrooms_extracted?: number | null
+          bulk_batch_id?: string | null
           created_at?: string
           error_message?: string | null
           id?: string
           is_stub?: boolean
           meta?: Json
+          photos_extracted?: number
+          price_extracted?: number | null
           project_id?: string | null
+          retry_count?: number
           scrape_status?: string
           scraped_data?: Json
           source_portal: string
           source_url: string
           updated_at?: string
           user_id: string
+          zone_extracted?: string | null
         }
         Update: {
+          area_extracted?: number | null
+          bedrooms_extracted?: number | null
+          bulk_batch_id?: string | null
           created_at?: string
           error_message?: string | null
           id?: string
           is_stub?: boolean
           meta?: Json
+          photos_extracted?: number
+          price_extracted?: number | null
           project_id?: string | null
+          retry_count?: number
           scrape_status?: string
           scraped_data?: Json
           source_portal?: string
           source_url?: string
           updated_at?: string
           user_id?: string
+          zone_extracted?: string | null
         }
         Relationships: [
           {

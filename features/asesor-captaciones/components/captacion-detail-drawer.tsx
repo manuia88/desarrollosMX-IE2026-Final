@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, useEffect, useRef, useState } from 'react';
 import { DisclosurePill } from '@/shared/ui/primitives/canon';
@@ -31,6 +32,7 @@ export function CaptacionDetailDrawer({ detail }: CaptacionDetailDrawerProps) {
   const [editOpen, setEditOpen] = useState(false);
   const [closeDialogOpen, setCloseDialogOpen] = useState(false);
   const acmCompute = useAcmCompute();
+  const router = useRouter();
 
   useEffect(() => {
     if (isOpen) closeRef.current?.focus();
@@ -147,6 +149,12 @@ export function CaptacionDetailDrawer({ detail }: CaptacionDetailDrawerProps) {
 
   const handleRunAcm = () => {
     acmCompute.mutate({ id: detail.id });
+  };
+
+  // FASE 14.F.4 Sprint 3 — UPGRADE 8 LATERAL: Generar Studio video desde captación.
+  // Pre-fill flow handled por importFromCaptacion lib en server-side.
+  const handleGenerateStudio = () => {
+    router.push(`/studio-app/projects/new?captacionId=${encodeURIComponent(detail.id)}`);
   };
 
   return (
@@ -277,6 +285,27 @@ export function CaptacionDetailDrawer({ detail }: CaptacionDetailDrawerProps) {
                   }}
                 >
                   {t('closeCaptacion')}
+                </button>
+              ) : null}
+              {!isClosed ? (
+                <button
+                  type="button"
+                  onClick={handleGenerateStudio}
+                  aria-label={t('generateStudioAria')}
+                  data-testid="captacion-generate-studio"
+                  style={{
+                    padding: '10px 18px',
+                    borderRadius: 'var(--canon-radius-pill)',
+                    background: 'var(--gradient-ai, linear-gradient(90deg, #6366F1, #EC4899))',
+                    border: 'none',
+                    color: '#fff',
+                    fontFamily: 'var(--font-body)',
+                    fontWeight: 700,
+                    fontSize: 13,
+                    cursor: 'pointer',
+                  }}
+                >
+                  {t('generateStudio')}
                 </button>
               ) : null}
             </div>

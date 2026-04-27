@@ -291,6 +291,7 @@ export function TrustScoreDrawer({
 
           <section style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {/* TODO L-NEW-STUDIO-TRUST-BOOST F14.F.2+: mention +5 pts cuando studio_video_projects published >= 1 */}
+            {/* FASE 14.F.4 Sprint 3 EXTEND L-NEW-STUDIO-TRUST-BOOST: agregar entry "Studio Copy Pack uso = +2 pts adicional doc_transparency" cuando calculateStudioCopyPackBonus retorna 2. Lib en features/dmx-studio/lib/cross-functions/trust-score-boost.ts. Activación cron H2 escribe breakdown.studio_copy_pack_signal. UI: agregar item en improvements list cuando boost > 0 — usa key i18n dev.trustScore.improvements.studioCopyPackBonus. */}
             <h3 style={sectionTitleStyle}>{t('improvements.title')}</h3>
             {trustScore && trustScore.improvements.length > 0 ? (
               <ul
