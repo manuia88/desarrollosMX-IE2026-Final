@@ -15836,12 +15836,17 @@ export type Database = {
           contact_phone: string | null
           created_at: string
           display_name: string | null
+          font_preference: string | null
           id: string
+          intro_text: string | null
           is_default: boolean
           logo_url: string | null
           meta: Json
           organization_id: string | null
+          outro_text: string | null
+          preview_storage_path: string | null
           primary_color: string | null
+          secondary_color: string | null
           social_links: Json
           tagline: string | null
           tone: string
@@ -15857,12 +15862,17 @@ export type Database = {
           contact_phone?: string | null
           created_at?: string
           display_name?: string | null
+          font_preference?: string | null
           id?: string
+          intro_text?: string | null
           is_default?: boolean
           logo_url?: string | null
           meta?: Json
           organization_id?: string | null
+          outro_text?: string | null
+          preview_storage_path?: string | null
           primary_color?: string | null
+          secondary_color?: string | null
           social_links?: Json
           tagline?: string | null
           tone?: string
@@ -15878,12 +15888,17 @@ export type Database = {
           contact_phone?: string | null
           created_at?: string
           display_name?: string | null
+          font_preference?: string | null
           id?: string
+          intro_text?: string | null
           is_default?: boolean
           logo_url?: string | null
           meta?: Json
           organization_id?: string | null
+          outro_text?: string | null
+          preview_storage_path?: string | null
           primary_color?: string | null
+          secondary_color?: string | null
           social_links?: Json
           tagline?: string | null
           tone?: string
@@ -16695,6 +16710,7 @@ export type Database = {
           period_month: string
           project_id: string | null
           subscription_id: string | null
+          threshold_warning_sent: boolean
           user_id: string
         }
         Insert: {
@@ -16709,6 +16725,7 @@ export type Database = {
           period_month: string
           project_id?: string | null
           subscription_id?: string | null
+          threshold_warning_sent?: boolean
           user_id: string
         }
         Update: {
@@ -16723,6 +16740,7 @@ export type Database = {
           period_month?: string
           project_id?: string | null
           subscription_id?: string | null
+          threshold_warning_sent?: boolean
           user_id?: string
         }
         Relationships: [
@@ -16921,8 +16939,11 @@ export type Database = {
           created_at: string
           duration_seconds: number | null
           format: string
+          has_beat_sync: boolean
+          has_branding_overlay: boolean
           hook_variant: string
           id: string
+          is_branded: boolean
           meta: Json
           project_id: string
           render_cost_usd: number | null
@@ -16939,8 +16960,11 @@ export type Database = {
           created_at?: string
           duration_seconds?: number | null
           format: string
+          has_beat_sync?: boolean
+          has_branding_overlay?: boolean
           hook_variant: string
           id?: string
+          is_branded?: boolean
           meta?: Json
           project_id: string
           render_cost_usd?: number | null
@@ -16957,8 +16981,11 @@ export type Database = {
           created_at?: string
           duration_seconds?: number | null
           format?: string
+          has_beat_sync?: boolean
+          has_branding_overlay?: boolean
           hook_variant?: string
           id?: string
+          is_branded?: boolean
           meta?: Json
           project_id?: string
           render_cost_usd?: number | null
