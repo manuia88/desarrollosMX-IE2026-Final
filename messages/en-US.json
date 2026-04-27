@@ -2659,6 +2659,14 @@
         "cta": "View matches"
       },
       "ctaPending": "Coming soon — wiring lands in next phase"
+    },
+    "studioBanner": {
+      "aria": "DMX Studio promotion",
+      "badge": "Coming soon",
+      "title": "Coming soon: DMX Studio",
+      "subtitle": "Create your first AI real estate video in 60 seconds.",
+      "cta": "Join the waitlist",
+      "ctaAria": "Join the DMX Studio waitlist"
     }
   },
   "AsesorBusquedas": {
@@ -4268,6 +4276,181 @@
         "contrato": "Contract",
         "otro": "Other"
       }
+    }
+  },
+  "Studio": {
+    "meta": {
+      "title": "DMX Studio — Real estate videos in 60 seconds",
+      "description": "Your real estate marketing agency, on autopilot. Voice clone, virtual staging, photo classification and AI videos in minutes. Founders cohort: lifetime 30% off."
+    },
+    "nav": {
+      "brand": "DMX Studio",
+      "ariaLabel": "DMX Studio navigation",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "waitlist": "Join waitlist",
+      "localeSwitch": "Language"
+    },
+    "hero": {
+      "eyebrow": "Sprint 0 — Pre-launch Q3 2026",
+      "title": "Your real estate marketing agency, on autopilot",
+      "subtitle": "Generate social videos, narration with your own voice, classified photos and virtual staging. No creative team, no editing, no friction.",
+      "ctaWaitlist": "Join the waitlist",
+      "ctaDemos": "See demos",
+      "ctaPricing": "View pricing",
+      "disclosureLabel": "Synthetic data",
+      "demosPlaceholderLabel": "Demos in production"
+    },
+    "trustSignals": {
+      "sectionLabel": "Traction signals",
+      "title": "Built with real agents",
+      "subtitle": "Live metrics from the DMX Studio waitlist.",
+      "waitlistLabel": "On waitlist",
+      "asesoresLabel": "Active agents on DMX",
+      "foundersLabel": "Founder seats remaining",
+      "foundersOf": "of 50",
+      "previewLabel": "Studio preview",
+      "preview1Title": "60 sec AI video",
+      "preview1Caption": "Kling render + ElevenLabs voice",
+      "preview2Title": "50 classified photos",
+      "preview2Caption": "Living / kitchen / facade with Vision AI",
+      "preview3Title": "Virtual staging",
+      "preview3Caption": "Empty room → editorial in 1 click",
+      "disclosureLabel": "Synthetic preview"
+    },
+    "founders": {
+      "sectionLabel": "Founders cohort",
+      "badgeAvailable": "Join the first 50 = Studio Founder + 30% lifetime off",
+      "badgeFull": "Cohort full — Join the next wave",
+      "remainingPrefix": "Only",
+      "remainingSuffix": "seats left",
+      "perksTitle": "What founders cohort includes",
+      "perks": {
+        "lifetime": "30% lifetime discount on any plan",
+        "earlyAccess": "Early access July 2026 (before public launch)",
+        "badge": "Studio Founder badge visible in your agent portal",
+        "input": "Direct voice into the H2 features roadmap"
+      },
+      "ctaJoin": "Reserve my founder seat",
+      "ctaWaitlist": "Join the waitlist",
+      "disclosureLabel": "Cohort placeholder"
+    },
+    "pricing": {
+      "sectionLabel": "Plans and pricing",
+      "title": "A plan for every workflow",
+      "subtitle": "Cancel anytime. No penalty.",
+      "toggleMonthly": "Monthly",
+      "toggleAnnual": "Annual",
+      "annualSavingsLabel": "Save 20%",
+      "popularBadge": "MOST POPULAR",
+      "perMonth": "/ mo",
+      "billedAnnually": "billed annually",
+      "ctaStart": "Get started",
+      "ctaProcessing": "Processing…",
+      "foundersCallout": "Founders cohort: 30% lifetime off",
+      "currencyPrefix": "USD ",
+      "disclosureLabel": "Pre-launch pricing",
+      "plans": {
+        "pro": {
+          "name": "Studio Pro",
+          "tagline": "For solo agents posting weekly",
+          "features": {
+            "f1": "1 AI video / month (60 sec)",
+            "f2": "ElevenLabs voice narration",
+            "f3": "3 alternative copy hooks",
+            "f4": "Basic copy pack (caption + hashtags)",
+            "f5": "DMX branding on each video",
+            "f6": "Chat support 48h"
+          }
+        },
+        "foto": {
+          "name": "Studio Foto",
+          "tagline": "Photographers and agencies with high photo volume",
+          "features": {
+            "f1": "50 classified photos / month",
+            "f2": "No branding (white-label)",
+            "f3": "ElevenLabs voice narration",
+            "f4": "Basic copy pack",
+            "f5": "Vision AI auto-tag (living, kitchen, facade…)",
+            "f6": "Priority support 24h"
+          }
+        },
+        "agency": {
+          "name": "Studio Agency",
+          "tagline": "Agency teams with branded production",
+          "features": {
+            "f1": "20 AI videos / month",
+            "f2": "Voice clone of your personal voice",
+            "f3": "Virtual staging included",
+            "f4": "Full copy pack (caption + email + WhatsApp)",
+            "f5": "Series mode (3 cohesive videos)",
+            "f6": "Multi-user (5 seats)",
+            "f7": "Dedicated founder support line"
+          }
+        }
+      }
+    },
+    "faq": {
+      "sectionLabel": "Frequently asked",
+      "title": "Frequently asked questions",
+      "subtitle": "What agents and agencies typically ask before signing up.",
+      "items": {
+        "q1": {
+          "q": "What does Studio include?",
+          "a": "Pro: 1 AI video/month with ElevenLabs voice. Foto: 50 classified photos/month with Vision AI. Agency: 20 AI videos/month + voice clone + virtual staging + 5 seats."
+        },
+        "q2": {
+          "q": "When does Studio launch?",
+          "a": "Q3 2026 to the public. Founders cohort gets early access in July 2026, before the public launch."
+        },
+        "q3": {
+          "q": "Do I need to be a DMX agent to use Studio?",
+          "a": "No. Studio is open to any real estate agent, photographer or agency in Mexico. If you already have a DMX account, it connects to your agent portal automatically."
+        },
+        "q4": {
+          "q": "How does voice clone work?",
+          "a": "You record 30 seconds reading a standard script. ElevenLabs trains your personal voice and uses it to narrate all your videos automatically. Available on Agency plan."
+        },
+        "q5": {
+          "q": "Can I cancel anytime?",
+          "a": "Yes. Immediate cancellation, no penalty or minimum term. Access continues until the end of the billed cycle."
+        },
+        "q6": {
+          "q": "What about my data and my clients' data?",
+          "a": "LFPDPPP Mexico privacy compliance. Explicit opt-in for each image use. Data stored on DMX infrastructure with encryption at rest and per-user RLS."
+        },
+        "q7": {
+          "q": "Does it work in other countries?",
+          "a": "H1 (2026) Mexico only. H2 expansion to Colombia, Argentina and Brazil. Infrastructure already supports multi-country, but support and catalogue activate progressively."
+        },
+        "q8": {
+          "q": "Does it integrate with Inmuebles24, Lamudi or Vivanuncios?",
+          "a": "In Sprint 3 of the roadmap (BIBLIA v4). Auto-publishing to portals scheduled for Q4 2026 subject to API availability."
+        },
+        "q9": {
+          "q": "How much does producing 1 video cost?",
+          "a": "AI production cost (Kling, ElevenLabs, etc.) is covered in your plan. No extras per video within your monthly quota."
+        },
+        "q10": {
+          "q": "What is founders cohort?",
+          "a": "The first 50 subscribers receive 30% lifetime discount on their plan, Studio Founder badge and direct voice on the roadmap. Limited seats — once full, closed forever."
+        }
+      }
+    },
+    "footer": {
+      "tagline": "DMX Studio — part of DesarrollosMX",
+      "linkPrivacy": "Privacy",
+      "linkTerms": "Terms",
+      "linkContact": "Contact",
+      "copyright": "DesarrollosMX 2026. All rights reserved.",
+      "disclosureLabel": "Sprint 0 pre-launch"
+    },
+    "stubs": {
+      "demosNote": "Demos in preparation — available Sprint 1"
+    },
+    "errors": {
+      "checkoutFailed": "We couldn't start checkout. Try again or write to us.",
+      "metricsFallback": "Metrics syncing"
     }
   }
 }

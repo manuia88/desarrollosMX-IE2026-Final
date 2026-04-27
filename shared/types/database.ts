@@ -15740,6 +15740,1665 @@ export type Database = {
           },
         ]
       }
+      studio_api_jobs: {
+        Row: {
+          actual_cost_usd: number | null
+          attempt_count: number
+          completed_at: string | null
+          created_at: string
+          error_message: string | null
+          estimated_cost_usd: number | null
+          external_job_id: string | null
+          id: string
+          input_payload: Json
+          job_type: string
+          max_attempts: number
+          meta: Json
+          output_payload: Json
+          project_id: string | null
+          provider: string
+          started_at: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          actual_cost_usd?: number | null
+          attempt_count?: number
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          estimated_cost_usd?: number | null
+          external_job_id?: string | null
+          id?: string
+          input_payload?: Json
+          job_type: string
+          max_attempts?: number
+          meta?: Json
+          output_payload?: Json
+          project_id?: string | null
+          provider: string
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          actual_cost_usd?: number | null
+          attempt_count?: number
+          completed_at?: string | null
+          created_at?: string
+          error_message?: string | null
+          estimated_cost_usd?: number | null
+          external_job_id?: string | null
+          id?: string
+          input_payload?: Json
+          job_type?: string
+          max_attempts?: number
+          meta?: Json
+          output_payload?: Json
+          project_id?: string | null
+          provider?: string
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_api_jobs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_api_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_api_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_brand_kits: {
+        Row: {
+          accent_color: string | null
+          cities: string[]
+          contact_email: string | null
+          contact_phone: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          is_default: boolean
+          logo_url: string | null
+          meta: Json
+          organization_id: string | null
+          primary_color: string | null
+          social_links: Json
+          tagline: string | null
+          tone: string
+          updated_at: string
+          user_id: string
+          watermark_url: string | null
+          zones: string[]
+        }
+        Insert: {
+          accent_color?: string | null
+          cities?: string[]
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          is_default?: boolean
+          logo_url?: string | null
+          meta?: Json
+          organization_id?: string | null
+          primary_color?: string | null
+          social_links?: Json
+          tagline?: string | null
+          tone?: string
+          updated_at?: string
+          user_id: string
+          watermark_url?: string | null
+          zones?: string[]
+        }
+        Update: {
+          accent_color?: string | null
+          cities?: string[]
+          contact_email?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          is_default?: boolean
+          logo_url?: string | null
+          meta?: Json
+          organization_id?: string | null
+          primary_color?: string | null
+          social_links?: Json
+          tagline?: string | null
+          tone?: string
+          updated_at?: string
+          user_id?: string
+          watermark_url?: string | null
+          zones?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_brand_kits_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_brand_kits_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_brand_kits_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_content_calendar: {
+        Row: {
+          ai_generated: boolean
+          channel: string
+          content_type: string
+          created_at: string
+          id: string
+          meta: Json
+          notes: string | null
+          organization_id: string | null
+          project_id: string | null
+          scheduled_for: string
+          scheduled_time: string | null
+          status: string
+          topic: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          ai_generated?: boolean
+          channel: string
+          content_type: string
+          created_at?: string
+          id?: string
+          meta?: Json
+          notes?: string | null
+          organization_id?: string | null
+          project_id?: string | null
+          scheduled_for: string
+          scheduled_time?: string | null
+          status?: string
+          topic?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          ai_generated?: boolean
+          channel?: string
+          content_type?: string
+          created_at?: string
+          id?: string
+          meta?: Json
+          notes?: string | null
+          organization_id?: string | null
+          project_id?: string | null
+          scheduled_for?: string
+          scheduled_time?: string | null
+          status?: string
+          topic?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_content_calendar_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_content_calendar_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_content_calendar_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_content_calendar_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_copy_outputs: {
+        Row: {
+          ai_cost_usd: number | null
+          ai_model: string | null
+          channel: string
+          content: string
+          created_at: string
+          id: string
+          language: string
+          meta: Json
+          project_id: string
+          selected_by_user: boolean
+          updated_at: string
+          user_id: string
+          variants: Json
+        }
+        Insert: {
+          ai_cost_usd?: number | null
+          ai_model?: string | null
+          channel: string
+          content: string
+          created_at?: string
+          id?: string
+          language?: string
+          meta?: Json
+          project_id: string
+          selected_by_user?: boolean
+          updated_at?: string
+          user_id: string
+          variants?: Json
+        }
+        Update: {
+          ai_cost_usd?: number | null
+          ai_model?: string | null
+          channel?: string
+          content?: string
+          created_at?: string
+          id?: string
+          language?: string
+          meta?: Json
+          project_id?: string
+          selected_by_user?: boolean
+          updated_at?: string
+          user_id?: string
+          variants?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_copy_outputs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_copy_outputs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_copy_outputs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_drone_simulations: {
+        Row: {
+          altitude_m: number | null
+          cost_usd: number | null
+          created_at: string
+          duration_seconds: number | null
+          id: string
+          is_stub: boolean
+          meta: Json
+          output_url: string | null
+          project_id: string
+          simulation_type: string
+          source_lat: number | null
+          source_lng: number | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          altitude_m?: number | null
+          cost_usd?: number | null
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          is_stub?: boolean
+          meta?: Json
+          output_url?: string | null
+          project_id: string
+          simulation_type?: string
+          source_lat?: number | null
+          source_lng?: number | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          altitude_m?: number | null
+          cost_usd?: number | null
+          created_at?: string
+          duration_seconds?: number | null
+          id?: string
+          is_stub?: boolean
+          meta?: Json
+          output_url?: string | null
+          project_id?: string
+          simulation_type?: string
+          source_lat?: number | null
+          source_lng?: number | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_drone_simulations_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_drone_simulations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_drone_simulations_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_feedback: {
+        Row: {
+          comments: string | null
+          created_at: string
+          id: string
+          meta: Json
+          preferred_format: string | null
+          project_id: string
+          rating: number | null
+          selected_hook: string | null
+          selected_output_id: string | null
+          user_id: string
+          would_recommend: boolean | null
+        }
+        Insert: {
+          comments?: string | null
+          created_at?: string
+          id?: string
+          meta?: Json
+          preferred_format?: string | null
+          project_id: string
+          rating?: number | null
+          selected_hook?: string | null
+          selected_output_id?: string | null
+          user_id: string
+          would_recommend?: boolean | null
+        }
+        Update: {
+          comments?: string | null
+          created_at?: string
+          id?: string
+          meta?: Json
+          preferred_format?: string | null
+          project_id?: string
+          rating?: number | null
+          selected_hook?: string | null
+          selected_output_id?: string | null
+          user_id?: string
+          would_recommend?: boolean | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_feedback_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_feedback_selected_output_id_fkey"
+            columns: ["selected_output_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_outputs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_feedback_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_feedback_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_music_tracks: {
+        Row: {
+          bpm: number | null
+          created_at: string
+          duration_seconds: number | null
+          external_id: string | null
+          full_url: string | null
+          genre: string | null
+          id: string
+          is_active: boolean
+          is_premium: boolean
+          meta: Json
+          mood: string | null
+          name: string
+          preview_url: string | null
+          provider: string
+          updated_at: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          bpm?: number | null
+          created_at?: string
+          duration_seconds?: number | null
+          external_id?: string | null
+          full_url?: string | null
+          genre?: string | null
+          id?: string
+          is_active?: boolean
+          is_premium?: boolean
+          meta?: Json
+          mood?: string | null
+          name: string
+          preview_url?: string | null
+          provider?: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          bpm?: number | null
+          created_at?: string
+          duration_seconds?: number | null
+          external_id?: string | null
+          full_url?: string | null
+          genre?: string | null
+          id?: string
+          is_active?: boolean
+          is_premium?: boolean
+          meta?: Json
+          mood?: string | null
+          name?: string
+          preview_url?: string | null
+          provider?: string
+          updated_at?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_music_tracks_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_music_tracks_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_organizations: {
+        Row: {
+          created_at: string
+          id: string
+          meta: Json
+          name: string
+          owner_user_id: string
+          plan_key: string
+          seats_total: number
+          seats_used: number
+          slug: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          meta?: Json
+          name: string
+          owner_user_id: string
+          plan_key?: string
+          seats_total?: number
+          seats_used?: number
+          slug?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          meta?: Json
+          name?: string
+          owner_user_id?: string
+          plan_key?: string
+          seats_total?: number
+          seats_used?: number
+          slug?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_organizations_owner_user_id_fkey"
+            columns: ["owner_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_organizations_owner_user_id_fkey"
+            columns: ["owner_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_portal_imports: {
+        Row: {
+          created_at: string
+          error_message: string | null
+          id: string
+          is_stub: boolean
+          meta: Json
+          project_id: string | null
+          scrape_status: string
+          scraped_data: Json
+          source_portal: string
+          source_url: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          is_stub?: boolean
+          meta?: Json
+          project_id?: string | null
+          scrape_status?: string
+          scraped_data?: Json
+          source_portal: string
+          source_url: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          error_message?: string | null
+          id?: string
+          is_stub?: boolean
+          meta?: Json
+          project_id?: string | null
+          scrape_status?: string
+          scraped_data?: Json
+          source_portal?: string
+          source_url?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_portal_imports_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_portal_imports_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_portal_imports_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_public_galleries: {
+        Row: {
+          bio: string | null
+          cover_image_url: string | null
+          created_at: string
+          featured_video_ids: string[]
+          id: string
+          is_active: boolean
+          meta: Json
+          organization_id: string | null
+          slug: string
+          title: string
+          updated_at: string
+          user_id: string
+          view_count: number
+        }
+        Insert: {
+          bio?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          featured_video_ids?: string[]
+          id?: string
+          is_active?: boolean
+          meta?: Json
+          organization_id?: string | null
+          slug: string
+          title: string
+          updated_at?: string
+          user_id: string
+          view_count?: number
+        }
+        Update: {
+          bio?: string | null
+          cover_image_url?: string | null
+          created_at?: string
+          featured_video_ids?: string[]
+          id?: string
+          is_active?: boolean
+          meta?: Json
+          organization_id?: string | null
+          slug?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+          view_count?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_public_galleries_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_public_galleries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_public_galleries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_series_projects: {
+        Row: {
+          cover_image_url: string | null
+          created_at: string
+          episode_project_ids: string[]
+          episodes_count: number
+          id: string
+          meta: Json
+          organization_id: string | null
+          series_type: string
+          status: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cover_image_url?: string | null
+          created_at?: string
+          episode_project_ids?: string[]
+          episodes_count?: number
+          id?: string
+          meta?: Json
+          organization_id?: string | null
+          series_type?: string
+          status?: string
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cover_image_url?: string | null
+          created_at?: string
+          episode_project_ids?: string[]
+          episodes_count?: number
+          id?: string
+          meta?: Json
+          organization_id?: string | null
+          series_type?: string
+          status?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_series_projects_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_series_projects_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_series_projects_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_style_templates: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          is_active: boolean
+          is_premium: boolean
+          key: string
+          meta: Json
+          music_mood: string | null
+          name: string
+          pacing: string
+          preview_url: string | null
+          tone: string
+          updated_at: string
+          visual_treatment: Json
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_premium?: boolean
+          key: string
+          meta?: Json
+          music_mood?: string | null
+          name: string
+          pacing?: string
+          preview_url?: string | null
+          tone: string
+          updated_at?: string
+          visual_treatment?: Json
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          is_premium?: boolean
+          key?: string
+          meta?: Json
+          music_mood?: string | null
+          name?: string
+          pacing?: string
+          preview_url?: string | null
+          tone?: string
+          updated_at?: string
+          visual_treatment?: Json
+        }
+        Relationships: []
+      }
+      studio_subscriptions: {
+        Row: {
+          cancel_at_period_end: boolean
+          created_at: string
+          current_period_end: string | null
+          current_period_start: string | null
+          founders_cohort: boolean
+          founders_discount_pct: number
+          id: string
+          meta: Json
+          organization_id: string | null
+          plan_key: string
+          status: string
+          stripe_customer_id: string | null
+          stripe_price_id: string
+          stripe_subscription_id: string | null
+          updated_at: string
+          user_id: string
+          videos_per_month_limit: number
+          videos_used_this_period: number
+        }
+        Insert: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          founders_cohort?: boolean
+          founders_discount_pct?: number
+          id?: string
+          meta?: Json
+          organization_id?: string | null
+          plan_key: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_price_id: string
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id: string
+          videos_per_month_limit?: number
+          videos_used_this_period?: number
+        }
+        Update: {
+          cancel_at_period_end?: boolean
+          created_at?: string
+          current_period_end?: string | null
+          current_period_start?: string | null
+          founders_cohort?: boolean
+          founders_discount_pct?: number
+          id?: string
+          meta?: Json
+          organization_id?: string | null
+          plan_key?: string
+          status?: string
+          stripe_customer_id?: string | null
+          stripe_price_id?: string
+          stripe_subscription_id?: string | null
+          updated_at?: string
+          user_id?: string
+          videos_per_month_limit?: number
+          videos_used_this_period?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_subscriptions_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_subscriptions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_usage_logs: {
+        Row: {
+          api_job_id: string | null
+          cost_usd: number
+          created_at: string
+          id: string
+          meta: Json
+          metric_amount: number
+          metric_type: string
+          organization_id: string | null
+          period_month: string
+          project_id: string | null
+          subscription_id: string | null
+          user_id: string
+        }
+        Insert: {
+          api_job_id?: string | null
+          cost_usd?: number
+          created_at?: string
+          id?: string
+          meta?: Json
+          metric_amount?: number
+          metric_type: string
+          organization_id?: string | null
+          period_month: string
+          project_id?: string | null
+          subscription_id?: string | null
+          user_id: string
+        }
+        Update: {
+          api_job_id?: string | null
+          cost_usd?: number
+          created_at?: string
+          id?: string
+          meta?: Json
+          metric_amount?: number
+          metric_type?: string
+          organization_id?: string | null
+          period_month?: string
+          project_id?: string | null
+          subscription_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_usage_logs_api_job_id_fkey"
+            columns: ["api_job_id"]
+            isOneToOne: false
+            referencedRelation: "studio_api_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_usage_logs_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_usage_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_usage_logs_subscription_id_fkey"
+            columns: ["subscription_id"]
+            isOneToOne: false
+            referencedRelation: "studio_subscriptions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_usage_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_usage_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_users_extension: {
+        Row: {
+          brand_kit_completed: boolean
+          created_at: string
+          first_video_generated_at: string | null
+          meta: Json
+          onboarding_completed: boolean
+          onboarding_step: string | null
+          organization_id: string | null
+          studio_role: string
+          updated_at: string
+          user_id: string
+          voice_clone_completed: boolean
+        }
+        Insert: {
+          brand_kit_completed?: boolean
+          created_at?: string
+          first_video_generated_at?: string | null
+          meta?: Json
+          onboarding_completed?: boolean
+          onboarding_step?: string | null
+          organization_id?: string | null
+          studio_role?: string
+          updated_at?: string
+          user_id: string
+          voice_clone_completed?: boolean
+        }
+        Update: {
+          brand_kit_completed?: boolean
+          created_at?: string
+          first_video_generated_at?: string | null
+          meta?: Json
+          onboarding_completed?: boolean
+          onboarding_step?: string | null
+          organization_id?: string | null
+          studio_role?: string
+          updated_at?: string
+          user_id?: string
+          voice_clone_completed?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_users_extension_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_users_extension_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_users_extension_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_video_assets: {
+        Row: {
+          ai_classification: Json
+          ai_quality_score: number | null
+          asset_type: string
+          created_at: string
+          duration_seconds: number | null
+          height: number | null
+          id: string
+          meta: Json
+          mime_type: string | null
+          order_index: number
+          project_id: string
+          size_bytes: number | null
+          storage_url: string
+          thumbnail_url: string | null
+          updated_at: string
+          user_id: string
+          width: number | null
+        }
+        Insert: {
+          ai_classification?: Json
+          ai_quality_score?: number | null
+          asset_type: string
+          created_at?: string
+          duration_seconds?: number | null
+          height?: number | null
+          id?: string
+          meta?: Json
+          mime_type?: string | null
+          order_index?: number
+          project_id: string
+          size_bytes?: number | null
+          storage_url: string
+          thumbnail_url?: string | null
+          updated_at?: string
+          user_id: string
+          width?: number | null
+        }
+        Update: {
+          ai_classification?: Json
+          ai_quality_score?: number | null
+          asset_type?: string
+          created_at?: string
+          duration_seconds?: number | null
+          height?: number | null
+          id?: string
+          meta?: Json
+          mime_type?: string | null
+          order_index?: number
+          project_id?: string
+          size_bytes?: number | null
+          storage_url?: string
+          thumbnail_url?: string | null
+          updated_at?: string
+          user_id?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_video_assets_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_assets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_assets_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_video_outputs: {
+        Row: {
+          created_at: string
+          duration_seconds: number | null
+          format: string
+          hook_variant: string
+          id: string
+          meta: Json
+          project_id: string
+          render_cost_usd: number | null
+          render_provider: string | null
+          render_status: string
+          selected_by_user: boolean
+          size_bytes: number | null
+          storage_url: string
+          thumbnail_url: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number | null
+          format: string
+          hook_variant: string
+          id?: string
+          meta?: Json
+          project_id: string
+          render_cost_usd?: number | null
+          render_provider?: string | null
+          render_status?: string
+          selected_by_user?: boolean
+          size_bytes?: number | null
+          storage_url: string
+          thumbnail_url?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number | null
+          format?: string
+          hook_variant?: string
+          id?: string
+          meta?: Json
+          project_id?: string
+          render_cost_usd?: number | null
+          render_provider?: string | null
+          render_status?: string
+          selected_by_user?: boolean
+          size_bytes?: number | null
+          storage_url?: string
+          thumbnail_url?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_video_outputs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_outputs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_outputs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_video_projects: {
+        Row: {
+          brand_kit_id: string | null
+          captacion_id: string | null
+          created_at: string
+          director_brief: Json
+          enable_ambient_audio: boolean
+          enable_avatar: boolean
+          enable_drone_sim: boolean
+          enable_remarketing: boolean
+          enable_virtual_staging: boolean
+          format_variants: Json
+          hook_variants_count: number
+          id: string
+          meta: Json
+          music_track_id: string | null
+          organization_id: string | null
+          project_type: string
+          proyecto_id: string | null
+          published_at: string | null
+          rendered_at: string | null
+          source_metadata: Json
+          status: string
+          style_template_id: string | null
+          title: string
+          unidad_id: string | null
+          updated_at: string
+          user_id: string
+          voice_clone_id: string | null
+        }
+        Insert: {
+          brand_kit_id?: string | null
+          captacion_id?: string | null
+          created_at?: string
+          director_brief?: Json
+          enable_ambient_audio?: boolean
+          enable_avatar?: boolean
+          enable_drone_sim?: boolean
+          enable_remarketing?: boolean
+          enable_virtual_staging?: boolean
+          format_variants?: Json
+          hook_variants_count?: number
+          id?: string
+          meta?: Json
+          music_track_id?: string | null
+          organization_id?: string | null
+          project_type?: string
+          proyecto_id?: string | null
+          published_at?: string | null
+          rendered_at?: string | null
+          source_metadata?: Json
+          status?: string
+          style_template_id?: string | null
+          title: string
+          unidad_id?: string | null
+          updated_at?: string
+          user_id: string
+          voice_clone_id?: string | null
+        }
+        Update: {
+          brand_kit_id?: string | null
+          captacion_id?: string | null
+          created_at?: string
+          director_brief?: Json
+          enable_ambient_audio?: boolean
+          enable_avatar?: boolean
+          enable_drone_sim?: boolean
+          enable_remarketing?: boolean
+          enable_virtual_staging?: boolean
+          format_variants?: Json
+          hook_variants_count?: number
+          id?: string
+          meta?: Json
+          music_track_id?: string | null
+          organization_id?: string | null
+          project_type?: string
+          proyecto_id?: string | null
+          published_at?: string | null
+          rendered_at?: string | null
+          source_metadata?: Json
+          status?: string
+          style_template_id?: string | null
+          title?: string
+          unidad_id?: string | null
+          updated_at?: string
+          user_id?: string
+          voice_clone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_video_projects_brand_kit_id_fkey"
+            columns: ["brand_kit_id"]
+            isOneToOne: false
+            referencedRelation: "studio_brand_kits"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_captacion_id_fkey"
+            columns: ["captacion_id"]
+            isOneToOne: false
+            referencedRelation: "captaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_music_track_id_fkey"
+            columns: ["music_track_id"]
+            isOneToOne: false
+            referencedRelation: "studio_music_tracks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_style_template_id_fkey"
+            columns: ["style_template_id"]
+            isOneToOne: false
+            referencedRelation: "studio_style_templates"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_unidad_id_fkey"
+            columns: ["unidad_id"]
+            isOneToOne: false
+            referencedRelation: "unidades"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_voice_clone_id_fkey"
+            columns: ["voice_clone_id"]
+            isOneToOne: false
+            referencedRelation: "studio_voice_clones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_virtual_staging_jobs: {
+        Row: {
+          cost_usd: number | null
+          created_at: string
+          id: string
+          is_stub: boolean
+          meta: Json
+          output_url: string | null
+          project_id: string
+          room_type: string | null
+          source_asset_id: string | null
+          staging_style: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cost_usd?: number | null
+          created_at?: string
+          id?: string
+          is_stub?: boolean
+          meta?: Json
+          output_url?: string | null
+          project_id: string
+          room_type?: string | null
+          source_asset_id?: string | null
+          staging_style?: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cost_usd?: number | null
+          created_at?: string
+          id?: string
+          is_stub?: boolean
+          meta?: Json
+          output_url?: string | null
+          project_id?: string
+          room_type?: string | null
+          source_asset_id?: string | null
+          staging_style?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_virtual_staging_jobs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_virtual_staging_jobs_source_asset_id_fkey"
+            columns: ["source_asset_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_assets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_virtual_staging_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_virtual_staging_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_voice_clones: {
+        Row: {
+          clone_type: string
+          consent_signed: boolean
+          consent_signed_at: string | null
+          created_at: string
+          elevenlabs_voice_id: string | null
+          id: string
+          language: string
+          meta: Json
+          name: string
+          organization_id: string | null
+          preview_url: string | null
+          source_audio_url: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          clone_type?: string
+          consent_signed?: boolean
+          consent_signed_at?: string | null
+          created_at?: string
+          elevenlabs_voice_id?: string | null
+          id?: string
+          language?: string
+          meta?: Json
+          name: string
+          organization_id?: string | null
+          preview_url?: string | null
+          source_audio_url?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          clone_type?: string
+          consent_signed?: boolean
+          consent_signed_at?: string | null
+          created_at?: string
+          elevenlabs_voice_id?: string | null
+          id?: string
+          language?: string
+          meta?: Json
+          name?: string
+          organization_id?: string | null
+          preview_url?: string | null
+          source_audio_url?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_voice_clones_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_voice_clones_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_voice_clones_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_waitlist: {
+        Row: {
+          city: string | null
+          converted_at: string | null
+          country_code: string | null
+          created_at: string
+          current_closed_deals_count: number | null
+          current_leads_count: number | null
+          current_user_id: string | null
+          email: string
+          founders_cohort_eligible: boolean
+          founders_cohort_position: number | null
+          id: string
+          meta: Json
+          name: string | null
+          notified_at: string | null
+          phone: string | null
+          priority_score: number
+          role: string
+          source: string | null
+          updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          city?: string | null
+          converted_at?: string | null
+          country_code?: string | null
+          created_at?: string
+          current_closed_deals_count?: number | null
+          current_leads_count?: number | null
+          current_user_id?: string | null
+          email: string
+          founders_cohort_eligible?: boolean
+          founders_cohort_position?: number | null
+          id?: string
+          meta?: Json
+          name?: string | null
+          notified_at?: string | null
+          phone?: string | null
+          priority_score?: number
+          role?: string
+          source?: string | null
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          city?: string | null
+          converted_at?: string | null
+          country_code?: string | null
+          created_at?: string
+          current_closed_deals_count?: number | null
+          current_leads_count?: number | null
+          current_user_id?: string | null
+          email?: string
+          founders_cohort_eligible?: boolean
+          founders_cohort_position?: number | null
+          id?: string
+          meta?: Json
+          name?: string | null
+          notified_at?: string | null
+          phone?: string | null
+          priority_score?: number
+          role?: string
+          source?: string | null
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_waitlist_current_user_id_fkey"
+            columns: ["current_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_waitlist_current_user_id_fkey"
+            columns: ["current_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       subscriptions: {
         Row: {
           billing_cycle: string
@@ -20543,6 +22202,9 @@ export type Database = {
         | "comprador"
         | "vendedor_publico"
         | "system"
+        | "studio_user"
+        | "studio_admin"
+        | "studio_photographer"
     }
     CompositeTypes: {
       check_default_table: {
@@ -20751,6 +22413,9 @@ export const Constants = {
         "comprador",
         "vendedor_publico",
         "system",
+        "studio_user",
+        "studio_admin",
+        "studio_photographer",
       ],
     },
   },

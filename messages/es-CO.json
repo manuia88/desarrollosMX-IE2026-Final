@@ -2659,6 +2659,14 @@
         "cta": "Ver coincidencias"
       },
       "ctaPending": "Próximamente — wiring real en próxima fase"
+    },
+    "studioBanner": {
+      "aria": "Promoción DMX Studio",
+      "badge": "Próximamente",
+      "title": "Próximamente: DMX Studio",
+      "subtitle": "Crea tu primer video inmobiliario con IA en 60 segundos.",
+      "cta": "Únete a la lista de espera",
+      "ctaAria": "Únete a la lista de espera de DMX Studio"
     }
   },
   "AsesorBusquedas": {
@@ -4268,6 +4276,181 @@
         "contrato": "Contrato",
         "otro": "Otro"
       }
+    }
+  },
+  "Studio": {
+    "meta": {
+      "title": "DMX Studio — Crea videos inmobiliarios en 60 segundos",
+      "description": "Tu agencia de marketing inmobiliario, automática. Voice clone, virtual staging, fotos clasificadas y videos AI listos en minutos. Founders cohort: lifetime 30% descuento."
+    },
+    "nav": {
+      "brand": "DMX Studio",
+      "ariaLabel": "Navegación DMX Studio",
+      "pricing": "Precios",
+      "faq": "Preguntas",
+      "waitlist": "Lista de espera",
+      "localeSwitch": "Idioma"
+    },
+    "hero": {
+      "eyebrow": "Sprint 0 — Pre-launch Q3 2026",
+      "title": "Tu agencia de marketing inmobiliario, automática",
+      "subtitle": "Genera videos para redes, narración con tu propia voz, fotos clasificadas y staging virtual. Sin equipo creativo, sin edición, sin fricción.",
+      "ctaWaitlist": "Únete a la lista de espera",
+      "ctaDemos": "Ver demos",
+      "ctaPricing": "Ver precios",
+      "disclosureLabel": "Datos sintéticos",
+      "demosPlaceholderLabel": "Demos en producción"
+    },
+    "trustSignals": {
+      "sectionLabel": "Señales de tracción",
+      "title": "Construido con asesores reales",
+      "subtitle": "Métricas en vivo de la lista de espera DMX Studio.",
+      "waitlistLabel": "En lista de espera",
+      "asesoresLabel": "Asesores activos en DMX",
+      "foundersLabel": "Lugares founders disponibles",
+      "foundersOf": "de 50",
+      "previewLabel": "Vista previa Studio",
+      "preview1Title": "Video AI 60 seg",
+      "preview1Caption": "Render Kling + voz ElevenLabs",
+      "preview2Title": "50 fotos clasificadas",
+      "preview2Caption": "Sala / cocina / fachada con Vision AI",
+      "preview3Title": "Staging virtual",
+      "preview3Caption": "Mueble vacío → editorial en 1 click",
+      "disclosureLabel": "Vista previa sintética"
+    },
+    "founders": {
+      "sectionLabel": "Founders cohort",
+      "badgeAvailable": "Únete a los primeros 50 = Studio Founder + 30% lifetime descuento",
+      "badgeFull": "Lista llena — Únete a la siguiente cohort",
+      "remainingPrefix": "Quedan",
+      "remainingSuffix": "lugares",
+      "perksTitle": "Qué incluye founders cohort",
+      "perks": {
+        "lifetime": "30% lifetime descuento en cualquier plan",
+        "earlyAccess": "Acceso anticipado julio 2026 (antes del launch público)",
+        "badge": "Badge Studio Founder visible en tu portal asesor",
+        "input": "Voz directa al roadmap H2 features"
+      },
+      "ctaJoin": "Reservar mi lugar founder",
+      "ctaWaitlist": "Únete a la lista de espera",
+      "disclosureLabel": "Cohort placeholder"
+    },
+    "pricing": {
+      "sectionLabel": "Planes y precios",
+      "title": "Un plan para cada flujo de trabajo",
+      "subtitle": "Cancela cuando quieras. Sin penalización.",
+      "toggleMonthly": "Mensual",
+      "toggleAnnual": "Anual",
+      "annualSavingsLabel": "Ahorra 20%",
+      "popularBadge": "MÁS POPULAR",
+      "perMonth": "/ mes",
+      "billedAnnually": "facturado anual",
+      "ctaStart": "Empezar",
+      "ctaProcessing": "Procesando…",
+      "foundersCallout": "Founders cohort: 30% lifetime descuento",
+      "currencyPrefix": "USD ",
+      "disclosureLabel": "Pricing pre-launch",
+      "plans": {
+        "pro": {
+          "name": "Studio Pro",
+          "tagline": "Para asesor solo creando contenido cada semana",
+          "features": {
+            "f1": "1 video AI / mes (60 seg)",
+            "f2": "Voz ElevenLabs narración",
+            "f3": "3 hooks alternativos copy",
+            "f4": "Pack copy básico (caption + hashtags)",
+            "f5": "Branding DMX en cada video",
+            "f6": "Soporte chat 48h"
+          }
+        },
+        "foto": {
+          "name": "Studio Foto",
+          "tagline": "Fotógrafos y agencias con volumen alto de fotos",
+          "features": {
+            "f1": "50 fotos clasificadas / mes",
+            "f2": "Sin branding (white-label)",
+            "f3": "Voz ElevenLabs narración",
+            "f4": "Pack copy básico",
+            "f5": "Vision AI auto-tag (sala, cocina, fachada…)",
+            "f6": "Soporte prioritario 24h"
+          }
+        },
+        "agency": {
+          "name": "Studio Agency",
+          "tagline": "Equipos asesores con producción de marca",
+          "features": {
+            "f1": "20 videos AI / mes",
+            "f2": "Voice clone tu voz personal",
+            "f3": "Virtual staging incluido",
+            "f4": "Pack copy completo (caption + email + WhatsApp)",
+            "f5": "Modo serie (3 videos coherentes)",
+            "f6": "Multi-usuario (5 seats)",
+            "f7": "Soporte dedicado founder line"
+          }
+        }
+      }
+    },
+    "faq": {
+      "sectionLabel": "Preguntas frecuentes",
+      "title": "Preguntas frecuentes",
+      "subtitle": "Lo que asesores y agencias suelen preguntar antes de unirse.",
+      "items": {
+        "q1": {
+          "q": "¿Qué incluye Studio?",
+          "a": "Pro: 1 video AI/mes con voz ElevenLabs. Foto: 50 fotos clasificadas/mes con Vision AI. Agency: 20 videos AI/mes + voice clone + virtual staging + 5 seats."
+        },
+        "q2": {
+          "q": "¿Cuándo lanza Studio?",
+          "a": "Q3 2026 al público general. Founders cohort tiene acceso anticipado en julio 2026, antes del launch."
+        },
+        "q3": {
+          "q": "¿Necesito ser asesor DMX para usar Studio?",
+          "a": "No. Studio está abierto a cualquier asesor inmobiliario, fotógrafo o agencia en México. Si ya tienes cuenta DMX, se conecta a tu portal asesor automático."
+        },
+        "q4": {
+          "q": "¿Cómo funciona el voice clone?",
+          "a": "Grabas 30 segundos leyendo un guion estándar. ElevenLabs entrena tu voz personal y la usa para narrar todos tus videos automáticamente. Sólo en plan Agency."
+        },
+        "q5": {
+          "q": "¿Puedo cancelar cuando quiera?",
+          "a": "Sí. Cancelación inmediata, sin penalización ni periodo mínimo. El acceso continúa hasta el fin del ciclo facturado."
+        },
+        "q6": {
+          "q": "¿Qué pasa con mis datos y los de mis clientes?",
+          "a": "Privacidad LFPDPPP México. Opt-in explícito para cada uso de imagen. Datos guardados en infraestructura DMX con cifrado en reposo y RLS por usuario."
+        },
+        "q7": {
+          "q": "¿Funciona en otros países?",
+          "a": "H1 (2026) sólo México. H2 expansión a Colombia, Argentina y Brasil. La infraestructura ya soporta multi-país, pero el soporte y catálogo se activan progresivamente."
+        },
+        "q8": {
+          "q": "¿Integra con Inmuebles24, Lamudi o Vivanuncios?",
+          "a": "En Sprint 3 del roadmap (BIBLIA v4). Auto-publicación a portales programada para Q4 2026 sujeto a APIs disponibles."
+        },
+        "q9": {
+          "q": "¿Cuánto cuesta producir 1 video?",
+          "a": "El costo de producción AI (Kling, ElevenLabs, etc.) está cubierto en tu plan. No pagas extras por video dentro de tu cuota mensual."
+        },
+        "q10": {
+          "q": "¿Qué es founders cohort?",
+          "a": "Los primeros 50 suscriptores reciben 30% lifetime descuento en su plan, badge Studio Founder y voz directa al roadmap. Lugares limitados, una vez llenos cierra para siempre."
+        }
+      }
+    },
+    "footer": {
+      "tagline": "DMX Studio — parte de DesarrollosMX",
+      "linkPrivacy": "Privacidad",
+      "linkTerms": "Términos",
+      "linkContact": "Contacto",
+      "copyright": "DesarrollosMX 2026. Todos los derechos reservados.",
+      "disclosureLabel": "Sprint 0 pre-launch"
+    },
+    "stubs": {
+      "demosNote": "Demos en preparación — disponibles en Sprint 1"
+    },
+    "errors": {
+      "checkoutFailed": "No pudimos iniciar el checkout. Intenta de nuevo o escríbenos.",
+      "metricsFallback": "Métricas en sincronización"
     }
   }
 }
