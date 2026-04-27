@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { FadeUp } from '@/shared/ui/motion/fade-up';
 import { Button } from '@/shared/ui/primitives/canon/button';
 import { Card } from '@/shared/ui/primitives/canon/card';
 import { DisclosurePill } from '@/shared/ui/primitives/canon/disclosure-pill';
@@ -16,75 +17,82 @@ export function MorningBriefing({ bullets }: MorningBriefingProps) {
   const listen = useListenMode({ text, lang: 'es-MX' });
 
   return (
-    <Card
-      variant="spotlight"
-      className="flex flex-col gap-4 p-6"
-      style={{ borderColor: 'rgba(168, 85, 247, 0.30)' }}
-    >
-      <header className="flex items-center justify-between">
-        <h2
-          className="text-[14px] font-semibold uppercase tracking-[0.08em]"
-          style={{ color: 'var(--canon-cream-2)', fontFamily: 'var(--font-body)' }}
-        >
-          {t('title')}
-        </h2>
-        <DisclosurePill tone="violet">{t('disclosure')}</DisclosurePill>
-      </header>
-      <svg
-        viewBox="0 0 200 32"
-        width="100%"
-        height="32"
-        aria-hidden="true"
-        className="text-[var(--accent-violet)]"
+    <FadeUp delay={0.1} durationMs={600} distance={18}>
+      <Card
+        variant="spotlight"
+        className="flex flex-col gap-4 p-6"
+        style={{
+          borderColor: 'rgba(168, 85, 247, 0.30)',
+          background: 'rgba(255,255,255,0.04)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+        }}
       >
-        {Array.from({ length: 30 }, (_, i) => {
-          const h = 6 + Math.abs(Math.sin(i * 0.7)) * 18;
-          return (
-            <rect
-              // biome-ignore lint/suspicious/noArrayIndexKey: decorative waveform, fixed positional bars
-              key={i}
-              x={i * 7}
-              y={(32 - h) / 2}
-              width={3}
-              height={h}
-              rx={1.5}
-              fill="currentColor"
-              opacity={0.6}
-            />
-          );
-        })}
-      </svg>
-      <ul className="flex flex-col gap-2">
-        {bullets.length === 0 ? (
-          <li
-            className="text-[13px]"
-            style={{ color: 'var(--canon-cream-3)', fontFamily: 'var(--font-body)' }}
+        <header className="flex items-center justify-between">
+          <h2
+            className="text-[14px] font-semibold uppercase tracking-[0.08em]"
+            style={{ color: 'var(--canon-cream-2)', fontFamily: 'var(--font-body)' }}
           >
-            {t('empty')}
-          </li>
-        ) : (
-          bullets.map((b) => (
+            {t('title')}
+          </h2>
+          <DisclosurePill tone="violet">{t('disclosure')}</DisclosurePill>
+        </header>
+        <svg
+          viewBox="0 0 200 32"
+          width="100%"
+          height="32"
+          aria-hidden="true"
+          style={{ color: 'var(--canon-indigo)' }}
+        >
+          {Array.from({ length: 30 }, (_, i) => {
+            const h = 6 + Math.abs(Math.sin(i * 0.7)) * 18;
+            return (
+              <rect
+                // biome-ignore lint/suspicious/noArrayIndexKey: decorative waveform, fixed positional bars
+                key={i}
+                x={i * 7}
+                y={(32 - h) / 2}
+                width={3}
+                height={h}
+                rx={1.5}
+                fill="currentColor"
+                opacity={0.6}
+              />
+            );
+          })}
+        </svg>
+        <ul className="flex flex-col gap-2">
+          {bullets.length === 0 ? (
             <li
-              key={b}
-              className="text-[13px] leading-relaxed"
-              style={{ color: 'var(--canon-cream)', fontFamily: 'var(--font-body)' }}
+              className="text-[13px]"
+              style={{ color: 'var(--canon-cream-3)', fontFamily: 'var(--font-body)' }}
             >
-              {b}
+              {t('empty')}
             </li>
-          ))
-        )}
-      </ul>
-      <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        aria-pressed={listen.isListening}
-        aria-label={t('listenAria')}
-        {...listen.holdHandlers}
-        disabled={listen.isStub || bullets.length === 0}
-      >
-        {listen.isListening ? t('listening') : t('listen', { minutes: 4 })}
-      </Button>
-    </Card>
+          ) : (
+            bullets.map((b) => (
+              <li
+                key={b}
+                className="text-[13px] leading-relaxed"
+                style={{ color: 'var(--canon-cream)', fontFamily: 'var(--font-body)' }}
+              >
+                {b}
+              </li>
+            ))
+          )}
+        </ul>
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          aria-pressed={listen.isListening}
+          aria-label={t('listenAria')}
+          {...listen.holdHandlers}
+          disabled={listen.isStub || bullets.length === 0}
+        >
+          {listen.isListening ? t('listening') : t('listen', { minutes: 4 })}
+        </Button>
+      </Card>
+    </FadeUp>
   );
 }

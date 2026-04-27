@@ -65,14 +65,26 @@ export function PipelineCarousel({ deals }: PipelineCarouselProps) {
   const deal = activeDeals[index];
   if (!deal) return null;
 
-  const cardStyle: CSSProperties = {};
+  const cardStyle: CSSProperties = {
+    transition:
+      'transform 220ms cubic-bezier(0.22, 1, 0.36, 1), border-color 220ms ease, box-shadow 220ms ease',
+    background: 'rgba(255,255,255,0.04)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+  };
 
   return (
     <Card
       variant="elevated"
-      className="flex flex-col gap-4 p-6"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
+      className="flex flex-col gap-4 p-6 hover:border-[color:rgba(99,102,241,0.40)] hover:shadow-[0_12px_32px_rgba(99,102,241,0.18)]"
+      onMouseEnter={(e) => {
+        setPaused(true);
+        e.currentTarget.style.transform = 'translateY(-4px)';
+      }}
+      onMouseLeave={(e) => {
+        setPaused(false);
+        e.currentTarget.style.transform = 'translateY(0)';
+      }}
       style={cardStyle}
     >
       <header className="flex items-center justify-between">

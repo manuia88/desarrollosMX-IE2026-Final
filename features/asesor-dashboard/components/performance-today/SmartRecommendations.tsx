@@ -1,5 +1,8 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { IconArrowRight, IconSparkles } from '@/shared/ui/icons/canon-icons';
+import { StaggerContainer } from '@/shared/ui/motion/stagger-container';
 import { Button } from '@/shared/ui/primitives/canon/button';
 import { Card } from '@/shared/ui/primitives/canon/card';
 import { DisclosurePill } from '@/shared/ui/primitives/canon/disclosure-pill';
@@ -41,13 +44,22 @@ export function SmartRecommendations({ items }: SmartRecommendationsProps) {
           </p>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <StaggerContainer
+          className="grid grid-cols-1 gap-3 md:grid-cols-3"
+          staggerMs={80}
+          distance={16}
+        >
           {items.map((rec) => (
             <ConfidenceHalo key={rec.id} confidence={rec.confidence} intensity="subtle">
               <Card
                 variant="elevated"
-                className="flex h-full flex-col gap-3 p-5"
-                style={{ borderColor: 'rgba(168, 85, 247, 0.30)' }}
+                className="flex h-full flex-col gap-3 p-5 transition-transform duration-200 hover:-translate-y-1"
+                style={{
+                  borderColor: 'rgba(168, 85, 247, 0.30)',
+                  background: 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(20px)',
+                  WebkitBackdropFilter: 'blur(20px)',
+                }}
               >
                 <div className="flex items-center gap-2">
                   <IconSparkles size={16} className="text-[var(--accent-violet)]" />
@@ -76,7 +88,7 @@ export function SmartRecommendations({ items }: SmartRecommendationsProps) {
               </Card>
             </ConfidenceHalo>
           ))}
-        </div>
+        </StaggerContainer>
       )}
     </section>
   );

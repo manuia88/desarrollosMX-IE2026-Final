@@ -10,6 +10,9 @@ export interface BlurTextProps {
   delay?: number;
   staggerMs?: number;
   gradientWords?: ReadonlyArray<string>;
+  gradientAll?: boolean;
+  gradientItalic?: boolean;
+  gradient?: string;
   style?: CSSProperties;
 }
 
@@ -27,6 +30,9 @@ export function BlurText({
   delay = 0,
   staggerMs = 70,
   gradientWords = [],
+  gradientAll = false,
+  gradientItalic = true,
+  gradient = 'linear-gradient(90deg, #6366F1, #EC4899)',
   style,
 }: BlurTextProps) {
   const ref = useRef<HTMLElement>(null);
@@ -41,7 +47,7 @@ export function BlurText({
     <Component ref={ref} className={className} style={style}>
       {words.map((word, i) => {
         const cleaned = word.replace(/[.,;:!?]/g, '').toLowerCase();
-        const isGrad = gradSet.has(cleaned);
+        const isGrad = gradientAll || gradSet.has(cleaned);
         const transitionDelay = `${delay + (i * staggerMs) / 1000}s`;
         const wordStyle: CSSProperties = {
           display: 'inline-block',
@@ -53,11 +59,11 @@ export function BlurText({
           transition: `filter ${DURATION_MS}ms ${EASE} ${transitionDelay}, opacity ${DURATION_MS}ms ${EASE} ${transitionDelay}, transform ${DURATION_MS}ms ${EASE} ${transitionDelay}`,
           ...(isGrad
             ? {
-                backgroundImage: 'linear-gradient(90deg, #6366F1, #EC4899)',
+                backgroundImage: gradient,
                 WebkitBackgroundClip: 'text',
                 backgroundClip: 'text',
                 color: 'transparent',
-                fontStyle: 'italic',
+                ...(gradientItalic ? { fontStyle: 'italic' } : {}),
               }
             : {}),
         };

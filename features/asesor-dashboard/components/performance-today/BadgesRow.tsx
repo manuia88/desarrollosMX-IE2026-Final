@@ -1,5 +1,8 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 import { IconAward } from '@/shared/ui/icons/canon-icons';
+import { StaggerContainer } from '@/shared/ui/motion/stagger-container';
 import { Card } from '@/shared/ui/primitives/canon/card';
 import { IconCircle } from '@/shared/ui/primitives/canon/icon-circle';
 
@@ -36,9 +39,13 @@ export function BadgesRow({ badges }: BadgesRowProps) {
           {t('empty')}
         </p>
       ) : (
-        <ul className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+        <StaggerContainer
+          className="grid grid-cols-3 gap-3 sm:grid-cols-6"
+          staggerMs={60}
+          distance={12}
+        >
           {badges.map((badge) => (
-            <li
+            <div
               key={badge.id}
               className="relative flex flex-col items-center gap-1.5"
               title={badge.label}
@@ -72,9 +79,9 @@ export function BadgesRow({ badges }: BadgesRowProps) {
               >
                 {badge.label}
               </span>
-            </li>
+            </div>
           ))}
-        </ul>
+        </StaggerContainer>
       )}
     </Card>
   );

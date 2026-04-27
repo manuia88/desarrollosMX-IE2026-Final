@@ -8,6 +8,7 @@ export interface UseSidebarHoverOptions {
   delayMs?: number;
   closeDelayMs?: number;
   disabled?: boolean;
+  persistKey?: string;
 }
 
 export interface UseSidebarHoverReturn {
@@ -19,16 +20,47 @@ export interface UseSidebarHoverReturn {
   onBlurCapture: () => void;
 }
 
+const DEFAULT_PERSIST_KEY = 'asesor-sidebar-expanded';
+
+function readPersisted(key: string): boolean {
+  if (typeof window === 'undefined') return false;
+  try {
+    return window.sessionStorage.getItem(key) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function writePersisted(key: string, value: boolean): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.sessionStorage.setItem(key, value ? '1' : '0');
+  } catch {
+    /* noop */
+  }
+}
+
 export function useSidebarHover(options: UseSidebarHoverOptions = {}): UseSidebarHoverReturn {
   const collapsed = options.collapsed ?? 60;
   const expanded = options.expanded ?? 240;
   const delayMs = options.delayMs ?? 250;
-  const closeDelayMs = options.closeDelayMs ?? 100;
+  const closeDelayMs = options.closeDelayMs ?? 400;
   const disabled = options.disabled ?? false;
+  const persistKey = options.persistKey ?? DEFAULT_PERSIST_KEY;
 
   const [isExpanded, setIsExpanded] = useState(false);
   const enterTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const exitTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (disabled) return;
+    if (readPersisted(persistKey)) setIsExpanded(true);
+  }, [disabled, persistKey]);
+
+  useEffect(() => {
+    if (disabled) return;
+    writePersisted(persistKey, isExpanded);
+  }, [isExpanded, disabled, persistKey]);
 
   const clear = useCallback(() => {
     if (enterTimer.current) clearTimeout(enterTimer.current);
