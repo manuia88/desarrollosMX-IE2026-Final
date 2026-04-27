@@ -19,23 +19,22 @@ export function QRGenerator({ onClose, onCreated }: QRGeneratorProps) {
   const [colorHex, setColorHex] = useState('#6366F1');
   const [error, setError] = useState<string | null>(null);
 
-  const create = trpc.marketing.qrCodes.create.useMutation({
-    onSuccess: () => {
-      setError(null);
-      onCreated();
-    },
-    onError: (err) => setError(err.message),
-  });
+  const create = trpc.marketing.qrCodes.create.useMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    create.mutate({
-      destinoType,
-      destinoId,
-      copy: copy || undefined,
-      colorHex: colorHex || undefined,
-    });
+    try {
+      await create.mutateAsync({
+        destinoType,
+        destinoId,
+        copy: copy || undefined,
+        colorHex: colorHex || undefined,
+      });
+      onCreated();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'create failed');
+    }
   };
 
   return (

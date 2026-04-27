@@ -16,18 +16,17 @@ export function FolderEditor({ onClose, onCreated }: FolderEditorProps) {
   const [slug, setSlug] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const create = trpc.marketing.folders.create.useMutation({
-    onSuccess: () => {
-      setError(null);
-      onCreated();
-    },
-    onError: (err) => setError(err.message),
-  });
+  const create = trpc.marketing.folders.create.useMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    create.mutate({ title, slug });
+    try {
+      await create.mutateAsync({ title, slug });
+      onCreated();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'create failed');
+    }
   };
 
   return (

@@ -19,26 +19,25 @@ export function WATemplateForm({ onClose, onCreated }: WATemplateFormProps) {
   const [footer, setFooter] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const create = trpc.marketing.waTemplates.create.useMutation({
-    onSuccess: () => {
-      setError(null);
-      onCreated();
-    },
-    onError: (err) => setError(err.message),
-  });
+  const create = trpc.marketing.waTemplates.create.useMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    create.mutate({
-      name,
-      category,
-      body,
-      placeholders: [],
-      headerType: 'none',
-      footer: footer || undefined,
-      buttons: [],
-    });
+    try {
+      await create.mutateAsync({
+        name,
+        category,
+        body,
+        placeholders: [],
+        headerType: 'none',
+        footer: footer || undefined,
+        buttons: [],
+      });
+      onCreated();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'create failed');
+    }
   };
 
   return (
