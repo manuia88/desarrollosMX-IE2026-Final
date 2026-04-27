@@ -3,6 +3,8 @@ export { Button, buttonVariants } from './button';
 export type { CardCanonVariant, CardProps } from './card';
 export { Card } from './card';
 export { cn } from './cn';
+export type { DateTimePickerAbsoluteProps } from './date-time-picker-absolute';
+export { DateTimePickerAbsolute } from './date-time-picker-absolute';
 export type { DisclosurePillProps, DisclosureTone } from './disclosure-pill';
 export { DisclosurePill } from './disclosure-pill';
 export type { GlassOverlayProps } from './glass-overlay';

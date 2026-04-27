@@ -3314,5 +3314,112 @@
         "reasonDefaultFollowUp": "Manter cadência com um listing alinhado ao perfil."
       }
     }
+  },
+  "Tareas": {
+    "header": {
+      "title": "Tarefas",
+      "create": "+ Nova tarefa",
+      "disclosure": "Dados ao vivo",
+      "metaDescription": "Gestor de tarefas do consultor — pendentes, vencidas e concluídas em uma visão unificada."
+    },
+    "filters": {
+      "aria": "Filtro de intervalo temporal",
+      "today": "Hoje",
+      "week": "Semana",
+      "month": "Mês",
+      "all": "Todas"
+    },
+    "column": {
+      "propiedades": "Imóveis",
+      "clientes": "Clientes",
+      "prospectos": "Leads",
+      "general": "Geral",
+      "empty": "Sem tarefas nesta coluna"
+    },
+    "priority": { "aria": "Prioridade", "alta": "Alta", "media": "Média", "baja": "Baixa" },
+    "status": { "pending": "Pendente", "expired": "Vencida", "done": "Concluída" },
+    "detalleTipo": {
+      "aria": "Tipo de detalhe",
+      "contactar_propietario": "Contatar proprietário",
+      "organizar_visita": "Organizar visita",
+      "organizar_captacion": "Organizar captação",
+      "pedir_devolucion_visita": "Pedir retorno de visita",
+      "custom": "Personalizado"
+    },
+    "card": {
+      "completeAria": "Marcar tarefa como concluída",
+      "overdue": "Vencida {days, plural, one {# dia} other {# dias}}"
+    },
+    "menu": {
+      "aria": "Ações da tarefa",
+      "edit": "Editar",
+      "delete": "Excluir",
+      "reassign": "Reatribuir",
+      "cancel": "Cancelar",
+      "confirmDelete": "Confirmar exclusão",
+      "confirmDeleteAria": "Confirmar exclusão da tarefa"
+    },
+    "empty": {
+      "title": "Você não tem tarefas pendentes hoje",
+      "body": "Crie sua primeira tarefa para manter o fluxo.",
+      "cta": "Criar tarefa"
+    },
+    "errors": { "list": "Não foi possível carregar suas tarefas. Tente atualizar." },
+    "widget": {
+      "title": "Tarefas de hoje",
+      "viewAll": "Ver todas",
+      "viewAllAria": "Ver todas as tarefas",
+      "loading": "Carregando…",
+      "empty": "Sem tarefas hoje",
+      "emptyCta": "Ir ao gestor"
+    },
+    "equipo": { "aria": "Visão de equipe", "on": "Minha equipe", "off": "Só eu" },
+    "entityPicker": {
+      "aria": "Buscar entidade",
+      "listAria": "Resultados da busca",
+      "loading": "Buscando…",
+      "error": "Erro ao buscar",
+      "empty": "Sem resultados",
+      "placeholder": {
+        "property": "Buscar imóvel…",
+        "capture": "Buscar captação…",
+        "search": "Buscar busca…",
+        "client": "Buscar cliente…",
+        "lead": "Buscar lead…"
+      }
+    },
+    "wizard": {
+      "aria": "Assistente de nova tarefa",
+      "stepperAria": "Passos do assistente",
+      "step1": { "title": "Sobre o que é a tarefa?" },
+      "step2": { "title": "Detalhe e vencimento" },
+      "next": "Próximo",
+      "back": "Voltar",
+      "submit": "Criar tarefa",
+      "submitting": "Criando…",
+      "close": "Fechar",
+      "types": {
+        "property": "Imóvel",
+        "capture": "Captação",
+        "search": "Busca",
+        "client": "Cliente",
+        "lead": "Lead",
+        "general": "Geral"
+      },
+      "fields": {
+        "type": "Tipo de tarefa",
+        "entity": "Entidade relacionada",
+        "title": "Título",
+        "detalleTipo": "Tipo de detalhe",
+        "description": "Descrição",
+        "dueAt": "Vencimento",
+        "dueDateAria": "Data de vencimento",
+        "dueTimeAria": "Hora de vencimento",
+        "priority": "Prioridade",
+        "redirectTo": "URL ao concluir (opcional)",
+        "redirectToPlaceholder": "/asesores/visitas/registrar"
+      },
+      "errors": { "generic": "Revise os dados do formulário." }
+    }
   }
 }

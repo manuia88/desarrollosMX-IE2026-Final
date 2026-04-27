@@ -32,6 +32,7 @@ import { strScoresRouter } from '@/features/str-intelligence/routes/scores';
 import { strViabilityRouter } from '@/features/str-intelligence/routes/viability';
 import { strWatchdogRouter } from '@/features/str-intelligence/routes/watchdog';
 import { zoneInvestmentRouter } from '@/features/str-intelligence/routes/zone-investment';
+import { tareasRouter } from '@/features/tareas/routes/tareas';
 import { publicProcedure, router } from './init';
 import { causalRouter } from './routers/causal';
 import { migrationFlowRouter } from './routers/migration-flow';
@@ -79,6 +80,7 @@ export const appRouter = router({
   strWatchdog: strWatchdogRouter,
   strScores: strScoresRouter,
   strViability: strViabilityRouter,
+  tareas: tareasRouter,
   trendGenome: trendGenomeRouter,
   zoneInvestment: zoneInvestmentRouter,
 });

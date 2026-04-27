@@ -3314,5 +3314,129 @@
         "reasonDefaultFollowUp": "Keep cadence with a listing aligned to the profile."
       }
     }
+  },
+  "Tareas": {
+    "header": {
+      "title": "Tasks",
+      "create": "+ New task",
+      "disclosure": "Live data",
+      "metaDescription": "Advisor task manager — pending, overdue and completed tasks in one unified view."
+    },
+    "filters": {
+      "aria": "Time scope filter",
+      "today": "Today",
+      "week": "Week",
+      "month": "Month",
+      "all": "All"
+    },
+    "column": {
+      "propiedades": "Properties",
+      "clientes": "Clients",
+      "prospectos": "Leads",
+      "general": "General",
+      "empty": "No tasks in this column"
+    },
+    "priority": {
+      "aria": "Priority",
+      "alta": "High",
+      "media": "Medium",
+      "baja": "Low"
+    },
+    "status": {
+      "pending": "Pending",
+      "expired": "Overdue",
+      "done": "Completed"
+    },
+    "detalleTipo": {
+      "aria": "Detail type",
+      "contactar_propietario": "Contact owner",
+      "organizar_visita": "Schedule visit",
+      "organizar_captacion": "Organize capture",
+      "pedir_devolucion_visita": "Request visit follow-up",
+      "custom": "Custom"
+    },
+    "card": {
+      "completeAria": "Mark task as complete",
+      "overdue": "Overdue {days, plural, one {# day} other {# days}}"
+    },
+    "menu": {
+      "aria": "Task actions",
+      "edit": "Edit",
+      "delete": "Delete",
+      "reassign": "Reassign",
+      "cancel": "Cancel",
+      "confirmDelete": "Confirm delete",
+      "confirmDeleteAria": "Confirm task deletion"
+    },
+    "empty": {
+      "title": "You have no pending tasks today",
+      "body": "Create your first task to keep momentum.",
+      "cta": "Create task"
+    },
+    "errors": {
+      "list": "We couldn't load your tasks. Please refresh."
+    },
+    "widget": {
+      "title": "Today's tasks",
+      "viewAll": "View all",
+      "viewAllAria": "View all tasks",
+      "loading": "Loading…",
+      "empty": "No tasks today",
+      "emptyCta": "Go to task manager"
+    },
+    "equipo": {
+      "aria": "Team view",
+      "on": "My team",
+      "off": "Just me"
+    },
+    "entityPicker": {
+      "aria": "Search entity",
+      "listAria": "Search results",
+      "loading": "Searching…",
+      "error": "Search error",
+      "empty": "No results",
+      "placeholder": {
+        "property": "Search property…",
+        "capture": "Search capture…",
+        "search": "Search search…",
+        "client": "Search client…",
+        "lead": "Search lead…"
+      }
+    },
+    "wizard": {
+      "aria": "New task wizard",
+      "stepperAria": "Wizard steps",
+      "step1": { "title": "What is the task about?" },
+      "step2": { "title": "Detail and due date" },
+      "next": "Next",
+      "back": "Back",
+      "submit": "Create task",
+      "submitting": "Creating…",
+      "close": "Close",
+      "types": {
+        "property": "Property",
+        "capture": "Capture",
+        "search": "Search",
+        "client": "Client",
+        "lead": "Lead",
+        "general": "General"
+      },
+      "fields": {
+        "type": "Task type",
+        "entity": "Related entity",
+        "title": "Title",
+        "detalleTipo": "Detail type",
+        "description": "Description",
+        "dueAt": "Due",
+        "dueDateAria": "Due date",
+        "dueTimeAria": "Due time",
+        "priority": "Priority",
+        "redirectTo": "URL on complete (optional)",
+        "redirectToPlaceholder": "/asesores/visitas/registrar"
+      },
+      "errors": {
+        "generic": "Please review the form fields."
+      }
+    }
   }
 }

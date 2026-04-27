@@ -14246,6 +14246,60 @@ export type Database = {
           },
         ]
       }
+      tareas: {
+        Row: {
+          asesor_id: string
+          calendar_event_id: string | null
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          detalle_tipo: string
+          due_at: string
+          entity_id: string | null
+          id: string
+          priority: string
+          redirect_to: string | null
+          status: string
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          asesor_id: string
+          calendar_event_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          detalle_tipo: string
+          due_at: string
+          entity_id?: string | null
+          id?: string
+          priority?: string
+          redirect_to?: string | null
+          status?: string
+          title: string
+          type: string
+          updated_at?: string
+        }
+        Update: {
+          asesor_id?: string
+          calendar_event_id?: string | null
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          detalle_tipo?: string
+          due_at?: string
+          entity_id?: string | null
+          id?: string
+          priority?: string
+          redirect_to?: string | null
+          status?: string
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       tax_rules: {
         Row: {
           applies_from: string
