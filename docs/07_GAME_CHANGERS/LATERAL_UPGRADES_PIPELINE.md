@@ -3154,5 +3154,24 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 - **Dependencies:** launch H1 cerrado · feedback usuarios US Latinx H1 que demande sources US-specific · founder gate decision
 - **Ref:** ADR-051 + memoria `project_scope_multipais_h1_opcion_b` punto 4
 
+### L-NEW-FEATURE-PATTERN-MIGRATE-M01-M06-SPLIT-TO-UNIFIED — Migrar M01-M06 split a unified canon
+
+- **Status:** 🟡 deferred-H2 (ADR-053 founder canon 2026-04-27)
+- **Origen:** F14.B.1 cleanup post M07 Operaciones — ADR-053 declara unified pattern canónico forward, M01-M06 split legacy preservado.
+- **Qué es:** migrar 6 módulos shippeados FASE 13 (`features/asesor-dashboard/` ↔ `features/dashboard/`, `features/asesor-leads/` ↔ `features/leads/`, `features/asesor-clientes/` ↔ `features/clientes/`, `features/asesor-propiedades/` ↔ `features/propiedades/`, `features/asesor-busqueda/` ↔ `features/busqueda/`, `features/asesor-tareas/` ↔ `features/tareas/`) del split pattern actual a unified `features/<dominio>/` con sub-dirs `components/asesor/`.
+- **Para qué sirve:** match conceptual 1:1 `04_MODULOS/Mxx` ↔ `features/<dominio>/` único; reduce mental load navegación PM/founder; consolida pattern para sub-agents CC futuros leen un solo canon (forward ADR-053).
+- **Beneficio concreto:** cero deuda pattern split-vs-unified; imports lineales `@/features/<dominio>/...`; refactors futuros M01-M06 en un solo directorio.
+- **Fase target:** H2 post-launch, capacity disponible sin scope nuevo bloqueante.
+- **Estimado:** ~12-16h CC (6 módulos × ~2h cada uno + test reorg + audit-dead-ui re-baseline)
+- **Plan migration por módulo:**
+  1. `mv features/asesor-<dom>/components/* features/<dom>/components/asesor/`
+  2. Update import paths (`rg` replace `@/features/asesor-<dom>` → `@/features/<dom>/components/asesor`)
+  3. Run `npm run typecheck` + `npm run test` + `npm run audit:dead-ui` por módulo
+  4. Eliminar `features/asesor-<dom>/` directorio vacío
+  5. Update `04_MODULOS/Mxx_*.md` referencias paths
+- **RICE estimate:** Reach 1 (DX interno) × Impact 4 (clarity arquitectónica) × Confidence 0.9 (cambio puramente refactor sin runtime risk) / Effort 14h ≈ **0.26** (low priority — pattern ya documentado por ADR-053, beneficio incremental)
+- **Dependencies:** launch H1 cerrado · zero scope creep activo en M01-M06 · founder gate
+- **Ref:** ADR-053 (unified canon) + ADR-018 (audit-dead-ui enforcement universal) + CLAUDE.md sección "Estructura feature-sliced"
+
 ---
 
