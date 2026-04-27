@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 import type { CSSProperties } from 'react';
-import { AmbientBackground } from '@/shared/ui/motion/ambient-background';
 import { BlurText } from '@/shared/ui/motion/blur-text';
 import { FadeUp } from '@/shared/ui/motion/fade-up';
 import { HeroCanvas } from '@/shared/ui/motion/hero-canvas';
@@ -79,7 +78,6 @@ export function HeroPulse({
       className="relative flex flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:px-10"
       style={containerStyle}
     >
-      <AmbientBackground intensity="subtle" />
       <HeroCanvas density={14} />
       <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
         {isSyntheticData ? (

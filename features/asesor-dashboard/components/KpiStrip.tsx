@@ -33,14 +33,15 @@ interface TileProps {
   footer: React.ReactNode;
   empty?: boolean | undefined;
   spark?: ReadonlyArray<number> | undefined;
+  variant?: 'elevated' | 'glow' | undefined;
 }
 
-function KpiTile({ title, bigNum, footer, empty, spark }: TileProps) {
+function KpiTile({ title, bigNum, footer, empty, spark, variant = 'elevated' }: TileProps) {
   return (
     <div className="group relative h-full transition-transform duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5">
       <Card
-        variant="elevated"
-        className="flex h-full flex-col justify-between p-5 transition-[border-color,box-shadow] duration-200 group-hover:border-[color:rgba(99,102,241,0.40)] group-hover:shadow-[0_12px_32px_rgba(99,102,241,0.18)]"
+        variant={variant}
+        className="flex h-full flex-col justify-between p-5 transition-[border-color,box-shadow] duration-200 group-hover:border-[color:var(--canon-card-border-hover)] group-hover:shadow-[var(--canon-card-shadow-hover)]"
       >
         <span
           className="text-[10.5px] font-semibold uppercase tracking-[0.08em]"
@@ -153,6 +154,7 @@ export function KpiStrip({
           }
         />
         <KpiTile
+          variant="glow"
           title={t('xp.title')}
           bigNum={`Lv ${xpLevel}`}
           footer={

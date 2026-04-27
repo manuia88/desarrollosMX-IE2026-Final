@@ -244,6 +244,14 @@
   --shadow-canon-focus: 0 0 0 3px rgba(99, 102, 241, 0.45);
   --shadow-canon-spotlight: 0 24px 64px rgba(168, 85, 247, 0.22);
 
+  /* ---- Card luminous tokens (FASE 13.G.1.1 cards refinement) ---- */
+  --canon-white-pure: #ffffff;
+  --canon-card-border-default: rgba(255, 255, 255, 0.14);
+  --canon-card-border-hover: rgba(99, 102, 241, 0.4);
+  --canon-card-shadow-hover: 0 24px 60px rgba(99, 102, 241, 0.18);
+  --canon-card-shadow-glow-rest: 0 12px 32px rgba(99, 102, 241, 0.08);
+  --canon-card-shadow-glow-peak: 0 16px 40px rgba(99, 102, 241, 0.18);
+
   /* ---- 10 wayfinding colors per módulo asesor ---- */
   --mod-dashboard: #6366f1;
   --mod-desarrollos: #14b8a6;
@@ -342,6 +350,26 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+@keyframes canon-breath-glow {
+  0%,
+  100% {
+    box-shadow: var(--canon-card-shadow-glow-rest);
+  }
+  50% {
+    box-shadow: var(--canon-card-shadow-glow-peak);
+  }
+}
+
+.canon-breath {
+  animation: canon-breath-glow 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .canon-breath {
+    animation: none;
   }
 }
 

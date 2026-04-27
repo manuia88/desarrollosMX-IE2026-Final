@@ -26,7 +26,7 @@ export function BadgesRow({ badges }: BadgesRowProps) {
       <header>
         <h2
           className="text-[14px] font-semibold uppercase tracking-[0.08em]"
-          style={{ color: 'var(--canon-cream-2)', fontFamily: 'var(--font-body)' }}
+          style={{ color: 'var(--canon-cream)', fontFamily: 'var(--font-body)' }}
         >
           {t('title')}
         </h2>

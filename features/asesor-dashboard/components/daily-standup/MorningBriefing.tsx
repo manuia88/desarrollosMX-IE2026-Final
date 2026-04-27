@@ -19,10 +19,9 @@ export function MorningBriefing({ bullets }: MorningBriefingProps) {
   return (
     <FadeUp delay={0.1} durationMs={600} distance={18}>
       <Card
-        variant="spotlight"
+        variant="glow"
         className="flex flex-col gap-4 p-6"
         style={{
-          borderColor: 'rgba(168, 85, 247, 0.30)',
           background: 'rgba(255,255,255,0.04)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -31,7 +30,7 @@ export function MorningBriefing({ bullets }: MorningBriefingProps) {
         <header className="flex items-center justify-between">
           <h2
             className="text-[14px] font-semibold uppercase tracking-[0.08em]"
-            style={{ color: 'var(--canon-cream-2)', fontFamily: 'var(--font-body)' }}
+            style={{ color: 'var(--canon-cream)', fontFamily: 'var(--font-body)' }}
           >
             {t('title')}
           </h2>
