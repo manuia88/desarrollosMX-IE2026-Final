@@ -76,6 +76,7 @@ export default async function RadarPublicPage({ params }: RouteProps) {
                 className="flex flex-col gap-3 rounded-2xl border border-[color:rgba(255,255,255,0.10)] bg-[color:rgba(255,255,255,0.04)] p-4"
               >
                 {project.cover_photo_url ? (
+                  // biome-ignore lint/performance/noImgElement: Supabase Storage external host; next/image domains config postpuesto a F14.D infra pass
                   <img
                     src={project.cover_photo_url}
                     alt={project.nombre ?? 'proyecto'}
