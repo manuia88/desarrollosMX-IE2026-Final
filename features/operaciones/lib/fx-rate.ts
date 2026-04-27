@@ -1,9 +1,4 @@
-import { convert, getLatestRate } from '@/shared/lib/currency/fx';
-
-const HARDCODED_FALLBACK_RATES: Record<string, number> = {
-  'USD-MXN': 17.05,
-  'MXN-USD': 1 / 17.05,
-};
+import { type FxRateResult, getFxRate } from './fx/cascade';
 
 export type GetFxRateResult = {
   rate: number;
@@ -11,21 +6,19 @@ export type GetFxRateResult = {
   pair: string;
 };
 
+function toLegacySource(source: FxRateResult['source']): 'live' | 'fallback' {
+  return source === 'fallback' ? 'fallback' : 'live';
+}
+
 export async function getFxRateForOperacion(from: string, to: string): Promise<GetFxRateResult> {
   if (from === to) return { rate: 1, source: 'live', pair: `${from}-${to}` };
 
-  const live = await getLatestRate(from, to);
-  if (live !== null && live > 0) {
-    return { rate: live, source: 'live', pair: `${from}-${to}` };
-  }
-
-  const fallbackKey = `${from}-${to}`;
-  const fallback = HARDCODED_FALLBACK_RATES[fallbackKey];
-  if (fallback !== undefined) {
-    return { rate: fallback, source: 'fallback', pair: fallbackKey };
-  }
-
-  throw new Error(`No FX rate available for ${from}->${to} (no live, no fallback)`);
+  const result = await getFxRate(from, to);
+  return {
+    rate: result.rate,
+    source: toLegacySource(result.source),
+    pair: result.pair,
+  };
 }
 
 export async function convertForOperacion(
@@ -35,17 +28,10 @@ export async function convertForOperacion(
 ): Promise<{ amount: number; source: 'live' | 'fallback'; rate: number }> {
   if (from === to) return { amount, source: 'live', rate: 1 };
 
-  const live = await convert(amount, from, to);
-  if (live !== null && Number.isFinite(live)) {
-    const rate = live / amount;
-    return { amount: live, source: 'live', rate };
-  }
-
-  const fallbackKey = `${from}-${to}`;
-  const fallback = HARDCODED_FALLBACK_RATES[fallbackKey];
-  if (fallback !== undefined) {
-    return { amount: amount * fallback, source: 'fallback', rate: fallback };
-  }
-
-  throw new Error(`No FX conversion available for ${from}->${to}`);
+  const result = await getFxRate(from, to);
+  return {
+    amount: amount * result.rate,
+    source: toLegacySource(result.source),
+    rate: result.rate,
+  };
 }
