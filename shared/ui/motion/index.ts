@@ -1,7 +1,15 @@
+export type { AmbientBackgroundProps } from './ambient-background';
+export { AmbientBackground } from './ambient-background';
+export type { AnimatedBarProps } from './animated-bar';
+export { AnimatedBar } from './animated-bar';
 export type { BlurTextProps } from './blur-text';
 export { BlurText, splitWords } from './blur-text';
+export type { CountUpProps } from './count-up';
+export { CountUp } from './count-up';
 export type { FadeUpProps } from './fade-up';
 export { FadeUp } from './fade-up';
+export type { HeroCanvasProps } from './hero-canvas';
+export { HeroCanvas } from './hero-canvas';
 export type { MarqueeProps } from './marquee';
 export { Marquee } from './marquee';
 export type { StaggerContainerProps } from './stagger-container';

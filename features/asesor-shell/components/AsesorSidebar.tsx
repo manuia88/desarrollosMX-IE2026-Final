@@ -19,7 +19,7 @@ export function AsesorSidebar({ activeModuleId, locale, forceCollapsed }: Asesor
     collapsed: 60,
     expanded: 240,
     delayMs: 250,
-    closeDelayMs: 120,
+    closeDelayMs: 400,
     disabled: forceCollapsed === true,
   });
 
@@ -110,7 +110,7 @@ function NavItem({ item, active, expanded, label, locale }: NavItemProps) {
         boxShadow: `inset 0 0 0 1px color-mix(in oklab, ${tint} 30%, transparent)`,
       }
     : {
-        color: 'var(--canon-cream-2)',
+        color: 'var(--canon-cream)',
       };
 
   return (
@@ -120,7 +120,7 @@ function NavItem({ item, active, expanded, label, locale }: NavItemProps) {
       aria-label={label}
       className={cn(
         'group relative flex h-11 items-center gap-3 rounded-[12px] px-3 transition-colors',
-        'hover:bg-[color:rgba(255,255,255,0.04)]',
+        'hover:bg-[color:rgba(255,255,255,0.06)]',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--canon-indigo)] focus-visible:ring-offset-1 focus-visible:ring-offset-[color:var(--canon-bg)]',
       )}
       style={itemStyle}
