@@ -28,6 +28,27 @@ export interface ApplyAutoImportResult {
   readonly importedFields: ReadonlyArray<string>;
 }
 
+export interface BrandKitStep1Snapshot {
+  readonly display_name: string | null;
+  readonly contact_phone: string | null;
+  readonly zones: ReadonlyArray<string> | null;
+}
+
+/**
+ * Returns true cuando la fila brand_kit ya tiene los datos mínimos del Step 1
+ * (display_name + contact_phone + al menos 1 zona). Permite skip directo a
+ * Step 2 (voice clone) tras auto-import del perfil DMX existente.
+ */
+export function isStep1Complete(brandKit: BrandKitStep1Snapshot): boolean {
+  const displayName = brandKit.display_name;
+  const contactPhone = brandKit.contact_phone;
+  const zones = brandKit.zones;
+  if (typeof displayName !== 'string' || displayName.trim().length === 0) return false;
+  if (typeof contactPhone !== 'string' || contactPhone.trim().length === 0) return false;
+  if (!zones || zones.length === 0) return false;
+  return true;
+}
+
 const TOP_LIMIT = 3 as const;
 
 function emptyResult(): AutoImportResult {

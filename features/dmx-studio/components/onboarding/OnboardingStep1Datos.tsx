@@ -11,8 +11,16 @@ import { trpc } from '@/shared/lib/trpc/client';
 import { FadeUp } from '@/shared/ui/motion';
 import { Button, Card } from '@/shared/ui/primitives/canon';
 
+export interface OnboardingStep1InitialValues {
+  readonly name?: string;
+  readonly phone?: string;
+  readonly city?: string;
+  readonly zonesText?: string;
+}
+
 export interface OnboardingStep1DatosProps {
   readonly onDone: () => void;
+  readonly initialValues?: OnboardingStep1InitialValues;
 }
 
 interface FormValues {
@@ -20,6 +28,17 @@ interface FormValues {
   readonly phone: string;
   readonly city: string;
   readonly zonesText: string;
+}
+
+function hasAnyImportedValue(values: OnboardingStep1InitialValues | undefined): boolean {
+  if (!values) return false;
+  const { name, phone, city, zonesText } = values;
+  return Boolean(
+    (typeof name === 'string' && name.trim().length > 0) ||
+      (typeof phone === 'string' && phone.trim().length > 0) ||
+      (typeof city === 'string' && city.trim().length > 0) ||
+      (typeof zonesText === 'string' && zonesText.trim().length > 0),
+  );
 }
 
 const inputStyle: React.CSSProperties = {
@@ -42,10 +61,11 @@ const labelStyle: React.CSSProperties = {
   letterSpacing: '0.01em',
 };
 
-export function OnboardingStep1Datos({ onDone }: OnboardingStep1DatosProps) {
+export function OnboardingStep1Datos({ onDone, initialValues }: OnboardingStep1DatosProps) {
   const t = useTranslations('Studio.onboarding');
   const formId = useId();
   const [serverError, setServerError] = useState<string | null>(null);
+  const hasImportedValues = hasAnyImportedValue(initialValues);
 
   const completeStep1 = trpc.studio.onboarding.completeStep1.useMutation({
     onSuccess() {
@@ -62,7 +82,12 @@ export function OnboardingStep1Datos({ onDone }: OnboardingStep1DatosProps) {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
-    defaultValues: { name: '', phone: '', city: '', zonesText: '' },
+    defaultValues: {
+      name: initialValues?.name ?? '',
+      phone: initialValues?.phone ?? '',
+      city: initialValues?.city ?? '',
+      zonesText: initialValues?.zonesText ?? '',
+    },
     mode: 'onSubmit',
   });
 
@@ -96,6 +121,24 @@ export function OnboardingStep1Datos({ onDone }: OnboardingStep1DatosProps) {
             {t('step1Subtitle')}
           </p>
         </header>
+
+        {hasImportedValues && (
+          <p
+            data-testid="auto-import-banner"
+            aria-live="polite"
+            style={{
+              margin: 0,
+              padding: '10px 14px',
+              background: 'var(--surface-elevated)',
+              border: '1px solid var(--canon-border)',
+              borderRadius: 'var(--canon-radius-pill)',
+              fontSize: '13px',
+              color: 'var(--canon-cream-2)',
+            }}
+          >
+            {t('autoImportBanner')}
+          </p>
+        )}
 
         <form
           id={formId}
