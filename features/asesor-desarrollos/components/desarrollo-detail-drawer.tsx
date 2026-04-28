@@ -2,8 +2,10 @@
 
 import { useTranslations } from 'next-intl';
 import { type CSSProperties, useEffect, useRef } from 'react';
+import { trpc } from '@/shared/lib/trpc/client';
 import { IconX } from '@/shared/ui/icons/canon-icons';
 import { GlassOverlay } from '@/shared/ui/primitives/canon';
+import { WorksheetRequestButton } from '@/shared/ui/worksheets/WorksheetRequestButton';
 import { useDesarrolloDrawer } from '../hooks/use-desarrollo-drawer';
 import type { DesarrolloSummary } from '../lib/desarrollos-loader';
 import { PANE_KEYS, type PaneKey } from '../lib/filter-schemas';
@@ -216,7 +218,103 @@ function DrawerPaneBody({ pane, project }: { pane: PaneKey; project: DesarrolloS
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
       <p style={{ fontSize: 13, color: 'var(--canon-cream-2)' }}>{ubicacion}</p>
-      <p style={{ fontSize: 12, color: 'var(--canon-cream-3)' }}>{t(`panes.${pane}`)}</p>
+      {pane === 'unidades' ? (
+        <UnidadesPaneList projectId={project.id} />
+      ) : (
+        <p style={{ fontSize: 12, color: 'var(--canon-cream-3)' }}>{t(`panes.${pane}`)}</p>
+      )}
     </div>
+  );
+}
+
+type UnidadRow = {
+  id: string;
+  numero: string | null;
+  status: string;
+  recamaras: number | null;
+  area_m2: number | string | null;
+  price_mxn: number | string | null;
+  tipo: string | null;
+};
+
+function UnidadesPaneList({ projectId }: { projectId: string }) {
+  const t = useTranslations('AsesorDesarrollos.drawer.unidadesPane');
+  const listQ = trpc.desarrollos.listUnidades.useQuery({ proyecto_id: projectId });
+  const rows = (listQ.data ?? []) as UnidadRow[];
+
+  if (listQ.isLoading) {
+    return <p style={{ fontSize: 12, color: 'var(--canon-cream-3)' }}>{t('loading')}</p>;
+  }
+  if (rows.length === 0) {
+    return <p style={{ fontSize: 12, color: 'var(--canon-cream-3)' }}>{t('empty')}</p>;
+  }
+
+  return (
+    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8 }}>
+      {rows.map((unit) => {
+        const price = typeof unit.price_mxn === 'string' ? Number(unit.price_mxn) : unit.price_mxn;
+        const m2 = typeof unit.area_m2 === 'string' ? Number(unit.area_m2) : unit.area_m2;
+        const isAvailable = unit.status === 'disponible';
+        return (
+          <li
+            key={unit.id}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              padding: '10px 12px',
+              borderRadius: 12,
+              border: '1px solid var(--canon-border-2)',
+              background: 'var(--surface-recessed)',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 2, flex: 1 }}>
+              <span
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
+                  fontSize: 13,
+                  color: 'var(--canon-white-pure)',
+                }}
+              >
+                {unit.numero ?? unit.id.slice(0, 8)}
+              </span>
+              <span style={{ fontSize: 11, color: 'var(--canon-cream-3)' }}>
+                {[
+                  unit.tipo,
+                  m2 ? `${m2} m²` : null,
+                  unit.recamaras ? `${unit.recamaras} rec` : null,
+                ]
+                  .filter(Boolean)
+                  .join(' · ')}
+              </span>
+              {price ? (
+                <span style={{ fontSize: 12, color: 'var(--canon-cream-2)' }}>
+                  ${(price / 1_000_000).toFixed(2)}M MXN
+                </span>
+              ) : null}
+            </div>
+            <span
+              style={{
+                padding: '2px 8px',
+                borderRadius: 'var(--canon-radius-pill)',
+                border: '1px solid var(--canon-border-2)',
+                fontSize: 10,
+                color: isAvailable ? 'var(--canon-emerald)' : 'var(--canon-cream-3)',
+                textTransform: 'uppercase',
+              }}
+            >
+              {t(`status.${unit.status}`)}
+            </span>
+            {isAvailable ? (
+              <WorksheetRequestButton
+                unitId={unit.id}
+                {...(unit.numero ? { unitLabel: unit.numero } : {})}
+              />
+            ) : null}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
