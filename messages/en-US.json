@@ -5003,5 +5003,77 @@
     "loadingSkeleton": {
       "ariaLabel": "Loading content"
     }
+  },
+  "Cities": {
+    "selector": {
+      "label": "Select city",
+      "placeholder": "Choose a city",
+      "beta": "Beta",
+      "comingSoon": "Coming soon",
+      "allCities": "All cities"
+    },
+    "comparator": {
+      "title": "Compare cities",
+      "kpiPrecioM2": "Average price /m²",
+      "kpiTendencia": "30-day trend",
+      "kpiZones": "Zone count",
+      "kpiProjects": "Project count",
+      "kpiTopZones": "Top 3 zones"
+    },
+    "cdmx": {
+      "name": "Mexico City",
+      "shortName": "CDMX"
+    },
+    "playaDelCarmen": {
+      "name": "Playa del Carmen",
+      "shortName": "Playa",
+      "heroTitle": "Real estate investment in Playa del Carmen",
+      "heroSubtitle": "Tier H1 synthetic data, real ingestion H2.",
+      "kpiTitle": "Top 5 zones KPIs",
+      "mapTitle": "Key zones map",
+      "ctaPrimary": "Explore developments",
+      "disclaimer": "Synthetic data H1. Real ingestion H2 with local cadastral sources.",
+      "zonesLabel": "Key zones",
+      "synthBadge": "Synthetic data H1"
+    },
+    "guadalajara": {
+      "name": "Guadalajara",
+      "shortName": "GDL",
+      "heroTitle": "Real estate investment in Guadalajara",
+      "heroSubtitle": "Synthetic Tier H1 data, real ingestion H2. Mexico Bajio financial hub + Andares ecosystem.",
+      "kpiTitle": "Top 5 zones KPIs",
+      "mapTitle": "Key zones map",
+      "ctaPrimary": "Explore developments",
+      "disclaimer": "Synthetic H1 data shipped with ADR-018 disclosure. Auto-replaced when real ingestion ships H2.",
+      "zonesLabel": "Key zones",
+      "synthBadge": "Synthetic H1 data"
+    },
+    "queretaro": {
+      "name": "Queretaro",
+      "shortName": "QRO",
+      "heroTitle": "Queretaro: the emerging Bajio hub",
+      "heroSubtitle": "Real-time real-estate intelligence for Juriquilla, El Refugio, Historic Downtown and more. Pulse, futures and ghost-opportunity metrics per zone.",
+      "kpiTitle": "Key indicators per zone",
+      "mapTitle": "Interactive Queretaro map",
+      "ctaPrimary": "Explore Queretaro intelligence",
+      "disclaimer": "Synthetic H1 data with transparent disclosure. Real sources migrating H2 (ADR-018 canon).",
+      "zonesLabel": "Zones",
+      "synthBadge": "Synthetic data · ADR-059"
+    },
+    "dubai": {
+      "name": "Dubai",
+      "shortName": "Dubai",
+      "heroTitle": "Real estate investment in Dubai",
+      "heroSubtitle": "Tier H1 synthetic data + Reelly STUB pending API key.",
+      "kpiTitle": "Top 5 zones KPIs",
+      "mapTitle": "Key zones map",
+      "ctaPrimary": "Coming soon",
+      "disclaimer": "Synthetic data H1. Real ingestion via Reelly API H2 (pending API key).",
+      "zonesLabel": "Key zones",
+      "synthBadge": "Synthetic data H1",
+      "comingSoonBadge": "Coming soon — Reelly integration H2",
+      "priceUsdLabel": "USD",
+      "priceAedLabel": "AED"
+    }
   }
 }

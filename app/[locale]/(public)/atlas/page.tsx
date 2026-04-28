@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { defaultLocale, locales } from '@/shared/lib/i18n/config';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
+import { CitiesAtlasFilter } from '@/shared/ui/cities/CitiesAtlasFilter';
 
 interface PageProps {
   params: Promise<{ locale: string }>;
@@ -102,6 +103,9 @@ export default async function AtlasLandingPage({ params }: PageProps) {
         </h1>
         <p className="text-sm text-[color:var(--color-text-secondary)]">{t('landing.subtitle')}</p>
       </header>
+
+      {/* ADR-059 — M17 cities filter integration. Full city-aware data fetch agendado L-NEW-CITIES-ATLAS-FULL H2. */}
+      <CitiesAtlasFilter locale={locale} />
 
       {colonias.length === 0 ? (
         <div

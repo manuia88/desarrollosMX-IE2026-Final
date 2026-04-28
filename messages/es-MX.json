@@ -5003,5 +5003,77 @@
     "loadingSkeleton": {
       "ariaLabel": "Cargando contenido"
     }
+  },
+  "Cities": {
+    "selector": {
+      "label": "Seleccionar ciudad",
+      "placeholder": "Elige una ciudad",
+      "beta": "Beta",
+      "comingSoon": "Próximamente",
+      "allCities": "Todas las ciudades"
+    },
+    "comparator": {
+      "title": "Comparar ciudades",
+      "kpiPrecioM2": "Precio promedio /m²",
+      "kpiTendencia": "Tendencia 30d",
+      "kpiZones": "Número de zonas",
+      "kpiProjects": "Número de proyectos",
+      "kpiTopZones": "Top 3 zonas"
+    },
+    "cdmx": {
+      "name": "Ciudad de México",
+      "shortName": "CDMX"
+    },
+    "playaDelCarmen": {
+      "name": "Playa del Carmen",
+      "shortName": "Playa",
+      "heroTitle": "Inversión inmobiliaria en Playa del Carmen",
+      "heroSubtitle": "Datos sintéticos Tier H1, ingestion real H2.",
+      "kpiTitle": "KPIs Top 5 zonas",
+      "mapTitle": "Mapa de zonas clave",
+      "ctaPrimary": "Explorar desarrollos",
+      "disclaimer": "Datos sintéticos H1. Activación ingestion real H2 con sources catastrales locales.",
+      "zonesLabel": "Zonas key",
+      "synthBadge": "Datos sintéticos H1"
+    },
+    "guadalajara": {
+      "name": "Guadalajara",
+      "shortName": "GDL",
+      "heroTitle": "Inversión inmobiliaria en Guadalajara",
+      "heroSubtitle": "Datos sintéticos Tier H1, ingestion real H2. Primer hub financiero del Bajío + Andares ecosystem.",
+      "kpiTitle": "KPIs Top 5 zonas",
+      "mapTitle": "Mapa de zonas clave",
+      "ctaPrimary": "Explorar desarrollos",
+      "disclaimer": "Datos sintéticos H1 publicados con disclosure ADR-018. Reemplazo automático cuando ingestion real esté lista H2.",
+      "zonesLabel": "Zonas key",
+      "synthBadge": "Datos sintéticos H1"
+    },
+    "queretaro": {
+      "name": "Querétaro",
+      "shortName": "QRO",
+      "heroTitle": "Querétaro: el hub emergente de Bajío",
+      "heroSubtitle": "Inteligencia inmobiliaria en tiempo real para Juriquilla, El Refugio, Centro Histórico y más. Métricas de pulso, futuros y oportunidad ghost por zona.",
+      "kpiTitle": "Indicadores clave por zona",
+      "mapTitle": "Mapa interactivo Querétaro",
+      "ctaPrimary": "Explorar inteligencia Querétaro",
+      "disclaimer": "Datos sintéticos H1 con disclosure transparente. Fuentes reales en migración H2 (canon ADR-018).",
+      "zonesLabel": "Zonas",
+      "synthBadge": "Datos sintéticos · ADR-059"
+    },
+    "dubai": {
+      "name": "Dubái",
+      "shortName": "Dubái",
+      "heroTitle": "Inversión inmobiliaria en Dubái",
+      "heroSubtitle": "Datos sintéticos H1 + integración Reelly pendiente API key.",
+      "kpiTitle": "KPIs top 5 zonas",
+      "mapTitle": "Mapa de zonas clave",
+      "ctaPrimary": "Próximamente",
+      "disclaimer": "Datos sintéticos H1. Ingesta real vía Reelly API H2 (API key pendiente).",
+      "zonesLabel": "Zonas clave",
+      "synthBadge": "Datos sintéticos H1",
+      "comingSoonBadge": "Próximamente — integración Reelly H2",
+      "priceUsdLabel": "USD",
+      "priceAedLabel": "AED"
+    }
   }
 }
