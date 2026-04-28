@@ -242,7 +242,7 @@ export function OperacionDetail({ operacionId, locale }: OperacionDetailProps) {
         </Card>
       ) : null}
 
-      <div className="flex justify-start">
+      <div className="flex justify-start gap-3">
         <Button
           variant="ghost"
           size="md"
@@ -251,6 +251,19 @@ export function OperacionDetail({ operacionId, locale }: OperacionDetailProps) {
           aria-label={t('detail.refresh')}
         >
           {t('detail.refresh')}
+        </Button>
+        <Button
+          variant="primary"
+          size="md"
+          type="button"
+          aria-label="Subir video presentación propiedad a Studio"
+          onClick={() => {
+            window.location.assign(
+              `/${locale}/studio-app/raw-video/new?from_operacion=${operacionId}`,
+            );
+          }}
+        >
+          Subir video presentación
         </Button>
       </div>
     </div>

@@ -16444,6 +16444,70 @@ export type Database = {
           },
         ]
       }
+      studio_highlight_reels: {
+        Row: {
+          clip_index: number
+          created_at: string
+          end_ms: number
+          id: string
+          reason: string
+          reel_duration_seconds: number | null
+          reel_storage_path: string | null
+          source_raw_video_id: string
+          start_ms: number
+          status: string
+          user_id: string
+        }
+        Insert: {
+          clip_index: number
+          created_at?: string
+          end_ms: number
+          id?: string
+          reason: string
+          reel_duration_seconds?: number | null
+          reel_storage_path?: string | null
+          source_raw_video_id: string
+          start_ms: number
+          status?: string
+          user_id: string
+        }
+        Update: {
+          clip_index?: number
+          created_at?: string
+          end_ms?: number
+          id?: string
+          reason?: string
+          reel_duration_seconds?: number | null
+          reel_storage_path?: string | null
+          source_raw_video_id?: string
+          start_ms?: number
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_highlight_reels_source_raw_video_id_fkey"
+            columns: ["source_raw_video_id"]
+            isOneToOne: false
+            referencedRelation: "studio_raw_videos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_highlight_reels_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_highlight_reels_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_listing_health_scores: {
         Row: {
           calculated_at: string
@@ -16775,6 +16839,85 @@ export type Database = {
           },
         ]
       }
+      studio_raw_videos: {
+        Row: {
+          audio_extract_storage_path: string | null
+          chapters: Json | null
+          cleaned_storage_path: string | null
+          created_at: string
+          cuts_applied: boolean
+          duration_seconds: number | null
+          edl: Json | null
+          file_size_bytes: number
+          id: string
+          mime_type: string
+          project_id: string | null
+          source_storage_path: string
+          transcription: Json | null
+          transcription_status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          audio_extract_storage_path?: string | null
+          chapters?: Json | null
+          cleaned_storage_path?: string | null
+          created_at?: string
+          cuts_applied?: boolean
+          duration_seconds?: number | null
+          edl?: Json | null
+          file_size_bytes: number
+          id?: string
+          mime_type: string
+          project_id?: string | null
+          source_storage_path: string
+          transcription?: Json | null
+          transcription_status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          audio_extract_storage_path?: string | null
+          chapters?: Json | null
+          cleaned_storage_path?: string | null
+          created_at?: string
+          cuts_applied?: boolean
+          duration_seconds?: number | null
+          edl?: Json | null
+          file_size_bytes?: number
+          id?: string
+          mime_type?: string
+          project_id?: string | null
+          source_storage_path?: string
+          transcription?: Json | null
+          transcription_status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_raw_videos_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_raw_videos_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_raw_videos_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_remarketing_jobs: {
         Row: {
           angle: string
@@ -16903,6 +17046,70 @@ export type Database = {
           },
           {
             foreignKeyName: "studio_series_projects_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_speech_analytics: {
+        Row: {
+          bad_takes_count: number
+          calculated_at: string
+          clarity_score: number | null
+          filler_count: number
+          filler_ratio_pct: number | null
+          id: string
+          raw_video_id: string
+          sentiment: string | null
+          top_fillers: Json | null
+          user_id: string
+          words_per_minute: number | null
+        }
+        Insert: {
+          bad_takes_count?: number
+          calculated_at?: string
+          clarity_score?: number | null
+          filler_count?: number
+          filler_ratio_pct?: number | null
+          id?: string
+          raw_video_id: string
+          sentiment?: string | null
+          top_fillers?: Json | null
+          user_id: string
+          words_per_minute?: number | null
+        }
+        Update: {
+          bad_takes_count?: number
+          calculated_at?: string
+          clarity_score?: number | null
+          filler_count?: number
+          filler_ratio_pct?: number | null
+          id?: string
+          raw_video_id?: string
+          sentiment?: string | null
+          top_fillers?: Json | null
+          user_id?: string
+          words_per_minute?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_speech_analytics_raw_video_id_fkey"
+            columns: ["raw_video_id"]
+            isOneToOne: true
+            referencedRelation: "studio_raw_videos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_speech_analytics_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_speech_analytics_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "public_profiles"
