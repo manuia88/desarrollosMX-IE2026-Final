@@ -106,19 +106,40 @@ async function fetchProjectBrief(
   };
 }
 
-async function resolveVoiceId(supabase: AdminClient, voiceCloneId: string | null): Promise<string> {
-  if (!voiceCloneId || !FEATURE_FLAGS.ELEVENLABS_VOICE_CLONE_ENABLED) {
-    return DEFAULT_VOICE_ID_ES_MX;
-  }
-  const { data } = await supabase
-    .from('studio_voice_clones')
-    .select('elevenlabs_voice_id, status')
-    .eq('id', voiceCloneId)
+type VoiceResolution =
+  | { readonly mode: 'clone' | 'prebuilt'; readonly voiceId: string }
+  | { readonly mode: 'none'; readonly voiceId: null };
+
+async function resolveVoiceForUser(
+  supabase: AdminClient,
+  userId: string,
+  voiceCloneId: string | null,
+): Promise<VoiceResolution> {
+  const { data: ext } = await supabase
+    .from('studio_users_extension')
+    .select('voice_preference, selected_prebuilt_voice_id')
+    .eq('user_id', userId)
     .maybeSingle();
-  if (data && data.status === 'ready' && data.elevenlabs_voice_id) {
-    return data.elevenlabs_voice_id;
+
+  const preference = ext?.voice_preference ?? 'prebuilt';
+
+  if (preference === 'none') {
+    return { mode: 'none', voiceId: null };
   }
-  return DEFAULT_VOICE_ID_ES_MX;
+
+  if (preference === 'clone' && voiceCloneId && FEATURE_FLAGS.ELEVENLABS_VOICE_CLONE_ENABLED) {
+    const { data } = await supabase
+      .from('studio_voice_clones')
+      .select('elevenlabs_voice_id, status')
+      .eq('id', voiceCloneId)
+      .maybeSingle();
+    if (data && data.status === 'ready' && data.elevenlabs_voice_id) {
+      return { mode: 'clone', voiceId: data.elevenlabs_voice_id };
+    }
+  }
+
+  const prebuiltId = ext?.selected_prebuilt_voice_id ?? DEFAULT_VOICE_ID_ES_MX;
+  return { mode: 'prebuilt', voiceId: prebuiltId };
 }
 
 async function fetchPrimaryAssetUrl(
@@ -426,7 +447,19 @@ export async function kickoffVideoPipeline(
     ? imageUrl
     : `https://storage.placeholder/${imageUrl}`;
 
-  const voiceId = await resolveVoiceId(supabase, project.voiceCloneId);
+  const voice = await resolveVoiceForUser(supabase, input.userId, project.voiceCloneId);
+
+  const ttsPromise: Promise<StageOutcome> =
+    voice.mode === 'none'
+      ? Promise.resolve({ status: 'completed' as const, jobIds: [] })
+      : runTtsStage({
+          supabase,
+          projectId: input.projectId,
+          userId: input.userId,
+          narrationScript: project.directorBrief.narrationScript,
+          voiceId: voice.voiceId,
+          deps,
+        });
 
   const [klingOutcome, ttsOutcome, musicOutcome] = await Promise.all([
     runKlingClipsStage({
@@ -437,14 +470,7 @@ export async function kickoffVideoPipeline(
       imageUrl: safeImageUrl,
       deps,
     }),
-    runTtsStage({
-      supabase,
-      projectId: input.projectId,
-      userId: input.userId,
-      narrationScript: project.directorBrief.narrationScript,
-      voiceId,
-      deps,
-    }),
+    ttsPromise,
     runMusicStage({
       supabase,
       projectId: input.projectId,
@@ -471,12 +497,14 @@ export async function kickoffVideoPipeline(
       });
     }
 
+    const ttsCost =
+      voice.mode === 'none' ? 0 : (project.directorBrief.narrationScript.length / 1000) * 0.3;
     const totalCost =
       project.directorBrief.klingPrompts.reduce(
         (acc, p) => acc + Math.min(Math.max(p.durationSeconds, 3), 10) * KLING_COST_PER_SECOND_USD,
         0,
       ) +
-      (project.directorBrief.narrationScript.length / 1000) * 0.3 +
+      ttsCost +
       30 * 0.02;
     try {
       await logPipelineUsage(

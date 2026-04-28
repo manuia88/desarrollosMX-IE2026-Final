@@ -119,12 +119,32 @@ export const onboardingStep1Input = z.object({
 });
 export type OnboardingStep1Input = z.infer<typeof onboardingStep1Input>;
 
-export const onboardingStep2Input = z.object({
+export const VOICE_PREFERENCES = ['clone', 'prebuilt', 'none'] as const;
+export const voicePreferenceEnum = z.enum(VOICE_PREFERENCES);
+export type VoicePreference = z.infer<typeof voicePreferenceEnum>;
+
+const onboardingStep2CloneInput = z.object({
+  voicePreference: z.literal('clone'),
   voiceSampleStoragePath: z.string().trim().min(1).max(512),
   voiceLanguage: z.string().trim().min(2).max(10).default('es-MX'),
   voiceName: z.string().trim().min(1).max(80),
-  consentSigned: z.boolean(),
+  consentSigned: z.literal(true),
 });
+
+const onboardingStep2PrebuiltInput = z.object({
+  voicePreference: z.literal('prebuilt'),
+  selectedPrebuiltVoiceId: z.string().trim().min(1).max(64),
+});
+
+const onboardingStep2NoneInput = z.object({
+  voicePreference: z.literal('none'),
+});
+
+export const onboardingStep2Input = z.discriminatedUnion('voicePreference', [
+  onboardingStep2CloneInput,
+  onboardingStep2PrebuiltInput,
+  onboardingStep2NoneInput,
+]);
 export type OnboardingStep2Input = z.infer<typeof onboardingStep2Input>;
 
 export const onboardingStep3Input = z.object({

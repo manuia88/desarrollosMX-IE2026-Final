@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef } from 'react';
 import { OnboardingStep1Datos, type OnboardingStep1InitialValues } from './OnboardingStep1Datos';
-import { OnboardingStep2Voice } from './OnboardingStep2Voice';
+import { OnboardingStep2Voice, type OnboardingStep2VoiceDoneInput } from './OnboardingStep2Voice';
 import { OnboardingStep3Confirm } from './OnboardingStep3Confirm';
 import {
   ONBOARDING_STEP_ORDER,
@@ -47,9 +47,11 @@ export function OnboardingFlow({
   }, [state]);
 
   const handleStep2Done = useCallback(
-    (voiceSampleStoragePath: string, voiceCloneId: string) => {
-      state.setVoiceSampleStoragePath(voiceSampleStoragePath);
-      state.setVoiceCloneId(voiceCloneId);
+    (input: OnboardingStep2VoiceDoneInput) => {
+      state.setVoiceSampleStoragePath(input.voiceSampleStoragePath);
+      state.setVoiceCloneId(input.voiceCloneId);
+      state.setVoicePreference(input.voicePreference);
+      state.setSelectedPrebuiltVoiceId(input.selectedPrebuiltVoiceId);
       state.goToStep('step3');
     },
     [state],

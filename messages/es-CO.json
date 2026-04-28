@@ -4515,6 +4515,28 @@
       "errorNoSample": "Graba una muestra de voz antes de continuar.",
       "errorVoiceName": "Asigna un nombre a tu voz.",
       "errorConsent": "Necesitamos tu consentimiento para usar la voz.",
+      "errorNoPrebuiltVoice": "Selecciona una voz pre-built antes de continuar.",
+      "voiceOptionsLabel": "¿Cómo quieres narrar tus videos?",
+      "selectedPrebuiltVoiceLabel": "Voz seleccionada",
+      "voiceCloneGatedDisclosure": "La clonación de voz se activa cuando suscribes plan Pro. Por ahora puedes usar una voz pre-built o sin narración.",
+      "voiceCloneGatedError": "La clonación de voz no está disponible en tu plan actual. Selecciona una voz pre-built o sin narración.",
+      "voiceOption": {
+        "prebuilt": {
+          "title": "Usar una voz pre-built",
+          "description": "Aurora, Mateo o Sofía narran tus videos. Listo en segundos, sin grabar."
+        },
+        "clone": {
+          "title": "Clonar mi voz",
+          "badge": "Pro",
+          "description": "Graba 30 segundos y crea una voz AI con tu identidad para todos tus videos.",
+          "gatedDescription": "Próximamente: disponible al activar plan Pro. Mientras tanto puedes elegir una voz pre-built."
+        },
+        "none": {
+          "title": "Sin narración",
+          "description": "Solo música ambiente. Ideal para reels rápidos o videos institucionales.",
+          "helper": "Tus videos se generarán con música ambiente seleccionada por AI según el estilo de la propiedad."
+        }
+      },
       "step3Title": "Todo listo",
       "step3Subtitle": "Tu cuenta DMX Studio está configurada. En unos minutos podrás crear tu primer video.",
       "voiceCloneCreatedLabel": "Muestra de voz registrada",
