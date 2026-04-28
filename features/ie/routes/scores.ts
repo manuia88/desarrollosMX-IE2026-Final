@@ -150,49 +150,52 @@ export const ieScoresRouter = router({
   // B.6 Lead Score C01 — FASE 15 v3 onyx-benchmarked.
   // RLS: lead_scores SELECT policy uses lead_belongs_to_dev_or_asesor(lead_id).
   // No additional auth filter needed beyond authenticatedProcedure.
-  getLeadScore: authenticatedProcedure
-    .input(ieScoresGetLeadScoreInput)
-    .query(async ({ input }) => {
-      const supabase = createAdminClient();
-      const { data, error } = await supabase
-        .from('lead_scores')
-        .select('lead_id, score, factors, model_version, computed_at, ttl_until')
-        .eq('lead_id', input.leadId)
-        .maybeSingle();
+  getLeadScore: authenticatedProcedure.input(ieScoresGetLeadScoreInput).query(async ({ input }) => {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from('lead_scores')
+      .select('lead_id, score, factors, model_version, computed_at, ttl_until')
+      .eq('lead_id', input.leadId)
+      .maybeSingle();
 
-      if (error) {
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
-      }
+    if (error) {
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+    }
 
-      if (!data) {
-        const result = await computeLeadScore(input.leadId, { supabase });
-        await persistLeadScore(result, { supabase });
-        return {
-          leadId: result.lead_id,
-          score: result.score,
-          tier: result.tier,
-          factors: result.factors,
-          modelVersion: result.model_version,
-          computedAt: result.factors.computed_at,
-          ttlUntil: result.ttl_until,
-          freshlyComputed: true as const,
-        };
-      }
-
-      const factors = (data.factors ?? {}) as Partial<LeadScoreFactors>;
-      const tier = data.score >= 75 ? ('hot' as const) : data.score >= 40 ? ('warm' as const) : ('cold' as const);
-
+    if (!data) {
+      const result = await computeLeadScore(input.leadId, { supabase });
+      await persistLeadScore(result, { supabase });
       return {
-        leadId: data.lead_id,
-        score: data.score,
-        tier,
-        factors,
-        modelVersion: data.model_version,
-        computedAt: data.computed_at,
-        ttlUntil: data.ttl_until,
-        freshlyComputed: false as const,
+        leadId: result.lead_id,
+        score: result.score,
+        tier: result.tier,
+        factors: result.factors,
+        modelVersion: result.model_version,
+        computedAt: result.factors.computed_at,
+        ttlUntil: result.ttl_until,
+        freshlyComputed: true as const,
       };
-    }),
+    }
+
+    const factors = (data.factors ?? {}) as Partial<LeadScoreFactors>;
+    const tier =
+      data.score >= 75
+        ? ('hot' as const)
+        : data.score >= 40
+          ? ('warm' as const)
+          : ('cold' as const);
+
+    return {
+      leadId: data.lead_id,
+      score: data.score,
+      tier,
+      factors,
+      modelVersion: data.model_version,
+      computedAt: data.computed_at,
+      ttlUntil: data.ttl_until,
+      freshlyComputed: false as const,
+    };
+  }),
 
   recomputeLeadScore: authenticatedProcedure
     .input(ieScoresRecomputeLeadScoreInput)

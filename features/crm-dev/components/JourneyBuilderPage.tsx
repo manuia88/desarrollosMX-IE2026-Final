@@ -19,6 +19,18 @@ import {
 } from '../schemas';
 import { JourneyStepRow } from './JourneyStepRow';
 
+// Type alias para evitar TS2589 deep instantiation en map() de list.data.
+// La inferencia tRPC anidada genera tipos circulares en el JSX render.
+type JourneyRow = {
+  id: string;
+  name: string;
+  trigger_event: string;
+  audience_filter: Record<string, unknown> | null;
+  steps: ReadonlyArray<JourneyStep>;
+  active: boolean;
+  created_at: string;
+};
+
 export interface JourneyBuilderPageProps {
   readonly locale: string;
 }
@@ -86,7 +98,7 @@ export function JourneyBuilderPage({ locale }: JourneyBuilderPageProps) {
     }
   };
 
-  const journeys = useMemo(() => list.data ?? [], [list.data]);
+  const journeys = useMemo(() => (list.data ?? []) as unknown as JourneyRow[], [list.data]);
 
   return (
     <main style={{ padding: '24px 28px 80px' }}>
