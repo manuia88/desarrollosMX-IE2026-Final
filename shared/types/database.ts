@@ -725,6 +725,72 @@ export type Database = {
           },
         ]
       }
+      attribution_events: {
+        Row: {
+          attribution_model: string
+          campaign_id: string | null
+          channel: string
+          created_at: string
+          event_type: string
+          id: string
+          lead_id: string | null
+          meta: Json | null
+          occurred_at: string
+          utm_campaign: string | null
+          utm_content: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          weight: number | null
+        }
+        Insert: {
+          attribution_model?: string
+          campaign_id?: string | null
+          channel: string
+          created_at?: string
+          event_type: string
+          id?: string
+          lead_id?: string | null
+          meta?: Json | null
+          occurred_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          weight?: number | null
+        }
+        Update: {
+          attribution_model?: string
+          campaign_id?: string | null
+          channel?: string
+          created_at?: string
+          event_type?: string
+          id?: string
+          lead_id?: string | null
+          meta?: Json | null
+          occurred_at?: string
+          utm_campaign?: string | null
+          utm_content?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          weight?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attribution_events_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attribution_events_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audit_crm_log: {
         Row: {
           action: string
@@ -2491,6 +2557,204 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "currencies"
             referencedColumns: ["code"]
+          },
+        ]
+      }
+      campaign_analytics: {
+        Row: {
+          ai_recommendation_reasoning: string | null
+          attribution_model: string
+          attribution_score: Json | null
+          cac_mxn: number | null
+          campaign_id: string
+          channel: string
+          clicks: number
+          conversions: number
+          cpl_mxn: number | null
+          created_at: string
+          ctr: number | null
+          date: string
+          id: string
+          impressions: number
+          leads: number
+          recommended_action: string | null
+          spend_mxn: number
+        }
+        Insert: {
+          ai_recommendation_reasoning?: string | null
+          attribution_model?: string
+          attribution_score?: Json | null
+          cac_mxn?: number | null
+          campaign_id: string
+          channel: string
+          clicks?: number
+          conversions?: number
+          cpl_mxn?: number | null
+          created_at?: string
+          ctr?: number | null
+          date: string
+          id?: string
+          impressions?: number
+          leads?: number
+          recommended_action?: string | null
+          spend_mxn?: number
+        }
+        Update: {
+          ai_recommendation_reasoning?: string | null
+          attribution_model?: string
+          attribution_score?: Json | null
+          cac_mxn?: number | null
+          campaign_id?: string
+          channel?: string
+          clicks?: number
+          conversions?: number
+          cpl_mxn?: number | null
+          created_at?: string
+          ctr?: number | null
+          date?: string
+          id?: string
+          impressions?: number
+          leads?: number
+          recommended_action?: string | null
+          spend_mxn?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaign_analytics_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      campaign_creatives: {
+        Row: {
+          ai_generated: boolean
+          campaign_id: string
+          created_at: string
+          id: string
+          meta: Json
+          preview_url: string | null
+          url: string
+          variant: string
+        }
+        Insert: {
+          ai_generated?: boolean
+          campaign_id: string
+          created_at?: string
+          id?: string
+          meta?: Json
+          preview_url?: string | null
+          url: string
+          variant: string
+        }
+        Update: {
+          ai_generated?: boolean
+          campaign_id?: string
+          created_at?: string
+          id?: string
+          meta?: Json
+          preview_url?: string | null
+          url?: string
+          variant?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaign_creatives_campaign_id_fkey"
+            columns: ["campaign_id"]
+            isOneToOne: false
+            referencedRelation: "campaigns"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      campaigns: {
+        Row: {
+          canales: Json
+          created_at: string
+          created_by: string | null
+          desarrolladora_id: string
+          end_date: string
+          id: string
+          meta: Json
+          nombre: string
+          presupuesto_mxn: number
+          proyecto_ids: string[]
+          start_date: string
+          status: string
+          tipo: string
+          updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+        }
+        Insert: {
+          canales?: Json
+          created_at?: string
+          created_by?: string | null
+          desarrolladora_id: string
+          end_date: string
+          id?: string
+          meta?: Json
+          nombre: string
+          presupuesto_mxn?: number
+          proyecto_ids?: string[]
+          start_date: string
+          status?: string
+          tipo: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Update: {
+          canales?: Json
+          created_at?: string
+          created_by?: string | null
+          desarrolladora_id?: string
+          end_date?: string
+          id?: string
+          meta?: Json
+          nombre?: string
+          presupuesto_mxn?: number
+          proyecto_ids?: string[]
+          start_date?: string
+          status?: string
+          tipo?: string
+          updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "campaigns_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "campaigns_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "campaigns_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "campaigns_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -13399,6 +13663,80 @@ export type Database = {
           zone_id?: string | null
         }
         Relationships: []
+      }
+      site_selection_queries: {
+        Row: {
+          ai_narrative: string | null
+          cost_usd: number | null
+          created_at: string
+          desarrolladora_id: string | null
+          duration_ms: number | null
+          id: string
+          output_listings: Json
+          output_zones: Json
+          parsed_intent: Json
+          pdf_url: string | null
+          query_text: string
+          user_id: string
+        }
+        Insert: {
+          ai_narrative?: string | null
+          cost_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string | null
+          duration_ms?: number | null
+          id?: string
+          output_listings?: Json
+          output_zones?: Json
+          parsed_intent?: Json
+          pdf_url?: string | null
+          query_text: string
+          user_id: string
+        }
+        Update: {
+          ai_narrative?: string | null
+          cost_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string | null
+          duration_ms?: number | null
+          id?: string
+          output_listings?: Json
+          output_zones?: Json
+          parsed_intent?: Json
+          pdf_url?: string | null
+          query_text?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "site_selection_queries_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_selection_queries_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_selection_queries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "site_selection_queries_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       spatial_ref_sys: {
         Row: {

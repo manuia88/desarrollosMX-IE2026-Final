@@ -9,6 +9,7 @@ import { constellationsRouter } from '@/features/constellations/routes/constella
 import { crmRouter } from '@/features/crm/routes/crm';
 import { crmDevRouter } from '@/features/crm-dev/routes/crm-dev';
 import { desarrollosRouter } from '@/features/desarrollos/routes/desarrollos';
+import { devMarketingRouter } from '@/features/dev-marketing/routes/dev-marketing';
 import { developerRouter } from '@/features/developer/routes/developer';
 import { studioRouter } from '@/features/dmx-studio/routes/studio';
 import { estadisticasRouter } from '@/features/estadisticas/routes/estadisticas';
@@ -61,6 +62,7 @@ export const appRouter = router({
   crm: crmRouter,
   crmDev: crmDevRouter,
   desarrollos: desarrollosRouter,
+  devMarketing: devMarketingRouter,
   developer: developerRouter,
   estadisticas: estadisticasRouter,
   fx: fxRouter,

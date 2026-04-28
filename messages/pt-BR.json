@@ -4202,6 +4202,55 @@
       "loading": {
         "kpis": "Cargando KPIs...",
         "inventory": "Cargando inventario..."
+      },
+      "title": "Dashboard",
+      "trustScore": {
+        "hero": "Trust Score",
+        "badges": {
+          "high": "Confianza alta",
+          "medium": "Confianza media",
+          "low": "Alerta"
+        },
+        "ranking": "Dev ranking top {pct}% MX",
+        "ctaPlanMejora": "Ver plan de mejora IE",
+        "delta": "vs último mes"
+      },
+      "kpis": {
+        "absorcion30d": "Absorción 30d",
+        "unitsStock": "Unidades en stock",
+        "daysOnMarket": "Días en mercado promedio",
+        "revenueClosed": "Revenue cerrado",
+        "pipelineOps": "Pipeline operaciones",
+        "leadToVisit": "Lead → Visita",
+        "visitToClose": "Visita → Cierre"
+      },
+      "weeklyCarousel": {
+        "title": "Qué pasó esta semana"
+      },
+      "notifs": {
+        "title": "Notificaciones recientes",
+        "empty": "Sin notificaciones nuevas"
+      },
+      "actions": {
+        "title": "Próximas acciones",
+        "empty": "Sin tareas pendientes"
+      },
+      "profile": {
+        "editInline": "Editar",
+        "razonSocial": "Razón social",
+        "certificaciones": "Certificaciones"
+      },
+      "welcomeChecklist": {
+        "title": "Bienvenido",
+        "step1": "Sube tu primer proyecto",
+        "step2": "Sube fotos",
+        "step3": "Sube docs para validación",
+        "step4": "Configura canal distribución",
+        "step5": "Conecta contador (Fase 16)"
+      },
+      "marketPulse": {
+        "title": "Market Pulse IE",
+        "empty": "Sin pulse data esta semana"
       }
     },
     "trustScore": {
@@ -5043,6 +5092,114 @@
             "description": "5 emails escalonados nurturing del proyecto."
           }
         }
+      }
+    },
+    "layout": {
+      "sidebarItems": {
+        "dashboard": "Dashboard",
+        "inventario": "Inventario",
+        "crm": "CRM",
+        "marketing": "Marketing",
+        "analytics": "Analytics IE",
+        "contabilidad": "Contabilidad"
+      },
+      "projectSwitcher": {
+        "label": "Proyecto",
+        "allProjects": "Todos los proyectos",
+        "noProjects": "Sin proyectos"
+      },
+      "contabilidadPin": "Pin"
+    },
+    "featureGate": {
+      "upgradePrompt": {
+        "title": "Función premium",
+        "ctaUpgrade": "Upgrade a {plan}",
+        "freeNote": "Disponible en plan {plan}"
+      }
+    },
+    "siteSelection": {
+      "title": "Site Selection AI",
+      "subtitle": "Encuentra el mejor terreno con IA",
+      "queryPlaceholder": "Ej: Quiero terreno para 60 unidades residencial medio en CDMX norte, budget 60M MXN",
+      "ctaQuery": "Analizar",
+      "loading": "Analizando...",
+      "resultsTitle": "Top 5 zonas recomendadas",
+      "scoreFitLabel": "Fit score",
+      "exportPdf": "Exportar PDF",
+      "history": "Historial",
+      "costNote": "Costo aprox: /bin/zsh.50 USD por consulta (Pro+ tier)"
+    },
+    "marketing": {
+      "title": "Marketing Dev",
+      "tabs": {
+        "campaigns": "Campañas",
+        "landings": "Landings",
+        "kit": "Kit Ventas",
+        "analytics": "Analytics",
+        "portales": "Portales",
+        "videoAi": "Video AI",
+        "attribution": "Atribución"
+      },
+      "campaigns": {
+        "listTitle": "Campañas activas",
+        "newCta": "Nueva campaña",
+        "wizard": {
+          "step1Title": "Tipo",
+          "step2Title": "Proyectos",
+          "step3Title": "Presupuesto + fechas + canales",
+          "step4Title": "Creativos",
+          "step5Title": "Tracking UTM"
+        },
+        "types": {
+          "launch": "Lanzamiento",
+          "promo": "Promo",
+          "evento": "Evento",
+          "branding": "Branding"
+        },
+        "statuses": {
+          "draft": "Borrador",
+          "active": "Activa",
+          "paused": "Pausada",
+          "completed": "Completada",
+          "cancelled": "Cancelada"
+        }
+      },
+      "attribution": {
+        "title": "Multi-touch attribution",
+        "waterfallTitle": "Distribución por canal",
+        "models": {
+          "last_touch": "Último click",
+          "linear": "Lineal",
+          "time_decay": "Decay tiempo",
+          "position_based": "Posición"
+        },
+        "recommendations": {
+          "continue": "Continuar",
+          "pause": "Pausar canal",
+          "scale": "Escalar",
+          "optimize": "Optimizar"
+        },
+        "applyAction": "Aplicar recomendación",
+        "aiReasoning": "Razonamiento IA"
+      },
+      "videoAi": {
+        "title": "Generar video AI proyecto",
+        "ctaProject": "Generar video proyecto",
+        "ctaPrototypes": "Generar 5 videos prototipos destacados",
+        "statusQueued": "En cola",
+        "statusProcessing": "Procesando",
+        "statusReady": "Listo",
+        "proPlanRequired": "Plan Pro+ requerido"
+      },
+      "analytics": {
+        "impressions": "Impresiones",
+        "clicks": "Clicks",
+        "ctr": "CTR",
+        "leads": "Leads",
+        "cpl": "CPL",
+        "cac": "CAC",
+        "spend": "Gasto",
+        "funnel": "Funnel: impression → click → lead → visit → offer → close"
       }
     }
   },
