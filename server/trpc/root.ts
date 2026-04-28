@@ -1,3 +1,4 @@
+import { analyticsDevRouter } from '@/features/analytics-dev/routes/analytics-dev';
 import { atlasRouter } from '@/features/atlas/routes/atlas';
 import { meRouter } from '@/features/auth/routes/me';
 import { mfaRouter } from '@/features/auth/routes/mfa';
@@ -50,6 +51,7 @@ export const appRouter = router({
     timestamp: Date.now(),
   })),
   ai: aiRouter,
+  analyticsDev: analyticsDevRouter,
   atlas: atlasRouter,
   busquedas: busquedasRouter,
   captaciones: captacionesRouter,
