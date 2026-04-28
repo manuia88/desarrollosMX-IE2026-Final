@@ -6,6 +6,8 @@ import {
   morningBriefingDevInput,
   pendientesInput,
   trustScoreInput,
+  type UnitDemandHeatmapItem,
+  unitDemandHeatmapInput,
 } from '@/features/developer/schemas';
 import { router } from '@/server/trpc/init';
 import { authenticatedProcedure } from '@/server/trpc/middleware';
@@ -479,5 +481,62 @@ export const developerRouter = router({
       };
       runtimeCache.set(cacheKey, placeholder, { ttlSeconds: 60 * 60 });
       return placeholder;
+    }),
+
+  // FASE 15 v3 onyx-benchmarked — B.2 Unit-level demand heatmap (M11 APPEND v3 + ADR-060)
+  // Cron unit_demand_score_daily refresca demand_score_30d + demand_signals + demand_color
+  // Aquí solo SELECT (RLS dev/asesor authorized via inherited unidades policy)
+  getUnitDemandHeatmap: authenticatedProcedure
+    .input(unitDemandHeatmapInput)
+    .query(async ({ ctx, input }): Promise<readonly UnitDemandHeatmapItem[]> => {
+      const supabase = createAdminClient();
+      await requireDevContext(supabase, ctx.user.id);
+
+      const { data: project, error: projErr } = await supabase
+        .from('proyectos')
+        .select('id, desarrolladora_id')
+        .eq('id', input.proyectoId)
+        .maybeSingle();
+
+      if (projErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: projErr.message });
+      }
+      if (!project) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'proyecto not found' });
+      }
+
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('desarrolladora_id, rol')
+        .eq('id', ctx.user.id)
+        .single();
+
+      const isOwner =
+        profileData?.desarrolladora_id === project.desarrolladora_id ||
+        profileData?.rol === 'superadmin';
+      if (!isOwner) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'project access denied' });
+      }
+
+      const { data: units, error: unitsErr } = await supabase
+        .from('unidades')
+        .select('id, numero, demand_score_30d, demand_color, demand_signals')
+        .eq('proyecto_id', input.proyectoId)
+        .order('demand_score_30d', { ascending: false });
+
+      if (unitsErr) {
+        sentry.captureException(unitsErr, {
+          tags: { route: 'developer.getUnitDemandHeatmap' },
+        });
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: unitsErr.message });
+      }
+
+      return (units ?? []).map((u) => ({
+        unitId: u.id,
+        numero: u.numero,
+        demandScore: u.demand_score_30d ?? 0,
+        color: (u.demand_color ?? 'red') as 'red' | 'amber' | 'green',
+        signals: (u.demand_signals as Record<string, unknown> | null) ?? null,
+      }));
     }),
 });
