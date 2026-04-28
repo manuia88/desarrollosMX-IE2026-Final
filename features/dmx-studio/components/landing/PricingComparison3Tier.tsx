@@ -11,27 +11,27 @@ type BillingCycle = 'monthly' | 'annual';
 
 interface PlanRow {
   readonly key: StudioPlanKey;
-  readonly priceUsd: number;
+  readonly priceMxn: number;
   readonly highlighted: boolean;
   readonly featureKeys: ReadonlyArray<string>;
 }
 
 const PLAN_ROWS: ReadonlyArray<PlanRow> = [
   {
-    key: 'pro',
-    priceUsd: STUDIO_PLANS.pro.priceUsd,
-    highlighted: true,
-    featureKeys: ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'],
-  },
-  {
-    key: 'foto',
-    priceUsd: STUDIO_PLANS.foto.priceUsd,
+    key: 'founder',
+    priceMxn: STUDIO_PLANS.founder.priceMxn,
     highlighted: false,
     featureKeys: ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'],
   },
   {
+    key: 'pro',
+    priceMxn: STUDIO_PLANS.pro.priceMxn,
+    highlighted: true,
+    featureKeys: ['f1', 'f2', 'f3', 'f4', 'f5', 'f6'],
+  },
+  {
     key: 'agency',
-    priceUsd: STUDIO_PLANS.agency.priceUsd,
+    priceMxn: STUDIO_PLANS.agency.priceMxn,
     highlighted: false,
     featureKeys: ['f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7'],
   },
@@ -39,11 +39,11 @@ const PLAN_ROWS: ReadonlyArray<PlanRow> = [
 
 const ANNUAL_DISCOUNT = 0.2;
 
-function effectivePriceUsd(monthlyUsd: number, cycle: BillingCycle): number {
+function effectivePriceMxn(monthlyMxn: number, cycle: BillingCycle): number {
   if (cycle === 'annual') {
-    return Math.round(monthlyUsd * (1 - ANNUAL_DISCOUNT));
+    return Math.round(monthlyMxn * (1 - ANNUAL_DISCOUNT));
   }
-  return monthlyUsd;
+  return monthlyMxn;
 }
 
 const NUMBER_STYLE: CSSProperties = {
@@ -163,7 +163,7 @@ export function PricingComparison3Tier({ foundersEligible }: PricingComparison3T
 
         <StaggerContainer className="grid gap-6 md:grid-cols-3">
           {PLAN_ROWS.map((plan) => {
-            const price = effectivePriceUsd(plan.priceUsd, cycle);
+            const price = effectivePriceMxn(plan.priceMxn, cycle);
             const planName = tPlans(`${plan.key}.name`);
             const planTagline = tPlans(`${plan.key}.tagline`);
             const isPopular = plan.highlighted;
@@ -221,7 +221,7 @@ export function PricingComparison3Tier({ foundersEligible }: PricingComparison3T
                     style={{ ...NUMBER_STYLE, color: 'var(--canon-cream)' }}
                     data-testid={`price-${plan.key}`}
                   >
-                    {price}
+                    {price.toLocaleString('es-MX')}
                   </span>
                   <span className="text-sm" style={{ color: 'var(--canon-cream-2)' }}>
                     {t('perMonth')}

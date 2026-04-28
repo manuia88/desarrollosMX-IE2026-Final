@@ -7,7 +7,7 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 
-export type PaywallRequiredPlan = 'agency' | 'pro' | 'foto';
+export type PaywallRequiredPlan = 'founder' | 'pro' | 'agency';
 
 export interface PlanPaywallCanonProps {
   readonly requiredPlan: PaywallRequiredPlan;
@@ -17,9 +17,9 @@ export interface PlanPaywallCanonProps {
 }
 
 const PLAN_LABELS: Record<PaywallRequiredPlan, string> = {
-  agency: 'DMX Agency $97/mes',
-  pro: 'DMX Pro',
-  foto: 'DMX Foto',
+  founder: 'DMX Studio Founder $997 MXN/mes',
+  pro: 'DMX Studio Pro $2,497 MXN/mes',
+  agency: 'DMX Studio Agency $5,997 MXN/mes',
 };
 
 const cardStyle: CSSProperties = {
@@ -85,9 +85,11 @@ const ctaStyle: CSSProperties = {
 };
 
 const PERSUASIVE_COPY: Record<PaywallRequiredPlan, string> = {
-  agency: 'Desbloquea automatización Agency: video AI, drone simulation y staging premium.',
-  pro: 'Sube a Pro y libera todas las funciones de generación AI sin marca de agua.',
-  foto: 'Activa Foto y empieza a publicar fichas con calidad estudio en minutos.',
+  founder:
+    'Activa Founder: 5 videos/mes (2 premium + 3 basic) + DMX CRM bundled. 100 founders cohort.',
+  pro: 'Sube a Pro: 15 videos/mes (5 premium + 10 basic) + DMX CRM bundled + series mode.',
+  agency:
+    'Desbloquea Agency: 50 videos/mes (20 premium + 30 basic) + DMX CRM + IA DMX + Multi-user 10 + Modo Reseller.',
 };
 
 export function PlanPaywallCanon({

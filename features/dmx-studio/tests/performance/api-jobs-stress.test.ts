@@ -146,11 +146,11 @@ describe('Stress: 100 concurrent video generations', () => {
     expect(totalEstimated).toBeCloseTo(247.5, 1);
 
     // Cross-check: 100 videos at projected cost matches projection scaled up.
-    // foto plan heavy = 50 videos. 100 videos = 2× heavy on foto = 2 × (50 × 2.505 + 15)
-    // We're not modeling per-plan here — just sanity: projection.variableCosts
-    // uses same per-video base rate.
-    const proLight = projectMonthlyCosts('pro', 'light');
-    expect(proLight.perVideoCost).toBeCloseTo(baseEstimate, 2);
+    // founder plan is base-only (no plan extras). 100 videos = 2× heavy on founder.
+    // We're not modeling per-plan here — just sanity: projection uses same
+    // per-video base rate ($2.475: Kling+TTS+Director+FFmpeg).
+    const founderLight = projectMonthlyCosts('founder', 'light');
+    expect(founderLight.perVideoCost).toBeCloseTo(baseEstimate, 2);
   });
 });
 

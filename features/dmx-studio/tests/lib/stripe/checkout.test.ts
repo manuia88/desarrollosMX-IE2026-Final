@@ -48,14 +48,14 @@ describe('createStudioCheckoutSession (stub mode)', () => {
     const result = await createStudioCheckoutSession({
       userId: 'user-uuid-1',
       userEmail: 'asesor@example.com',
-      planKey: 'pro',
+      planKey: 'founder',
       successUrl: '/studio/welcome',
       cancelUrl: '/studio',
     });
     expect(result.sessionId).toMatch(/^cs_test_/);
     expect(result.customerId).toMatch(/^cus_test_/);
     expect(result.url).toContain('checkout.stripe.com');
-    expect(result.priceId).toBe('price_1TQl2xCdtMsDaBnL2wzRlICK');
+    expect(result.priceId).toBe('price_1TR55ACdtMsDaBnLUwlPAeEo');
   });
 
   it('reuses stripe_customer_id from latest subscription row when present', async () => {
@@ -69,12 +69,12 @@ describe('createStudioCheckoutSession (stub mode)', () => {
     const result = await createStudioCheckoutSession({
       userId: 'user-uuid-2',
       userEmail: 'asesor2@example.com',
-      planKey: 'foto',
+      planKey: 'pro',
       successUrl: '/studio/welcome',
       cancelUrl: '/studio',
     });
     expect(result.customerId).toBe(existingCustomerId);
-    expect(result.priceId).toBe('price_1TQl2yCdtMsDaBnLKVAZbarz');
+    expect(result.priceId).toBe('price_1TR56BCdtMsDaBnLNa7X2WU4');
   });
 
   it('throws when supabase select fails', async () => {

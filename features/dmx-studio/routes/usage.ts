@@ -1,5 +1,6 @@
 // FASE 14.F.3 Sprint 2 BIBLIA — Usage tracking router (Tarea 2.5).
-// Plan limits: Pro 5 / Foto 50 / Agency 20 videos/mes.
+// Plan limits FASE 14.F.12 MXN canon: Founder 5 / Pro 15 / Agency 50 videos/mes.
+// Legacy keys (foto=50) preserved backwards compat H0.
 // Predictive 80% warning canon (memoria upgrade DIRECTO).
 
 import { TRPCError } from '@trpc/server';
@@ -9,9 +10,10 @@ import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { studioProcedure } from './_studio-procedure';
 
 const PLAN_LIMITS: Readonly<Record<string, number>> = {
-  pro: 5,
+  founder: 5,
+  pro: 15,
+  agency: 50,
   foto: 50,
-  agency: 20,
 } as const;
 
 function currentPeriodMonth(): string {
@@ -34,7 +36,7 @@ export const studioUsageRouter = router({
       .limit(1)
       .maybeSingle();
 
-    const planKey = subscription?.plan_key ?? 'pro';
+    const planKey = subscription?.plan_key ?? 'founder';
     const planLimit = subscription?.videos_per_month_limit ?? PLAN_LIMITS[planKey] ?? 5;
 
     const { count: usedCount, error: countErr } = await supabase
@@ -126,7 +128,7 @@ export const studioUsageRouter = router({
       .limit(1)
       .maybeSingle();
 
-    const planKey = subscription?.plan_key ?? 'pro';
+    const planKey = subscription?.plan_key ?? 'founder';
     const planLimit = subscription?.videos_per_month_limit ?? PLAN_LIMITS[planKey] ?? 5;
 
     const { count } = await supabase

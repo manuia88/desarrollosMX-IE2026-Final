@@ -77,7 +77,7 @@ export function BatchModeUpgradeNotice({ locale }: UpgradeNoticeProps) {
         }}
         data-testid="batch-mode-upgrade-link"
       >
-        Upgrade a Agency $97
+        Upgrade a Agency $5,997 MXN
       </Link>
     </div>
   );

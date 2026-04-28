@@ -1,7 +1,9 @@
 // FASE 14.F.3 Sprint 2 BIBLIA Tarea 2.5 — Usage tracking helpers (server-side only).
 // Inserts studio_usage_logs rows + maintains studio_subscriptions.videos_used_this_period
-// counter in lockstep. Plan limit fallbacks: pro=5 / foto=50 / agency=20 (override via
-// studio_subscriptions.videos_per_month_limit when subscription row exists).
+// counter in lockstep. Plan limit fallbacks (FASE 14.F.12 MXN canon): founder=5 /
+// pro=15 / agency=50 (override via studio_subscriptions.videos_per_month_limit when
+// subscription row exists). Legacy keys (foto=50, plain pro=5/agency=20) preserved
+// for backwards compat with H0 historical subscribers.
 // RLS bypass intencional via createAdminClient (server-side only). user_id explícito.
 
 import { createAdminClient } from '@/shared/lib/supabase/admin';
@@ -9,12 +11,15 @@ import { createAdminClient } from '@/shared/lib/supabase/admin';
 type AdminClient = ReturnType<typeof createAdminClient>;
 
 export const STUDIO_PLAN_LIMITS: Readonly<Record<string, number>> = {
-  pro: 5,
+  // Canon FASE 14.F.12 (MXN tier)
+  founder: 5,
+  pro: 15,
+  agency: 50,
+  // Legacy backwards compat (H0 USD tier + B2B2C photographer foto plan)
   foto: 50,
-  agency: 20,
 } as const;
 
-const DEFAULT_PLAN_KEY = 'pro';
+const DEFAULT_PLAN_KEY = 'founder';
 const DEFAULT_PLAN_LIMIT = 5;
 
 export interface RecordVideoGeneratedInput {
