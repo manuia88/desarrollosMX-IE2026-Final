@@ -4288,6 +4288,312 @@
         "contrato": "Contrato",
         "otro": "Otro"
       }
+    },
+    "inventario": {
+      "metaTitle": "Inventario · DMX Dev",
+      "metaDescription": "Gestiona unidades, prototipos, esquemas de pago y avance de obra de tu portafolio.",
+      "title": "Inventario",
+      "subtitle": "Unidades, prototipos, precios y avance",
+      "empty": {
+        "noProjects": "Aún no tienes proyectos. Crea tu primer proyecto para empezar a cargar inventario.",
+        "noUnits": "Sin unidades para los filtros aplicados.",
+        "noPrototypes": "Sin prototipos. Crea uno para usarlo de plantilla.",
+        "noEsquemas": "Sin esquemas de pago activos.",
+        "noAvance": "Sin registros de avance de obra todavía."
+      },
+      "filters": {
+        "title": "Filtros",
+        "proyecto": "Proyecto",
+        "proyectoAll": "Todos los proyectos",
+        "status": "Estado",
+        "statusAll": "Todos los estados",
+        "tipo": "Tipo",
+        "tipoAll": "Todos los tipos",
+        "recamaras": "Recámaras",
+        "priceRange": "Precio (MXN)",
+        "priceMin": "Mín",
+        "priceMax": "Máx",
+        "m2Range": "Superficie (m²)",
+        "m2Min": "Mín",
+        "m2Max": "Máx",
+        "clear": "Limpiar filtros",
+        "apply": "Aplicar"
+      },
+      "status": {
+        "disponible": "Disponible",
+        "apartada": "Apartada",
+        "reservada": "Reservada",
+        "vendida": "Vendida",
+        "bloqueada": "Bloqueada"
+      },
+      "tipo": {
+        "departamento": "Departamento",
+        "casa": "Casa",
+        "townhouse": "Townhouse",
+        "loft": "Loft",
+        "penthouse": "Penthouse",
+        "estudio": "Estudio"
+      },
+      "view": {
+        "label": "Vista",
+        "grid": "Tarjetas",
+        "table": "Tabla",
+        "timeline": "Línea de tiempo",
+        "ariaToggle": "Cambiar tipo de vista"
+      },
+      "metrics": {
+        "title": "Resumen",
+        "total": "Unidades totales",
+        "disponible": "Disponibles",
+        "apartada": "Apartadas",
+        "vendida": "Vendidas",
+        "absorption30d": "Absorción 30 días",
+        "absorption30dShort": "Absorción 30d",
+        "precioPromedioM2": "Precio promedio m²",
+        "daysOnMarketP50": "Días en mercado (mediana)",
+        "noData": "—"
+      },
+      "card": {
+        "ariaLabel": "Unidad {numero}, estado {status}, demanda {demand}",
+        "demandColorLabel": {
+          "red": "Demanda baja",
+          "amber": "Demanda media",
+          "green": "Demanda alta"
+        },
+        "demandTooltipTitle": "Demanda 30 días",
+        "demandSignals": {
+          "landing_views_pct": "Vistas landing",
+          "wishlist_pct": "Wishlist",
+          "matches_pct": "Matches búsqueda",
+          "qr_scans_pct": "Escaneos QR"
+        },
+        "daysOnMarket": "{days} días en mercado",
+        "newListing": "Nuevo",
+        "noPhoto": "Sin foto",
+        "openDetail": "Ver detalle",
+        "partialSignalsBadge": "Señal parcial",
+        "partialSignalsTooltip": "Wishlist + matches búsqueda visibles parcialmente; cobertura completa en H2."
+      },
+      "list": {
+        "loading": "Cargando inventario...",
+        "loadingMore": "Cargando más unidades...",
+        "loadMore": "Cargar más",
+        "endOfList": "Fin de la lista.",
+        "errorTitle": "Error cargando inventario",
+        "errorRetry": "Reintentar"
+      },
+      "table": {
+        "numero": "Número",
+        "proyecto": "Proyecto",
+        "tipo": "Tipo",
+        "rec": "Rec",
+        "banos": "Baños",
+        "m2": "m²",
+        "precio": "Precio",
+        "status": "Estado",
+        "demanda": "Demanda",
+        "actions": "Acciones",
+        "open": "Abrir"
+      },
+      "timeline": {
+        "title": "Cambios recientes (todas las unidades)",
+        "empty": "Sin cambios recientes."
+      },
+      "drawer": {
+        "title": "Unidad {numero}",
+        "close": "Cerrar",
+        "tabs": {
+          "info": "Info",
+          "precios": "Precios",
+          "cambios": "Cambios",
+          "ocupacion": "Ocupación",
+          "leads": "Leads"
+        }
+      },
+      "info": {
+        "edit": "Editar",
+        "save": "Guardar cambios",
+        "cancel": "Cancelar",
+        "savedToast": "Cambios guardados",
+        "errorToast": "Error al guardar",
+        "fields": {
+          "numero": "Número",
+          "tipo": "Tipo",
+          "status": "Estado",
+          "recamaras": "Recámaras",
+          "banos": "Baños",
+          "parking": "Parking",
+          "area_m2": "Área (m²)",
+          "price_mxn": "Precio (MXN)",
+          "maintenance_fee_mxn": "Mantenimiento (MXN)",
+          "floor": "Piso",
+          "motivoPriceChange": "Motivo del cambio de precio (opcional)"
+        },
+        "photos": {
+          "title": "Fotos",
+          "uploadCta": "Arrastra fotos aquí o haz clic para subir",
+          "uploadingLabel": "Subiendo {count} foto(s)...",
+          "uploadErrorToast": "Error al subir fotos",
+          "removePhoto": "Eliminar foto",
+          "makeMain": "Hacer principal",
+          "mainBadge": "Principal",
+          "reorderHint": "Arrastra para reordenar (la primera es la principal)",
+          "maxSize": "Máx 15 MB · WebP/JPEG/PNG",
+          "stubBanner": "Variantes WebP 320/800/1920 H2 — por ahora foto original optimizada por CDN."
+        }
+      },
+      "precios": {
+        "chartTitle": "Historial de precios",
+        "chartAria": "Línea de tiempo del precio de la unidad",
+        "currentPrice": "Precio actual",
+        "noHistory": "Sin cambios de precio registrados.",
+        "tableHeaders": {
+          "fecha": "Fecha",
+          "anterior": "Anterior",
+          "nuevo": "Nuevo",
+          "cambio": "Cambio",
+          "motivo": "Motivo"
+        }
+      },
+      "cambios": {
+        "loading": "Cargando bitácora...",
+        "empty": "Sin cambios registrados.",
+        "eventTypes": {
+          "status_change": "Cambio de estado",
+          "price_change": "Cambio de precio",
+          "info_update": "Actualización de información",
+          "photo_added": "Foto agregada",
+          "photo_removed": "Foto eliminada"
+        }
+      },
+      "ocupacion": {
+        "loading": "Cargando reservas...",
+        "empty": "Sin reservas activas.",
+        "stage": "Etapa",
+        "monto": "Monto",
+        "asesor": "Asesor",
+        "fecha": "Fecha"
+      },
+      "leads": {
+        "loading": "Cargando leads...",
+        "empty": "Sin leads para esta unidad.",
+        "scopeProjectBanner": "Alcance: leads del proyecto (asignación por unidad disponible en H2).",
+        "headers": {
+          "nombre": "Nombre",
+          "contacto": "Contacto",
+          "estado": "Estado",
+          "fuente": "Fuente",
+          "fecha": "Fecha"
+        }
+      },
+      "subnav": {
+        "ariaLabel": "Sub-secciones inventario",
+        "unidades": "Unidades",
+        "prototipos": "Prototipos",
+        "esquemasPago": "Esquemas de pago",
+        "avanceObra": "Avance de obra"
+      },
+      "prototipos": {
+        "title": "Prototipos",
+        "subtitle": "Plantillas reutilizables para crear unidades",
+        "newCta": "Nuevo prototipo",
+        "edit": "Editar",
+        "archive": "Archivar",
+        "fields": {
+          "nombre": "Nombre",
+          "description": "Descripción",
+          "recamaras": "Recámaras",
+          "banos": "Baños",
+          "m2Base": "Superficie base (m²)",
+          "precioBaseMxn": "Precio base (MXN)",
+          "planosUrl": "URL del plano (PDF)"
+        },
+        "savedToast": "Prototipo guardado",
+        "errorToast": "Error al guardar prototipo"
+      },
+      "esquemasPago": {
+        "title": "Esquemas de pago",
+        "subtitle": "Define enganche, mensualidades, contra-entrega y comisión",
+        "newCta": "Nuevo esquema",
+        "edit": "Editar",
+        "archive": "Archivar",
+        "fields": {
+          "nombre": "Nombre",
+          "engancheePct": "Enganche %",
+          "mensualidadesCount": "Mensualidades #",
+          "mesesGracia": "Meses de gracia",
+          "contraEntregaPct": "Contra-entrega %",
+          "comisionPct": "Comisión asesor %",
+          "ivaCalcLogic": "IVA",
+          "financingPartner": "Partner financiero (opcional)",
+          "notes": "Notas"
+        },
+        "ivaOptions": {
+          "exento": "Exento",
+          "incluido": "Incluido",
+          "agregado": "Agregado al final"
+        },
+        "preview": {
+          "title": "Vista previa de calculadora",
+          "precioBase": "Precio base",
+          "engancheMxn": "Enganche",
+          "mensualidadMxn": "Mensualidad",
+          "contraEntregaMxn": "Contra-entrega",
+          "comisionMxn": "Comisión",
+          "ivaMxn": "IVA",
+          "totalMxn": "Total"
+        },
+        "savedToast": "Esquema guardado",
+        "errorToast": "Error al guardar esquema"
+      },
+      "avanceObra": {
+        "title": "Avance de obra",
+        "subtitle": "Registra avance por etapa con fotos y geo opcional",
+        "newCta": "Nuevo registro",
+        "etapa": {
+          "cimentacion": "Cimentación",
+          "estructura": "Estructura",
+          "albanileria": "Albañilería",
+          "instalaciones": "Instalaciones",
+          "acabados": "Acabados",
+          "entrega": "Entrega"
+        },
+        "fields": {
+          "fecha": "Fecha",
+          "etapa": "Etapa",
+          "porcentaje": "% completado",
+          "notes": "Notas",
+          "dronePhotoUrl": "Foto drone (URL)",
+          "geoLocation": "Ubicación (lat,lng)"
+        },
+        "savedToast": "Avance registrado",
+        "errorToast": "Error al registrar avance",
+        "uploadFotos": "Subir fotos del avance"
+      },
+      "actions": {
+        "open": "Abrir",
+        "edit": "Editar",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "create": "Crear",
+        "back": "Volver",
+        "loading": "Cargando..."
+      },
+      "realtime": {
+        "updateToast": "Inventario actualizado en tiempo real",
+        "newUnit": "Nueva unidad agregada",
+        "unitUpdated": "Unidad {numero} actualizada",
+        "unitDeleted": "Unidad {numero} eliminada"
+      },
+      "errors": {
+        "loadFailed": "No se pudo cargar el inventario",
+        "saveFailed": "No se pudo guardar",
+        "uploadFailed": "Error al subir archivo",
+        "uploadTooLarge": "Archivo demasiado grande (máx 15 MB)",
+        "uploadInvalidType": "Formato no permitido (usa WebP/JPEG/PNG)",
+        "forbidden": "Acceso denegado"
+      }
     }
   },
   "Studio": {

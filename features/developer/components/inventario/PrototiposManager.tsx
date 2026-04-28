@@ -4,6 +4,18 @@ import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { trpc } from '@/shared/lib/trpc/client';
 
+// Type alias para evitar TS2589 deep instantiation en map() de listQ.data.
+// La inferencia tRPC anidada genera tipos circulares en el JSX render.
+type PrototipoRow = {
+  id: string;
+  nombre: string;
+  description: string | null;
+  recamaras: number;
+  banos: number;
+  m2_base: number;
+  precio_base_mxn: number;
+};
+
 interface PrototiposManagerProps {
   locale: string;
 }
@@ -126,7 +138,7 @@ export function PrototiposManager({ locale: _locale }: PrototiposManagerProps) {
         </p>
       ) : (
         <ul className="space-y-2">
-          {listQ.data.map((pr) => (
+          {(listQ.data as PrototipoRow[]).map((pr) => (
             <li
               key={pr.id}
               className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-3"
