@@ -1,7 +1,8 @@
 // F14.F.0 — DMX Studio STUB wrappers tests (ADR-018 4 señales).
 // fal-gateway + virtual-staging + seedance activated F14.F.7 Sprint 6 (real wrappers).
 // Deepgram activated F14.F.6 Sprint 5.
-// HeyGen + Flux remain STUB Sprint 7+ H2.
+// HeyGen activated F14.F.8 Sprint 7 (real wrapper, gated por HEYGEN_AVATAR_ENABLED).
+// Flux remains STUB Sprint 8+ H2.
 
 import { TRPCError } from '@trpc/server';
 import { describe, expect, it } from 'vitest';
@@ -19,15 +20,17 @@ async function expectNotImplemented(promise: Promise<unknown>): Promise<void> {
   });
 }
 
-describe('dmx-studio/lib/heygen STUB', () => {
-  it('generateAvatarVideo throws TRPCError NOT_IMPLEMENTED', async () => {
-    await expectNotImplemented(heygen.generateAvatarVideo({}));
-  });
-
-  it('testConnection returns ok:false with reason', async () => {
-    const result = await heygen.testConnection();
-    expect(result.ok).toBe(false);
-    expect(result.reason).toBe('STUB H2 Sprint 7 HeyGen avatar');
+describe('dmx-studio/lib/heygen real wrapper (F14.F.8)', () => {
+  it('testConnection returns ok=false sin API key configurada', async () => {
+    const original = process.env.HEYGEN_API_KEY;
+    process.env.HEYGEN_API_KEY = '';
+    try {
+      const result = await heygen.testConnection();
+      expect(result.ok).toBe(false);
+      expect(result.reason).toMatch(/HEYGEN_API_KEY/);
+    } finally {
+      process.env.HEYGEN_API_KEY = original;
+    }
   });
 });
 
