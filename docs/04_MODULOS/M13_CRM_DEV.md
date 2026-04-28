@@ -157,3 +157,62 @@ const assignAsesorInput = z.object({
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent H) | **Fecha:** 2026-04-17
+
+---
+
+## APPEND v3 onyx-benchmarked (2026-04-28) — B.6 Lead scoring C01 IA shipped + B.7 Journey builder
+
+**Autoritativo:** [ADR-060](../01_DECISIONES_ARQUITECTONICAS/ADR-060_FASE_15_BUCKET_B_ONYX_BENCHMARKED_INTEGRATION.md).
+
+### B.6 — Lead scoring C01 IA shipped real (anchor 21x conversión <5min response)
+
+**BD nueva:** Tabla `lead_scores` (lead_id FK contactos, score 0-100, factors jsonb {engagement, intent, demographics, recency}, model_version, computed_at, ttl_until). RLS dev/asesor por ownership lead.
+
+**Calculator:** `lib/scores/c01-lead-score.ts` extiende patrón C04 dynamic-advisor str-intelligence. Factors:
+- engagement: count touchpoints + recency exponential decay
+- intent: form submissions + meeting scheduled + offer requested
+- demographics: budget match + location match + financial qualification
+- recency: días desde último touchpoint
+
+**Trigger BD:** insert/update `lead_touchpoints` → debounced 30s recompute.
+
+**tRPC nuevas:** `scores.getLeadScore({leadId})`, `scores.recomputeLeadScore({leadId})` extiende `features/ie/routes/scores.ts`.
+
+**Cron:** `lead_score_recompute_hourly` batch refresh degraded leads (TTL>1h).
+
+**Notif type 17:** "Hot lead detected (score >85)" SLA <5min asesor + dev (canal in-app + WA + email).
+
+**Hook React:** `useLeadScore(leadId)` realtime sub canal `lead_scores:lead_id=eq.${id}`.
+
+**UI integration:** Badge `<LeadScoreBadge score={X}>` con colores rojo/ámbar/verde + Kanban M04 sort default hot leads primero.
+
+**Cross-fn shipped:** alimenta M03 Contactos + M04 Búsquedas + M01 Dashboard widget hot leads + dispara B.7 journey trigger.
+
+**Esfuerzo:** 8-12h. **Priority:** 🥇 #1.
+
+---
+
+### B.7 — Journey builder visual básico (anchor -30% ciclo ventas)
+
+**BD nueva:** Tablas `marketing_journeys` (id, name, trigger_event enum, audience_filter jsonb, steps jsonb[], active, created_by, project_id) + `journey_executions` (journey_id, lead_id, current_step, status, started_at, completed_at).
+
+**UI builder:** dnd-kit drag&drop steps simple (NO full Marketo). Trigger types: lead_created, lead_score_changed, visit_scheduled, offer_sent, days_no_activity. Step types: send_email (Resend template), send_wa (wa_template), wait (hours/days), conditional (if score>X then else).
+
+**Cron:** `journey_executor_hourly` evalúa pendientes → ejecuta step actual → log execution.
+
+**5 templates seed:**
+1. Bienvenida lead nuevo (immediate WA + email +24h follow-up)
+2. Follow-up post-visita (3d after visit_scheduled→completed)
+3. Reactivación frío 60d sin actividad
+4. Aniversario apartado (1 año post-deposit confirm)
+5. Drip tour proyecto (5 emails escalonados nurturing)
+
+**tRPC en `features/marketing/routes/marketing.ts`:** `listJourneys`, `createJourney`, `updateJourney`, `pauseJourney`, `getJourneyExecutions`.
+
+**Cross-fn:** trigger desde lead_score_change (B.6) + envía vía M08 Resend shipped + wa_templates shipped + registra event en `lead_touchpoints` → alimenta de vuelta B.6 score.
+
+**Esfuerzo:** 16-20h. **Priority:** 🥇 #2.
+
+---
+
+**Autor v3:** Claude Opus 4.7 PM (canon zero preguntas) | **Fecha:** 2026-04-28

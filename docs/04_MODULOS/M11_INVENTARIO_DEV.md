@@ -183,3 +183,37 @@ const updateUnidadStatusInput = z.object({
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent H) | **Fecha:** 2026-04-17
+
+---
+
+## APPEND v3 onyx-benchmarked (2026-04-28) — B.2 Unit-level demand heatmap
+
+**Autoritativo:** [ADR-060](../01_DECISIONES_ARQUITECTONICAS/ADR-060_FASE_15_BUCKET_B_ONYX_BENCHMARKED_INTEGRATION.md).
+
+### Anchor Onyx M2 +30% eficiencia operativa (parte unit map interactivo)
+
+Cada unidad muestra "calor" (demand_score 0-100) basado en signals reales últimos 30d:
+- 40% landing_views unit-specific (`landing_analytics`)
+- 25% wishlist adds (`wishlist`)
+- 20% busqueda_matches (`busqueda_matches`)
+- 15% qr_scans (`qr_codes.scans`)
+
+### BD nueva
+- Migration agrega `unidades.demand_score_30d int default 0`, `unidades.demand_color text generated always` (rojo<30/ámbar 30-70/verde>70), `unidades.demand_signals jsonb`.
+
+### tRPC
+- `developer.getUnitDemandHeatmap({projectId})` returns `[{unitId, demandScore, color, signalsBreakdown}]`. Extiende `features/developer/routes/developer.ts`.
+
+### Engine + Cron
+- `lib/scores/unit-demand-score.ts` — cálculo composite ponderado.
+- Cron `unit_demand_score_daily` 3am refresca todos proyectos activos.
+
+### UI
+- M11 grid color-codes unit cards rojo/ámbar/verde.
+- Tooltip muestra signals breakdown + comparativa vs media proyecto.
+
+### Cross-fn
+- Alimenta B03 Pricing Autopilot input (recommendation engine considera demand real).
+- Alimenta M14 dashboard "Top 5 unidades hot" widget.
+
+**Esfuerzo:** 6-8h. **Priority Bucket B:** 🥈 #5.

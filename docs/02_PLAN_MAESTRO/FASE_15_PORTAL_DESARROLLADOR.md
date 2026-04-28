@@ -594,3 +594,90 @@ FASE 16 — Contabilidad Dev (CFDI 4.0 + SAT + bancos + payout + holdback + dunn
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
 **Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)
+
+---
+
+# APPEND v3 onyx-benchmarked (2026-04-28) — Bucket B + 4 cross-fn
+
+**Autoritativo:** [ADR-060](../01_DECISIONES_ARQUITECTONICAS/ADR-060_FASE_15_BUCKET_B_ONYX_BENCHMARKED_INTEGRATION.md). Cancelaciones founder: ❌ M1.1.4 tours virtuales, ❌ M4.4.4 ID biométrico, ❌ M4.4.5 tenant screening.
+
+## Bucket B — 7 upgrades onyx-inspired (priorizado business impact)
+
+### MÓDULO 15.B.1 EXTENDIDO — B.2 Unit-level demand heatmap (6-8h, anchor +30% eficiencia op)
+- `[15.B.1.6]` Migration agrega `unidades.demand_score_30d`, `demand_color`, `demand_signals jsonb`.
+- `[15.B.1.7]` Engine `lib/scores/unit-demand-score.ts`: 40% landing_views unit-specific + 25% wishlist + 20% busqueda_matches + 15% qr_scans 30d.
+- `[15.B.1.8]` Cron `unit_demand_score_daily` 3am.
+- `[15.B.1.9]` UI grid M11 color-codes + tooltip signals breakdown.
+- **Cross-fn:** alimenta B03 Pricing Autopilot input + M14 dashboard hot units.
+
+### MÓDULO 15.C.3 NUEVO — B.1 Worksheets brokers (8-10h, anchor -25% ciclo brokers)
+- `[15.C.3.1]` Tabla `unit_worksheets` (asesor solicita reserva 48h, dev aprueba 1-click).
+- `[15.C.3.2]` Router `features/operaciones/routes/worksheets.ts`: requestWorksheet/approveWorksheet/rejectWorksheet/listMyWorksheets/expireWorksheet.
+- `[15.C.3.3]` Cron `worksheets_expire_30min`.
+- `[15.C.3.4]` Trigger BD: approve → unidades.status='reservada' + crea operaciones row.
+- `[15.C.3.5]` Notif types 19-20.
+- `[15.C.3.6]` UI cross-portal M02 ↔ M11 + CF.4 priority sort Trust+Score.
+
+### MÓDULO 15.D.1.5 REFORZADO — B.6 Lead scoring C01 IA shipped (8-12h, anchor 21x conv)
+- `[15.D.1.5.1]` Tabla `lead_scores` (lead_id, score 0-100, factors jsonb, model_version, computed_at, ttl_until).
+- `[15.D.1.5.2]` Calculator `lib/scores/c01-lead-score.ts` (extiende C04 dynamic-advisor pattern).
+- `[15.D.1.5.3]` Trigger BD: lead_touchpoints insert/update → debounce 30s recompute.
+- `[15.D.1.5.4]` tRPC `scores.getLeadScore` + `recomputeLeadScore`.
+- `[15.D.1.5.5]` Cron `lead_score_recompute_hourly`.
+- `[15.D.1.5.6]` Notif type 17 hot lead SLA <5min.
+- **Cross-fn:** badge M03/M04 + Kanban sort + M01 widget + dispara B.7 journey.
+
+### MÓDULO 15.D.3 NUEVO — B.7 Journey builder visual (16-20h, anchor -30% ciclo)
+- `[15.D.3.1]` Tablas `marketing_journeys` + `journey_executions`.
+- `[15.D.3.2]` UI dnd-kit drag&drop steps (trigger → wait → email/WA → condicional).
+- `[15.D.3.3]` Cron `journey_executor_hourly`.
+- `[15.D.3.4]` 5 templates seed (bienvenida/follow-up/abandono/aniversario/drip).
+- `[15.D.3.5]` tRPC `marketing.listJourneys/createJourney/updateJourney/pauseJourney`.
+- **Cross-fn:** trigger ← B.6 + envía vía M08 Resend + wa_templates + append lead_touchpoints.
+
+### MÓDULO 15.D.2 EXTENDIDO — B.4 Ad spend multi-touch + IA pause (10-14h)
+- `[15.D.2.7]` Columnas en `campaign_analytics`: attribution_model, attribution_score jsonb, recommended_action, ai_recommendation_reasoning.
+- `[15.D.2.8]` Engines attribution-multi-touch + ad-spend-optimizer Claude Sonnet.
+- `[15.D.2.9]` Cron `ad_spend_optimizer_daily` 6am.
+- `[15.D.2.10]` UI tab Atribución waterfall.
+- `[15.D.2.11]` Notif type 18.
+- **Cross-fn:** alimenta M09 Estadísticas CPA real.
+
+### MÓDULO 15.D.4 NUEVO — CF.2 Studio video auto desde M14 (3-5h)
+- `[15.D.4.1]` Tab "Video AI" en M14 Marketing Dev.
+- `[15.D.4.2]` Botones generar video proyecto + 5 videos prototipo (reusa Studio routes shipped).
+- `[15.D.4.3]` Cost-tracked en studio_usage (canon F14.F.12 ADR-058).
+- **Diferenciador único LATAM** (Onyx no tiene video AI).
+
+### MÓDULO 15.G.3 NUEVO — B.3 Contracts e-sign Mifiel + smart pre-fill (12-16h)
+- `[15.G.3.1]` Tabla `contracts` (operacion_id, signers jsonb, status, audit_trail, mifiel_doc_id, docusign_envelope_id).
+- `[15.G.3.2]` Smart pre-fill engine: unidades + esquemas_pago + asesores.comision_pct + IVA auto.
+- `[15.G.3.3]` Router `features/operaciones/routes/contracts.ts`.
+- `[15.G.3.4]` Mifiel MX primary + webhook receiver.
+- `[15.G.3.5]` DocuSign STUB ADR-018 H1 (4 señales).
+- `[15.G.3.6]` UI dashboard contratos + audit trail timeline.
+- `[15.G.3.7]` Notif types 21-25.
+- **Cross-fn:** M07 stage='oferta' → trigger draft contract auto (CF.1).
+
+### MÓDULO 15.H.3 NUEVO — B.5 Export BI externo (4-6h)
+- `[15.H.3.1]` Vista `v_bi_export_developer`.
+- `[15.H.3.2]` Endpoint `/api/dev/export?format=powerbi|tableau|looker|csv|xlsx`.
+- `[15.H.3.3]` Auth API key Enterprise + rate limit.
+- `[15.H.3.4]` OpenAPI spec auto-gen.
+- `[15.H.3.5]` Feature gated dev.api_access (Enterprise).
+
+### MÓDULO 15.A.4 EXTENDIDO — CF.3 Atlas constellations Site Selection AI (4-6h)
+- `[15.A.4.6]` Claude tools: getConstellationContext + getGhostZoneRanking + getEcosystemDelta.
+- `[15.A.4.7]` Output 10x más preciso que Onyx (Onyx no tiene constellation graph).
+
+## Multi-agent canon execution (3 olas)
+
+🌊 OLA 1 paralelo 3 ventanas (~20h): M11+B.2 / M13+B.6+B.7 / M15 7 tabs
+🌊 OLA 2 secuencial (~20h): 15.A+CF.3 / 15.C.3+B.1 / 15.D.2+B.4 / 15.D.4+CF.2 / 15.G.3+B.3
+🌊 OLA 3 (~10h): 15.F UPG 7.10 + 15.X Moonshots + 15.G + 15.H.3+B.5 + seed 9 notifs + tag
+
+## Tag final
+
+`fase-15-onyx-benchmarked` (master tag cierre v3).
+
+**Autor v3:** Claude Opus 4.7 PM (canon zero preguntas — memoria 19) | **Fecha:** 2026-04-28

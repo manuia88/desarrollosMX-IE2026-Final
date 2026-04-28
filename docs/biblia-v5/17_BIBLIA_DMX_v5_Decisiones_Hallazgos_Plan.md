@@ -973,3 +973,163 @@ Catálogo IA propio DMX (denominado coloquialmente "DMX IA") es **paid tier add-
 - **`docs/M21_STUDIO/STUDIO_DMX_IA_INTEGRATION.md`** — Doc explicativo founder/asesores qué incluye cada tier.
 
 **Status DECISIÓN N+5:** Shipped (cierre F14.F.12 master tag `fase-14-complete` post-merge). Próximo: FASE 15 Portal Desarrollador M11-M15 (multi-agent canon).
+
+---
+
+## DECISIÓN N+6 — FASE 15 v3 Onyx-Benchmarked + FASE 18 M21 After-Sales (2026-04-28)
+
+### Contexto: Audit Onyx Technologies vs DMX
+
+Audit competitivo Onyx Technologies (Montréal CA, $60B+ inventario, 135K unidades, 50+ devs activos, clientes Four Seasons + QuadReal + Parkbridge + DevMcGill, mercados CA/EUA/UAE/KSA/FR/GR, idiomas EN+FR únicamente — **NO ES → ventaja LATAM moat DMX**) realizado 2026-04-28 contra documento autoritativo founder y HTML feature map. Resultado: 50 features distribuidas en 10 módulos.
+
+**Status DMX vs Onyx:**
+- ✅ Shipped equivalente: 8 features
+- 🟡 Canon FASE 15 planeado (no shipped): 11 features
+- 🟠 Parcial shipped: 11 features
+- 🔴 Gap real: 20 features
+
+**Métricas anchor declaradas Onyx (priorización por business impact):**
++15% revenue/u dynamic pricing | +20% absorción IA pricing | -30% ciclo journeys | +30% eficiencia unit map | -25% ciclo brokers | 21x conversión <5min | +20% velocidad decisión analytics | +35% retención property mgmt
+
+**DMX SUPERA estructuralmente Onyx en 10 áreas (NO catch-up):**
+1. Intelligence Engine 15 índices DMX + 5 niveles N1-N5 AI scores
+2. Atlas público + Constellations 43K edges
+3. DMX Studio Director IA Video (único LATAM)
+4. CFDI 4.0 + Facturapi + AML/UIF + ESG nativo MX
+5. Multi-país día 1 (5 locales, 4 cities expansion shipped F14.1)
+6. Open data LATAM masivo (76K climate + 226 INEGI + 208 ENIGH + 43K constellations)
+7. B07 Competitive Intel 8 dimensiones
+8. B08 Absorption Forecast 12-24m + 3 escenarios
+9. B12 Cost Tracker INEGI INPP real-time
+10. Trust Score H05 desarrolladora 5 categorías
+
+### Cancelaciones founder lock-in 2026-04-28
+
+❌ M1.1.4 Tours virtuales 360°/Matterport (no entra ni H1 ni H2 — defer indefinido)
+❌ M4.4.4 Background checks biométricos identidad ventas (no H1)
+❌ M4.4.5 Tenant screening rentas (no H1, alineado Gate-9)
+
+### Decisiones canon aplicadas (memoria 19 zero preguntas)
+
+**ADR-060 FASE 15 v3 onyx-benchmarked:** Integrar 7 upgrades onyx-inspired Bucket B + 4 cross-functions descubiertas en audit como scope adicional FASE 15 original.
+
+- Bucket B 7 upgrades priorizados business impact:
+  - 🥇 B.6 Lead scoring C01 IA shipped real (anchor 21x conv <5min) — 8-12h
+  - 🥇 B.7 Journey builder visual básico (anchor -30% ciclo) — 16-20h
+  - 🥇 B.4 Ad spend multi-touch + Claude IA pause (anchor optimiz directa) — 10-14h
+  - 🥈 B.1 Worksheets brokers (anchor -25% ciclo brokers) — 8-10h
+  - 🥈 B.2 Unit-level demand heatmap (anchor +30% eficiencia) — 6-8h
+  - 🥈 B.3 Contracts e-sign Mifiel + smart pre-fill (anchor smart templates) — 12-16h
+  - 🥉 B.5 Export BI Power BI/Tableau/Looker (anchor enterprise unlock) — 4-6h
+- 4 cross-functions:
+  - CF.1 Smart contract pre-fill ↔ M07 Operaciones (incluido B.3)
+  - CF.2 DMX Studio video AI ↔ M14 Marketing Dev (3-5h, 15.D.4 nuevo, **diferenciador único LATAM**)
+  - CF.3 Atlas + Constellations ↔ Site Selection AI (4-6h, extiende 15.A.4)
+  - CF.4 Trust Score H05 + Lead score → Worksheet priority sort (1-2h, incluido B.1)
+
+**ADR-061 FASE 18 M21 After-Sales dedicada:** Insertar FASE 18 nueva en slot vacío post FASE 17 (zero desplazamiento fases 19-28). Scope completo Onyx M7 8 features + cross-fn shipped (M03/M06/M09/M12/M14/M15).
+
+- 8 bloques FASE 18:
+  - 18.A Portal cliente branded + auth role
+  - 18.B Selección acabados self-serve + CFDI auto-emit (único LATAM)
+  - 18.C Inspecciones pre-entrega PWA offline
+  - 18.D Solicitudes mantenimiento + work orders
+  - 18.E Portal subcontratistas (invite-only H1)
+  - 18.F AI chatbot post-venta 24/7 Claude RAG
+  - 18.G AI task management subcontratistas
+  - 18.H Insights data-driven cross-fn M09/M15
+- Wall-clock estimado FASE 18: ~50-60h CC-A multi-agent canon paralelo.
+
+### Decisiones producto founder lock-in (D.1-D.11)
+
+| D | Decisión | Lock-in |
+|---|---|---|
+| D.1 | Buyer self-serve checkout | defer FASE 22 |
+| D.2 | M21 After-Sales como FASE 18 nueva | SÍ (ADR-061) |
+| D.3 | Bucket B 7 upgrades completo | SÍ COMPLETO |
+| D.4 | Pricing dev tiers ↔ Studio canon | Opción C híbrida — Pro+ dev = Studio Pro bundled |
+| D.5 | Property mgmt leasing | defer H2 (Gate-9 vigente) |
+| D.6 | Managed marketing services | defer H2 (modelo negocio) |
+| D.7 | Smart contract pre-fill engine integrado B.3 | SÍ (+4-6h ya contado) |
+| D.8 | CF.2 Studio video auto en M14 | SÍ (3-5h, 15.D.4 nuevo) |
+| D.9 | CF.3 Atlas constellations en Site Selection AI | SÍ (4-6h, extiende 15.A.4) |
+| D.10 | CF.4 Worksheet priority sort Trust+Score | SÍ (1-2h, incluido B.1) |
+| D.11 | 9 notif types nuevos (17-25) seed | SÍ |
+
+### Multi-agent canon execution FASE 15 v3 (3 olas)
+
+🌊 OLA 1 paralelo 3 ventanas branches independientes (~20h):
+- CC-A 1 `feat/fase-15-m11-inventario`: M11 + B.2
+- CC-A 2 `feat/fase-15-m13-crm`: M13 + B.6 + B.7
+- CC-A 3 `feat/fase-15-m15-analytics`: M15 7 tabs + Dynamic Pricing + Competitor Radar
+
+🌊 OLA 2 secuencial sobre ola 1 (~20h):
+- 15.A Layout + Dashboard + Trust Score H05 real + Site Selection AI con CF.3
+- 15.C Canal distribución + B.1 Worksheets + CF.4 priority sort
+- 15.D.2 M14 Marketing + B.4 ad spend + CF.2 Studio video
+- 15.G.3 B.3 Contracts e-sign Mifiel + smart pre-fill
+
+🌊 OLA 3 final (~10h):
+- 15.F UPG 7.10 9 herramientas
+- 15.X Moonshots (Simulador + Radar + Reporte Comité + Pipeline Tracker + API Enterprise)
+- 15.G Upload docs + Contabilidad pin stub Fase 16
+- 15.H Plans seed + feature gating + B.5 BI export
+- Seed 9 notif types nuevos
+- Tag `fase-15-onyx-benchmarked`
+
+### Wall-clock estimado FASE 15 v3 onyx-benchmarked
+
+~50-60h CC-A multi-agent canon paralelo / ~140-180h secuencial / ~5-7 días calendario.
+
+### Bucket C — 18 L-NEW H2 distribuidos por destino concreto
+
+Documentados en `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` v3 append:
+- FASE 18 (nueva): 5 L-NEW (sub-features after-sales)
+- FASE 21 (M19): 1 (buyer self-serve checkout)
+- FASE 22.A Banking: 1 (Stripe deposits + escrow)
+- FASE 24 SRE: 1 (anomaly detection)
+- H2 sin fase específica: 10 (property mgmt leasing + ML personalization + market studies + custom dashboards + managed services + multi-currency BI + ventas+leasing unified workflow + 3 sub more)
+
+### Roadmap H1 launch impact
+
+Estimación H1 launch restante pre-decisión N+6: 250-400h CC + 3-6 meses calendario.
+Estimación H1 launch restante post-decisión N+6: **300-460h CC + 4-7 meses calendario** (+1 mes para FASE 18 nueva catch-up After-Sales).
+
+ROI: cierra el diferenciador #1 Onyx + posiciona DMX como "Market.Sell.Manage" (Lease defer H2) + diferenciador único LATAM CFDI auto-emit en finishes selection que ningún competidor global tiene.
+
+### Documentos actualizados/creados decisión N+6
+
+**Creados:**
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-060_FASE_15_BUCKET_B_ONYX_BENCHMARKED_INTEGRATION.md`
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-061_FASE_18_M21_AFTER_SALES_DEDICATED.md`
+- `docs/02_PLAN_MAESTRO/FASE_18_AFTER_SALES_M21.md`
+- `docs/04_MODULOS/M21_AFTER_SALES.md`
+
+**Updated (append v3):**
+- `docs/02_PLAN_MAESTRO/FASE_15_PORTAL_DESARROLLADOR.md` (Bucket B + 4 CF + 3 olas)
+- `docs/04_MODULOS/M11_INVENTARIO_DEV.md` (B.2 demand heatmap)
+- `docs/04_MODULOS/M13_CRM_DEV.md` (B.6 lead scoring + B.7 journey builder)
+- `docs/04_MODULOS/M14_MARKETING_DEV.md` (B.4 ad spend + CF.2 Studio video)
+- `docs/03_CATALOGOS/03.1_CATALOGO_BD_TABLAS.md` (18 tablas nuevas H1 forward)
+- `docs/03_CATALOGOS/03.4_CATALOGO_BD_RLS.md` (~70 RLS policies + 13 SECDEF helpers nuevos)
+- `docs/03_CATALOGOS/03.5_CATALOGO_TRPC_PROCEDURES.md` (~55 procedures nuevas)
+- `docs/03_CATALOGOS/03.7_CATALOGO_CRONS.md` (9 crons nuevos)
+- `docs/03_CATALOGOS/03.10_CATALOGO_UI_FEATURE_FLAGS.md` (16 flags nuevos)
+- `docs/03_CATALOGOS/03.12_CATALOGO_NOTIFS_Y_WEBHOOKS.md` (18 notif types 17-34)
+- `docs/03_CATALOGOS/03.13_E2E_CONNECTIONS_MAP.md` (27 flows E2E nuevos)
+- `docs/03_CATALOGOS/03.14_CASCADE_GRAPH.md` (8 cascadas nuevas)
+- `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` (18 L-NEW H2 onyx-derivados)
+- `docs/02_PLAN_MAESTRO/02.0_INDICE_MAESTRO.md` (FASE 18 inserta + 47 fases total)
+- `docs/biblia-v5/17_BIBLIA_DMX_v5_Decisiones_Hallazgos_Plan.md` (este append decisión N+6)
+
+### Cumplimiento canon
+
+- Memoria 19 (zero preguntas): D.1-D.11 + cancelaciones aplicadas sin preguntar
+- Memoria 11 (upgrades destino concreto): 18 L-NEW H2 con fase target específica
+- Memoria 8 (zero deuda): HOTFIX UX onboarding Studio resuelto pre-ola 1
+- Memoria 13 (escalable desacoplada): M11/M13/M15 paralelo en 3 ventanas independientes
+- Memoria 22 (audit_rls_strict): allowlist v29+v30 mismo PR con SECDEF nuevas
+- Memoria 27 (MCP apply_migration acceptable): 18 tablas nuevas via MCP pre-merge + types regen
+- Multi-agent canon (3 ventanas branches independientes): respetado lockfile manual root.ts/migrations/types
+
+**Status DECISIÓN N+6:** Aprobada founder 2026-04-28. Próximo: ejecución 3 olas FASE 15 v3 onyx-benchmarked + FASE 18 M21 After-Sales post-FASE 17.

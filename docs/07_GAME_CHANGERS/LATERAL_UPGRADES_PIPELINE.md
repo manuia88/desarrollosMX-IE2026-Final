@@ -3251,3 +3251,87 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 
 ---
 
+## APPEND v3 onyx-benchmarked (2026-04-28) — 18 L-NEW H2 derivados Onyx audit
+
+**Origen:** Audit Onyx Technologies vs DMX (50 features × 10 módulos) realizado 2026-04-28. Cancelaciones founder: ❌ tour virtual (1.4), ❌ ID biométrico (4.4), ❌ tenant screening (4.5).
+
+**Autoritativos:** [ADR-060](../01_DECISIONES_ARQUITECTONICAS/ADR-060_FASE_15_BUCKET_B_ONYX_BENCHMARKED_INTEGRATION.md), [ADR-061](../01_DECISIONES_ARQUITECTONICAS/ADR-061_FASE_18_M21_AFTER_SALES_DEDICATED.md).
+
+### Bucket C — 18 L-NEW H2 distribuidos por destino concreto (memoria 11)
+
+#### FASE 18 nueva — M21 After-Sales (8 sub L-NEW agrupados, ya canonizados ADR-061)
+
+- **L-NEW-AFTER-SALES-PORTAL-M21-PARENT** — Onyx M7 8 features → ADR-061 FASE 18 dedicada (~50-60h)
+- **L-NEW-AFTER-SALES-SUBCONTRACTOR-MARKETPLACE-PUBLIC** — H2 extender invite-only a marketplace
+- **L-NEW-AFTER-SALES-INSPECTOR-MARKETPLACE-CERTIFIED** — H2 empleado-only → marketplace inspectores certificados
+- **L-NEW-POSTSALE-NPS-LOOP-AUTOMATED** — H2 survey + score + AI insights post-WO 7d
+- **L-NEW-POSTSALE-WARRANTY-AUTO-RENEWAL-REMINDERS** — H2 cron warranty expiration alerts cliente
+
+#### FASE 21 (M19 Comprador full)
+
+- **L-NEW-BUYER-SELF-SERVE-CHECKOUT** — Onyx M1 1.2 buyer reserva+depósito+firma sin asesor
+  - **Qué es:** flujo e-commerce completo comprador (buscar+seleccionar+reservar+pagar+firmar) sin intermediario.
+  - **Para qué sirve:** acelera ciclo venta + reduce dependencia equipo ventas + diferenciador "compra digital end-to-end".
+  - **Beneficio:** -30% ciclo ventas declarado Onyx.
+  - **Fase target:** FASE 21 M19 Comprador full
+  - **Dependencies:** FASE 22 Banking (Stripe deposits + escrow MX) shipped
+
+#### FASE 22.A Banking
+
+- **L-NEW-STRIPE-BUYER-DEPOSITS-ESCROW-MX** — Onyx M1 1.3
+  - **Qué es:** pasarela pagos depósitos comprador + escrow legal MX para protección.
+  - **Para qué sirve:** habilita L-NEW-BUYER-SELF-SERVE-CHECKOUT FASE 21.
+  - **Beneficio:** moneda en custodia hasta hito construcción → confianza compradores.
+  - **Fase target:** FASE 22.A Banking
+  - **Dependencies:** Stripe Connect (shipped payouts) + escrow legal MX + KYC compliance
+
+#### FASE 24 SRE
+
+- **L-NEW-ANOMALY-DETECTION-DASHBOARD-ALERTS** — Onyx M8 8.4
+  - **Qué es:** dashboards detectan automatically cuellos de botella, caídas conversion, unidades baja absorción.
+  - **Para qué sirve:** alertas proactivas vs reactivas → dev/asesor toma acción antes que problema escale.
+  - **Beneficio:** +20% velocidad decisión declarado Onyx.
+  - **Fase target:** FASE 24 SRE Observability
+
+#### H2 sin fase específica (defer post-launch H1)
+
+- **L-NEW-PROPERTY-MGMT-LEASING-FULL** — Onyx M10 4 features (lease tracking + tenant onboarding + tenant portal + dashboard property mgr) → defer H2 (Gate-9 vigente: asset class residencial nueva only H1)
+- **L-NEW-PROPERTY-MGMT-LEASE-GENERATION-AUTO** — Onyx M10 lease auto contracts vía Mifiel/DocuSign extension
+- **L-NEW-ML-PERSONALIZATION-CONTENT-ENGINE** — Onyx M5 5.3
+  - **Qué es:** Claude Sonnet genera contenido dinámico per-lead (emails+WA+landing copy) basado en perfil 360°.
+  - **Para qué sirve:** +50% engagement declarado Onyx con personalización ML.
+  - **Beneficio:** mensajes hyper-targeted que mueven leads más rápido.
+  - **Fase target:** H2 sin fase específica
+- **L-NEW-PRELAUNCH-MARKET-STUDIES-POLLS** — Onyx M5 5.6
+  - **Qué es:** encuestas + polls + A/B tests público landing antes que dev empiece construcción.
+  - **Para qué sirve:** validar precio + amenidades + mix unidades antes commit diseño.
+  - **Beneficio:** evita costly redesigns post-launch.
+  - **Fase target:** H2 sin fase específica
+- **L-NEW-CUSTOM-DASHBOARD-DRAG-DROP-WIDGETS** — Onyx M8 8.3
+  - **Qué es:** dashboards customizables con drag&drop widgets per-rol (executive/PM/field team).
+  - **Para qué sirve:** cada rol ve KPIs relevantes su función.
+  - **Beneficio:** reduce time-to-insight + mejora adopción.
+  - **Fase target:** H2 sin fase específica
+- **L-NEW-MANAGED-MARKETING-SERVICES-REVENUE** — Onyx M5 5.7
+  - **Qué es:** modelo negocio managed services (DMX crea contenido + diseña campañas + gestiona newsletters + soporte eventos para devs sin equipo interno).
+  - **Para qué sirve:** revenue stream B2B services beyond SaaS subscription.
+  - **Beneficio:** captura segment devs mid-market sin marketing team.
+  - **Fase target:** H2 sin fase específica (modelo negocio, no técnica)
+- **L-NEW-MULTI-CURRENCY-MULTI-MARKET-BI-EXPORT** — Onyx M8 reportes
+  - **Qué es:** reportes BI export multi-currency + multi-market unified dashboard (DMX ya tiene multi-país pero NO unified BI export multi-currency).
+  - **Para qué sirve:** devs operando múltiples mercados con compliance fiscal diferente.
+  - **Beneficio:** unifica reporting cross-país.
+  - **Fase target:** H2 extiende B.5 BI export
+- **L-NEW-CONTRACTS-VENTAS-LEASING-UNIFIED-WORKFLOW** — Onyx M6 ventas+arrendamiento mismo workflow → H2 cuando leasing entra (Gate-9)
+
+### Total L-NEW H2 cohort onyx-derivados: 18
+
+**Distribución por destino:**
+- FASE 18 (nueva): 5 L-NEW
+- FASE 21 (M19): 1
+- FASE 22.A Banking: 1
+- FASE 24 SRE: 1
+- H2 sin fase específica: 10
+
+**Memoria 11 cumplida:** todos los L-NEW tienen destino concreto (fase target específica O explícitamente "H2 sin fase").
+

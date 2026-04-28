@@ -171,3 +171,60 @@ const createCampaignInput = z.object({
 
 ---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent H) | **Fecha:** 2026-04-17
+
+---
+
+## APPEND v3 onyx-benchmarked (2026-04-28) — B.4 Ad spend multi-touch + CF.2 Studio video auto
+
+**Autoritativo:** [ADR-060](../01_DECISIONES_ARQUITECTONICAS/ADR-060_FASE_15_BUCKET_B_ONYX_BENCHMARKED_INTEGRATION.md).
+
+### B.4 — Ad spend multi-touch attribution + Claude IA pause channels (extiende M14)
+
+**BD existente extendida:** Migration agrega columnas a `campaign_analytics`:
+- `attribution_model enum default 'last_touch'` (linear|time_decay|position_based|last_touch)
+- `attribution_score jsonb` (multi-touch breakdown)
+- `recommended_action enum continue|pause|scale|optimize`
+- `ai_recommendation_reasoning text`
+
+**Engines:**
+- `lib/marketing/attribution-multi-touch.ts` — 4 modelos (linear/time_decay/position_based/last_touch)
+- `lib/marketing/ad-spend-optimizer.ts` — Claude Sonnet evalúa cada campaign vs CPL/ROI media
+
+**Cron `ad_spend_optimizer_daily` 6am:** evalúa todas campañas activas. Si CPL > 2x media + ROI < 1.5x → recomienda `pause`. Si ROI > 3x → recomienda `scale`.
+
+**tRPC extiende `features/marketing/routes/marketing.ts`:**
+- `getAttributionReport({campaignId, model})` returns waterfall data
+- `getOptimizerRecommendations({range})` returns top 10 actions
+- `applyOptimizerAction({campaignId, action})` ejecuta con audit_log
+
+**UI:** tab Marketing > Atribución con waterfall chart + recomendaciones inline + botón "Aplicar".
+
+**Notif type 18:** "Canal X pasado threshold — pausar sugerido" daily digest dev.
+
+**Cross-fn:** alimenta M09 Estadísticas asesor con CPA real (no last-click) + M10 Dashboard dev "ROI canales".
+
+**Esfuerzo:** 10-14h. **Priority:** 🥇 #3.
+
+---
+
+### CF.2 — Studio video auto desde M14 (Marketing Dev → DMX Studio)
+
+**Diferenciador único LATAM** — Onyx no tiene video AI generativo.
+
+**UI:** tab "Video AI" en M14 Marketing Dev. Botones:
+- "Generar video proyecto" (1 video hero proyecto, 60-90s)
+- "Generar 5 videos prototipos destacados" (1 por prototipo principal, 30-45s c/u)
+
+**Backend:** Reusa `features/dmx-studio/routes` shipped F14.F (Kling video gen + ElevenLabs TTS + Claude director). Crea `studio_video_jobs` con `source='m14_marketing_dev'` + `project_id` + `dev_id`.
+
+**Cost-tracked:** En `studio_usage` per dev (canon F14.F.12 ADR-058). Pricing dev_pro+ tier incluido (Studio Pro bundled — Opción C founder lock-in).
+
+**tRPC nueva:** `devMarketing.requestStudioVideoJob({projectId, type: 'project'|'prototype'})` extiende M14 router.
+
+**Cross-fn:** Studio routes 100% reutilizadas (zero rebuild) + audit_log tracking + notif type 25 nuevo "Video proyecto generado" cuando completa.
+
+**Esfuerzo:** 3-5h (15.D.4 nuevo). **Priority:** 🥈 cross-fn.
+
+---
+
+**Autor v3:** Claude Opus 4.7 PM (canon zero preguntas) | **Fecha:** 2026-04-28
