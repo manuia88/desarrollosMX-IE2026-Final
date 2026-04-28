@@ -912,3 +912,64 @@ ADR-050 (`docs/01_DECISIONES_ARQUITECTONICAS/ADR-050_DESIGN_LANGUAGE_CANON_PROTO
 **BIBLIA DECISIÓN 2 respetada** (no borrar): primitives Dopamine `shared/ui/primitives/{card,button,...}.tsx` consumidos por 20+ features preservados. Migration gradual feature-by-feature en F2 implementation. Banner deprecated en `docs/referencias-ui/M*.tsx` apunta a layout structure válido + visual SUPERSEDED ADR-050.
 
 **Status DECISIÓN N+4:** Shipped (tag `fase-13.A-complete`). Próximo FASE 13.B M01 Dashboard Asesor "Command Center" (~8-10h CC) — Hero Pulse + KPI Strip + Pipeline Carousel + Daily Standup + Performance Today + 10 innovaciones visuales.
+
+---
+
+## DECISIÓN N+5 — DMX Studio Pricing canon + DMX IA Add-on separado (2026-04-28)
+
+**Status:** FASE 14.F.12 cierre master. Tag esperado `fase-14-complete` post-merge (cierra FASE 14 entera Portal Asesor M06-M10 + M21 DMX Studio).
+
+### Studio Pricing canon — 3 tiers MXN
+
+| Tier | Precio MXN/mes | Audiencia | Cohort especial |
+|---|---|---|---|
+| **Studio Founder** | $997 | Asesor entry-level individual | Lifetime grandfathered primeros 100 |
+| **Studio Pro** | $2,497 | Asesor activo profesional | Sin cohort especial |
+| **Studio Agency** | $5,997 | Brokerage multi-user / multi-brand | DMX IA Add-on bundled por default |
+
+Cada plan Studio incluye acceso completo a **DMX CRM basic** (M01 Captación + M02 Operaciones + M03 Leads + M04 Compradores + M05 Cartera + M06 Marketing + M07 Reportes + M08 Settings + M09 Onboarding asesor). Studio Founder + Pro **NO bundlean** features de IA predictiva — esa capa es Add-on separado opcional.
+
+### DMX IA Add-on — decisión separada (canon ADR-058)
+
+Catálogo IA propio DMX (denominado coloquialmente "DMX IA") es **paid tier add-on opcional**, NO incluido por default en Studio Founder/Pro. Features cubiertas:
+
+- **Atlas predictive scoring** zona+desarrollo H1-H6 horizontes con benchmarks colonia.
+- **Copilot semantic search** matchings inversionistas vía embeddings + reranking.
+- **Smart Matching** auto recomendación búsqueda↔unidad disponible vía Claude tool-use.
+- **AI Agents** portal asesor: agentes autónomos generación reportes + outreach personalizado + qualification leads.
+- **Anomaly detection** mercado: alertas pricing zona + outliers comportamiento.
+
+**Razones para tier separado** (rationale completo en [ADR-058 §Context](../01_DECISIONES_ARQUITECTONICAS/ADR-058_DMX_IA_ADD_ON_PRICING_TIER.md)):
+
+1. **Margen sostenibilidad cohort grandfathered.** Cada call Claude Sonnet 4 cuesta ~$0.05-$0.20 USD reales (memoria canon `feedback_airroi_cost_empirical`); bundlear unlimited en Founder $997 MXN romperia márgenes.
+2. **Adopción gradual razor+blades.** Solo subset asesores Studio (estimate 10-30%) consumirá IA features con regularidad para justificar premium pricing.
+3. **Pricing tier futuro TBD.** Founder defer decisión post-launch Studio cuando exista signal real demanda + data costo real per-asesor activo.
+4. **Modular subscription canon ADR-008.** Schema actual `subscriptions.feature_set` jsonb + futuro `subscription_addons` permite extension sin breaking.
+5. **Decision separation evita scope creep.** Mantener pricing IA decision separado simplifica F14.F.12 cleanup; agendado FASE 15+ portal developer monetization.
+
+### Implications operativas H1 cierre
+
+- **Sin migrations BD F14.F.12.** Schema `subscriptions` + `studio_users_extension` ya soporta extension via `feature_set` jsonb.
+- **Sin Stripe price IDs nuevos.** DMX IA price IDs Stripe se crearán cuando founder defina pricing tier (post-launch).
+- **Sin feature flag runtime F14.F.12.** Flag `DMX_IA_ENABLED` per user defer H2 cuando feature shippee.
+- **Doc canon shipped.** ADR-058 + cross-ref `docs/M21_STUDIO/STUDIO_DMX_IA_INTEGRATION.md` (explicación qué incluye Studio vs DMX IA para founder/asesores/sales).
+
+### Roadmap activación DMX IA Add-on H2
+
+1. Founder define pricing concreto Light / Standard / Pro post-launch Studio (sketch en ADR-058 §Decision orientativo, no commitment).
+2. Stripe price IDs DMX IA hardcoded en `features/dmx-ia/lib/stripe-products.ts` (futuro, ADR-053 unified pattern).
+3. Feature flag `DMX_IA_ENABLED` per user (default false; Agency plan auto-activa post-checkout webhook).
+4. UI canon `PlanPaywallCanon` en features gated cuando Founder/Pro intentan acceder Atlas/Copilot/Smart Matching.
+5. Disclosure flag canon ADR-018 visible en cada call que consume tokens Claude (cost transparency obligatoria).
+6. Telemetría adoption Studio Founder → Pro → Agency + DMX IA Add-on para iterar pricing data-driven.
+
+### Cross-refs canónicos
+
+- **[ADR-058](../01_DECISIONES_ARQUITECTONICAS/ADR-058_DMX_IA_ADD_ON_PRICING_TIER.md)** — DMX IA Add-on canon decision (este registro es resumen ejecutivo).
+- **[ADR-054](../01_DECISIONES_ARQUITECTONICAS/ADR-054_DMX_STUDIO_INTEGRATED_WITHIN_DMX.md)** — Studio dentro DMX único entorno.
+- **[ADR-053](../01_DECISIONES_ARQUITECTONICAS/ADR-053_FEATURE_MODULE_PATTERN_UNIFIED.md)** — Feature module pattern unified (futuro `features/dmx-ia/`).
+- **[ADR-018](../01_DECISIONES_ARQUITECTONICAS/ADR-018_E2E_CONNECTEDNESS.md)** — E2E connectedness + STUBs 4 señales canon.
+- **[ADR-008](../01_DECISIONES_ARQUITECTONICAS/ADR-008_MONETIZATION_FEATURE_GATING.md)** — Monetization tiers canon.
+- **`docs/M21_STUDIO/STUDIO_DMX_IA_INTEGRATION.md`** — Doc explicativo founder/asesores qué incluye cada tier.
+
+**Status DECISIÓN N+5:** Shipped (cierre F14.F.12 master tag `fase-14-complete` post-merge). Próximo: FASE 15 Portal Desarrollador M11-M15 (multi-agent canon).
