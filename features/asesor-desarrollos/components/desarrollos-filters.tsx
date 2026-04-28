@@ -1,16 +1,43 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { type CSSProperties, useId } from 'react';
+import { type CSSProperties, useId, useMemo } from 'react';
+import { getActiveCities } from '@/shared/lib/cities/registry';
 import { IconSearch } from '@/shared/ui/icons/canon-icons';
 import { useDesarrollosFilters } from '../hooks/use-desarrollos-filters';
 import { tipoEnum } from '../lib/filter-schemas';
 import { DesarrollosSort } from './desarrollos-sort';
 
+// ADR-059 — registry-driven cities dropdown. Maps slug → display name; setFilter('city') stores the
+// display name to preserve existing ILIKE-based string filter semantics.
+const CITY_DISPLAY_NAMES: Readonly<Record<string, string>> = {
+  cdmx: 'México',
+  'playa-del-carmen': 'Playa del Carmen',
+  guadalajara: 'Guadalajara',
+  queretaro: 'Querétaro',
+  dubai: 'Dubai',
+};
+
 export function DesarrollosFilters() {
   const t = useTranslations('AsesorDesarrollos.filters');
   const { filters, setFilter, clear, hasActiveFilters } = useDesarrollosFilters();
   const searchId = useId();
+
+  const cityOptions = useMemo(() => {
+    const list = getActiveCities(filters.countryCode);
+    return list.map((c) => ({
+      slug: c.slug,
+      label: CITY_DISPLAY_NAMES[c.slug] ?? c.slug,
+      isBeta: c.status === 'beta',
+    }));
+  }, [filters.countryCode]);
+
+  const matchedCitySlug = useMemo<string>(() => {
+    const current = filters.city;
+    if (!current) return '';
+    const found = cityOptions.find((o) => o.label === current);
+    return found ? found.slug : '';
+  }, [cityOptions, filters.city]);
 
   const containerStyle: CSSProperties = {
     display: 'flex',
@@ -107,12 +134,35 @@ export function DesarrollosFilters() {
         <option value="US">US</option>
       </select>
 
+      <select
+        aria-label={t('city')}
+        value={matchedCitySlug}
+        onChange={(e) => {
+          const slug = e.target.value;
+          if (!slug) {
+            setFilter('city', undefined);
+            return;
+          }
+          const opt = cityOptions.find((o) => o.slug === slug);
+          setFilter('city', opt ? opt.label : undefined);
+        }}
+        style={dropdownBaseStyle}
+      >
+        <option value="">{t('city')}</option>
+        {cityOptions.map((opt) => (
+          <option key={opt.slug} value={opt.slug}>
+            {opt.label}
+            {opt.isBeta ? ' (Beta)' : ''}
+          </option>
+        ))}
+      </select>
+
       <input
         type="text"
-        value={filters.city ?? ''}
+        value={filters.city && !matchedCitySlug ? filters.city : ''}
         onChange={(e) => setFilter('city', e.target.value || undefined)}
         placeholder={t('city')}
-        aria-label={t('city')}
+        aria-label={`${t('city')} (free)`}
         style={numberInputStyle}
       />
 
