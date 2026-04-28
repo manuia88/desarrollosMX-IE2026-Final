@@ -38,6 +38,7 @@ import { studioSprint7PublicGalleryRouter } from './sprint7-public-gallery';
 import { studioSprint7ZoneVideosRouter } from './sprint7-zone-videos';
 import { studioSprint8PublicSeriesRouter } from './sprint8-public-series';
 import { studioSprint8SeriesRouter } from './sprint8-series';
+import { studioSprint9PhotographerRouter } from './sprint9-photographer';
 import { studioStreaksRouter } from './streaks';
 import { studioSubscriptionsRouter } from './subscriptions';
 import { studioSubtitlesRouter } from './subtitles';
@@ -83,6 +84,7 @@ export const studioRouter = router({
   sprint7ZoneVideos: studioSprint7ZoneVideosRouter,
   sprint8PublicSeries: studioSprint8PublicSeriesRouter,
   sprint8Series: studioSprint8SeriesRouter,
+  sprint9Photographer: studioSprint9PhotographerRouter,
   streaks: studioStreaksRouter,
   subscriptions: studioSubscriptionsRouter,
   subtitles: studioSubtitlesRouter,
