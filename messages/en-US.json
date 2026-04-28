@@ -4971,6 +4971,17 @@
       "waShareCta": "Compartir directo por WhatsApp",
       "waShareAriaLabel": "Abrir WhatsApp con el mensaje pre-cargado",
       "waPhoneMissingWarning": "Configura tu teléfono en Brand Kit para compartir directo"
+    },
+    "routeError": {
+      "title": "Something went wrong in DMX Studio",
+      "description": "We hit an unexpected error loading this section. Your saved work is safe.",
+      "retry": "Try again",
+      "goDashboard": "Back to dashboard",
+      "supportHint": "If the problem persists, contact us with the error code.",
+      "codeLabel": "Code"
+    },
+    "loadingSkeleton": {
+      "ariaLabel": "Loading content"
     }
   }
 }

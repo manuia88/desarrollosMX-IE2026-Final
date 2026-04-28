@@ -1,6 +1,8 @@
 'use client';
 
 // F14.F.9 Sprint 8 BIBLIA Tarea 8.3 — Series detail page con timeline + actions.
+// F14.F.11 Sprint 10 BIBLIA Tarea 10.5 fix P1.2 — Loading skeleton canon en lugar
+// de literal "Cargando..." (consistencia con LibraryPage / CalendarPage / Dashboard).
 import { useRouter } from 'next/navigation';
 import { type CSSProperties, useState } from 'react';
 import { trpc } from '@/shared/lib/trpc/client';
@@ -52,6 +54,32 @@ const ghostStyle: CSSProperties = {
   color: 'var(--canon-cream)',
 };
 
+const skeletonHeroStyle: CSSProperties = {
+  background: 'var(--surface-recessed)',
+  border: '1px solid var(--canon-border)',
+  borderRadius: 'var(--canon-radius-card)',
+  height: 32,
+  width: '60%',
+  marginTop: 8,
+};
+
+const skeletonLineStyle: CSSProperties = {
+  background: 'var(--surface-recessed)',
+  border: '1px solid var(--canon-border)',
+  borderRadius: 'var(--canon-radius-card)',
+  height: 14,
+  width: '40%',
+  marginTop: 12,
+};
+
+const skeletonBlockStyle: CSSProperties = {
+  background: 'var(--surface-recessed)',
+  border: '1px solid var(--canon-border)',
+  borderRadius: 'var(--canon-radius-card)',
+  height: 220,
+  marginTop: 24,
+};
+
 export function SeriesDetailPage({ seriesId, locale }: SeriesDetailPageProps) {
   const router = useRouter();
   const series = trpc.studio.sprint8Series.getById.useQuery({ seriesId });
@@ -64,7 +92,18 @@ export function SeriesDetailPage({ seriesId, locale }: SeriesDetailPageProps) {
   const publishMutation = trpc.studio.sprint8Series.publishPublicly.useMutation();
 
   if (series.isLoading) {
-    return <div style={{ color: 'var(--canon-cream-2)' }}>Cargando...</div>;
+    return (
+      <section
+        role="status"
+        aria-busy="true"
+        aria-label="Cargando serie"
+        data-testid="series-detail-loading"
+      >
+        <div aria-hidden="true" style={skeletonHeroStyle} />
+        <div aria-hidden="true" style={skeletonLineStyle} />
+        <div aria-hidden="true" style={skeletonBlockStyle} />
+      </section>
+    );
   }
   if (!series.data) {
     return <div style={{ color: 'var(--canon-cream-2)' }}>Serie no encontrada</div>;

@@ -1,6 +1,8 @@
 'use client';
 
 // F14.F.9 Sprint 8 BIBLIA Tarea 8.3 — Series list page.
+// F14.F.11 Sprint 10 BIBLIA Tarea 10.5 fix P1.2 — Loading skeleton canon en lugar
+// de literal "Cargando..." (consistencia con LibraryPage / CalendarPage / Dashboard).
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
 import { trpc } from '@/shared/lib/trpc/client';
@@ -53,6 +55,15 @@ const ctaStyle: CSSProperties = {
   display: 'inline-block',
 };
 
+const skeletonCardStyle: CSSProperties = {
+  background: 'var(--surface-recessed)',
+  border: '1px solid var(--canon-border)',
+  borderRadius: 'var(--canon-radius-card)',
+  height: '140px',
+};
+
+const SKELETON_KEYS = ['s1', 's2', 's3'] as const;
+
 export function SeriesListPage({ locale }: SeriesListPageProps) {
   const list = trpc.studio.sprint8Series.list.useQuery();
 
@@ -70,7 +81,19 @@ export function SeriesListPage({ locale }: SeriesListPageProps) {
         </Link>
       </div>
 
-      {list.isLoading ? <div style={{ ...subtitleStyle, marginTop: 24 }}>Cargando...</div> : null}
+      {list.isLoading ? (
+        <div
+          role="status"
+          aria-busy="true"
+          aria-label="Cargando series"
+          data-testid="series-list-loading"
+          style={{ ...gridStyle, marginTop: 24 }}
+        >
+          {SKELETON_KEYS.map((key) => (
+            <div key={key} aria-hidden="true" style={skeletonCardStyle} />
+          ))}
+        </div>
+      ) : null}
 
       {!list.isLoading && (list.data?.series.length ?? 0) === 0 ? (
         <div
