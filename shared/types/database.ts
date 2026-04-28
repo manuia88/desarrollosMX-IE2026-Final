@@ -1868,6 +1868,70 @@ export type Database = {
           },
         ]
       }
+      avance_obra: {
+        Row: {
+          autor_id: string | null
+          created_at: string
+          drone_photo_url: string | null
+          etapa: string
+          fecha: string
+          fotos_urls: Json
+          geo_location: Json | null
+          id: string
+          notes: string | null
+          porcentaje: number
+          proyecto_id: string
+        }
+        Insert: {
+          autor_id?: string | null
+          created_at?: string
+          drone_photo_url?: string | null
+          etapa: string
+          fecha: string
+          fotos_urls?: Json
+          geo_location?: Json | null
+          id?: string
+          notes?: string | null
+          porcentaje: number
+          proyecto_id: string
+        }
+        Update: {
+          autor_id?: string | null
+          created_at?: string
+          drone_photo_url?: string | null
+          etapa?: string
+          fecha?: string
+          fotos_urls?: Json
+          geo_location?: Json | null
+          id?: string
+          notes?: string | null
+          porcentaje?: number
+          proyecto_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "avance_obra_autor_id_fkey"
+            columns: ["autor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "avance_obra_autor_id_fkey"
+            columns: ["autor_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "avance_obra_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       avm_estimates: {
         Row: {
           adjustments: Json
@@ -3956,6 +4020,65 @@ export type Database = {
           },
         ]
       }
+      esquemas_pago: {
+        Row: {
+          active: boolean
+          comision_pct: number
+          contra_entrega_pct: number
+          created_at: string
+          enganche_pct: number
+          financing_partner: string | null
+          id: string
+          iva_calc_logic: string
+          mensualidades_count: number
+          meses_gracia: number
+          nombre: string
+          notes: string | null
+          proyecto_id: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          comision_pct?: number
+          contra_entrega_pct?: number
+          created_at?: string
+          enganche_pct: number
+          financing_partner?: string | null
+          id?: string
+          iva_calc_logic?: string
+          mensualidades_count?: number
+          meses_gracia?: number
+          nombre: string
+          notes?: string | null
+          proyecto_id: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          comision_pct?: number
+          contra_entrega_pct?: number
+          created_at?: string
+          enganche_pct?: number
+          financing_partner?: string | null
+          id?: string
+          iva_calc_logic?: string
+          mensualidades_count?: number
+          meses_gracia?: number
+          nombre?: string
+          notes?: string | null
+          proyecto_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "esquemas_pago_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       exclusividad_acuerdos: {
         Row: {
           active: boolean
@@ -4952,6 +5075,64 @@ export type Database = {
             columns: ["colonia_id"]
             isOneToOne: false
             referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      historial_precios: {
+        Row: {
+          autor_id: string | null
+          cambio_pct: number | null
+          created_at: string
+          fecha: string
+          id: string
+          motivo: string | null
+          precio_anterior_mxn: number | null
+          precio_nuevo_mxn: number
+          unidad_id: string
+        }
+        Insert: {
+          autor_id?: string | null
+          cambio_pct?: number | null
+          created_at?: string
+          fecha?: string
+          id?: string
+          motivo?: string | null
+          precio_anterior_mxn?: number | null
+          precio_nuevo_mxn: number
+          unidad_id: string
+        }
+        Update: {
+          autor_id?: string | null
+          cambio_pct?: number | null
+          created_at?: string
+          fecha?: string
+          id?: string
+          motivo?: string | null
+          precio_anterior_mxn?: number | null
+          precio_nuevo_mxn?: number
+          unidad_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "historial_precios_autor_id_fkey"
+            columns: ["autor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "historial_precios_autor_id_fkey"
+            columns: ["autor_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "historial_precios_unidad_id_fkey"
+            columns: ["unidad_id"]
+            isOneToOne: false
+            referencedRelation: "unidades"
             referencedColumns: ["id"]
           },
         ]
@@ -10013,6 +10194,65 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "countries"
             referencedColumns: ["code"]
+          },
+        ]
+      }
+      prototipos: {
+        Row: {
+          active: boolean
+          amenidades: Json
+          banos: number
+          created_at: string
+          description: string | null
+          fotos_urls: Json
+          id: string
+          m2_base: number
+          nombre: string
+          planos_url: string | null
+          precio_base_mxn: number
+          proyecto_id: string
+          recamaras: number
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          amenidades?: Json
+          banos?: number
+          created_at?: string
+          description?: string | null
+          fotos_urls?: Json
+          id?: string
+          m2_base: number
+          nombre: string
+          planos_url?: string | null
+          precio_base_mxn: number
+          proyecto_id: string
+          recamaras?: number
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          amenidades?: Json
+          banos?: number
+          created_at?: string
+          description?: string | null
+          fotos_urls?: Json
+          id?: string
+          m2_base?: number
+          nombre?: string
+          planos_url?: string | null
+          precio_base_mxn?: number
+          proyecto_id?: string
+          recamaras?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prototipos_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
           },
         ]
       }
@@ -20123,6 +20363,55 @@ export type Database = {
           },
         ]
       }
+      unit_change_log: {
+        Row: {
+          actor_id: string | null
+          event_type: string
+          id: string
+          occurred_at: string
+          payload: Json
+          unidad_id: string
+        }
+        Insert: {
+          actor_id?: string | null
+          event_type: string
+          id?: string
+          occurred_at?: string
+          payload?: Json
+          unidad_id: string
+        }
+        Update: {
+          actor_id?: string | null
+          event_type?: string
+          id?: string
+          occurred_at?: string
+          payload?: Json
+          unidad_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_change_log_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_change_log_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_change_log_unidad_id_fkey"
+            columns: ["unidad_id"]
+            isOneToOne: false
+            referencedRelation: "unidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_scores: {
         Row: {
           citations: Json
@@ -22325,6 +22614,10 @@ export type Database = {
         Args: { p_request_id: string }
         Returns: undefined
       }
+      asesor_authorized_broker: {
+        Args: { p_proyecto_id: string }
+        Returns: boolean
+      }
       audit_rls_violations: {
         Args: never
         Returns: {
@@ -22547,6 +22840,8 @@ export type Database = {
           market_id: string
         }[]
       }
+      dev_owns_project: { Args: { p_proyecto_id: string }; Returns: boolean }
+      dev_owns_unit: { Args: { p_unidad_id: string }; Returns: boolean }
       disablelongtransactions: { Args: never; Returns: string }
       drop_constraints: {
         Args: {
