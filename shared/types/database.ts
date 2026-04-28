@@ -17369,55 +17369,182 @@ export type Database = {
           },
         ]
       }
+      studio_series_episodes: {
+        Row: {
+          created_at: string
+          description: string | null
+          episode_number: number
+          guest_avatars: Json
+          id: string
+          meta: Json
+          music_track_id: string | null
+          narrative_phase: string | null
+          project_id: string | null
+          real_progress_pct: number | null
+          series_id: string
+          shoot_completed_date: string | null
+          shoot_recommended_date: string | null
+          status: string
+          title: string
+          title_card_storage_path: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          episode_number: number
+          guest_avatars?: Json
+          id?: string
+          meta?: Json
+          music_track_id?: string | null
+          narrative_phase?: string | null
+          project_id?: string | null
+          real_progress_pct?: number | null
+          series_id: string
+          shoot_completed_date?: string | null
+          shoot_recommended_date?: string | null
+          status?: string
+          title: string
+          title_card_storage_path?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          episode_number?: number
+          guest_avatars?: Json
+          id?: string
+          meta?: Json
+          music_track_id?: string | null
+          narrative_phase?: string | null
+          project_id?: string | null
+          real_progress_pct?: number | null
+          series_id?: string
+          shoot_completed_date?: string | null
+          shoot_recommended_date?: string | null
+          status?: string
+          title?: string
+          title_card_storage_path?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_series_episodes_music_track_id_fkey"
+            columns: ["music_track_id"]
+            isOneToOne: false
+            referencedRelation: "studio_music_tracks"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_series_episodes_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_series_episodes_series_id_fkey"
+            columns: ["series_id"]
+            isOneToOne: false
+            referencedRelation: "studio_series_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_series_projects: {
         Row: {
+          auto_progress_enabled: boolean
           cover_image_url: string | null
           created_at: string
+          desarrollo_id: string | null
           episode_project_ids: string[]
           episodes_count: number
           id: string
+          is_published_publicly: boolean
           meta: Json
+          music_theme_track_id: string | null
+          narrative_arc: Json
           organization_id: string | null
+          public_slug: string | null
           series_type: string
           status: string
+          template_id: string | null
           title: string
           updated_at: string
           user_id: string
+          visual_consistency_refs: string[]
         }
         Insert: {
+          auto_progress_enabled?: boolean
           cover_image_url?: string | null
           created_at?: string
+          desarrollo_id?: string | null
           episode_project_ids?: string[]
           episodes_count?: number
           id?: string
+          is_published_publicly?: boolean
           meta?: Json
+          music_theme_track_id?: string | null
+          narrative_arc?: Json
           organization_id?: string | null
+          public_slug?: string | null
           series_type?: string
           status?: string
+          template_id?: string | null
           title: string
           updated_at?: string
           user_id: string
+          visual_consistency_refs?: string[]
         }
         Update: {
+          auto_progress_enabled?: boolean
           cover_image_url?: string | null
           created_at?: string
+          desarrollo_id?: string | null
           episode_project_ids?: string[]
           episodes_count?: number
           id?: string
+          is_published_publicly?: boolean
           meta?: Json
+          music_theme_track_id?: string | null
+          narrative_arc?: Json
           organization_id?: string | null
+          public_slug?: string | null
           series_type?: string
           status?: string
+          template_id?: string | null
           title?: string
           updated_at?: string
           user_id?: string
+          visual_consistency_refs?: string[]
         }
         Relationships: [
+          {
+            foreignKeyName: "studio_series_projects_desarrollo_id_fkey"
+            columns: ["desarrollo_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_series_projects_music_theme_track_id_fkey"
+            columns: ["music_theme_track_id"]
+            isOneToOne: false
+            referencedRelation: "studio_music_tracks"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "studio_series_projects_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "studio_organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_series_projects_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "studio_series_templates"
             referencedColumns: ["id"]
           },
           {
@@ -17435,6 +17562,54 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      studio_series_templates: {
+        Row: {
+          category: string
+          created_at: string
+          default_total_episodes: number
+          description: string | null
+          id: string
+          is_active: boolean
+          music_theme_mood: string | null
+          name: string
+          narrative_arc: Json
+          slug: string
+          thumbnail_storage_path: string | null
+          updated_at: string
+          visual_style: Json
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          default_total_episodes: number
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          music_theme_mood?: string | null
+          name: string
+          narrative_arc: Json
+          slug: string
+          thumbnail_storage_path?: string | null
+          updated_at?: string
+          visual_style?: Json
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          default_total_episodes?: number
+          description?: string | null
+          id?: string
+          is_active?: boolean
+          music_theme_mood?: string | null
+          name?: string
+          narrative_arc?: Json
+          slug?: string
+          thumbnail_storage_path?: string | null
+          updated_at?: string
+          visual_style?: Json
+        }
+        Relationships: []
       }
       studio_speech_analytics: {
         Row: {
