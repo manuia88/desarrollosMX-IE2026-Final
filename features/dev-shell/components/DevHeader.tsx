@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ProjectSwitcher } from '@/features/developer/components/dashboard/ProjectSwitcher';
+import { ProjectSwitcher } from '@/shared/ui/developer-shell/ProjectSwitcher';
 
 export interface DevHeaderUser {
   readonly id: string;
