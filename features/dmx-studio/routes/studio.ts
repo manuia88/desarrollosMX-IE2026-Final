@@ -24,6 +24,13 @@ import { studioRawVideoPipelineRouter } from './raw-video-pipeline';
 import { studioRawVideosRouter } from './raw-videos';
 import { studioRemarketingRouter } from './remarketing';
 import { studioSpeechAnalyticsRouter } from './speech-analytics';
+import {
+  studioSprint6CinemaModeRouter,
+  studioSprint6DroneRouter,
+  studioSprint6SeedanceRouter,
+  studioSprint6TogglesRouter,
+  studioSprint6VirtualStagingRouter,
+} from './sprint6';
 import { studioStreaksRouter } from './streaks';
 import { studioSubscriptionsRouter } from './subscriptions';
 import { studioSubtitlesRouter } from './subtitles';
@@ -38,11 +45,13 @@ export const studioRouter = router({
   brandKit: studioBrandKitRouter,
   calendar: studioCalendarRouter,
   challenges: studioChallengesRouter,
+  cinemaMode: studioSprint6CinemaModeRouter,
   copyPack: studioCopyPackRouter,
   copyVersions: studioCopyVersionsRouter,
   crossFunctions: studioCrossFunctionsRouter,
   cuts: studioCutsRouter,
   dashboard: studioDashboardRouter,
+  drone: studioSprint6DroneRouter,
   edl: studioEdlRouter,
   foundersCohort: studioFoundersCohortRouter,
   highlightReels: studioHighlightReelsRouter,
@@ -57,12 +66,15 @@ export const studioRouter = router({
   rawVideoPipeline: studioRawVideoPipelineRouter,
   rawVideos: studioRawVideosRouter,
   remarketing: studioRemarketingRouter,
+  seedance: studioSprint6SeedanceRouter,
   speechAnalytics: studioSpeechAnalyticsRouter,
+  sprint6Toggles: studioSprint6TogglesRouter,
   streaks: studioStreaksRouter,
   subscriptions: studioSubscriptionsRouter,
   subtitles: studioSubtitlesRouter,
   urlImport: studioUrlImportRouter,
   usage: studioUsageRouter,
+  virtualStaging: studioSprint6VirtualStagingRouter,
   voiceClones: studioVoiceClonesRouter,
   waitlist: studioWaitlistRouter,
 });
