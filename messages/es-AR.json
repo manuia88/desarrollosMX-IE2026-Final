@@ -4594,6 +4594,209 @@
         "uploadInvalidType": "Formato no permitido (usa WebP/JPEG/PNG)",
         "forbidden": "Acceso denegado"
       }
+    },
+    "analytics": {
+      "metaTitle": "Analytics IE — Portal Desarrollador",
+      "metaDescription": "Demanda, pricing, absorción, competencia, PMF, costos y predicciones IE en un solo lugar.",
+      "title": "Analytics IE",
+      "subtitle": "7 pestañas alimentadas por scores Intelligence Engine + datos reales de tus proyectos.",
+      "selectProject": "Proyecto",
+      "selectProjectPlaceholder": "Seleccioná…",
+      "emptyProject": "Seleccioná un proyecto para visualizar sus analytics.",
+      "contextLine": "{ciudad} · {colonia} · {disponibles}/{totales} unidades disponibles",
+      "tablist": "Pestañas Analytics IE",
+      "tabs": {
+        "demanda": "Demanda",
+        "pricing": "Pricing",
+        "absorcion": "Absorción",
+        "competencia": "Competencia",
+        "pmf": "PMF",
+        "costos": "Costos",
+        "predicciones": "Predicciones"
+      },
+      "disclosure": {
+        "observed": "Observado",
+        "mixed": "Mixto",
+        "synthetic": "Sintético",
+        "observedTooltip": "Datos 100% reales con muestra suficiente.",
+        "mixedTooltip": "Combina datos observados + parámetros plausibles.",
+        "syntheticTooltip": "Parámetros plausibles. Faltan datos para confianza alta.",
+        "observedAria": "Datos observados",
+        "mixedAria": "Datos mixtos",
+        "syntheticAria": "Datos sintéticos"
+      },
+      "demanda": {
+        "loading": "Cargando heatmap…",
+        "mapTitle": "Heatmap demanda zona",
+        "mapAria": "Mapa interactivo de demanda",
+        "matchesTitle": "Búsquedas matcheando inventario",
+        "matchScore": "Match: {score}",
+        "noMatches": "Sin matches por ahora.",
+        "noCenter": "Proyecto sin coordenadas. Editá ubicación.",
+        "noToken": "Mapbox token no configurado.",
+        "kpis": {
+          "searches": "Búsquedas activas",
+          "matches": "Matches",
+          "matchRate": "Match rate"
+        }
+      },
+      "pricing": {
+        "loading": "Calculando sugerencias…",
+        "title": "Pricing Autopilot (B03)",
+        "summary": "{total} unidades · {bajadas} ↓ · {subidas} ↑ · {hold} = · Δ promedio {deltaAvg}%",
+        "filterDeviation": "Solo desviaciones >5%",
+        "autoApply": "Auto-apply",
+        "autoApplyTier": "Pro+",
+        "autoApplyHint": "Cambios ≤3%/día respetan guard rails canon.",
+        "apply": "Aceptar",
+        "emptySuggestions": "No hay unidades activas con datos suficientes.",
+        "dailyTitle": "Sugerencias daily (cron)",
+        "dailyHint": "Generadas 2am — válidas 24h",
+        "dailyEmpty": "Sin sugerencias pendientes.",
+        "cols": {
+          "unit": "Unidad",
+          "tipo": "Tipo",
+          "current": "Precio actual",
+          "suggested": "Sugerido IE",
+          "delta": "Δ %",
+          "dom": "DOM",
+          "action": "Acción",
+          "reasoning": "Razonamiento"
+        },
+        "actions": {
+          "bajar": "Bajar",
+          "subir": "Subir",
+          "mantener": "Mantener"
+        }
+      },
+      "absorcion": {
+        "loading": "Calculando forecast…",
+        "title": "Absorción 24m (B08)",
+        "velocityActual": "Velocidad actual",
+        "velocityBenchmark": "Benchmark zona",
+        "etaOpt": "ETA optimista",
+        "etaBase": "ETA base",
+        "etaPes": "ETA pesimista",
+        "priceShockLabel": "Si ajusto precio: {value}%",
+        "priceShockAria": "Slider de simulación de precio"
+      },
+      "competencia": {
+        "loading": "Calculando radar competitivo…",
+        "title": "Competencia 8D (B07)",
+        "score": "Score competitivo: {score}/100",
+        "cols": {
+          "project": "Proyecto",
+          "precio_m2": "Precio/m²",
+          "amenidades": "Amenities",
+          "absorcion": "Absorción",
+          "dom": "DOM",
+          "quality": "Calidad",
+          "momentum": "Momentum",
+          "similarity": "Similaridad"
+        },
+        "dims": {
+          "precio_m2": "Precio/m²",
+          "amenidades": "Amenities",
+          "tamano": "Tamaño",
+          "absorcion": "Absorción",
+          "marketing_spend": "Marketing",
+          "dom": "DOM",
+          "quality": "Calidad",
+          "momentum": "Momentum"
+        },
+        "radar": {
+          "title": "Competitor Radar",
+          "addMonitor": "+ Monitor",
+          "cancel": "Cancelar",
+          "namePlaceholder": "Nombre del competidor",
+          "urlPlaceholder": "URL (opcional)",
+          "save": "Guardar",
+          "remove": "Eliminar",
+          "empty": "Sin monitores configurados.",
+          "alertsFeed": "Alertas últimos 7 días",
+          "alertsEmpty": "Sin alertas recientes.",
+          "alertEmpty": "Cambio detectado",
+          "markRead": "Marcar leída",
+          "read": "Leída",
+          "alertTypes": {
+            "new_launch": "Nuevo lanzamiento",
+            "price_change": "Cambio de precio",
+            "inventory_change": "Cambio inventario",
+            "avance_change": "Avance obra",
+            "ad_visible": "Ad visible",
+            "review_change": "Cambio review"
+          }
+        }
+      },
+      "pmf": {
+        "loading": "Calculando PMF…",
+        "title": "Product-Market Fit (B04)",
+        "score": "Score",
+        "matchPct": "Match %",
+        "demandTotal": "Búsquedas total",
+        "gapsTitle": "Gaps demanda no satisfecha",
+        "gapsEmpty": "Tu inventario cubre la demanda observada.",
+        "oportunidadesTitle": "Oportunidades de ajuste",
+        "historicoTitle": "Histórico 12 meses"
+      },
+      "costos": {
+        "loading": "Calculando INPP…",
+        "title": "Cost Tracker INPP (B12)",
+        "weightedDelta": "Δ ponderado: {value}%",
+        "score": "Score: {value}",
+        "alerts": {
+          "normal": "Normal",
+          "warning": "Advertencia",
+          "critical": "Crítico"
+        },
+        "breakdown": {
+          "inpp": "INPP construcción",
+          "materiales": "Materiales",
+          "manoObra": "Mano de obra"
+        }
+      },
+      "predicciones": {
+        "loading": "Calculando predicciones…",
+        "cycle": {
+          "title": "Ciclo mercado (B05)",
+          "fase": "Fase actual",
+          "confidence": "Confianza {pct}%",
+          "phases": {
+            "expansion": "Expansión",
+            "recuperacion": "Recuperación",
+            "pico": "Pico",
+            "contraccion": "Contracción",
+            "insufficient": "Datos insuficientes"
+          }
+        },
+        "launch": {
+          "title": "Launch timing (B15)",
+          "recommended": "Ventana recomendada",
+          "score": "Score {score}/100",
+          "months": {
+            "0": "Ene",
+            "1": "Feb",
+            "2": "Mar",
+            "3": "Abr",
+            "4": "May",
+            "5": "Jun",
+            "6": "Jul",
+            "7": "Ago",
+            "8": "Sep",
+            "9": "Oct",
+            "10": "Nov",
+            "11": "Dic"
+          }
+        },
+        "cashFlow": {
+          "title": "Cash flow 24m (B09)",
+          "breakeven": "Breakeven",
+          "cumulative": "Acumulado final"
+        },
+        "master": {
+          "title": "Recomendación maestra IA"
+        }
+      }
     }
   },
   "Studio": {
