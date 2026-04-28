@@ -7,6 +7,7 @@ import { busquedasRouter } from '@/features/busquedas/routes/busquedas';
 import { captacionesRouter } from '@/features/captaciones/routes/captaciones';
 import { constellationsRouter } from '@/features/constellations/routes/constellations';
 import { crmRouter } from '@/features/crm/routes/crm';
+import { crmDevRouter } from '@/features/crm-dev/routes/crm-dev';
 import { desarrollosRouter } from '@/features/desarrollos/routes/desarrollos';
 import { developerRouter } from '@/features/developer/routes/developer';
 import { studioRouter } from '@/features/dmx-studio/routes/studio';
@@ -58,6 +59,7 @@ export const appRouter = router({
   causal: causalRouter,
   constellations: constellationsRouter,
   crm: crmRouter,
+  crmDev: crmDevRouter,
   desarrollos: desarrollosRouter,
   developer: developerRouter,
   estadisticas: estadisticasRouter,

@@ -4797,6 +4797,253 @@
           "title": "Master AI recommendation"
         }
       }
+    },
+    "crm": {
+      "page": {
+        "title": "CRM",
+        "subtitle": "{total} leads · {hot} 🔥 hot",
+        "metaTitle": "CRM · Developer",
+        "metaDescription": "Owned pipeline: lead → interest → visit → offer → close.",
+        "createLead": "+ New lead",
+        "openJourneys": "Journeys",
+        "loading": "Loading leads..."
+      },
+      "empty": {
+        "title": "No leads yet in your pipeline",
+        "description": "Connect landings, QR codes, or external portals to start capturing leads automatically. You can also create one manually.",
+        "cta": "+ Create lead manually"
+      },
+      "stage": {
+        "lead": "Lead",
+        "interes": "Interest",
+        "visita": "Visit",
+        "oferta": "Offer",
+        "cierre": "Close"
+      },
+      "source": {
+        "landing": "Landing",
+        "inmuebles24": "Inmuebles24",
+        "mercadolibre": "MercadoLibre",
+        "facebook": "Facebook",
+        "whatsapp": "WhatsApp",
+        "walk_in": "Walk-in",
+        "referido": "Referral",
+        "evento": "Event",
+        "otro": "Other"
+      },
+      "card": {
+        "aria": "{name} — {days} days in stage",
+        "daysInStage": "{days}d in stage",
+        "assigned": "Assigned",
+        "unassigned": "Unassigned",
+        "noContact": "No contact"
+      },
+      "kanban": {
+        "aria": "Dev CRM kanban pipeline",
+        "emptyColumn": "Empty",
+        "moveBack": "Move back one stage",
+        "moveForward": "Move forward one stage",
+        "movedTo": "Moved to {stage}",
+        "serverError": "Server error: {detail}",
+        "dragStart": "Dragging lead — drop on a column"
+      },
+      "score": {
+        "badge": {
+          "unscored": "No score",
+          "aria": "Lead score {score} ({tier})"
+        },
+        "tier": {
+          "hot": "hot",
+          "warm": "warm",
+          "cold": "cold"
+        },
+        "breakdown": {
+          "title": "Lead score breakdown",
+          "engagement": "Engagement",
+          "intent": "Intent",
+          "demographics": "Demographics",
+          "recency": "Recency"
+        }
+      },
+      "form": {
+        "title": "New lead",
+        "save": "Save lead",
+        "saving": "Saving...",
+        "cancel": "Cancel",
+        "closeAria": "Close form",
+        "contactName": {
+          "label": "Full name",
+          "required": "Name required"
+        },
+        "contactEmail": {
+          "label": "Email"
+        },
+        "contactPhone": {
+          "label": "Phone"
+        },
+        "source": {
+          "label": "Source",
+          "options": {
+            "landing": "Landing",
+            "inmuebles24": "Inmuebles24",
+            "mercadolibre": "MercadoLibre",
+            "facebook": "Facebook",
+            "whatsapp": "WhatsApp",
+            "walk_in": "Walk-in",
+            "referido": "Referral",
+            "evento": "Event",
+            "otro": "Other"
+          }
+        },
+        "budgetMin": {
+          "label": "Min budget"
+        },
+        "budgetMax": {
+          "label": "Max budget"
+        },
+        "notes": {
+          "label": "Initial notes"
+        }
+      },
+      "drawer": {
+        "title": "Lead detail",
+        "closeAria": "Close drawer",
+        "loading": "Loading lead...",
+        "actions": {
+          "assignAsesor": "Assign agent",
+          "recompute": "Recompute score",
+          "recomputing": "Recomputing..."
+        },
+        "tabs": {
+          "aria": "Lead sections",
+          "timeline": "Timeline",
+          "score": "Score",
+          "inbox": "Inbox",
+          "tareas": "Tasks"
+        },
+        "timeline": {
+          "empty": "No activity yet.",
+          "loading": "Loading timeline...",
+          "partialNotice": "Partial timeline. Missing sources: {sources}.",
+          "type": {
+            "lead_created": "Lead created",
+            "lead_updated": "Lead updated",
+            "score_computed": "Score computed",
+            "journey_event": "Journey event"
+          }
+        },
+        "score": {
+          "empty": "No score yet. Recompute to generate one.",
+          "model": "Model {version}",
+          "computedAt": "Computed {date}",
+          "factor": {
+            "engagement": "Engagement (touchpoints)",
+            "intent": "Intent (forms, visits, offers)",
+            "demographics": "Demographics (budget, zone)",
+            "recency": "Recency (days since update)"
+          }
+        },
+        "inbox": {
+          "comingSoon": "Unified inbox coming soon",
+          "description": "WhatsApp Business + Resend inbound + CRM events. Available FASE 15 wave 2."
+        },
+        "tareas": {
+          "comingSoon": "Dev team tasks coming soon",
+          "description": "Follow-ups, prepare proposal, send docs. Available FASE 15 wave 2."
+        }
+      },
+      "assign": {
+        "title": "Assign agent",
+        "description": "Paste the ID of the agent allied with the project. The agent receives a notification on assignment.",
+        "inputLabel": "Agent ID",
+        "placeholder": "agent uuid (empty = unassign)",
+        "cancel": "Cancel",
+        "assign": "Assign"
+      },
+      "journey": {
+        "page": {
+          "metaTitle": "Journey Builder — Dev CRM",
+          "metaDescription": "Automate multi-channel sequences: WhatsApp + email + conditionals.",
+          "title": "Journey Builder",
+          "subtitle": "Automate multi-channel follow-ups (WA + email) with score-based conditionals.",
+          "backToCRM": "← CRM",
+          "openBuilder": "+ Create journey",
+          "cancelBuilder": "Cancel",
+          "activeList": "My journeys",
+          "empty": "You don't have journeys yet. Start with a template.",
+          "loading": "Loading journeys...",
+          "stepsCount": "{count} steps",
+          "active": "Active",
+          "paused": "Paused",
+          "pause": "Pause",
+          "templatesTitle": "Templates",
+          "useTemplate": "Use template"
+        },
+        "triggerEvent": {
+          "lead_created": "New lead",
+          "lead_score_changed": "Score changed",
+          "visit_scheduled": "Visit scheduled",
+          "offer_sent": "Offer sent",
+          "days_no_activity": "No activity N days",
+          "aniversary_apartado": "Deposit anniversary"
+        },
+        "step": {
+          "type": {
+            "send_email": "Send email",
+            "send_wa": "Send WhatsApp",
+            "wait": "Wait",
+            "conditional": "Conditional"
+          },
+          "moveUp": "Move up",
+          "moveDown": "Move down",
+          "remove": "Remove step"
+        },
+        "builder": {
+          "aria": "Journey builder",
+          "title": "New journey",
+          "nameLabel": "Name",
+          "triggerLabel": "Trigger",
+          "noSteps": "Add steps to start.",
+          "save": "Save journey",
+          "saving": "Saving...",
+          "addStep": {
+            "send_email": "Email",
+            "send_wa": "WhatsApp",
+            "wait": "Wait",
+            "conditional": "Conditional"
+          },
+          "trigger": {
+            "lead_created": "Lead created",
+            "lead_score_changed": "Score changed",
+            "visit_scheduled": "Visit scheduled",
+            "offer_sent": "Offer sent",
+            "days_no_activity": "No activity",
+            "aniversary_apartado": "Deposit anniversary"
+          }
+        },
+        "templates": {
+          "bienvenida_lead_nuevo": {
+            "name": "New lead welcome",
+            "description": "Instant WA + email + 24h follow-up."
+          },
+          "follow_up_post_visita": {
+            "name": "Post-visit follow-up",
+            "description": "Recap + score-conditional offer invite (3-7d)."
+          },
+          "reactivacion_frio_60d": {
+            "name": "Cold lead 60d reactivation",
+            "description": "Email + WA after 60d of no activity."
+          },
+          "aniversario_apartado": {
+            "name": "Deposit anniversary",
+            "description": "Email + WA on 1-year post-deposit."
+          },
+          "drip_tour_proyecto": {
+            "name": "Project drip tour (5 emails)",
+            "description": "5 staggered nurturing emails about the project."
+          }
+        }
+      }
     }
   },
   "Studio": {
