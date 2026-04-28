@@ -39,7 +39,7 @@ function popMaybeSingle(table: string): { data: unknown; error: unknown } {
 function buildAdminClient() {
   return {
     from(table: string) {
-      const selectChain = (cols?: string, opts?: { count?: string; head?: boolean }) => {
+      const selectChain = (_cols?: string, opts?: { count?: string; head?: boolean }) => {
         const builder: Record<string, unknown> = {};
         const pass = (() => builder) as () => typeof builder;
         builder.eq = pass;

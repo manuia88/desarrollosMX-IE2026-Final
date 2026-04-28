@@ -4971,6 +4971,17 @@
       "similarListingsLabel": "Asume {count} listings similares en la zona",
       "hookIndexLabel": "Hook {n}",
       "disclosureLabel": "Análisis IA basado en zona típica"
+    },
+    "routeError": {
+      "title": "Algo salió mal en DMX Studio",
+      "description": "Encontramos un error inesperado al cargar esta sección. Tu trabajo guardado está seguro.",
+      "retry": "Reintentar",
+      "goDashboard": "Volver al dashboard",
+      "supportHint": "Si el problema persiste, escríbenos con el código del error.",
+      "codeLabel": "Código"
+    },
+    "loadingSkeleton": {
+      "ariaLabel": "Cargando contenido"
     }
   }
 }

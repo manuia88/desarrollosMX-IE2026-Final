@@ -5,7 +5,7 @@ vi.mock('@/shared/lib/supabase/admin', () => ({
 }));
 
 describe('studioRouter — module export smoke', () => {
-  it('exports expected namespaces (Sprint 0-9: baseline + Sprint 5 video crudo + Sprint 6 seedance/staging/drone/cinema/toggles + Sprint 7 avatars/galleryAnalytics/publicGallery/zoneVideos/analytics + Sprint 8 series/publicSeries + Sprint 9 photographer)', async () => {
+  it('exports expected namespaces (Sprint 0-10: baseline + Sprint 5 video crudo + Sprint 6 seedance/staging/drone/cinema/toggles + Sprint 7 avatars/galleryAnalytics/publicGallery/zoneVideos/analytics + Sprint 8 series/publicSeries + Sprint 9 photographer + Sprint 10 feedback/healthCheck/qaReport)', async () => {
     const mod = await import('../routes/studio');
     const r = mod.studioRouter as unknown as { _def: { record: Record<string, unknown> } };
     const names = Object.keys(r._def.record);
@@ -48,6 +48,9 @@ describe('studioRouter — module export smoke', () => {
         'sprint8PublicSeries',
         'sprint8Series',
         'sprint9Photographer',
+        'sprint10Feedback',
+        'sprint10HealthCheck',
+        'sprint10QaReport',
         'streaks',
         'subscriptions',
         'subtitles',

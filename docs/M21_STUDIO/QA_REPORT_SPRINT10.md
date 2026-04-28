@@ -10,7 +10,11 @@
 - **audit-dead-ui:ci baseline:** 25 entries (zero del módulo studio — todas legacy ingest macro).
 - **STUBs ADR-018 H2 documentados:** 24+ (todos con 4 señales canon).
 - **Tests baseline pre-Sprint 10:** 4334 passing.
-- **Migrations Sprint 10:** 0 (cero schema changes idealmente).
+- **Tests post-Sprint 10:** 4522 passing | 4 skipped (delta +188 nuevos tests, +17 archivos test).
+- **Migrations Sprint 10:** 0 (cero schema changes — solo procedures + UI + tests + docs).
+- **P0 bugs detectados:** 0.
+- **P1 bugs fixed:** 2 (route error boundary + loading skeletons inconsistency).
+- **P2 deferred L-NEW H2:** 4 (i18n migrations + token migration).
 
 ## 2. Cobertura QA Multi-Path (Tarea 10.1)
 

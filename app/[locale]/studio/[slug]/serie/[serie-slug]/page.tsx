@@ -5,11 +5,11 @@ import type { Metadata } from 'next';
 import { PublicSeriesPage } from '@/features/dmx-studio/components/public-series/PublicSeriesPage';
 
 interface PublicSeriesRouteParams {
-  params: Promise<{ locale: string; 'asesor-slug': string; 'serie-slug': string }>;
+  params: Promise<{ locale: string; slug: string; 'serie-slug': string }>;
 }
 
 export async function generateMetadata({ params }: PublicSeriesRouteParams): Promise<Metadata> {
-  const { 'asesor-slug': asesorSlug, 'serie-slug': serieSlug } = await params;
+  const { slug: asesorSlug, 'serie-slug': serieSlug } = await params;
   const title = `${serieSlug} — DMX Studio`;
   const description = `Serie documental producida por ${asesorSlug} en DMX Studio.`;
   return {
@@ -21,6 +21,6 @@ export async function generateMetadata({ params }: PublicSeriesRouteParams): Pro
 }
 
 export default async function PublicSeriesRoute({ params }: PublicSeriesRouteParams) {
-  const { locale, 'asesor-slug': asesorSlug, 'serie-slug': serieSlug } = await params;
+  const { locale, slug: asesorSlug, 'serie-slug': serieSlug } = await params;
   return <PublicSeriesPage asesorSlug={asesorSlug} serieSlug={serieSlug} locale={locale} />;
 }
