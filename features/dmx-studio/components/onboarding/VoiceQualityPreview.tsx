@@ -2,8 +2,9 @@
 
 // FASE 14.F.2 Sprint 1 — Voice quality preview (3 muestras pre-grabadas ES-MX).
 // STUB ADR-018 — placeholder URLs, founder hosts real samples post-launch.
-// L-NEW-STUDIO-VOICE-PREVIEW-SAMPLES: subir 3 .mp3 a Supabase Storage bucket
-// `studio-voice-previews` y reemplazar audioUrl[] aquí.
+// L-NEW-STUDIO-VOICE-PREVIEW-SAMPLES H2: generar 3 .mp3 vía ElevenLabs API
+// server-side + servir desde Supabase Storage bucket `studio-voice-previews`.
+// Por ahora muestra disclosure "Próximamente" cuando el archivo no carga.
 
 import { useTranslations } from 'next-intl';
 import { useCallback, useRef, useState } from 'react';
@@ -41,11 +42,22 @@ export const VOICE_PREVIEW_SAMPLE_IDS = VOICE_SAMPLES.map((v) => v.id);
 export function VoiceQualityPreview() {
   const t = useTranslations('Studio.onboarding');
   const [playingId, setPlayingId] = useState<string | null>(null);
+  const [unavailableIds, setUnavailableIds] = useState<ReadonlySet<string>>(() => new Set());
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const markUnavailable = useCallback((id: string) => {
+    setUnavailableIds((prev) => {
+      if (prev.has(id)) return prev;
+      const next = new Set(prev);
+      next.add(id);
+      return next;
+    });
+  }, []);
 
   const togglePlay = useCallback(
     (sample: VoiceSample) => {
       if (typeof window === 'undefined') return;
+      if (unavailableIds.has(sample.id)) return;
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
@@ -57,10 +69,21 @@ export function VoiceQualityPreview() {
       const audio = new Audio(sample.audioUrl);
       audioRef.current = audio;
       audio.addEventListener('ended', () => setPlayingId(null), { once: true });
-      audio.play().catch(() => setPlayingId(null));
+      audio.addEventListener(
+        'error',
+        () => {
+          markUnavailable(sample.id);
+          setPlayingId(null);
+        },
+        { once: true },
+      );
+      audio.play().catch(() => {
+        markUnavailable(sample.id);
+        setPlayingId(null);
+      });
       setPlayingId(sample.id);
     },
-    [playingId],
+    [playingId, unavailableIds, markUnavailable],
   );
 
   return (
@@ -83,20 +106,24 @@ export function VoiceQualityPreview() {
       <ul className="flex flex-col gap-2" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
         {VOICE_SAMPLES.map((sample) => {
           const isPlaying = playingId === sample.id;
+          const isUnavailable = unavailableIds.has(sample.id);
           return (
             <li key={sample.id}>
               <button
                 type="button"
                 onClick={() => togglePlay(sample)}
                 aria-pressed={isPlaying}
+                aria-disabled={isUnavailable}
                 aria-label={`${t(sample.nameKey)} — ${t(sample.toneKey)}`}
+                disabled={isUnavailable}
                 className="flex w-full items-center gap-3 px-4 py-3 text-left"
                 style={{
                   background: isPlaying ? 'var(--surface-spotlight)' : 'var(--surface-recessed)',
                   border: '1px solid var(--canon-border)',
                   borderRadius: 'var(--canon-radius-pill)',
                   color: 'var(--canon-cream)',
-                  cursor: 'pointer',
+                  cursor: isUnavailable ? 'not-allowed' : 'pointer',
+                  opacity: isUnavailable ? 0.6 : 1,
                   transition: 'background-color var(--canon-duration-fast) var(--canon-ease-out)',
                 }}
               >
@@ -119,7 +146,7 @@ export function VoiceQualityPreview() {
                 <span style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                   <span style={{ fontSize: '13.5px', fontWeight: 600 }}>{t(sample.nameKey)}</span>
                   <span style={{ fontSize: '11.5px', color: 'var(--canon-cream-2)' }}>
-                    {t(sample.toneKey)}
+                    {isUnavailable ? t('voicePreviewComingSoon') : t(sample.toneKey)}
                   </span>
                 </span>
               </button>
