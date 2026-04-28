@@ -15918,6 +15918,114 @@ export type Database = {
         }
         Relationships: []
       }
+      studio_avatar_variants: {
+        Row: {
+          avatar_id: string
+          created_at: string
+          heygen_variant_id: string | null
+          id: string
+          is_default: boolean
+          preview_image_url: string | null
+          storage_path: string | null
+          style: string
+        }
+        Insert: {
+          avatar_id: string
+          created_at?: string
+          heygen_variant_id?: string | null
+          id?: string
+          is_default?: boolean
+          preview_image_url?: string | null
+          storage_path?: string | null
+          style: string
+        }
+        Update: {
+          avatar_id?: string
+          created_at?: string
+          heygen_variant_id?: string | null
+          id?: string
+          is_default?: boolean
+          preview_image_url?: string | null
+          storage_path?: string | null
+          style?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_avatar_variants_avatar_id_fkey"
+            columns: ["avatar_id"]
+            isOneToOne: false
+            referencedRelation: "studio_avatars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_avatars: {
+        Row: {
+          cost_usd: number
+          created_at: string
+          failure_reason: string | null
+          heygen_avatar_id: string | null
+          id: string
+          linked_voice_clone_id: string | null
+          quality_score: number | null
+          ready_at: string | null
+          source_photo_storage_path: string
+          status: string
+          user_id: string
+          voice_sample_storage_path: string
+        }
+        Insert: {
+          cost_usd?: number
+          created_at?: string
+          failure_reason?: string | null
+          heygen_avatar_id?: string | null
+          id?: string
+          linked_voice_clone_id?: string | null
+          quality_score?: number | null
+          ready_at?: string | null
+          source_photo_storage_path: string
+          status?: string
+          user_id: string
+          voice_sample_storage_path: string
+        }
+        Update: {
+          cost_usd?: number
+          created_at?: string
+          failure_reason?: string | null
+          heygen_avatar_id?: string | null
+          id?: string
+          linked_voice_clone_id?: string | null
+          quality_score?: number | null
+          ready_at?: string | null
+          source_photo_storage_path?: string
+          status?: string
+          user_id?: string
+          voice_sample_storage_path?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_avatars_linked_voice_clone_id_fkey"
+            columns: ["linked_voice_clone_id"]
+            isOneToOne: false
+            referencedRelation: "studio_voice_clones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_avatars_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_avatars_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_brand_kits: {
         Row: {
           accent_color: string | null
@@ -16489,6 +16597,76 @@ export type Database = {
           },
         ]
       }
+      studio_gallery_views_log: {
+        Row: {
+          asesor_slug: string
+          asesor_user_id: string | null
+          country_code: string | null
+          created_at: string
+          device_type: string | null
+          id: string
+          ip_hash: string | null
+          referer: string | null
+          user_agent_truncated: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          video_id: string | null
+        }
+        Insert: {
+          asesor_slug: string
+          asesor_user_id?: string | null
+          country_code?: string | null
+          created_at?: string
+          device_type?: string | null
+          id?: string
+          ip_hash?: string | null
+          referer?: string | null
+          user_agent_truncated?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          video_id?: string | null
+        }
+        Update: {
+          asesor_slug?: string
+          asesor_user_id?: string | null
+          country_code?: string | null
+          created_at?: string
+          device_type?: string | null
+          id?: string
+          ip_hash?: string | null
+          referer?: string | null
+          user_agent_truncated?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          video_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_gallery_views_log_asesor_user_id_fkey"
+            columns: ["asesor_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_gallery_views_log_asesor_user_id_fkey"
+            columns: ["asesor_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_gallery_views_log_video_id_fkey"
+            columns: ["video_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_outputs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_highlight_reels: {
         Row: {
           clip_index: number
@@ -16959,6 +17137,80 @@ export type Database = {
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_referral_form_submissions: {
+        Row: {
+          asesor_user_id: string
+          id: string
+          ip_hash: string | null
+          lead_created_id: string | null
+          source: string
+          source_video_id: string | null
+          submitted_at: string
+          submitted_email: string
+          submitted_interest_type: string | null
+          submitted_message: string | null
+          submitted_name: string
+          submitted_phone: string | null
+        }
+        Insert: {
+          asesor_user_id: string
+          id?: string
+          ip_hash?: string | null
+          lead_created_id?: string | null
+          source?: string
+          source_video_id?: string | null
+          submitted_at?: string
+          submitted_email: string
+          submitted_interest_type?: string | null
+          submitted_message?: string | null
+          submitted_name: string
+          submitted_phone?: string | null
+        }
+        Update: {
+          asesor_user_id?: string
+          id?: string
+          ip_hash?: string | null
+          lead_created_id?: string | null
+          source?: string
+          source_video_id?: string | null
+          submitted_at?: string
+          submitted_email?: string
+          submitted_interest_type?: string | null
+          submitted_message?: string | null
+          submitted_name?: string
+          submitted_phone?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_referral_form_submissions_asesor_user_id_fkey"
+            columns: ["asesor_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_referral_form_submissions_asesor_user_id_fkey"
+            columns: ["asesor_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_referral_form_submissions_lead_created_id_fkey"
+            columns: ["lead_created_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_referral_form_submissions_source_video_id_fkey"
+            columns: ["source_video_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_outputs"
             referencedColumns: ["id"]
           },
         ]
@@ -18163,6 +18415,74 @@ export type Database = {
             columns: ["current_user_id"]
             isOneToOne: false
             referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_zone_videos: {
+        Row: {
+          ai_summary: string | null
+          created_at: string
+          heatmap_storage_path: string | null
+          id: string
+          ie_scores_snapshot: Json
+          market_data: Json
+          project_id: string
+          user_id: string
+          zone_id: string
+          zone_name: string
+        }
+        Insert: {
+          ai_summary?: string | null
+          created_at?: string
+          heatmap_storage_path?: string | null
+          id?: string
+          ie_scores_snapshot?: Json
+          market_data?: Json
+          project_id: string
+          user_id: string
+          zone_id: string
+          zone_name: string
+        }
+        Update: {
+          ai_summary?: string | null
+          created_at?: string
+          heatmap_storage_path?: string | null
+          id?: string
+          ie_scores_snapshot?: Json
+          market_data?: Json
+          project_id?: string
+          user_id?: string
+          zone_id?: string
+          zone_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_zone_videos_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: true
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_zone_videos_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_zone_videos_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_zone_videos_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
             referencedColumns: ["id"]
           },
         ]
