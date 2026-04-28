@@ -5131,6 +5131,8 @@
     },
     "marketing": {
       "title": "Marketing Dev",
+      "metaTitle": "Marketing Dev — Campañas + atribución multi-touch",
+      "metaDescription": "Centro de marketing del desarrollador: campañas, atribución multi-touch, video AI, kit de ventas y portales.",
       "tabs": {
         "campaigns": "Campañas",
         "landings": "Landings",
@@ -5143,12 +5145,46 @@
       "campaigns": {
         "listTitle": "Campañas activas",
         "newCta": "Nueva campaña",
+        "loading": "Cargando campañas...",
+        "empty": "Sin campañas. Crea la primera para activar tracking + atribución.",
+        "budgetLabel": "Presupuesto",
+        "dateRangeLabel": "Rango",
+        "projectsLabel": "Proyectos",
+        "showAnalytics": "Ver analytics",
+        "hideAnalytics": "Ocultar analytics",
+        "pauseCta": "Pausar",
         "wizard": {
           "step1Title": "Tipo",
           "step2Title": "Proyectos",
           "step3Title": "Presupuesto + fechas + canales",
           "step4Title": "Creativos",
-          "step5Title": "Tracking UTM"
+          "step5Title": "Tracking UTM",
+          "ariaLabel": "Asistente nueva campaña",
+          "nameLabel": "Nombre de la campaña",
+          "typeLabel": "Tipo de campaña",
+          "loadingProjects": "Cargando proyectos...",
+          "emptyProjects": "Sin proyectos disponibles. Crea uno antes de lanzar campañas.",
+          "budgetLabel": "Presupuesto (MXN)",
+          "startLabel": "Inicio",
+          "endLabel": "Fin",
+          "channelsLabel": "Canales",
+          "variantLabel": "Variante de creativo",
+          "urlPlaceholder": "https://...",
+          "addCreativeCta": "+ Creativo",
+          "aiStubNote": "Generador AI de creativos disponible próximamente. Por ahora carga URLs propias.",
+          "cancelCta": "Cancelar",
+          "backCta": "Atrás",
+          "nextCta": "Siguiente",
+          "submitCta": "Crear campaña",
+          "submittingCta": "Creando...",
+          "errors": {
+            "nameRequired": "Nombre obligatorio (mínimo 2 caracteres).",
+            "projectsRequired": "Selecciona al menos un proyecto.",
+            "budgetPositive": "Presupuesto debe ser mayor a 0.",
+            "channelRequired": "Selecciona al menos un canal.",
+            "dateRange": "Fecha de fin debe ser igual o posterior al inicio.",
+            "creativesRequired": "Carga al menos un creativo con URL válida."
+          }
         },
         "types": {
           "launch": "Lanzamiento",
@@ -5167,6 +5203,15 @@
       "attribution": {
         "title": "Multi-touch attribution",
         "waterfallTitle": "Distribución por canal",
+        "campaignSelect": "Campaña:",
+        "campaignPlaceholder": "Selecciona campaña",
+        "selectFirst": "Selecciona una campaña para ver atribución.",
+        "loading": "Calculando...",
+        "summaryLine": "{leads} leads · {events} eventos analizados",
+        "shareTooltip": "Share %",
+        "recommendationsTitle": "Recomendaciones IA optimizer",
+        "noRecs": "Sin recomendaciones. Cuando haya métricas suficientes el optimizer calculará acciones.",
+        "cpl": "CPL",
         "models": {
           "last_touch": "Último click",
           "linear": "Lineal",
@@ -5183,7 +5228,12 @@
         "aiReasoning": "Razonamiento IA"
       },
       "videoAi": {
-        "title": "Generar video AI proyecto",
+        "title": "Video AI inmobiliario",
+        "subtitle": "Genera video del proyecto o lote de prototipos destacados con DMX Studio.",
+        "selectProject": "Proyecto:",
+        "selectPlaceholder": "Selecciona proyecto",
+        "queueTitle": "Cola reciente",
+        "queueEmpty": "Aún no has enviado videos.",
         "ctaProject": "Generar video proyecto",
         "ctaPrototypes": "Generar 5 videos prototipos destacados",
         "statusQueued": "En cola",
@@ -5199,7 +5249,65 @@
         "cpl": "CPL",
         "cac": "CAC",
         "spend": "Gasto",
+        "loadingAnalytics": "Cargando analytics...",
         "funnel": "Funnel: impression → click → lead → visit → offer → close"
+      },
+      "analyticsTab": {
+        "title": "Analytics campañas",
+        "campaignSelect": "Campaña:",
+        "campaignPlaceholder": "Selecciona campaña",
+        "selectFirst": "Selecciona una campaña para ver analytics.",
+        "loading": "Cargando...",
+        "empty": "Sin métricas en el rango. Activa la campaña o espera ingest diario.",
+        "funnelHint": "Funnel: impresión → click → lead → visita → oferta → cierre"
+      },
+      "landingsTab": {
+        "title": "Landings",
+        "summary": "{total} landings",
+        "loading": "Cargando...",
+        "empty": "Sin landings. Genera la primera desde el portal asesor o aquí.",
+        "createdAt": "Creada {date}",
+        "published": "Publicada",
+        "draft": "Borrador",
+        "reusedFromAsesor": "Esta tab consume el módulo M08 Marketing Asesor (read-only). Edita en /marketing."
+      },
+      "kit": {
+        "title": "Kit de ventas IE",
+        "subtitle": "PDF/PPTX con DMX Score, zone scores, absorción y modelo financiero embebidos.",
+        "selectProject": "Proyecto:",
+        "selectPlaceholder": "Selecciona proyecto",
+        "ctaPdf": "Descargar PDF",
+        "ctaPptx": "Descargar PPTX",
+        "ctaWeb": "Link web interactivo",
+        "stubNote": "Generación PDF/PPTX próximamente. Mientras tanto consulta scores en Analytics IE.",
+        "feature": {
+          "iescore": "DMX Score IE",
+          "zoneScores": "Zone scores embebidos",
+          "absorption": "Forecast absorción",
+          "financialModel": "Modelo financiero ROI",
+          "walkability": "Walkability + safety + transit",
+          "photos": "Fotos HD + planos"
+        }
+      },
+      "portales": {
+        "title": "Feeds portales",
+        "subtitle": "Sincroniza inventario con portales externos.",
+        "configPending": "Config pendiente",
+        "reusedFromAsesor": "Reusa M08 portales asesor. Configura credenciales en /marketing/portales.",
+        "portal": {
+          "inmuebles24": {
+            "name": "Inmuebles24",
+            "description": "Feed XML diario."
+          },
+          "easybroker": {
+            "name": "EasyBroker MLS",
+            "description": "Sincronización bidireccional."
+          },
+          "mercadolibre": {
+            "name": "MercadoLibre",
+            "description": "Publisher API."
+          }
+        }
       }
     }
   },
