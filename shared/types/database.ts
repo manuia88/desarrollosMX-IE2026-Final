@@ -16904,6 +16904,302 @@ export type Database = {
           },
         ]
       }
+      studio_photographer_clients: {
+        Row: {
+          client_email: string
+          client_name: string | null
+          client_phone: string | null
+          client_user_id: string | null
+          created_at: string
+          first_video_at: string | null
+          id: string
+          last_video_at: string | null
+          markup_applied: number | null
+          photographer_id: string
+          relation_status: string
+          total_revenue_attributed: number
+          total_videos_generated: number
+          updated_at: string
+        }
+        Insert: {
+          client_email: string
+          client_name?: string | null
+          client_phone?: string | null
+          client_user_id?: string | null
+          created_at?: string
+          first_video_at?: string | null
+          id?: string
+          last_video_at?: string | null
+          markup_applied?: number | null
+          photographer_id: string
+          relation_status?: string
+          total_revenue_attributed?: number
+          total_videos_generated?: number
+          updated_at?: string
+        }
+        Update: {
+          client_email?: string
+          client_name?: string | null
+          client_phone?: string | null
+          client_user_id?: string | null
+          created_at?: string
+          first_video_at?: string | null
+          id?: string
+          last_video_at?: string | null
+          markup_applied?: number | null
+          photographer_id?: string
+          relation_status?: string
+          total_revenue_attributed?: number
+          total_videos_generated?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_photographer_clients_client_user_id_fkey"
+            columns: ["client_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_photographer_clients_client_user_id_fkey"
+            columns: ["client_user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_photographer_clients_photographer_id_fkey"
+            columns: ["photographer_id"]
+            isOneToOne: false
+            referencedRelation: "studio_photographers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_photographer_directory: {
+        Row: {
+          created_at: string
+          id: string
+          listing_priority: number
+          listing_status: string
+          photographer_id: string
+          rejection_reason: string | null
+          tags: string[]
+          updated_at: string
+          verified_at: string | null
+          verified_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          listing_priority?: number
+          listing_status?: string
+          photographer_id: string
+          rejection_reason?: string | null
+          tags?: string[]
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          listing_priority?: number
+          listing_status?: string
+          photographer_id?: string
+          rejection_reason?: string | null
+          tags?: string[]
+          updated_at?: string
+          verified_at?: string | null
+          verified_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_photographer_directory_photographer_id_fkey"
+            columns: ["photographer_id"]
+            isOneToOne: true
+            referencedRelation: "studio_photographers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_photographer_directory_verified_by_fkey"
+            columns: ["verified_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_photographer_directory_verified_by_fkey"
+            columns: ["verified_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_photographer_invites: {
+        Row: {
+          accepted_at: string | null
+          commission_earned_usd: number | null
+          created_at: string
+          expires_at: string
+          id: string
+          invitation_type: string
+          invited_email: string
+          invited_name: string | null
+          opened_at: string | null
+          photographer_id: string
+          referral_token: string
+          related_video_id: string | null
+          sent_at: string
+          status: string
+          subscribed_to_pro: boolean
+        }
+        Insert: {
+          accepted_at?: string | null
+          commission_earned_usd?: number | null
+          created_at?: string
+          expires_at: string
+          id?: string
+          invitation_type: string
+          invited_email: string
+          invited_name?: string | null
+          opened_at?: string | null
+          photographer_id: string
+          referral_token: string
+          related_video_id?: string | null
+          sent_at?: string
+          status?: string
+          subscribed_to_pro?: boolean
+        }
+        Update: {
+          accepted_at?: string | null
+          commission_earned_usd?: number | null
+          created_at?: string
+          expires_at?: string
+          id?: string
+          invitation_type?: string
+          invited_email?: string
+          invited_name?: string | null
+          opened_at?: string | null
+          photographer_id?: string
+          referral_token?: string
+          related_video_id?: string | null
+          sent_at?: string
+          status?: string
+          subscribed_to_pro?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_photographer_invites_photographer_id_fkey"
+            columns: ["photographer_id"]
+            isOneToOne: false
+            referencedRelation: "studio_photographers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_photographer_invites_related_video_id_fkey"
+            columns: ["related_video_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_outputs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_photographers: {
+        Row: {
+          bio: string | null
+          business_name: string
+          clients_count: number
+          created_at: string
+          directory_listing_enabled: boolean
+          email: string
+          id: string
+          markup_pct: number | null
+          phone: string | null
+          portfolio_visible: boolean
+          rating_avg: number | null
+          reseller_terms_accepted_at: string | null
+          revenue_est_total: number
+          slug: string
+          speciality_zones: string[]
+          updated_at: string
+          user_id: string
+          verified: boolean
+          videos_generated_total: number
+          website: string | null
+          white_label_custom_footer: string | null
+          white_label_enabled: boolean
+          years_experience: number | null
+        }
+        Insert: {
+          bio?: string | null
+          business_name: string
+          clients_count?: number
+          created_at?: string
+          directory_listing_enabled?: boolean
+          email: string
+          id?: string
+          markup_pct?: number | null
+          phone?: string | null
+          portfolio_visible?: boolean
+          rating_avg?: number | null
+          reseller_terms_accepted_at?: string | null
+          revenue_est_total?: number
+          slug: string
+          speciality_zones?: string[]
+          updated_at?: string
+          user_id: string
+          verified?: boolean
+          videos_generated_total?: number
+          website?: string | null
+          white_label_custom_footer?: string | null
+          white_label_enabled?: boolean
+          years_experience?: number | null
+        }
+        Update: {
+          bio?: string | null
+          business_name?: string
+          clients_count?: number
+          created_at?: string
+          directory_listing_enabled?: boolean
+          email?: string
+          id?: string
+          markup_pct?: number | null
+          phone?: string | null
+          portfolio_visible?: boolean
+          rating_avg?: number | null
+          reseller_terms_accepted_at?: string | null
+          revenue_est_total?: number
+          slug?: string
+          speciality_zones?: string[]
+          updated_at?: string
+          user_id?: string
+          verified?: boolean
+          videos_generated_total?: number
+          website?: string | null
+          white_label_custom_footer?: string | null
+          white_label_enabled?: boolean
+          years_experience?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_photographers_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_photographers_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       studio_portal_imports: {
         Row: {
           area_extracted: number | null
