@@ -1,11 +1,11 @@
 // FASE 14.F.0 — DMX Studio STUB wrappers tests (ADR-018 4 señales).
-// Valida 6 wrappers STUB: fal-gateway, heygen, virtual-staging, flux, deepgram, seedance.
+// Valida 5 wrappers STUB: fal-gateway, heygen, virtual-staging, flux, seedance.
+// Deepgram activado real F14.F.6 Sprint 5 (ver tests/lib/deepgram.test.ts).
 // Cada wrapper: función principal throw TRPCError NOT_IMPLEMENTED + testConnection ok:false + reason.
 
 import { TRPCError } from '@trpc/server';
 import { describe, expect, it } from 'vitest';
 
-import * as deepgram from '@/features/dmx-studio/lib/deepgram';
 import * as falGateway from '@/features/dmx-studio/lib/fal-gateway';
 import * as flux from '@/features/dmx-studio/lib/flux';
 import * as heygen from '@/features/dmx-studio/lib/heygen';
@@ -74,18 +74,6 @@ describe('dmx-studio/lib/flux STUB', () => {
     const result = await flux.testConnection();
     expect(result.ok).toBe(false);
     expect(result.reason).toBe('STUB H2 Sprint 6 Flux frame+upscale');
-  });
-});
-
-describe('dmx-studio/lib/deepgram STUB', () => {
-  it('transcribeAudio throws TRPCError NOT_IMPLEMENTED', async () => {
-    await expectNotImplemented(deepgram.transcribeAudio({ audioUrl: 'https://example.com/a.mp3' }));
-  });
-
-  it('testConnection returns ok:false with reason', async () => {
-    const result = await deepgram.testConnection();
-    expect(result.ok).toBe(false);
-    expect(result.reason).toBe('STUB H2 Sprint 5 Deepgram transcription');
   });
 });
 

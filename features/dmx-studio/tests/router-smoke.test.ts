@@ -5,7 +5,7 @@ vi.mock('@/shared/lib/supabase/admin', () => ({
 }));
 
 describe('studioRouter — module export smoke', () => {
-  it('exports the 25 expected namespaces (Sprint 0-4: baseline + library/multiFormat/usage + url-import/copyPack/copyVersions/listingHealth + crossFunctions + Sprint 4 calendar/remarketing/batchMode/streaks/notifications/challenges/aiCoach)', async () => {
+  it('exports expected namespaces (Sprint 0-5: baseline + Sprint 5 raw videos + edl + cuts + speech-analytics + subtitles + highlight-reels)', async () => {
     const mod = await import('../routes/studio');
     const r = mod.studioRouter as unknown as { _def: { record: Record<string, unknown> } };
     const names = Object.keys(r._def.record);
@@ -19,8 +19,11 @@ describe('studioRouter — module export smoke', () => {
         'copyPack',
         'copyVersions',
         'crossFunctions',
+        'cuts',
         'dashboard',
+        'edl',
         'foundersCohort',
+        'highlightReels',
         'landing',
         'library',
         'listingHealth',
@@ -29,9 +32,13 @@ describe('studioRouter — module export smoke', () => {
         'onboarding',
         'projects',
         'publicGallery',
+        'rawVideoPipeline',
+        'rawVideos',
         'remarketing',
+        'speechAnalytics',
         'streaks',
         'subscriptions',
+        'subtitles',
         'urlImport',
         'usage',
         'voiceClones',
