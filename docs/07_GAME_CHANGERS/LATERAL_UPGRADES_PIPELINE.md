@@ -3173,5 +3173,81 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 - **Dependencies:** launch H1 cerrado · zero scope creep activo en M01-M06 · founder gate
 - **Ref:** ADR-053 (unified canon) + ADR-018 (audit-dead-ui enforcement universal) + CLAUDE.md sección "Estructura feature-sliced"
 
+### L-NEW-STUDIO-MIGRATE-WAN21-SELF-HOSTED — Migrar Kling video generation a Wan 2.1 self-hosted
+
+- **Status:** 🟡 deferred-H2 (founder canon 2026-04-27, agendado post-PMF)
+- **Origen:** F14.F.7 founder pregunta sobre tecnología propia. Análisis económico breakeven ~150 usuarios activos H1.
+- **Qué es:** migrar pipeline video generation de Kling 3.0 vía Replicate API ($2.25/video 30s) a **Wan 2.1** (Alibaba open source) self-hosted en Modal serverless GPUs.
+- **Para qué sirve:** reducir costo unitario per video 7x (~$2.25 → ~$0.30), aumentar margen Pro de 76% a ~90%, control total infraestructura, preparar fine-tune con dataset propio H3.
+- **Beneficio concreto:** a 500 usuarios activos = ahorro $4,125/mes; a 1,000 usuarios = $9,250/mes; a 5,000 usuarios = $51,250/mes.
+- **Stack target:**
+  - Wan 2.1 model weights (HuggingFace open weights)
+  - Modal serverless GPU A100 80GB (~$1.50-2/hora) auto-scale per request
+  - Replace `features/dmx-studio/lib/kling/index.ts` Replicate client → Modal endpoint client
+  - Mantener API surface idéntica (zero breaking changes downstream)
+- **Fase target:** FASE 30 H2 (post-launch beta, ~150+ usuarios activos validados)
+- **Estimado:** ~80-120h CC (Modal infra setup + Wan 2.1 fine-tune ES-MX inmobiliario + integration tests + monitoring + cost tracking) + ~2-3 meses MLOps
+- **Trigger:** founder gate cuando >150 usuarios Pro/Agency activos generando >500 videos/mes
+- **RICE estimate:** Reach 5,000 (target H2 escala) × Impact 9 (margen 76% → 90% + moat tech) × Confidence 0.7 (Wan 2.1 calidad demostrada similar Kling) / Effort 100h ≈ **315** (high value H2)
+- **Dependencies:** launch H1 cerrado · 150+ usuarios activos validados · MLOps capacity disponible · dataset propio acumulado >5K videos para fine-tune
+- **Ref:** BIBLIA Studio v4 §9.5 "Defensa Contra Subida de Precios" — multi-modelo via fal.ai switch en 1 línea + largo plazo fine-tune open source
+
+### L-NEW-STUDIO-MIGRATE-XTTS-SELF-HOSTED — Migrar ElevenLabs TTS + voice clone a XTTS-v2 self-hosted
+
+- **Status:** 🟡 deferred-H2 (founder canon 2026-04-27, agendado post-PMF)
+- **Origen:** F14.F.7 founder pregunta tecnología propia. Análisis económico breakeven ~150 usuarios.
+- **Qué es:** migrar TTS + voice cloning de ElevenLabs API ($0.10/1000 chars + Starter $5/mes IVC required) a **XTTS-v2** (Coqui open source) self-hosted en Modal/RunPod GPU.
+- **Para qué sirve:** reducir costo TTS 10x (~$0.10/1000 → ~$0.005/min) + voice cloning sin suscripción mensual + control privacy + fine-tune voces ES-MX inmobiliario.
+- **Beneficio concreto:** a 1,000 usuarios = ahorro $1,500/mes TTS + zero subscription dependency. Voice clone ilimitado per asesor.
+- **Stack target:**
+  - XTTS-v2 model weights (HuggingFace open weights)
+  - Modal serverless GPU RTX 4090 (~$0.50/hora)
+  - Replace `features/dmx-studio/lib/elevenlabs/index.ts` cliente ElevenLabs → Modal endpoint
+  - Mantener API surface (zero breaking)
+- **Fase target:** FASE 30 H2 (junto con Wan 2.1 migration, mismo Modal setup)
+- **Estimado:** ~40-60h CC (Modal infra + XTTS-v2 fine-tune ES-MX nativo + voice cloning pipeline + integration tests)
+- **Trigger:** mismo gate que Wan 2.1 (>150 usuarios)
+- **RICE estimate:** Reach 5,000 × Impact 7 (cost reduction + ownership) × Confidence 0.65 (XTTS quality slightly lower que ElevenLabs Pro) / Effort 50h ≈ **227** (high value H2)
+- **Dependencies:** Wan 2.1 migration shipped primero (mismo Modal setup) · dataset voces ES-MX propio acumulado · founder gate
+- **Ref:** BIBLIA Studio v4 §9.4 "Voice Clone Quality" — fine-tuning con feedback del asesor + ElevenLabs mejora modelos = clones mejoran solos (forward H3 own model = irreversible moat)
+
+### L-NEW-STUDIO-MIGRATE-WHISPER-SELF-HOSTED — Migrar Deepgram STT a Whisper-Large-v3 self-hosted
+
+- **Status:** 🟡 deferred-H2 (founder canon 2026-04-27, agendado post-PMF)
+- **Origen:** F14.F.7 founder pregunta tecnología propia.
+- **Qué es:** migrar speech-to-text de Deepgram nova-3 ES-MX ($0.43/hora) a **Whisper-Large-v3** (OpenAI open source) self-hosted en Modal GPU.
+- **Para qué sirve:** reducir costo STT 80x (~$0.43/h → ~$0.005/h), control latency, fine-tune jerga inmobiliaria ES-MX.
+- **Beneficio concreto:** a 1,000 usuarios procesando 100h/mes raw video = ahorro $42/mes (low impact — Whisper migration es la menos crítica económicamente, pero strategic ownership).
+- **Stack target:**
+  - Whisper-Large-v3 (HuggingFace) o Distil-Whisper para latency menor
+  - Modal serverless GPU A40 (~$0.80/hora)
+  - Replace `features/dmx-studio/lib/deepgram/index.ts` cliente Deepgram → Modal endpoint
+- **Fase target:** FASE 30 H2 (junto con Wan 2.1 + XTTS, mismo Modal setup)
+- **Estimado:** ~30-40h CC (Modal infra + Whisper fine-tune ES-MX inmobiliario + utterance detection + tests)
+- **Trigger:** mismo gate Wan 2.1 (>150 usuarios)
+- **RICE estimate:** Reach 5,000 × Impact 4 (cost low + ownership) × Confidence 0.85 (Whisper madurez alta, fine-tune trivial) / Effort 35h ≈ **490** (excellent ROI H2 — alta confianza baja effort)
+- **Dependencies:** mismo gate y setup que Wan 2.1 + XTTS · founder gate
+- **Ref:** BIBLIA Studio v4 — STT como capa post-PMF migration paralela a video gen
+
+### L-NEW-STUDIO-FINE-TUNE-DATASET-PROPIO — Fine-tune custom inmobiliario LATAM (moat moonshot)
+
+- **Status:** 🟢 H3 moonshot (founder canon 2026-04-27, FASE 36+)
+- **Origen:** F14.F.7 founder visión long-term moat tech. Dataset propio acumulado H1+H2 = oro irrepetible.
+- **Qué es:** train modelos custom (Wan 2.1 + XTTS-v2 + virtual staging custom) con dataset propietario DMX Studio acumulado: 5,000+ videos generados con feedback rating + voces ES-MX nativas asesores reales + amueblamientos LATAM specific + jerga inmobiliaria ES-MX.
+- **Para qué sirve:** moat tech irrepetible (nadie tiene este dataset LATAM), modelos especializados inmobiliario MX > generic models, output quality superior competencia LATAM, defensibility absoluta.
+- **Beneficio concreto:** competidores requieren años acumular dataset equivalente. Calidad output 2x mejor que generic models para use case específico inmobiliario LATAM. Moat real H3.
+- **Stack target:**
+  - LoRA / DreamBooth fine-tune Wan 2.1 con dataset propio video
+  - XTTS-v2 fine-tune con corpus voces ES-MX nativas grabadas
+  - Stable Diffusion + ControlNet fine-tune con dataset amueblamientos LATAM scraped + curado
+  - Pipeline retraining automatizado mensual con nuevo data
+  - A/B testing modelos custom vs base public per asesor
+- **Fase target:** FASE 36+ H3 moonshot (post-escala 5,000+ usuarios activos, dataset >50K videos generated)
+- **Estimado:** ~200-400h CC (LoRA training pipeline + dataset curation + A/B infra + monitoring) + ~6-12 meses MLOps team dedicado
+- **Trigger:** FASE 36 H3 capacity + founder validation moat strategic value
+- **RICE estimate:** Reach 50,000 (target H3 platform play LATAM) × Impact 10 (categoría única + moat irrepetible) × Confidence 0.5 (depend success H1+H2) / Effort 300h ≈ **833** (moonshot H3 valor extremo)
+- **Dependencies:** Wan 2.1 + XTTS + Whisper migrations H2 shipped · 5,000+ usuarios activos · 50K+ videos dataset acumulado · MLOps team dedicado
+- **Ref:** BIBLIA Studio v4 §9.5 "largo plazo: fine-tune open source Wan 2.6 con dataset propio" + memoria `user_founder_profile` Manu visión moonshot $1-5B 3-5 años
+
 ---
 
