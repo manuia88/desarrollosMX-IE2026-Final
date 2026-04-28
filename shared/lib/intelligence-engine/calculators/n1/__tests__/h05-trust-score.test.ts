@@ -131,8 +131,8 @@ describe('H05 Trust Score calculator', () => {
     expect(res.components.missing_dimensions).toContain('reviews_avg');
     expect(res.components.available_count).toBe(2);
     // weights renormalized: cumplimiento 0.3/0.6=0.5; volumen 0.3/0.6=0.5
-    expect(res.components.weights_applied['cumplimiento']).toBeCloseTo(0.5, 3);
-    expect(res.components.weights_applied['volumen']).toBeCloseTo(0.5, 3);
+    expect(res.components.weights_applied.cumplimiento).toBeCloseTo(0.5, 3);
+    expect(res.components.weights_applied.volumen).toBeCloseTo(0.5, 3);
     expect(res.confidence).toBe('medium');
   });
 

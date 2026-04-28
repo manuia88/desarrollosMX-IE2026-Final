@@ -100,8 +100,8 @@ describe('D05 Gentrification calculator', () => {
     expect(res.components.missing_dimensions).toContain('N01');
     expect(res.components.available_count).toBe(2);
     // weights renormalized: N03 0.5/0.75 = 0.667; A04 0.25/0.75 = 0.333
-    expect(res.components.weights_applied['N03']).toBeCloseTo(0.6667, 3);
-    expect(res.components.weights_applied['A04']).toBeCloseTo(0.3333, 3);
+    expect(res.components.weights_applied.N03).toBeCloseTo(0.6667, 3);
+    expect(res.components.weights_applied.A04).toBeCloseTo(0.3333, 3);
     // velocity_component = 0.667·60 + 0.333·40 = 40 + 13.33 = 53.33
     expect(res.components.velocity_component).toBeCloseTo(53.33, 1);
     // confidence degraded por missing

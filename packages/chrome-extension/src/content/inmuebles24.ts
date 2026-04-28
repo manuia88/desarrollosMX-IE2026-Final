@@ -65,7 +65,7 @@ async function extract(): Promise<MarketCapture | null> {
   const listing_id = extractListingId();
 
   const rawPrice =
-    (asRecord(ld?.['offers'])?.['price'] as string | number | undefined) ??
+    (asRecord(ld?.offers)?.price as string | number | undefined) ??
     document.querySelector<HTMLElement>('[data-qa="POSTING_CARD_PRICE"]')?.textContent ??
     document.querySelector<HTMLElement>('[class*="price"]')?.textContent ??
     '';

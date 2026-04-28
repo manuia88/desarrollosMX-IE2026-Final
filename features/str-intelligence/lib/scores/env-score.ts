@@ -174,6 +174,6 @@ export function noiseShareFromTopicCounts(
   reviewsAnalyzed: number,
 ): number | null {
   if (!topicCounts || reviewsAnalyzed === 0) return null;
-  const noiseMentions = topicCounts['noise'] ?? 0;
+  const noiseMentions = topicCounts.noise ?? 0;
   return noiseMentions / reviewsAnalyzed;
 }

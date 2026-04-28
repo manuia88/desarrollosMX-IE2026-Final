@@ -80,7 +80,7 @@ export const portalsRouter = router({
       .eq('portal', input.portal)
       .maybeSingle();
     if (cfgErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: cfgErr.message });
-    if (!config || !config.is_active || !config.credentials_encrypted) {
+    if (!config?.is_active || !config.credentials_encrypted) {
       throw new TRPCError({
         code: 'PRECONDITION_FAILED',
         message: 'Portal credentials not configured. Configure via portals.configure first.',

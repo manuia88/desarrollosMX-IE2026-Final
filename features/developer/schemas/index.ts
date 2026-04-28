@@ -56,3 +56,5 @@ export const unitDemandHeatmapItem = z.object({
   signals: z.record(z.string(), z.unknown()).nullable(),
 });
 export type UnitDemandHeatmapItem = z.infer<typeof unitDemandHeatmapItem>;
+
+export * from './inventario';

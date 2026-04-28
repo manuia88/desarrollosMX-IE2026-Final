@@ -72,7 +72,7 @@ function ScoreTile({
   const { scoreOutput, registryEntry, methodology, tierGate, recommendations, reasoningTemplate } =
     entry;
 
-  if (tierGate && tierGate.gated) {
+  if (tierGate?.gated) {
     return (
       <ScorePlaceholder
         tierGate={tierGate}

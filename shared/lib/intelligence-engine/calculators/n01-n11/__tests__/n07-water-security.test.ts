@@ -45,7 +45,7 @@ describe('N07 Water Security calculator', () => {
 
   it('Polanco (2d + 3% sobreexp) → score ≥85', () => {
     const polanco = CDMX_ZONES.find((z) => z.zona_name === 'Polanco');
-    const conagua = CDMX_CONAGUA['Polanco'];
+    const conagua = CDMX_CONAGUA.Polanco;
     if (!polanco || !conagua) throw new Error('fixtures missing');
     const res = computeN07WaterSecurity({
       dias_sin_agua_anual: polanco.sources.sacmex.dias_sin_agua_anual,

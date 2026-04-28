@@ -305,7 +305,7 @@ async function maybeGenerateNarrative(
   input: CalculatorInput,
 ): Promise<CalculatorOutput> {
   const calcMeta = CALCULATOR_META.get(scoreId);
-  if (!calcMeta || !calcMeta.ai_narrative || !calcMeta.reasoning_template) return output;
+  if (!calcMeta?.ai_narrative || !calcMeta.reasoning_template) return output;
   const entityId = input.zoneId ?? input.projectId ?? input.userId ?? 'unknown';
   try {
     const res = await generateNarrative({

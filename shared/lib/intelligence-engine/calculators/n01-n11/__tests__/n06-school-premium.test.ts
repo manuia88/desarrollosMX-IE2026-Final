@@ -33,7 +33,7 @@ describe('N06 School Premium calculator', () => {
   });
 
   it('Polanco (premium 24% + 4 top_20) → score ≥80', () => {
-    const polanco = CDMX_SCHOOL_PREMIUM['Polanco'];
+    const polanco = CDMX_SCHOOL_PREMIUM.Polanco;
     const siged = CDMX_ZONES.find((z) => z.zona_name === 'Polanco')?.sources.siged;
     if (!polanco || !siged) throw new Error('fixtures missing');
     const res = computeN06SchoolPremium({
