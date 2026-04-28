@@ -121,11 +121,14 @@ describe('Step 1 form validation — Zod schema contract', () => {
 });
 
 describe('Step 2 voice preview + recorder + upload contract', () => {
-  it('VoiceQualityPreview exposes 3 sample IDs (aurora, mateo, sofia)', async () => {
+  it('VoiceQualityPreview exposes 3 sample IDs (canon Aurora/Mateo/Sofia ElevenLabs voice_ids)', async () => {
     const mod = await import('../../../components/onboarding/VoiceQualityPreview');
+    const voicesMod = await import('../../../lib/elevenlabs/voices-canon');
     expect(typeof mod.VoiceQualityPreview).toBe('function');
-    expect(mod.VOICE_PREVIEW_SAMPLE_IDS).toEqual(['aurora-mx', 'mateo-mx', 'sofia-mx']);
     expect(mod.VOICE_PREVIEW_SAMPLE_IDS.length).toBe(3);
+    expect(mod.VOICE_PREVIEW_SAMPLE_IDS).toEqual(
+      voicesMod.ELEVENLABS_CANON_VOICES_ES_MX.map((v) => v.id),
+    );
   });
 
   it('VoiceRecorder exports as function (Blob captured via MediaRecorder mock)', async () => {
@@ -133,16 +136,36 @@ describe('Step 2 voice preview + recorder + upload contract', () => {
     expect(typeof mod.VoiceRecorder).toBe('function');
   });
 
-  it('Step 2 Zod schema requires consentSigned + voiceSampleStoragePath + voiceName', () => {
+  it('Step 2 Zod discriminated union accepts clone/prebuilt/none branches', () => {
     const missing = onboardingStep2Input.safeParse({});
     expect(missing.success).toBe(false);
-    const ok = onboardingStep2Input.safeParse({
+
+    const clone = onboardingStep2Input.safeParse({
+      voicePreference: 'clone',
       voiceSampleStoragePath: 'user-uuid/voice-samples/12345_sample.webm',
       voiceLanguage: 'es-MX',
       voiceName: 'Mi voz profesional',
       consentSigned: true,
     });
-    expect(ok.success).toBe(true);
+    expect(clone.success).toBe(true);
+
+    const prebuilt = onboardingStep2Input.safeParse({
+      voicePreference: 'prebuilt',
+      selectedPrebuiltVoiceId: '21m00Tcm4TlvDq8ikWAM',
+    });
+    expect(prebuilt.success).toBe(true);
+
+    const none = onboardingStep2Input.safeParse({ voicePreference: 'none' });
+    expect(none.success).toBe(true);
+
+    const invalidClone = onboardingStep2Input.safeParse({
+      voicePreference: 'clone',
+      voiceSampleStoragePath: 'user-uuid/voice-samples/12345_sample.webm',
+      voiceLanguage: 'es-MX',
+      voiceName: 'Mi voz profesional',
+      consentSigned: false,
+    });
+    expect(invalidClone.success).toBe(false);
   });
 
   it('Step 2 mutation chain: uploadVoiceSample → PUT signed URL → completeStep2', async () => {

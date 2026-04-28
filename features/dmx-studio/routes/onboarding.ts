@@ -105,36 +105,84 @@ export const studioOnboardingRouter = router({
     }),
 
   completeStep2: studioProcedure.input(onboardingStep2Input).mutation(async ({ ctx, input }) => {
-    if (!input.consentSigned) {
-      throw new TRPCError({
-        code: 'BAD_REQUEST',
-        message: 'Consent signed required for voice clone',
-      });
-    }
     const supabase = createAdminClient();
-    const { data, error } = await supabase
-      .from('studio_voice_clones')
-      .insert({
-        user_id: ctx.user.id,
-        name: input.voiceName,
-        clone_type: 'instant',
-        status: 'pending',
-        source_audio_url: input.voiceSampleStoragePath,
-        language: input.voiceLanguage,
-        consent_signed: input.consentSigned,
-        consent_signed_at: input.consentSigned ? new Date().toISOString() : null,
-      })
-      .select('id')
-      .single();
-    if (error) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
+
+    if (input.voicePreference === 'clone') {
+      const { data, error } = await supabase
+        .from('studio_voice_clones')
+        .insert({
+          user_id: ctx.user.id,
+          name: input.voiceName,
+          clone_type: 'instant',
+          status: 'pending',
+          source_audio_url: input.voiceSampleStoragePath,
+          language: input.voiceLanguage,
+          consent_signed: input.consentSigned,
+          consent_signed_at: new Date().toISOString(),
+        })
+        .select('id')
+        .single();
+      if (error) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: error });
+
+      const { error: extErr } = await supabase
+        .from('studio_users_extension')
+        .update({
+          onboarding_step: 'step3',
+          voice_clone_completed: true,
+          voice_preference: 'clone',
+          selected_prebuilt_voice_id: null,
+        })
+        .eq('user_id', ctx.user.id);
+      if (extErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: extErr });
+
+      return {
+        ok: true,
+        voicePreference: 'clone' as const,
+        voiceCloneId: data.id,
+        selectedPrebuiltVoiceId: null,
+        nextStep: 'step3' as const,
+      };
+    }
+
+    if (input.voicePreference === 'prebuilt') {
+      const { error: extErr } = await supabase
+        .from('studio_users_extension')
+        .update({
+          onboarding_step: 'step3',
+          voice_clone_completed: false,
+          voice_preference: 'prebuilt',
+          selected_prebuilt_voice_id: input.selectedPrebuiltVoiceId,
+        })
+        .eq('user_id', ctx.user.id);
+      if (extErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: extErr });
+
+      return {
+        ok: true,
+        voicePreference: 'prebuilt' as const,
+        voiceCloneId: null,
+        selectedPrebuiltVoiceId: input.selectedPrebuiltVoiceId,
+        nextStep: 'step3' as const,
+      };
+    }
 
     const { error: extErr } = await supabase
       .from('studio_users_extension')
-      .update({ onboarding_step: 'step3', voice_clone_completed: true })
+      .update({
+        onboarding_step: 'step3',
+        voice_clone_completed: false,
+        voice_preference: 'none',
+        selected_prebuilt_voice_id: null,
+      })
       .eq('user_id', ctx.user.id);
     if (extErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: extErr });
 
-    return { ok: true, voiceCloneId: data.id, nextStep: 'step3' as const };
+    return {
+      ok: true,
+      voicePreference: 'none' as const,
+      voiceCloneId: null,
+      selectedPrebuiltVoiceId: null,
+      nextStep: 'step3' as const,
+    };
   }),
 
   completeStep3: studioProcedure.input(onboardingStep3Input).mutation(async ({ ctx, input }) => {

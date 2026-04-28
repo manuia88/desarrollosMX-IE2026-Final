@@ -4,6 +4,7 @@
 // Steps: step1 (datos asesor) → step2 (voice sample) → step3 (disclosure + finalizar).
 
 import { useCallback, useState } from 'react';
+import type { VoicePreference } from '@/features/dmx-studio/schemas';
 
 export type OnboardingStepKey = 'step1' | 'step2' | 'step3';
 
@@ -19,11 +20,15 @@ export interface OnboardingState {
   readonly totalSteps: number;
   readonly voiceSampleStoragePath: string | null;
   readonly voiceCloneId: string | null;
+  readonly voicePreference: VoicePreference | null;
+  readonly selectedPrebuiltVoiceId: string | null;
   goToStep(step: OnboardingStepKey): void;
   next(): void;
   back(): void;
   setVoiceSampleStoragePath(path: string | null): void;
   setVoiceCloneId(id: string | null): void;
+  setVoicePreference(pref: VoicePreference | null): void;
+  setSelectedPrebuiltVoiceId(id: string | null): void;
 }
 
 export function useOnboardingState(options: UseOnboardingStateOptions = {}): OnboardingState {
@@ -31,6 +36,8 @@ export function useOnboardingState(options: UseOnboardingStateOptions = {}): Onb
   const [currentStep, setCurrentStep] = useState<OnboardingStepKey>(initial);
   const [voiceSampleStoragePath, setVoiceSampleStoragePathState] = useState<string | null>(null);
   const [voiceCloneId, setVoiceCloneIdState] = useState<string | null>(null);
+  const [voicePreference, setVoicePreferenceState] = useState<VoicePreference | null>(null);
+  const [selectedPrebuiltVoiceId, setSelectedPrebuiltVoiceIdState] = useState<string | null>(null);
 
   const goToStep = useCallback((step: OnboardingStepKey) => {
     setCurrentStep(step);
@@ -62,6 +69,14 @@ export function useOnboardingState(options: UseOnboardingStateOptions = {}): Onb
     setVoiceCloneIdState(id);
   }, []);
 
+  const setVoicePreference = useCallback((pref: VoicePreference | null) => {
+    setVoicePreferenceState(pref);
+  }, []);
+
+  const setSelectedPrebuiltVoiceId = useCallback((id: string | null) => {
+    setSelectedPrebuiltVoiceIdState(id);
+  }, []);
+
   const currentIndex = ONBOARDING_STEP_ORDER.indexOf(currentStep);
 
   return {
@@ -70,10 +85,14 @@ export function useOnboardingState(options: UseOnboardingStateOptions = {}): Onb
     totalSteps: ONBOARDING_STEP_ORDER.length,
     voiceSampleStoragePath,
     voiceCloneId,
+    voicePreference,
+    selectedPrebuiltVoiceId,
     goToStep,
     next,
     back,
     setVoiceSampleStoragePath,
     setVoiceCloneId,
+    setVoicePreference,
+    setSelectedPrebuiltVoiceId,
   };
 }

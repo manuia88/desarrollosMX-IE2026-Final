@@ -4512,9 +4512,31 @@
       "voiceNameLabel": "Nombre de tu voz",
       "voiceNamePlaceholder": "Mi voz profesional",
       "voiceConsent": "Acepto que mi muestra de voz se use para clonación AI dentro de DMX Studio. Puedo revocar el consentimiento en cualquier momento desde mi cuenta.",
-      "errorNoSample": "Graba una muestra de voz antes de continuar.",
-      "errorVoiceName": "Asigna un nombre a tu voz.",
-      "errorConsent": "Necesitamos tu consentimiento para usar la voz.",
+      "errorNoSample": "Grave uma amostra de voz antes de continuar.",
+      "errorVoiceName": "Atribua um nome à sua voz.",
+      "errorConsent": "Precisamos do seu consentimento para usar a voz.",
+      "errorNoPrebuiltVoice": "Selecione uma voz pré-construída antes de continuar.",
+      "voiceOptionsLabel": "Como você quer narrar seus vídeos?",
+      "selectedPrebuiltVoiceLabel": "Voz selecionada",
+      "voiceCloneGatedDisclosure": "A clonagem de voz é ativada quando você assina o plano Pro. Por enquanto, use uma voz pré-construída ou sem narração.",
+      "voiceCloneGatedError": "A clonagem de voz não está disponível no seu plano atual. Selecione uma voz pré-construída ou sem narração.",
+      "voiceOption": {
+        "prebuilt": {
+          "title": "Usar uma voz pré-construída",
+          "description": "Aurora, Mateo ou Sofía narram seus vídeos. Pronto em segundos, sem gravação."
+        },
+        "clone": {
+          "title": "Clonar minha voz",
+          "badge": "Pro",
+          "description": "Grave 30 segundos e crie uma voz AI com sua identidade para todos os seus vídeos.",
+          "gatedDescription": "Em breve: disponível ao ativar plano Pro. Enquanto isso, você pode escolher uma voz pré-construída."
+        },
+        "none": {
+          "title": "Sem narração",
+          "description": "Apenas música ambiente. Ideal para reels rápidos ou vídeos institucionais.",
+          "helper": "Seus vídeos serão gerados com música ambiente selecionada pela AI de acordo com o estilo da propriedade."
+        }
+      },
       "step3Title": "Todo listo",
       "step3Subtitle": "Tu cuenta DMX Studio está configurada. En unos minutos podrás crear tu primer video.",
       "voiceCloneCreatedLabel": "Muestra de voz registrada",

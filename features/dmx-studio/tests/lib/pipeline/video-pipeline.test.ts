@@ -17,6 +17,10 @@ interface BuildMockOpts {
   readonly voiceCloneId?: string | null;
   readonly hasAsset?: boolean;
   readonly voiceCloneRow?: { elevenlabs_voice_id: string | null; status: string } | null;
+  readonly usersExtension?: {
+    voice_preference: 'clone' | 'prebuilt' | 'none';
+    selected_prebuilt_voice_id: string | null;
+  } | null;
 }
 
 function defaultDirectorBrief(): Record<string, unknown> {
@@ -57,6 +61,13 @@ function buildMockClient(opts: BuildMockOpts = {}): MockHarness {
   const voiceCloneId = opts.voiceCloneId ?? null;
   const hasAsset = opts.hasAsset !== false;
   const voiceCloneRow = opts.voiceCloneRow ?? null;
+  const usersExtension =
+    opts.usersExtension === undefined
+      ? {
+          voice_preference: 'prebuilt' as const,
+          selected_prebuilt_voice_id: '21m00Tcm4TlvDq8ikWAM',
+        }
+      : opts.usersExtension;
   let insertCounter = 0;
 
   function makeInsertChain(table: string, payload: unknown) {
@@ -148,6 +159,21 @@ function buildMockClient(opts: BuildMockOpts = {}): MockHarness {
               return {
                 async maybeSingle() {
                   return { data: voiceCloneRow, error: null };
+                },
+              };
+            },
+          };
+        },
+      };
+    }
+    if (table === 'studio_users_extension') {
+      return {
+        select(_cols: string) {
+          return {
+            eq(_col: string, _val: string) {
+              return {
+                async maybeSingle() {
+                  return { data: usersExtension, error: null };
                 },
               };
             },

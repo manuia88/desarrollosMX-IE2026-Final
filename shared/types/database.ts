@@ -18255,10 +18255,12 @@ export type Database = {
           onboarding_completed: boolean
           onboarding_step: string | null
           organization_id: string | null
+          selected_prebuilt_voice_id: string | null
           studio_role: string
           updated_at: string
           user_id: string
           voice_clone_completed: boolean
+          voice_preference: string
         }
         Insert: {
           brand_kit_completed?: boolean
@@ -18268,10 +18270,12 @@ export type Database = {
           onboarding_completed?: boolean
           onboarding_step?: string | null
           organization_id?: string | null
+          selected_prebuilt_voice_id?: string | null
           studio_role?: string
           updated_at?: string
           user_id: string
           voice_clone_completed?: boolean
+          voice_preference?: string
         }
         Update: {
           brand_kit_completed?: boolean
@@ -18281,10 +18285,12 @@ export type Database = {
           onboarding_completed?: boolean
           onboarding_step?: string | null
           organization_id?: string | null
+          selected_prebuilt_voice_id?: string | null
           studio_role?: string
           updated_at?: string
           user_id?: string
           voice_clone_completed?: boolean
+          voice_preference?: string
         }
         Relationships: [
           {

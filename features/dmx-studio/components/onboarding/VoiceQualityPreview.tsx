@@ -1,10 +1,11 @@
 'use client';
 
 // FASE 14.F.2 Sprint 1 — Voice quality preview (3 muestras pre-grabadas ES-MX).
-// STUB ADR-018 — placeholder URLs, founder hosts real samples post-launch.
+// STUB ADR-018 — sample mp3 no existen aun, founder genera + uploads via service_role.
 // L-NEW-STUDIO-VOICE-PREVIEW-SAMPLES H2: generar 3 .mp3 vía ElevenLabs API
-// server-side + servir desde Supabase Storage bucket `studio-voice-previews`.
-// Por ahora muestra disclosure "Próximamente" cuando el archivo no carga.
+// server-side + servir desde Supabase Storage bucket `studio-voice-previews` (público).
+// VoiceQualityPreview muestra disclosure "Próximamente" cuando el archivo no carga.
+// F14.F.14 hotfix2: source of truth en ELEVENLABS_CANON_VOICES_ES_MX (voices-canon.ts).
 
 import { useTranslations } from 'next-intl';
 import { useCallback, useRef, useState } from 'react';
@@ -16,26 +17,20 @@ interface VoiceSample {
   readonly audioUrl: string;
 }
 
-const VOICE_SAMPLES: ReadonlyArray<VoiceSample> = [
-  {
-    id: 'aurora-mx',
-    nameKey: 'voicePreview.aurora.name',
-    toneKey: 'voicePreview.aurora.tone',
-    audioUrl: '/audio/studio-voice-previews/aurora-mx.mp3',
-  },
-  {
-    id: 'mateo-mx',
-    nameKey: 'voicePreview.mateo.name',
-    toneKey: 'voicePreview.mateo.tone',
-    audioUrl: '/audio/studio-voice-previews/mateo-mx.mp3',
-  },
-  {
-    id: 'sofia-mx',
-    nameKey: 'voicePreview.sofia.name',
-    toneKey: 'voicePreview.sofia.tone',
-    audioUrl: '/audio/studio-voice-previews/sofia-mx.mp3',
-  },
-];
+import { ELEVENLABS_CANON_VOICES_ES_MX } from '@/features/dmx-studio/lib/elevenlabs/voices-canon';
+
+const VOICE_KEY_BY_NAME: Record<string, { nameKey: string; toneKey: string }> = {
+  'Aurora MX': { nameKey: 'voicePreview.aurora.name', toneKey: 'voicePreview.aurora.tone' },
+  'Mateo MX': { nameKey: 'voicePreview.mateo.name', toneKey: 'voicePreview.mateo.tone' },
+  'Sofía MX': { nameKey: 'voicePreview.sofia.name', toneKey: 'voicePreview.sofia.tone' },
+};
+
+const VOICE_SAMPLES: ReadonlyArray<VoiceSample> = ELEVENLABS_CANON_VOICES_ES_MX.map((v) => ({
+  id: v.id,
+  nameKey: VOICE_KEY_BY_NAME[v.name]?.nameKey ?? 'voicePreview.aurora.name',
+  toneKey: VOICE_KEY_BY_NAME[v.name]?.toneKey ?? 'voicePreview.aurora.tone',
+  audioUrl: v.samplePreviewUrl,
+}));
 
 export const VOICE_PREVIEW_SAMPLE_IDS = VOICE_SAMPLES.map((v) => v.id);
 
