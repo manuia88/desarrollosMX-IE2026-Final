@@ -310,7 +310,9 @@ export const analyticsDevRouter = router({
       if (monitorIds.length === 0) return [];
       let q = supabase
         .from('competitor_alerts')
-        .select('id, monitor_id, alert_type, severity, payload, ai_narrative, detected_at, read_at, created_at')
+        .select(
+          'id, monitor_id, alert_type, severity, payload, ai_narrative, detected_at, read_at, created_at',
+        )
         .in('monitor_id', monitorIds)
         .order('detected_at', { ascending: false });
       if (input.unreadOnly) q = q.is('read_at', null);
