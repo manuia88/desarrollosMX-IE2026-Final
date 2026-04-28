@@ -52,9 +52,10 @@ export function calculateBreakEven(
   const projection = projectMonthlyCosts(planKey, assumedUsageProfile);
   // Variable cost per user = projection.variableCosts (which is per-user cost)
   const costPerUserUsd = round2(projection.variableCosts);
-  const contributionMarginPerUserUsd = round2(plan.priceUsd - costPerUserUsd);
+  const planPriceUsd = plan.priceUsdEquivalent ?? 0;
+  const contributionMarginPerUserUsd = round2(planPriceUsd - costPerUserUsd);
   const contributionMarginPct =
-    plan.priceUsd > 0 ? round2((contributionMarginPerUserUsd / plan.priceUsd) * 100) : 0;
+    planPriceUsd > 0 ? round2((contributionMarginPerUserUsd / planPriceUsd) * 100) : 0;
 
   // If contribution margin <= 0, plan unprofitable — usersNeeded = Infinity
   // semantically but we cap at 9999 to keep type Number serializable (JSON safe).
@@ -64,7 +65,7 @@ export function calculateBreakEven(
   } else {
     usersNeeded = Math.ceil(STUDIO_OPERATIONAL_FIXED_USD_PER_MONTH / contributionMarginPerUserUsd);
   }
-  const mrrTargetUsd = round2(usersNeeded * plan.priceUsd);
+  const mrrTargetUsd = round2(usersNeeded * planPriceUsd);
 
   return {
     planKey,
@@ -90,7 +91,7 @@ export interface BreakEvenSummary {
  * PerformanceDashboard + UNIT_ECONOMICS.md doc.
  */
 export function calculateBreakEvenAllPlans(): BreakEvenSummary {
-  const planKeys: ReadonlyArray<StudioPlanKey> = ['pro', 'foto', 'agency'];
+  const planKeys: ReadonlyArray<StudioPlanKey> = ['founder', 'pro', 'agency'];
   return {
     perPlan: planKeys.map((p) => calculateBreakEven(p, 'typical')),
     operationalFixedUsd: STUDIO_OPERATIONAL_FIXED_USD_PER_MONTH,

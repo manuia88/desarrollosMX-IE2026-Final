@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const STUDIO_PLAN_KEYS = ['pro', 'foto', 'agency'] as const;
+export const STUDIO_PLAN_KEYS = ['founder', 'pro', 'agency'] as const;
 export const studioPlanKeyEnum = z.enum(STUDIO_PLAN_KEYS);
 export type StudioPlanKeySchema = z.infer<typeof studioPlanKeyEnum>;
 

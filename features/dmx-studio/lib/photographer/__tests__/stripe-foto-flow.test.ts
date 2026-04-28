@@ -1,12 +1,14 @@
 // F14.F.10 Sprint 9 BIBLIA — Stripe Foto plan checkout wrapper unit tests (Modo A).
+// FASE 14.F.12 — Constant rename to STUDIO_STRIPE_PRICE_FOTO_USD_67_LEGACY_PHOTOGRAPHER_B2B2C
+// + override checkout flow (B2B2C standalone, NO STUDIO_PLANS main tier).
 // 3 tests: customer metadata propagation, success URL canon, foto plan price ID lock.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-const checkoutMock = vi.fn();
+const checkoutOverrideMock = vi.fn();
 
 vi.mock('@/features/dmx-studio/lib/stripe/checkout', () => ({
-  createStudioCheckoutSession: checkoutMock,
+  createStudioCheckoutSessionOverride: checkoutOverrideMock,
 }));
 
 const updateMock = vi.fn().mockReturnThis();
@@ -25,7 +27,7 @@ vi.mock('@/shared/lib/telemetry/sentry', () => ({
 }));
 
 beforeEach(() => {
-  checkoutMock.mockReset();
+  checkoutOverrideMock.mockReset();
   updateMock.mockClear();
   eqMock.mockClear();
   fromMock.mockClear();
@@ -36,15 +38,15 @@ afterEach(() => {
 });
 
 describe('createPhotoCheckoutSession', () => {
-  it('locks priceId to STUDIO_STRIPE_PRICE_FOTO_USD_67 and forwards to createStudioCheckoutSession', async () => {
-    const { STUDIO_STRIPE_PRICE_FOTO_USD_67 } = await import(
+  it('locks priceId to STUDIO_STRIPE_PRICE_FOTO_USD_67_LEGACY_PHOTOGRAPHER_B2B2C and forwards override', async () => {
+    const { STUDIO_STRIPE_PRICE_FOTO_USD_67_LEGACY_PHOTOGRAPHER_B2B2C } = await import(
       '@/features/dmx-studio/lib/stripe-products'
     );
-    checkoutMock.mockResolvedValueOnce({
+    checkoutOverrideMock.mockResolvedValueOnce({
       url: 'https://checkout.stripe.com/c/pay/cs_test_xyz',
       sessionId: 'cs_test_xyz',
       customerId: 'cus_test_abc',
-      priceId: STUDIO_STRIPE_PRICE_FOTO_USD_67,
+      priceId: STUDIO_STRIPE_PRICE_FOTO_USD_67_LEGACY_PHOTOGRAPHER_B2B2C,
     });
 
     const { createPhotoCheckoutSession } = await import('../stripe-foto-flow');
@@ -53,26 +55,27 @@ describe('createPhotoCheckoutSession', () => {
       userEmail: 'foto@example.com',
     });
 
-    expect(checkoutMock).toHaveBeenCalledWith(
+    expect(checkoutOverrideMock).toHaveBeenCalledWith(
       expect.objectContaining({
         userId: 'user-uuid-foto-1',
         userEmail: 'foto@example.com',
-        planKey: 'foto',
+        priceId: STUDIO_STRIPE_PRICE_FOTO_USD_67_LEGACY_PHOTOGRAPHER_B2B2C,
+        planKeyMetadata: 'foto',
       }),
     );
-    expect(result.priceId).toBe(STUDIO_STRIPE_PRICE_FOTO_USD_67);
+    expect(result.priceId).toBe(STUDIO_STRIPE_PRICE_FOTO_USD_67_LEGACY_PHOTOGRAPHER_B2B2C);
     expect(result.url).toContain('checkout.stripe.com');
   });
 
   it('uses canon success path /studio-app/photographer/onboarding-success when not provided', async () => {
-    const { STUDIO_STRIPE_PRICE_FOTO_USD_67 } = await import(
+    const { STUDIO_STRIPE_PRICE_FOTO_USD_67_LEGACY_PHOTOGRAPHER_B2B2C } = await import(
       '@/features/dmx-studio/lib/stripe-products'
     );
-    checkoutMock.mockResolvedValueOnce({
+    checkoutOverrideMock.mockResolvedValueOnce({
       url: 'https://checkout.stripe.com/c/pay/cs_test_2',
       sessionId: 'cs_test_2',
       customerId: 'cus_test_2',
-      priceId: STUDIO_STRIPE_PRICE_FOTO_USD_67,
+      priceId: STUDIO_STRIPE_PRICE_FOTO_USD_67_LEGACY_PHOTOGRAPHER_B2B2C,
     });
 
     const { createPhotoCheckoutSession, PHOTOGRAPHER_DEFAULT_SUCCESS_PATH } = await import(
@@ -83,13 +86,13 @@ describe('createPhotoCheckoutSession', () => {
       userEmail: null,
     });
 
-    const calledWith = checkoutMock.mock.calls[0]?.[0] as { successUrl?: string };
+    const calledWith = checkoutOverrideMock.mock.calls[0]?.[0] as { successUrl?: string };
     expect(calledWith.successUrl).toBe(PHOTOGRAPHER_DEFAULT_SUCCESS_PATH);
     expect(PHOTOGRAPHER_DEFAULT_SUCCESS_PATH).toBe('/studio-app/photographer/onboarding-success');
   });
 
   it('throws price_mismatch when underlying wrapper returns wrong priceId (canon defense)', async () => {
-    checkoutMock.mockResolvedValueOnce({
+    checkoutOverrideMock.mockResolvedValueOnce({
       url: 'https://checkout.stripe.com/c/pay/wrong',
       sessionId: 'cs_test_wrong',
       customerId: 'cus_test_wrong',

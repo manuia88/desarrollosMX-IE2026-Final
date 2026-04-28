@@ -11,7 +11,11 @@ export type StudioFeatureKey =
   | 'HEYGEN_AVATAR_ENABLED'
   | 'DEEPGRAM_TRANSCRIPTION_ENABLED'
   | 'SERIES_MODE_ENABLED'
-  | 'PORTAL_SCRAPER_ENABLED';
+  | 'PORTAL_SCRAPER_ENABLED'
+  | 'SOCIAL_PUBLISHING_ENABLED'
+  | 'INSTAGRAM_PUBLISH_ENABLED'
+  | 'TIKTOK_PUBLISH_ENABLED'
+  | 'FACEBOOK_PUBLISH_ENABLED';
 
 export const FEATURE_FLAGS: Readonly<Record<StudioFeatureKey, boolean>> = {
   ELEVENLABS_VOICE_CLONE_ENABLED: process.env.ELEVENLABS_VOICE_CLONE_ENABLED === 'true',
@@ -23,6 +27,10 @@ export const FEATURE_FLAGS: Readonly<Record<StudioFeatureKey, boolean>> = {
   DEEPGRAM_TRANSCRIPTION_ENABLED: process.env.DEEPGRAM_TRANSCRIPTION_ENABLED === 'true',
   SERIES_MODE_ENABLED: process.env.SERIES_MODE_ENABLED === 'true',
   PORTAL_SCRAPER_ENABLED: process.env.PORTAL_SCRAPER_ENABLED === 'true',
+  SOCIAL_PUBLISHING_ENABLED: process.env.SOCIAL_PUBLISHING_ENABLED === 'true',
+  INSTAGRAM_PUBLISH_ENABLED: process.env.INSTAGRAM_PUBLISH_ENABLED === 'true',
+  TIKTOK_PUBLISH_ENABLED: process.env.TIKTOK_PUBLISH_ENABLED === 'true',
+  FACEBOOK_PUBLISH_ENABLED: process.env.FACEBOOK_PUBLISH_ENABLED === 'true',
 } as const;
 
 export function shouldUseFeature(key: StudioFeatureKey): boolean {
@@ -39,6 +47,10 @@ export const FEATURE_FLAG_SPRINT_MAP: Readonly<Record<StudioFeatureKey, string>>
   DEEPGRAM_TRANSCRIPTION_ENABLED: 'Sprint 5 H2',
   SERIES_MODE_ENABLED: 'Sprint 8 H2',
   PORTAL_SCRAPER_ENABLED: 'Sprint 3 H2',
+  SOCIAL_PUBLISHING_ENABLED: 'Sprint 11+12 H2 (post-aprobación API + PMF validation)',
+  INSTAGRAM_PUBLISH_ENABLED: 'Sprint 11+12 H2 (post-aprobación API + PMF validation)',
+  TIKTOK_PUBLISH_ENABLED: 'Sprint 11+12 H2 (post-aprobación API + PMF validation)',
+  FACEBOOK_PUBLISH_ENABLED: 'Sprint 11+12 H2 (post-aprobación API + PMF validation)',
 } as const;
 
 export const AGENCY_PLAN_KEY = 'agency';

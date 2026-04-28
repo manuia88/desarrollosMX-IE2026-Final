@@ -23,6 +23,7 @@ import { studioPublicGalleryRouter } from './public-gallery';
 import { studioRawVideoPipelineRouter } from './raw-video-pipeline';
 import { studioRawVideosRouter } from './raw-videos';
 import { studioRemarketingRouter } from './remarketing';
+import { socialPublishersRouter } from './social-publishers';
 import { studioSpeechAnalyticsRouter } from './speech-analytics';
 import {
   studioSprint6CinemaModeRouter,
@@ -80,6 +81,7 @@ export const studioRouter = router({
   rawVideos: studioRawVideosRouter,
   remarketing: studioRemarketingRouter,
   seedance: studioSprint6SeedanceRouter,
+  socialPublishers: socialPublishersRouter,
   speechAnalytics: studioSpeechAnalyticsRouter,
   sprint6Toggles: studioSprint6TogglesRouter,
   sprint7Analytics: studioSprint7AnalyticsRouter,

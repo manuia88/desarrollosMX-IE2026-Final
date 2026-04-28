@@ -2,8 +2,8 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
-  STUDIO_STRIPE_PRICE_FOTO_USD_67,
-  STUDIO_STRIPE_PRICE_PRO_USD_47,
+  STUDIO_STRIPE_PRICE_FOUNDER_MXN_997,
+  STUDIO_STRIPE_PRICE_PRO_MXN_2497,
 } from '@/features/dmx-studio/lib/stripe-products';
 
 interface QueryResult {
@@ -78,7 +78,7 @@ describe('handleStripeWebhook checkout.session.completed', () => {
           subscription: 'sub_test_001',
           mode: 'subscription',
           status: 'complete',
-          metadata: { user_id: 'user-uuid-A', plan_key: 'pro' },
+          metadata: { user_id: 'user-uuid-A', plan_key: 'founder' },
           success_url: 'https://example.com/welcome',
           cancel_url: 'https://example.com/cancel',
         },
@@ -96,10 +96,10 @@ describe('handleStripeWebhook checkout.session.completed', () => {
 
     const subInsert = insertCalls.find((c) => c.table === 'studio_subscriptions');
     expect(subInsert).toBeDefined();
-    expect(subInsert?.row.plan_key).toBe('pro');
+    expect(subInsert?.row.plan_key).toBe('founder');
     expect(subInsert?.row.stripe_subscription_id).toBe('sub_test_001');
     expect(subInsert?.row.stripe_customer_id).toBe('cus_test_001');
-    expect(subInsert?.row.stripe_price_id).toBe(STUDIO_STRIPE_PRICE_PRO_USD_47);
+    expect(subInsert?.row.stripe_price_id).toBe(STUDIO_STRIPE_PRICE_FOUNDER_MXN_997);
     expect(subInsert?.row.status).toBe('active');
     expect(subInsert?.row.videos_per_month_limit).toBe(5);
 
@@ -108,7 +108,7 @@ describe('handleStripeWebhook checkout.session.completed', () => {
     expect(auditInsert?.row.action).toBe('studio.subscription.created');
   });
 
-  it('uses foto plan price when plan_key=foto', async () => {
+  it('uses pro plan price when plan_key=pro (FASE 14.F.12 MXN canon)', async () => {
     const event = {
       id: 'evt_test_002',
       object: 'event',
@@ -123,7 +123,7 @@ describe('handleStripeWebhook checkout.session.completed', () => {
           subscription: 'sub_test_002',
           mode: 'subscription',
           status: 'complete',
-          metadata: { user_id: 'user-uuid-B', plan_key: 'foto' },
+          metadata: { user_id: 'user-uuid-B', plan_key: 'pro' },
           success_url: 'https://example.com/welcome',
           cancel_url: 'https://example.com/cancel',
         },
@@ -137,8 +137,8 @@ describe('handleStripeWebhook checkout.session.completed', () => {
     });
     expect(result.ok).toBe(true);
     const subInsert = insertCalls.find((c) => c.table === 'studio_subscriptions');
-    expect(subInsert?.row.stripe_price_id).toBe(STUDIO_STRIPE_PRICE_FOTO_USD_67);
-    expect(subInsert?.row.videos_per_month_limit).toBe(50);
+    expect(subInsert?.row.stripe_price_id).toBe(STUDIO_STRIPE_PRICE_PRO_MXN_2497);
+    expect(subInsert?.row.videos_per_month_limit).toBe(15);
   });
 });
 

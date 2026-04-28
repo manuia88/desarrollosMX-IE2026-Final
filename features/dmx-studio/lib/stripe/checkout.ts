@@ -21,6 +21,21 @@ export interface CreateStudioCheckoutInput {
   readonly organizationId?: string | null;
 }
 
+// FASE 14.F.12 — Override variant for standalone B2B2C plans (e.g. photographer
+// 'foto' plan F14.F.10) that are NOT part of STUDIO_PLANS main tier.
+// Caller passes an explicit priceId + planKeyMetadata string for downstream
+// webhook routing. Bypasses STUDIO_PLANS round-trip canon validation.
+export interface CreateStudioCheckoutOverrideInput {
+  readonly userId: string;
+  readonly userEmail: string | null;
+  readonly priceId: string;
+  readonly planKeyMetadata: string;
+  readonly videosPerMonthLimit: number;
+  readonly successUrl: string;
+  readonly cancelUrl: string;
+  readonly organizationId?: string | null;
+}
+
 export interface CreateStudioCheckoutResult {
   readonly url: string;
   readonly sessionId: string;
@@ -136,5 +151,58 @@ export async function createStudioCheckoutSession(
     sessionId: session.id,
     customerId: customer.id,
     priceId: plan.priceId,
+  };
+}
+
+export async function createStudioCheckoutSessionOverride(
+  input: CreateStudioCheckoutOverrideInput,
+): Promise<CreateStudioCheckoutResult> {
+  if (!input.priceId) {
+    throw new Error('createStudioCheckoutSessionOverride: priceId required');
+  }
+  if (!input.planKeyMetadata) {
+    throw new Error('createStudioCheckoutSessionOverride: planKeyMetadata required');
+  }
+
+  const customer = await getOrCreateCustomer({
+    userId: input.userId,
+    userEmail: input.userEmail,
+  });
+
+  const origin = resolveAppOrigin();
+  const successUrl = ensureFullyQualifiedUrl(input.successUrl, origin);
+  const cancelUrl = ensureFullyQualifiedUrl(input.cancelUrl, origin);
+
+  const stripe = getStripe();
+  const session: StripeCheckoutSession = await stripe.checkout.sessions.create({
+    customer: customer.id,
+    mode: 'subscription',
+    success_url: successUrl,
+    cancel_url: cancelUrl,
+    line_items: [{ price: input.priceId, quantity: 1 }],
+    client_reference_id: input.userId,
+    metadata: {
+      user_id: input.userId,
+      plan_key: input.planKeyMetadata,
+      ...(input.organizationId ? { organization_id: input.organizationId } : {}),
+    },
+    subscription_data: {
+      metadata: {
+        user_id: input.userId,
+        plan_key: input.planKeyMetadata,
+        ...(input.organizationId ? { organization_id: input.organizationId } : {}),
+      },
+    },
+  });
+
+  if (!session.url) {
+    throw new Error('createStudioCheckoutSessionOverride: stripe returned no checkout URL');
+  }
+
+  return {
+    url: session.url,
+    sessionId: session.id,
+    customerId: customer.id,
+    priceId: input.priceId,
   };
 }

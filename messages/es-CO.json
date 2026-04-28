@@ -4481,6 +4481,7 @@
       "zonesLabel": "Zonas que cubres",
       "zonesHelp": "Separa con comas. Ejemplo: Polanco, Roma Norte, Condesa.",
       "continueButton": "Continuar",
+      "autoImportBanner": "Importamos tus datos de DesarrollosMX. Confirma o edita.",
       "step2Title": "Tu voz para narrar videos",
       "step2Subtitle": "Escucha 3 muestras de referencia y graba tu propia voz (10–30 segundos).",
       "voicePreviewTitle": "Voces de referencia",
@@ -4522,6 +4523,25 @@
       "disclosureLabel": "Entiendo que la clonación de mi voz se activa solo al suscribir plan Pro y que mis datos quedan protegidos bajo la política de privacidad LFPDPPP.",
       "errorAcknowledgeRequired": "Confirma el aviso para continuar.",
       "completeButton": "Empezar a crear videos"
+    },
+    "socialPublishers": {
+      "sectionTitle": "Publicar en redes sociales",
+      "sectionDescription": "Próximamente: publicación automática multi-plataforma cuando completemos aprobación de Meta y TikTok (3-7 días review).",
+      "stubBadge": "STUB H2",
+      "comingSoonBadge": "Próximamente",
+      "comingSoonTooltip": "Próximamente: publicación automática redes sociales (H2 post-aprobación API)",
+      "instagramTitle": "Instagram Reels",
+      "instagramDescription": "Reels verticales 9:16 publicados directo a tu cuenta Business o Creator.",
+      "instagramLabel": "Publicar en Instagram",
+      "instagramAriaLabel": "Publicar en Instagram (próximamente)",
+      "tiktokTitle": "TikTok",
+      "tiktokDescription": "Videos cortos 9:16 con auto-cropping y caption optimizado.",
+      "tiktokLabel": "Publicar en TikTok",
+      "tiktokAriaLabel": "Publicar en TikTok (próximamente)",
+      "facebookTitle": "Facebook Page",
+      "facebookDescription": "Posts de video en tu Página de Facebook con descripción + tags.",
+      "facebookLabel": "Publicar en Facebook",
+      "facebookAriaLabel": "Publicar en Facebook (próximamente)"
     },
     "dashboard": {
       "title": "DMX Studio",

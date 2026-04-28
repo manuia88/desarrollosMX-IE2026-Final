@@ -12,24 +12,24 @@ describe('PricingComparison3Tier — module export smoke', () => {
     expect(mod.PricingComparison3Tier.name).toBe('PricingComparison3Tier');
   });
 
-  it('STUDIO_PLANS source-of-truth contains 3 tiers (pro/foto/agency)', () => {
+  it('STUDIO_PLANS source-of-truth contains 3 tiers (founder/pro/agency)', () => {
     const keys = Object.keys(STUDIO_PLANS).sort();
-    expect(keys).toEqual(['agency', 'foto', 'pro']);
+    expect(keys).toEqual(['agency', 'founder', 'pro']);
   });
 
-  it('annual cycle applies 20% discount to monthly USD price', () => {
-    // mirrors effectivePriceUsd helper
+  it('annual cycle applies 20% discount to monthly MXN price', () => {
+    // mirrors effectivePriceMxn helper
     const ANNUAL_DISCOUNT = 0.2;
-    const annualPro = Math.round(STUDIO_PLANS.pro.priceUsd * (1 - ANNUAL_DISCOUNT));
-    const annualFoto = Math.round(STUDIO_PLANS.foto.priceUsd * (1 - ANNUAL_DISCOUNT));
-    const annualAgency = Math.round(STUDIO_PLANS.agency.priceUsd * (1 - ANNUAL_DISCOUNT));
-    // Pro = 47 → 38, Foto = 67 → 54, Agency = 97 → 78
-    expect(annualPro).toBe(38);
-    expect(annualFoto).toBe(54);
-    expect(annualAgency).toBe(78);
-    // Monthly equals priceUsd
-    expect(STUDIO_PLANS.pro.priceUsd).toBe(47);
-    expect(STUDIO_PLANS.foto.priceUsd).toBe(67);
-    expect(STUDIO_PLANS.agency.priceUsd).toBe(97);
+    const annualFounder = Math.round(STUDIO_PLANS.founder.priceMxn * (1 - ANNUAL_DISCOUNT));
+    const annualPro = Math.round(STUDIO_PLANS.pro.priceMxn * (1 - ANNUAL_DISCOUNT));
+    const annualAgency = Math.round(STUDIO_PLANS.agency.priceMxn * (1 - ANNUAL_DISCOUNT));
+    // Founder = 997 → 798, Pro = 2497 → 1998, Agency = 5997 → 4798
+    expect(annualFounder).toBe(798);
+    expect(annualPro).toBe(1998);
+    expect(annualAgency).toBe(4798);
+    // Monthly MXN canon FASE 14.F.12
+    expect(STUDIO_PLANS.founder.priceMxn).toBe(997);
+    expect(STUDIO_PLANS.pro.priceMxn).toBe(2497);
+    expect(STUDIO_PLANS.agency.priceMxn).toBe(5997);
   });
 });

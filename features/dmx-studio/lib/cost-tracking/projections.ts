@@ -14,15 +14,18 @@
 //   - Pedra virtual staging: $0.25 / foto
 //   - Vercel Sandbox FFmpeg: ~$0.10 / render
 //
-// Plans canon (stripe-products.ts ADR-054):
-//   - pro: $47/mes, 5 videos/mes
-//   - foto: $67/mes, 50 videos/mes
-//   - agency: $97/mes, 20 videos/mes
+// Plans canon (stripe-products.ts ADR-054 + FASE 14.F.12 MXN escala masiva):
+//   - founder: MXN 997/mes (~$58.65 USD), 5 videos/mes (2 premium + 3 basic)
+//   - pro: MXN 2,497/mes (~$146.88 USD), 15 videos/mes (5 premium + 10 basic)
+//   - agency: MXN 5,997/mes (~$352.76 USD), 50 videos/mes (20 premium + 30 basic)
 //
 // Usage profiles modelan distribución comportamiento típico:
 //   - light: 5 videos/mes (asesor casual)
 //   - typical: 20 videos/mes (asesor activo)
 //   - heavy: 50 videos/mes (agencia / fotógrafo)
+//
+// NOTA: cost projections operan en USD (proveedores APIs facturados USD).
+// planPriceUsd usa priceUsdEquivalent calculado MXN→USD para comparabilidad.
 
 import type { StudioPlanKey } from '@/features/dmx-studio/lib/stripe-products';
 import { STUDIO_PLANS } from '@/features/dmx-studio/lib/stripe-products';
@@ -108,17 +111,17 @@ export const PER_VIDEO_BASE_COST_USD =
   PROVIDER_PRICES_CANON.anthropic_director.costUsd +
   PROVIDER_PRICES_CANON.vercel_sandbox_ffmpeg.costUsd;
 
-// Modelo plan-aware: agency incluye virtual staging por video, foto incluye photo
-// pack (10 photos + vision classify), pro es base.
+// Modelo plan-aware: agency incluye virtual staging + voice clone amortized,
+// pro incluye copy pack full + series mode (extra TTS), founder es base.
 function planExtraCostPerVideo(planKey: StudioPlanKey): number {
   switch (planKey) {
-    case 'pro':
+    case 'founder':
       return 0;
-    case 'foto':
-      // Foto pack: 10 photos × vision classify
-      return PROVIDER_PRICES_CANON.anthropic_vision.costUsd * 10;
+    case 'pro':
+      // Pro: copy pack full + series mode → extra TTS amortized
+      return PROVIDER_PRICES_CANON.elevenlabs_tts_flash.costUsd;
     case 'agency':
-      // Agency includes virtual staging (1 photo) + voice clone amortized
+      // Agency: virtual staging (1 photo) + voice clone amortized
       return (
         PROVIDER_PRICES_CANON.pedra_virtual_staging.costUsd +
         PROVIDER_PRICES_CANON.elevenlabs_tts_flash.costUsd
@@ -165,8 +168,9 @@ export function projectMonthlyCosts(
   const variableCosts = perVideoCost * videos;
   const fixedCosts = FIXED_INFRA_COST_USD_PER_MONTH;
   const totalCosts = fixedCosts + variableCosts;
-  const grossMarginUsd = plan.priceUsd - totalCosts;
-  const grossMarginPct = plan.priceUsd > 0 ? (grossMarginUsd / plan.priceUsd) * 100 : 0;
+  const planPriceUsd = plan.priceUsdEquivalent ?? 0;
+  const grossMarginUsd = planPriceUsd - totalCosts;
+  const grossMarginPct = planPriceUsd > 0 ? (grossMarginUsd / planPriceUsd) * 100 : 0;
 
   return {
     planKey,
@@ -176,7 +180,7 @@ export function projectMonthlyCosts(
     variableCosts: round2(variableCosts),
     totalCosts: round2(totalCosts),
     perVideoCost: round2(perVideoCost),
-    planPriceUsd: plan.priceUsd,
+    planPriceUsd,
     grossMarginUsd: round2(grossMarginUsd),
     grossMarginPct: round2(grossMarginPct),
   };
@@ -193,7 +197,7 @@ export interface AllProjections {
  * Used by admin dashboard + UNIT_ECONOMICS.md doc generation.
  */
 export function projectAllCombinations(): AllProjections {
-  const planKeys: ReadonlyArray<StudioPlanKey> = ['pro', 'foto', 'agency'];
+  const planKeys: ReadonlyArray<StudioPlanKey> = ['founder', 'pro', 'agency'];
   const profiles: ReadonlyArray<UsageProfile> = ['light', 'typical', 'heavy'];
   const projections: CostProjection[] = [];
   for (const plan of planKeys) {

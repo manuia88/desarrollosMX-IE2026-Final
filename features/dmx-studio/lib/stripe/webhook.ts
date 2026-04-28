@@ -117,7 +117,7 @@ async function handleCheckoutSessionCompleted(
     .insert({
       user_id: userId,
       organization_id: organizationId,
-      plan_key: planKey || planFromSession?.key || 'pro',
+      plan_key: planKey || planFromSession?.key || 'founder',
       stripe_customer_id: customerId,
       stripe_subscription_id: subscriptionId,
       stripe_price_id: stripePriceId,
@@ -158,7 +158,7 @@ async function handleCheckoutSessionCompleted(
 }
 
 function isStudioPlanKey(value: string): value is StudioPlanKey {
-  return value === 'pro' || value === 'foto' || value === 'agency';
+  return value === 'founder' || value === 'pro' || value === 'agency';
 }
 
 function planKeyToPriceIdViaCanon(planKey: string): string | undefined {

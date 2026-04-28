@@ -6,8 +6,8 @@
 
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { useCallback } from 'react';
-import { OnboardingStep1Datos } from './OnboardingStep1Datos';
+import { useCallback, useEffect, useRef } from 'react';
+import { OnboardingStep1Datos, type OnboardingStep1InitialValues } from './OnboardingStep1Datos';
 import { OnboardingStep2Voice } from './OnboardingStep2Voice';
 import { OnboardingStep3Confirm } from './OnboardingStep3Confirm';
 import {
@@ -19,12 +19,28 @@ import {
 export interface OnboardingFlowProps {
   readonly initialStep?: OnboardingStepKey;
   readonly locale: string;
+  readonly initialValues?: OnboardingStep1InitialValues;
+  readonly skipStep1?: boolean;
 }
 
-export function OnboardingFlow({ initialStep, locale }: OnboardingFlowProps) {
+export function OnboardingFlow({
+  initialStep,
+  locale,
+  initialValues,
+  skipStep1,
+}: OnboardingFlowProps) {
   const t = useTranslations('Studio.onboarding');
   const router = useRouter();
   const state = useOnboardingState(initialStep ? { initialStep } : {});
+  const skipAppliedRef = useRef(false);
+
+  useEffect(() => {
+    if (skipAppliedRef.current) return;
+    if (!skipStep1) return;
+    if (state.currentStep !== 'step1') return;
+    skipAppliedRef.current = true;
+    state.goToStep('step2');
+  }, [skipStep1, state]);
 
   const handleStep1Done = useCallback(() => {
     state.goToStep('step2');
@@ -59,7 +75,12 @@ export function OnboardingFlow({ initialStep, locale }: OnboardingFlowProps) {
 
       <Stepper currentStep={state.currentStep} t={t} />
 
-      {state.currentStep === 'step1' && <OnboardingStep1Datos onDone={handleStep1Done} />}
+      {state.currentStep === 'step1' && (
+        <OnboardingStep1Datos
+          onDone={handleStep1Done}
+          {...(initialValues ? { initialValues } : {})}
+        />
+      )}
       {state.currentStep === 'step2' && <OnboardingStep2Voice onDone={handleStep2Done} />}
       {state.currentStep === 'step3' && (
         <OnboardingStep3Confirm voiceCloneId={state.voiceCloneId} onDone={handleStep3Done} />

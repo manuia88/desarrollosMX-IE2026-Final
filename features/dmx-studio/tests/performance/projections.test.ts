@@ -1,6 +1,8 @@
 // F14.F.11 Sprint 10 BIBLIA Tarea 10.2 — Cost projection + break-even tests.
 // Pure function tests (Modo A — no DB, no network). Cover 3 plans × 3 profiles
 // = 9 combinations + edge cases (negative margin, break-even threshold).
+// FASE 14.F.12 — Plan keys actualizados founder/pro/agency + planPriceUsd vía
+// priceUsdEquivalent (MXN→USD canon).
 
 import { describe, expect, it } from 'vitest';
 import {
@@ -14,6 +16,7 @@ import {
   projectMonthlyCosts,
   USAGE_PROFILE_VIDEOS,
 } from '@/features/dmx-studio/lib/cost-tracking/projections';
+import { STUDIO_PLANS } from '@/features/dmx-studio/lib/stripe-products';
 
 describe('projectMonthlyCosts — canon constants', () => {
   it('PROVIDER_PRICES_CANON contains all 9 expected providers', () => {
@@ -53,10 +56,10 @@ describe('projectMonthlyCosts — canon constants', () => {
   });
 });
 
-describe('projectMonthlyCosts — pro plan ($47/mes)', () => {
+describe('projectMonthlyCosts — founder plan ($997 MXN/mes ≈ $58.65 USD)', () => {
   it('light usage (5 videos) is profitable', () => {
-    const p = projectMonthlyCosts('pro', 'light');
-    expect(p.planKey).toBe('pro');
+    const p = projectMonthlyCosts('founder', 'light');
+    expect(p.planKey).toBe('founder');
     expect(p.usageProfile).toBe('light');
     expect(p.videosPerMonth).toBe(5);
     expect(p.perVideoCost).toBeCloseTo(2.475, 2);
@@ -65,53 +68,55 @@ describe('projectMonthlyCosts — pro plan ($47/mes)', () => {
     expect(p.fixedCosts).toBe(15);
     // 12.375 + 15 = 27.375
     expect(p.totalCosts).toBeCloseTo(27.38, 1);
-    expect(p.planPriceUsd).toBe(47);
+    expect(p.planPriceUsd).toBe(STUDIO_PLANS.founder.priceUsdEquivalent);
     expect(p.grossMarginUsd).toBeGreaterThan(0);
     expect(p.grossMarginPct).toBeGreaterThan(40);
   });
 
   it('heavy usage (50 videos) becomes unprofitable', () => {
-    const p = projectMonthlyCosts('pro', 'heavy');
-    // 50 × 2.475 = 123.75 + 15 = 138.75 > 47
+    const p = projectMonthlyCosts('founder', 'heavy');
+    // 50 × 2.475 = 123.75 + 15 = 138.75 > $58.65
     expect(p.totalCosts).toBeGreaterThan(p.planPriceUsd);
     expect(p.grossMarginUsd).toBeLessThan(0);
     expect(p.grossMarginPct).toBeLessThan(0);
   });
 });
 
-describe('projectMonthlyCosts — foto plan ($67/mes, photo pack 10 photos)', () => {
-  it('typical usage models photo extras (10 vision/video)', () => {
-    const p = projectMonthlyCosts('foto', 'typical');
-    expect(p.planKey).toBe('foto');
+describe('projectMonthlyCosts — pro plan ($2497 MXN/mes ≈ $146.88 USD, copy pack full)', () => {
+  it('typical usage models extra TTS amortized', () => {
+    const p = projectMonthlyCosts('pro', 'typical');
+    expect(p.planKey).toBe('pro');
     expect(p.usageProfile).toBe('typical');
-    // perVideoCost = base 2.475 + 10 × $0.003 = 2.505 → rounded to 2.51
-    expect(p.perVideoCost).toBeCloseTo(2.51, 2);
-    expect(p.planPriceUsd).toBe(67);
+    // perVideoCost = base 2.475 + extra TTS 0.025 = 2.50
+    expect(p.perVideoCost).toBeCloseTo(2.5, 2);
+    expect(p.planPriceUsd).toBe(STUDIO_PLANS.pro.priceUsdEquivalent);
   });
 
-  it('light usage profitable, heavy unprofitable', () => {
-    const light = projectMonthlyCosts('foto', 'light');
-    const heavy = projectMonthlyCosts('foto', 'heavy');
-    expect(light.grossMarginUsd).toBeGreaterThan(0);
-    expect(heavy.grossMarginUsd).toBeLessThan(0);
+  it('typical and heavy usage profitable on pro plan', () => {
+    const typical = projectMonthlyCosts('pro', 'typical');
+    const heavy = projectMonthlyCosts('pro', 'heavy');
+    // typical: 20 × 2.5 + 15 = 65 < 146.88 ⇒ profitable
+    expect(typical.grossMarginUsd).toBeGreaterThan(0);
+    // heavy: 50 × 2.5 + 15 = 140 < 146.88 ⇒ still profitable (tight)
+    expect(heavy.grossMarginUsd).toBeGreaterThan(0);
   });
 });
 
-describe('projectMonthlyCosts — agency plan ($97/mes, virtual staging incluido)', () => {
+describe('projectMonthlyCosts — agency plan ($5997 MXN/mes ≈ $352.76 USD, virtual staging incluido)', () => {
   it('per video cost includes virtual staging + extra TTS', () => {
     const p = projectMonthlyCosts('agency', 'typical');
     // base 2.475 + virtual_staging 0.25 + tts 0.025 = 2.75
     expect(p.perVideoCost).toBeCloseTo(2.75, 2);
-    expect(p.planPriceUsd).toBe(97);
+    expect(p.planPriceUsd).toBe(STUDIO_PLANS.agency.priceUsdEquivalent);
   });
 
-  it('typical (20 videos) close to break-even, heavy unprofitable', () => {
+  it('typical (20 videos) and heavy (50 videos) profitable on agency', () => {
     const typical = projectMonthlyCosts('agency', 'typical');
     const heavy = projectMonthlyCosts('agency', 'heavy');
-    // typical: 20 × 2.75 + 15 = 70 < 97 ⇒ profitable
+    // typical: 20 × 2.75 + 15 = 70 < 352.76 ⇒ profitable
     expect(typical.grossMarginUsd).toBeGreaterThan(0);
-    // heavy: 50 × 2.75 + 15 = 152.5 > 97 ⇒ negative margin
-    expect(heavy.grossMarginUsd).toBeLessThan(0);
+    // heavy: 50 × 2.75 + 15 = 152.5 < 352.76 ⇒ profitable
+    expect(heavy.grossMarginUsd).toBeGreaterThan(0);
   });
 });
 
@@ -133,42 +138,42 @@ describe('projectAllCombinations', () => {
 });
 
 describe('calculateBreakEven', () => {
-  it('pro plan typical usage signals unprofitable per-user', () => {
+  it('founder plan typical usage profitable break-even achievable', () => {
+    const be = calculateBreakEven('founder', 'typical');
+    // founder typical = 20 × 2.475 = 49.5; margin = 58.65 - 49.5 = 9.15
+    expect(be.profitableAtUsage).toBe(true);
+    expect(be.contributionMarginPerUserUsd).toBeGreaterThan(0);
+  });
+
+  it('founder plan light usage profitable break-even achievable', () => {
+    const be = calculateBreakEven('founder', 'light');
+    // founder light = 5 × 2.475 = 12.375; margin per user = 58.65 - 12.375 ≈ 46.27
+    // users needed = ceil(100 / 46.27) ≈ 3
+    expect(be.profitableAtUsage).toBe(true);
+    expect(be.usersNeeded).toBeLessThan(10);
+    expect(be.contributionMarginPerUserUsd).toBeGreaterThan(40);
+  });
+
+  it('pro plan typical usage profitable', () => {
     const be = calculateBreakEven('pro', 'typical');
-    // pro typical = 20 × 2.475 = 49.5 > $47 plan price
-    expect(be.profitableAtUsage).toBe(false);
-    expect(be.usersNeeded).toBe(9999); // sentinel cap
-    expect(be.contributionMarginPerUserUsd).toBeLessThanOrEqual(0);
-  });
-
-  it('pro plan light usage profitable break-even achievable', () => {
-    const be = calculateBreakEven('pro', 'light');
-    // pro light = 5 × 2.475 = 12.375; margin per user = 47 - 12.375 = 34.625
-    // users needed = ceil(100 / 34.625) ≈ 3
+    // pro typical = 20 × 2.5 = 50; margin = 146.88 - 50 = 96.88
     expect(be.profitableAtUsage).toBe(true);
-    expect(be.usersNeeded).toBeLessThan(10);
-    expect(be.contributionMarginPerUserUsd).toBeGreaterThan(30);
-  });
-
-  it('foto plan typical usage profitable', () => {
-    const be = calculateBreakEven('foto', 'typical');
-    // foto typical = 20 × 2.505 = 50.1; margin = 67 - 50.1 = 16.9
-    expect(be.profitableAtUsage).toBe(true);
-    expect(be.usersNeeded).toBeLessThan(10);
-    expect(be.contributionMarginPerUserUsd).toBeGreaterThan(15);
+    expect(be.usersNeeded).toBeLessThan(5);
+    expect(be.contributionMarginPerUserUsd).toBeGreaterThan(90);
   });
 
   it('agency plan typical usage profitable', () => {
     const be = calculateBreakEven('agency', 'typical');
-    // agency typical = 20 × 2.75 = 55; margin = 97 - 55 = 42
+    // agency typical = 20 × 2.75 = 55; margin = 352.76 - 55 ≈ 297.76
     expect(be.profitableAtUsage).toBe(true);
-    expect(be.contributionMarginPerUserUsd).toBeGreaterThan(40);
-    expect(be.usersNeeded).toBeLessThanOrEqual(3);
+    expect(be.contributionMarginPerUserUsd).toBeGreaterThan(290);
+    expect(be.usersNeeded).toBeLessThanOrEqual(2);
   });
 
-  it('mrrTargetUsd = usersNeeded × planPrice', () => {
+  it('mrrTargetUsd = usersNeeded × planPriceUsdEquivalent', () => {
     const be = calculateBreakEven('agency', 'typical');
-    expect(be.mrrTargetUsd).toBeCloseTo(be.usersNeeded * 97, 1);
+    const expected = be.usersNeeded * (STUDIO_PLANS.agency.priceUsdEquivalent ?? 0);
+    expect(be.mrrTargetUsd).toBeCloseTo(expected, 1);
   });
 
   it('contributionMarginPct between 0-100 when profitable', () => {
@@ -183,7 +188,7 @@ describe('calculateBreakEvenAllPlans', () => {
     const summary = calculateBreakEvenAllPlans();
     expect(summary.perPlan.length).toBe(3);
     const planKeys = summary.perPlan.map((p) => p.planKey).sort();
-    expect(planKeys).toEqual(['agency', 'foto', 'pro']);
+    expect(planKeys).toEqual(['agency', 'founder', 'pro']);
     expect(summary.operationalFixedUsd).toBe(100);
     expect(summary.perVideoBaseCostUsd).toBeCloseTo(2.475, 3);
   });
