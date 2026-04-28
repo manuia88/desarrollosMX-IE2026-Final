@@ -21117,6 +21117,116 @@ export type Database = {
           },
         ]
       }
+      unit_worksheets: {
+        Row: {
+          asesor_id: string
+          client_email_hash: string | null
+          client_first_name: string
+          client_phone_hash: string | null
+          created_at: string
+          decided_at: string | null
+          decided_by: string | null
+          desarrolladora_id: string
+          expires_at: string
+          id: string
+          notes: string | null
+          operacion_id: string | null
+          reject_reason: string | null
+          requested_at: string
+          status: string
+          unit_id: string
+          updated_at: string
+        }
+        Insert: {
+          asesor_id: string
+          client_email_hash?: string | null
+          client_first_name: string
+          client_phone_hash?: string | null
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          desarrolladora_id: string
+          expires_at?: string
+          id?: string
+          notes?: string | null
+          operacion_id?: string | null
+          reject_reason?: string | null
+          requested_at?: string
+          status?: string
+          unit_id: string
+          updated_at?: string
+        }
+        Update: {
+          asesor_id?: string
+          client_email_hash?: string | null
+          client_first_name?: string
+          client_phone_hash?: string | null
+          created_at?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          desarrolladora_id?: string
+          expires_at?: string
+          id?: string
+          notes?: string | null
+          operacion_id?: string | null
+          reject_reason?: string | null
+          requested_at?: string
+          status?: string
+          unit_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "unit_worksheets_asesor_id_fkey"
+            columns: ["asesor_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_worksheets_asesor_id_fkey"
+            columns: ["asesor_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_worksheets_decided_by_fkey"
+            columns: ["decided_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_worksheets_decided_by_fkey"
+            columns: ["decided_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_worksheets_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_worksheets_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unit_worksheets_unit_id_fkey"
+            columns: ["unit_id"]
+            isOneToOne: false
+            referencedRelation: "unidades"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_scores: {
         Row: {
           citations: Json

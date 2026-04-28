@@ -5309,6 +5309,48 @@
           }
         }
       }
+    },
+    "worksheets": {
+      "title": "Worksheets",
+      "asesorView": {
+        "requestCta": "Solicitar reserva 48h",
+        "formClient": "Nombre cliente",
+        "formClientPhone": "Teléfono",
+        "formNotes": "Notas",
+        "submit": "Enviar solicitud",
+        "cancel": "Cancelar",
+        "listTitle": "Mis worksheets"
+      },
+      "devView": {
+        "pendingTitle": "Worksheets pendientes",
+        "pendingEmpty": "Sin solicitudes pendientes",
+        "approveCta": "Aprobar",
+        "rejectCta": "Rechazar",
+        "rejectReasonLabel": "Motivo rechazo",
+        "expiresIn": "Expira en {hours}h",
+        "sortByPriority": "Ordenar por prioridad",
+        "priorityNote": "Trust H05 + Lead Score combinados (CF.4)"
+      },
+      "status": {
+        "pending": "Pendiente",
+        "approved": "Aprobada",
+        "rejected": "Rechazada",
+        "expired": "Expirada",
+        "converted": "Convertida",
+        "cancelled": "Cancelada"
+      },
+      "notifs": {
+        "pendingApproval": "Worksheet pendiente de aprobación",
+        "approved": "Tu worksheet fue aprobada",
+        "rejected": "Tu worksheet fue rechazada",
+        "expired": "Worksheet expiró sin respuesta"
+      },
+      "errors": {
+        "notAuthorized": "No autorizado para este proyecto",
+        "expired": "Worksheet ya expiró",
+        "alreadyDecided": "Worksheet ya fue decidida",
+        "unitUnavailable": "Unidad ya no está disponible"
+      }
     }
   },
   "Studio": {

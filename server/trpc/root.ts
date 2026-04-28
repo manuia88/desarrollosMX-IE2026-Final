@@ -24,6 +24,7 @@ import { marketRouter } from '@/features/market/routes/market';
 import { marketingRouter } from '@/features/marketing/routes/marketing';
 import { newsletterPublicRouter } from '@/features/newsletter/routes/newsletter-public';
 import { operacionesRouter } from '@/features/operaciones/routes/operaciones';
+import { worksheetsRouter } from '@/features/operaciones/routes/worksheets';
 import { scianRouter } from '@/features/scian/routes/scian';
 import { strBreakevenRouter } from '@/features/str-intelligence/routes/breakeven';
 import { envRouter } from '@/features/str-intelligence/routes/env';
@@ -74,6 +75,7 @@ export const appRouter = router({
   migrationFlow: migrationFlowRouter,
   newsletter: newsletterPublicRouter,
   operaciones: operacionesRouter,
+  worksheets: worksheetsRouter,
   roleRequest: roleRequestRouter,
   scian: scianRouter,
   ltrStrConnection: ltrStrConnectionRouter,
