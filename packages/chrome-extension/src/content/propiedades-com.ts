@@ -62,7 +62,7 @@ async function extract(): Promise<MarketCapture | null> {
   const url = location.href;
 
   const rawPrice =
-    (asRecord(ld?.['offers'])?.['price'] as string | number | undefined) ??
+    (asRecord(ld?.offers)?.price as string | number | undefined) ??
     document.querySelector<HTMLElement>('[class*="Price"]')?.textContent ??
     document.querySelector<HTMLElement>('[data-cy="price"]')?.textContent ??
     '';

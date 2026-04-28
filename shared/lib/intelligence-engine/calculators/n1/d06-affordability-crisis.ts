@@ -219,13 +219,13 @@ export function computeD06AffordabilityCrisis(
   // Pero si una dep falta, no entra — la suma ponderada usa renorm.weights.
   let accesibilidad = 0;
   if (available.includes('A01') && a01 !== null) {
-    accesibilidad += (renorm.weights['A01'] ?? 0) * clamp100(a01);
+    accesibilidad += (renorm.weights.A01 ?? 0) * clamp100(a01);
   }
   if (available.includes('sobrecosto') && sobrecosto_score !== null) {
-    accesibilidad += (renorm.weights['sobrecosto'] ?? 0) * (100 - sobrecosto_score);
+    accesibilidad += (renorm.weights.sobrecosto ?? 0) * (100 - sobrecosto_score);
   }
   if (available.includes('salario_gap') && salario_gap_score !== null) {
-    accesibilidad += (renorm.weights['salario_gap'] ?? 0) * (100 - salario_gap_score);
+    accesibilidad += (renorm.weights.salario_gap ?? 0) * (100 - salario_gap_score);
   }
 
   const value = Math.round(clamp100(100 - accesibilidad));

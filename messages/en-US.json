@@ -4288,6 +4288,312 @@
         "contrato": "Contract",
         "otro": "Other"
       }
+    },
+    "inventario": {
+      "metaTitle": "Inventory · DMX Dev",
+      "metaDescription": "Manage units, prototypes, payment plans and construction progress for your portfolio.",
+      "title": "Inventory",
+      "subtitle": "Units, prototypes, pricing and construction",
+      "empty": {
+        "noProjects": "No projects yet. Create your first project to start adding inventory.",
+        "noUnits": "No units match the current filters.",
+        "noPrototypes": "No prototypes yet. Create one to use as a template.",
+        "noEsquemas": "No active payment plans.",
+        "noAvance": "No construction progress entries yet."
+      },
+      "filters": {
+        "title": "Filters",
+        "proyecto": "Project",
+        "proyectoAll": "All projects",
+        "status": "Status",
+        "statusAll": "All statuses",
+        "tipo": "Type",
+        "tipoAll": "All types",
+        "recamaras": "Bedrooms",
+        "priceRange": "Price (MXN)",
+        "priceMin": "Min",
+        "priceMax": "Max",
+        "m2Range": "Area (m²)",
+        "m2Min": "Min",
+        "m2Max": "Max",
+        "clear": "Clear filters",
+        "apply": "Apply"
+      },
+      "status": {
+        "disponible": "Available",
+        "apartada": "Held",
+        "reservada": "Reserved",
+        "vendida": "Sold",
+        "bloqueada": "Blocked"
+      },
+      "tipo": {
+        "departamento": "Apartment",
+        "casa": "House",
+        "townhouse": "Townhouse",
+        "loft": "Loft",
+        "penthouse": "Penthouse",
+        "estudio": "Studio"
+      },
+      "view": {
+        "label": "View",
+        "grid": "Cards",
+        "table": "Table",
+        "timeline": "Timeline",
+        "ariaToggle": "Switch view type"
+      },
+      "metrics": {
+        "title": "Summary",
+        "total": "Total units",
+        "disponible": "Available",
+        "apartada": "Held",
+        "vendida": "Sold",
+        "absorption30d": "30-day absorption",
+        "absorption30dShort": "30d absorption",
+        "precioPromedioM2": "Avg price per m²",
+        "daysOnMarketP50": "Days on market (median)",
+        "noData": "—"
+      },
+      "card": {
+        "ariaLabel": "Unit {numero}, status {status}, demand {demand}",
+        "demandColorLabel": {
+          "red": "Low demand",
+          "amber": "Medium demand",
+          "green": "High demand"
+        },
+        "demandTooltipTitle": "30-day demand",
+        "demandSignals": {
+          "landing_views_pct": "Landing views",
+          "wishlist_pct": "Wishlist",
+          "matches_pct": "Search matches",
+          "qr_scans_pct": "QR scans"
+        },
+        "daysOnMarket": "{days} days on market",
+        "newListing": "New",
+        "noPhoto": "No photo",
+        "openDetail": "View detail",
+        "partialSignalsBadge": "Partial signal",
+        "partialSignalsTooltip": "Wishlist + search matches partially shown; full coverage in H2."
+      },
+      "list": {
+        "loading": "Loading inventory...",
+        "loadingMore": "Loading more units...",
+        "loadMore": "Load more",
+        "endOfList": "End of list.",
+        "errorTitle": "Error loading inventory",
+        "errorRetry": "Retry"
+      },
+      "table": {
+        "numero": "Number",
+        "proyecto": "Project",
+        "tipo": "Type",
+        "rec": "Bd",
+        "banos": "Ba",
+        "m2": "m²",
+        "precio": "Price",
+        "status": "Status",
+        "demanda": "Demand",
+        "actions": "Actions",
+        "open": "Open"
+      },
+      "timeline": {
+        "title": "Recent changes (all units)",
+        "empty": "No recent changes."
+      },
+      "drawer": {
+        "title": "Unit {numero}",
+        "close": "Close",
+        "tabs": {
+          "info": "Info",
+          "precios": "Pricing",
+          "cambios": "Activity",
+          "ocupacion": "Occupancy",
+          "leads": "Leads"
+        }
+      },
+      "info": {
+        "edit": "Edit",
+        "save": "Save changes",
+        "cancel": "Cancel",
+        "savedToast": "Changes saved",
+        "errorToast": "Error saving",
+        "fields": {
+          "numero": "Number",
+          "tipo": "Type",
+          "status": "Status",
+          "recamaras": "Bedrooms",
+          "banos": "Bathrooms",
+          "parking": "Parking",
+          "area_m2": "Area (m²)",
+          "price_mxn": "Price (MXN)",
+          "maintenance_fee_mxn": "Maintenance fee (MXN)",
+          "floor": "Floor",
+          "motivoPriceChange": "Price change reason (optional)"
+        },
+        "photos": {
+          "title": "Photos",
+          "uploadCta": "Drag photos here or click to upload",
+          "uploadingLabel": "Uploading {count} photo(s)...",
+          "uploadErrorToast": "Photo upload failed",
+          "removePhoto": "Remove photo",
+          "makeMain": "Make main",
+          "mainBadge": "Main",
+          "reorderHint": "Drag to reorder (first is main)",
+          "maxSize": "Max 15 MB · WebP/JPEG/PNG",
+          "stubBanner": "WebP variants 320/800/1920 H2 — original photo CDN-optimized for now."
+        }
+      },
+      "precios": {
+        "chartTitle": "Price history",
+        "chartAria": "Unit price timeline",
+        "currentPrice": "Current price",
+        "noHistory": "No price changes recorded.",
+        "tableHeaders": {
+          "fecha": "Date",
+          "anterior": "Previous",
+          "nuevo": "New",
+          "cambio": "Change",
+          "motivo": "Reason"
+        }
+      },
+      "cambios": {
+        "loading": "Loading activity log...",
+        "empty": "No changes recorded.",
+        "eventTypes": {
+          "status_change": "Status change",
+          "price_change": "Price change",
+          "info_update": "Info update",
+          "photo_added": "Photo added",
+          "photo_removed": "Photo removed"
+        }
+      },
+      "ocupacion": {
+        "loading": "Loading reservations...",
+        "empty": "No active reservations.",
+        "stage": "Stage",
+        "monto": "Amount",
+        "asesor": "Advisor",
+        "fecha": "Date"
+      },
+      "leads": {
+        "loading": "Loading leads...",
+        "empty": "No leads for this unit.",
+        "scopeProjectBanner": "Scope: project leads (per-unit assignment available in H2).",
+        "headers": {
+          "nombre": "Name",
+          "contacto": "Contact",
+          "estado": "Status",
+          "fuente": "Source",
+          "fecha": "Date"
+        }
+      },
+      "subnav": {
+        "ariaLabel": "Inventory subsections",
+        "unidades": "Units",
+        "prototipos": "Prototypes",
+        "esquemasPago": "Payment plans",
+        "avanceObra": "Construction progress"
+      },
+      "prototipos": {
+        "title": "Prototypes",
+        "subtitle": "Reusable templates for creating units",
+        "newCta": "New prototype",
+        "edit": "Edit",
+        "archive": "Archive",
+        "fields": {
+          "nombre": "Name",
+          "description": "Description",
+          "recamaras": "Bedrooms",
+          "banos": "Bathrooms",
+          "m2Base": "Base area (m²)",
+          "precioBaseMxn": "Base price (MXN)",
+          "planosUrl": "Floor plan URL (PDF)"
+        },
+        "savedToast": "Prototype saved",
+        "errorToast": "Error saving prototype"
+      },
+      "esquemasPago": {
+        "title": "Payment plans",
+        "subtitle": "Define down payment, installments, on-delivery and commission",
+        "newCta": "New plan",
+        "edit": "Edit",
+        "archive": "Archive",
+        "fields": {
+          "nombre": "Name",
+          "engancheePct": "Down payment %",
+          "mensualidadesCount": "Installments #",
+          "mesesGracia": "Grace months",
+          "contraEntregaPct": "On-delivery %",
+          "comisionPct": "Advisor commission %",
+          "ivaCalcLogic": "VAT",
+          "financingPartner": "Financing partner (optional)",
+          "notes": "Notes"
+        },
+        "ivaOptions": {
+          "exento": "Exempt",
+          "incluido": "Included",
+          "agregado": "Added at end"
+        },
+        "preview": {
+          "title": "Calculator preview",
+          "precioBase": "Base price",
+          "engancheMxn": "Down payment",
+          "mensualidadMxn": "Installment",
+          "contraEntregaMxn": "On-delivery",
+          "comisionMxn": "Commission",
+          "ivaMxn": "VAT",
+          "totalMxn": "Total"
+        },
+        "savedToast": "Plan saved",
+        "errorToast": "Error saving plan"
+      },
+      "avanceObra": {
+        "title": "Construction progress",
+        "subtitle": "Log progress per stage with photos and optional geo",
+        "newCta": "New entry",
+        "etapa": {
+          "cimentacion": "Foundation",
+          "estructura": "Structure",
+          "albanileria": "Masonry",
+          "instalaciones": "Utilities",
+          "acabados": "Finishes",
+          "entrega": "Delivery"
+        },
+        "fields": {
+          "fecha": "Date",
+          "etapa": "Stage",
+          "porcentaje": "% complete",
+          "notes": "Notes",
+          "dronePhotoUrl": "Drone photo URL",
+          "geoLocation": "Location (lat,lng)"
+        },
+        "savedToast": "Progress logged",
+        "errorToast": "Error logging progress",
+        "uploadFotos": "Upload progress photos"
+      },
+      "actions": {
+        "open": "Open",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "create": "Create",
+        "back": "Back",
+        "loading": "Loading..."
+      },
+      "realtime": {
+        "updateToast": "Inventory updated in real time",
+        "newUnit": "New unit added",
+        "unitUpdated": "Unit {numero} updated",
+        "unitDeleted": "Unit {numero} deleted"
+      },
+      "errors": {
+        "loadFailed": "Could not load inventory",
+        "saveFailed": "Could not save",
+        "uploadFailed": "Upload failed",
+        "uploadTooLarge": "File too large (max 15 MB)",
+        "uploadInvalidType": "Invalid format (use WebP/JPEG/PNG)",
+        "forbidden": "Access denied"
+      }
     }
   },
   "Studio": {

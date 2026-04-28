@@ -187,7 +187,7 @@ export const landingsRouter = router({
       .eq('id', input.landingId)
       .maybeSingle();
     if (ownsErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: ownsErr.message });
-    if (!owns || !owns.is_published) {
+    if (!owns?.is_published) {
       throw new TRPCError({ code: 'NOT_FOUND', message: 'Landing not published.' });
     }
 

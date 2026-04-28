@@ -41,8 +41,6 @@ export const DEV_NAV_ITEMS: readonly DevNavItem[] = [
     labelKey: 'dev.sidebar.inventario',
     Icon: IconBuilding2,
     route: '/desarrolladores/inventario',
-    futurePhase: 'FASE 15',
-    disabled: true,
   },
   {
     id: 'contabilidad',

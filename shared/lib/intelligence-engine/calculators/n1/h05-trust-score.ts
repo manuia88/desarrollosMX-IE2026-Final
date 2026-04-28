@@ -218,13 +218,13 @@ export function computeH05TrustScore(
 
   let score_raw = 0;
   if (reviews_normalized !== null) {
-    score_raw += (renorm.weights['reviews_avg'] ?? 0) * reviews_normalized;
+    score_raw += (renorm.weights.reviews_avg ?? 0) * reviews_normalized;
   }
   if (cumplimiento_value !== null) {
-    score_raw += (renorm.weights['cumplimiento'] ?? 0) * cumplimiento_value;
+    score_raw += (renorm.weights.cumplimiento ?? 0) * cumplimiento_value;
   }
   if (volumen_normalized !== null) {
-    score_raw += (renorm.weights['volumen'] ?? 0) * volumen_normalized;
+    score_raw += (renorm.weights.volumen ?? 0) * volumen_normalized;
   }
 
   const profeco_quejas = input.profeco_quejas_count ?? 0;

@@ -125,7 +125,7 @@ export function readOpenGraph(): Record<string, string> {
 
 export function readNextData(): unknown {
   const node = document.getElementById('__NEXT_DATA__');
-  if (!node || !node.textContent) return null;
+  if (!node?.textContent) return null;
   try {
     return JSON.parse(node.textContent);
   } catch {

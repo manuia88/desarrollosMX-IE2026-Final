@@ -20295,6 +20295,9 @@ export type Database = {
           area_terreno_m2: number | null
           banos: number | null
           created_at: string
+          demand_color: string | null
+          demand_score_30d: number
+          demand_signals: Json
           features: Json
           floor: number | null
           floor_plan_url: string | null
@@ -20316,6 +20319,9 @@ export type Database = {
           area_terreno_m2?: number | null
           banos?: number | null
           created_at?: string
+          demand_color?: string | null
+          demand_score_30d?: number
+          demand_signals?: Json
           features?: Json
           floor?: number | null
           floor_plan_url?: string | null
@@ -20337,6 +20343,9 @@ export type Database = {
           area_terreno_m2?: number | null
           banos?: number | null
           created_at?: string
+          demand_color?: string | null
+          demand_score_30d?: number
+          demand_signals?: Json
           features?: Json
           floor?: number | null
           floor_plan_url?: string | null

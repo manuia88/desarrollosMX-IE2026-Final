@@ -85,8 +85,8 @@ describe('D06 Affordability Crisis calculator', () => {
     expect(res.components.missing_dimensions).toContain('A01');
     expect(res.components.available_count).toBe(2);
     // weights: sobrecosto 0.3/(0.3+0.2)=0.6; salario_gap 0.4
-    expect(res.components.weights_applied['sobrecosto']).toBeCloseTo(0.6, 3);
-    expect(res.components.weights_applied['salario_gap']).toBeCloseTo(0.4, 3);
+    expect(res.components.weights_applied.sobrecosto).toBeCloseTo(0.6, 3);
+    expect(res.components.weights_applied.salario_gap).toBeCloseTo(0.4, 3);
     expect(res.confidence).toBe('medium');
   });
 
