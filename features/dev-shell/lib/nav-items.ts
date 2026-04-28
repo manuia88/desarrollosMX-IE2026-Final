@@ -55,8 +55,6 @@ export const DEV_NAV_ITEMS: readonly DevNavItem[] = [
     labelKey: 'dev.sidebar.crm',
     Icon: IconUsers,
     route: '/desarrolladores/crm',
-    futurePhase: 'FASE 15',
-    disabled: true,
   },
   {
     id: 'marketing-dev',

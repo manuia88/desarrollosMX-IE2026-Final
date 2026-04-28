@@ -46,3 +46,14 @@ export const ieScoresGetTierGateInput = z.object({
   country_code: countryCodeSchema.default('MX'),
 });
 export type IEScoresGetTierGateInput = z.infer<typeof ieScoresGetTierGateInput>;
+
+// B.6 Lead Score C01 (FASE 15 v3 onyx-benchmarked) — anchor 21x conv <5min Onyx.
+export const ieScoresGetLeadScoreInput = z.object({
+  leadId: z.string().uuid(),
+});
+export type IEScoresGetLeadScoreInput = z.infer<typeof ieScoresGetLeadScoreInput>;
+
+export const ieScoresRecomputeLeadScoreInput = z.object({
+  leadId: z.string().uuid(),
+});
+export type IEScoresRecomputeLeadScoreInput = z.infer<typeof ieScoresRecomputeLeadScoreInput>;
