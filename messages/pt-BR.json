@@ -4486,6 +4486,7 @@
       "step2Subtitle": "Escucha 3 muestras de referencia y graba tu propia voz (10–30 segundos).",
       "voicePreviewTitle": "Voces de referencia",
       "voicePreviewHelp": "Estas son ejemplos del estilo de narración. Puedes escucharlas para inspirarte.",
+      "voicePreviewComingSoon": "Em breve — amostras em produção",
       "voicePreview": {
         "aurora": {
           "name": "Aurora",

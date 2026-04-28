@@ -58,8 +58,12 @@ export default async function StudioOnboardingPage({
   const skipStep1 = skipStep1Param === 'true';
 
   const t = await getTranslations('Studio.onboarding');
-  const initialStep =
-    (extension?.onboarding_step as 'step1' | 'step2' | 'step3' | undefined) ?? 'step1';
+  const VALID_STEPS = new Set(['step1', 'step2', 'step3']);
+  const rawStep = extension?.onboarding_step;
+  const initialStep: 'step1' | 'step2' | 'step3' =
+    typeof rawStep === 'string' && VALID_STEPS.has(rawStep)
+      ? (rawStep as 'step1' | 'step2' | 'step3')
+      : 'step1';
 
   return (
     <main

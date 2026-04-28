@@ -120,20 +120,22 @@ export async function autoImportFromDmxProfile(
   ]);
 
   if (leadsResp.error) {
-    throw new Error(`auto-import leads count failed: ${leadsResp.error.message}`);
+    console.warn(`auto-import leads count tolerant skip: ${leadsResp.error.message}`);
   }
   if (dealsResp.error) {
-    throw new Error(`auto-import operaciones count failed: ${dealsResp.error.message}`);
+    console.warn(`auto-import operaciones count tolerant skip: ${dealsResp.error.message}`);
   }
   if (brokersResp.error) {
-    throw new Error(`auto-import project_brokers fetch failed: ${brokersResp.error.message}`);
+    console.warn(`auto-import project_brokers tolerant skip: ${brokersResp.error.message}`);
   }
 
   type BrokerRow = {
     proyecto_id: string;
     proyectos: { colonia: string | null; ciudad: string | null } | null;
   };
-  const brokerRows = (brokersResp.data ?? []) as ReadonlyArray<BrokerRow>;
+  const brokerRows = brokersResp.error
+    ? ([] as ReadonlyArray<BrokerRow>)
+    : ((brokersResp.data ?? []) as ReadonlyArray<BrokerRow>);
 
   const zones = topUnique(
     brokerRows.map((row) => row.proyectos?.colonia ?? null),
@@ -151,8 +153,8 @@ export async function autoImportFromDmxProfile(
     zones,
     cities,
     country_code: profile.country_code,
-    currentLeadsCount: leadsResp.count ?? 0,
-    currentClosedDealsCount: dealsResp.count ?? 0,
+    currentLeadsCount: leadsResp.error ? 0 : (leadsResp.count ?? 0),
+    currentClosedDealsCount: dealsResp.error ? 0 : (dealsResp.count ?? 0),
     role: profile.rol,
     isExistingDmxUser: true,
   };
@@ -228,7 +230,7 @@ export async function applyAutoImportToBrandKit(
     .upsert(
       {
         user_id: userId,
-        onboarding_step: 'brand_kit_imported',
+        onboarding_step: 'step1',
         brand_kit_completed: true,
       },
       { onConflict: 'user_id' },

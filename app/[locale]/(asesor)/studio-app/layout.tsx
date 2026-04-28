@@ -29,12 +29,6 @@ export default async function StudioLayout({ children, params }: StudioLayoutPro
     .maybeSingle();
 
   if (!extension) {
-    await supabase.from('studio_users_extension').insert({
-      user_id: user.id,
-      studio_role: 'studio_user',
-      onboarding_completed: false,
-    });
-
     let skipStep1 = false;
     try {
       await applyAutoImportToBrandKit(supabase, user.id);
@@ -51,10 +45,21 @@ export default async function StudioLayout({ children, params }: StudioLayoutPro
           zones: brandKit.zones,
         });
       }
-    } catch {
-      // Profile no existe (no es asesor existing) o auto-import falló: redirect
-      // onboarding regular sin skip. NO bloquear flow Studio por error import.
+    } catch (err) {
+      console.error('[studio-layout] auto-import failed:', err);
       skipStep1 = false;
+    }
+
+    const { error: extensionUpsertError } = await supabase.from('studio_users_extension').upsert(
+      {
+        user_id: user.id,
+        studio_role: 'studio_user',
+        onboarding_completed: false,
+      },
+      { onConflict: 'user_id', ignoreDuplicates: true },
+    );
+    if (extensionUpsertError) {
+      console.error('[studio-layout] extension upsert failed:', extensionUpsertError);
     }
 
     const target = skipStep1
