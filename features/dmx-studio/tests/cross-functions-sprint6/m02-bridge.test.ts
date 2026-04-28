@@ -2,8 +2,8 @@
 
 import { describe, expect, it } from 'vitest';
 import {
-  M02BridgeInputSchema,
   buildVirtualStagingDeepLink,
+  M02BridgeInputSchema,
   shouldShowVirtualStagingButton,
 } from '@/features/dmx-studio/lib/cross-functions/m02-virtual-staging-bridge';
 

@@ -55,7 +55,9 @@ export function StagingFlow({ projectId, assets, onConfirm }: StagingFlowProps) 
   const allSelected = selectedAssetIds.length > 0 && selectedAssetIds.length === allEmptyIds.length;
 
   function toggleAsset(id: string) {
-    setSelectedAssetIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+    setSelectedAssetIds((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+    );
   }
 
   function selectAll() {
@@ -81,14 +83,8 @@ export function StagingFlow({ projectId, assets, onConfirm }: StagingFlowProps) 
   }
 
   return (
-    <section
-      aria-label="Flujo de virtual staging"
-      className="flex flex-col gap-5"
-    >
-      <ol
-        aria-label="Pasos del flujo"
-        className="flex items-center gap-2 list-none p-0 m-0"
-      >
+    <section aria-label="Flujo de virtual staging" className="flex flex-col gap-5">
+      <ol aria-label="Pasos del flujo" className="flex items-center gap-2 list-none p-0 m-0">
         {[1, 2, 3].map((n) => (
           <li
             key={n}
@@ -113,9 +109,7 @@ export function StagingFlow({ projectId, assets, onConfirm }: StagingFlowProps) 
             >
               {n}
             </span>
-            <span>
-              {n === 1 ? 'Detectar' : n === 2 ? 'Estilo' : 'Confirmar'}
-            </span>
+            <span>{n === 1 ? 'Detectar' : n === 2 ? 'Estilo' : 'Confirmar'}</span>
           </li>
         ))}
       </ol>
@@ -126,7 +120,8 @@ export function StagingFlow({ projectId, assets, onConfirm }: StagingFlowProps) 
             Habitaciones vacías detectadas
           </h2>
           <p className="text-[12px] text-[color:var(--canon-cream-2)] mt-1">
-            Seleccionamos automáticamente fotos clasificadas como vacías. Elige cuáles enviar a staging.
+            Seleccionamos automáticamente fotos clasificadas como vacías. Elige cuáles enviar a
+            staging.
           </p>
 
           {emptyCandidates.length === 0 ? (
@@ -172,7 +167,7 @@ export function StagingFlow({ projectId, assets, onConfirm }: StagingFlowProps) 
                           className="h-24 w-full rounded-[10px] bg-[color:rgba(255,255,255,0.04)] mb-2 overflow-hidden"
                           aria-hidden="true"
                         >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          {/* biome-ignore lint/performance/noImgElement: signed Supabase Storage URLs need raw img tag (matches BrandKitForm precedent) */}
                           <img
                             src={asset.storage_url}
                             alt=""
@@ -265,10 +260,7 @@ export function StagingFlow({ projectId, assets, onConfirm }: StagingFlowProps) 
           </dl>
 
           {selectedAssetIds.length > MULTI_BATCH_MAX_ASSETS && (
-            <p
-              role="alert"
-              className="text-[12px] text-[color:var(--canon-cream-2)] mt-3"
-            >
+            <p role="alert" className="text-[12px] text-[color:var(--canon-cream-2)] mt-3">
               Máximo {MULTI_BATCH_MAX_ASSETS} fotos por batch.
             </p>
           )}

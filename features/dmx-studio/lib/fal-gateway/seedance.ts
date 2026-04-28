@@ -1,10 +1,10 @@
 // F14.F.7 Sprint 6 BIBLIA v4 §6 — Seedance video con audio ambiente nativo (Tarea 6.1).
 // DMX Studio dentro DMX único entorno (ADR-054). Specific module para Seedance via fal-gateway.
 
+import type { FalClient } from '@fal-ai/client';
 import { z } from 'zod';
 import { sentry } from '@/shared/lib/telemetry/sentry';
 import { DEFAULT_SEEDANCE_MODEL, getFalClient } from './index';
-import type { FalClient } from '@fal-ai/client';
 
 export const SEEDANCE_COST_PER_SECOND_USD = 0.08;
 

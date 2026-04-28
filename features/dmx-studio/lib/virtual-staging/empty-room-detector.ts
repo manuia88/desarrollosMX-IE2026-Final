@@ -23,10 +23,7 @@ function extractTags(source: unknown): string[] {
   return raw.filter((t): t is string => typeof t === 'string').map((t) => t.toLowerCase());
 }
 
-export function detectEmptyByMeta(asset: {
-  ai_classification?: unknown;
-  meta?: unknown;
-}): boolean {
+export function detectEmptyByMeta(asset: { ai_classification?: unknown; meta?: unknown }): boolean {
   const tags = [...extractTags(asset.ai_classification), ...extractTags(asset.meta)];
   if (tags.length === 0) return false;
   return tags.some((tag) => EMPTY_KEYWORDS.some((kw) => tag.includes(kw)));

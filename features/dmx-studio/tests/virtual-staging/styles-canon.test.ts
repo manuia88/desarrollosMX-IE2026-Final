@@ -4,8 +4,8 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  STAGING_STYLES_CANON,
   getStyleBySlug,
+  STAGING_STYLES_CANON,
 } from '@/features/dmx-studio/lib/virtual-staging/styles-canon';
 
 describe('virtual-staging.styles-canon', () => {

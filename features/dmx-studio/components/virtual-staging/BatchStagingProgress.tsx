@@ -27,9 +27,12 @@ function statusKind(status: string): 'completed' | 'failed' | 'pending' {
 }
 
 const STATUS_BADGE_CLASS: Record<'completed' | 'failed' | 'pending', string> = {
-  completed: 'bg-[color:rgba(34,197,94,0.18)] text-[color:#86efac] border-[color:rgba(34,197,94,0.40)]',
-  failed: 'bg-[color:rgba(239,68,68,0.18)] text-[color:#fca5a5] border-[color:rgba(239,68,68,0.40)]',
-  pending: 'bg-[color:rgba(99,102,241,0.18)] text-[color:var(--canon-indigo-2)] border-[color:rgba(99,102,241,0.40)]',
+  completed:
+    'bg-[color:rgba(34,197,94,0.18)] text-[color:#86efac] border-[color:rgba(34,197,94,0.40)]',
+  failed:
+    'bg-[color:rgba(239,68,68,0.18)] text-[color:#fca5a5] border-[color:rgba(239,68,68,0.40)]',
+  pending:
+    'bg-[color:rgba(99,102,241,0.18)] text-[color:var(--canon-indigo-2)] border-[color:rgba(99,102,241,0.40)]',
 };
 
 const STATUS_LABEL: Record<'completed' | 'failed' | 'pending', string> = {
@@ -122,9 +125,7 @@ export function BatchStagingProgress({ jobs }: BatchStagingProgressProps) {
                     Ver resultado
                   </a>
                 ) : (
-                  <p className="text-[11px] text-[color:var(--canon-cream-2)] truncate">
-                    {job.id}
-                  </p>
+                  <p className="text-[11px] text-[color:var(--canon-cream-2)] truncate">{job.id}</p>
                 )}
               </div>
               <span
@@ -133,6 +134,7 @@ export function BatchStagingProgress({ jobs }: BatchStagingProgressProps) {
                   'rounded-[var(--canon-radius-pill)] tabular-nums',
                   STATUS_BADGE_CLASS[kind],
                 )}
+                role="status"
                 aria-label={`Estado ${STATUS_LABEL[kind]}`}
               >
                 {STATUS_LABEL[kind]}

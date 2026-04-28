@@ -4,14 +4,14 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 import {
+  GenerateSeedanceClipInputSchema,
+  generateVideoWithAudio,
+} from '@/features/dmx-studio/lib/fal-gateway/seedance';
+import {
   AGENCY_PLAN_KEY,
   FEATURE_FLAGS,
   isAgencyPlan,
 } from '@/features/dmx-studio/lib/feature-flags';
-import {
-  GenerateSeedanceClipInputSchema,
-  generateVideoWithAudio,
-} from '@/features/dmx-studio/lib/fal-gateway/seedance';
 import { router } from '@/server/trpc/init';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { sentry } from '@/shared/lib/telemetry/sentry';
@@ -35,7 +35,17 @@ const stagingGenerateInput = z.object({
   imageUrl: z.string().url(),
   style: z.enum(['modern', 'classic', 'minimalist', 'industrial', 'bohemian', 'luxury', 'family']),
   roomType: z
-    .enum(['living', 'bedroom', 'kitchen', 'bathroom', 'dining', 'office', 'outdoor', 'garage', 'other'])
+    .enum([
+      'living',
+      'bedroom',
+      'kitchen',
+      'bathroom',
+      'dining',
+      'office',
+      'outdoor',
+      'garage',
+      'other',
+    ])
     .optional(),
 });
 
@@ -98,10 +108,7 @@ export const studioSprint6SeedanceRouter = router({
         sentry.captureException(err, {
           tags: { module: 'dmx-studio', component: 'sprint6.seedance', op: 'generateClip' },
         });
-        await supabase
-          .from('studio_seedance_clips')
-          .update({ status: 'failed' })
-          .eq('id', row.id);
+        await supabase.from('studio_seedance_clips').update({ status: 'failed' }).eq('id', row.id);
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',
           message: err instanceof Error ? err.message : 'seedance failed',
@@ -137,107 +144,103 @@ export const studioSprint6SeedanceRouter = router({
 });
 
 export const studioSprint6VirtualStagingRouter = router({
-  stageAsset: studioAgencyProcedure
-    .input(stagingGenerateInput)
-    .mutation(async ({ input, ctx }) => {
-      if (!FEATURE_FLAGS.VIRTUAL_STAGING_ENABLED) {
-        throw new TRPCError({
-          code: 'PRECONDITION_FAILED',
-          message: 'Virtual Staging feature disabled',
-        });
-      }
-      const { stageRoom } = await import('@/features/dmx-studio/lib/virtual-staging');
-      const supabase = createAdminClient();
-      const { data: row, error: insertError } = await supabase
-        .from('studio_virtual_staging_jobs')
-        .insert({
-          project_id: input.projectId,
-          user_id: ctx.user.id,
-          source_asset_id: input.sourceAssetId,
-          staging_style: input.style,
-          room_type: input.roomType ?? 'living',
-          status: 'processing',
-          is_stub: false,
-        })
-        .select('id')
-        .single();
-      if (insertError || !row) {
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: insertError ?? undefined });
-      }
-      try {
-        const result = await stageRoom({
-          imageUrl: input.imageUrl,
-          style: input.style,
-          roomType: input.roomType ?? 'living',
-        });
-        await supabase
-          .from('studio_virtual_staging_jobs')
-          .update({
-            status: 'completed',
-            output_url: result.stagedImageUrl,
-            cost_usd: result.costUsd,
-            meta: { pedra_job_id: result.pedraJobId },
-          })
-          .eq('id', row.id);
-        return { jobId: row.id, ...result };
-      } catch (err) {
-        sentry.captureException(err, {
-          tags: { module: 'dmx-studio', component: 'sprint6.virtual-staging', op: 'stageAsset' },
-        });
-        await supabase
-          .from('studio_virtual_staging_jobs')
-          .update({ status: 'failed' })
-          .eq('id', row.id);
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: err instanceof Error ? err.message : 'staging failed',
-        });
-      }
-    }),
-
-  batchStage: studioAgencyProcedure
-    .input(stagingBatchInput)
-    .mutation(async ({ input, ctx }) => {
-      if (!FEATURE_FLAGS.VIRTUAL_STAGING_ENABLED) {
-        throw new TRPCError({
-          code: 'PRECONDITION_FAILED',
-          message: 'Virtual Staging feature disabled',
-        });
-      }
-      const supabase = createAdminClient();
-      const { data: assets, error: loadErr } = await supabase
-        .from('studio_video_assets')
-        .select('id, storage_url')
-        .in('id', input.assetIds);
-      if (loadErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: loadErr });
-      if (!assets || assets.length === 0) throw new TRPCError({ code: 'NOT_FOUND' });
-
-      const batchId =
-        typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
-          ? crypto.randomUUID()
-          : `batch_${Date.now()}`;
-
-      const inserts = assets.map((a) => ({
+  stageAsset: studioAgencyProcedure.input(stagingGenerateInput).mutation(async ({ input, ctx }) => {
+    if (!FEATURE_FLAGS.VIRTUAL_STAGING_ENABLED) {
+      throw new TRPCError({
+        code: 'PRECONDITION_FAILED',
+        message: 'Virtual Staging feature disabled',
+      });
+    }
+    const { stageRoom } = await import('@/features/dmx-studio/lib/virtual-staging');
+    const supabase = createAdminClient();
+    const { data: row, error: insertError } = await supabase
+      .from('studio_virtual_staging_jobs')
+      .insert({
         project_id: input.projectId,
         user_id: ctx.user.id,
-        source_asset_id: a.id,
+        source_asset_id: input.sourceAssetId,
         staging_style: input.style,
-        room_type: 'living',
-        status: 'pending',
-        batch_id: batchId,
-        is_batch_member: true,
+        room_type: input.roomType ?? 'living',
+        status: 'processing',
         is_stub: false,
-      }));
-      const { error: bulkErr } = await supabase
+      })
+      .select('id')
+      .single();
+    if (insertError || !row) {
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: insertError ?? undefined });
+    }
+    try {
+      const result = await stageRoom({
+        imageUrl: input.imageUrl,
+        style: input.style,
+        roomType: input.roomType ?? 'living',
+      });
+      await supabase
         .from('studio_virtual_staging_jobs')
-        .insert(inserts);
-      if (bulkErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: bulkErr });
+        .update({
+          status: 'completed',
+          output_url: result.stagedImageUrl,
+          cost_usd: result.costUsd,
+          meta: { pedra_job_id: result.pedraJobId },
+        })
+        .eq('id', row.id);
+      return { jobId: row.id, ...result };
+    } catch (err) {
+      sentry.captureException(err, {
+        tags: { module: 'dmx-studio', component: 'sprint6.virtual-staging', op: 'stageAsset' },
+      });
+      await supabase
+        .from('studio_virtual_staging_jobs')
+        .update({ status: 'failed' })
+        .eq('id', row.id);
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: err instanceof Error ? err.message : 'staging failed',
+      });
+    }
+  }),
 
-      return { batchId, jobsCount: assets.length };
-    }),
+  batchStage: studioAgencyProcedure.input(stagingBatchInput).mutation(async ({ input, ctx }) => {
+    if (!FEATURE_FLAGS.VIRTUAL_STAGING_ENABLED) {
+      throw new TRPCError({
+        code: 'PRECONDITION_FAILED',
+        message: 'Virtual Staging feature disabled',
+      });
+    }
+    const supabase = createAdminClient();
+    const { data: assets, error: loadErr } = await supabase
+      .from('studio_video_assets')
+      .select('id, storage_url')
+      .in('id', input.assetIds);
+    if (loadErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: loadErr });
+    if (!assets || assets.length === 0) throw new TRPCError({ code: 'NOT_FOUND' });
+
+    const batchId =
+      typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function'
+        ? crypto.randomUUID()
+        : `batch_${Date.now()}`;
+
+    const inserts = assets.map((a) => ({
+      project_id: input.projectId,
+      user_id: ctx.user.id,
+      source_asset_id: a.id,
+      staging_style: input.style,
+      room_type: 'living',
+      status: 'pending',
+      batch_id: batchId,
+      is_batch_member: true,
+      is_stub: false,
+    }));
+    const { error: bulkErr } = await supabase.from('studio_virtual_staging_jobs').insert(inserts);
+    if (bulkErr) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', cause: bulkErr });
+
+    return { batchId, jobsCount: assets.length };
+  }),
 
   listJobs: studioProcedure
-    .input(z.object({ projectId: z.string().uuid().optional(), batchId: z.string().uuid().optional() }))
+    .input(
+      z.object({ projectId: z.string().uuid().optional(), batchId: z.string().uuid().optional() }),
+    )
     .query(async ({ input, ctx }) => {
       const supabase = createAdminClient();
       let query = supabase
@@ -312,7 +315,13 @@ export const studioSprint6CinemaModeRouter = router({
 
     const meta = (project.meta as Record<string, unknown>) ?? {};
     meta.cinema_mode = true;
-    meta.cinema_mode_features = ['drone', 'seedance_ambient', 'branded_overlay', 'multi_format', 'beat_sync'];
+    meta.cinema_mode_features = [
+      'drone',
+      'seedance_ambient',
+      'branded_overlay',
+      'multi_format',
+      'beat_sync',
+    ];
 
     const { error: updateErr } = await supabase
       .from('studio_video_projects')

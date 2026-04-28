@@ -4,10 +4,10 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import {
+  batchStage,
   ROOM_TYPES,
   STAGING_STYLES,
   StageRoomInputSchema,
-  batchStage,
   stageRoom,
   testConnection,
 } from '@/features/dmx-studio/lib/virtual-staging';
@@ -44,9 +44,7 @@ describe('virtual-staging.testConnection', () => {
 
 describe('virtual-staging.stageRoom', () => {
   it('rejects invalid input via Zod schema', () => {
-    expect(() =>
-      StageRoomInputSchema.parse({ imageUrl: 'not-a-url', style: 'modern' }),
-    ).toThrow();
+    expect(() => StageRoomInputSchema.parse({ imageUrl: 'not-a-url', style: 'modern' })).toThrow();
   });
 
   it('throws when no API key configured', async () => {
@@ -56,14 +54,12 @@ describe('virtual-staging.stageRoom', () => {
   });
 
   it('returns staged result on success', async () => {
-    const fetcher = vi
-      .fn()
-      .mockResolvedValue(
-        buildOkResponse({
-          job_id: 'pedra_123',
-          output_url: 'https://cdn.pedra.so/staged_123.jpg',
-        }),
-      );
+    const fetcher = vi.fn().mockResolvedValue(
+      buildOkResponse({
+        job_id: 'pedra_123',
+        output_url: 'https://cdn.pedra.so/staged_123.jpg',
+      }),
+    );
     const result = await stageRoom(
       { imageUrl: 'https://example.com/empty-living.jpg', style: 'modern', roomType: 'living' },
       { fetcher: fetcher as unknown as typeof fetch, apiKey: 'test-key' },
@@ -88,15 +84,13 @@ describe('virtual-staging.stageRoom', () => {
 
 describe('virtual-staging.batchStage', () => {
   it('processes multiple images in parallel', async () => {
-    const fetcher = vi
-      .fn()
-      .mockImplementation(async (_url, init: RequestInit) => {
-        const body = JSON.parse(init.body as string) as { image_url: string };
-        return buildOkResponse({
-          job_id: `pedra_${body.image_url.slice(-5)}`,
-          output_url: `https://cdn.pedra.so/staged_${body.image_url.slice(-5)}.jpg`,
-        });
+    const fetcher = vi.fn().mockImplementation(async (_url, init: RequestInit) => {
+      const body = JSON.parse(init.body as string) as { image_url: string };
+      return buildOkResponse({
+        job_id: `pedra_${body.image_url.slice(-5)}`,
+        output_url: `https://cdn.pedra.so/staged_${body.image_url.slice(-5)}.jpg`,
       });
+    });
     const result = await batchStage(
       {
         images: [

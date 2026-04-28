@@ -2,8 +2,8 @@
 // Plan check Agency canon: features Sprint 6 (Seedance + Virtual Staging + Drone + Cinema Mode).
 
 import { TRPCError } from '@trpc/server';
-import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { AGENCY_PLAN_KEY } from '@/features/dmx-studio/lib/feature-flags';
+import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { studioProcedure } from './_studio-procedure';
 
 export const studioAgencyProcedure = studioProcedure.use(async ({ ctx, next }) => {

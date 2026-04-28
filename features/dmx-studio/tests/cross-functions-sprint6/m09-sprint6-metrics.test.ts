@@ -2,8 +2,8 @@
 
 import { describe, expect, it } from 'vitest';
 import {
-  Sprint6MetricsRowSchema,
   aggregateSprint6Metrics,
+  Sprint6MetricsRowSchema,
 } from '@/features/dmx-studio/lib/cross-functions/m09-sprint6-metrics';
 
 const NOW = Date.parse('2026-04-27T12:00:00Z');

@@ -44,13 +44,16 @@ export function aggregateSprint6Metrics(input: AggregateSprint6MetricsInput): Sp
 
   const dronesByPattern: Record<string, number> = {};
   for (const d of input.drones) {
-    const key = typeof d.simulation_type === 'string' && d.simulation_type.length > 0
-      ? d.simulation_type
-      : 'unknown';
+    const key =
+      typeof d.simulation_type === 'string' && d.simulation_type.length > 0
+        ? d.simulation_type
+        : 'unknown';
     dronesByPattern[key] = (dronesByPattern[key] ?? 0) + 1;
   }
 
-  const cinema = Number.isFinite(input.cinemaProjects) ? Math.max(0, Math.trunc(input.cinemaProjects)) : 0;
+  const cinema = Number.isFinite(input.cinemaProjects)
+    ? Math.max(0, Math.trunc(input.cinemaProjects))
+    : 0;
 
   const result: Sprint6Metrics = {
     virtual_stagings_total: input.stagings.length,

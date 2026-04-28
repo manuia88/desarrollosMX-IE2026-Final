@@ -84,7 +84,11 @@ function extractLogs(status: unknown): string[] {
   const maybe = status as { logs?: unknown };
   if (!Array.isArray(maybe.logs)) return [];
   return maybe.logs
-    .map((l) => (l && typeof l === 'object' && 'message' in l ? String((l as { message: unknown }).message) : ''))
+    .map((l) =>
+      l && typeof l === 'object' && 'message' in l
+        ? String((l as { message: unknown }).message)
+        : '',
+    )
     .filter(Boolean);
 }
 
@@ -138,7 +142,12 @@ export interface TestConnectionResult {
 export async function testConnection(): Promise<TestConnectionResult> {
   const hasCredentials = Boolean(process.env.FAL_API_KEY ?? process.env.FAL_KEY);
   if (!hasCredentials) {
-    return { ok: false, modelsAvailable: 0, hasCredentials: false, error: 'FAL_API_KEY not configured' };
+    return {
+      ok: false,
+      modelsAvailable: 0,
+      hasCredentials: false,
+      error: 'FAL_API_KEY not configured',
+    };
   }
   const { models } = listModels();
   return { ok: true, modelsAvailable: models.length, hasCredentials: true };

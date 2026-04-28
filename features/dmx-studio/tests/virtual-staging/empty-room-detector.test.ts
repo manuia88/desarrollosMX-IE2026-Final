@@ -4,8 +4,8 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  EmptyRoomCandidateSchema,
   detectEmptyByMeta,
+  EmptyRoomCandidateSchema,
 } from '@/features/dmx-studio/lib/virtual-staging/empty-room-detector';
 
 describe('virtual-staging.empty-room-detector', () => {
@@ -16,18 +16,10 @@ describe('virtual-staging.empty-room-detector', () => {
   });
 
   it('detects empty via ai_classification.tags keywords (case-insensitive)', () => {
-    expect(
-      detectEmptyByMeta({ ai_classification: { tags: ['VACIO', 'living'] } }),
-    ).toBe(true);
-    expect(
-      detectEmptyByMeta({ ai_classification: { tags: ['empty_room'] } }),
-    ).toBe(true);
-    expect(
-      detectEmptyByMeta({ ai_classification: { tags: ['unfurnished'] } }),
-    ).toBe(true);
-    expect(
-      detectEmptyByMeta({ ai_classification: { tags: ['sin_muebles'] } }),
-    ).toBe(true);
+    expect(detectEmptyByMeta({ ai_classification: { tags: ['VACIO', 'living'] } })).toBe(true);
+    expect(detectEmptyByMeta({ ai_classification: { tags: ['empty_room'] } })).toBe(true);
+    expect(detectEmptyByMeta({ ai_classification: { tags: ['unfurnished'] } })).toBe(true);
+    expect(detectEmptyByMeta({ ai_classification: { tags: ['sin_muebles'] } })).toBe(true);
   });
 
   it('detects empty via meta.tags fallback', () => {
@@ -39,9 +31,7 @@ describe('virtual-staging.empty-room-detector', () => {
     expect(
       detectEmptyByMeta({ ai_classification: { tags: ['living', 'furnished', 'cozy'] } }),
     ).toBe(false);
-    expect(
-      detectEmptyByMeta({ ai_classification: { tags: [123, true, null] } }),
-    ).toBe(false);
+    expect(detectEmptyByMeta({ ai_classification: { tags: [123, true, null] } })).toBe(false);
   });
 
   it('EmptyRoomCandidateSchema validates expected shape', () => {

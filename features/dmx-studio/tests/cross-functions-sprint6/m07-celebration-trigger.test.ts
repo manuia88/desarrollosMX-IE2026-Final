@@ -2,9 +2,9 @@
 
 import { describe, expect, it } from 'vitest';
 import {
+  buildCelebrationProjectPayload,
   CELEBRATION_TRIGGER_OPT_IN_KEY,
   M07CelebrationInputSchema,
-  buildCelebrationProjectPayload,
   shouldTriggerCelebrationVideo,
 } from '@/features/dmx-studio/lib/cross-functions/m07-celebration-trigger';
 

@@ -37,15 +37,9 @@ const TONE_LABEL: Record<StagingStyleCanon['tone'], string> = {
 
 export function StyleSelector({ selectedSlug, onSelect }: StyleSelectorProps) {
   return (
-    <section
-      aria-label="Selector de estilo de virtual staging"
-      className="w-full"
-    >
+    <section aria-label="Selector de estilo de virtual staging" className="w-full">
       <ul
-        className={cn(
-          'grid gap-3 list-none p-0 m-0',
-          'grid-cols-2 md:grid-cols-3 lg:grid-cols-5',
-        )}
+        className={cn('grid gap-3 list-none p-0 m-0', 'grid-cols-2 md:grid-cols-3 lg:grid-cols-5')}
       >
         {STAGING_STYLES_CANON.map((style) => {
           const isSelected = style.slug === selectedSlug;

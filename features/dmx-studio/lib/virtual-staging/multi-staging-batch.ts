@@ -21,7 +21,11 @@ export interface BatchPlan {
 
 export function prepareBatchPlan(assets: ReadonlyArray<BatchPlanAsset>): BatchPlan {
   const validated = assets.filter(
-    (a) => typeof a.id === 'string' && a.id.length > 0 && typeof a.storage_url === 'string' && a.storage_url.length > 0,
+    (a) =>
+      typeof a.id === 'string' &&
+      a.id.length > 0 &&
+      typeof a.storage_url === 'string' &&
+      a.storage_url.length > 0,
   );
   const capped = validated.slice(0, MULTI_BATCH_MAX_ASSETS);
   const batchSlots: BatchPlanSlot[] = capped.map((a) => ({

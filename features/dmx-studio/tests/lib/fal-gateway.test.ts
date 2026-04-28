@@ -80,9 +80,13 @@ describe('fal-gateway.submitJob', () => {
   it('returns requestId on success', async () => {
     const mock = buildMockClient();
     mock.queue.submit.mockResolvedValue({ request_id: 'req_abc123' });
-    const result = await submitJob(DEFAULT_SEEDANCE_MODEL, { prompt: 'test' }, {
-      client: mock as unknown as FalClient,
-    });
+    const result = await submitJob(
+      DEFAULT_SEEDANCE_MODEL,
+      { prompt: 'test' },
+      {
+        client: mock as unknown as FalClient,
+      },
+    );
     expect(result.requestId).toBe('req_abc123');
     expect(mock.queue.submit).toHaveBeenCalledWith(DEFAULT_SEEDANCE_MODEL, {
       input: { prompt: 'test' },
