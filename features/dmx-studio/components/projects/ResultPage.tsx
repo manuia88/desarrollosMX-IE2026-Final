@@ -10,6 +10,7 @@ import { useMemo, useState } from 'react';
 import { trpc } from '@/shared/lib/trpc/client';
 import { FadeUp } from '@/shared/ui/motion';
 import { Button, Card, DisclosurePill } from '@/shared/ui/primitives/canon';
+import { SocialPublishersSection } from '../social-publishers/SocialPublishersSection';
 import { BeatSyncIndicator } from './BeatSyncIndicator';
 import { BrandingToggle, type StudioPlanTier } from './BrandingToggle';
 import { CopyPackViewer } from './CopyPackViewer';
@@ -251,6 +252,10 @@ export function ResultPage({ projectId }: ResultPageProps) {
 
       <FadeUp delay={0.25}>
         <FeedbackForm projectId={projectId} currentHook={currentHook} />
+      </FadeUp>
+
+      <FadeUp delay={0.3}>
+        <SocialPublishersSection videoUrl={currentVideo?.storage_url ?? ''} />
       </FadeUp>
     </>
   );
