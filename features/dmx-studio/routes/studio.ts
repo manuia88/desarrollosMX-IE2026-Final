@@ -36,6 +36,8 @@ import { studioSprint7AvatarsRouter } from './sprint7-avatars';
 import { studioSprint7GalleryAnalyticsRouter } from './sprint7-gallery-analytics';
 import { studioSprint7PublicGalleryRouter } from './sprint7-public-gallery';
 import { studioSprint7ZoneVideosRouter } from './sprint7-zone-videos';
+import { studioSprint8PublicSeriesRouter } from './sprint8-public-series';
+import { studioSprint8SeriesRouter } from './sprint8-series';
 import { studioStreaksRouter } from './streaks';
 import { studioSubscriptionsRouter } from './subscriptions';
 import { studioSubtitlesRouter } from './subtitles';
@@ -79,6 +81,8 @@ export const studioRouter = router({
   sprint7GalleryAnalytics: studioSprint7GalleryAnalyticsRouter,
   sprint7PublicGallery: studioSprint7PublicGalleryRouter,
   sprint7ZoneVideos: studioSprint7ZoneVideosRouter,
+  sprint8PublicSeries: studioSprint8PublicSeriesRouter,
+  sprint8Series: studioSprint8SeriesRouter,
   streaks: studioStreaksRouter,
   subscriptions: studioSubscriptionsRouter,
   subtitles: studioSubtitlesRouter,
