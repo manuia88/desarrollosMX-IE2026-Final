@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { ProjectSwitcher } from '@/shared/ui/developer-shell/ProjectSwitcher';
 
 export interface DevHeaderUser {
   readonly id: string;
@@ -57,6 +58,7 @@ export function DevHeader({ user, companyName, unreadCount = 0 }: DevHeaderProps
         </div>
       </div>
       <div className="flex items-center gap-3">
+        <ProjectSwitcher />
         <button
           type="button"
           disabled

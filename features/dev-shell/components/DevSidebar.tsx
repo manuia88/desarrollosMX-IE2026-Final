@@ -57,6 +57,18 @@ export function DevSidebar({ locale }: DevSidebarProps) {
                 data-disabled="true"
               >
                 <Icon size={18} aria-hidden="true" />
+                {item.badgeKey ? (
+                  <span
+                    className="absolute -right-1 -top-1 inline-flex h-3 min-w-[18px] items-center justify-center rounded-full px-1 text-[8px] font-semibold uppercase"
+                    style={{
+                      background: 'linear-gradient(90deg, #6366F1, #EC4899)',
+                      color: '#fff',
+                    }}
+                    aria-hidden="true"
+                  >
+                    {t(item.badgeKey)}
+                  </span>
+                ) : null}
               </button>
             );
           }

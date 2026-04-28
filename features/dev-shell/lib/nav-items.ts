@@ -27,6 +27,7 @@ export interface DevNavItem {
   route: string;
   futurePhase?: string;
   disabled?: boolean;
+  badgeKey?: string;
 }
 
 export const DEV_NAV_ITEMS: readonly DevNavItem[] = [
@@ -43,14 +44,6 @@ export const DEV_NAV_ITEMS: readonly DevNavItem[] = [
     route: '/desarrolladores/inventario',
   },
   {
-    id: 'contabilidad',
-    labelKey: 'dev.sidebar.contabilidad',
-    Icon: IconTrendingUp,
-    route: '/desarrolladores/contabilidad',
-    futurePhase: 'FASE 15',
-    disabled: true,
-  },
-  {
     id: 'crm-dev',
     labelKey: 'dev.sidebar.crm',
     Icon: IconUsers,
@@ -61,16 +54,21 @@ export const DEV_NAV_ITEMS: readonly DevNavItem[] = [
     labelKey: 'dev.sidebar.marketing',
     Icon: IconMegaphone,
     route: '/desarrolladores/marketing',
-    futurePhase: 'FASE 15',
-    disabled: true,
   },
   {
     id: 'analytics-ie',
     labelKey: 'dev.sidebar.analytics',
     Icon: IconBarChart3,
     route: '/desarrolladores/analytics',
-    futurePhase: 'FASE 15',
+  },
+  {
+    id: 'contabilidad',
+    labelKey: 'dev.sidebar.contabilidad',
+    Icon: IconTrendingUp,
+    route: '/desarrolladores/contabilidad',
+    futurePhase: 'FASE 16',
     disabled: true,
+    badgeKey: 'dev.layout.contabilidadPin',
   },
   {
     id: 'ajustes',

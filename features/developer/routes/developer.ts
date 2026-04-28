@@ -22,19 +22,27 @@ import {
   inventarioUpdateUnidadInput,
   inventorySnapshotInput,
   kpisInput,
+  listMyProjectsInput,
+  type MyProjectItem,
   morningBriefingDevInput,
   pendientesInput,
   prototipoCreateInput,
   prototipoDeleteInput,
   prototipoListInput,
   prototipoUpdateInput,
+  type SiteSelectionAIResult,
+  siteSelectionAIInput,
+  siteSelectionHistoryInput,
   trustScoreInput,
   type UnitDemandHeatmapItem,
   unitDemandHeatmapInput,
+  type WeeklyHighlightItem,
+  weeklyHighlightsInput,
 } from '@/features/developer/schemas';
 import { router } from '@/server/trpc/init';
 import { authenticatedProcedure } from '@/server/trpc/middleware';
 import * as runtimeCache from '@/shared/lib/runtime-cache';
+import { runSiteSelectionAI } from '@/shared/lib/site-selection/site-selection-ai';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { sentry } from '@/shared/lib/telemetry/sentry';
 import type { Database, Json } from '@/shared/types/database';
@@ -1402,5 +1410,202 @@ export const developerRouter = router({
       const { error } = await supabase.from('avance_obra').delete().eq('id', input.avanceId);
       if (error) throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
       return { success: true };
+    }),
+
+  // FASE 15.A.1.3 — ProjectSwitcher
+  listMyProjects: authenticatedProcedure
+    .input(listMyProjectsInput)
+    .query(async ({ ctx }): Promise<readonly MyProjectItem[]> => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) return [];
+      const { data, error } = await supabase
+        .from('proyectos')
+        .select('id, nombre, status, units_total, units_available')
+        .eq('desarrolladora_id', desarrolladoraId)
+        .eq('is_active', true)
+        .order('nombre', { ascending: true });
+      if (error) {
+        sentry.captureException(error, {
+          tags: { feature: 'developer', op: 'listMyProjects' },
+        });
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      type ProjectRow = {
+        id: string;
+        nombre: string;
+        status: string;
+        units_total: number | null;
+        units_available: number | null;
+      };
+      return ((data ?? []) as ProjectRow[]).map((p) => ({
+        id: p.id,
+        nombre: p.nombre,
+        status: p.status,
+        units_total: p.units_total ?? null,
+        units_available: p.units_available ?? null,
+      }));
+    }),
+
+  // FASE 15.A.2.6 — Weekly highlights carousel (M10 polish)
+  // Returns top 5 score deltas last 7d across dev's projects
+  getWeeklyHighlights: authenticatedProcedure
+    .input(weeklyHighlightsInput)
+    .query(async ({ ctx }): Promise<readonly WeeklyHighlightItem[]> => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) return [];
+
+      const { data: proyectos, error: pErr } = await supabase
+        .from('proyectos')
+        .select('id, nombre')
+        .eq('desarrolladora_id', desarrolladoraId)
+        .eq('is_active', true);
+      if (pErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: pErr.message });
+      }
+      const proyectoIds = (proyectos ?? []).map((p) => p.id);
+      if (proyectoIds.length === 0) return [];
+      const proyectoNombres = new Map((proyectos ?? []).map((p) => [p.id, p.nombre]));
+
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .slice(0, 10);
+
+      const { data, error } = await supabase
+        .from('project_scores')
+        .select(
+          'project_id, score_type, score_label, score_value, trend_direction, trend_vs_previous, period_date',
+        )
+        .in('project_id', proyectoIds)
+        .gte('period_date', sevenDaysAgo)
+        .not('trend_vs_previous', 'is', null)
+        .order('period_date', { ascending: false })
+        .limit(50);
+
+      if (error) {
+        sentry.captureException(error, {
+          tags: { feature: 'developer', op: 'getWeeklyHighlights' },
+        });
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+
+      type HighlightRow = {
+        project_id: string;
+        score_type: string;
+        score_label: string | null;
+        score_value: number | null;
+        trend_direction: string | null;
+        trend_vs_previous: number | null;
+        period_date: string;
+      };
+      const sorted = ((data ?? []) as HighlightRow[])
+        .filter((r) => r.trend_vs_previous !== null)
+        .sort(
+          (a, b) =>
+            Math.abs(Number(b.trend_vs_previous ?? 0)) - Math.abs(Number(a.trend_vs_previous ?? 0)),
+        )
+        .slice(0, 5);
+
+      return sorted.map((r) => ({
+        project_id: r.project_id,
+        project_nombre: proyectoNombres.get(r.project_id) ?? 'Proyecto',
+        score_type: r.score_type,
+        score_label: r.score_label,
+        score_value: r.score_value === null ? null : Number(r.score_value),
+        trend_direction: r.trend_direction,
+        trend_vs_previous: r.trend_vs_previous === null ? null : Number(r.trend_vs_previous),
+        period_date: r.period_date,
+      }));
+    }),
+
+  // FASE 15.A.4 — Site Selection AI con CF.3 Atlas constellations (GC-81)
+  // Cost tracked ~$0.50 USD/query. Feature gated dev.api_access (Pro+).
+  // Persiste en site_selection_queries.
+  siteSelectionAI: authenticatedProcedure
+    .input(siteSelectionAIInput)
+    .mutation(async ({ ctx, input }): Promise<SiteSelectionAIResult> => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) {
+        throw new TRPCError({
+          code: 'PRECONDITION_FAILED',
+          message: 'Desarrolladora linkage required',
+        });
+      }
+
+      const { data: features, error: featErr } = await supabase.rpc('resolve_features');
+      if (featErr) {
+        sentry.captureException(featErr, {
+          tags: { feature: 'developer', op: 'siteSelectionAI.features' },
+        });
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: featErr.message });
+      }
+      const featureSet = new Set((features ?? []) as string[]);
+      if (!featureSet.has('dev.api_access')) {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: 'site_selection_ai_requires_pro_plus',
+        });
+      }
+
+      const startedAt = Date.now();
+      const aiOutput = await runSiteSelectionAI({
+        query: input.query,
+        userId: ctx.user.id,
+        desarrolladoraId,
+      });
+      const durationMs = Date.now() - startedAt;
+
+      const insertRow: Database['public']['Tables']['site_selection_queries']['Insert'] = {
+        desarrolladora_id: desarrolladoraId,
+        user_id: ctx.user.id,
+        query_text: input.query,
+        parsed_intent: aiOutput.parsedIntent as Json,
+        output_zones: aiOutput.zones as unknown as Json,
+        output_listings: aiOutput.listings as unknown as Json,
+        ai_narrative: aiOutput.narrative,
+        cost_usd: aiOutput.costUsd,
+        duration_ms: durationMs,
+        pdf_url: null,
+      };
+      const { data: row, error: insErr } = await supabase
+        .from('site_selection_queries')
+        .insert(insertRow)
+        .select('id')
+        .single();
+      if (insErr) {
+        sentry.captureException(insErr, {
+          tags: { feature: 'developer', op: 'siteSelectionAI.insert' },
+        });
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: insErr.message });
+      }
+
+      return {
+        queryId: row.id,
+        zones: [...aiOutput.zones],
+        narrative: aiOutput.narrative,
+        costUsd: aiOutput.costUsd,
+        durationMs,
+        isPlaceholder: aiOutput.isPlaceholder,
+      };
+    }),
+
+  siteSelectionHistory: authenticatedProcedure
+    .input(siteSelectionHistoryInput)
+    .query(async ({ ctx, input }) => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) return [];
+      const { data, error } = await supabase
+        .from('site_selection_queries')
+        .select('id, query_text, ai_narrative, cost_usd, duration_ms, created_at')
+        .eq('desarrolladora_id', desarrolladoraId)
+        .order('created_at', { ascending: false })
+        .limit(input.limit);
+      if (error) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      return data ?? [];
     }),
 });
