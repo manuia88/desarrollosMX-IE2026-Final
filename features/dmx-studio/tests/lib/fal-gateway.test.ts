@@ -179,7 +179,7 @@ describe('fal-gateway/seedance.generateVideoWithAudio', () => {
       {
         imageUrl: 'https://example.com/garden.jpg',
         prompt: 'garden tour',
-        audioContext: 'garden_birds' as never,
+        audioContext: 'outdoor_garden',
       },
       { client: mock as unknown as FalClient },
     );
