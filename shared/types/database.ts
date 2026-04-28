@@ -3115,6 +3115,121 @@ export type Database = {
           },
         ]
       }
+      competitor_alerts: {
+        Row: {
+          ai_narrative: string | null
+          alert_type: string
+          created_at: string
+          detected_at: string
+          id: string
+          monitor_id: string
+          payload: Json
+          read_at: string | null
+          severity: string
+        }
+        Insert: {
+          ai_narrative?: string | null
+          alert_type: string
+          created_at?: string
+          detected_at?: string
+          id?: string
+          monitor_id: string
+          payload?: Json
+          read_at?: string | null
+          severity?: string
+        }
+        Update: {
+          ai_narrative?: string | null
+          alert_type?: string
+          created_at?: string
+          detected_at?: string
+          id?: string
+          monitor_id?: string
+          payload?: Json
+          read_at?: string | null
+          severity?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competitor_alerts_monitor_id_fkey"
+            columns: ["monitor_id"]
+            isOneToOne: false
+            referencedRelation: "competitor_monitors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      competitor_monitors: {
+        Row: {
+          active: boolean
+          competitor_external_name: string | null
+          competitor_external_url: string | null
+          competitor_proyecto_id: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          last_checked_at: string | null
+          metrics_tracked: Json
+          my_proyecto_id: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          competitor_external_name?: string | null
+          competitor_external_url?: string | null
+          competitor_proyecto_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          last_checked_at?: string | null
+          metrics_tracked?: Json
+          my_proyecto_id: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          competitor_external_name?: string | null
+          competitor_external_url?: string | null
+          competitor_proyecto_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          last_checked_at?: string | null
+          metrics_tracked?: Json
+          my_proyecto_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "competitor_monitors_competitor_proyecto_id_fkey"
+            columns: ["competitor_proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competitor_monitors_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competitor_monitors_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competitor_monitors_my_proyecto_id_fkey"
+            columns: ["my_proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       confidence_thresholds: {
         Row: {
           metric: string
@@ -3934,6 +4049,73 @@ export type Database = {
             columns: ["uploaded_by"]
             isOneToOne: false
             referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      dynamic_pricing_suggestions: {
+        Row: {
+          applied: boolean
+          applied_at: string | null
+          applied_by: string | null
+          confidence: string | null
+          created_at: string
+          current_price_mxn: number
+          delta_pct: number
+          expires_at: string
+          id: string
+          reasoning: string | null
+          suggested_price_mxn: number
+          unidad_id: string
+        }
+        Insert: {
+          applied?: boolean
+          applied_at?: string | null
+          applied_by?: string | null
+          confidence?: string | null
+          created_at?: string
+          current_price_mxn: number
+          delta_pct: number
+          expires_at?: string
+          id?: string
+          reasoning?: string | null
+          suggested_price_mxn: number
+          unidad_id: string
+        }
+        Update: {
+          applied?: boolean
+          applied_at?: string | null
+          applied_by?: string | null
+          confidence?: string | null
+          created_at?: string
+          current_price_mxn?: number
+          delta_pct?: number
+          expires_at?: string
+          id?: string
+          reasoning?: string | null
+          suggested_price_mxn?: number
+          unidad_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dynamic_pricing_suggestions_applied_by_fkey"
+            columns: ["applied_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dynamic_pricing_suggestions_applied_by_fkey"
+            columns: ["applied_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dynamic_pricing_suggestions_unidad_id_fkey"
+            columns: ["unidad_id"]
+            isOneToOne: false
+            referencedRelation: "unidades"
             referencedColumns: ["id"]
           },
         ]
@@ -5602,6 +5784,63 @@ export type Database = {
           },
         ]
       }
+      journey_executions: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          current_step: number
+          error_log: Json | null
+          id: string
+          journey_id: string
+          last_executed_at: string | null
+          lead_id: string
+          next_run_at: string | null
+          started_at: string
+          status: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          current_step?: number
+          error_log?: Json | null
+          id?: string
+          journey_id: string
+          last_executed_at?: string | null
+          lead_id: string
+          next_run_at?: string | null
+          started_at?: string
+          status?: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          current_step?: number
+          error_log?: Json | null
+          id?: string
+          journey_id?: string
+          last_executed_at?: string | null
+          lead_id?: string
+          next_run_at?: string | null
+          started_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "journey_executions_journey_id_fkey"
+            columns: ["journey_id"]
+            isOneToOne: false
+            referencedRelation: "marketing_journeys"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "journey_executions_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       landing_analytics: {
         Row: {
           country_code: string | null
@@ -6177,6 +6416,47 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      lead_scores: {
+        Row: {
+          computed_at: string
+          created_at: string
+          factors: Json
+          id: string
+          lead_id: string
+          model_version: string
+          score: number
+          ttl_until: string
+        }
+        Insert: {
+          computed_at?: string
+          created_at?: string
+          factors?: Json
+          id?: string
+          lead_id: string
+          model_version?: string
+          score?: number
+          ttl_until?: string
+        }
+        Update: {
+          computed_at?: string
+          created_at?: string
+          factors?: Json
+          id?: string
+          lead_id?: string
+          model_version?: string
+          score?: number
+          ttl_until?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_scores_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: true
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       lead_sources: {
         Row: {
@@ -8655,6 +8935,84 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "marketing_assets_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      marketing_journeys: {
+        Row: {
+          active: boolean
+          audience_filter: Json
+          created_at: string
+          created_by: string | null
+          desarrolladora_id: string | null
+          id: string
+          name: string
+          proyecto_id: string | null
+          steps: Json
+          trigger_event: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          audience_filter?: Json
+          created_at?: string
+          created_by?: string | null
+          desarrolladora_id?: string | null
+          id?: string
+          name: string
+          proyecto_id?: string | null
+          steps?: Json
+          trigger_event: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          audience_filter?: Json
+          created_at?: string
+          created_by?: string | null
+          desarrolladora_id?: string | null
+          id?: string
+          name?: string
+          proyecto_id?: string | null
+          steps?: Json
+          trigger_event?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "marketing_journeys_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "marketing_journeys_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "marketing_journeys_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "marketing_journeys_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "marketing_journeys_proyecto_id_fkey"
             columns: ["proyecto_id"]
             isOneToOne: false
             referencedRelation: "proyectos"
@@ -23111,6 +23469,10 @@ export type Database = {
         }[]
       }
       jsonb_diff: { Args: { a: Json; b: Json }; Returns: Json }
+      lead_belongs_to_dev_or_asesor: {
+        Args: { p_lead_id: string }
+        Returns: boolean
+      }
       load_inegi_ageb_staging_batch: { Args: { p_rows: Json }; Returns: number }
       longtransactionsenabled: { Args: never; Returns: boolean }
       market_migration_alert_pct: {
