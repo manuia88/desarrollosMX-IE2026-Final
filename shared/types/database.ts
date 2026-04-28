@@ -15879,6 +15879,45 @@ export type Database = {
           },
         ]
       }
+      studio_audio_ambient_library: {
+        Row: {
+          context_tags: string[]
+          created_at: string
+          description: string | null
+          duration_seconds: number
+          id: string
+          is_active: boolean
+          meta: Json
+          name: string
+          slug: string
+          storage_path: string
+        }
+        Insert: {
+          context_tags?: string[]
+          created_at?: string
+          description?: string | null
+          duration_seconds?: number
+          id?: string
+          is_active?: boolean
+          meta?: Json
+          name: string
+          slug: string
+          storage_path: string
+        }
+        Update: {
+          context_tags?: string[]
+          created_at?: string
+          description?: string | null
+          duration_seconds?: number
+          id?: string
+          is_active?: boolean
+          meta?: Json
+          name?: string
+          slug?: string
+          storage_path?: string
+        }
+        Relationships: []
+      }
       studio_brand_kits: {
         Row: {
           accent_color: string | null
@@ -16303,6 +16342,8 @@ export type Database = {
           cost_usd: number | null
           created_at: string
           duration_seconds: number | null
+          heat_map_reasoning: string | null
+          heat_map_suggestion: string | null
           id: string
           is_stub: boolean
           meta: Json
@@ -16320,6 +16361,8 @@ export type Database = {
           cost_usd?: number | null
           created_at?: string
           duration_seconds?: number | null
+          heat_map_reasoning?: string | null
+          heat_map_suggestion?: string | null
           id?: string
           is_stub?: boolean
           meta?: Json
@@ -16337,6 +16380,8 @@ export type Database = {
           cost_usd?: number | null
           created_at?: string
           duration_seconds?: number | null
+          heat_map_reasoning?: string | null
+          heat_map_suggestion?: string | null
           id?: string
           is_stub?: boolean
           meta?: Json
@@ -16979,6 +17024,92 @@ export type Database = {
           },
           {
             foreignKeyName: "studio_remarketing_jobs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      studio_seedance_clips: {
+        Row: {
+          asset_id: string | null
+          audio_context: string | null
+          completed_at: string | null
+          cost_usd: number | null
+          created_at: string
+          duration_seconds: number
+          fal_request_id: string | null
+          has_native_audio: boolean
+          id: string
+          meta: Json
+          project_id: string
+          prompt: string
+          resolution: string
+          status: string
+          storage_path: string | null
+          user_id: string
+        }
+        Insert: {
+          asset_id?: string | null
+          audio_context?: string | null
+          completed_at?: string | null
+          cost_usd?: number | null
+          created_at?: string
+          duration_seconds?: number
+          fal_request_id?: string | null
+          has_native_audio?: boolean
+          id?: string
+          meta?: Json
+          project_id: string
+          prompt: string
+          resolution?: string
+          status?: string
+          storage_path?: string | null
+          user_id: string
+        }
+        Update: {
+          asset_id?: string | null
+          audio_context?: string | null
+          completed_at?: string | null
+          cost_usd?: number | null
+          created_at?: string
+          duration_seconds?: number
+          fal_request_id?: string | null
+          has_native_audio?: boolean
+          id?: string
+          meta?: Json
+          project_id?: string
+          prompt?: string
+          resolution?: string
+          status?: string
+          storage_path?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studio_seedance_clips_asset_id_fkey"
+            columns: ["asset_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_assets"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_seedance_clips_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "studio_video_projects"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_seedance_clips_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_seedance_clips_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "public_profiles"
@@ -17789,9 +17920,11 @@ export type Database = {
       }
       studio_virtual_staging_jobs: {
         Row: {
+          batch_id: string | null
           cost_usd: number | null
           created_at: string
           id: string
+          is_batch_member: boolean
           is_stub: boolean
           meta: Json
           output_url: string | null
@@ -17804,9 +17937,11 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          batch_id?: string | null
           cost_usd?: number | null
           created_at?: string
           id?: string
+          is_batch_member?: boolean
           is_stub?: boolean
           meta?: Json
           output_url?: string | null
@@ -17819,9 +17954,11 @@ export type Database = {
           user_id: string
         }
         Update: {
+          batch_id?: string | null
           cost_usd?: number | null
           created_at?: string
           id?: string
+          is_batch_member?: boolean
           is_stub?: boolean
           meta?: Json
           output_url?: string | null
