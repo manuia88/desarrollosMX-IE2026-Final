@@ -76,6 +76,20 @@ export function applySecurityHeaders(
   response.headers.set('Cross-Origin-Opener-Policy', 'same-origin');
   response.headers.set('Cross-Origin-Resource-Policy', 'same-site');
   response.headers.set('x-nonce', nonce);
+  // Propagate x-nonce as REQUEST header downstream so Next.js renderer applies
+  // the nonce to its own script tags (_next/static/chunks/*.js). Required when
+  // CSP uses 'strict-dynamic' or browser blocks all chunks otherwise.
+  // Next.js convention: x-middleware-override-headers + x-middleware-request-<name>.
+  const existingOverride = response.headers.get('x-middleware-override-headers');
+  const tokens = new Set(
+    (existingOverride ?? '')
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean),
+  );
+  tokens.add('x-nonce');
+  response.headers.set('x-middleware-override-headers', Array.from(tokens).join(','));
+  response.headers.set('x-middleware-request-x-nonce', nonce);
   if (!isDev) {
     response.headers.set(
       'Strict-Transport-Security',
@@ -122,6 +136,16 @@ export function applyEmbedHeaders(
   response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   response.headers.set('Access-Control-Allow-Origin', '*');
   response.headers.set('x-nonce', nonce);
+  const existingOverride = response.headers.get('x-middleware-override-headers');
+  const tokens = new Set(
+    (existingOverride ?? '')
+      .split(',')
+      .map((t) => t.trim())
+      .filter(Boolean),
+  );
+  tokens.add('x-nonce');
+  response.headers.set('x-middleware-override-headers', Array.from(tokens).join(','));
+  response.headers.set('x-middleware-request-x-nonce', nonce);
   if (!isDev) {
     response.headers.set(
       'Strict-Transport-Security',
