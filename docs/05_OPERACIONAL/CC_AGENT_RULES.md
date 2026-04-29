@@ -1,7 +1,7 @@
 # CC Agent Rules — Canon operacional para prompts CC-A
 
-**Version**: v1.0
-**Origen**: Consolidación post-FASE 17 multi-agent incidents (2026-04-29)
+**Version**: v1.1
+**Origen**: Consolidación post-FASE 17 multi-agent incidents (2026-04-29). v1.1 adds N.5 zero huérfanos forward (2026-04-29).
 **Audiencia**: PM (chat web) y CC-A (Claude Code terminal Mac mini)
 **Estatus**: canon obligatorio. Cualquier prompt CC-A debe referenciar este doc.
 
@@ -441,6 +441,15 @@ NUNCA usar `any` como escape.
 **Origen**: memoria feedback_upgrades_destino.
 **Aplicación**: cada upgrade: O implementa en bloque actual O agenda L-NEW + fase/bloque específico. Prohibido "documentar sin ubicar".
 
+### N.5 Cero huérfanos forward — todo export requiere caller en MISMA fase
+**Origen**: F17 incident — `runValidation()` + `computeQualityScoreFromRecords()` + `checkDuplicate()`/`recordDocumentHash()` (engines) + `ValidationFindings` + `DedupeIndicator` (UI components) shipped sin callers/consumers, deuda técnica detectada por founder post-merge OLA 1.
+**Aplicación**:
+- Cada `export function`, `export const Component`, tRPC procedure nuevo, hook custom, tabla BD nueva, migration, **debe tener al menos un caller/consumer en el MISMO PR/fase**.
+- Si caller es deferred (legítimo bloqueador externo), debe agendarse explícitamente como `L-NEW-FX-Y-WIRE-XXX` con fase + bloque destino + razón del defer.
+- Audit obligatorio al cierre cada PR/fase: `grep -r "export function <name>" / "export const <Component>" / "<procedureName>:" + grep callers/consumers`. Si grep retorna `0 callers`, es huérfano y bloquea merge.
+- Engines lib + UI components + tRPC procedures + BD tables son los principales focos de regresión. Verificar especialmente cuando multi-agent paralelo (ventana A define export, ventana B se asume va a wirearlo, NADIE wirea).
+- "Pipeline funcional pero sin validation/dedupe wireado" NO es feature complete. Feature complete = E2E conectado (UI → tRPC → engine → BD), todos los componentes shipped en uso.
+
 ---
 
 ## O. Producción
@@ -463,7 +472,7 @@ NUNCA usar `any` como escape.
 
 ---
 
-## Total: 75 reglas activas (v1.0)
+## Total: 76 reglas activas (v1.1)
 
 Distribución por sección:
 - A. Contexto (5) — pre-flight + decisiones
@@ -479,7 +488,7 @@ Distribución por sección:
 - K. Audit (3) — exhaustivo + production
 - L. Comunicación (8) — founder + canon + brutal honesto
 - M. Secrets (4) — presence checks + rotación
-- N. STUBs (4) — 4 señales + migration MISMA fase
+- N. STUBs (5) — 4 señales + migration MISMA fase + cero huérfanos forward
 - O. Producción (4) — smoke + health check
 
 ---
