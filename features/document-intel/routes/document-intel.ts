@@ -1,19 +1,23 @@
-// FASE 17 Document Intelligence — tRPC router (sesión 17.A.UI).
-// Authority: ADR-062 + plan FASE_17_DOCUMENT_INTEL.md addendum v3.
-//
-// Sesión 17.A.UI shipped:
-//   - addDriveMonitor / listMyDriveMonitors / deleteDriveMonitor (Drive monitor link público)
-//   - getMyCreditsBalance (saldo IA + tx recientes)
-// Sesión 17.B (CC-A.1) extiende con extraction/ingest procedures (createJob, processJobNow, etc.)
-// en su propia rama paralela; merge final lo realiza PM.
-
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { grantCredits } from '@/features/document-intel/lib/credits-engine';
 import { parseDriveFolderId, pollFolder } from '@/features/document-intel/lib/drive-monitor';
+import { processJob } from '@/features/document-intel/lib/extraction-engine';
+import {
+  adminGrantCreditsInput,
+  createJobInput,
+  docTypeEnum,
+  getExtractedDataInput,
+  getJobInput,
+  listMyJobsInput,
+  requestExtractionInput,
+} from '@/features/document-intel/schemas';
 import { router } from '@/server/trpc/init';
 import { authenticatedProcedure } from '@/server/trpc/middleware';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { sentry } from '@/shared/lib/telemetry/sentry';
+
+const ADMIN_ROLES: ReadonlySet<string> = new Set(['superadmin', 'mb_admin']);
 
 const monitorTypeSchema = z.enum(['marketing_folder', 'legal_folder']);
 
@@ -47,14 +51,6 @@ async function requireDesarrolladoraId(
 }
 
 export const documentIntelRouter = router({
-  ping: authenticatedProcedure.query(() => ({
-    ok: true,
-    feature: 'document-intel',
-    phase: 'F17.A.UI',
-    stub: false,
-    message: 'F17.A.UI shipped — saldo IA + Drive monitor procedures activas',
-  })),
-
   addDriveMonitor: authenticatedProcedure
     .input(addDriveMonitorInput)
     .mutation(async ({ ctx, input }) => {
@@ -162,6 +158,188 @@ export const documentIntelRouter = router({
       return { ok: true };
     }),
 
+  createJob: authenticatedProcedure.input(createJobInput).mutation(async ({ ctx, input }) => {
+    const admin = createAdminClient();
+    const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+    const { data, error } = await admin
+      .from('document_jobs')
+      .insert({
+        desarrolladora_id: desarrolladoraId,
+        uploaded_by: ctx.user.id,
+        doc_type: input.doc_type,
+        proyecto_id: input.proyecto_id ?? null,
+        unidad_id: input.unidad_id ?? null,
+        storage_path: input.storage_path,
+        original_filename: input.original_filename,
+        file_size_bytes: input.file_size_bytes,
+        mime_type: input.mime_type,
+        page_count: input.page_count ?? null,
+        drive_source_file_id: input.drive_source_file_id ?? null,
+        visibility: input.visibility,
+        status: 'uploaded',
+      })
+      .select('id, status, doc_type, visibility, created_at')
+      .single();
+
+    if (error || !data) {
+      sentry.captureException(error ?? new Error('createJob_insert_null'), {
+        tags: { feature: 'document-intel', stage: 'createJob.insert' },
+      });
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message ?? 'job_insert_failed',
+      });
+    }
+
+    return data;
+  }),
+
+  getJob: authenticatedProcedure.input(getJobInput).query(async ({ ctx, input }) => {
+    const admin = createAdminClient();
+    const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+    const { data, error } = await admin
+      .from('document_jobs')
+      .select('*')
+      .eq('id', input.id)
+      .maybeSingle();
+    if (error) {
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+    }
+    if (!data) throw new TRPCError({ code: 'NOT_FOUND', message: 'job_not_found' });
+    if (data.desarrolladora_id !== desarrolladoraId && !ADMIN_ROLES.has(ctx.profile?.rol ?? '')) {
+      throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+    }
+    return data;
+  }),
+
+  listMyJobs: authenticatedProcedure.input(listMyJobsInput).query(async ({ ctx, input }) => {
+    const admin = createAdminClient();
+    const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+    let query = admin
+      .from('document_jobs')
+      .select(
+        'id, doc_type, status, visibility, original_filename, file_size_bytes, page_count, quality_score, ai_cost_usd, charged_credits_usd, created_at, updated_at, proyecto_id',
+      )
+      .eq('desarrolladora_id', desarrolladoraId)
+      .order('created_at', { ascending: false })
+      .limit(input.limit);
+
+    if (input.proyecto_id) query = query.eq('proyecto_id', input.proyecto_id);
+    if (input.status) query = query.eq('status', input.status);
+    if (input.doc_type) query = query.eq('doc_type', input.doc_type);
+
+    const { data, error } = await query;
+    if (error) {
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+    }
+    return data ?? [];
+  }),
+
+  requestExtraction: authenticatedProcedure
+    .input(requestExtractionInput)
+    .mutation(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+      const { data: job, error } = await admin
+        .from('document_jobs')
+        .select('id, status, desarrolladora_id')
+        .eq('id', input.jobId)
+        .maybeSingle();
+      if (error) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      if (!job) throw new TRPCError({ code: 'NOT_FOUND', message: 'job_not_found' });
+      if (job.desarrolladora_id !== desarrolladoraId && !ADMIN_ROLES.has(ctx.profile?.rol ?? '')) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+      }
+      if (job.status !== 'uploaded' && job.status !== 'ocr_done' && job.status !== 'error') {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: `cannot_extract_from_status:${job.status}`,
+        });
+      }
+
+      const { error: updErr } = await admin
+        .from('document_jobs')
+        .update({ status: 'extracting', updated_at: new Date().toISOString() })
+        .eq('id', input.jobId);
+      if (updErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: updErr.message });
+      }
+
+      return { id: input.jobId, status: 'extracting' as const, queued: true };
+    }),
+
+  getExtractedData: authenticatedProcedure
+    .input(getExtractedDataInput)
+    .query(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+      const { data: job, error: jobErr } = await admin
+        .from('document_jobs')
+        .select('id, desarrolladora_id, doc_type, status, quality_score')
+        .eq('id', input.jobId)
+        .maybeSingle();
+      if (jobErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: jobErr.message });
+      }
+      if (!job) throw new TRPCError({ code: 'NOT_FOUND', message: 'job_not_found' });
+      if (job.desarrolladora_id !== desarrolladoraId && !ADMIN_ROLES.has(ctx.profile?.rol ?? '')) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+      }
+
+      const { data: extractions, error: extErr } = await admin
+        .from('document_extractions')
+        .select(
+          'id, extraction_version, extracted_data, citations, confidence_score, extraction_engine, prompt_template_version, created_at',
+        )
+        .eq('job_id', input.jobId)
+        .order('extraction_version', { ascending: false })
+        .limit(1);
+
+      if (extErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: extErr.message });
+      }
+
+      return {
+        job: {
+          id: job.id,
+          doc_type: job.doc_type,
+          status: job.status,
+          quality_score: job.quality_score,
+        },
+        extraction: extractions?.[0] ?? null,
+      };
+    }),
+
+  processJobNow: authenticatedProcedure
+    .input(requestExtractionInput)
+    .mutation(async ({ ctx, input }) => {
+      if (!ADMIN_ROLES.has(ctx.profile?.rol ?? '')) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'admin_only' });
+      }
+      return processJob(input.jobId);
+    }),
+
+  adminGrantCredits: authenticatedProcedure
+    .input(adminGrantCreditsInput)
+    .mutation(async ({ ctx, input }) => {
+      if (!ADMIN_ROLES.has(ctx.profile?.rol ?? '')) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'admin_only' });
+      }
+      return grantCredits({
+        desarrolladora_id: input.desarrolladora_id,
+        amount_usd: input.amount_usd,
+        granted_by: ctx.user.id,
+        ...(input.description ? { description: input.description } : {}),
+      });
+    }),
+
   getMyCreditsBalance: authenticatedProcedure.query(async ({ ctx }) => {
     const admin = createAdminClient();
     const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
@@ -176,10 +354,10 @@ export const documentIntelRouter = router({
 
     const { data: txs } = await admin
       .from('ai_credit_transactions')
-      .select('id, type, amount_usd, balance_after_usd, description, created_at')
+      .select('id, type, amount_usd, balance_after_usd, related_job_id, description, created_at')
       .eq('desarrolladora_id', desarrolladoraId)
       .order('created_at', { ascending: false })
-      .limit(10);
+      .limit(20);
 
     return {
       desarrolladora_id: desarrolladoraId,
@@ -192,4 +370,129 @@ export const documentIntelRouter = router({
       recent_transactions: txs ?? [],
     };
   }),
+
+  getJobValidations: authenticatedProcedure
+    .input(z.object({ job_id: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+      const { data: job } = await admin
+        .from('document_jobs')
+        .select('desarrolladora_id')
+        .eq('id', input.job_id)
+        .maybeSingle();
+      if (!job || job.desarrolladora_id !== desarrolladoraId) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+      }
+      const { data, error } = await admin
+        .from('document_validations')
+        .select(
+          'id, rule_code, severity, field_path, message, expected_value, actual_value, resolved_at, resolved_by, resolution_note, created_at',
+        )
+        .eq('job_id', input.job_id)
+        .order('severity', { ascending: true })
+        .order('created_at', { ascending: false });
+      if (error) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      return data ?? [];
+    }),
+
+  resolveValidation: authenticatedProcedure
+    .input(
+      z.object({
+        validation_id: z.string().uuid(),
+        note: z.string().min(1).max(500),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+      const { data: validation, error: lookupErr } = await admin
+        .from('document_validations')
+        .select('id, job_id, document_jobs!inner(desarrolladora_id)')
+        .eq('id', input.validation_id)
+        .maybeSingle();
+      if (lookupErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: lookupErr.message });
+      }
+      if (!validation) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'validation_not_found' });
+      }
+      const ownerDevId = (
+        validation as unknown as {
+          document_jobs?: { desarrolladora_id?: string };
+        }
+      ).document_jobs?.desarrolladora_id;
+      if (ownerDevId !== desarrolladoraId) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+      }
+
+      const { error } = await admin
+        .from('document_validations')
+        .update({
+          resolved_at: new Date().toISOString(),
+          resolved_by: ctx.user.id,
+          resolution_note: input.note,
+        })
+        .eq('id', input.validation_id);
+      if (error) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      return { ok: true };
+    }),
+
+  getJobDuplicateInfo: authenticatedProcedure
+    .input(z.object({ job_id: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+      const { data: job } = await admin
+        .from('document_jobs')
+        .select('desarrolladora_id, duplicate_of_job_id')
+        .eq('id', input.job_id)
+        .maybeSingle();
+      if (!job || job.desarrolladora_id !== desarrolladoraId) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+      }
+      if (!job.duplicate_of_job_id) {
+        return { isDuplicate: false as const };
+      }
+      const { data: original } = await admin
+        .from('document_jobs')
+        .select('id, original_filename, created_at')
+        .eq('id', job.duplicate_of_job_id)
+        .maybeSingle();
+      return { isDuplicate: true as const, original };
+    }),
+
+  uploadDocumentToStorage: authenticatedProcedure
+    .input(
+      z.object({
+        file_name: z.string().min(1).max(255),
+        doc_type: docTypeEnum,
+        proyecto_id: z.string().uuid().optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+      const safeName = input.file_name.replace(/[^a-zA-Z0-9._-]/g, '_');
+      const storagePath = `${desarrolladoraId}/${Date.now()}_${safeName}`;
+      const { data: signed, error } = await admin.storage
+        .from('project-documents')
+        .createSignedUploadUrl(storagePath);
+      if (error || !signed) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message ?? 'signed_url_failed',
+        });
+      }
+      return {
+        signed_url: signed.signedUrl,
+        storage_path: storagePath,
+        token: signed.token,
+      };
+    }),
 });
