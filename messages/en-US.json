@@ -3061,7 +3061,18 @@
       "ctaApartar": "Reserve unit",
       "ctaCompartir": "Share asset",
       "ctaApartarDisabled": "Reserve (coming soon)",
-      "minimapStub": "Map available in M11 — phase 15"
+      "minimapStub": "Map available in M11 — phase 15",
+      "unidadesPane": {
+        "loading": "Cargando unidades…",
+        "empty": "Este desarrollo aún no publica unidades.",
+        "status": {
+          "disponible": "Disponible",
+          "apartada": "Apartada",
+          "vendida": "Vendida",
+          "reservada": "Reservada",
+          "bloqueada": "Bloqueada"
+        }
+      }
     },
     "actions": {
       "viewDetail": "View detail",
@@ -5350,6 +5361,67 @@
         "expired": "Worksheet ya expiró",
         "alreadyDecided": "Worksheet ya fue decidida",
         "unitUnavailable": "Unidad ya no está disponible"
+      },
+      "requestModal": {
+        "title": "Solicitar reserva 48 horas",
+        "subtitle": "Esta unidad quedará bloqueada para tu cliente hasta que el desarrollador apruebe o rechace la solicitud.",
+        "close": "Cerrar",
+        "fields": {
+          "firstName": "Nombre del cliente",
+          "phone": "Teléfono (opcional)",
+          "email": "Email (opcional)",
+          "notes": "Notas para el desarrollador (opcional)"
+        },
+        "errors": {
+          "firstNameRequired": "El nombre del cliente es obligatorio"
+        },
+        "actions": {
+          "cancel": "Cancelar",
+          "submit": "Solicitar reserva",
+          "submitting": "Enviando…"
+        }
+      },
+      "requestButton": {
+        "label": "Solicitar reserva 48h"
+      },
+      "devPanel": {
+        "metaTitle": "Worksheets pendientes — Desarrolladora",
+        "metaDescription": "Aprobación 1-click de solicitudes de reserva 48h enviadas por brokers.",
+        "title": "Worksheets",
+        "subtitle": "Solicitudes de reserva 48h enviadas por brokers para tus proyectos. Ordenadas por prioridad.",
+        "loading": "Cargando…",
+        "empty": "No hay worksheets en este estado.",
+        "unitLabel": "Unidad #{unitId}",
+        "priorityLabel": "Prioridad",
+        "expiresLabel": "Expira",
+        "tabs": {
+          "pending": "Pendientes",
+          "approved": "Aprobadas",
+          "rejected": "Rechazadas",
+          "expired": "Expiradas",
+          "cancelled": "Canceladas"
+        },
+        "actions": {
+          "approve": "Aprobar",
+          "reject": "Rechazar",
+          "approving": "Aprobando…",
+          "rejecting": "Rechazando…"
+        },
+        "statusLabel": {
+          "pending": "Pendiente",
+          "approved": "Aprobada",
+          "rejected": "Rechazada",
+          "expired": "Expirada",
+          "cancelled": "Cancelada"
+        },
+        "rejectModal": {
+          "title": "Motivo del rechazo",
+          "close": "Cerrar",
+          "placeholder": "Indica al broker por qué rechazas la solicitud (opcional).",
+          "cancel": "Cancelar",
+          "submit": "Confirmar rechazo",
+          "submitting": "Rechazando…"
+        }
       }
     }
   },
