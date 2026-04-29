@@ -10010,6 +10010,100 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_types: {
+        Row: {
+          category: string
+          code: string
+          created_at: string
+          default_channels: Json
+          is_active: boolean
+          template_en_us: string | null
+          template_es_mx: string | null
+        }
+        Insert: {
+          category: string
+          code: string
+          created_at?: string
+          default_channels?: Json
+          is_active?: boolean
+          template_en_us?: string | null
+          template_es_mx?: string | null
+        }
+        Update: {
+          category?: string
+          code?: string
+          created_at?: string
+          default_channels?: Json
+          is_active?: boolean
+          template_en_us?: string | null
+          template_es_mx?: string | null
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          channels: Json
+          created_at: string
+          delivered_at: string | null
+          failure_reason: string | null
+          id: string
+          payload: Json
+          read_at: string | null
+          sent_at: string | null
+          status: string
+          type_code: string
+          user_id: string
+        }
+        Insert: {
+          channels?: Json
+          created_at?: string
+          delivered_at?: string | null
+          failure_reason?: string | null
+          id?: string
+          payload?: Json
+          read_at?: string | null
+          sent_at?: string | null
+          status?: string
+          type_code: string
+          user_id: string
+        }
+        Update: {
+          channels?: Json
+          created_at?: string
+          delivered_at?: string | null
+          failure_reason?: string | null
+          id?: string
+          payload?: Json
+          read_at?: string | null
+          sent_at?: string | null
+          status?: string
+          type_code?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_type_code_fkey"
+            columns: ["type_code"]
+            isOneToOne: false
+            referencedRelation: "notification_types"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       operacion_attachments: {
         Row: {
           created_at: string
