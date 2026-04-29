@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { useCallback } from 'react';
 import { trpc } from '@/shared/lib/trpc/client';
 import { Button, Card } from '@/shared/ui/primitives/canon';
+import { ComplianceFindings } from './ComplianceFindings';
 import { DedupeIndicator } from './DedupeIndicator';
 import { ValidationFindings } from './ValidationFindings';
 
@@ -75,6 +76,12 @@ export function DocumentJobDetail({ jobId, locale }: DocumentJobDetailProps) {
             {...(dedupe.original?.id ? { previousJobShortId: dedupe.original.id.slice(0, 8) } : {})}
           />
         </Card>
+      ) : null}
+
+      {job?.proyecto_id ? (
+        <section className="mb-6">
+          <ComplianceFindings proyectoId={job.proyecto_id} />
+        </section>
       ) : null}
 
       <Card variant="elevated" className="mb-6 p-4">

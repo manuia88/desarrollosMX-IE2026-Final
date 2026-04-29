@@ -6,6 +6,7 @@ import { DOC_TYPE, type DocType } from '@/features/document-intel/schemas';
 import { trpc } from '@/shared/lib/trpc/client';
 import { Button, Card } from '@/shared/ui/primitives/canon';
 import { DocumentJobItem, type DocumentJobItemData } from './DocumentJobItem';
+import { DocumentSearchBar } from './DocumentSearchBar';
 import { UploadDocumentModal } from './UploadDocumentModal';
 
 const STATUSES = ['uploaded', 'extracting', 'extracted', 'validated', 'approved', 'error'] as const;
@@ -48,6 +49,10 @@ export function DocumentsListPage({ locale, projects }: DocumentsListPageProps) 
           {t('upload_button')}
         </Button>
       </header>
+
+      <div className="mb-4">
+        <DocumentSearchBar locale={locale} />
+      </div>
 
       <Card variant="recessed" className="mb-4 p-3">
         <div className="flex flex-wrap items-center gap-3">

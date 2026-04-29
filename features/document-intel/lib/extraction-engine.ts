@@ -16,10 +16,13 @@ import {
   type ExtractionTelemetry,
   runExtraction,
 } from '@/features/document-intel/lib/anthropic-client';
+import { runComplianceCheck } from '@/features/document-intel/lib/compliance-check';
 import { consumeCredits } from '@/features/document-intel/lib/credits-engine';
+import { generateAndPersistEmbeddings } from '@/features/document-intel/lib/embeddings-engine';
 import {
   checkDuplicate,
   computePageHashes,
+  diffPages,
   recordDocumentHash,
   sha256,
 } from '@/features/document-intel/lib/hash-dedup';
@@ -58,6 +61,118 @@ async function downloadPdfBuffer(storagePath: string): Promise<Buffer> {
   }
   const arrayBuffer = await data.arrayBuffer();
   return Buffer.from(arrayBuffer);
+}
+
+interface DiffPagesContext {
+  readonly previousJobId: string | null;
+  readonly changedPages: number[];
+  readonly allSame: boolean;
+}
+
+async function detectPreviousVersionDiff(opts: {
+  readonly desarrolladoraId: string;
+  readonly jobId: string;
+  readonly originalFilename: string | null;
+  readonly currentPageHashes: ReadonlyArray<string>;
+}): Promise<DiffPagesContext> {
+  if (!opts.originalFilename) {
+    return { previousJobId: null, changedPages: [], allSame: false };
+  }
+  const supabase = createAdminClient();
+  const { data: candidates } = await supabase
+    .from('document_jobs')
+    .select('id, original_filename, status, created_at')
+    .eq('desarrolladora_id', opts.desarrolladoraId)
+    .eq('original_filename', opts.originalFilename)
+    .neq('id', opts.jobId)
+    .in('status', ['extracted', 'validated', 'approved'])
+    .order('created_at', { ascending: false })
+    .limit(1);
+
+  const prev = candidates?.[0];
+  if (!prev) {
+    return { previousJobId: null, changedPages: [], allSame: false };
+  }
+
+  try {
+    const changed = await diffPages({
+      currentHashes: opts.currentPageHashes,
+      previousJobId: prev.id,
+    });
+    return {
+      previousJobId: prev.id,
+      changedPages: changed,
+      allSame: changed.length === 0,
+    };
+  } catch (err) {
+    sentry.captureException(err, {
+      tags: { feature: 'document-intel', stage: 'diffPages', job_id: opts.jobId },
+    });
+    return { previousJobId: prev.id, changedPages: [], allSame: false };
+  }
+}
+
+interface PostExtractionHookOptions {
+  readonly jobId: string;
+  readonly desarrolladoraId: string;
+  readonly proyectoId: string | null;
+  readonly docType: string;
+  readonly fileName: string;
+  readonly visibility: string;
+  readonly extractedData: Record<string, unknown>;
+}
+
+async function runPostExtractionHooks(opts: PostExtractionHookOptions): Promise<void> {
+  const visibility: 'dev_only' | 'public_derived' =
+    opts.visibility === 'public_derived' ? 'public_derived' : 'dev_only';
+
+  try {
+    await generateAndPersistEmbeddings({
+      jobId: opts.jobId,
+      desarrolladoraId: opts.desarrolladoraId,
+      proyectoId: opts.proyectoId,
+      visibility,
+      extractedData: opts.extractedData,
+      docType: opts.docType,
+      fileName: opts.fileName,
+    });
+  } catch (err) {
+    sentry.captureException(err, {
+      tags: {
+        feature: 'document-intel',
+        stage: 'post_extraction.embeddings',
+        job_id: opts.jobId,
+      },
+    });
+  }
+
+  if (!opts.proyectoId) return;
+
+  try {
+    const supabase = createAdminClient();
+    const { count } = await supabase
+      .from('document_jobs')
+      .select('id', { count: 'exact', head: true })
+      .eq('proyecto_id', opts.proyectoId)
+      .eq('desarrolladora_id', opts.desarrolladoraId)
+      .in('status', ['extracted', 'validated', 'approved']);
+
+    if ((count ?? 0) >= 2) {
+      await runComplianceCheck({
+        proyectoId: opts.proyectoId,
+        desarrolladoraId: opts.desarrolladoraId,
+      });
+    }
+  } catch (err) {
+    sentry.captureException(err, {
+      tags: {
+        feature: 'document-intel',
+        stage: 'post_extraction.compliance',
+        job_id: opts.jobId,
+        proyecto_id: opts.proyectoId,
+      },
+    });
+  }
 }
 
 export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
@@ -111,6 +226,14 @@ export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
         .eq('id', jobId);
       return { job_id: jobId, status: 'extracted', cost_usd: 0, charged_usd: 0 };
     }
+
+    const currentPageHashes = computePageHashes({ fileBuffer: pdfBuffer });
+    const diffPagesContext = await detectPreviousVersionDiff({
+      desarrolladoraId: typed.desarrolladora_id,
+      jobId,
+      originalFilename: typed.original_filename,
+      currentPageHashes,
+    });
 
     await supabase
       .from('document_jobs')
@@ -203,16 +326,24 @@ export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
       })),
     );
 
-    const pageHashes = computePageHashes({ fileBuffer: pdfBuffer });
     const hashResult = await recordDocumentHash({
       desarrolladoraId: typed.desarrolladora_id,
       jobId,
       fileHash,
-      pageHashes,
+      pageHashes: currentPageHashes,
     });
     if (!hashResult.ok) {
       sentry.captureException(new Error(hashResult.error ?? 'record_hash_failed'), {
         tags: { feature: 'document-intel', stage: 'record_hash', job_id: jobId },
+      });
+    }
+
+    if (diffPagesContext.previousJobId) {
+      console.info('[document-intel] diff_pages_detected', {
+        job_id: jobId,
+        previous_job_id: diffPagesContext.previousJobId,
+        changed_pages: diffPagesContext.changedPages,
+        all_same: diffPagesContext.allSame,
       });
     }
 
@@ -231,6 +362,16 @@ export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
         updated_at: new Date().toISOString(),
       })
       .eq('id', jobId);
+
+    void runPostExtractionHooks({
+      jobId,
+      desarrolladoraId: typed.desarrolladora_id,
+      proyectoId: typed.proyecto_id,
+      docType,
+      fileName: typed.original_filename ?? jobId,
+      visibility: typed.visibility,
+      extractedData: result.extracted_data,
+    });
 
     return {
       job_id: jobId,
