@@ -5847,7 +5847,14 @@
         "click": "clique para escolher arquivo",
         "processing": "Processando com IA...",
         "success": "Documento enviado",
-        "error": "Erro ao enviar documento"
+        "error": "Erro ao enviar documento",
+        "modal_title": "Enviar documento PDF",
+        "drop_zone": "Arraste o PDF aqui ou clique para selecionar",
+        "doc_type_label": "Tipo de documento",
+        "proyecto_label": "Projeto (opcional)",
+        "submit": "Enviar e processar",
+        "uploading": "Enviando...",
+        "cancel": "Cancelar"
       },
       "score": {
         "green": "Aprovado",
@@ -5931,6 +5938,24 @@
         "duplicate_of": "Duplicado de #{id}",
         "pages_changed": "{count, plural, one {# página alterada} other {# páginas alteradas}}",
         "pages_list": "Páginas: {pages}"
+      },
+      "list": {
+        "title": "Documentos IA",
+        "upload_button": "Enviar PDF",
+        "filter_doc_type": "Tipo de documento",
+        "filter_status": "Status",
+        "empty_title": "Ainda sem documentos",
+        "empty_description": "Envie seu primeiro PDF para começar.",
+        "all": "Todos",
+        "loading": "Carregando...",
+        "pages": "{count} pág.",
+        "open_job": "Abrir documento {name}"
+      },
+      "detail": {
+        "extracted_section": "Informação extraída",
+        "validations_section": "Validações",
+        "dedupe_section": "Documento duplicado",
+        "back_to_list": "Voltar à lista"
       }
     }
   },

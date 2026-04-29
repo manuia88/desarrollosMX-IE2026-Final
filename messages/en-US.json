@@ -5847,7 +5847,14 @@
         "click": "click to choose file",
         "processing": "Processing with AI...",
         "success": "Document uploaded",
-        "error": "Error uploading document"
+        "error": "Error uploading document",
+        "modal_title": "Upload PDF document",
+        "drop_zone": "Drag the PDF here or click to select",
+        "doc_type_label": "Document type",
+        "proyecto_label": "Project (optional)",
+        "submit": "Upload and process",
+        "uploading": "Uploading...",
+        "cancel": "Cancel"
       },
       "score": {
         "green": "Approved",
@@ -5931,6 +5938,24 @@
         "duplicate_of": "Duplicate of #{id}",
         "pages_changed": "{count, plural, one {# page changed} other {# pages changed}}",
         "pages_list": "Pages: {pages}"
+      },
+      "list": {
+        "title": "AI Documents",
+        "upload_button": "Upload PDF",
+        "filter_doc_type": "Document type",
+        "filter_status": "Status",
+        "empty_title": "No documents yet",
+        "empty_description": "Upload your first PDF to get started.",
+        "all": "All",
+        "loading": "Loading...",
+        "pages": "{count} pgs",
+        "open_job": "Open document {name}"
+      },
+      "detail": {
+        "extracted_section": "Extracted data",
+        "validations_section": "Validations",
+        "dedupe_section": "Duplicate document",
+        "back_to_list": "Back to list"
       }
     }
   },

@@ -5847,7 +5847,14 @@
         "click": "click para elegir archivo",
         "processing": "Procesando con IA...",
         "success": "Documento subido",
-        "error": "Error al subir documento"
+        "error": "Error al subir documento",
+        "modal_title": "Subir documento PDF",
+        "drop_zone": "Arrastra el PDF aquí o haz click para seleccionar",
+        "doc_type_label": "Tipo de documento",
+        "proyecto_label": "Proyecto (opcional)",
+        "submit": "Subir y procesar",
+        "uploading": "Subiendo...",
+        "cancel": "Cancelar"
       },
       "score": {
         "green": "Aprobado",
@@ -5931,6 +5938,24 @@
         "duplicate_of": "Duplicado de #{id}",
         "pages_changed": "{count, plural, one {# página cambió} other {# páginas cambiaron}}",
         "pages_list": "Páginas: {pages}"
+      },
+      "list": {
+        "title": "Documentos AI",
+        "upload_button": "Subir PDF",
+        "filter_doc_type": "Tipo de documento",
+        "filter_status": "Estado",
+        "empty_title": "No hay documentos aún",
+        "empty_description": "Sube tu primer PDF para empezar.",
+        "all": "Todos",
+        "loading": "Cargando...",
+        "pages": "{count} pág.",
+        "open_job": "Abrir documento {name}"
+      },
+      "detail": {
+        "extracted_section": "Información extraída",
+        "validations_section": "Validaciones",
+        "dedupe_section": "Documento duplicado",
+        "back_to_list": "Volver a la lista"
       }
     }
   },
