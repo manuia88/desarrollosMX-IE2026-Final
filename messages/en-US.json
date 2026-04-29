@@ -5865,7 +5865,31 @@
         "paste_link": "Paste public Google Drive link",
         "label_placeholder": "Folder label (e.g. Torre Reforma marketing)",
         "last_polled": "Last polled",
-        "files_detected": "files detected"
+        "files_detected": "files detected",
+        "page_title": "Drive Monitor",
+        "page_subtitle": "Connect public Drive folders to auto-import PDFs",
+        "add_button": "Add folder",
+        "add_modal_title": "Connect Drive folder",
+        "url_label": "Folder link",
+        "type_label": "Folder type",
+        "label_label": "Label (optional)",
+        "project_label": "Project (optional)",
+        "project_placeholder": "No project assigned",
+        "submit_button": "Connect",
+        "submit_loading": "Connecting…",
+        "delete_button": "Remove",
+        "delete_confirm": "Remove this monitor? Already-imported files are kept.",
+        "invalid_url": "Invalid Drive link. Paste the full folder URL.",
+        "not_accessible": "Could not access the folder. Make sure it's public (anyone with the link).",
+        "added_success": "Folder connected",
+        "deleted_success": "Monitor removed",
+        "duplicate": "This folder is already being monitored",
+        "empty_state": "No folders connected. Add the first one to auto-import PDFs.",
+        "never_polled": "Never polled",
+        "next_poll": "Next poll",
+        "failure_warning": "Last poll failed: {message}",
+        "type_marketing": "Marketing public",
+        "type_legal": "Legal private"
       },
       "credits": {
         "balance": "AI credits",
@@ -5874,7 +5898,9 @@
         "no_balance": "No balance. Top up Pack $25 to process with AI",
         "manual_upload": "Upload manual (no AI)",
         "consumed": "Consumed",
-        "purchased": "Purchased"
+        "purchased": "Purchased",
+        "zero_short": "No AI balance",
+        "close": "Close"
       },
       "compliance": {
         "title": "AI cross-validation",
