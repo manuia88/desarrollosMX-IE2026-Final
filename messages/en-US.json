@@ -5884,6 +5884,27 @@
         "severity_critical": "Legal blocker",
         "resolved": "Resolved",
         "mark_resolved": "Mark resolved"
+      },
+      "validations": {
+        "title": "Validation findings",
+        "empty": "No findings — document approved",
+        "mark_resolved": "Mark resolved",
+        "resolution_required": "Notes required to resolve",
+        "resolution_note_label": "Resolution notes",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "submitting": "Resolving...",
+        "severity_error": "Error",
+        "col_severity": "Severity",
+        "col_code": "Rule",
+        "col_message": "Message",
+        "col_field": "Field",
+        "col_actions": "Actions"
+      },
+      "dedupe": {
+        "duplicate_of": "Duplicate of #{id}",
+        "pages_changed": "{count, plural, one {# page changed} other {# pages changed}}",
+        "pages_list": "Pages: {pages}"
       }
     }
   },

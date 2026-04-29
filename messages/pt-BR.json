@@ -5884,6 +5884,27 @@
         "severity_critical": "Bloqueador legal",
         "resolved": "Resolvido",
         "mark_resolved": "Marcar resolvido"
+      },
+      "validations": {
+        "title": "Achados de validação",
+        "empty": "Sem achados — documento aprovado",
+        "mark_resolved": "Marcar resolvido",
+        "resolution_required": "Notas obrigatórias para resolver",
+        "resolution_note_label": "Notas de resolução",
+        "cancel": "Cancelar",
+        "confirm": "Confirmar",
+        "submitting": "Resolvendo...",
+        "severity_error": "Erro",
+        "col_severity": "Severidade",
+        "col_code": "Regra",
+        "col_message": "Mensagem",
+        "col_field": "Campo",
+        "col_actions": "Ações"
+      },
+      "dedupe": {
+        "duplicate_of": "Duplicado de #{id}",
+        "pages_changed": "{count, plural, one {# página alterada} other {# páginas alteradas}}",
+        "pages_list": "Páginas: {pages}"
       }
     }
   },
