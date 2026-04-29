@@ -22,13 +22,13 @@ const isRecord = (v: unknown): v is Record<string, unknown> =>
 const RFC_MX_REGEX = /^[A-ZÑ&]{3,4}\d{6}[A-Z\d]{3}$/i;
 
 function getUnidades(data: Record<string, unknown>): Record<string, unknown>[] | null {
-  const u = data['unidades'];
+  const u = data.unidades;
   if (!isArray(u)) return null;
   return u.filter(isRecord);
 }
 
 function getPartes(data: Record<string, unknown>): Record<string, unknown>[] | null {
-  const p = data['partes'];
+  const p = data.partes;
   if (!isArray(p)) return null;
   return p.filter(isRecord);
 }
@@ -66,14 +66,14 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     description: 'Todos los precios deben ser numéricos',
     validate: (data) => {
       const unidades = getUnidades(data) ?? [];
-      const bad = unidades.findIndex((u) => !isFiniteNumber(u['precio_mxn']));
+      const bad = unidades.findIndex((u) => !isFiniteNumber(u.precio_mxn));
       return bad === -1
         ? { pass: true }
         : {
             pass: false,
             field: `unidades[${bad}].precio_mxn`,
             expected: 'number',
-            actual: typeof unidades[bad]?.['precio_mxn'],
+            actual: typeof unidades[bad]?.precio_mxn,
           };
     },
   },
@@ -85,7 +85,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     validate: (data) => {
       const unidades = getUnidades(data) ?? [];
       const bad = unidades.findIndex((u) => {
-        const p = u['precio_mxn'];
+        const p = u.precio_mxn;
         return isFiniteNumber(p) && (p < 500_000 || p > 500_000_000);
       });
       return bad === -1
@@ -94,7 +94,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
             pass: false,
             field: `unidades[${bad}].precio_mxn`,
             expected: '500000-500000000',
-            actual: String(unidades[bad]?.['precio_mxn']),
+            actual: String(unidades[bad]?.precio_mxn),
           };
     },
   },
@@ -105,16 +105,14 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     description: 'Todos los m² deben ser numéricos > 0',
     validate: (data) => {
       const unidades = getUnidades(data) ?? [];
-      const bad = unidades.findIndex(
-        (u) => !isFiniteNumber(u['m2']) || (u['m2'] as number) <= 0,
-      );
+      const bad = unidades.findIndex((u) => !isFiniteNumber(u.m2) || (u.m2 as number) <= 0);
       return bad === -1
         ? { pass: true }
         : {
             pass: false,
             field: `unidades[${bad}].m2`,
             expected: 'number > 0',
-            actual: String(unidades[bad]?.['m2']),
+            actual: String(unidades[bad]?.m2),
           };
     },
   },
@@ -125,7 +123,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     description: 'Cada unidad debe declarar tipología',
     validate: (data) => {
       const unidades = getUnidades(data) ?? [];
-      const bad = unidades.findIndex((u) => !isNonEmptyString(u['tipologia']));
+      const bad = unidades.findIndex((u) => !isNonEmptyString(u.tipologia));
       return bad === -1
         ? { pass: true }
         : { pass: false, field: `unidades[${bad}].tipologia`, expected: 'non-empty string' };
@@ -139,7 +137,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Número de escritura presente',
     validate: (data) =>
-      isNonEmptyString(data['num_escritura'])
+      isNonEmptyString(data.num_escritura)
         ? { pass: true }
         : { pass: false, field: 'num_escritura', expected: 'non-empty string' },
   },
@@ -149,7 +147,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Fecha de escritura válida y anterior a hoy',
     validate: (data) => {
-      const d = parseDate(data['fecha']);
+      const d = parseDate(data.fecha);
       if (!d) return { pass: false, field: 'fecha', expected: 'ISO date' };
       if (d.getTime() > Date.now())
         return { pass: false, field: 'fecha', expected: 'past date', actual: d.toISOString() };
@@ -162,7 +160,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'error',
     description: 'Número de notario debe ser numérico',
     validate: (data) => {
-      const n = data['notario_num'];
+      const n = data.notario_num;
       const ok = isFiniteNumber(n) || (typeof n === 'string' && /^\d+$/.test(n));
       return ok
         ? { pass: true }
@@ -190,7 +188,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     validate: (data) => {
       const partes = getPartes(data) ?? [];
       const hasValid = partes.some((p) => {
-        const r = p['rfc'];
+        const r = p.rfc;
         return typeof r === 'string' && RFC_MX_REGEX.test(r);
       });
       return hasValid
@@ -206,7 +204,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Folio del permiso presente',
     validate: (data) =>
-      isNonEmptyString(data['folio'])
+      isNonEmptyString(data.folio)
         ? { pass: true }
         : { pass: false, field: 'folio', expected: 'non-empty string' },
   },
@@ -216,7 +214,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Vigencia del permiso debe ser futura',
     validate: (data) => {
-      const d = parseDate(data['vigencia_fecha']);
+      const d = parseDate(data.vigencia_fecha);
       if (!d) return { pass: false, field: 'vigencia_fecha', expected: 'ISO date' };
       return d.getTime() > Date.now()
         ? { pass: true }
@@ -234,7 +232,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'error',
     description: 'Niveles autorizados entre 1 y 50',
     validate: (data) => {
-      const n = data['niveles_autorizados'];
+      const n = data.niveles_autorizados;
       const ok = isFiniteNumber(n) && Number.isInteger(n) && n >= 1 && n <= 50;
       return ok
         ? { pass: true }
@@ -252,7 +250,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'error',
     description: 'm² construcción numérico > 0',
     validate: (data) => {
-      const v = data['m2_construccion'];
+      const v = data.m2_construccion;
       const ok = isFiniteNumber(v) && v > 0;
       return ok
         ? { pass: true }
@@ -272,7 +270,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'Laboratorio responsable presente',
     validate: (data) =>
-      isNonEmptyString(data['laboratorio'])
+      isNonEmptyString(data.laboratorio)
         ? { pass: true }
         : { pass: false, field: 'laboratorio', expected: 'non-empty string' },
   },
@@ -282,7 +280,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Capacidad de carga numérica > 0',
     validate: (data) => {
-      const v = data['capacidad_carga_kg_m2'];
+      const v = data.capacidad_carga_kg_m2;
       const ok = isFiniteNumber(v) && v > 0;
       return ok
         ? { pass: true }
@@ -302,7 +300,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Folio de licencia presente',
     validate: (data) =>
-      isNonEmptyString(data['folio'])
+      isNonEmptyString(data.folio)
         ? { pass: true }
         : { pass: false, field: 'folio', expected: 'non-empty string' },
   },
@@ -312,7 +310,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Vigencia de licencia futura',
     validate: (data) => {
-      const d = parseDate(data['vigencia_fecha']);
+      const d = parseDate(data.vigencia_fecha);
       if (!d) return { pass: false, field: 'vigencia_fecha', expected: 'ISO date' };
       return d.getTime() > Date.now()
         ? { pass: true }
@@ -330,7 +328,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'RFC del desarrollador válido',
     validate: (data) => {
-      const r = data['desarrollador_rfc'];
+      const r = data.desarrollador_rfc;
       return typeof r === 'string' && RFC_MX_REGEX.test(r)
         ? { pass: true }
         : { pass: false, field: 'desarrollador_rfc', expected: 'valid MX RFC' };
@@ -344,7 +342,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Número de cuenta predial presente',
     validate: (data) =>
-      isNonEmptyString(data['cuenta_predial'])
+      isNonEmptyString(data.cuenta_predial)
         ? { pass: true }
         : { pass: false, field: 'cuenta_predial', expected: 'non-empty string' },
   },
@@ -354,7 +352,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Predial al corriente (sin adeudo)',
     validate: (data) => {
-      const adeudo = data['adeudo_mxn'];
+      const adeudo = data.adeudo_mxn;
       const ok = !isFiniteNumber(adeudo) || adeudo === 0;
       return ok
         ? { pass: true }
@@ -367,7 +365,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'Vigencia del predial dentro del año fiscal corriente',
     validate: (data) => {
-      const ejercicio = data['ejercicio_fiscal'];
+      const ejercicio = data.ejercicio_fiscal;
       const currentYear = new Date().getFullYear();
       const ok =
         isFiniteNumber(ejercicio) && ejercicio >= currentYear - 1 && ejercicio <= currentYear;
@@ -389,7 +387,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'Nombre del proyecto en brochure',
     validate: (data) =>
-      isNonEmptyString(data['proyecto_nombre'])
+      isNonEmptyString(data.proyecto_nombre)
         ? { pass: true }
         : { pass: false, field: 'proyecto_nombre', expected: 'non-empty string' },
   },
@@ -399,7 +397,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'Ubicación declarada en brochure',
     validate: (data) =>
-      isNonEmptyString(data['ubicacion'])
+      isNonEmptyString(data.ubicacion)
         ? { pass: true }
         : { pass: false, field: 'ubicacion', expected: 'non-empty string' },
   },
@@ -409,7 +407,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'info',
     description: 'Amenidades declaradas (recomendado)',
     validate: (data) => {
-      const a = data['amenidades'];
+      const a = data.amenidades;
       return isArray(a) && a.length > 0
         ? { pass: true }
         : { pass: false, field: 'amenidades', expected: 'array length > 0' };
@@ -423,7 +421,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'Plano declara número de niveles',
     validate: (data) => {
-      const n = data['niveles'];
+      const n = data.niveles;
       return isFiniteNumber(n) && Number.isInteger(n) && n >= 1
         ? { pass: true }
         : { pass: false, field: 'niveles', expected: 'integer >= 1', actual: String(n) };
@@ -435,7 +433,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'Plano declara m² totales',
     validate: (data) => {
-      const v = data['m2_total'];
+      const v = data.m2_total;
       return isFiniteNumber(v) && v > 0
         ? { pass: true }
         : { pass: false, field: 'm2_total', expected: 'number > 0', actual: String(v) };
@@ -466,7 +464,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'Contrato declara precio total numérico',
     validate: (data) => {
-      const v = data['precio_total_mxn'];
+      const v = data.precio_total_mxn;
       return isFiniteNumber(v) && v > 0
         ? { pass: true }
         : {
@@ -483,7 +481,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'error',
     description: 'Fecha de firma o vigencia válida',
     validate: (data) => {
-      const d = parseDate(data['fecha_firma'] ?? data['vigencia_fecha']);
+      const d = parseDate(data.fecha_firma ?? data.vigencia_fecha);
       return d
         ? { pass: true }
         : { pass: false, field: 'fecha_firma|vigencia_fecha', expected: 'ISO date' };
@@ -497,7 +495,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'critical',
     description: 'RFC válido en constancia de situación fiscal',
     validate: (data) => {
-      const r = data['rfc'];
+      const r = data.rfc;
       return typeof r === 'string' && RFC_MX_REGEX.test(r)
         ? { pass: true }
         : { pass: false, field: 'rfc', expected: 'valid MX RFC', actual: String(r) };
@@ -509,7 +507,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'Régimen fiscal declarado',
     validate: (data) =>
-      isNonEmptyString(data['regimen_fiscal'])
+      isNonEmptyString(data.regimen_fiscal)
         ? { pass: true }
         : { pass: false, field: 'regimen_fiscal', expected: 'non-empty string' },
   },
@@ -519,7 +517,7 @@ export const VALIDATION_RULES: ReadonlyArray<ValidationRule> = [
     severity: 'warning',
     description: 'Fecha de emisión dentro de los últimos 90 días',
     validate: (data) => {
-      const d = parseDate(data['fecha_emision']);
+      const d = parseDate(data.fecha_emision);
       if (!d) return { pass: false, field: 'fecha_emision', expected: 'ISO date' };
       const ageDays = (Date.now() - d.getTime()) / (1000 * 60 * 60 * 24);
       return ageDays <= 90
