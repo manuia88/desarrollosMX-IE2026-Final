@@ -5361,7 +5361,26 @@
         "filterDraft": "Borradores",
         "filterSent": "Enviados",
         "filterSigned": "Firmados",
-        "filterExpired": "Expirados"
+        "filterExpired": "Expirados",
+        "subtitle": "Genera, envía a firma y rastrea el ciclo de vida de cada contrato.",
+        "loading": "Cargando…",
+        "filterLabel": "Filtros de estatus",
+        "filter": {
+          "all": "Todos",
+          "draft": "Borrador",
+          "sent": "Enviados",
+          "viewed": "Vistos",
+          "signed": "Firmados",
+          "cancelled": "Cancelados",
+          "expired": "Expirados"
+        },
+        "col": {
+          "type": "Tipo",
+          "operacion": "Operación",
+          "signers": "Firmantes",
+          "status": "Estatus",
+          "created": "Creado"
+        }
       },
       "generateCta": "Generar contrato",
       "generateModal": {
@@ -5386,7 +5405,15 @@
         },
         "submit": "Crear borrador",
         "cancel": "Cancelar",
-        "preFillNote": "Datos auto-llenados desde unidad + esquema pago + comisión asesor + IVA"
+        "preFillNote": "Datos auto-llenados desde unidad + esquema pago + comisión asesor + IVA",
+        "description": "El esquema de pago + datos del comprador se llenan automáticamente.",
+        "typeLegend": "Tipo de contrato",
+        "signersLegend": "Firmantes",
+        "namePlaceholder": "Nombre completo",
+        "emailPlaceholder": "Email",
+        "addSigner": "+ Firmante",
+        "confirm": "Generar",
+        "submitting": "Generando…"
       },
       "status": {
         "draft": "Borrador",
@@ -5431,6 +5458,97 @@
         "signerEmailInvalid": "Email firmante inválido",
         "cannotCancelSigned": "No se puede cancelar contrato firmado",
         "mifielNotConfigured": "Mifiel no configurado (H2 — pendiente API key)"
+      },
+      "type": {
+        "aps": "Acuerdo de Preventa",
+        "promesa": "Promesa",
+        "reserva": "Reserva"
+      },
+      "signerRole": {
+        "comprador": "Comprador",
+        "vendedor": "Vendedor",
+        "asesor": "Asesor",
+        "desarrolladora": "Desarrolladora"
+      },
+      "audit": {
+        "created": "Contrato creado",
+        "sent": "Enviado a firma",
+        "viewed": "Visto por firmante",
+        "signed": "Firmado",
+        "cancelled": "Cancelado",
+        "expired": "Expirado",
+        "webhook_received": "Webhook recibido"
+      },
+      "drawer": {
+        "title": "Detalle de contrato",
+        "close": "Cerrar",
+        "stubBadge": "Próximamente Mifiel",
+        "loading": "Cargando contrato…",
+        "noSigners": "Sin firmantes definidos.",
+        "noPreFill": "Sin datos pre-llenados.",
+        "noAudit": "Sin eventos en el audit trail.",
+        "pdfUnsigned": "PDF sin firmar",
+        "pdfSigned": "PDF firmado",
+        "openPdf": "Abrir PDF",
+        "tab": {
+          "details": "Detalles",
+          "signers": "Firmantes",
+          "preFill": "Datos pre-llenados",
+          "audit": "Audit trail",
+          "pdfs": "PDFs"
+        },
+        "kv": {
+          "template": "Versión plantilla",
+          "mifielId": "Mifiel doc ID",
+          "docusignId": "DocuSign envelope ID",
+          "sentAt": "Enviado en",
+          "signedAt": "Firmado en",
+          "cancellation": "Motivo cancelación",
+          "unidad": "Unidad",
+          "esquema": "Esquema de pago",
+          "montos": "Montos",
+          "enganche": "Enganche",
+          "contraEntrega": "Contra entrega",
+          "mensualidad": "Mensualidad",
+          "comision": "Comisión asesor",
+          "iva": "IVA",
+          "total": "Total"
+        },
+        "action": {
+          "send": "Enviar a firma",
+          "cancel": "Cancelar contrato"
+        }
+      },
+      "sendModal": {
+        "title": "Enviar a firma electrónica",
+        "description": "Selecciona el proveedor de firma. La integración real está disponible en H2.",
+        "cancel": "Cancelar",
+        "confirm": "Enviar",
+        "submitting": "Enviando…",
+        "provider": {
+          "mifiel": {
+            "label": "Mifiel",
+            "note": "Firma electrónica certificada NOM-151. STUB H1 — real H2."
+          },
+          "docusign": {
+            "label": "DocuSign",
+            "note": "Estándar internacional. STUB H1 — real H2."
+          }
+        }
+      },
+      "cancelModal": {
+        "title": "Cancelar contrato",
+        "description": "Indica el motivo de cancelación (mínimo 10 caracteres).",
+        "placeholder": "Motivo de cancelación…",
+        "cancel": "Volver",
+        "confirm": "Cancelar contrato",
+        "submitting": "Cancelando…"
+      },
+      "asesor": {
+        "title": "Contratos de la operación",
+        "generate": "Generar contrato",
+        "empty": "Aún no se ha generado ningún contrato para esta operación.",
+        "signers": "firmantes"
       }
     }
   },
