@@ -1996,6 +1996,13 @@ export type Database = {
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "avance_obra_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
         ]
       }
       avm_estimates: {
@@ -3379,6 +3386,104 @@ export type Database = {
           },
         ]
       }
+      committee_reports: {
+        Row: {
+          citations: Json
+          cost_usd: number | null
+          created_at: string
+          desarrolladora_id: string | null
+          duration_ms: number | null
+          feasibility_id: string | null
+          id: string
+          pdf_url: string | null
+          proyecto_id: string | null
+          sections: Json
+          thesis_summary: string | null
+          user_id: string
+          word_url: string | null
+        }
+        Insert: {
+          citations?: Json
+          cost_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string | null
+          duration_ms?: number | null
+          feasibility_id?: string | null
+          id?: string
+          pdf_url?: string | null
+          proyecto_id?: string | null
+          sections?: Json
+          thesis_summary?: string | null
+          user_id: string
+          word_url?: string | null
+        }
+        Update: {
+          citations?: Json
+          cost_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string | null
+          duration_ms?: number | null
+          feasibility_id?: string | null
+          id?: string
+          pdf_url?: string | null
+          proyecto_id?: string | null
+          sections?: Json
+          thesis_summary?: string | null
+          user_id?: string
+          word_url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "committee_reports_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "committee_reports_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "committee_reports_feasibility_id_fkey"
+            columns: ["feasibility_id"]
+            isOneToOne: false
+            referencedRelation: "feasibility_reports"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "committee_reports_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "committee_reports_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
+          {
+            foreignKeyName: "committee_reports_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "committee_reports_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       competitor_alerts: {
         Row: {
           ai_narrative: string | null
@@ -3472,6 +3577,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "competitor_monitors_competitor_proyecto_id_fkey"
+            columns: ["competitor_proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
+          {
             foreignKeyName: "competitor_monitors_created_by_fkey"
             columns: ["created_by"]
             isOneToOne: false
@@ -3491,6 +3603,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "competitor_monitors_my_proyecto_id_fkey"
+            columns: ["my_proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
         ]
       }
@@ -4071,6 +4190,66 @@ export type Database = {
           },
         ]
       }
+      developer_benchmarks: {
+        Row: {
+          cohort_median: number | null
+          cohort_size: number
+          cohort_top10: number | null
+          cohort_top25: number | null
+          computed_at: string
+          created_at: string
+          desarrolladora_id: string
+          id: string
+          metric: string
+          percentile: number
+          period_quarter: string
+          value: number
+        }
+        Insert: {
+          cohort_median?: number | null
+          cohort_size?: number
+          cohort_top10?: number | null
+          cohort_top25?: number | null
+          computed_at?: string
+          created_at?: string
+          desarrolladora_id: string
+          id?: string
+          metric: string
+          percentile: number
+          period_quarter: string
+          value: number
+        }
+        Update: {
+          cohort_median?: number | null
+          cohort_size?: number
+          cohort_top10?: number | null
+          cohort_top25?: number | null
+          computed_at?: string
+          created_at?: string
+          desarrolladora_id?: string
+          id?: string
+          metric?: string
+          percentile?: number
+          period_quarter?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "developer_benchmarks_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "developer_benchmarks_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dmx_indices: {
         Row: {
           calculated_at: string
@@ -4390,6 +4569,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "documents_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
+          {
             foreignKeyName: "documents_uploaded_by_fkey"
             columns: ["uploaded_by"]
             isOneToOne: false
@@ -4611,6 +4797,13 @@ export type Database = {
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "esquemas_pago_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
         ]
       }
       exclusividad_acuerdos: {
@@ -4672,6 +4865,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "exclusividad_acuerdos_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
         ]
       }
@@ -4774,6 +4974,101 @@ export type Database = {
             columns: ["primary_buyer_twin_id"]
             isOneToOne: false
             referencedRelation: "buyer_twins"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      feasibility_reports: {
+        Row: {
+          break_even_month: number | null
+          cash_flow_5y: Json | null
+          catastro_link: string | null
+          comparables: Json | null
+          cost_usd: number | null
+          created_at: string
+          desarrolladora_id: string | null
+          duration_ms: number | null
+          geometry_geojson: Json | null
+          id: string
+          irr_10y: number | null
+          irr_5y: number | null
+          npv_mxn: number | null
+          pdf_url: string | null
+          pmf_score: number | null
+          programa_input: Json
+          sensitivity_analysis: Json | null
+          user_id: string
+          zone_id: string | null
+        }
+        Insert: {
+          break_even_month?: number | null
+          cash_flow_5y?: Json | null
+          catastro_link?: string | null
+          comparables?: Json | null
+          cost_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string | null
+          duration_ms?: number | null
+          geometry_geojson?: Json | null
+          id?: string
+          irr_10y?: number | null
+          irr_5y?: number | null
+          npv_mxn?: number | null
+          pdf_url?: string | null
+          pmf_score?: number | null
+          programa_input?: Json
+          sensitivity_analysis?: Json | null
+          user_id: string
+          zone_id?: string | null
+        }
+        Update: {
+          break_even_month?: number | null
+          cash_flow_5y?: Json | null
+          catastro_link?: string | null
+          comparables?: Json | null
+          cost_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string | null
+          duration_ms?: number | null
+          geometry_geojson?: Json | null
+          id?: string
+          irr_10y?: number | null
+          irr_5y?: number | null
+          npv_mxn?: number | null
+          pdf_url?: string | null
+          pmf_score?: number | null
+          programa_input?: Json
+          sensitivity_analysis?: Json | null
+          user_id?: string
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "feasibility_reports_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "feasibility_reports_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "feasibility_reports_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "feasibility_reports_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
             referencedColumns: ["id"]
           },
         ]
@@ -4903,6 +5198,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "folder_projects_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
         ]
       }
@@ -7003,6 +7305,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "leads_dev_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
         ]
       }
@@ -9292,6 +9601,13 @@ export type Database = {
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "marketing_assets_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
         ]
       }
       marketing_journeys: {
@@ -9370,6 +9686,13 @@ export type Database = {
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "marketing_journeys_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
         ]
       }
       marketing_portales: {
@@ -9446,6 +9769,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "marketing_publications_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
         ]
       }
@@ -10363,6 +10693,102 @@ export type Database = {
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "photos_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
+        ]
+      }
+      pipeline_snapshots: {
+        Row: {
+          absorcion_actual: number | null
+          absorcion_benchmark: number | null
+          absorcion_delta_pct: number | null
+          alerts: Json | null
+          avance_obra_pct: number | null
+          created_at: string
+          desarrolladora_id: string
+          dmx_score: number | null
+          id: string
+          precio_delta_pct: number | null
+          precio_m2_mxn: number | null
+          precio_m2_zone_median: number | null
+          proyecto_id: string
+          snapshot_date: string
+          status: string | null
+          trust_score: number | null
+          zone_id: string | null
+        }
+        Insert: {
+          absorcion_actual?: number | null
+          absorcion_benchmark?: number | null
+          absorcion_delta_pct?: number | null
+          alerts?: Json | null
+          avance_obra_pct?: number | null
+          created_at?: string
+          desarrolladora_id: string
+          dmx_score?: number | null
+          id?: string
+          precio_delta_pct?: number | null
+          precio_m2_mxn?: number | null
+          precio_m2_zone_median?: number | null
+          proyecto_id: string
+          snapshot_date: string
+          status?: string | null
+          trust_score?: number | null
+          zone_id?: string | null
+        }
+        Update: {
+          absorcion_actual?: number | null
+          absorcion_benchmark?: number | null
+          absorcion_delta_pct?: number | null
+          alerts?: Json | null
+          avance_obra_pct?: number | null
+          created_at?: string
+          desarrolladora_id?: string
+          dmx_score?: number | null
+          id?: string
+          precio_delta_pct?: number | null
+          precio_m2_mxn?: number | null
+          precio_m2_zone_median?: number | null
+          proyecto_id?: string
+          snapshot_date?: string
+          status?: string | null
+          trust_score?: number | null
+          zone_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pipeline_snapshots_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pipeline_snapshots_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pipeline_snapshots_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pipeline_snapshots_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
         ]
       }
       plans: {
@@ -10765,6 +11191,13 @@ export type Database = {
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "project_brokers_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
         ]
       }
       project_scores: {
@@ -10963,6 +11396,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prototipos_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
         ]
       }
@@ -13751,6 +14191,104 @@ export type Database = {
           zone_id?: string | null
         }
         Relationships: []
+      }
+      simulator_runs: {
+        Row: {
+          cost_usd: number | null
+          created_at: string
+          desarrolladora_id: string | null
+          duration_ms: number | null
+          id: string
+          output_absorcion_meses: number | null
+          output_break_even_month: number | null
+          output_comparables: Json | null
+          output_cost_mxn: number | null
+          output_irr: number | null
+          output_npv: number | null
+          output_pmf_score: number | null
+          output_revenue_mxn: number | null
+          output_risk_flags: Json | null
+          output_sensitivity: Json | null
+          pdf_url: string | null
+          pricing_input: Json
+          tipologia_input: Json
+          ubicacion_input: Json
+          user_id: string
+        }
+        Insert: {
+          cost_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string | null
+          duration_ms?: number | null
+          id?: string
+          output_absorcion_meses?: number | null
+          output_break_even_month?: number | null
+          output_comparables?: Json | null
+          output_cost_mxn?: number | null
+          output_irr?: number | null
+          output_npv?: number | null
+          output_pmf_score?: number | null
+          output_revenue_mxn?: number | null
+          output_risk_flags?: Json | null
+          output_sensitivity?: Json | null
+          pdf_url?: string | null
+          pricing_input?: Json
+          tipologia_input?: Json
+          ubicacion_input?: Json
+          user_id: string
+        }
+        Update: {
+          cost_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string | null
+          duration_ms?: number | null
+          id?: string
+          output_absorcion_meses?: number | null
+          output_break_even_month?: number | null
+          output_comparables?: Json | null
+          output_cost_mxn?: number | null
+          output_irr?: number | null
+          output_npv?: number | null
+          output_pmf_score?: number | null
+          output_revenue_mxn?: number | null
+          output_risk_flags?: Json | null
+          output_sensitivity?: Json | null
+          pdf_url?: string | null
+          pricing_input?: Json
+          tipologia_input?: Json
+          ubicacion_input?: Json
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "simulator_runs_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "simulator_runs_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "simulator_runs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "simulator_runs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       site_selection_queries: {
         Row: {
@@ -18847,6 +19385,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "studio_series_projects_desarrollo_id_fkey"
+            columns: ["desarrollo_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
+          {
             foreignKeyName: "studio_series_projects_music_theme_track_id_fkey"
             columns: ["music_theme_track_id"]
             isOneToOne: false
@@ -19633,6 +20178,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "studio_video_projects_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
           {
             foreignKeyName: "studio_video_projects_style_template_id_fkey"
@@ -21153,6 +21705,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "proyectos"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "unidades_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
         ]
       }
@@ -23231,6 +23790,56 @@ export type Database = {
           table_schema: unknown
         }
         Relationships: []
+      }
+      v_bi_export_developer: {
+        Row: {
+          country_code: string | null
+          created_at: string | null
+          desarrolladora_id: string | null
+          desarrolladora_name: string | null
+          price_max_mxn: number | null
+          price_min_mxn: number | null
+          proyecto_id: string | null
+          proyecto_nombre: string | null
+          proyecto_status: Database["public"]["Enums"]["proyecto_status"] | null
+          trust_score: number | null
+          unidades_apartadas: number | null
+          unidades_vendidas: number | null
+          units_available: number | null
+          units_total: number | null
+          updated_at: string | null
+          zone_id: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "desarrolladoras_country_code_fkey"
+            columns: ["country_code"]
+            isOneToOne: false
+            referencedRelation: "countries"
+            referencedColumns: ["code"]
+          },
+          {
+            foreignKeyName: "proyectos_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "proyectos_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "proyectos_zone_id_fkey"
+            columns: ["zone_id"]
+            isOneToOne: false
+            referencedRelation: "zones"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       v_ltr_str_connection: {
         Row: {

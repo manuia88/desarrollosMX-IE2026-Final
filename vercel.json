@@ -25,6 +25,8 @@
     { "path": "/api/cron/dynamic-pricing", "schedule": "0 2 * * *" },
     { "path": "/api/cron/competitor-radar", "schedule": "0 4 * * *" },
     { "path": "/api/cron/ad-spend-optimizer", "schedule": "0 6 * * *" },
-    { "path": "/api/cron/worksheets-expire", "schedule": "*/30 * * * *" }
+    { "path": "/api/cron/worksheets-expire", "schedule": "*/30 * * * *" },
+    { "path": "/api/cron/pipeline-snapshot-daily", "schedule": "0 5 * * *" },
+    { "path": "/api/cron/developer-benchmarks-quarterly", "schedule": "0 8 1 */3 *" }
   ]
 }

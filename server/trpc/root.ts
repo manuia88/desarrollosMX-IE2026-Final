@@ -11,6 +11,8 @@ import { crmDevRouter } from '@/features/crm-dev/routes/crm-dev';
 import { desarrollosRouter } from '@/features/desarrollos/routes/desarrollos';
 import { devMarketingRouter } from '@/features/dev-marketing/routes/dev-marketing';
 import { developerRouter } from '@/features/developer/routes/developer';
+import { developerMoonshotsRouter } from '@/features/developer-moonshots/routes/developer-moonshots';
+import { developerUpgRouter } from '@/features/developer-upg/routes/developer-upg';
 import { studioRouter } from '@/features/dmx-studio/routes/studio';
 import { estadisticasRouter } from '@/features/estadisticas/routes/estadisticas';
 import { fxRouter } from '@/features/fx/routes/fx';
@@ -66,6 +68,8 @@ export const appRouter = router({
   desarrollos: desarrollosRouter,
   devMarketing: devMarketingRouter,
   developer: developerRouter,
+  developerMoonshots: developerMoonshotsRouter,
+  developerUpg: developerUpgRouter,
   estadisticas: estadisticasRouter,
   fx: fxRouter,
   ghostZones: ghostZonesRouter,

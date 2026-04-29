@@ -5550,6 +5550,124 @@
         "empty": "Aún no se ha generado ningún contrato para esta operación.",
         "signers": "firmantes"
       }
+    },
+    "upg": {
+      "title": "Developer Intelligence (UPG 7.10)",
+      "tools": {
+        "demandHeatmap": "Demand Heatmap (UPG 81)",
+        "pricingAdvisor": "Pricing Advisor (UPG 82)",
+        "competitive": "Competitive Intel (UPG 83)",
+        "benchmark": "Benchmark Cohort (UPG 84)",
+        "feasibility": "Feasibility Auto (UPG 85)",
+        "terrenos": "Terrenos Disponibles (UPG 86)",
+        "manzana": "Análisis Manzana (UPG 87)",
+        "oportunidad": "Zonas Oportunidad (UPG 88)",
+        "proyeccion": "Proyección 5 años (UPG 89)"
+      },
+      "benchmark": {
+        "percentileLabel": "Percentil",
+        "cohortMedianLabel": "Mediana cohort",
+        "topPctLabel": "Top {pct}%"
+      },
+      "feasibility": {
+        "newCta": "Nuevo análisis",
+        "catastroLabel": "Link Catastro",
+        "programLabel": "Programa",
+        "generateCta": "Generar análisis",
+        "costNote": "Costo aprox /bin/zsh.50 USD"
+      },
+      "terrenos": {
+        "listTitle": "Terrenos disponibles",
+        "filtersZone": "Zona",
+        "filtersM2": "m² rango"
+      }
+    },
+    "moonshots": {
+      "title": "Moonshots",
+      "simulator": {
+        "title": "Simulador de Proyecto",
+        "step1": "Ubicación",
+        "step2": "Tipología",
+        "step3": "Pricing",
+        "step4": "Review",
+        "submit": "Simular",
+        "loading": "Calculando...",
+        "outputAbsorcion": "Absorción esperada (meses)",
+        "outputRevenue": "Revenue total",
+        "outputIRR": "IRR estimado",
+        "outputNPV": "NPV",
+        "outputBreakEven": "Break-even (mes)",
+        "exportPdf": "Exportar PDF"
+      },
+      "radar": {
+        "title": "Radar Trend Genome B2B",
+        "subscribeCta": "Suscribir alertas zona",
+        "alertTypes": {
+          "new_project": "Nuevo proyecto",
+          "price_movement": "Movimiento precio",
+          "pulse_spike": "Spike pulse",
+          "alpha_alert": "Alpha alert"
+        }
+      },
+      "committee": {
+        "title": "Reporte Comité",
+        "generateCta": "Generar memo",
+        "costNote": "Costo -8 USD/reporte",
+        "quotaPro": "Pro: 5/mes",
+        "quotaEnterprise": "Enterprise: ilimitado"
+      },
+      "pipeline": {
+        "title": "Pipeline Tracker",
+        "columns": {
+          "proyecto": "Proyecto",
+          "zona": "Zona",
+          "avance": "Avance %",
+          "absorcion": "Absorción",
+          "precio": "Precio/m²",
+          "dmxScore": "DMX Score",
+          "trustScore": "Trust"
+        },
+        "alertsTitle": "Alertas"
+      },
+      "apiEnterprise": {
+        "title": "API Enterprise REST",
+        "generateKeyCta": "Generar API key",
+        "rateLimit": "100K requests/día",
+        "endpointsLabel": "Endpoints",
+        "openapiLink": "OpenAPI spec"
+      }
+    },
+    "exports": {
+      "title": "BI Export",
+      "formats": {
+        "powerbi": "Power BI",
+        "tableau": "Tableau",
+        "looker": "Looker Studio",
+        "csv": "CSV",
+        "xlsx": "XLSX"
+      },
+      "rangeLabel": "Rango",
+      "entityLabel": "Entidad",
+      "downloadCta": "Descargar export",
+      "apiKeyRequired": "Plan Enterprise requerido"
+    },
+    "plans": {
+      "title": "Plans",
+      "tiers": {
+        "dev_free": "Free",
+        "dev_starter": "Starter",
+        "dev_pro": "Pro",
+        "dev_enterprise": "Enterprise"
+      },
+      "pricing": {
+        "dev_free": "$0/mes",
+        "dev_starter": "$999 MXN/mes",
+        "dev_pro": "$2,997 MXN/mes",
+        "dev_enterprise": "Custom"
+      },
+      "upgradeCta": "Upgrade a {plan}",
+      "matrixTitle": "Comparativa features",
+      "bundleStudio": "Studio Pro bundled (Pro+)"
     }
   },
   "Studio": {
