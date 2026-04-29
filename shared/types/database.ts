@@ -3573,6 +3573,94 @@ export type Database = {
           },
         ]
       }
+      contracts: {
+        Row: {
+          audit_trail: Json
+          cancellation_reason: string | null
+          contract_type: string
+          created_at: string
+          created_by: string | null
+          docusign_envelope_id: string | null
+          expires_at: string | null
+          id: string
+          mifiel_doc_id: string | null
+          operacion_id: string
+          pdf_signed_url: string | null
+          pdf_unsigned_url: string | null
+          pre_filled_data: Json
+          sent_at: string | null
+          signed_at: string | null
+          signers: Json
+          status: string
+          template_version: string | null
+          updated_at: string
+        }
+        Insert: {
+          audit_trail?: Json
+          cancellation_reason?: string | null
+          contract_type: string
+          created_at?: string
+          created_by?: string | null
+          docusign_envelope_id?: string | null
+          expires_at?: string | null
+          id?: string
+          mifiel_doc_id?: string | null
+          operacion_id: string
+          pdf_signed_url?: string | null
+          pdf_unsigned_url?: string | null
+          pre_filled_data?: Json
+          sent_at?: string | null
+          signed_at?: string | null
+          signers?: Json
+          status?: string
+          template_version?: string | null
+          updated_at?: string
+        }
+        Update: {
+          audit_trail?: Json
+          cancellation_reason?: string | null
+          contract_type?: string
+          created_at?: string
+          created_by?: string | null
+          docusign_envelope_id?: string | null
+          expires_at?: string | null
+          id?: string
+          mifiel_doc_id?: string | null
+          operacion_id?: string
+          pdf_signed_url?: string | null
+          pdf_unsigned_url?: string | null
+          pre_filled_data?: Json
+          sent_at?: string | null
+          signed_at?: string | null
+          signers?: Json
+          status?: string
+          template_version?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contracts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "contracts_operacion_id_fkey"
+            columns: ["operacion_id"]
+            isOneToOne: false
+            referencedRelation: "operaciones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       countries: {
         Row: {
           address_format: Json

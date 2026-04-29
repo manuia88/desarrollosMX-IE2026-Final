@@ -23,6 +23,7 @@ import { lifepathRouter } from '@/features/lifepath/routes/lifepath';
 import { marketRouter } from '@/features/market/routes/market';
 import { marketingRouter } from '@/features/marketing/routes/marketing';
 import { newsletterPublicRouter } from '@/features/newsletter/routes/newsletter-public';
+import { contractsRouter } from '@/features/operaciones/routes/contracts';
 import { operacionesRouter } from '@/features/operaciones/routes/operaciones';
 import { worksheetsRouter } from '@/features/operaciones/routes/worksheets';
 import { scianRouter } from '@/features/scian/routes/scian';
@@ -74,6 +75,7 @@ export const appRouter = router({
   mfa: mfaRouter,
   migrationFlow: migrationFlowRouter,
   newsletter: newsletterPublicRouter,
+  contracts: contractsRouter,
   operaciones: operacionesRouter,
   worksheets: worksheetsRouter,
   roleRequest: roleRequestRouter,

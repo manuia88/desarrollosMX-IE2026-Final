@@ -5351,6 +5351,87 @@
         "alreadyDecided": "Worksheet ya fue decidida",
         "unitUnavailable": "Unidad ya no está disponible"
       }
+    },
+    "contracts": {
+      "title": "Contratos",
+      "list": {
+        "title": "Contratos",
+        "empty": "Sin contratos generados",
+        "filterAll": "Todos",
+        "filterDraft": "Borradores",
+        "filterSent": "Enviados",
+        "filterSigned": "Firmados",
+        "filterExpired": "Expirados"
+      },
+      "generateCta": "Generar contrato",
+      "generateModal": {
+        "title": "Generar contrato",
+        "typeLabel": "Tipo",
+        "typeOptions": {
+          "aps": "APS Promesa",
+          "promesa": "Promesa",
+          "escritura": "Escritura",
+          "anexo": "Anexo",
+          "reserva": "Reserva"
+        },
+        "signersLabel": "Firmantes",
+        "addSignerCta": "Agregar firmante",
+        "signerNameLabel": "Nombre",
+        "signerEmailLabel": "Email",
+        "signerRoleLabel": "Rol",
+        "signerRoleOptions": {
+          "comprador": "Comprador",
+          "asesor": "Asesor",
+          "dev_legal": "Dev Legal"
+        },
+        "submit": "Crear borrador",
+        "cancel": "Cancelar",
+        "preFillNote": "Datos auto-llenados desde unidad + esquema pago + comisión asesor + IVA"
+      },
+      "status": {
+        "draft": "Borrador",
+        "sent": "Enviado",
+        "viewed": "Visto",
+        "partial_signed": "Parcialmente firmado",
+        "signed": "Firmado",
+        "rejected": "Rechazado",
+        "cancelled": "Cancelado",
+        "expired": "Expirado"
+      },
+      "contractType": {
+        "aps": "Acuerdo de Promesa",
+        "promesa": "Promesa",
+        "escritura": "Escritura",
+        "anexo": "Anexo",
+        "reserva": "Reserva"
+      },
+      "detail": {
+        "backToList": "Volver",
+        "sendCta": "Enviar a firma",
+        "cancelCta": "Cancelar contrato",
+        "cancelReasonLabel": "Motivo cancelación",
+        "auditTrailTitle": "Audit trail",
+        "signersTitle": "Firmantes",
+        "preFilledDataTitle": "Datos pre-llenados",
+        "eSignProvider": "Proveedor firma",
+        "mifielStub": "Mifiel (STUB H1 — activar H2)",
+        "docusignStub": "DocuSign (STUB H1 — activar H2)",
+        "pdfUnsignedDownload": "PDF sin firma",
+        "pdfSignedDownload": "PDF firmado"
+      },
+      "notifs": {
+        "contractSent": "Contrato enviado a firma",
+        "contractViewed": "Contrato visto por firmante",
+        "contractSigned": "Contrato firmado",
+        "contractRejected": "Contrato rechazado por firmante",
+        "contractExpired": "Contrato expiró sin firma"
+      },
+      "errors": {
+        "operacionRequired": "Operación requerida",
+        "signerEmailInvalid": "Email firmante inválido",
+        "cannotCancelSigned": "No se puede cancelar contrato firmado",
+        "mifielNotConfigured": "Mifiel no configurado (H2 — pendiente API key)"
+      }
     }
   },
   "Studio": {
