@@ -147,6 +147,84 @@ export type Database = {
           },
         ]
       }
+      ai_credit_transactions: {
+        Row: {
+          amount_usd: number
+          balance_after_usd: number
+          created_at: string
+          desarrolladora_id: string
+          description: string | null
+          granted_by: string | null
+          id: string
+          metadata: Json | null
+          related_job_id: string | null
+          stripe_payment_id: string | null
+          type: string
+        }
+        Insert: {
+          amount_usd: number
+          balance_after_usd: number
+          created_at?: string
+          desarrolladora_id: string
+          description?: string | null
+          granted_by?: string | null
+          id?: string
+          metadata?: Json | null
+          related_job_id?: string | null
+          stripe_payment_id?: string | null
+          type: string
+        }
+        Update: {
+          amount_usd?: number
+          balance_after_usd?: number
+          created_at?: string
+          desarrolladora_id?: string
+          description?: string | null
+          granted_by?: string | null
+          id?: string
+          metadata?: Json | null
+          related_job_id?: string | null
+          stripe_payment_id?: string | null
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_credit_transactions_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_credit_transactions_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_credit_transactions_granted_by_fkey"
+            columns: ["granted_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_credit_transactions_granted_by_fkey"
+            columns: ["granted_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ai_credit_transactions_related_job_id_fkey"
+            columns: ["related_job_id"]
+            isOneToOne: false
+            referencedRelation: "document_jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       ai_generated_content: {
         Row: {
           content: string
@@ -4121,6 +4199,57 @@ export type Database = {
           },
         ]
       }
+      dev_ai_credits: {
+        Row: {
+          balance_usd: number
+          created_at: string
+          desarrolladora_id: string
+          last_consumption_at: string | null
+          last_purchase_at: string | null
+          packs_purchased_count: number
+          total_consumed_usd: number
+          total_purchased_usd: number
+          updated_at: string
+        }
+        Insert: {
+          balance_usd?: number
+          created_at?: string
+          desarrolladora_id: string
+          last_consumption_at?: string | null
+          last_purchase_at?: string | null
+          packs_purchased_count?: number
+          total_consumed_usd?: number
+          total_purchased_usd?: number
+          updated_at?: string
+        }
+        Update: {
+          balance_usd?: number
+          created_at?: string
+          desarrolladora_id?: string
+          last_consumption_at?: string | null
+          last_purchase_at?: string | null
+          packs_purchased_count?: number
+          total_consumed_usd?: number
+          total_purchased_usd?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dev_ai_credits_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: true
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "dev_ai_credits_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: true
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       dev_trust_scores: {
         Row: {
           calculated_at: string
@@ -4480,6 +4609,512 @@ export type Database = {
         }
         Relationships: []
       }
+      document_compliance_checks: {
+        Row: {
+          ai_recommendation: string | null
+          check_code: string
+          conflicting_data: Json | null
+          created_at: string
+          desarrolladora_id: string
+          finding: string
+          id: string
+          proyecto_id: string
+          resolution_note: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          severity: string
+          source_job_ids: string[]
+        }
+        Insert: {
+          ai_recommendation?: string | null
+          check_code: string
+          conflicting_data?: Json | null
+          created_at?: string
+          desarrolladora_id: string
+          finding: string
+          id?: string
+          proyecto_id: string
+          resolution_note?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity: string
+          source_job_ids?: string[]
+        }
+        Update: {
+          ai_recommendation?: string | null
+          check_code?: string
+          conflicting_data?: Json | null
+          created_at?: string
+          desarrolladora_id?: string
+          finding?: string
+          id?: string
+          proyecto_id?: string
+          resolution_note?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          severity?: string
+          source_job_ids?: string[]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_compliance_checks_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_compliance_checks_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_compliance_checks_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_compliance_checks_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
+          {
+            foreignKeyName: "document_compliance_checks_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_compliance_checks_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_doc_hashes: {
+        Row: {
+          created_at: string
+          desarrolladora_id: string
+          file_hash_sha256: string
+          id: string
+          job_id: string | null
+          page_hashes: Json
+        }
+        Insert: {
+          created_at?: string
+          desarrolladora_id: string
+          file_hash_sha256: string
+          id?: string
+          job_id?: string | null
+          page_hashes?: Json
+        }
+        Update: {
+          created_at?: string
+          desarrolladora_id?: string
+          file_hash_sha256?: string
+          id?: string
+          job_id?: string | null
+          page_hashes?: Json
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_doc_hashes_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_doc_hashes_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_doc_hashes_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "document_jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_embeddings: {
+        Row: {
+          chunk_index: number
+          chunk_text: string
+          created_at: string
+          desarrolladora_id: string
+          embedding: string | null
+          id: string
+          job_id: string
+          metadata: Json | null
+          proyecto_id: string | null
+          visibility: string
+        }
+        Insert: {
+          chunk_index: number
+          chunk_text: string
+          created_at?: string
+          desarrolladora_id: string
+          embedding?: string | null
+          id?: string
+          job_id: string
+          metadata?: Json | null
+          proyecto_id?: string | null
+          visibility?: string
+        }
+        Update: {
+          chunk_index?: number
+          chunk_text?: string
+          created_at?: string
+          desarrolladora_id?: string
+          embedding?: string | null
+          id?: string
+          job_id?: string
+          metadata?: Json | null
+          proyecto_id?: string | null
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_embeddings_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_embeddings_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_embeddings_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "document_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_embeddings_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_embeddings_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
+        ]
+      }
+      document_extractions: {
+        Row: {
+          citations: Json
+          confidence_score: number | null
+          created_at: string
+          extracted_data: Json
+          extraction_engine: string | null
+          extraction_version: number
+          id: string
+          job_id: string
+          prompt_template_version: string | null
+        }
+        Insert: {
+          citations?: Json
+          confidence_score?: number | null
+          created_at?: string
+          extracted_data?: Json
+          extraction_engine?: string | null
+          extraction_version?: number
+          id?: string
+          job_id: string
+          prompt_template_version?: string | null
+        }
+        Update: {
+          citations?: Json
+          confidence_score?: number | null
+          created_at?: string
+          extracted_data?: Json
+          extraction_engine?: string | null
+          extraction_version?: number
+          id?: string
+          job_id?: string
+          prompt_template_version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_extractions_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "document_jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_jobs: {
+        Row: {
+          ai_cost_usd: number | null
+          ai_model: string | null
+          ai_tokens_cache_read: number | null
+          ai_tokens_input: number | null
+          ai_tokens_output: number | null
+          charged_credits_usd: number | null
+          created_at: string
+          desarrolladora_id: string
+          doc_type: string
+          document_id: string | null
+          drive_source_file_id: string | null
+          duplicate_of_job_id: string | null
+          error_message: string | null
+          file_size_bytes: number | null
+          human_corrections: Json | null
+          human_reviewed_at: string | null
+          human_reviewed_by: string | null
+          id: string
+          mime_type: string | null
+          original_filename: string | null
+          page_count: number | null
+          proyecto_id: string | null
+          quality_score: string | null
+          quality_score_numeric: number | null
+          retry_count: number
+          status: string
+          storage_path: string
+          unidad_id: string | null
+          updated_at: string
+          uploaded_by: string
+          visibility: string
+        }
+        Insert: {
+          ai_cost_usd?: number | null
+          ai_model?: string | null
+          ai_tokens_cache_read?: number | null
+          ai_tokens_input?: number | null
+          ai_tokens_output?: number | null
+          charged_credits_usd?: number | null
+          created_at?: string
+          desarrolladora_id: string
+          doc_type: string
+          document_id?: string | null
+          drive_source_file_id?: string | null
+          duplicate_of_job_id?: string | null
+          error_message?: string | null
+          file_size_bytes?: number | null
+          human_corrections?: Json | null
+          human_reviewed_at?: string | null
+          human_reviewed_by?: string | null
+          id?: string
+          mime_type?: string | null
+          original_filename?: string | null
+          page_count?: number | null
+          proyecto_id?: string | null
+          quality_score?: string | null
+          quality_score_numeric?: number | null
+          retry_count?: number
+          status?: string
+          storage_path: string
+          unidad_id?: string | null
+          updated_at?: string
+          uploaded_by: string
+          visibility?: string
+        }
+        Update: {
+          ai_cost_usd?: number | null
+          ai_model?: string | null
+          ai_tokens_cache_read?: number | null
+          ai_tokens_input?: number | null
+          ai_tokens_output?: number | null
+          charged_credits_usd?: number | null
+          created_at?: string
+          desarrolladora_id?: string
+          doc_type?: string
+          document_id?: string | null
+          drive_source_file_id?: string | null
+          duplicate_of_job_id?: string | null
+          error_message?: string | null
+          file_size_bytes?: number | null
+          human_corrections?: Json | null
+          human_reviewed_at?: string | null
+          human_reviewed_by?: string | null
+          id?: string
+          mime_type?: string | null
+          original_filename?: string | null
+          page_count?: number | null
+          proyecto_id?: string | null
+          quality_score?: string | null
+          quality_score_numeric?: number | null
+          retry_count?: number
+          status?: string
+          storage_path?: string
+          unidad_id?: string | null
+          updated_at?: string
+          uploaded_by?: string
+          visibility?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_jobs_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_document_id_fkey"
+            columns: ["document_id"]
+            isOneToOne: false
+            referencedRelation: "documents"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_duplicate_of_job_id_fkey"
+            columns: ["duplicate_of_job_id"]
+            isOneToOne: false
+            referencedRelation: "document_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_human_reviewed_by_fkey"
+            columns: ["human_reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_human_reviewed_by_fkey"
+            columns: ["human_reviewed_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
+          },
+          {
+            foreignKeyName: "document_jobs_unidad_id_fkey"
+            columns: ["unidad_id"]
+            isOneToOne: false
+            referencedRelation: "unidades"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_jobs_uploaded_by_fkey"
+            columns: ["uploaded_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      document_validations: {
+        Row: {
+          actual_value: string | null
+          created_at: string
+          expected_value: string | null
+          field_path: string | null
+          id: string
+          job_id: string
+          message: string
+          resolution_note: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          rule_code: string
+          severity: string
+        }
+        Insert: {
+          actual_value?: string | null
+          created_at?: string
+          expected_value?: string | null
+          field_path?: string | null
+          id?: string
+          job_id: string
+          message: string
+          resolution_note?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          rule_code: string
+          severity: string
+        }
+        Update: {
+          actual_value?: string | null
+          created_at?: string
+          expected_value?: string | null
+          field_path?: string | null
+          id?: string
+          job_id?: string
+          message?: string
+          resolution_note?: string | null
+          resolved_at?: string | null
+          resolved_by?: string | null
+          rule_code?: string
+          severity?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "document_validations_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "document_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_validations_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "document_validations_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       documents: {
         Row: {
           approved_at: string | null
@@ -4588,6 +5223,163 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "public_profiles"
             referencedColumns: ["id"]
+          },
+        ]
+      }
+      drive_files_snapshot: {
+        Row: {
+          drive_file_id: string
+          file_name: string
+          first_seen_at: string
+          id: string
+          ingested: boolean
+          job_id: string | null
+          last_seen_at: string
+          mime_type: string | null
+          modified_time: string | null
+          monitor_id: string
+          size_bytes: number | null
+        }
+        Insert: {
+          drive_file_id: string
+          file_name: string
+          first_seen_at?: string
+          id?: string
+          ingested?: boolean
+          job_id?: string | null
+          last_seen_at?: string
+          mime_type?: string | null
+          modified_time?: string | null
+          monitor_id: string
+          size_bytes?: number | null
+        }
+        Update: {
+          drive_file_id?: string
+          file_name?: string
+          first_seen_at?: string
+          id?: string
+          ingested?: boolean
+          job_id?: string | null
+          last_seen_at?: string
+          mime_type?: string | null
+          modified_time?: string | null
+          monitor_id?: string
+          size_bytes?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "drive_files_snapshot_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "document_jobs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "drive_files_snapshot_monitor_id_fkey"
+            columns: ["monitor_id"]
+            isOneToOne: false
+            referencedRelation: "drive_monitors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      drive_monitors: {
+        Row: {
+          created_at: string
+          created_by: string
+          desarrolladora_id: string
+          drive_folder_id: string
+          drive_folder_url: string
+          failure_count: number
+          folder_label: string | null
+          id: string
+          is_active: boolean
+          last_failure_message: string | null
+          last_polled_at: string | null
+          last_polled_files_count: number | null
+          monitor_type: string
+          next_poll_at: string | null
+          proyecto_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          desarrolladora_id: string
+          drive_folder_id: string
+          drive_folder_url: string
+          failure_count?: number
+          folder_label?: string | null
+          id?: string
+          is_active?: boolean
+          last_failure_message?: string | null
+          last_polled_at?: string | null
+          last_polled_files_count?: number | null
+          monitor_type: string
+          next_poll_at?: string | null
+          proyecto_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          desarrolladora_id?: string
+          drive_folder_id?: string
+          drive_folder_url?: string
+          failure_count?: number
+          folder_label?: string | null
+          id?: string
+          is_active?: boolean
+          last_failure_message?: string | null
+          last_polled_at?: string | null
+          last_polled_files_count?: number | null
+          monitor_type?: string
+          next_poll_at?: string | null
+          proyecto_id?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "drive_monitors_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "drive_monitors_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "public_profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "drive_monitors_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "drive_monitors_desarrolladora_id_fkey"
+            columns: ["desarrolladora_id"]
+            isOneToOne: false
+            referencedRelation: "public_desarrolladoras"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "drive_monitors_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "proyectos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "drive_monitors_proyecto_id_fkey"
+            columns: ["proyecto_id"]
+            isOneToOne: false
+            referencedRelation: "v_bi_export_developer"
+            referencedColumns: ["proyecto_id"]
           },
         ]
       }
@@ -24446,6 +25238,7 @@ export type Database = {
           market_id: string
         }[]
       }
+      dev_owns_document_job: { Args: { p_job_id: string }; Returns: boolean }
       dev_owns_project: { Args: { p_proyecto_id: string }; Returns: boolean }
       dev_owns_unit: { Args: { p_unidad_id: string }; Returns: boolean }
       disablelongtransactions: { Args: never; Returns: string }

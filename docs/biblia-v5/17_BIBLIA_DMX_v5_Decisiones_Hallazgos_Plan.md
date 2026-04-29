@@ -1133,3 +1133,132 @@ ROI: cierra el diferenciador #1 Onyx + posiciona DMX como "Market.Sell.Manage" (
 - Multi-agent canon (3 ventanas branches independientes): respetado lockfile manual root.ts/migrations/types
 
 **Status DECISIÓN N+6:** Aprobada founder 2026-04-28. Próximo: ejecución 3 olas FASE 15 v3 onyx-benchmarked + FASE 18 M21 After-Sales post-FASE 17.
+
+---
+
+## DECISIÓN N+7 — FASE 17 Document Intelligence v3: monetización Pack $25 saldo IA + 22 upgrades distribuidos
+
+**Fecha:** 2026-04-29
+**Founder:** Manu (macosta.ia88@gmail.com)
+**Authority:** [ADR-062](../01_DECISIONES_ARQUITECTONICAS/ADR-062_FASE_17_DOC_INTEL_MONETIZATION_AI_CREDITS.md)
+**Antecedente:** plan FASE 17 original asumía quotas mensuales por plan (Free 5, Starter 20, Pro 50, Enterprise unlimited).
+
+### Contexto founder
+
+Análisis honesto pre-FASE 17 detectó:
+1. Quotas mensuales NO calzan con behavior real dev (carga fuerte 1 vez al cargar proyecto, después gestión manual)
+2. Modelo necesita reflejar carga inicial + updates esporádicos
+3. Drive API key + 17 upgrades adicionales (DIRECTOS + LATERALES + CROSS-FEATURE) no en plan original
+
+Anthropic saldo $7 USD = testing controlado limitado. **NO production launch hasta cargar saldo $500+.**
+
+### Decisión confirmada (4 ejes)
+
+#### N+7.1 Monetización: Pack $25 USD saldo IA + Markup 50%
+
+- Pack único $25 USD = balance prepago
+- Cada acción AI descuenta `cost_real × 1.5`
+- Saldo persiste sin expiración
+- Manual upload nunca consume saldo
+- H1 testing: feature flag `ENFORCE_AI_CREDIT_BALANCE=false`
+- H2 production (post F18 Stripe Connect): flip flag `true`
+
+**Margen DMX:** 33% promedio. Con prompt caching: **65%**.
+
+**Cobertura:**
+- Onboarding 500 unidades, 8 PDFs, 240 pgs: $10.65 consumido (de $25)
+- Onboarding 1000 unidades, 12 PDFs: $15.95 consumido
+- Onboarding 200 unidades, 5 PDFs: $6.65 consumido
+- Updates LP individuales: $0.30-0.50 c/u (con dedup hash: $0.03)
+
+#### N+7.2 Drive monitor: API key sola (sin OAuth)
+
+Plan original asumía OAuth completo. Founder confirmó:
+- Material marketing (LPs, brochures, planos comerciales) ya es público de facto
+- Material legal (escrituras, permisos) NUNCA via Drive — solo upload directo a DMX
+- API key (`GOOGLE_DRIVE_API_KEY` env) lee folders/files "anyone with link can view"
+- Setup founder: 5 min Google Cloud Console (DONE 2026-04-29)
+- Cero pantalla "Conectar mi Drive" — zero friction
+
+**Polling cron 15 min:** `drive_files_snapshot` diff detection.
+
+#### N+7.3 Upgrades F17 directos (5)
+
+| Upgrade | Sesión | Beneficio |
+|---|---|---|
+| Prompt caching Anthropic | 17.B | Margen 33% → 65% |
+| Citations span GC-7 (refuerzo) | 17.B | Trust + click-to-PDF highlight |
+| Detección duplicados hash + diff | 17.C | Update LP $0.30 → $0.03 |
+| **AI Compliance Cross-Check ⭐⭐⭐** | 17.D | Único en LATAM (Onyx no, Inmuebles24 no) |
+| pgvector RAG indexing cross-feat | 17.D | Free + habilita F20 Concierge search |
+
+#### N+7.4 Upgrades distribuidos forward (17)
+
+- **F19:** 1 (admin dashboard búsquedas/atribución)
+- **F20:** 4 (DMX Concierge ⭐⭐⭐ + Embeddings unified + Conversational + Lead enrichment)
+- **F21:** 5 (Atribución link wirea + Multi-modal + Atlas conversational + Studio video tour + Notifications saved searches)
+- **F21.A:** 3 (Bot WA lead capture + Group post-venta + Saved searches WA alerts)
+- **F22:** 2 (Tinder inmuebles + Lead Score WA realtime)
+- **F23:** 2 (Saved searches gating Pro + Auction time-limited)
+- **H2 defer:** 3 (Cascade Sonnet→Haiku + Predicción venta timing + DocVault público inversionistas)
+
+**Total:** 22 upgrades con destino concreto (memoria 11 cumplida).
+
+### Plan ejecución 5 sesiones FASE 17 con paralelización
+
+| Sesión | Tipo | Wall-clock |
+|---|---|---|
+| 17.A — Schema BD + saldo IA + Drive + pre-registros shared | PM secuencial | ~30 min |
+| 17.B/C/A.UI — 3 ventanas CC-A paralelas (engines independientes) | CC-A 3 ventanas | ~4h calendar |
+| 17.audit — PM audit independiente + merge 3 PRs | PM secuencial | ~1h |
+| 17.D — AI Compliance + pgvector RAG | CC-A solo (depende B/C) | ~3h |
+| 17.E — UI M11 + cost tracking + smoke E2E user real | CC-A solo (depende todo) | ~2h |
+| TAG `fase-17-complete` post smoke verde | PM | 5 min |
+
+**Total:** ~10-12h calendar (vs 20h secuencial puro). **Ahorro 40-50%.**
+
+### 25 aprendizajes activos (acumulados F1-F15)
+
+Aplicados en F17 desde sesión 17.A. Lista completa en ADR-062 sección "25 aprendizajes activos".
+
+Highlight de los 9 más relevantes para F17:
+1. Pre-flight PM + audit:rls strict 1:1 BD remota
+2. Smoke test E2E user real al cierre (incident F15 auth)
+3. Cero crons sub-daily Hobby (incident F15 worksheets-expire)
+4. Pages redirect target deben existir (incident F15 /profile)
+5. STUBs ADR-018 con migration MISMA fase (incident F15 notifications)
+6. Production health check cada 5-6 commits (incident F15 PR #116 atascado 4h)
+7. CC prompts 3 secciones fijas (PROHIBIDO + AUDIT + REPORTAR)
+8. Sub-agent over-revert risk — validar git diff post-Task
+9. Defensive default visibility — `dev_only` para tablas sensibles
+
+### Riesgos identificados + mitigaciones
+
+| Riesgo | Mitigación |
+|---|---|
+| Anthropic saldo $7 USD | Testing controlado founder. NO production launch hasta $500+. |
+| Drive API key visible chat history | Founder rota preventivamente Google Cloud Console (5 min). |
+| CC-A multi-window conflicts shared | PM pre-registra root.ts + i18n + vercel.json UPFRONT. |
+| TS2589 deep type recursion (incident F15) | Prompt CC-A incluye warning type alias + cast pattern. |
+| Cross-feature import audit fail | Saldo IA UI directo en `shared/ui/developer-shell/` día 1. |
+| Production atascado sin detección | PM `mcp__list_deployments` cada merge. |
+
+### Documentos actualizados con N+7
+
+- `docs/01_DECISIONES_ARQUITECTONICAS/ADR-062_FASE_17_DOC_INTEL_MONETIZATION_AI_CREDITS.md` (NEW)
+- `docs/02_PLAN_MAESTRO/FASE_17_DOCUMENT_INTEL.md` (addendum v3 — 5 sesiones + paralelización)
+- `docs/07_GAME_CHANGERS/LATERAL_UPGRADES_PIPELINE.md` (22 L-NEW F17 cohort distribuidos)
+- `docs/biblia-v5/17_BIBLIA_DMX_v5_Decisiones_Hallazgos_Plan.md` (este append decisión N+7)
+
+### Cumplimiento canon
+
+- Memoria 19 (zero preguntas): N+7.1-7.4 aplicados sin friction founder
+- Memoria 11 (upgrades destino concreto): 22 L-NEW con fase + bloque específico (3 H2 con criterio claro)
+- Memoria 8 (zero deuda): scope ajustado pre-arranque para evitar over-commitment
+- Memoria 13 (escalable desacoplada): `document_jobs` separado de `documents` (no extender, evolutivo)
+- Memoria 22 (audit_rls_strict): allowlist update mismo PR con SECDEF nuevas
+- Memoria 27 (MCP apply_migration acceptable): 10 tablas nuevas via MCP pre-merge
+- Memoria 16 (CC guardrails exhaustivos): prompts 3 ventanas CC-A con secciones fijas
+- Multi-agent canon (3 ventanas paralelas): pre-registros shared upfront eliminan conflicts
+
+**Status DECISIÓN N+7:** Aprobada founder 2026-04-29. Próximo: ejecución sesión 17.A (Schema BD + pre-registros shared) — PM secuencial.

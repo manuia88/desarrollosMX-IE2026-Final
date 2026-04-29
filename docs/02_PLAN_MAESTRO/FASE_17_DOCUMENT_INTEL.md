@@ -510,5 +510,94 @@ Aplican en esta fase:
 Al ejecutar FASE 17, revisar status en pipeline maestro y confirmar incorporación al scope.
 
 ---
+
+## Addendum v3 onyx-benchmarked + monetization + paralelización (2026-04-29)
+
+> **Authority:** [ADR-062](../01_DECISIONES_ARQUITECTONICAS/ADR-062_FASE_17_DOC_INTEL_MONETIZATION_AI_CREDITS.md)
+>
+> Reemplaza modelo quotas mensuales original por **Pack $25 saldo IA prepago + Markup 50%**. Agrega 5 upgrades F17 (3 directos + 1 lateral apuesta + 1 cross-feature). Distribuye 22 upgrades total entre F17/F19/F20/F21/F21.A/F22/F23.
+
+### Modelo monetización canon
+
+- Pack único $25 USD = balance IA prepago
+- Cada acción AI descuenta `cost_real × 1.5` (markup 50%)
+- Saldo persiste sin expiración. Balance $0 = bloquea AI uploads (manual upload nunca consume saldo)
+- H1 testing: feature flag `ENFORCE_AI_CREDIT_BALANCE=false` + admin grant credits manual
+- H2 production (post F18 Stripe Connect): flip flag `true`
+
+### 5 Upgrades F17 incorporados
+
+| Upgrade | Sesión | Tipo | Beneficio |
+|---|---|---|---|
+| **Prompt caching Anthropic** | 17.B | Direct #1 | Margen 33% → 65% (5min TTL system prompts) |
+| **Citations span (GC-7)** | 17.B | Direct #2 | Refuerza plan original — span por dato extraído |
+| **Detección duplicados hash+diff** | 17.C | Direct #3 | Update LP $0.30 → $0.03 (10x ahorro) |
+| **AI Compliance Cross-Check ⭐⭐⭐** | 17.D | Lateral #1 (apuesta) | Único en LATAM — cruza LP vs escritura vs permisos |
+| **pgvector RAG indexing** | 17.D | Cross-feat #1 | Free (procesamos PDFs ya). Habilita F20 Concierge search |
+
+### Schema F17 — 10 tablas nuevas (canon spanish singular)
+
+1. `document_jobs` — pipeline AI (FK → documents existing F15.B.M11)
+2. `document_extractions` — JSON structured con citations spans
+3. `document_validations` — rules + errors por doc_type
+4. `document_compliance_checks` — cross-check findings
+5. `document_doc_hashes` — SHA256 dedup + diff detection
+6. `document_embeddings` — pgvector RAG (vector(1536))
+7. `dev_ai_credits` — balance per dev
+8. `ai_credit_transactions` — audit log compras + consumos
+9. `drive_monitors` — link público + folder_id + last_check
+10. `drive_files_snapshot` — último snapshot per folder
+
+**Default visibility por doc_type:** escritura/permiso_*/predial/licencia_* → `dev_only` automático. lista_precios/brochure → derivado a `lista_precios`/`unidades`, sin exponer PDF.
+
+### Plan 5 sesiones con paralelización segura
+
+| Sesión | Bloque | Tipo | Wall-clock |
+|---|---|---|---|
+| **17.A** | Schema BD + audit_rls + saldo IA + Drive monitor + pre-registros shared | PM secuencial | ~30 min |
+| **17.B** ↔ | Pipeline AI engine + prompt caching + citations span + tRPC router | CC-A.1 paralelo | ~4h |
+| **17.C** ↔ | Validation rules + Quality Score + Dedupe hash + Human-in-the-loop | CC-A.2 paralelo | concurrente B |
+| **17.A.UI** ↔ | Saldo dev shell `shared/ui/` + Drive monitor lib | CC-A.3 paralelo | concurrente B |
+| **17.audit** | PM audit independiente + merge 3 PRs secuencial | PM secuencial | ~1h |
+| **17.D** | AI Compliance Cross-Check + pgvector RAG indexing | CC-A solo (depende B/C) | ~3h |
+| **17.E** | UI M11 Inventario + cost tracking + smoke E2E user real | CC-A solo (depende todo) | ~2h |
+| **TAG** | `fase-17-complete` post smoke verde | PM | 5 min |
+
+**Total:** ~10-12h calendar (vs 20h secuencial puro). **Ahorro 40-50%.**
+
+### Drive monitor: API key (sin OAuth)
+
+Plan original asumía OAuth completo. Founder feedback 2026-04-29 confirmó:
+- Material marketing (LPs, brochures, planos comerciales) ya es público de facto
+- Material legal (escrituras, permisos) NUNCA via Drive — solo upload directo a DMX
+- API key sola (`GOOGLE_DRIVE_API_KEY` env) lee folders/files "anyone with link can view"
+- Polling cron 15 min: `drive_files_snapshot` diff detection
+
+### Pre-registros shared upfront (evita conflicts multi-agent)
+
+Antes de invocar CC-A.1/2/3 en paralelo, PM crea:
+
+1. `server/trpc/root.ts`: import + registry stub `documentIntel: documentIntelRouter`
+2. `features/document-intel/routes/document-intel.ts`: stub router 1 procedure ping (CC-A.1 lo extiende)
+3. `messages/{es-MX,es-CO,es-AR,pt-BR,en-US}.json`: namespace `dev.documents.*` vacío (CC-A.1/2/3 agregan keys)
+4. `vercel.json`: NINGÚN cron sub-daily (Hobby blocker). pg_cron Supabase para frecuencia alta.
+5. `app/api/cron/document-jobs-process/route.ts`: STUB Bearer auth (CC-A.1 agrega body real)
+6. `app/api/cron/drive-monitor-poll/route.ts`: STUB Bearer auth (CC-A.3 agrega body real)
+
+### Cierre F17 — validación obligatoria pre-tag
+
+- [ ] Audit:rls 0 violations (1:1 SECDEF↔allowlist BD remota)
+- [ ] Audit:dead-ui 0 violations
+- [ ] i18n parity 5/5 locales (~120 keys nuevas)
+- [ ] Anthropic SDK logs muestran `cache_read_input_tokens` en calls 2+ (prompt caching activo)
+- [ ] Compliance Cross-Check engine corre con 2+ docs procesados
+- [ ] pgvector embeddings poblados post-extraction (count > 0)
+- [ ] Drive API key curl probe folder público OK
+- [ ] Saldo IA UI muestra balance + descuenta post extraction
+- [ ] **Smoke E2E user real:** login `dev@test.com` → /desarrolladores/inventario/documentos → upload PDF (~10 pgs) → ver score 🟢🟡🔴 + saldo descontado
+- [ ] Production deploy verde post-merge (HEAD main = latest deploy READY)
+
+---
 **Autor:** Claude Opus 4.7 (rewrite BATCH 2 Agent E) | **Fecha:** 2026-04-17
 **Pivot revisión:** 2026-04-18 (biblia v2 moonshot — GCs integrados + E2E checklist)
+**Addendum v3:** 2026-04-29 (ADR-062 monetización + paralelización + 5 upgrades F17 + 17 distribuidos)

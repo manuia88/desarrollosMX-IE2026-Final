@@ -5831,6 +5831,60 @@
       "onboardingCta": "Ver onboarding",
       "disclosureBadge": "Stub FASE 16",
       "disclosureTitle": "Pin del módulo contabilidad. Implementación shipping FASE 16."
+    },
+    "documents": {
+      "title": "Documentos",
+      "subtitle": "Gestão inteligente de documentos do projeto",
+      "tabs": {
+        "marketing": "Marketing",
+        "legales": "Legais",
+        "drive": "Monitor Drive",
+        "compliance": "Validação IA"
+      },
+      "upload": {
+        "cta": "Enviar documento",
+        "drag": "Arraste PDF aqui ou",
+        "click": "clique para escolher arquivo",
+        "processing": "Processando com IA...",
+        "success": "Documento enviado",
+        "error": "Erro ao enviar documento"
+      },
+      "score": {
+        "green": "Aprovado",
+        "amber": "Revisão sugerida",
+        "red": "Bloqueado"
+      },
+      "visibility": {
+        "dev_only": "Apenas dev",
+        "asesor_visible": "Visível corretor",
+        "public_derived": "Derivado público"
+      },
+      "drive": {
+        "monitor_marketing": "Monitorar pasta marketing",
+        "monitor_legal": "Monitorar pasta legal",
+        "paste_link": "Cole link público do Google Drive",
+        "label_placeholder": "Rótulo pasta (ex. Torre Reforma marketing)",
+        "last_polled": "Última verificação",
+        "files_detected": "arquivos detectados"
+      },
+      "credits": {
+        "balance": "Saldo IA",
+        "buy_pack": "Recarregar Pack $25 USD",
+        "pack_unavailable": "Disponível no lançamento (Stripe Connect F18)",
+        "no_balance": "Sem saldo. Recarregue Pack $25 para processar com IA",
+        "manual_upload": "Enviar manual (não usa IA)",
+        "consumed": "Consumido",
+        "purchased": "Comprado"
+      },
+      "compliance": {
+        "title": "Validação IA cruzada",
+        "subtitle": "Inconsistências detectadas entre documentos do projeto",
+        "severity_info": "Info",
+        "severity_warning": "Aviso",
+        "severity_critical": "Bloqueador legal",
+        "resolved": "Resolvido",
+        "mark_resolved": "Marcar resolvido"
+      }
     }
   },
   "Studio": {

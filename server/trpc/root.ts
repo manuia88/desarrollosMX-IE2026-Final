@@ -14,6 +14,7 @@ import { developerRouter } from '@/features/developer/routes/developer';
 import { developerMoonshotsRouter } from '@/features/developer-moonshots/routes/developer-moonshots';
 import { developerUpgRouter } from '@/features/developer-upg/routes/developer-upg';
 import { studioRouter } from '@/features/dmx-studio/routes/studio';
+import { documentIntelRouter } from '@/features/document-intel/routes/document-intel';
 import { estadisticasRouter } from '@/features/estadisticas/routes/estadisticas';
 import { fxRouter } from '@/features/fx/routes/fx';
 import { ghostZonesRouter } from '@/features/ghost-zones/routes/ghost-zones';
@@ -70,6 +71,7 @@ export const appRouter = router({
   developer: developerRouter,
   developerMoonshots: developerMoonshotsRouter,
   developerUpg: developerUpgRouter,
+  documentIntel: documentIntelRouter,
   estadisticas: estadisticasRouter,
   fx: fxRouter,
   ghostZones: ghostZonesRouter,

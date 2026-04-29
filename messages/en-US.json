@@ -5831,6 +5831,60 @@
       "onboardingCta": "Ver onboarding",
       "disclosureBadge": "Stub FASE 16",
       "disclosureTitle": "Pin del módulo contabilidad. Implementación shipping FASE 16."
+    },
+    "documents": {
+      "title": "Documents",
+      "subtitle": "Smart document intelligence for project",
+      "tabs": {
+        "marketing": "Marketing",
+        "legales": "Legal",
+        "drive": "Drive monitor",
+        "compliance": "AI validation"
+      },
+      "upload": {
+        "cta": "Upload document",
+        "drag": "Drag PDF here or",
+        "click": "click to choose file",
+        "processing": "Processing with AI...",
+        "success": "Document uploaded",
+        "error": "Error uploading document"
+      },
+      "score": {
+        "green": "Approved",
+        "amber": "Review suggested",
+        "red": "Blocked"
+      },
+      "visibility": {
+        "dev_only": "Dev only",
+        "asesor_visible": "Broker visible",
+        "public_derived": "Public derived"
+      },
+      "drive": {
+        "monitor_marketing": "Monitor marketing folder",
+        "monitor_legal": "Monitor legal folder",
+        "paste_link": "Paste public Google Drive link",
+        "label_placeholder": "Folder label (e.g. Torre Reforma marketing)",
+        "last_polled": "Last polled",
+        "files_detected": "files detected"
+      },
+      "credits": {
+        "balance": "AI credits",
+        "buy_pack": "Top up Pack $25 USD",
+        "pack_unavailable": "Available at launch (Stripe Connect F18)",
+        "no_balance": "No balance. Top up Pack $25 to process with AI",
+        "manual_upload": "Upload manual (no AI)",
+        "consumed": "Consumed",
+        "purchased": "Purchased"
+      },
+      "compliance": {
+        "title": "AI cross-validation",
+        "subtitle": "Inconsistencies detected between project documents",
+        "severity_info": "Info",
+        "severity_warning": "Warning",
+        "severity_critical": "Legal blocker",
+        "resolved": "Resolved",
+        "mark_resolved": "Mark resolved"
+      }
     }
   },
   "Studio": {

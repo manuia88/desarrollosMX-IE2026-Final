@@ -3348,3 +3348,76 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
   - **Qué es:** hoy `switchDevPlan` retorna `{ ok: true, stub: true, reason: 'stripe_checkout_pending_fase_23' }`. Cuando shipping FASE 23 (Monetización), wirearlo a Stripe Checkout + webhook subscription:upgraded → update tabla `subscriptions`.
   - **Fase target:** FASE 23.
 
+
+
+---
+
+## L-NEW FASE 17 Document Intel scope expansion (2026-04-29)
+
+> **Authority:** [ADR-062](../01_DECISIONES_ARQUITECTONICAS/ADR-062_FASE_17_DOC_INTEL_MONETIZATION_AI_CREDITS.md) — 22 upgrades distribuidos F17/F19/F20/F21/F21.A/F22/F23 + H2.
+
+### Implementados directamente en FASE 17 (5 upgrades)
+
+- **L-F17-PROMPT-CACHING-ANTHROPIC** — `cache_control: ephemeral` en system prompts por tipo doc. Margen 33% → 65%. Implementación 17.B.
+- **L-F17-CITATIONS-SPAN-GC7** — refuerzo plan original. Cada extracción trae página + párrafo origen. Click highlight PDF. Implementación 17.B.
+- **L-F17-DEDUP-HASH-DIFF** — SHA256 + diff detection. Update LP $0.30 → $0.03 (10x). Implementación 17.C.
+- **L-F17-AI-COMPLIANCE-CROSS-CHECK** ⭐⭐⭐ APUESTA — cruza LP vs escritura vs permisos vs estudio suelo. Único en LATAM (Onyx no, Inmuebles24 no). Vendible Enterprise. Implementación 17.D.
+- **L-F17-PGVECTOR-RAG-INDEXING** cross-feature — indexa texto extraído PDFs en pgvector. Habilita F20 búsqueda semántica. Costo marginal CERO. Implementación 17.D.
+
+### Distribución forward (17 upgrades agendados)
+
+#### FASE 19 — Portal Admin (1 upgrade)
+
+- **L-F19-DASHBOARD-BUSQUEDAS-ATRIBUCION-ADMIN** — admin dashboard que muestra búsquedas top + atribución asesor vs DMX directo + lead score distribution. Reusa tablas `busquedas` + `attribution_events` + `lead_scores` ya shipped. Bloque 19.C.
+
+#### FASE 20 — Portal Comprador (4 upgrades)
+
+- **L-F20-DMX-CONCIERGE** ⭐⭐⭐ APUESTA PRINCIPAL H1 — comprador busca → AI no solo regresa resultados, agrega "hay 3 similares 10% más barato en zona X", "65% del inventario que cumple baja precio en 30 días", "si subes presupuesto $12M pasa de 15 a 47 unidades". **Único en LATAM.** Compite con asesor humano 24/7. Bloque 20.D (nuevo).
+- **L-F20-EMBEDDINGS-UNIFIED-SEARCH** — vectoriza projects + units + busquedas + leads + docs (RAG indexing F17.D). Una búsqueda regresa proyectos + asesores expertos zona + leads similares cerrados. "Google de DMX". Bloque 20.B.
+- **L-F20-CONVERSATIONAL-REFINEMENT** — "depa Roma 3 rec $10M" → 12 resultados. "Que tenga balcón interior" → filtra mantiene contexto. Como ChatGPT, no Google search. Bloque 20.C.
+- **L-F20-LEAD-ENRICHMENT-AI** — texto comprador "$10M cash, urgencia 30 días" → AI extrae intent + presupuesto + timing → score lead C01 100/100 antes asesor lo vea. Reusa `lead_scores` shipped F15.D.2. Bloque 20.E.
+
+#### FASE 21 — Portal Público (5 upgrades)
+
+- **L-F21-ATRIBUCION-LINK-ASESOR-WIREA** — UI wirea tabla `attribution_events` shipped F15.D.2. Link `?ref=asesor_id` registra al asesor. Sin ref = lead a DMX directo. Bloque 21.B.
+- **L-F21-MULTI-MODAL-SEARCH** — comprador toma foto dept Pinterest → DMX encuentra parecido en inventario. CLIP embeddings o Sonnet vision. Bloque 21.D (nuevo).
+- **L-F21-ATLAS-CONVERSATIONAL** — "depa Roma con escuela bilingüe a 5 cuadras" → AI consulta Atlas geo + busquedas → matchea proyectos + visualiza mapa. Bloque 21.D.
+- **L-F21-STUDIO-AUTO-VIDEO-TOUR** — comprador encuentra unit → DMX auto-genera video tour personalizado room-by-room con voz IA. Reusa Studio infrastructure F14.F. Bloque 21.E.
+- **L-F21-NOTIFICATIONS-SAVED-SEARCHES** — saved search sin resultado → cuando aparece coincidencia → notif via canales preferidos (in_app + WA + email). Reusa tabla `notifications` shipped F15.post. Bloque 21.C.
+
+#### FASE 21.A — WhatsApp Integration (3 upgrades)
+
+- **L-F21A-WA-BOT-LEAD-CAPTURE** — bot WA recibe queries lenguaje natural ("busco depa Roma 3 rec $10M") → consulta RAG → regresa resultados → registra lead. Bloque 21.A.A.
+- **L-F21A-WA-GROUP-POST-VENTA** — post-compra crea grupo WA con comprador + asesor + AI bot moderador. AI responde dudas técnicas 24/7 ("¿qué dice contrato sobre cancelación?"), libera asesor para temas estratégicos. Es Studio para post-venta. Bloque 21.A.D (nuevo).
+- **L-F21A-SAVED-SEARCHES-ALERTAS-WA** — saved search match → push WA al comprador. Replica Zillow Saved Searches con WA push real LATAM. Bloque 21.A.C.
+
+#### FASE 22 — Marketing Comms (2 upgrades)
+
+- **L-F22-TINDER-INMUEBLES** — comprador hace perfil 5 min con AI conversacional → DMX presenta 3 propiedades curadas (no 200 resultados) → swipe right/left → AI ajusta. Hinge para inmuebles. Convierte 10x mejor que listing largo. Bloque 22.D (nuevo).
+- **L-F22-LEAD-SCORE-WA-REALTIME** — cliente busca por WA, engagement (preguntas, tiempo respuesta, depth) actualiza score lead C01 tiempo real. Asesor recibe notif cuando score > 70. Bloque 22.B.
+
+#### FASE 23 — Monetización (2 upgrades)
+
+- **L-F23-SAVED-SEARCHES-GATING-PRO** — saved searches gratis hasta 3 (Free). Más = upgrade Starter+. Pro+: alertas WA + saved searches ilimitados. Bloque 23.B.
+- **L-F23-AUCTION-TIME-LIMITED-OFFERS** — propiedad publicada con descuento -10% por 48h si llegan X leads. Countdown UI estilo Booking.com. Sube conversion masivo. Buy-in devs para mover inventario stuck. Bloque 23.E (nuevo).
+
+### Defer H2 (3 upgrades)
+
+- **L-H2-CASCADE-SONNET-HAIKU** — primer pass Haiku (10x más barato), si confidence < 70% → Sonnet. Esperar volumen real para detectar patrones de complexity por doc_type. H2 cuando hay 1000+ extractions data.
+- **L-H2-PREDICTION-VENTA-TIMING** — AI dice al comprador: "Esta propiedad 15% por debajo del promedio zona. Probabilidad venta < 10 días: 85%. Hoy es buen día." Urgency + AI trust. Requiere modelo predictivo entrenado con historia ventas H2.
+- **L-H2-DOCVAULT-PUBLICO-INVERSIONISTAS** — dev autoriza compartir versión "carta-fe" pública de docs (escritura, permisos, licencia). Inversionista pega link DMX → ve estado legal proyecto + score "🟢 Documentos completos verificados AI". Trustpilot de proyectos. **Requiere reputation DMX establecida** post-launch.
+
+### Total L-NEW F17 cohort: 22 upgrades
+
+**Distribución:**
+- FASE 17 implementación directa: 5
+- FASE 19: 1
+- FASE 20: 4
+- FASE 21: 5
+- FASE 21.A: 3
+- FASE 22: 2
+- FASE 23: 2
+- H2 defer: 3 (con criterio claro de unblock)
+
+**Memoria 11 cumplida:** todos con destino concreto (fase + bloque específico O criterio explícito H2).
+
