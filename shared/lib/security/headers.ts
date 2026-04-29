@@ -8,8 +8,8 @@ export function buildCsp(nonce: string, isDev: boolean): string {
   const supabaseWss = SUPABASE_HOST ? `wss://${SUPABASE_HOST}` : '';
 
   const scriptSrc = isDev
-    ? `'self' 'nonce-${nonce}' 'unsafe-eval' 'unsafe-inline' https://*.posthog.com https://*.sentry.io`
-    : `'self' 'nonce-${nonce}' 'strict-dynamic' https://*.posthog.com https://*.sentry.io`;
+    ? `'self' 'nonce-${nonce}' 'unsafe-eval' 'unsafe-inline' https://*.posthog.com https://*.sentry.io https://js.stripe.com`
+    : `'self' 'nonce-${nonce}' 'strict-dynamic' https://*.posthog.com https://*.sentry.io https://js.stripe.com`;
 
   const imgSrc = [
     "'self'",
@@ -34,6 +34,8 @@ export function buildCsp(nonce: string, isDev: boolean): string {
     'https://api.openai.com',
     'https://www.googleapis.com',
     'https://ai-gateway.vercel.sh',
+    'https://api.stripe.com',
+    'https://checkout.stripe.com',
   ]
     .filter(Boolean)
     .join(' ');

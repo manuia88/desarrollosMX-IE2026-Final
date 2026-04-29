@@ -7,6 +7,10 @@
 
 import { TRPCError } from '@trpc/server';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
+import type { Database, Json } from '@/shared/types/database';
+
+type AiCreditTransactionInsert = Database['public']['Tables']['ai_credit_transactions']['Insert'];
+type DevAiCreditsUpdate = Database['public']['Tables']['dev_ai_credits']['Update'];
 
 type AdminClient = ReturnType<typeof createAdminClient>;
 
@@ -138,6 +142,10 @@ interface GrantArgs {
   readonly amount_usd: number;
   readonly granted_by: string;
   readonly description?: string;
+  readonly transaction_type?: 'grant_admin' | 'purchase' | 'refund' | 'adjustment';
+  readonly stripe_payment_id?: string;
+  readonly metadata?: Record<string, unknown>;
+  readonly increment_pack_count?: boolean;
 }
 
 export async function grantCredits(args: GrantArgs): Promise<ConsumeResult> {
@@ -149,31 +157,47 @@ export async function grantCredits(args: GrantArgs): Promise<ConsumeResult> {
   const newBalance = Number((snapshot.balance_usd + args.amount_usd).toFixed(4));
   const newTotalPurchased = Number((snapshot.total_purchased_usd + args.amount_usd).toFixed(4));
   const nowIso = new Date().toISOString();
+  const txType = args.transaction_type ?? 'grant_admin';
+
+  const updatePayload: DevAiCreditsUpdate = {
+    balance_usd: newBalance,
+    total_purchased_usd: newTotalPurchased,
+    last_purchase_at: nowIso,
+    updated_at: nowIso,
+  };
+  if (args.increment_pack_count) {
+    updatePayload.packs_purchased_count = snapshot.packs_purchased_count + 1;
+  }
 
   const { error: updErr } = await supabase
     .from('dev_ai_credits')
-    .update({
-      balance_usd: newBalance,
-      total_purchased_usd: newTotalPurchased,
-      last_purchase_at: nowIso,
-      updated_at: nowIso,
-    })
+    .update(updatePayload)
     .eq('desarrolladora_id', args.desarrolladora_id);
 
   if (updErr) {
     throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: updErr.message });
   }
 
+  const insertPayload: AiCreditTransactionInsert = {
+    desarrolladora_id: args.desarrolladora_id,
+    type: txType,
+    amount_usd: args.amount_usd,
+    balance_after_usd: newBalance,
+    description: args.description ?? (txType === 'purchase' ? 'Stripe purchase' : 'Admin grant'),
+  };
+  if (txType === 'grant_admin') {
+    insertPayload.granted_by = args.granted_by;
+  }
+  if (args.stripe_payment_id) {
+    insertPayload.stripe_payment_id = args.stripe_payment_id;
+  }
+  if (args.metadata) {
+    insertPayload.metadata = args.metadata as Json;
+  }
+
   const { data: tx, error: txErr } = await supabase
     .from('ai_credit_transactions')
-    .insert({
-      desarrolladora_id: args.desarrolladora_id,
-      type: 'grant_admin',
-      amount_usd: args.amount_usd,
-      balance_after_usd: newBalance,
-      granted_by: args.granted_by,
-      description: args.description ?? 'Admin grant',
-    })
+    .insert(insertPayload)
     .select('id')
     .single();
 
