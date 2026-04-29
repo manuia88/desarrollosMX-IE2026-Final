@@ -85,6 +85,9 @@ export function AICreditsBalance() {
           balance={balance}
           consumed={data.total_consumed_usd}
           purchased={data.total_purchased_usd}
+          packAvailable={data.pack_available ?? false}
+          packPriceUsd={data.pack_price_usd ?? 25}
+          packCreditsAddedUsd={data.pack_credits_added_usd ?? 25}
           onClose={() => setModalOpen(false)}
         />
       ) : null}
@@ -96,11 +99,43 @@ interface RechargeModalProps {
   readonly balance: number;
   readonly consumed: number;
   readonly purchased: number;
+  readonly packAvailable: boolean;
+  readonly packPriceUsd: number;
+  readonly packCreditsAddedUsd: number;
   readonly onClose: () => void;
 }
 
-function RechargeModal({ balance, consumed, purchased, onClose }: RechargeModalProps) {
+function RechargeModal({
+  balance,
+  consumed,
+  purchased,
+  packAvailable,
+  packPriceUsd,
+  packCreditsAddedUsd,
+  onClose,
+}: RechargeModalProps) {
   const t = useTranslations('dev.documents.credits');
+  const [redirecting, setRedirecting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const checkoutMutation = trpc.documentIntel.createCreditsCheckoutSession.useMutation({
+    onSuccess: (result) => {
+      window.location.href = result.url;
+    },
+    onError: (err) => {
+      setRedirecting(false);
+      setError(err.message ?? 'checkout_failed');
+    },
+  });
+
+  const handleRecharge = (): void => {
+    if (!packAvailable || redirecting) return;
+    setError(null);
+    setRedirecting(true);
+    checkoutMutation.mutate({});
+  };
+
+  const packLabel = `${t('buy_pack_button')} — ${CURRENCY_FORMATTER.format(packPriceUsd)}`;
 
   return (
     <div
@@ -133,7 +168,12 @@ function RechargeModal({ balance, consumed, purchased, onClose }: RechargeModalP
           {t('buy_pack')}
         </h2>
         <p className="mt-2 text-sm" style={{ color: 'var(--canon-cream-3)' }}>
-          {t('pack_unavailable')}
+          {packAvailable
+            ? t('pack_description', {
+                price: CURRENCY_FORMATTER.format(packPriceUsd),
+                credits: CURRENCY_FORMATTER.format(packCreditsAddedUsd),
+              })
+            : t('pack_unavailable')}
         </p>
 
         <dl
@@ -148,7 +188,13 @@ function RechargeModal({ balance, consumed, purchased, onClose }: RechargeModalP
           <Stat label={t('purchased')} value={CURRENCY_FORMATTER.format(purchased)} />
         </dl>
 
-        <div className="mt-5 flex justify-end gap-2">
+        {error ? (
+          <p role="alert" className="mt-4 text-xs" style={{ color: 'rgb(252, 165, 165)' }}>
+            {t('checkout_error')}: {error}
+          </p>
+        ) : null}
+
+        <div className="mt-5 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <button
             type="button"
             onClick={onClose}
@@ -161,7 +207,32 @@ function RechargeModal({ balance, consumed, purchased, onClose }: RechargeModalP
           >
             {t('close')}
           </button>
+          <button
+            type="button"
+            onClick={handleRecharge}
+            disabled={!packAvailable || redirecting}
+            aria-disabled={!packAvailable || redirecting}
+            className="h-[34px] rounded-full px-5 text-xs font-semibold transition-opacity disabled:opacity-50"
+            style={{
+              background: 'var(--gradient-ai)',
+              color: '#fff',
+              border: '1px solid rgba(255,255,255,0.20)',
+              boxShadow: 'var(--shadow-canon-spotlight)',
+              cursor: !packAvailable || redirecting ? 'not-allowed' : 'pointer',
+            }}
+          >
+            {redirecting ? t('redirecting_to_stripe') : packLabel}
+          </button>
         </div>
+
+        {!packAvailable ? (
+          <p
+            className="mt-3 text-[10px] uppercase tracking-[0.16em]"
+            style={{ color: 'var(--canon-cream-3)' }}
+          >
+            {t('pack_pending_setup')}
+          </p>
+        ) : null}
       </div>
     </div>
   );

@@ -3,6 +3,11 @@ import { z } from 'zod';
 import { grantCredits } from '@/features/document-intel/lib/credits-engine';
 import { parseDriveFolderId, pollFolder } from '@/features/document-intel/lib/drive-monitor';
 import { processJob } from '@/features/document-intel/lib/extraction-engine';
+import { createCreditsCheckoutSession } from '@/features/document-intel/lib/stripe-credits';
+import {
+  AI_CREDITS_PACK_25,
+  isAiCreditsPack25PriceConfigured,
+} from '@/features/document-intel/lib/stripe-credits-products';
 import {
   adminGrantCreditsInput,
   createJobInput,
@@ -354,7 +359,9 @@ export const documentIntelRouter = router({
 
     const { data: txs } = await admin
       .from('ai_credit_transactions')
-      .select('id, type, amount_usd, balance_after_usd, related_job_id, description, created_at')
+      .select(
+        'id, type, amount_usd, balance_after_usd, related_job_id, stripe_payment_id, description, created_at',
+      )
       .eq('desarrolladora_id', desarrolladoraId)
       .order('created_at', { ascending: false })
       .limit(20);
@@ -368,8 +375,51 @@ export const documentIntelRouter = router({
       last_purchase_at: credits?.last_purchase_at ?? null,
       last_consumption_at: credits?.last_consumption_at ?? null,
       recent_transactions: txs ?? [],
+      pack_available: isAiCreditsPack25PriceConfigured(),
+      pack_price_usd: AI_CREDITS_PACK_25.priceUsd,
+      pack_credits_added_usd: AI_CREDITS_PACK_25.creditsAddedUsd,
     };
   }),
+
+  createCreditsCheckoutSession: authenticatedProcedure
+    .input(
+      z.object({
+        success_path: z.string().min(1).max(500).optional(),
+        cancel_path: z.string().min(1).max(500).optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!isAiCreditsPack25PriceConfigured()) {
+        throw new TRPCError({
+          code: 'PRECONDITION_FAILED',
+          message: 'ai_credits_pack_price_not_configured',
+        });
+      }
+
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+      try {
+        const result = await createCreditsCheckoutSession({
+          userId: ctx.user.id,
+          userEmail: ctx.user.email ?? null,
+          desarrolladoraId,
+          ...(input.success_path ? { successPath: input.success_path } : {}),
+          ...(input.cancel_path ? { cancelPath: input.cancel_path } : {}),
+        });
+        return result;
+      } catch (err) {
+        sentry.captureException(err, {
+          tags: { feature: 'document-intel', op: 'credits-checkout' },
+          extra: { user_id: ctx.user.id, desarrolladora_id: desarrolladoraId },
+        });
+        if (err instanceof TRPCError) throw err;
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: err instanceof Error ? err.message : 'checkout_session_failed',
+        });
+      }
+    }),
 
   getJobValidations: authenticatedProcedure
     .input(z.object({ job_id: z.string().uuid() }))

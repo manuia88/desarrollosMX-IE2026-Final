@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
+import { CreditsRechargeToast } from '@/features/document-intel/components/dev/CreditsRechargeToast';
 import { DocumentsListPage } from '@/features/document-intel/components/dev/DocumentsListPage';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { createClient } from '@/shared/lib/supabase/server';
@@ -37,9 +38,12 @@ export default async function AiDocumentsRoute({ params }: RouteProps) {
     .order('nombre');
 
   return (
-    <DocumentsListPage
-      locale={locale}
-      projects={(proyectos ?? []).map((p) => ({ id: p.id, nombre: p.nombre ?? '' }))}
-    />
+    <>
+      <CreditsRechargeToast />
+      <DocumentsListPage
+        locale={locale}
+        projects={(proyectos ?? []).map((p) => ({ id: p.id, nombre: p.nombre ?? '' }))}
+      />
+    </>
   );
 }
