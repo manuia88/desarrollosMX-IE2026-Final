@@ -53,8 +53,14 @@ export async function proxy(req: NextRequest) {
   const isDev = process.env.NODE_ENV !== 'production';
   const nonce = generateNonce();
 
+  // Propagate nonce to Next.js renderer via REQUEST headers (canon Next.js docs).
+  // Without this, the strict-dynamic CSP blocks all _next/static/chunks/*.js because
+  // Next.js cannot apply the nonce to its own script tags.
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set('x-nonce', nonce);
+
   if (pathname.startsWith('/embed')) {
-    const pass = NextResponse.next({ request: req });
+    const pass = NextResponse.next({ request: { headers: requestHeaders } });
     return applyEmbedHeaders(pass, nonce, isDev);
   }
 
@@ -65,7 +71,7 @@ export async function proxy(req: NextRequest) {
     pathname.startsWith('/design-system') ||
     pathname.startsWith('/ie-playground')
   ) {
-    const pass = NextResponse.next({ request: req });
+    const pass = NextResponse.next({ request: { headers: requestHeaders } });
     return applySecurityHeaders(pass, nonce, isDev);
   }
 
