@@ -7,9 +7,15 @@ export function buildCsp(nonce: string, isDev: boolean): string {
   const supabaseHttps = SUPABASE_HOST ? `https://${SUPABASE_HOST}` : '';
   const supabaseWss = SUPABASE_HOST ? `wss://${SUPABASE_HOST}` : '';
 
+  // Producción: 'self' + nonce + 'unsafe-inline' (fallback para inline scripts
+  // de Next.js hydration + telemetry libs PostHog/Sentry). Los hosts allowlisted
+  // (posthog/sentry/stripe) cubren scripts externos. Nonce protege injection.
+  // NOTA: 'unsafe-inline' es ignorado por browsers cuando hay nonce, pero sirve
+  // de fallback para browsers viejos que no entienden nonce. Sin 'strict-dynamic'
+  // porque ese flag deshabilita el host-based allowlisting (rompe PostHog/Sentry).
   const scriptSrc = isDev
     ? `'self' 'nonce-${nonce}' 'unsafe-eval' 'unsafe-inline' https://*.posthog.com https://*.sentry.io https://js.stripe.com`
-    : `'self' 'nonce-${nonce}' 'strict-dynamic' https://*.posthog.com https://*.sentry.io https://js.stripe.com`;
+    : `'self' 'nonce-${nonce}' 'unsafe-inline' https://*.posthog.com https://*.sentry.io https://js.stripe.com`;
 
   const imgSrc = [
     "'self'",
@@ -105,7 +111,7 @@ export function buildEmbedCsp(nonce: string, isDev: boolean): string {
 
   const scriptSrc = isDev
     ? `'self' 'nonce-${nonce}' 'unsafe-eval' 'unsafe-inline' https://*.posthog.com`
-    : `'self' 'nonce-${nonce}' 'strict-dynamic' https://*.posthog.com`;
+    : `'self' 'nonce-${nonce}' 'unsafe-inline' https://*.posthog.com`;
 
   const imgSrc = ["'self'", 'data:', 'blob:', supabaseHttps].filter(Boolean).join(' ');
   const connectSrc = ["'self'", supabaseHttps, supabaseWss, 'https://*.posthog.com']
