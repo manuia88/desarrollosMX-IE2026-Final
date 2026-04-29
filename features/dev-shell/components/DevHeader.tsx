@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { AICreditsBalance } from '@/shared/ui/developer-shell/AICreditsBalance';
 import { ProjectSwitcher } from '@/shared/ui/developer-shell/ProjectSwitcher';
 
 export interface DevHeaderUser {
@@ -59,6 +60,7 @@ export function DevHeader({ user, companyName, unreadCount = 0 }: DevHeaderProps
       </div>
       <div className="flex items-center gap-3">
         <ProjectSwitcher />
+        <AICreditsBalance />
         <button
           type="button"
           disabled

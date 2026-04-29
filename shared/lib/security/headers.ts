@@ -32,6 +32,7 @@ export function buildCsp(nonce: string, isDev: boolean): string {
     'https://openexchangerates.org',
     'https://api.anthropic.com',
     'https://api.openai.com',
+    'https://www.googleapis.com',
     'https://ai-gateway.vercel.sh',
   ]
     .filter(Boolean)
