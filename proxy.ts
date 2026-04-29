@@ -19,13 +19,6 @@ const APPROVAL_REQUIRED_ROLES: ReadonlySet<string> = new Set([
   'broker_manager',
 ]);
 
-const MFA_REQUIRED_ROLES: ReadonlySet<string> = new Set([
-  'superadmin',
-  'admin_desarrolladora',
-  'mb_admin',
-  'mb_coordinator',
-]);
-
 const intlMiddleware = createIntlMiddleware(routing);
 
 function splitLocale(pathname: string): { locale: string; rest: string } {
@@ -128,7 +121,7 @@ export async function proxy(req: NextRequest) {
 
   const { data: profile } = await supabase
     .from('profiles')
-    .select('is_active, is_approved, rol, meta')
+    .select('is_active, is_approved, rol')
     .eq('id', user.id)
     .maybeSingle();
 
@@ -142,13 +135,6 @@ export async function proxy(req: NextRequest) {
 
   if (!profile.is_approved && APPROVAL_REQUIRED_ROLES.has(profile.rol)) {
     return redirectTo(req, locale, '/auth/pending-approval');
-  }
-
-  if (MFA_REQUIRED_ROLES.has(profile.rol)) {
-    const meta = (profile.meta ?? {}) as Record<string, unknown>;
-    if (meta.mfa_enabled !== true) {
-      return redirectTo(req, locale, '/auth/mfa-enroll');
-    }
   }
 
   return applySecurityHeaders(response, nonce, isDev);

@@ -31,11 +31,15 @@ export function LoginForm() {
       }
       const { data: factorsData } = await supabase.auth.mfa.listFactors();
       const totpFactor = factorsData?.totp?.find((f) => f.status === 'verified');
+      const localeMatch = window.location.pathname.match(/^\/([a-z]{2}-[A-Z]{2})\//);
+      const localePrefix = localeMatch ? `/${localeMatch[1]}` : '';
+      const params = new URLSearchParams(window.location.search);
+      const redirectTo = params.get('redirect');
       if (totpFactor) {
-        window.location.href = `/auth/mfa-verify?factor=${encodeURIComponent(totpFactor.id)}`;
+        window.location.href = `${localePrefix}/auth/mfa-verify?factor=${encodeURIComponent(totpFactor.id)}`;
         return;
       }
-      window.location.href = '/';
+      window.location.href = redirectTo || `${localePrefix}/desarrolladores/dashboard`;
     } catch (err) {
       setError(err instanceof Error ? err.message : 'login_failed');
     } finally {
