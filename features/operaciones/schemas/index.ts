@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export * from './contracts';
+
 export const OPERACION_SIDE = ['ambos', 'comprador', 'vendedor'] as const;
 export const operacionSideEnum = z.enum(OPERACION_SIDE);
 export type OperacionSide = z.infer<typeof operacionSideEnum>;
