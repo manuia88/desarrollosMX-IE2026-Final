@@ -3,7 +3,13 @@ import {
   avanceObraCreateInput,
   avanceObraDeleteInput,
   avanceObraListInput,
+  type DocumentRow,
   dashboardInput,
+  documentApproveInput,
+  documentCreateInput,
+  documentDeleteInput,
+  documentListInput,
+  documentSignedUrlInput,
   esquemaPagoCreateInput,
   esquemaPagoDeleteInput,
   esquemaPagoListInput,
@@ -25,6 +31,7 @@ import {
   listMyProjectsInput,
   type MyProjectItem,
   morningBriefingDevInput,
+  type PlanRow,
   pendientesInput,
   prototipoCreateInput,
   prototipoDeleteInput,
@@ -33,6 +40,7 @@ import {
   type SiteSelectionAIResult,
   siteSelectionAIInput,
   siteSelectionHistoryInput,
+  switchPlanInput,
   trustScoreInput,
   type UnitDemandHeatmapItem,
   unitDemandHeatmapInput,
@@ -1608,4 +1616,220 @@ export const developerRouter = router({
       }
       return data ?? [];
     }),
+
+  // ─────────────────────────────────────────────────────────────
+  // FASE 15.G — Documentos proyecto (project-documents bucket).
+  // RLS shipped: 4 policies en bucket. desarrolladora_id derivado del profile.
+  // ─────────────────────────────────────────────────────────────
+  documentList: authenticatedProcedure
+    .input(documentListInput)
+    .query(async ({ ctx, input }): Promise<readonly DocumentRow[]> => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) return [];
+      let query = supabase
+        .from('documents')
+        .select(
+          'id, desarrolladora_id, proyecto_id, tipo, nombre, storage_path, status, approved_at, rejection_reason, expires_at, uploaded_by, created_at, updated_at',
+        )
+        .eq('desarrolladora_id', desarrolladoraId)
+        .order('created_at', { ascending: false })
+        .limit(200);
+      if (input.proyectoId) query = query.eq('proyecto_id', input.proyectoId);
+      const { data, error } = await query;
+      if (error) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      return (data ?? []).map((r) => ({
+        id: r.id,
+        desarrolladoraId: r.desarrolladora_id,
+        proyectoId: r.proyecto_id,
+        tipo: r.tipo,
+        nombre: r.nombre,
+        storagePath: r.storage_path,
+        status: r.status,
+        approvedAt: r.approved_at,
+        rejectionReason: r.rejection_reason,
+        expiresAt: r.expires_at,
+        uploadedBy: r.uploaded_by,
+        createdAt: r.created_at,
+        updatedAt: r.updated_at,
+      }));
+    }),
+
+  documentCreate: authenticatedProcedure
+    .input(documentCreateInput)
+    .mutation(async ({ ctx, input }) => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'desarrolladora_id required' });
+      }
+      const { data, error } = await supabase
+        .from('documents')
+        .insert({
+          desarrolladora_id: desarrolladoraId,
+          proyecto_id: input.proyectoId,
+          tipo: input.tipo,
+          nombre: input.nombre,
+          storage_path: input.storagePath,
+          status: 'uploaded',
+          uploaded_by: ctx.user.id,
+          meta: (input.meta ?? null) as Json,
+        })
+        .select('id, status')
+        .single();
+      if (error || !data) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message ?? 'documents insert failed',
+        });
+      }
+      return { id: data.id, status: data.status };
+    }),
+
+  documentDelete: authenticatedProcedure
+    .input(documentDeleteInput)
+    .mutation(async ({ ctx, input }) => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'desarrolladora_id required' });
+      }
+      const { data: doc, error: selErr } = await supabase
+        .from('documents')
+        .select('id, storage_path, desarrolladora_id')
+        .eq('id', input.documentId)
+        .maybeSingle();
+      if (selErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: selErr.message });
+      }
+      if (!doc || doc.desarrolladora_id !== desarrolladoraId) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'document_not_found' });
+      }
+      await supabase.storage.from('project-documents').remove([doc.storage_path]);
+      const { error: delErr } = await supabase
+        .from('documents')
+        .delete()
+        .eq('id', input.documentId);
+      if (delErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: delErr.message });
+      }
+      return { ok: true };
+    }),
+
+  documentApprove: authenticatedProcedure
+    .input(documentApproveInput)
+    .mutation(async ({ ctx, input }) => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'desarrolladora_id required' });
+      }
+      const { error } = await supabase
+        .from('documents')
+        .update({
+          status: input.status,
+          approved_by: input.status === 'approved' ? ctx.user.id : null,
+          approved_at: input.status === 'approved' ? new Date().toISOString() : null,
+          rejection_reason: input.status === 'rejected' ? (input.rejectionReason ?? null) : null,
+        })
+        .eq('id', input.documentId)
+        .eq('desarrolladora_id', desarrolladoraId);
+      if (error) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      return { ok: true };
+    }),
+
+  documentSignedUrl: authenticatedProcedure
+    .input(documentSignedUrlInput)
+    .mutation(async ({ ctx, input }) => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      if (!desarrolladoraId) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'desarrolladora_id required' });
+      }
+      const { data: doc } = await supabase
+        .from('documents')
+        .select('storage_path, desarrolladora_id')
+        .eq('id', input.documentId)
+        .maybeSingle();
+      if (!doc || doc.desarrolladora_id !== desarrolladoraId) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'document_not_found' });
+      }
+      const { data, error } = await supabase.storage
+        .from('project-documents')
+        .createSignedUrl(doc.storage_path, input.expiresIn);
+      if (error || !data) {
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: error?.message ?? 'signed_url_failed',
+        });
+      }
+      return { signedUrl: data.signedUrl };
+    }),
+
+  // ─────────────────────────────────────────────────────────────
+  // FASE 15.H — Plans + feature gating
+  // ─────────────────────────────────────────────────────────────
+  listDevPlans: authenticatedProcedure.query(async (): Promise<readonly PlanRow[]> => {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase
+      .from('plans')
+      .select(
+        'id, code, name, audience, monthly_price_minor, yearly_price_minor, currency, trial_days, is_active, sort_order, features_summary',
+      )
+      .eq('audience', 'desarrolladora')
+      .eq('is_active', true)
+      .order('sort_order', { ascending: true });
+    if (error) {
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+    }
+    return (data ?? []).map((r) => ({
+      id: r.id,
+      code: r.code,
+      name: r.name,
+      audience: r.audience,
+      monthlyPriceMinor: r.monthly_price_minor,
+      yearlyPriceMinor: r.yearly_price_minor,
+      currency: r.currency,
+      trialDays: r.trial_days,
+      isActive: r.is_active,
+      sortOrder: r.sort_order,
+      featuresSummary: (r.features_summary ?? {}) as PlanRow['featuresSummary'],
+    }));
+  }),
+
+  currentDevPlan: authenticatedProcedure.query(
+    async ({ ctx }): Promise<{ planCode: string; isPlaceholder: boolean }> => {
+      const supabase = createAdminClient();
+      const { desarrolladoraId } = await requireDevContext(supabase, ctx.user.id);
+      const subjectIds = [ctx.user.id, ...(desarrolladoraId ? [desarrolladoraId] : [])];
+      const { data } = await supabase
+        .from('subscriptions')
+        .select('plans!inner(code, audience), status')
+        .in('subject_id', subjectIds)
+        .in('status', ['active', 'trialing'])
+        .eq('plans.audience', 'desarrolladora')
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      const planCode = (data as { plans?: { code?: string } } | null)?.plans?.code ?? null;
+      if (planCode) return { planCode, isPlaceholder: false };
+      // Placeholder: dev_free hasta Stripe Checkout en FASE 23
+      return { planCode: 'dev_free', isPlaceholder: true };
+    },
+  ),
+
+  // STUB ADR-018 — Stripe Checkout shipping FASE 23
+  // L-NEW-FEATURE-GATE-STRIPE-CHECKOUT-WIRED — wire to /api/stripe/checkout-session
+  switchDevPlan: authenticatedProcedure.input(switchPlanInput).mutation(({ input }) => {
+    return {
+      ok: true,
+      stub: true,
+      reason: 'stripe_checkout_pending_fase_23',
+      requestedPlan: input.planCode,
+    };
+  }),
 });
