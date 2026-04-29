@@ -3335,3 +3335,16 @@ Deuda carryover 07.5.D (climate real ingestion) + laterales 07.5.E LLM wiki ecos
 
 **Memoria 11 cumplida:** todos los L-NEW tienen destino concreto (fase target específica O explícitamente "H2 sin fase").
 
+---
+
+## L-NEW FASE 15 OLA 4 cierre derivados
+
+- **L-NEW-NOTIFICATIONS-DEV-SCHEMA-FASE-16** — schema notifications + notification_types
+  - **Qué es:** tabla `notifications` (id, profile_id, type, payload, read_at, created_at) + catálogo `notification_types` con 9 tipos developer (plan_limit_approaching/reached, document_uploaded/extracted/approved/rejected, api_key_created/revoked, export_completed).
+  - **Para qué sirve:** notificar al desarrollador eventos críticos del portal (límites, docs, API keys, exports) sin reventar el código actual.
+  - **Beneficio concreto:** retención + activación. Hoy `dispatchDevNotification()` retorna `{ skipped: true, reason: 'notifications_table_pending_fase_16' }` (STUB ADR-018 4 señales).
+  - **Fase target:** FASE 16 (Contabilidad backbone — incluye notificaciones financieras, mismo schema sirve para devs).
+- **L-NEW-FEATURE-GATE-STRIPE-CHECKOUT-WIRED** — wire `developer.switchDevPlan` a `/api/stripe/checkout-session`
+  - **Qué es:** hoy `switchDevPlan` retorna `{ ok: true, stub: true, reason: 'stripe_checkout_pending_fase_23' }`. Cuando shipping FASE 23 (Monetización), wirearlo a Stripe Checkout + webhook subscription:upgraded → update tabla `subscriptions`.
+  - **Fase target:** FASE 23.
+

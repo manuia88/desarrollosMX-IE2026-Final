@@ -121,4 +121,6 @@ export const unitDemandHeatmapItem = z.object({
 });
 export type UnitDemandHeatmapItem = z.infer<typeof unitDemandHeatmapItem>;
 
+export * from './documentos';
 export * from './inventario';
+export * from './plans';

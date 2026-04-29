@@ -5114,7 +5114,9 @@
       "upgradePrompt": {
         "title": "Función premium",
         "ctaUpgrade": "Upgrade a {plan}",
-        "freeNote": "Disponible en plan {plan}"
+        "freeNote": "Disponible en plan {plan}",
+        "disclosureBadge": "Premium",
+        "disclosureTitle": "Función disponible en planes superiores"
       }
     },
     "siteSelection": {
@@ -5713,7 +5715,15 @@
       "apiKeyRequired": "Plan Enterprise requerido"
     },
     "plans": {
+      "metaTitle": "Plans — Portal Developer DMX",
       "title": "Plans",
+      "subtitle": "Compara features y elige el plan que activa tu portal.",
+      "currentPlanLabel": "Tu plan actual",
+      "currentBadge": "Plan actual",
+      "placeholderBadge": "Stub FASE 23",
+      "limitWarning": "Te acercas al límite del plan {plan}. Considera upgrade.",
+      "featureLabel": "Feature",
+      "pricingLoading": "—",
       "tiers": {
         "dev_free": "Free",
         "dev_starter": "Starter",
@@ -5726,9 +5736,101 @@
         "dev_pro": "$2,997 MXN/mes",
         "dev_enterprise": "Custom"
       },
+      "features": {
+        "projectsMax": "Proyectos máx.",
+        "aiExtractions": "Extracciones AI / mes",
+        "storage": "Storage (GB)",
+        "driveMonitors": "Drive monitors",
+        "pricingAutopilot": "Pricing Autopilot",
+        "competitiveIntel": "Competitive Intel",
+        "absorptionForecast": "Absorption Forecast",
+        "predictionsTab": "Predictions tab",
+        "studioBundled": "DMX Studio bundled",
+        "apiAccess": "API REST acceso",
+        "biExport": "BI Export Power BI/Tableau/Looker"
+      },
+      "cellTrue": "Sí",
+      "cellFalse": "—",
+      "cellUnlimited": "Ilimitado",
       "upgradeCta": "Upgrade a {plan}",
       "matrixTitle": "Comparativa features",
-      "bundleStudio": "Studio Pro bundled (Pro+)"
+      "bundleStudio": "Studio Pro bundled (Pro+)",
+      "disclosureBadge": "Stub Stripe",
+      "disclosureTitle": "Stripe Checkout shipping FASE 23 — switchPlan retorna stub."
+    },
+    "docs": {
+      "metaTitle": "Documentos — Portal Developer DMX",
+      "title": "Documentos del proyecto",
+      "subtitle": "Sube planos, escrituras, permisos y documentación. Storage privado con RLS.",
+      "projectLabel": "Proyecto",
+      "tipoLabel": "Tipo de documento",
+      "dropZone": "Arrastra archivos o haz click para subir",
+      "dropZoneHint": "PDF, DOCX, XLSX, JPG, PNG, WebP. Máx 50MB.",
+      "uploading": "Subiendo…",
+      "uploaded": "Documentos subidos.",
+      "noProjects": "Sin proyectos",
+      "listTitle": "Documentos del proyecto",
+      "empty": "Aún no hay documentos.",
+      "previewCta": "Ver",
+      "deleteCta": "Eliminar",
+      "tipos": {
+        "planos": "Planos",
+        "memoria": "Memoria descriptiva",
+        "escrituras": "Escrituras",
+        "permisos": "Permisos",
+        "carta_credito": "Carta de crédito",
+        "estudio_suelo": "Estudio de suelo",
+        "factibilidad": "Factibilidad",
+        "otros": "Otros"
+      },
+      "status": {
+        "uploaded": "Subido",
+        "extracting": "Extrayendo…",
+        "extracted": "Extraído",
+        "validated": "Validado",
+        "approved": "Aprobado",
+        "rejected": "Rechazado"
+      },
+      "errors": {
+        "uploadFailed": "Subida falló: {reason}"
+      },
+      "disclosureBadge": "Stub FASE 17",
+      "disclosureTitle": "Extracción AI shipping FASE 17. Hoy archivos quedan en estado uploaded."
+    },
+    "contabilidad": {
+      "metaTitle": "Contabilidad — Portal Developer DMX",
+      "title": "Contabilidad",
+      "subtitle": "Centro financiero del desarrollador. Backbone shipping FASE 16.",
+      "phaseBanner": "FASE 16 implementa contabilidad completa: facturas, pagos, conciliación bancaria y payouts.",
+      "comingSoon": "Próximamente",
+      "sectionsTitle": "Módulos por shipping",
+      "sections": {
+        "dashboard": "Dashboard financiero",
+        "invoices": "Facturas CFDI",
+        "payments": "Pagos",
+        "reconciliation": "Conciliación bancaria",
+        "payouts": "Payouts",
+        "reports": "Reportes financieros"
+      },
+      "kpis": {
+        "revenueMonth": {
+          "label": "Revenue del mes",
+          "hint": "Suma facturado mes actual"
+        },
+        "commissionsPending": {
+          "label": "Comisiones pendientes",
+          "hint": "Operaciones cerradas sin payout"
+        },
+        "payoutsNext": {
+          "label": "Próximo payout",
+          "hint": "ETA siguiente pago de comisiones"
+        }
+      },
+      "onboardingTitle": "Configura tu FIEL + Facturapi",
+      "onboardingBody": "FASE 16 conecta tu certificado FIEL con Facturapi para emitir CFDI 4.0 desde DMX automáticamente.",
+      "onboardingCta": "Ver onboarding",
+      "disclosureBadge": "Stub FASE 16",
+      "disclosureTitle": "Pin del módulo contabilidad. Implementación shipping FASE 16."
     }
   },
   "Studio": {
