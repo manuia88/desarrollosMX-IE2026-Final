@@ -147,9 +147,7 @@ export async function grantCredits(args: GrantArgs): Promise<ConsumeResult> {
   const supabase = createAdminClient();
   const snapshot = await ensureCreditsRow(supabase, args.desarrolladora_id);
   const newBalance = Number((snapshot.balance_usd + args.amount_usd).toFixed(4));
-  const newTotalPurchased = Number(
-    (snapshot.total_purchased_usd + args.amount_usd).toFixed(4),
-  );
+  const newTotalPurchased = Number((snapshot.total_purchased_usd + args.amount_usd).toFixed(4));
   const nowIso = new Date().toISOString();
 
   const { error: updErr } = await supabase
@@ -193,9 +191,11 @@ export async function grantCredits(args: GrantArgs): Promise<ConsumeResult> {
   };
 }
 
-export async function getBalance(
-  desarrolladoraId: string,
-): Promise<{ balance_usd: number; last_consumption_at: string | null; last_purchase_at: string | null }> {
+export async function getBalance(desarrolladoraId: string): Promise<{
+  balance_usd: number;
+  last_consumption_at: string | null;
+  last_purchase_at: string | null;
+}> {
   const supabase = createAdminClient();
   const { data, error } = await supabase
     .from('dev_ai_credits')

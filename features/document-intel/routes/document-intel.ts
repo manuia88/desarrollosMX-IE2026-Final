@@ -158,44 +158,42 @@ export const documentIntelRouter = router({
       return { ok: true };
     }),
 
-  createJob: authenticatedProcedure
-    .input(createJobInput)
-    .mutation(async ({ ctx, input }) => {
-      const admin = createAdminClient();
-      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+  createJob: authenticatedProcedure.input(createJobInput).mutation(async ({ ctx, input }) => {
+    const admin = createAdminClient();
+    const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
 
-      const { data, error } = await admin
-        .from('document_jobs')
-        .insert({
-          desarrolladora_id: desarrolladoraId,
-          uploaded_by: ctx.user.id,
-          doc_type: input.doc_type,
-          proyecto_id: input.proyecto_id ?? null,
-          unidad_id: input.unidad_id ?? null,
-          storage_path: input.storage_path,
-          original_filename: input.original_filename,
-          file_size_bytes: input.file_size_bytes,
-          mime_type: input.mime_type,
-          page_count: input.page_count ?? null,
-          drive_source_file_id: input.drive_source_file_id ?? null,
-          visibility: input.visibility,
-          status: 'uploaded',
-        })
-        .select('id, status, doc_type, visibility, created_at')
-        .single();
+    const { data, error } = await admin
+      .from('document_jobs')
+      .insert({
+        desarrolladora_id: desarrolladoraId,
+        uploaded_by: ctx.user.id,
+        doc_type: input.doc_type,
+        proyecto_id: input.proyecto_id ?? null,
+        unidad_id: input.unidad_id ?? null,
+        storage_path: input.storage_path,
+        original_filename: input.original_filename,
+        file_size_bytes: input.file_size_bytes,
+        mime_type: input.mime_type,
+        page_count: input.page_count ?? null,
+        drive_source_file_id: input.drive_source_file_id ?? null,
+        visibility: input.visibility,
+        status: 'uploaded',
+      })
+      .select('id, status, doc_type, visibility, created_at')
+      .single();
 
-      if (error || !data) {
-        sentry.captureException(error ?? new Error('createJob_insert_null'), {
-          tags: { feature: 'document-intel', stage: 'createJob.insert' },
-        });
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: error?.message ?? 'job_insert_failed',
-        });
-      }
+    if (error || !data) {
+      sentry.captureException(error ?? new Error('createJob_insert_null'), {
+        tags: { feature: 'document-intel', stage: 'createJob.insert' },
+      });
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+        message: error?.message ?? 'job_insert_failed',
+      });
+    }
 
-      return data;
-    }),
+    return data;
+  }),
 
   getJob: authenticatedProcedure.input(getJobInput).query(async ({ ctx, input }) => {
     const admin = createAdminClient();
@@ -210,40 +208,35 @@ export const documentIntelRouter = router({
       throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
     }
     if (!data) throw new TRPCError({ code: 'NOT_FOUND', message: 'job_not_found' });
-    if (
-      data.desarrolladora_id !== desarrolladoraId &&
-      !ADMIN_ROLES.has(ctx.profile?.rol ?? '')
-    ) {
+    if (data.desarrolladora_id !== desarrolladoraId && !ADMIN_ROLES.has(ctx.profile?.rol ?? '')) {
       throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
     }
     return data;
   }),
 
-  listMyJobs: authenticatedProcedure
-    .input(listMyJobsInput)
-    .query(async ({ ctx, input }) => {
-      const admin = createAdminClient();
-      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+  listMyJobs: authenticatedProcedure.input(listMyJobsInput).query(async ({ ctx, input }) => {
+    const admin = createAdminClient();
+    const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
 
-      let query = admin
-        .from('document_jobs')
-        .select(
-          'id, doc_type, status, visibility, original_filename, file_size_bytes, page_count, quality_score, ai_cost_usd, charged_credits_usd, created_at, updated_at, proyecto_id',
-        )
-        .eq('desarrolladora_id', desarrolladoraId)
-        .order('created_at', { ascending: false })
-        .limit(input.limit);
+    let query = admin
+      .from('document_jobs')
+      .select(
+        'id, doc_type, status, visibility, original_filename, file_size_bytes, page_count, quality_score, ai_cost_usd, charged_credits_usd, created_at, updated_at, proyecto_id',
+      )
+      .eq('desarrolladora_id', desarrolladoraId)
+      .order('created_at', { ascending: false })
+      .limit(input.limit);
 
-      if (input.proyecto_id) query = query.eq('proyecto_id', input.proyecto_id);
-      if (input.status) query = query.eq('status', input.status);
-      if (input.doc_type) query = query.eq('doc_type', input.doc_type);
+    if (input.proyecto_id) query = query.eq('proyecto_id', input.proyecto_id);
+    if (input.status) query = query.eq('status', input.status);
+    if (input.doc_type) query = query.eq('doc_type', input.doc_type);
 
-      const { data, error } = await query;
-      if (error) {
-        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
-      }
-      return data ?? [];
-    }),
+    const { data, error } = await query;
+    if (error) {
+      throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+    }
+    return data ?? [];
+  }),
 
   requestExtraction: authenticatedProcedure
     .input(requestExtractionInput)
@@ -260,17 +253,10 @@ export const documentIntelRouter = router({
         throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
       }
       if (!job) throw new TRPCError({ code: 'NOT_FOUND', message: 'job_not_found' });
-      if (
-        job.desarrolladora_id !== desarrolladoraId &&
-        !ADMIN_ROLES.has(ctx.profile?.rol ?? '')
-      ) {
+      if (job.desarrolladora_id !== desarrolladoraId && !ADMIN_ROLES.has(ctx.profile?.rol ?? '')) {
         throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
       }
-      if (
-        job.status !== 'uploaded' &&
-        job.status !== 'ocr_done' &&
-        job.status !== 'error'
-      ) {
+      if (job.status !== 'uploaded' && job.status !== 'ocr_done' && job.status !== 'error') {
         throw new TRPCError({
           code: 'BAD_REQUEST',
           message: `cannot_extract_from_status:${job.status}`,
@@ -303,10 +289,7 @@ export const documentIntelRouter = router({
         throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: jobErr.message });
       }
       if (!job) throw new TRPCError({ code: 'NOT_FOUND', message: 'job_not_found' });
-      if (
-        job.desarrolladora_id !== desarrolladoraId &&
-        !ADMIN_ROLES.has(ctx.profile?.rol ?? '')
-      ) {
+      if (job.desarrolladora_id !== desarrolladoraId && !ADMIN_ROLES.has(ctx.profile?.rol ?? '')) {
         throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
       }
 
@@ -371,9 +354,7 @@ export const documentIntelRouter = router({
 
     const { data: txs } = await admin
       .from('ai_credit_transactions')
-      .select(
-        'id, type, amount_usd, balance_after_usd, related_job_id, description, created_at',
-      )
+      .select('id, type, amount_usd, balance_after_usd, related_job_id, description, created_at')
       .eq('desarrolladora_id', desarrolladoraId)
       .order('created_at', { ascending: false })
       .limit(20);
@@ -406,7 +387,7 @@ export const documentIntelRouter = router({
       const { data, error } = await admin
         .from('document_validations')
         .select(
-          'id, rule_code, severity, field_path, message, expected, actual, resolved_at, resolved_by, resolution_note, created_at',
+          'id, rule_code, severity, field_path, message, expected_value, actual_value, resolved_at, resolved_by, resolution_note, created_at',
         )
         .eq('job_id', input.job_id)
         .order('severity', { ascending: true })
@@ -439,9 +420,11 @@ export const documentIntelRouter = router({
       if (!validation) {
         throw new TRPCError({ code: 'NOT_FOUND', message: 'validation_not_found' });
       }
-      const ownerDevId = (validation as unknown as {
-        document_jobs?: { desarrolladora_id?: string };
-      }).document_jobs?.desarrolladora_id;
+      const ownerDevId = (
+        validation as unknown as {
+          document_jobs?: { desarrolladora_id?: string };
+        }
+      ).document_jobs?.desarrolladora_id;
       if (ownerDevId !== desarrolladoraId) {
         throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
       }

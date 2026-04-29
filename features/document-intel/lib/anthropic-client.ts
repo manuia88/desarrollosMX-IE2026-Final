@@ -76,9 +76,7 @@ export function calculateCostUsd(usage: {
   return Number(cost.toFixed(6));
 }
 
-function extractTextFromContent(
-  content: ReadonlyArray<{ type: string; text?: string }>,
-): string {
+function extractTextFromContent(content: ReadonlyArray<{ type: string; text?: string }>): string {
   const texts = content.filter((b) => b.type === 'text' && typeof b.text === 'string');
   return texts.map((b) => b.text ?? '').join('');
 }

@@ -18,9 +18,17 @@ import {
 } from '@/features/document-intel/lib/anthropic-client';
 import { consumeCredits } from '@/features/document-intel/lib/credits-engine';
 import {
+  checkDuplicate,
+  computePageHashes,
+  recordDocumentHash,
+  sha256,
+} from '@/features/document-intel/lib/hash-dedup';
+import { computeQualityScoreFromRecords } from '@/features/document-intel/lib/quality-score';
+import {
   getSystemPrompt,
   PROMPT_TEMPLATE_VERSION,
 } from '@/features/document-intel/lib/system-prompts';
+import { runValidation } from '@/features/document-intel/lib/validation-rules';
 import { docTypeEnum } from '@/features/document-intel/schemas';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { sentry } from '@/shared/lib/telemetry/sentry';
@@ -39,7 +47,7 @@ export interface ProcessJobOutcome {
   readonly telemetry?: ExtractionTelemetry;
 }
 
-async function downloadPdfBase64(storagePath: string): Promise<string> {
+async function downloadPdfBuffer(storagePath: string): Promise<Buffer> {
   const supabase = createAdminClient();
   const { data, error } = await supabase.storage.from(STORAGE_BUCKET).download(storagePath);
   if (error || !data) {
@@ -49,13 +57,7 @@ async function downloadPdfBase64(storagePath: string): Promise<string> {
     });
   }
   const arrayBuffer = await data.arrayBuffer();
-  return Buffer.from(arrayBuffer).toString('base64');
-}
-
-function deriveQualityScore(confidence: number): 'green' | 'amber' | 'red' {
-  if (confidence >= 0.85) return 'green';
-  if (confidence >= 0.6) return 'amber';
-  return 'red';
+  return Buffer.from(arrayBuffer);
 }
 
 export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
@@ -80,11 +82,6 @@ export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
     return { job_id: jobId, status: 'extracted' };
   }
 
-  await supabase
-    .from('document_jobs')
-    .update({ status: 'extracting', updated_at: new Date().toISOString() })
-    .eq('id', jobId);
-
   try {
     const docTypeParsed = docTypeEnum.safeParse(typed.doc_type);
     if (!docTypeParsed.success) {
@@ -94,8 +91,34 @@ export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
       });
     }
     const docType = docTypeParsed.data;
+
+    const pdfBuffer = await downloadPdfBuffer(typed.storage_path);
+    const fileHash = sha256(pdfBuffer);
+    const dupResult = await checkDuplicate({
+      desarrolladoraId: typed.desarrolladora_id,
+      fileBuffer: pdfBuffer,
+    });
+    if (dupResult.duplicate && dupResult.existingJobId && dupResult.existingJobId !== jobId) {
+      await supabase
+        .from('document_jobs')
+        .update({
+          status: 'extracted',
+          duplicate_of_job_id: dupResult.existingJobId,
+          ai_cost_usd: 0,
+          charged_credits_usd: 0,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', jobId);
+      return { job_id: jobId, status: 'extracted', cost_usd: 0, charged_usd: 0 };
+    }
+
+    await supabase
+      .from('document_jobs')
+      .update({ status: 'extracting', updated_at: new Date().toISOString() })
+      .eq('id', jobId);
+
     const systemPrompt = getSystemPrompt(docType);
-    const pdfBase64 = await downloadPdfBase64(typed.storage_path);
+    const pdfBase64 = pdfBuffer.toString('base64');
 
     const { result, telemetry } = await runExtraction({
       systemPrompt,
@@ -139,8 +162,59 @@ export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
       description: `AI extraction ${docType} job ${jobId}`,
     });
 
-    const qualityScore = deriveQualityScore(result.confidence);
-    const qualityNumeric = Number((result.confidence * 100).toFixed(2));
+    const findings = runValidation({
+      docType,
+      extracted: result.extracted_data,
+    });
+    const validationRecords = findings.map((f) => ({
+      job_id: jobId,
+      rule_code: f.rule_code,
+      severity: f.severity,
+      field_path: f.field_path,
+      message: f.message,
+      expected_value: f.expected_value,
+      actual_value: f.actual_value,
+    }));
+    if (validationRecords.length > 0) {
+      const { error: validationErr } = await supabase
+        .from('document_validations')
+        .insert(validationRecords);
+      if (validationErr) {
+        sentry.captureException(validationErr, {
+          tags: { feature: 'document-intel', stage: 'persist_validations', job_id: jobId },
+        });
+      }
+    }
+
+    const qualityResult = computeQualityScoreFromRecords(
+      findings.map((f) => ({
+        id: '',
+        job_id: jobId,
+        rule_code: f.rule_code,
+        severity: f.severity,
+        message: f.message,
+        field_path: f.field_path,
+        expected_value: f.expected_value,
+        actual_value: f.actual_value,
+        resolved_at: null,
+        resolved_by: null,
+        resolution_note: null,
+        created_at: new Date().toISOString(),
+      })),
+    );
+
+    const pageHashes = computePageHashes({ fileBuffer: pdfBuffer });
+    const hashResult = await recordDocumentHash({
+      desarrolladoraId: typed.desarrolladora_id,
+      jobId,
+      fileHash,
+      pageHashes,
+    });
+    if (!hashResult.ok) {
+      sentry.captureException(new Error(hashResult.error ?? 'record_hash_failed'), {
+        tags: { feature: 'document-intel', stage: 'record_hash', job_id: jobId },
+      });
+    }
 
     await supabase
       .from('document_jobs')
@@ -152,8 +226,8 @@ export async function processJob(jobId: string): Promise<ProcessJobOutcome> {
         ai_tokens_cache_read: telemetry.tokens_cache_read,
         ai_cost_usd: telemetry.cost_usd,
         charged_credits_usd: credits.charged_usd,
-        quality_score: qualityScore,
-        quality_score_numeric: qualityNumeric,
+        quality_score: qualityResult.score,
+        quality_score_numeric: qualityResult.numeric,
         updated_at: new Date().toISOString(),
       })
       .eq('id', jobId);

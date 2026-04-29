@@ -47,7 +47,7 @@ Schema de output:
 }
 
 Few-shot example:
-INPUT: PDF con tabla "Unidad 101 — 75m² — 2R/2B — \$8,500,000 — DISPONIBLE" y "Unidad 102 — 80m² — 2R/2B — \$9,200,000 — APARTADO".
+INPUT: PDF con tabla "Unidad 101 — 75m² — 2R/2B — $8,500,000 — DISPONIBLE" y "Unidad 102 — 80m² — 2R/2B — $9,200,000 — APARTADO".
 OUTPUT:
 {
   "extracted_data": {

@@ -86,7 +86,7 @@ describe('pollFolder', () => {
 });
 
 describe('documentIntelRouter — module export smoke', () => {
-  it('exports the expected drive monitor procedures', async () => {
+  it('exports the expected drive monitor + pipeline procedures', async () => {
     vi.doMock('@/shared/lib/supabase/admin', () => ({
       createAdminClient: vi.fn(() => ({ from: vi.fn() })),
     }));
@@ -96,6 +96,16 @@ describe('documentIntelRouter — module export smoke', () => {
     expect(r.listMyDriveMonitors).toBeDefined();
     expect(r.deleteDriveMonitor).toBeDefined();
     expect(r.getMyCreditsBalance).toBeDefined();
-    expect(r.ping).toBeDefined();
+    expect(r.createJob).toBeDefined();
+    expect(r.getJob).toBeDefined();
+    expect(r.listMyJobs).toBeDefined();
+    expect(r.requestExtraction).toBeDefined();
+    expect(r.getExtractedData).toBeDefined();
+    expect(r.processJobNow).toBeDefined();
+    expect(r.adminGrantCredits).toBeDefined();
+    expect(r.getJobValidations).toBeDefined();
+    expect(r.resolveValidation).toBeDefined();
+    expect(r.getJobDuplicateInfo).toBeDefined();
+    expect(r.uploadDocumentToStorage).toBeDefined();
   });
 });
