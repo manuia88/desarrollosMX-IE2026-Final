@@ -1,5 +1,6 @@
 import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
+import { runComplianceCheck } from '@/features/document-intel/lib/compliance-check';
 import { grantCredits } from '@/features/document-intel/lib/credits-engine';
 import { parseDriveFolderId, pollFolder } from '@/features/document-intel/lib/drive-monitor';
 import { processJob } from '@/features/document-intel/lib/extraction-engine';
@@ -19,6 +20,7 @@ import {
 } from '@/features/document-intel/schemas';
 import { router } from '@/server/trpc/init';
 import { authenticatedProcedure } from '@/server/trpc/middleware';
+import { generateEmbedding } from '@/shared/lib/openai/embeddings';
 import { createAdminClient } from '@/shared/lib/supabase/admin';
 import { sentry } from '@/shared/lib/telemetry/sentry';
 
@@ -515,6 +517,240 @@ export const documentIntelRouter = router({
         .eq('id', job.duplicate_of_job_id)
         .maybeSingle();
       return { isDuplicate: true as const, original };
+    }),
+
+  getProjectComplianceChecks: authenticatedProcedure
+    .input(z.object({ proyecto_id: z.string().uuid() }))
+    .query(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+      const { data: project, error: projErr } = await admin
+        .from('proyectos')
+        .select('id, desarrolladora_id')
+        .eq('id', input.proyecto_id)
+        .maybeSingle();
+      if (projErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: projErr.message });
+      }
+      if (!project) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'project_not_found' });
+      }
+      if (
+        project.desarrolladora_id !== desarrolladoraId &&
+        !ADMIN_ROLES.has(ctx.profile?.rol ?? '')
+      ) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+      }
+
+      const SEVERITY_RANK: Record<string, number> = {
+        critical: 0,
+        warning: 1,
+        info: 2,
+      };
+
+      const { data, error } = await admin
+        .from('document_compliance_checks')
+        .select(
+          'id, check_code, severity, finding, source_job_ids, conflicting_data, ai_recommendation, resolved_at, resolved_by, resolution_note, created_at',
+        )
+        .eq('proyecto_id', input.proyecto_id)
+        .order('created_at', { ascending: false });
+      if (error) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      const rows = data ?? [];
+      return [...rows].sort((a, b) => {
+        const ar = a.resolved_at !== null ? 1 : 0;
+        const br = b.resolved_at !== null ? 1 : 0;
+        if (ar !== br) return ar - br;
+        const sa = SEVERITY_RANK[a.severity] ?? 99;
+        const sb = SEVERITY_RANK[b.severity] ?? 99;
+        return sa - sb;
+      });
+    }),
+
+  runComplianceCheckManual: authenticatedProcedure
+    .input(z.object({ proyecto_id: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+      const { data: project, error: projErr } = await admin
+        .from('proyectos')
+        .select('id, desarrolladora_id')
+        .eq('id', input.proyecto_id)
+        .maybeSingle();
+      if (projErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: projErr.message });
+      }
+      if (!project) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'project_not_found' });
+      }
+      if (
+        project.desarrolladora_id !== desarrolladoraId &&
+        !ADMIN_ROLES.has(ctx.profile?.rol ?? '')
+      ) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+      }
+
+      try {
+        const result = await runComplianceCheck({
+          proyectoId: input.proyecto_id,
+          desarrolladoraId,
+        });
+        return { ok: true, ...result };
+      } catch (err) {
+        sentry.captureException(err, {
+          tags: { feature: 'document-intel', stage: 'runComplianceCheckManual' },
+        });
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: err instanceof Error ? err.message : 'compliance_check_failed',
+        });
+      }
+    }),
+
+  resolveComplianceCheck: authenticatedProcedure
+    .input(
+      z.object({
+        check_id: z.string().uuid(),
+        note: z.string().min(1).max(500),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+      const { data: check, error: lookupErr } = await admin
+        .from('document_compliance_checks')
+        .select('id, desarrolladora_id, resolved_at')
+        .eq('id', input.check_id)
+        .maybeSingle();
+      if (lookupErr) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: lookupErr.message });
+      }
+      if (!check) {
+        throw new TRPCError({ code: 'NOT_FOUND', message: 'check_not_found' });
+      }
+      if (
+        check.desarrolladora_id !== desarrolladoraId &&
+        !ADMIN_ROLES.has(ctx.profile?.rol ?? '')
+      ) {
+        throw new TRPCError({ code: 'FORBIDDEN', message: 'cross_dev_access_denied' });
+      }
+      if (check.resolved_at !== null) {
+        throw new TRPCError({ code: 'CONFLICT', message: 'already_resolved' });
+      }
+
+      const { error } = await admin
+        .from('document_compliance_checks')
+        .update({
+          resolved_at: new Date().toISOString(),
+          resolved_by: ctx.user.id,
+          resolution_note: input.note,
+        })
+        .eq('id', input.check_id);
+      if (error) {
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+      return { ok: true };
+    }),
+
+  searchDocuments: authenticatedProcedure
+    .input(
+      z.object({
+        query: z.string().min(3).max(500),
+        proyecto_id: z.string().uuid().optional(),
+        limit: z.number().int().min(1).max(20).default(10),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const admin = createAdminClient();
+      const desarrolladoraId = await requireDesarrolladoraId(admin, ctx.user.id);
+
+      const { embedding, telemetry } = await generateEmbedding(input.query);
+
+      let queryBuilder = admin
+        .from('document_embeddings')
+        .select('id, job_id, proyecto_id, chunk_index, chunk_text, metadata, created_at, embedding')
+        .eq('desarrolladora_id', desarrolladoraId)
+        .eq('visibility', 'dev_only');
+
+      if (input.proyecto_id) {
+        queryBuilder = queryBuilder.eq('proyecto_id', input.proyecto_id);
+      }
+
+      const { data: rows, error } = await queryBuilder.limit(500);
+      if (error) {
+        sentry.captureException(error, {
+          tags: { feature: 'document-intel', stage: 'searchDocuments.query' },
+        });
+        throw new TRPCError({ code: 'INTERNAL_SERVER_ERROR', message: error.message });
+      }
+
+      const queryArr = embedding;
+      const queryNorm = Math.sqrt(queryArr.reduce((s, v) => s + v * v, 0)) || 1;
+
+      const scored = (rows ?? []).flatMap((r) => {
+        if (!r.embedding) return [];
+        let candidateVec: number[];
+        try {
+          candidateVec = JSON.parse(r.embedding) as number[];
+        } catch {
+          return [];
+        }
+        if (!Array.isArray(candidateVec) || candidateVec.length !== queryArr.length) return [];
+        let dot = 0;
+        let normB = 0;
+        for (let i = 0; i < queryArr.length; i += 1) {
+          const a = queryArr[i] ?? 0;
+          const b = candidateVec[i] ?? 0;
+          dot += a * b;
+          normB += b * b;
+        }
+        const denom = queryNorm * (Math.sqrt(normB) || 1);
+        const similarity = denom === 0 ? 0 : dot / denom;
+        return [{ row: r, similarity }];
+      });
+
+      const filtered = scored
+        .filter((s) => s.similarity >= 0.7)
+        .sort((a, b) => b.similarity - a.similarity)
+        .slice(0, input.limit);
+
+      const jobIds = [...new Set(filtered.map((s) => s.row.job_id))];
+      const jobMetaById = new Map<string, { original_filename: string | null; doc_type: string }>();
+      if (jobIds.length > 0) {
+        const { data: jobs } = await admin
+          .from('document_jobs')
+          .select('id, original_filename, doc_type')
+          .in('id', jobIds);
+        for (const j of jobs ?? []) {
+          jobMetaById.set(j.id, {
+            original_filename: j.original_filename,
+            doc_type: j.doc_type,
+          });
+        }
+      }
+
+      return {
+        query_tokens: telemetry.tokens_used,
+        query_cost_usd: telemetry.cost_usd,
+        results: filtered.map((s) => {
+          const meta = jobMetaById.get(s.row.job_id);
+          return {
+            id: s.row.id,
+            job_id: s.row.job_id,
+            chunk_index: s.row.chunk_index,
+            chunk_text: s.row.chunk_text,
+            similarity: Number(s.similarity.toFixed(4)),
+            doc_type: meta?.doc_type ?? null,
+            original_filename: meta?.original_filename ?? null,
+            created_at: s.row.created_at,
+          };
+        }),
+      };
     }),
 
   uploadDocumentToStorage: authenticatedProcedure

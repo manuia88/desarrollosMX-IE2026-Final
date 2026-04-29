@@ -5919,11 +5919,32 @@
       "compliance": {
         "title": "Validação IA cruzada",
         "subtitle": "Inconsistências detectadas entre documentos do projeto",
+        "section_title": "Análise cruzada do projeto",
         "severity_info": "Info",
         "severity_warning": "Aviso",
         "severity_critical": "Bloqueador legal",
         "resolved": "Resolvido",
-        "mark_resolved": "Marcar resolvido"
+        "resolved_by": "Resolução",
+        "mark_resolved": "Marcar como resolvido",
+        "empty": "Sem inconsistências cruzadas",
+        "run_manual": "Re-executar análise",
+        "run_started": "Análise iniciada…",
+        "loading": "Carregando análise…",
+        "source_jobs": "Documentos envolvidos",
+        "recommendation": "Ver recomendação IA",
+        "hide_recommendation": "Ocultar recomendação",
+        "resolution_required": "Notas obrigatórias para resolver",
+        "resolution_note_label": "Notas de resolução",
+        "cancel": "Cancelar",
+        "confirm": "Confirmar",
+        "submitting": "Resolvendo…"
+      },
+      "search": {
+        "placeholder": "Buscar nos seus documentos…",
+        "empty": "Digite ≥3 caracteres para buscar",
+        "no_results": "Nenhum resultado similar",
+        "similarity": "Similaridade",
+        "loading": "Buscando…"
       },
       "validations": {
         "title": "Achados de validação",

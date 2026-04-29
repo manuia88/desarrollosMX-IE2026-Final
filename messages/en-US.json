@@ -5919,11 +5919,32 @@
       "compliance": {
         "title": "AI cross-validation",
         "subtitle": "Inconsistencies detected between project documents",
+        "section_title": "Cross-document project analysis",
         "severity_info": "Info",
         "severity_warning": "Warning",
         "severity_critical": "Legal blocker",
         "resolved": "Resolved",
-        "mark_resolved": "Mark resolved"
+        "resolved_by": "Resolution",
+        "mark_resolved": "Mark resolved",
+        "empty": "No cross-document findings",
+        "run_manual": "Re-run analysis",
+        "run_started": "Analysis started…",
+        "loading": "Loading analysis…",
+        "source_jobs": "Documents involved",
+        "recommendation": "Show AI recommendation",
+        "hide_recommendation": "Hide recommendation",
+        "resolution_required": "Notes required to resolve",
+        "resolution_note_label": "Resolution notes",
+        "cancel": "Cancel",
+        "confirm": "Confirm",
+        "submitting": "Resolving…"
+      },
+      "search": {
+        "placeholder": "Search your documents…",
+        "empty": "Type ≥3 characters to search",
+        "no_results": "No similar results",
+        "similarity": "Similarity",
+        "loading": "Searching…"
       },
       "validations": {
         "title": "Validation findings",

@@ -137,6 +137,48 @@ function parseExtractionResponse(rawText: string): ExtractionResult {
   return { extracted_data, citations, confidence };
 }
 
+export interface ReasoningTelemetry {
+  readonly tokens_input: number;
+  readonly tokens_output: number;
+  readonly cost_usd: number;
+  readonly model: string;
+}
+
+export interface ReasoningResult {
+  readonly text: string;
+  readonly telemetry: ReasoningTelemetry;
+}
+
+export interface ReasoningCallParams {
+  readonly systemPrompt: string;
+  readonly userMessage: string;
+  readonly maxTokens?: number;
+}
+
+export async function runReasoningChat(params: ReasoningCallParams): Promise<ReasoningResult> {
+  const client = getAnthropicClient();
+  const response = await client.messages.create({
+    model: ANTHROPIC_MODEL,
+    max_tokens: params.maxTokens ?? 600,
+    system: params.systemPrompt,
+    messages: [
+      {
+        role: 'user',
+        content: [{ type: 'text', text: params.userMessage }],
+      },
+    ],
+  });
+
+  const text = extractTextFromContent(response.content).trim();
+  const telemetry: ReasoningTelemetry = {
+    tokens_input: response.usage.input_tokens,
+    tokens_output: response.usage.output_tokens,
+    cost_usd: calculateCostUsd(response.usage),
+    model: ANTHROPIC_MODEL,
+  };
+  return { text, telemetry };
+}
+
 export async function runExtraction(params: ExtractionCallParams): Promise<ExtractionRunResult> {
   const client = getAnthropicClient();
   const startedAt = Date.now();
