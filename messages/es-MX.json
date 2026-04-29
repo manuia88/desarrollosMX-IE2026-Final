@@ -5553,6 +5553,9 @@
     },
     "upg": {
       "title": "Developer Intelligence (UPG 7.10)",
+      "hubSubtitle": "Nueve herramientas de inteligencia para acelerar decisiones de tu portafolio.",
+      "hubOpenCta": "Abrir",
+      "hubPendingH2": "Disponible H2",
       "tools": {
         "demandHeatmap": "Demand Heatmap (UPG 81)",
         "pricingAdvisor": "Pricing Advisor (UPG 82)",
@@ -5564,17 +5567,75 @@
         "oportunidad": "Zonas Oportunidad (UPG 88)",
         "proyeccion": "Proyección 5 años (UPG 89)"
       },
+      "hubDescriptions": {
+        "demandHeatmap": "Heatmap de demanda real con búsquedas + tráfico landing.",
+        "pricingAdvisor": "Sugerencias de precio por unidad vs. mercado secundario.",
+        "competitive": "Comparativo vs. 5 competidores activos en tu zona.",
+        "benchmark": "Tu desarrolladora vs. cohort nacional por métricas clave.",
+        "feasibility": "Cash flow 5y + IRR + NPV + sensibilidad ±10/20%.",
+        "terrenos": "Inventario de terrenos publicados (próximamente).",
+        "manzana": "Score combinado por colonia (seguridad + ecosistema + valor).",
+        "oportunidad": "Ranking de zonas pre-gentrificación con potencial.",
+        "proyeccion": "Narrativa 5 años por colonia con tendencias estructurales."
+      },
       "benchmark": {
+        "title": "Benchmark vs. cohort",
+        "subtitle": "Compara tu desempeño contra otras desarrolladoras activas.",
+        "quarterLabel": "Trimestre",
+        "loading": "Cargando benchmarks…",
+        "valueLabel": "Tu valor",
         "percentileLabel": "Percentil",
         "cohortMedianLabel": "Mediana cohort",
-        "topPctLabel": "Top {pct}%"
+        "cohortSizeLabel": "Cohort: {count} desarrolladoras",
+        "topPctLabel": "Top {pct}%",
+        "metrics": {
+          "absorption_rate_monthly": "Tasa absorción mensual",
+          "price_per_m2_avg_mxn": "Precio promedio por m² (MXN)",
+          "days_to_sell_avg": "Días promedio venta",
+          "units_delivered_on_time_pct": "Unidades entregadas a tiempo (%)"
+        }
       },
       "feasibility": {
         "newCta": "Nuevo análisis",
         "catastroLabel": "Link Catastro",
         "programLabel": "Programa",
         "generateCta": "Generar análisis",
-        "costNote": "Costo aprox /bin/zsh.50 USD"
+        "generatingCta": "Generando…",
+        "costNote": "Costo aprox 0.50 USD",
+        "wizardStepLabel": "Paso {current} de {total}",
+        "stepCatastroTitle": "1. Identificación del predio",
+        "stepCatastroHint": "Pega el link público de Catastro o déjalo vacío para análisis genérico.",
+        "stepProgramaTitle": "2. Programa arquitectónico",
+        "stepFinanzasTitle": "3. Parámetros financieros",
+        "stepConfirmTitle": "4. Confirmar y generar",
+        "tipoLabel": "Tipo",
+        "unitsLabel": "Unidades totales",
+        "absorcionLabel": "Absorción / mes",
+        "precioLabel": "Precio promedio (MXN)",
+        "costoLabel": "Costo total estimado (MXN)",
+        "constructionMonthsLabel": "Meses de construcción",
+        "discountRateLabel": "Tasa descuento anual (%)",
+        "noCatastro": "sin link",
+        "backCta": "Atrás",
+        "nextCta": "Siguiente"
+      },
+      "manzana": {
+        "title": "Análisis de manzana",
+        "subtitle": "Score combinado por zona (seguridad + ecosistema + diversidad + valor).",
+        "pickerHint": "Pega el ID de colonia (UUID). En H2: click directo en mapa.",
+        "coloniaIdLabel": "ID de colonia",
+        "analyzeCta": "Analizar",
+        "loading": "Cargando análisis…",
+        "resultTitle": "Resultado",
+        "missingLabel": "Faltantes",
+        "noData": "Sin datos para esta colonia.",
+        "breakdown": {
+          "seguridad": "Seguridad (F01)",
+          "ecosistema": "Ecosistema (F03)",
+          "diversidad": "Diversidad (N01)",
+          "gentrificacion": "Gentrificación (F10)",
+          "value": "Value (F09)"
+        }
       },
       "terrenos": {
         "listTitle": "Terrenos disponibles",
