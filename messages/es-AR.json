@@ -5865,16 +5865,42 @@
         "paste_link": "Pega link público de Google Drive",
         "label_placeholder": "Etiqueta carpeta (ej. Torre Reforma marketing)",
         "last_polled": "Última verificación",
-        "files_detected": "archivos detectados"
+        "files_detected": "archivos detectados",
+        "page_title": "Drive Monitor",
+        "page_subtitle": "Conectá carpetas Drive públicas para auto-importar PDFs",
+        "add_button": "Agregar carpeta",
+        "add_modal_title": "Conectar carpeta Drive",
+        "url_label": "Link de la carpeta",
+        "type_label": "Tipo de carpeta",
+        "label_label": "Etiqueta (opcional)",
+        "project_label": "Proyecto (opcional)",
+        "project_placeholder": "Sin proyecto asignado",
+        "submit_button": "Conectar",
+        "submit_loading": "Conectando…",
+        "delete_button": "Eliminar",
+        "delete_confirm": "¿Eliminar este monitor? Los archivos ya importados se conservan.",
+        "invalid_url": "Link de Drive inválido. Pegá la URL completa de la carpeta.",
+        "not_accessible": "No se pudo acceder a la carpeta. Verificá que esté pública (cualquiera con el link).",
+        "added_success": "Carpeta conectada",
+        "deleted_success": "Monitor eliminado",
+        "duplicate": "Esta carpeta ya está siendo monitoreada",
+        "empty_state": "Sin carpetas conectadas. Agregá la primera para auto-importar PDFs.",
+        "never_polled": "Nunca verificada",
+        "next_poll": "Próxima verificación",
+        "failure_warning": "Última verificación falló: {message}",
+        "type_marketing": "Marketing público",
+        "type_legal": "Legales privado"
       },
       "credits": {
         "balance": "Saldo IA",
         "buy_pack": "Recargar Pack $25 USD",
         "pack_unavailable": "Disponible al lanzamiento (Stripe Connect F18)",
-        "no_balance": "Sin saldo. Recarga Pack $25 para procesar con IA",
+        "no_balance": "Sin saldo. Recargá Pack $25 para procesar con IA",
         "manual_upload": "Subir manual (no usa IA)",
         "consumed": "Consumido",
-        "purchased": "Comprado"
+        "purchased": "Comprado",
+        "zero_short": "Sin saldo IA",
+        "close": "Cerrar"
       },
       "compliance": {
         "title": "Validación AI cruzada",
@@ -5884,6 +5910,27 @@
         "severity_critical": "Bloqueador legal",
         "resolved": "Resuelto",
         "mark_resolved": "Marcar resuelto"
+      },
+      "validations": {
+        "title": "Hallazgos de validación",
+        "empty": "Sin hallazgos — documento aprobado",
+        "mark_resolved": "Marcar resuelto",
+        "resolution_required": "Notas requeridas para resolver",
+        "resolution_note_label": "Notas de resolución",
+        "cancel": "Cancelar",
+        "confirm": "Confirmar",
+        "submitting": "Resolviendo...",
+        "severity_error": "Error",
+        "col_severity": "Severidad",
+        "col_code": "Regla",
+        "col_message": "Mensaje",
+        "col_field": "Campo",
+        "col_actions": "Acciones"
+      },
+      "dedupe": {
+        "duplicate_of": "Duplicado de #{id}",
+        "pages_changed": "{count, plural, one {# página cambió} other {# páginas cambiaron}}",
+        "pages_list": "Páginas: {pages}"
       }
     }
   },

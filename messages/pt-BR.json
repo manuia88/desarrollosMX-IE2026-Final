@@ -5865,7 +5865,31 @@
         "paste_link": "Cole link público do Google Drive",
         "label_placeholder": "Rótulo pasta (ex. Torre Reforma marketing)",
         "last_polled": "Última verificação",
-        "files_detected": "arquivos detectados"
+        "files_detected": "arquivos detectados",
+        "page_title": "Drive Monitor",
+        "page_subtitle": "Conecte pastas Drive públicas para importar PDFs automaticamente",
+        "add_button": "Adicionar pasta",
+        "add_modal_title": "Conectar pasta Drive",
+        "url_label": "Link da pasta",
+        "type_label": "Tipo de pasta",
+        "label_label": "Rótulo (opcional)",
+        "project_label": "Projeto (opcional)",
+        "project_placeholder": "Sem projeto atribuído",
+        "submit_button": "Conectar",
+        "submit_loading": "Conectando…",
+        "delete_button": "Remover",
+        "delete_confirm": "Remover este monitor? Os arquivos já importados serão mantidos.",
+        "invalid_url": "Link de Drive inválido. Cole a URL completa da pasta.",
+        "not_accessible": "Não foi possível acessar a pasta. Verifique se está pública (qualquer pessoa com o link).",
+        "added_success": "Pasta conectada",
+        "deleted_success": "Monitor removido",
+        "duplicate": "Esta pasta já está sendo monitorada",
+        "empty_state": "Sem pastas conectadas. Adicione a primeira para importar PDFs automaticamente.",
+        "never_polled": "Nunca verificada",
+        "next_poll": "Próxima verificação",
+        "failure_warning": "Última verificação falhou: {message}",
+        "type_marketing": "Marketing público",
+        "type_legal": "Legais privado"
       },
       "credits": {
         "balance": "Saldo IA",
@@ -5874,7 +5898,9 @@
         "no_balance": "Sem saldo. Recarregue Pack $25 para processar com IA",
         "manual_upload": "Enviar manual (não usa IA)",
         "consumed": "Consumido",
-        "purchased": "Comprado"
+        "purchased": "Comprado",
+        "zero_short": "Sem saldo IA",
+        "close": "Fechar"
       },
       "compliance": {
         "title": "Validação IA cruzada",
@@ -5884,6 +5910,27 @@
         "severity_critical": "Bloqueador legal",
         "resolved": "Resolvido",
         "mark_resolved": "Marcar resolvido"
+      },
+      "validations": {
+        "title": "Achados de validação",
+        "empty": "Sem achados — documento aprovado",
+        "mark_resolved": "Marcar resolvido",
+        "resolution_required": "Notas obrigatórias para resolver",
+        "resolution_note_label": "Notas de resolução",
+        "cancel": "Cancelar",
+        "confirm": "Confirmar",
+        "submitting": "Resolvendo...",
+        "severity_error": "Erro",
+        "col_severity": "Severidade",
+        "col_code": "Regra",
+        "col_message": "Mensagem",
+        "col_field": "Campo",
+        "col_actions": "Ações"
+      },
+      "dedupe": {
+        "duplicate_of": "Duplicado de #{id}",
+        "pages_changed": "{count, plural, one {# página alterada} other {# páginas alteradas}}",
+        "pages_list": "Páginas: {pages}"
       }
     }
   },
