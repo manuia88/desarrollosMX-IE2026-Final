@@ -1,4 +1,8 @@
-import type { QualityScoreResult, ValidationRecord, ValidationSeverity } from '../schemas/validation';
+import type {
+  QualityScoreResult,
+  ValidationRecord,
+  ValidationSeverity,
+} from '../schemas/validation';
 
 export interface QualityScoreInput {
   readonly severity: ValidationSeverity;
@@ -9,7 +13,9 @@ function isUnresolved(v: QualityScoreInput): boolean {
   return v.resolved_at === null;
 }
 
-export function computeQualityScore(validations: ReadonlyArray<QualityScoreInput>): QualityScoreResult {
+export function computeQualityScore(
+  validations: ReadonlyArray<QualityScoreInput>,
+): QualityScoreResult {
   const unresolved = validations.filter(isUnresolved);
   const critical = unresolved.filter((v) => v.severity === 'critical').length;
   const error = unresolved.filter((v) => v.severity === 'error').length;

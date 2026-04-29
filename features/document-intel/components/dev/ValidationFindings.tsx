@@ -12,7 +12,10 @@ const SEVERITY_ORDER: Record<ValidationSeverity, number> = {
   info: 3,
 };
 
-const SEVERITY_BADGE_STYLE: Record<ValidationSeverity, { bg: string; border: string; color: string }> = {
+const SEVERITY_BADGE_STYLE: Record<
+  ValidationSeverity,
+  { bg: string; border: string; color: string }
+> = {
   critical: { bg: 'rgba(239, 68, 68, 0.10)', border: 'rgba(239, 68, 68, 0.32)', color: '#fca5a5' },
   error: { bg: 'rgba(249, 115, 22, 0.10)', border: 'rgba(249, 115, 22, 0.32)', color: '#fdba74' },
   warning: { bg: 'rgba(245, 158, 11, 0.10)', border: 'rgba(245, 158, 11, 0.32)', color: '#fcd34d' },
@@ -58,10 +61,7 @@ export function ValidationFindings({
   if (sorted.length === 0) {
     return (
       <Card variant="recessed" className="p-6">
-        <p
-          className="text-center text-sm"
-          style={{ color: 'var(--canon-cream)', opacity: 0.7 }}
-        >
+        <p className="text-center text-sm" style={{ color: 'var(--canon-cream)', opacity: 0.7 }}>
           {t('empty')}
         </p>
       </Card>
@@ -96,10 +96,7 @@ export function ValidationFindings({
         >
           {t('title')}
         </h3>
-        <span
-          className="text-xs"
-          style={{ color: 'var(--canon-cream)', opacity: 0.6 }}
-        >
+        <span className="text-xs" style={{ color: 'var(--canon-cream)', opacity: 0.6 }}>
           {sorted.length}
         </span>
       </header>
@@ -111,9 +108,7 @@ export function ValidationFindings({
               <th className="px-2 py-2 font-medium">{t('col_code')}</th>
               <th className="px-2 py-2 font-medium">{t('col_message')}</th>
               <th className="px-2 py-2 font-medium">{t('col_field')}</th>
-              {canResolve ? (
-                <th className="px-2 py-2 font-medium">{t('col_actions')}</th>
-              ) : null}
+              {canResolve ? <th className="px-2 py-2 font-medium">{t('col_actions')}</th> : null}
             </tr>
           </thead>
           <tbody>
@@ -142,7 +137,6 @@ export function ValidationFindings({
                         textTransform: 'uppercase',
                         letterSpacing: '0.02em',
                       }}
-                      aria-label={severityLabel(v.severity)}
                     >
                       {severityLabel(v.severity)}
                     </span>
@@ -153,10 +147,7 @@ export function ValidationFindings({
                   >
                     {v.rule_code}
                   </td>
-                  <td
-                    className="px-2 py-2 align-top"
-                    style={{ color: 'var(--canon-cream)' }}
-                  >
+                  <td className="px-2 py-2 align-top" style={{ color: 'var(--canon-cream)' }}>
                     {v.message}
                   </td>
                   <td

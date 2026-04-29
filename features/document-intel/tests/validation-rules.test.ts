@@ -101,13 +101,19 @@ const CASES: ReadonlyArray<RuleCase> = [
       num_escritura: '12345',
       fecha: '2024-01-15',
       notario_num: 42,
-      partes: [{ nombre: 'A', rfc: 'ABCD800101AB1' }, { nombre: 'B', rfc: 'XYZW900101XY2' }],
+      partes: [
+        { nombre: 'A', rfc: 'ABCD800101AB1' },
+        { nombre: 'B', rfc: 'XYZW900101XY2' },
+      ],
     },
     fail: {
       num_escritura: '',
       fecha: '2024-01-15',
       notario_num: 42,
-      partes: [{ nombre: 'A', rfc: 'ABCD800101AB1' }, { nombre: 'B', rfc: 'XYZW900101XY2' }],
+      partes: [
+        { nombre: 'A', rfc: 'ABCD800101AB1' },
+        { nombre: 'B', rfc: 'XYZW900101XY2' },
+      ],
     },
   },
   {
@@ -117,13 +123,19 @@ const CASES: ReadonlyArray<RuleCase> = [
       num_escritura: '12345',
       fecha: '2024-01-15',
       notario_num: 42,
-      partes: [{ nombre: 'A', rfc: 'ABCD800101AB1' }, { nombre: 'B', rfc: 'XYZW900101XY2' }],
+      partes: [
+        { nombre: 'A', rfc: 'ABCD800101AB1' },
+        { nombre: 'B', rfc: 'XYZW900101XY2' },
+      ],
     },
     fail: {
       num_escritura: '12345',
       fecha: '2099-01-15',
       notario_num: 42,
-      partes: [{ nombre: 'A', rfc: 'ABCD800101AB1' }, { nombre: 'B', rfc: 'XYZW900101XY2' }],
+      partes: [
+        { nombre: 'A', rfc: 'ABCD800101AB1' },
+        { nombre: 'B', rfc: 'XYZW900101XY2' },
+      ],
     },
   },
   {
@@ -133,13 +145,19 @@ const CASES: ReadonlyArray<RuleCase> = [
       num_escritura: '12345',
       fecha: '2024-01-15',
       notario_num: 42,
-      partes: [{ nombre: 'A', rfc: 'ABCD800101AB1' }, { nombre: 'B', rfc: 'XYZW900101XY2' }],
+      partes: [
+        { nombre: 'A', rfc: 'ABCD800101AB1' },
+        { nombre: 'B', rfc: 'XYZW900101XY2' },
+      ],
     },
     fail: {
       num_escritura: '12345',
       fecha: '2024-01-15',
       notario_num: 'cuarenta y dos',
-      partes: [{ nombre: 'A', rfc: 'ABCD800101AB1' }, { nombre: 'B', rfc: 'XYZW900101XY2' }],
+      partes: [
+        { nombre: 'A', rfc: 'ABCD800101AB1' },
+        { nombre: 'B', rfc: 'XYZW900101XY2' },
+      ],
     },
   },
   {
@@ -149,7 +167,10 @@ const CASES: ReadonlyArray<RuleCase> = [
       num_escritura: '12345',
       fecha: '2024-01-15',
       notario_num: 42,
-      partes: [{ nombre: 'A', rfc: 'ABCD800101AB1' }, { nombre: 'B', rfc: 'XYZW900101XY2' }],
+      partes: [
+        { nombre: 'A', rfc: 'ABCD800101AB1' },
+        { nombre: 'B', rfc: 'XYZW900101XY2' },
+      ],
     },
     fail: {
       num_escritura: '12345',
@@ -165,13 +186,19 @@ const CASES: ReadonlyArray<RuleCase> = [
       num_escritura: '12345',
       fecha: '2024-01-15',
       notario_num: 42,
-      partes: [{ nombre: 'A', rfc: 'ABCD800101AB1' }, { nombre: 'B', rfc: 'XYZW900101XY2' }],
+      partes: [
+        { nombre: 'A', rfc: 'ABCD800101AB1' },
+        { nombre: 'B', rfc: 'XYZW900101XY2' },
+      ],
     },
     fail: {
       num_escritura: '12345',
       fecha: '2024-01-15',
       notario_num: 42,
-      partes: [{ nombre: 'A', rfc: 'badrfc' }, { nombre: 'B', rfc: '' }],
+      partes: [
+        { nombre: 'A', rfc: 'badrfc' },
+        { nombre: 'B', rfc: '' },
+      ],
     },
   },
   // PERMISO_SEDUVI
@@ -299,13 +326,21 @@ const CASES: ReadonlyArray<RuleCase> = [
   {
     code: 'PREDIAL_CUENTA_NUM',
     docType: 'predial',
-    pass: { cuenta_predial: '123-456-789', adeudo_mxn: 0, ejercicio_fiscal: new Date().getFullYear() },
+    pass: {
+      cuenta_predial: '123-456-789',
+      adeudo_mxn: 0,
+      ejercicio_fiscal: new Date().getFullYear(),
+    },
     fail: { cuenta_predial: '', adeudo_mxn: 0, ejercicio_fiscal: new Date().getFullYear() },
   },
   {
     code: 'PREDIAL_AL_CORRIENTE',
     docType: 'predial',
-    pass: { cuenta_predial: '123-456-789', adeudo_mxn: 0, ejercicio_fiscal: new Date().getFullYear() },
+    pass: {
+      cuenta_predial: '123-456-789',
+      adeudo_mxn: 0,
+      ejercicio_fiscal: new Date().getFullYear(),
+    },
     fail: {
       cuenta_predial: '123-456-789',
       adeudo_mxn: 5000,
@@ -315,7 +350,11 @@ const CASES: ReadonlyArray<RuleCase> = [
   {
     code: 'PREDIAL_VIGENCIA',
     docType: 'predial',
-    pass: { cuenta_predial: '123-456-789', adeudo_mxn: 0, ejercicio_fiscal: new Date().getFullYear() },
+    pass: {
+      cuenta_predial: '123-456-789',
+      adeudo_mxn: 0,
+      ejercicio_fiscal: new Date().getFullYear(),
+    },
     fail: { cuenta_predial: '123-456-789', adeudo_mxn: 0, ejercicio_fiscal: 2010 },
   },
   // BROCHURE

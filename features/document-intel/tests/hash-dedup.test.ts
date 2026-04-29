@@ -29,18 +29,25 @@ interface InsertResult {
   error: { message: string } | null;
 }
 
-function buildSelectClient(result: MaybeSingleResult | SingleResult, mode: 'maybe' | 'single' = 'maybe') {
-  const eq2 = vi.fn().mockReturnValue(
-    mode === 'maybe'
-      ? { maybeSingle: vi.fn().mockResolvedValue(result) }
-      : { single: vi.fn().mockResolvedValue(result) },
-  );
+function buildSelectClient(
+  result: MaybeSingleResult | SingleResult,
+  mode: 'maybe' | 'single' = 'maybe',
+) {
+  const eq2 = vi
+    .fn()
+    .mockReturnValue(
+      mode === 'maybe'
+        ? { maybeSingle: vi.fn().mockResolvedValue(result) }
+        : { single: vi.fn().mockResolvedValue(result) },
+    );
   const eq1 = vi.fn().mockReturnValue({ eq: eq2 });
-  const select = vi.fn().mockReturnValue(
-    mode === 'maybe'
-      ? { eq: eq1 }
-      : { eq: vi.fn().mockReturnValue({ single: vi.fn().mockResolvedValue(result) }) },
-  );
+  const select = vi
+    .fn()
+    .mockReturnValue(
+      mode === 'maybe'
+        ? { eq: eq1 }
+        : { eq: vi.fn().mockReturnValue({ single: vi.fn().mockResolvedValue(result) }) },
+    );
   const from = vi.fn().mockReturnValue({ select });
   return { from };
 }
@@ -136,10 +143,7 @@ describe('checkDuplicate', () => {
   });
 
   it('returns duplicate false when supabase error', async () => {
-    const fakeClient = buildSelectClient(
-      { data: null, error: { message: 'boom' } },
-      'maybe',
-    );
+    const fakeClient = buildSelectClient({ data: null, error: { message: 'boom' } }, 'maybe');
     mockCreateAdminClient.mockReturnValue(
       fakeClient as unknown as ReturnType<typeof createAdminClient>,
     );
@@ -154,7 +158,10 @@ describe('checkDuplicate', () => {
 describe('diffPages', () => {
   it('returns empty array when all pages match', async () => {
     const previous = ['h1', 'h2', 'h3'];
-    const fakeClient = buildSelectClient({ data: { page_hashes: previous }, error: null }, 'single');
+    const fakeClient = buildSelectClient(
+      { data: { page_hashes: previous }, error: null },
+      'single',
+    );
     mockCreateAdminClient.mockReturnValue(
       fakeClient as unknown as ReturnType<typeof createAdminClient>,
     );
@@ -167,7 +174,10 @@ describe('diffPages', () => {
 
   it('returns indices of changed pages', async () => {
     const previous = ['h1', 'h2', 'h3'];
-    const fakeClient = buildSelectClient({ data: { page_hashes: previous }, error: null }, 'single');
+    const fakeClient = buildSelectClient(
+      { data: { page_hashes: previous }, error: null },
+      'single',
+    );
     mockCreateAdminClient.mockReturnValue(
       fakeClient as unknown as ReturnType<typeof createAdminClient>,
     );
@@ -179,10 +189,7 @@ describe('diffPages', () => {
   });
 
   it('returns all indices when previous record missing', async () => {
-    const fakeClient = buildSelectClient(
-      { data: null, error: { message: 'not found' } },
-      'single',
-    );
+    const fakeClient = buildSelectClient({ data: null, error: { message: 'not found' } }, 'single');
     mockCreateAdminClient.mockReturnValue(
       fakeClient as unknown as ReturnType<typeof createAdminClient>,
     );

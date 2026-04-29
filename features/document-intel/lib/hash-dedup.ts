@@ -35,7 +35,7 @@ export async function checkDuplicate({
   if (error) {
     return { duplicate: false };
   }
-  if (!data || !data.job_id) return { duplicate: false };
+  if (!data?.job_id) return { duplicate: false };
   return { duplicate: true, existingJobId: data.job_id };
 }
 
@@ -45,10 +45,7 @@ export interface PageHashOptions {
   readonly pageBuffers?: ReadonlyArray<FileBuffer>;
 }
 
-export function computePageHashes({
-  fileBuffer,
-  pageBuffers,
-}: PageHashOptions): string[] {
+export function computePageHashes({ fileBuffer, pageBuffers }: PageHashOptions): string[] {
   if (pageBuffers && pageBuffers.length > 0) {
     return pageBuffers.map((p) => sha256(p));
   }

@@ -2,7 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { computeQualityScore, computeQualityScoreFromRecords } from '../lib/quality-score';
 import type { ValidationRecord, ValidationSeverity } from '../schemas/validation';
 
-function v(severity: ValidationSeverity, resolved = false): { severity: ValidationSeverity; resolved_at: string | null } {
+function v(
+  severity: ValidationSeverity,
+  resolved = false,
+): { severity: ValidationSeverity; resolved_at: string | null } {
   return { severity, resolved_at: resolved ? '2025-01-01T00:00:00Z' : null };
 }
 
